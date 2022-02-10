@@ -1,0 +1,164 @@
+// CLAIM FORM COMPONENT
+#claim-form {
+    // padding-top: 12em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    background: radial-gradient(
+        closest-side at 50% 50%,
+        #fcfcfc 0%,
+        #ededed 100%
+    );
+    .prize-info {
+        padding: 1em;
+        position: relative;
+        background-color: white;
+        border-radius: 20px;
+        .prize-content {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            font-size: 10px;
+            border-radius: 12px;
+            background-color: #a6a6a6;
+            color: white;
+            padding: 0.3em 0.5em;
+        }
+        .prize-img {
+            border-radius: 6px;
+        }
+        .prize-name {
+            font-family: Ilisarniq-Bold;
+            font-size: 28px;
+        }
+        .title {
+            color: #868686;
+            font-size: 14px;
+        }
+        label {
+            font-size: 14px;
+        }
+        .region,
+        .countries {
+            padding: 1em;
+        }
+        textarea {
+            padding: 1em;
+            font-size: 12px;
+            border: 1px solid #bfbfbf;
+            border-radius: 10px;
+            &::placeholder {
+                color: #5a5a5a;
+                font-size: 12px;
+                padding: 1em;
+            }
+        }
+        input,
+        select {
+            width: 100%;
+            min-height: 48px;
+            border-radius: 10px;
+            font-size: 12px;
+            border: 1px solid #bfbfbf;
+            padding: 1em;
+            &::placeholder {
+                color: #5a5a5a;
+                font-size: 12px;
+                padding: 1em;
+            }
+        }
+        .checkbox-wrapper {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 10px;
+            line-height: 133%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            color: #868686;
+            p {
+                position: relative;
+                top: 5px;
+            }
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+                &:checked {
+                    ~ {
+                        .checkmark {
+                            background-color: #14daa7;
+                            &:after {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 24px;
+                width: 24px;
+                background-color: #e6e6e6;
+                border-radius: 6px;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                    left: 9px;
+                    top: 5px;
+                    width: 5px;
+                    height: 10px;
+                    border: solid white;
+                    border-width: 0 3px 3px 0;
+                    -webkit-transform: rotate(45deg);
+                    -ms-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                }
+            }
+            .terms,
+            .privacy {
+                a {
+                    color: #7824f8;
+                }
+            }
+        }
+        .btn-submit {
+            width: 100%;
+            min-height: 48px;
+            font-size: 14px;
+            font-family: Ilisarniq-Bold;
+            background: linear-gradient(264deg, #fdc43d 0%, #efa500 100%);
+            border-radius: 12px;
+        }
+        .react-tel-input {
+            .search {
+                display: flex;
+            }
+            .search-emoji {
+                font-size: 25px;
+                align-self: center;
+            }
+            .search-box {
+                margin: 0 10px;
+            }
+            .selected-flag,
+            .flag-dropdown {
+                border-radius: 10px;
+            }
+            .form-control {
+                width: 100%;
+                padding: 0 4em;
+            }
+        }
+    }
+}

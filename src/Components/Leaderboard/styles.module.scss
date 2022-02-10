@@ -1,0 +1,302 @@
+// GAME LEADERBOARD COMPONENT
+#game-leaderboard-screen {
+    position: relative;
+    margin-top: 140px;
+    .title {
+        font-size: 1.125em;
+        font-family: Ilisarniq-Bold;
+        @media only screen and (min-width: 768px) {
+            font-size: 1.8em;
+        }
+    }
+    .game-info {
+        background: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        .game-thumbnail {
+            height: 54px;
+            width: 54px;
+            @media only screen and (min-width: 768px) {
+                height: 90px;
+                width: 90px;
+            }
+            object-fit: cover;
+            object-position: top;
+            border-radius: 4px;
+        }
+        .counter {
+            height: 20px;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            .end-text {
+                font-size: 12px;
+                font-family: Ilisarniq-Regular;
+                color: #868686;
+                margin-bottom: 0.1em;
+                @media only screen and (min-width: 768px) {
+                    align-self: flex-end;
+                }
+            }
+            .timer-text {
+                font-size: 1rem;
+                font-family: Ilisarniq-Bold;
+                color: #14daa7;
+                text-align: center;
+                @media only screen and (min-width: 768px) {
+                    font-size: inherit;
+                    align-self: flex-end;
+                    min-width: 60px;
+                }
+            }
+            .tickets-text-end {
+                position: relative;
+                top: 0.2em;
+                font-family: Ilisarniq-Bold;
+                font-size: 20px;
+                @media screen and (min-width: 360px) {
+                    font-size: 24;
+                }
+                @media screen and (min-width: 768px) {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+    .leaderboard {
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+        position: relative;
+        background: linear-gradient(1deg, #ffffff 85%, #ffffff08 100%);
+        .leaderboard-rank-layer {
+            overflow-y: scroll;
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+            scrollbar-width: none; /* Firefox */
+        }
+        .leaderboard-rank-layer-without-user {
+            max-height: 300px;
+        }
+        .leaderboard-rank-layer::-webkit-scrollbar {
+            width: 0; /* Safari and Chrome */
+        }
+        .leaderboard-user-wrapper {
+            position: relative;
+            top: 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0px 18px 26px #00000029;
+        }
+        .leader-player-card {
+            background-color: #f2f2f2;
+            min-height: 3.5em;
+            border-radius: 7px;
+            .user-avatar {
+                position: relative;
+                .rank-star {
+                    position: absolute;
+                    bottom: -0.2em;
+                    right: -0.3em;
+                    img {
+                        width: 16px;
+                    }
+                }
+                .avatar {
+                    border-radius: 100%;
+                    object-fit: contain;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            p {
+                font-family: Ilisarniq-Bold;
+                margin: 0;
+                font-size: 14px;
+            }
+            .player-name {
+                width: 12ch;
+                @media only screen and (min-width: 768px) {
+                    width: 25ch;
+                }
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
+            .points {
+                font-family: "Ilisarniq-Regular";
+                color: #14daa7;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+            }
+            .tickets {
+                background: linear-gradient(90deg, #fdc43d 0%, #efa500 100%);
+                border-radius: 30px;
+                height: 100%;
+                span {
+                    font-family: Ilisarniq-Bold;
+                    font-size: 16px;
+                }
+            }
+            .rank-number {
+                font-family: Ilisarniq-Bold;
+                background: #e0e0e0;
+                border-radius: 30px;
+                font-size: 0.75rem;
+                text-align: center;
+                min-width: 20px;
+                padding: 0.25em 0.5em;
+            }
+        }
+    }
+    .leader-curr-player-card {
+        // temp
+        background: #fdc43d !important;
+        .points {
+            color: #7824f8 !important;
+        }
+        .tickets {
+            background: #b5891f !important;
+            color: #fdc43d;
+        }
+    }
+}
+.leaderboard-bottom-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px -2px 16px #00000017;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #f7f7f7;
+    padding: 1em;
+    @media only screen and (min-width: 375px) {
+        padding: 1.5em;
+    }
+    @media only screen and (min-width: 768px) {
+        padding: 1em;
+    }
+    min-height: 100px;
+    .ready-tournament {
+        background: linear-gradient(263deg, #5725ff 0%, #df23f9 100%);
+        box-shadow: 0px 10px 15px #6d38ef33;
+        border-radius: 10px;
+        color: #fdc43d;
+        font-size: 18px;
+        font-family: Ilisarniq-Bold;
+        min-width: 80%;
+        @media only screen and (min-width: 375px) {
+            min-width: 20em;
+        }
+        @media only screen and (min-width: 768px) {
+            min-width: 30em;
+            height: 68px;
+        }
+        height: 52px;
+        padding: 0 2em;
+    }
+    .play-btn {
+        background: linear-gradient(270deg, #04e4aa 0%, #01b789 100%);
+        box-shadow: 0px 15px 20px #64d6aa73;
+        border-radius: 10px;
+        color: white;
+        font-size: 18px;
+        font-family: Ilisarniq-Bold;
+        min-width: 85%;
+        @media only screen and (min-width: 375px) {
+            min-width: 20em;
+        }
+        @media only screen and (min-width: 768px) {
+            min-width: 30em;
+            height: 68px;
+        }
+        height: 52px;
+        padding: 0 2em;
+    }
+}
+
+// IFRAME
+.game-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: #111111;
+    .quit-modal {
+        position: absolute;
+        z-index: 4;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        min-height: 30vh;
+        @supports not (
+            (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+        ) {
+            background-color: rgba(244, 244, 244, 0.9);
+        }
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: #ffffff4a;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        border: 1px solid #00000012;
+        background-clip: padding-box;
+        border-radius: 12px;
+        padding: 1em 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: Ilisarniq-Bold;
+        .btn-wrapper {
+            button {
+                color: white;
+                border-radius: 4px;
+                width: 4em;
+                height: 2.2em;
+                font-size: 1.2em;
+            }
+            .btn-yes {
+                background: #58cd58;
+            }
+            .btn-no {
+                background: #ff2c44;
+            }
+        }
+    }
+    .quit-btn {
+        z-index: 4;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    iframe {
+        z-index: 3;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .game-loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: black;
+        .loading-text {
+            font-family: Ilisarniq-Bold;
+            font-size: 1.25rem;
+            color: white;
+        }
+    }
+}

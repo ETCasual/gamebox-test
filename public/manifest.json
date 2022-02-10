@@ -1,0 +1,31 @@
+{
+    "short_name": "ESM",
+    "description": "Esports Mini - A multiplayer H5 games platform.",
+    "name": "Esports Mini",
+    "icons": [
+        {
+            "src": "https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "orientation": "portrait",
+    "scope": "/",
+    "categories": ["Entertainment"],
+    "screenshots": [
+        {
+            "src": "https://esm-cdn.sgp1.digitaloceanspaces.com/app/images/2.0/pwa/ss_1.png",
+            "sizes": "1280x800",
+            "type": "image/png"
+        },
+        {
+            "src": "https://esm-cdn.sgp1.digitaloceanspaces.com/app/images/2.0/pwa/ss_2.png",
+            "sizes": "750x1334",
+            "type": "image/png"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+.featured {
+    .complete-overlay {
+        padding: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        .wrapper {
+            position: relative;
+            .reward-icon {
+                width: clamp(5rem, 30vw, 12rem);
+            }
+            .loader,
+            .content {
+                border-radius: 10px;
+                background-color: white;
+                min-height: 10rem;
+                width: 100%;
+            }
+            .loader {
+                p {
+                    color: #868686;
+                    font-size: 0.875rem;
+                }
+            }
+            .content {
+                .title {
+                    font-family: Ilisarniq-Bold;
+                    font-size: 1.1rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 1.25rem;
+                    }
+                }
+                .subtitle,
+                .tap-btn {
+                    font-size: 1.1rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 0.875rem;
+                    }
+                }
+                .tap-btn {
+                    text-align: center;
+                    width: 100%;
+                    border-radius: 5px;
+                    padding: 1.5em 1.2em;
+                    background: linear-gradient(
+                        270deg,
+                        #ffc742 0%,
+                        #eaa400 100%
+                    );
+                }
+            }
+        }
+    }
+}

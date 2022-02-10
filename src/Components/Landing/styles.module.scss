@@ -1,0 +1,58 @@
+// BETA MODAL
+.beta-modal,
+.blocked-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    width: 100%;
+    height: 100%;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrapper {
+        position: relative;
+        background: white;
+        border-radius: 20px;
+        width: 90%;
+        @media only screen and (min-width: 768px) {
+            width: 60%;
+        }
+        @media only screen and (min-width: 1200px) {
+            width: 50%;
+        }
+        min-height: 400px;
+        margin: 0 auto;
+        box-shadow: 0px 18px 26px #00000029;
+        img {
+            width: 10em;
+        }
+        p {
+            text-align: center;
+            font-size: 1.125rem;
+            width: 100%;
+            @media only screen and (min-width: 768px) {
+                width: 80%;
+            }
+            margin: 0 auto;
+        }
+        button {
+            font-family: Ilisarniq-Bold;
+            background: linear-gradient(262deg, #fdc43d 0%, #efa500 100%);
+            box-shadow: 0px 18px 26px #f5c559b2;
+            border-radius: 12px;
+            padding: 1em 5em;
+        }
+        .region-clause {
+            font-family: "Ilisarniq-Bold";
+            color: "crimson";
+        }
+    }
+}

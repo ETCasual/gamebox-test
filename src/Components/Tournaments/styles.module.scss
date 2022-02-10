@@ -1,0 +1,114 @@
+// TOURNAMENT PANEL COMPONENT
+.nav-top-back-btn-wrapper {
+    cursor: default;
+    position: fixed;
+    top: 71px;
+    z-index: 2;
+    width: 100%;
+    min-height: 60px;
+}
+#game-screen {
+    position: relative;
+    margin-top: 160px;
+    @media only screen and (max-width: 480px) {
+        padding-bottom: 200px;
+    }
+    .title {
+        font-size: 1em;
+        @media only screen and (min-width: 768px) {
+            font-size: 1.75rem;
+        }
+        font-family: Ilisarniq-Bold;
+    }
+    .prize-detail-panel {
+        .prize-img {
+            height: 40px;
+            width: 40px;
+            @media screen and (min-width: 768px) {
+                height: 63px;
+                width: 75px;
+            }
+            border-radius: 0.5em;
+            object-fit: cover;
+        }
+        .prizeId {
+            font-size: 0.5rem;
+            background-color: #a1a1a1;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 12px;
+            width: min-content;
+        }
+        .progress {
+            // overflow: visible !important;
+            position: relative;
+            border-radius: 1em;
+            background: #e6e6e6;
+            height: 1.5em;
+            @media only screen and (min-width: 768px) {
+                height: 2em;
+            }
+            .progress-bar {
+                height: inherit;
+                border-radius: 1em;
+                background: linear-gradient(267deg, #04e4aa, #01b789);
+            }
+        }
+        .progressbar-shadow {
+            position: absolute;
+            top: 0;
+            border-radius: 1em;
+            box-shadow: 0 18px 26px #64d6aa67;
+            transition: all 0.5s ease;
+            height: 1.45em;
+        }
+        .progress-perc {
+            font-size: 22px;
+            @media only screen and (min-width: 360px) {
+                font-size: 26px;
+            }
+            @media only screen and (min-width: 768px) {
+                font-size: 33px;
+            }
+            @media only screen and (min-width: 1441px) {
+                font-size: 38px;
+            }
+            color: #7824f8;
+            font-family: Ilisarniq-Bold;
+        }
+        .instructions,
+        .draw-text,
+        .total-tickets-text {
+            color: #868686;
+            font-size: 0.625rem;
+            @media screen and (min-width: 768px) {
+                font-size: 0.875rem;
+            }
+        }
+        .tickets-text,
+        .tickets-text-end {
+            font-family: Ilisarniq-Bold;
+            font-size: 1em;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.75rem;
+            }
+        }
+    }
+    .game-detail-panel {
+        .statement-title {
+            font-size: 1.5rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 2.25rem;
+            }
+            font-family: Ilisarniq-Bold;
+        }
+        .statement-subtitle {
+            line-height: 1.5;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 0.875rem;
+            }
+            color: #868686;
+        }
+    }
+}

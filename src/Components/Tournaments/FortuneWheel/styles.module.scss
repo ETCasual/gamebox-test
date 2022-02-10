@@ -1,0 +1,307 @@
+// FORTUNE WHEEL COMPONENT
+.fortune-wheel-fixed-btn {
+    cursor: pointer;
+    position: fixed;
+    bottom: -4.5em;
+    right: -4.5em;
+    @media only screen and (min-width: 1024px) {
+        right: 1em;
+        bottom: 0;
+    }
+    min-width: 140px;
+    min-height: 170px;
+    transition: all 0.3s ease-in;
+    &:hover {
+        right: 1em;
+        bottom: 0;
+        .button-wrapper {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .spinner-wrapper {
+        position: relative;
+        height: 118px;
+        bottom: 1em;
+        .spinner {
+            position: absolute;
+            z-index: -1;
+            top: 3em;
+            left: -0.5em;
+            width: 100%;
+            height: inherit;
+        }
+    }
+    .button-wrapper {
+        background: #ffffff;
+        box-shadow: 0px 10px 15px #00000026;
+        border-radius: 10px;
+        padding: 0.3em;
+        bottom: 1em;
+        position: relative;
+        opacity: 0;
+        visibility: hidden;
+        @media only screen and (min-width: 1024px) {
+            opacity: 1;
+            visibility: visible;
+        }
+        button {
+            font-size: 0.875rem;
+            font-family: Ilisarniq-Bold;
+            background: #14daa7;
+            box-shadow: 0px 10px 15px #00000026;
+            border-radius: 5px;
+            color: white;
+            min-width: 100%;
+            padding: 1em;
+        }
+    }
+}
+.fortune-wheel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    z-index: 3;
+    .fortune-wheel-wrapper {
+        background: linear-gradient(0deg, #6c25ffd6 0%, #9d20e4d6 100%);
+        box-shadow: 0px 15px 20px #6d38ef80;
+        border: 5px solid #ffffff;
+        border-radius: 20px;
+        min-height: 70vh;
+        @media only screen and (min-width: 1024px) {
+            min-height: 85vh;
+        }
+        .spinner-info-icon {
+            position: absolute;
+            top: 0.7em;
+            left: 0.7em;
+            width: 24px;
+            z-index: 1;
+        }
+        .tickets {
+            .title {
+                text-transform: uppercase;
+                color: white;
+                font-size: 0.8rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1rem;
+                }
+                @media only screen and (min-width: 1441px) {
+                    font-size: 1.25rem;
+                }
+            }
+            .tickets-wrapper {
+                box-shadow: 0px 15px 20px #00000029;
+                padding: 0.5em 2em;
+                min-height: inherit;
+                background: transparent
+                    linear-gradient(106deg, #fdc43d 0%, #efa500 100%);
+                box-shadow: 0px 10px 15px #00000029;
+                border-radius: 14px;
+                color: white;
+                border: 4.8px solid white;
+                .ticket-text {
+                    font-size: 0.625rem;
+                    text-transform: uppercase;
+                }
+                .ticket-value {
+                    font-size: 1.2rem;
+                    @media only screen and (min-width: 1441px) {
+                        font-size: 1.5rem;
+                    }
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+        }
+        .wheel-spinner {
+            color: white;
+            cursor: default;
+            .btn-spin-wrapper {
+                background: #f4f4f4;
+                color: white;
+                width: 100%;
+                border-radius: 50%;
+                box-shadow: 5px 10px 30px #b7b7b7;
+                position: absolute;
+                top: 33%;
+                left: 34%;
+                width: 32.5%;
+                height: 32.5%;
+                @media only screen and (min-width: 360px) {
+                    top: 35.5%;
+                    left: 35.7%;
+                    width: 28.5%;
+                    height: 28.5%;
+                }
+                @media only screen and (min-width: 768px) {
+                    top: 37.5%;
+                    left: 37.5%;
+                    width: 25%;
+                    height: 25%;
+                }
+                .btn-spin {
+                    border-radius: 50%;
+                    width: 85%;
+                    height: 85%;
+                    background: radial-gradient(
+                        closest-side at 52% -1%,
+                        #906bff 0%,
+                        #8f63fc 13%,
+                        #8b4ef2 32%,
+                        #852ce2 56%,
+                        #7e00ce 81%
+                    );
+                    font-size: 12px;
+                    @media only screen and (min-width: 360px) {
+                        font-size: 14px;
+                    }
+                    box-shadow: 0px 5px 10px #b100ff79;
+                    span {
+                        font-size: 10px;
+                        @media only screen and (min-width: 360px) {
+                            font-size: 12px;
+                        }
+                        @media only screen and (min-width: 768px) {
+                            font-size: 16px;
+                        }
+                        img {
+                            width: 24px;
+                        }
+                    }
+                }
+            }
+            .spin-wrapper {
+                position: relative;
+                svg {
+                    width: clamp(14rem, 22vw, 24rem);
+                    margin: 0 auto;
+                    position: relative;
+                    z-index: 0;
+                    text {
+                        font-family: Ilisarniq-Bold;
+                        font-size: 16px;
+                    }
+                    .max {
+                        font-size: 20px;
+                        fill: #fdc43d;
+                    }
+                }
+                .pointer-img {
+                    position: absolute;
+                    top: 24%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: clamp(1rem, 2vw, 1.7rem);
+                }
+            }
+        }
+        .spin-available {
+            color: white;
+            font-size: 0.8rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1rem;
+            }
+            @media only screen and (min-width: 1441px) {
+                font-size: 1.25rem;
+            }
+            .count {
+                font-size: 1rem;
+                @media only screen and (min-width: 360px) {
+                    font-size: 1.25rem;
+                }
+                @media only screen and (min-width: 1441px) {
+                    font-size: 1.75rem;
+                }
+                font-family: Ilisarniq-Bold;
+                color: #fdc43d;
+            }
+        }
+        .buy-more-spins,
+        .buy-more-gems {
+            background: linear-gradient(180deg, #04e4aa 0%, #01b789 100%);
+            width: 100%;
+            min-height: 60px;
+            box-shadow: 0px 10px 15px #005a305f;
+            border-radius: 10px;
+            font-size: 12px;
+            color: white;
+            font-size: 10px;
+            @media only screen and (min-width: 360px) {
+                font-size: 12px;
+            }
+            @media only screen and (min-width: 768px) {
+                font-size: 20px;
+            }
+            font-family: Ilisarniq-Bold;
+        }
+        .buy-more-gems {
+            background: #ff2c44;
+            color: white !important;
+            span {
+                font-size: 12px;
+                font-family: Ilisarniq-Regular;
+            }
+        }
+        .buy-more-spins {
+            font-size: 0.9rem;
+            @media only screen and (min-width: 360px) {
+                font-size: 1rem;
+            }
+            @media only screen and (min-width: 768px) {
+                font-size: 1.25rem;
+            }
+        }
+    }
+    .spinner-rules {
+        .title {
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 0.875rem;
+            }
+            font-family: Ilisarniq-Bold;
+            color: white;
+        }
+        .probability {
+            ul {
+                font-size: 0.75rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 0.875rem;
+                }
+                li {
+                    .wrapper {
+                        color: white;
+                        line-height: 2;
+                        p {
+                            margin-bottom: 0.6rem;
+                            @media only screen and (min-width: 768px) {
+                                margin-bottom: 1rem;
+                            }
+                            @media only screen and (min-width: 1441px) {
+                                margin-bottom: 1.25rem;
+                            }
+                            &:nth-child(1) {
+                                font-family: Ilisarniq-Bold;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .separator {
+            height: 1px;
+            width: 100%;
+            background-color: white;
+        }
+    }
+}

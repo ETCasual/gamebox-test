@@ -1,0 +1,124 @@
+// SELECTED PLAYER INFO COMPONENT
+#selected-player-info {
+    position: relative;
+    margin-top: 180px;
+    .profile-info {
+        img {
+            border-radius: 100%;
+            width: 14.125em;
+            height: 14.125em;
+            object-fit: contain;
+            border: 8px solid white;
+            box-shadow: 0px 12px 15px 0px #cbcbcb;
+            background-color: #e8e8e8;
+        }
+        h3 {
+            font-family: Ilisarniq-Bold;
+            font-size: 1.75rem;
+            text-transform: capitalize;
+        }
+    }
+    .multiplier {
+        background: white;
+        position: relative;
+        box-shadow: 0px 10px 15px #0000000d;
+        min-height: 10em;
+        border-radius: 20px;
+        .multiplier-info {
+            color: black;
+            font-family: Ilisarniq-Bold;
+            font-size: 1.25rem;
+            span {
+                color: #7824f8;
+                font-family: Ilisarniq-Bold;
+            }
+        }
+        .level {
+            .current-level {
+                color: #868686;
+                font-size: 0.875rem;
+            }
+            .exp {
+                font-size: 0.875rem;
+                color: #868686;
+                background: #f4f4f4;
+                border-radius: 17px;
+                min-width: 6.5em;
+                min-height: 2.25em;
+                padding: 0.1em 1.1em;
+                .player-exp {
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+        }
+        .progress {
+            margin-top: 1em;
+            width: 100%;
+            height: 2em;
+            border-radius: 1em;
+            background-color: #f4f4f4;
+            position: relative;
+            .progress-bar {
+                background: linear-gradient(267deg, #04e4aa, #01b789);
+                border-radius: 1em;
+                height: inherit;
+            }
+        }
+        .progressbar-shadow {
+            position: absolute;
+            bottom: 0;
+            border-radius: 1em;
+            height: 1.45em;
+            box-shadow: 0px 10px 20px #64d6aa67;
+            transition: all 0.5s ease;
+        }
+    }
+    .high-score {
+        .title {
+            font-family: Ilisarniq-Bold;
+            font-size: 1.75rem;
+        }
+        .highscore-card {
+            border-radius: 12px;
+            min-height: 4.5em;
+            font-size: 0.75rem;
+            .game-details {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                min-height: inherit;
+            }
+            p {
+                margin-bottom: 0;
+            }
+            img {
+                border: 2px solid white;
+                border-radius: 7px;
+                width: 76px;
+                @media only screen and (min-width: 991px) {
+                    width: 100%;
+                }
+                @media only screen and (min-width: 1200px) {
+                    width: 76px;
+                }
+            }
+            .game-title {
+                font-size: 1rem;
+                font-family: Ilisarniq-Bold;
+            }
+            .score {
+                font-size: 0.875rem;
+                color: #14daa7;
+                display: flex;
+                align-self: flex-start;
+                justify-content: flex-end;
+                font-family: Ilisarniq-Bold;
+            }
+            .score-date {
+                font-size: 0.625rem;
+                color: #868686;
+            }
+        }
+    }
+}

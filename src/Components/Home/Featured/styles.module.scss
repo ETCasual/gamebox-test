@@ -1,0 +1,105 @@
+// FEATURED COMPONENT
+.featured {
+    .card-wrapper {
+        min-height: 40vh;
+        @media only screen and (min-width: 1200px) {
+            min-height: 65vh;
+        }
+    }
+    .ticket-info {
+        height: auto;
+        @media only screen and (min-width: 767px) {
+            height: 80px;
+        }
+        .ticket-wrapper {
+            height: auto;
+            @media only screen and (min-width: 768px) {
+                min-height: 50px;
+            }
+            .your-tickets {
+                img.icon {
+                    width: 18px;
+                    @media only screen and (min-width: 480px) {
+                        width: 40px;
+                        height: 24px;
+                        object-fit: cover;
+                    }
+                }
+            }
+            .pool-tickets {
+                img.icon {
+                    width: 18px;
+                    @media only screen and (min-width: 480px) {
+                        width: 24px;
+                        height: 27px;
+                        object-fit: cover;
+                    }
+                }
+            }
+            .your-tickets,
+            .pool-tickets {
+                .label {
+                    font-size: 0.625rem;
+                    @media only screen and (min-width: 360px) {
+                        font-size: 0.75rem;
+                    }
+                    @media only screen and (min-width: 1320px) {
+                        font-size: 0.875rem;
+                    }
+                    line-height: 133%;
+                    color: #868686;
+                }
+                .tickets {
+                    font-size: 0.75rem;
+                    @media only screen and (min-width: 360px) {
+                        font-size: 0.875rem;
+                    }
+                    @media only screen and (min-width: 768px) {
+                        font-size: 1.5rem;
+                    }
+                    @media only screen and (min-width: 1200px) {
+                        font-size: 1.125rem;
+                    }
+                    @media only screen and (min-width: 1320px) {
+                        font-size: 1.25rem;
+                    }
+                    font-family: Ilisarniq-Bold;
+                }
+                .timer {
+                    font-family: Ilisarniq-Bold;
+                    font-size: 1.25rem;
+                    @media only screen and (min-width: 480px) {
+                        margin-top: 4px;
+                        font-size: 1rem;
+                    }
+                    @media only screen and (min-width: 1200px) {
+                        margin-top: 4px;
+                        font-size: 1.125rem;
+                    }
+                }
+                .required-tickets {
+                    color: #868686;
+                    font-size: 0.625rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+        }
+        .game-icon {
+            position: relative;
+            width: 80px;
+            height: 70px;
+            @media only screen and (min-width: 360px) {
+                width: 80px;
+                height: 70px;
+            }
+            @media only screen and (min-width: 767px) {
+                height: 90px;
+                width: 100px;
+                top: -1.3em;
+                right: -3px;
+            }
+        }
+    }
+}

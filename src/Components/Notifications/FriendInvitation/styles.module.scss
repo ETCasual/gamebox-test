@@ -1,0 +1,44 @@
+#friend-invitation {
+    .wrapper {
+        .close-button {
+            right: -10px;
+        }
+        .invitaiton {
+            background-color: white;
+            padding: 1em;
+            border-radius: 10px;
+            margin: 0;
+            .title {
+                font-family: Ilisarniq-Bold;
+                font-size: 1rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1.75rem;
+                }
+            }
+            .subtitle {
+                color: #868686;
+                font-size: 0.625rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 0.875rem;
+                }
+                .friend-username {
+                    color: #14daa7;
+                }
+            }
+            .reward {
+                border-radius: 15px;
+                background-color: #f4f4f4;
+                .title {
+                    font-size: 0.875rem;
+                }
+                .gem {
+                    span {
+                        font-size: 1.3rem;
+                        font-family: Ilisarniq-Bold;
+                        color: #14daa7;
+                    }
+                }
+            }
+        }
+    }
+}

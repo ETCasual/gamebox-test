@@ -1,0 +1,231 @@
+// PLAYER MULTIPLIER LEVEL
+#player-level {
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    .level-modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .level-wrapper {
+            background: #ffffff;
+            box-shadow: 0px 18px 26px #00000029;
+            border-radius: 12px;
+            padding: 0 0.7em;
+            .close-button {
+                top: -8px;
+                right: -8px;
+            }
+            .scrolling-wrapper-y {
+                border-radius: 6px;
+                margin: 0.7em 0 1.5em 0;
+                height: 28.5em;
+                background: white;
+                overflow-y: scroll;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                .bold {
+                    font-family: Ilisarniq-Bold;
+                }
+                .current-level-wrapper {
+                    position: relative;
+                    box-shadow: 0px 10px 15px #00000029;
+                    border-radius: 20px;
+                    margin-top: 6em;
+                    padding: 5em 1em 1.5em 1em;
+                    @media only screen and (min-width: 768px) {
+                        padding: 6em 1.5em 1.5em 1.5em;
+                    }
+                    .level-indicator-wrapper {
+                        width: 6.8em;
+                        height: 6.8em;
+                        border-radius: 100%;
+                        background: white;
+                        box-shadow: 0px 20px 30px #00000029;
+                        position: absolute;
+                        top: -60px;
+                        left: 50%;
+                        transform: translate(-50%, 0);
+                        .level-indicator {
+                            background: linear-gradient(
+                                180deg,
+                                #5725ff 0%,
+                                #04e4aa 100%
+                            );
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: 6em;
+                            height: 6em;
+                            border-radius: 100%;
+                            margin: 0 auto;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            color: #ffffff;
+                            .level {
+                                font-family: Ilisarniq-Bold;
+                                font-size: 46px;
+                                line-height: 1em;
+                            }
+                            span {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                    .statement {
+                        color: black;
+                        font-family: Ilisarniq-Bold;
+                        width: 100%;
+                        text-align: center;
+                        margin-bottom: 2em;
+                        font-size: 1.2rem;
+                        @media only screen and (min-width: 768px) {
+                            font-size: 20px;
+                            margin-bottom: 1em;
+                        }
+                    }
+                    .current-level-details-wrapper {
+                        width: 100%;
+                        height: 100%;
+                        background-color: #f4f4f4;
+                        padding: 1.2rem;
+                        border-radius: 6px;
+                        .exp {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            .multiplier-text {
+                                p {
+                                    color: black;
+                                    font-family: Ilisarniq-Bold;
+                                    font-size: 0.75rem;
+                                    @media only screen and (min-width: 768px) {
+                                        font-size: 14px;
+                                        // font-size: 20px;
+                                    }
+                                }
+                                .multiplier-value {
+                                    color: #7824f8;
+                                }
+                            }
+                            .exp-count {
+                                background: #d6d6d630;
+                                color: #868686;
+                                border-radius: 12px;
+                                padding: 0 10px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 12px;
+                                min-height: 26px;
+                            }
+                        }
+                        .progress {
+                            position: relative;
+                            width: 100%;
+                            border-radius: 1em;
+                            height: 1rem;
+                            @media only screen and (min-width: 768px) {
+                                height: 1.5rem;
+                            }
+                            .progress-bar {
+                                border-radius: 1em;
+                                background: linear-gradient(
+                                    267deg,
+                                    #04e4aa,
+                                    #01b789
+                                );
+                                height: inherit;
+                            }
+                        }
+                        .progressbar-shadow {
+                            position: absolute;
+                            bottom: 0;
+                            border-radius: 1em;
+                            box-shadow: 0px 10px 20px #64d6aa67;
+                            transition: all 0.5s ease;
+                            height: 1.45em;
+                        }
+                    }
+                }
+                .gap {
+                    width: 15px;
+                    height: 39px;
+                    margin: 1em auto;
+                    img {
+                        margin: 0.9em auto 1em auto;
+                        transform: scale(1.5);
+                    }
+                }
+                .level-type {
+                    background: #f7f7f7;
+                    border-radius: 12px;
+                    .level-type-head {
+                        p {
+                            font-family: Ilisarniq-Bold;
+                            color: #868686;
+                            font-size: 14px;
+                        }
+                        .level-exp {
+                            min-height: 26px;
+                            background: #d6d6d6;
+                            color: #868686;
+                            border-radius: 16px;
+                            padding: 0.3em;
+                            font-size: 10px;
+                            span {
+                                font-family: Ilisarniq-Bold;
+                            }
+                        }
+                    }
+                    .level-type-content {
+                        background: white;
+                        border-radius: 6px;
+                        text-align: center;
+                        .reward-text {
+                            font-size: 10px;
+                            color: #868686;
+                        }
+                        .ticket-text {
+                            font-size: 0.75rem;
+                            color: #868686;
+                            @media only screen and (min-width: 768px) {
+                                font-size: 14px;
+                            }
+                            .ticket {
+                                font-family: Ilisarniq-Bold;
+                            }
+                            .ticket-value {
+                                font-family: Ilisarniq-Bold;
+                                color: #7824f8;
+                            }
+                        }
+                        .gems {
+                            p {
+                                font-family: Ilisarniq-Bold;
+                                font-size: 14px;
+                                color: #8f1fff;
+                            }
+                        }
+                    }
+                }
+            }
+            .scrolling-wrapper-y::-webkit-scrollbar {
+                width: 0; /* Safari and Chrome */
+            }
+        }
+    }
+}

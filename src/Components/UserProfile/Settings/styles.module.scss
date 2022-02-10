@@ -1,0 +1,325 @@
+// SETTINGS COMPONENT
+#settings {
+    padding-top: 12em;
+    .title {
+        font-family: Ilisarniq-Bold;
+        font-size: 1.5rem;
+        @media only screen and(min-width: 768px) {
+            font-size: 28px;
+        }
+    }
+    .profile-info {
+        img {
+            border: 4px solid white;
+            width: 76px;
+            height: 76px;
+            object-fit: contain;
+            border-radius: 100%;
+            box-shadow: 0px 12px 15px 0px #cbcbcb;
+            background-color: #e8e8e8;
+        }
+        .player-name {
+            white-space: nowrap;
+            width: 20ch;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            font-size: 1rem;
+            @media only screen and(min-width: 768px) {
+                font-size: 20px;
+                width: 30ch;
+            }
+            color: black;
+            text-transform: capitalize;
+        }
+        .bottom-wrapper {
+            .player-email {
+                color: #868686;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
+                font-size: 0.75rem;
+                width: 17ch;
+                @media only screen and(min-width: 768px) {
+                    font-size: 0.875rem;
+                    width: 30ch;
+                }
+            }
+            .profile-edit {
+                font-size: 0.625rem;
+                @media only screen and(min-width: 768px) {
+                    font-size: 16px;
+                }
+                color: #14daa7;
+                font-family: Ilisarniq-Bold;
+                padding-bottom: 0.3em;
+            }
+        }
+    }
+    .social-account-icons {
+        .svg-wrapper {
+            padding: 8px;
+            border-radius: 14px;
+            svg {
+                width: 42px;
+            }
+        }
+        .fb-icon {
+            background: #1877f2;
+        }
+        .google-icon {
+            background: white;
+            @media only screen and (max-width: 767px) {
+                width: 44px;
+                height: 44px;
+            }
+            svg {
+                transform: scale(1);
+                @media only screen and (max-width: 767px) {
+                    transform: scale(0.75) translateX(-9px) translateY(-9px);
+                }
+            }
+        }
+    }
+    .toggle-wrapper {
+        font-size: 16px;
+        p {
+            white-space: pre;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1rem;
+            }
+        }
+        .react-toggle {
+            .react-toggle-track {
+                background: radial-gradient(
+                    78.7% 78.78% at 50.06% 50%,
+                    rgba(202, 202, 202, 0) 0%,
+                    rgba(195, 195, 195, 0) 20.31%,
+                    rgba(190, 190, 190, 0) 37.5%,
+                    rgba(182, 182, 182, 0.24) 60.42%,
+                    rgba(169, 169, 169, 0.49) 100%
+                );
+            }
+            .react-toggle-thumb {
+                background: #ededed !important;
+                box-shadow: 2px 2px 4px #b4b4b491, -2px -2px 4px #ffffff,
+                    inset 2px 2px 4px #c9c9c9, inset -2px -2px 4px #ffffff !important;
+                border: 2px solid #ededed !important;
+                width: 24px;
+                height: 24px;
+                top: 0;
+                left: 0;
+            }
+        }
+        .react-toggle--checked {
+            .react-toggle-track {
+                background: #64d6aa;
+                box-shadow: 0px 10px 30px #00000029;
+            }
+            .react-toggle-thumb {
+                border: 1px solid white;
+                background: #d6d6d6;
+                box-shadow: 0px 6px 30px #00000029;
+                left: 26px;
+            }
+        }
+    }
+    .subscription {
+        p {
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1rem;
+            }
+        }
+        .plan-status {
+            font-family: Ilisarniq-Bold;
+        }
+        .plan-status.active {
+            color: #14daa7;
+        }
+        .subscription-wrapper {
+            background: #f4f4f4;
+            border-radius: 8px;
+            .plan-title,
+            .plan-price {
+                font-family: Ilisarniq-Bold;
+            }
+            .expiry-date-time {
+                span {
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+
+            .btn-sub,
+            .re-active {
+                font-size: 0.875rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1rem;
+                }
+                color: #14daa7 !important;
+            }
+        }
+    }
+    .social-media {
+        svg {
+            border-radius: 100%;
+            &:not(:last-child) {
+                margin-right: 0.7em;
+            }
+        }
+    }
+    .info-links {
+        ul {
+            list-style-type: none;
+            li {
+                font-size: 0.75rem;
+                color: #868686;
+                @media only screen and (min-width: 768px) {
+                    font-size: 18px;
+                }
+                margin-bottom: 1.5em;
+            }
+        }
+    }
+}
+
+// NOTIFICATION TOGGLE COMPONENT
+.react-toggle {
+    touch-action: pan-x;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    &:hover {
+        &:not(.react-toggle--disabled) {
+            .react-toggle-track {
+                background-color: black;
+            }
+        }
+    }
+    &:active {
+        &:not(.react-toggle--disabled) {
+            .react-toggle-thumb {
+                -webkit-box-shadow: 0px 0px 5px 5px #0099e0;
+                -moz-box-shadow: 0px 0px 5px 5px #0099e0;
+                box-shadow: 0px 0px 5px 5px #0099e0;
+            }
+        }
+    }
+}
+.react-toggle-screenreader-only {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.react-toggle--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    -webkit-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+}
+.react-toggle-track {
+    width: 50px;
+    height: 24px;
+    padding: 0;
+    border-radius: 30px;
+    background-color: #4d4d4d;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.react-toggle--checked {
+    .react-toggle-track {
+        background-color: #19ab27;
+    }
+    &:hover {
+        &:not(.react-toggle--disabled) {
+            .react-toggle-track {
+                background-color: #128d15;
+            }
+        }
+    }
+    .react-toggle-track-check {
+        opacity: 1;
+        -webkit-transition: opacity 0.25s ease;
+        -moz-transition: opacity 0.25s ease;
+        transition: opacity 0.25s ease;
+    }
+    .react-toggle-track-x {
+        opacity: 0;
+    }
+    .react-toggle-thumb {
+        left: 27px;
+        border-color: #19ab27;
+    }
+}
+.react-toggle-track-check {
+    position: absolute;
+    width: 14px;
+    height: 10px;
+    top: 0px;
+    bottom: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: 0;
+    left: 8px;
+    opacity: 0;
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+}
+.react-toggle-track-x {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0px;
+    bottom: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
+    line-height: 0;
+    right: 10px;
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease;
+    -moz-transition: opacity 0.25s ease;
+    transition: opacity 0.25s ease;
+}
+.react-toggle-thumb {
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #4d4d4d;
+    border-radius: 50%;
+    background-color: #fafafa;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+.react-toggle--focus {
+    .react-toggle-thumb {
+        -webkit-box-shadow: 0px 0px 3px 2px #0099e0;
+        -moz-box-shadow: 0px 0px 3px 2px #0099e0;
+        box-shadow: 0px 0px 2px 3px #0099e0;
+    }
+}

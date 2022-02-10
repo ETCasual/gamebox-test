@@ -1,0 +1,139 @@
+#home {
+    padding: 6em 0;
+}
+
+// WINNER ANNOUNCEMENT MODAL COMPONENT
+.winner-announcement {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .swiper {
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+            background-color: #fdc43d;
+        }
+        .prize {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0 auto;
+            min-height: 30rem;
+            width: 95%;
+            @media only screen and (min-width: 480px) {
+                width: 25em;
+            }
+            border-radius: 30px;
+            .picture-wrapper {
+                position: relative;
+                .picture {
+                    max-width: 100%;
+                    width: 100%;
+                    height: 200px;
+                    @media only screen and (min-width: 768px) {
+                        height: 250px;
+                    }
+                    object-fit: cover;
+                    border-radius: 30px 30px 0 0;
+                }
+                .winner-pic {
+                    position: absolute;
+                    bottom: 0;
+                    border: 4px solid white;
+                    border-radius: 100%;
+                    box-shadow: 0px 10px 10px #00000029;
+                    width: 85px;
+                    height: 85px;
+                    object-fit: contain;
+                    background-color: #f4f4f4;
+                }
+            }
+            .title {
+                font-size: 1.5rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1.875rem;
+                }
+                color: #7824f8;
+                font-family: Ilisarniq-Bold;
+                position: relative;
+                z-index: 1;
+                text-transform: uppercase;
+                &::before {
+                    text-transform: uppercase;
+                    content: attr(data-text);
+                    position: absolute;
+                    z-index: -1;
+                    top: 0;
+                    transform: translate(0.08em, 0.08em);
+                    color: transparent;
+                    -webkit-text-stroke-color: #868686;
+                    -webkit-text-stroke-width: 1px;
+                }
+            }
+            .description {
+                text-align: center;
+                font-size: 1.125rem;
+                span {
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+            button {
+                border-radius: 7px;
+                padding: 1em;
+                width: 90%;
+                margin-bottom: 1em;
+            }
+            .claim-btn {
+                font-family: Ilisarniq-Bold;
+                background: linear-gradient(262deg, #fdc43d 0%, #efa500 100%);
+                box-shadow: 0px 18px 26px #f5c559b2;
+            }
+            .continue-btn {
+                color: #868686;
+            }
+            .later-btn {
+                color: #b7b7b7;
+            }
+            .separator {
+                height: 1px;
+                width: 80%;
+                margin: 0 auto;
+                background-color: #e2e2e2;
+            }
+        }
+        .swiper-button-prev {
+            color: white;
+            left: 10px;
+            @media only screen and (min-width: 768px) {
+                left: 120px;
+            }
+            @media only screen and (min-width: 1200px) {
+                left: 300px;
+            }
+        }
+        .swiper-button-next {
+            color: white;
+            right: 10px;
+            @media only screen and (min-width: 768px) {
+                right: 120px;
+            }
+            @media only screen and (min-width: 1200px) {
+                right: 300px;
+            }
+        }
+    }
+}

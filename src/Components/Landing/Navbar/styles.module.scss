@@ -1,0 +1,21 @@
+.landing-nav {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    .wrapper {
+        min-height: 70px;
+        .logo {
+            width: 110px;
+        }
+        .sign-in {
+            background: linear-gradient(261deg, #fdc43d 0%, #efa500 100%);
+            box-shadow: 0px 5px 10px #efe8ff;
+            border-radius: 15px;
+            color: black;
+            min-width: 120px;
+            min-height: 50px;
+            font-size: 0.875rem;
+        }
+    }
+}

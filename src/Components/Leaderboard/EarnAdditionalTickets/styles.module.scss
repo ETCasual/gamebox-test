@@ -1,0 +1,155 @@
+// EARN ADDITIONAL TICKET COMPONENT
+#earn-additional-tickets {
+    .title {
+        font-size: 16px;
+        font-family: Ilisarniq-Bold;
+        text-transform: uppercase;
+        @media only screen and (min-width: 768px) {
+            font-size: 20px;
+        }
+    }
+    .subtitle {
+        font-size: 10px;
+        color: #868686;
+        @media only screen and (min-width: 768px) {
+            font-size: 14px;
+        }
+    }
+    .earn-panel {
+        position: relative;
+        background: white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 8px;
+        box-shadow: 0px 5px 15px #0000002b;
+        width: 100%;
+        margin: 0;
+        min-height: auto;
+        @media only screen and (min-width: 480px) {
+            min-height: 150px;
+        }
+        @media only screen and (min-width: 768px) {
+            min-height: 300px;
+            flex-direction: column;
+            box-shadow: 0px 5px 15px #0000001a;
+        }
+
+        .watch-ads-img {
+            object-fit: contain;
+            width: 50px;
+            height: 50px;
+            @media only screen and (min-width: 480px) {
+                width: 60px;
+                height: 60px;
+            }
+            @media only screen and (min-width: 768px) {
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+            }
+        }
+        .use-gems-img {
+            object-fit: cover;
+            transform: translate(-4px, 0px);
+            width: 60px;
+            height: 60px;
+            @media only screen and (min-width: 480px) {
+                width: 80px;
+                height: 80px;
+            }
+            @media only screen and (min-width: 768px) {
+                width: 130px;
+                height: 130px;
+                object-fit: cover;
+            }
+        }
+        .info-wrapper {
+            background: linear-gradient(180deg, #f7f7f7 0%, #f7f7f700 100%);
+            border-radius: 3px;
+            padding: 0.5em 1em;
+            width: 100%;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            @media only screen and (min-width: 768px) {
+                padding: 1em;
+                min-height: auto;
+            }
+            .earn-title {
+                font-size: 10px;
+                font-family: Ilisarniq-Bold;
+                @media only screen and (min-width: 768px) {
+                    font-size: 14px;
+                }
+            }
+            .earn-tickets,
+            .earn-exp {
+                background: linear-gradient(90deg, #fdc43d 0%, #efa500 100%);
+                border-radius: 6px;
+                width: 80px;
+                p {
+                    font-size: 16px;
+                    font-family: Ilisarniq-Bold;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 20px;
+                    }
+                }
+            }
+            .earn-exp {
+                background: linear-gradient(
+                    90deg,
+                    #fdc33d73 0%,
+                    #efa30065 100%
+                );
+            }
+            .earn-desc {
+                font-size: 10px;
+                font-family: Ilisarniq-Regular;
+                @media only screen and (min-width: 768px) {
+                    font-size: 14px;
+                }
+                span {
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+        }
+    }
+    .note {
+        color: #5a5a5a;
+        font-size: 10px;
+        cursor: default;
+        @media only screen and (min-width: 768px) {
+            font-size: 14px;
+        }
+
+        &:before,
+        &:after {
+            @media only screen and (min-width: 768px) {
+                background-color: #d3d3d3;
+                content: "";
+                display: inline-block;
+                height: 1px;
+                position: relative;
+                vertical-align: middle;
+                width: 20%;
+            }
+        }
+        &:before {
+            @media only screen and (min-width: 768px) {
+                right: 0.5em;
+                margin-left: -50%;
+            }
+        }
+
+        &:after {
+            @media only screen and (min-width: 768px) {
+                left: 0.5em;
+                margin-right: -50%;
+            }
+        }
+    }
+}

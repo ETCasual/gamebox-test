@@ -1,0 +1,87 @@
+// AVATAR SELECTION COMPONENT
+#avatar-selection {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .close-btn {
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        width: 36px;
+        z-index: 3;
+    }
+    .edge-blur {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 30px;
+        @supports not (
+            (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+        ) {
+            background-color: rgba(244, 244, 244, 0.9);
+        }
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            background: rgb(244, 244, 244);
+            background: linear-gradient(
+                100deg,
+                rgba(244, 244, 244, 0) 0%,
+                rgba(251, 251, 251, 0.6) 40%,
+                rgba(255, 255, 255, 0.6) 55%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        transition: all 0.3s ease;
+    }
+    .top {
+        top: 0;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .bottom {
+        bottom: -30px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .wrapper {
+        position: relative;
+        background-color: white;
+        overflow-y: scroll;
+        height: 70vh;
+        border-radius: 20px;
+        padding: 2em;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        .avatar-selection {
+            border-radius: 100%;
+            width: clamp(4rem, 12vw, 10rem);
+            transition: all 0.3 ease-in-out;
+        }
+        .avatar-selection.active {
+            border: 5px solid white;
+            box-shadow: 0px 12px 15px 0px #cbcbcb;
+            -webkit-box-shadow: 0px 20px 30px #cbcbcb;
+            -moz-box-shadow: 0px 20px 30px #cbcbcb;
+            transition: all 0.3 ease-in-out;
+        }
+    }
+}

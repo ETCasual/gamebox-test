@@ -1,0 +1,33 @@
+// FOOTER
+.footer {
+    margin: 6rem 0 2rem 0;
+    font-size: 10px;
+    font-family: Ilisarniq-Regular;
+    .copyright {
+        color: #868686;
+    }
+    ul.paths {
+        li {
+            color: #9966cc;
+            &:nth-child(2) {
+                position: relative;
+                margin: 0 0.6rem;
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    background: black;
+                    width: 1%;
+                    height: 1em;
+                }
+                &::before {
+                    left: -5px;
+                }
+                &::after {
+                    right: -5px;
+                }
+            }
+        }
+    }
+}

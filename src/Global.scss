@@ -1,0 +1,1012 @@
+// MISC.
+*,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+    font-family: Ilisarniq-Regular;
+}
+#root {
+    overflow-x: hidden;
+}
+body {
+    width: 100vw;
+    min-height: 100vh;
+    background: radial-gradient(
+        closest-side at 50% 50%,
+        #fcfcfc 0%,
+        #ededed 100%
+    );
+    line-height: unset;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+a {
+    color: unset !important;
+    text-decoration: none !important;
+}
+button {
+    outline: none !important;
+    border: 0;
+    background: transparent;
+}
+.opacity-0-5 {
+    opacity: 0.5;
+}
+.ellipsis {
+    white-space: nowrap;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+.badges {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 70px;
+    // width: -webkit-fit-content;
+    // width: -moz-fit-content;
+    // width: fit-content;
+    min-height: 25px;
+    padding: 0 1em;
+    color: white;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(138, 138, 138, 0.3);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background: rgba(28, 28, 28, 0.45);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+    font-size: 8px;
+    @media only screen and (min-width: 768px) {
+        font-size: 10px;
+    }
+}
+.blur-overlay {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: 70px;
+    z-index: 2;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background: rgb(244, 244, 244);
+        background: linear-gradient(
+            100deg,
+            rgba(244, 244, 244, 0) 0%,
+            rgba(251, 251, 251, 0.6) 40%,
+            rgba(255, 255, 255, 0.6) 55%,
+            rgba(255, 255, 255, 0) 100%
+        );
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+}
+
+// **********************
+/****** COMPONENTS *******/
+// *********************
+
+// PRIZES MIX COMPONENTS
+.featured,
+.premium,
+.daily,
+.automatedEntry {
+    .complete-overlay {
+        @supports not (
+            (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+        ) {
+            background-color: rgba(244, 244, 244, 0.9);
+        }
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            backdrop-filter: blur(17px);
+            -webkit-backdrop-filter: blur(17px);
+        }
+        border-radius: 12px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+        width: 94%;
+        @media only screen and (min-width: 480px) {
+            width: 96%;
+        }
+        @media only screen and (min-width: 768px) {
+            width: 100%;
+        }
+        height: 101%;
+        background: linear-gradient(180deg, #ffffff00 0%, #00000029 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .card-wrapper {
+        display: grid;
+        border-top-left-radius: 17px;
+        border-top-right-radius: 17px;
+        position: relative;
+        cursor: pointer;
+        picture {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-top-left-radius: 17px;
+                border-top-right-radius: 17px;
+            }
+        }
+        .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            z-index: 0;
+            background: linear-gradient(
+                183deg,
+                rgba(black, 0) 0%,
+                rgba(#3f3f3f, 0.2) 55%,
+                rgba(black, 0.577766) 100%
+            );
+            border-top-left-radius: 17px;
+            border-top-right-radius: 17px;
+        }
+        .prize-text {
+            width: 100%;
+            position: absolute;
+            bottom: 1em;
+            .card-title {
+                font-family: Ilisarniq-Bold;
+                font-size: 1rem;
+                @media only screen and (min-width: 480px) {
+                    font-size: 0.875rem;
+                }
+                @media only screen and (min-width: 768px) {
+                    font-size: 1.5rem;
+                }
+                @media only screen and (min-width: 1200px) {
+                    font-size: 1.125rem;
+                }
+                @media only screen and (min-width: 1320px) {
+                    font-size: 1.25rem;
+                }
+                color: white;
+                line-height: 120%;
+                max-width: 75%;
+            }
+            .card-subtitle {
+                font-size: 0.75rem;
+                @media only screen and (min-width: 1320px) {
+                    font-size: 0.875rem;
+                }
+                line-height: 120%;
+                color: white;
+                max-width: 75%;
+            }
+        }
+    }
+    .ticket-info {
+        position: relative;
+        background-color: white;
+        border-bottom-left-radius: 17px;
+        border-bottom-right-radius: 17px;
+        height: auto;
+        .ticket-wrapper {
+            background-color: #f4f4f4;
+            border-radius: 12px;
+        }
+        .game-icon {
+            width: 80px;
+            img {
+                position: relative;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 16px;
+                border: 2px solid white;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+// TOAST COMPONENT
+.toasty {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    background: white;
+    z-index: 3;
+    border-radius: 12px;
+    min-width: 20rem;
+    min-height: 5rem;
+    padding: 1rem;
+    transform: translateX(120%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+// BACKGROUND PATTERNS COMPONENT
+.patter-wrapper {
+    @supports not ((-webkit-filter: none) or (filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-filter: none) or (filter: none)) {
+        filter: blur(12px);
+        -webkit-filter: blur(12px);
+    }
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+    .patterns {
+        position: fixed;
+    }
+    .triangle-1 {
+        top: 40%;
+        left: 32%;
+
+        @media only screen and (min-width: 1200px) {
+            top: 10em;
+            left: 10em;
+        }
+    }
+    .triangle-2 {
+        top: 9em;
+        right: -3em;
+
+        @media only screen and (min-width: 1200px) {
+            top: 9em;
+            right: 28em;
+        }
+    }
+    .triangle-3 {
+        bottom: 8em;
+        right: 6em;
+
+        @media only screen and (min-width: 1200px) {
+            bottom: 5em;
+            right: 6em;
+        }
+    }
+
+    .box-1 {
+        top: -2em;
+        left: -3em;
+
+        @media only screen and (min-width: 1200px) {
+            top: unset;
+            bottom: 10em;
+            left: 25em;
+        }
+    }
+    .box-2 {
+        top: 22em;
+        right: 5em;
+    }
+    .box-3 {
+        top: 5em;
+        left: 35em;
+    }
+
+    .circle-1 {
+        bottom: -3em;
+        left: -2em;
+
+        @media only screen and (min-width: 1200px) {
+            bottom: 5em;
+            left: -2em;
+        }
+    }
+    .circle-2 {
+        bottom: -3em;
+        right: -2em;
+        @media only screen and (min-width: 1200px) {
+            bottom: 10em;
+            right: 40em;
+        }
+    }
+    .circle-3 {
+        top: -1em;
+        right: 0em;
+    }
+}
+
+// TOP NAVBAR COMPONENT
+.navbar-top {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    min-height: 70px;
+    .profile {
+        background: #ffffff 0% 0% no-repeat padding-box;
+        border-radius: 100%;
+        width: 35px;
+        height: 35px;
+        @media only screen and (min-width: 768px) {
+            width: 40px;
+            height: 40px;
+        }
+        img {
+            border-radius: 100%;
+            width: 35px;
+            height: 35px;
+            @media only screen and (min-width: 768px) {
+                width: 40px;
+                height: 40px;
+            }
+            object-fit: contain;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .gems {
+        background: #ffffff 0% 0% no-repeat padding-box;
+        border-radius: 20px;
+        .gem-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 6em;
+            padding: 0 3.3em;
+            @media only screen and (min-width: 768px) {
+                width: 7em;
+                padding: 0 4em;
+            }
+            min-height: 40px;
+            color: #14daa7;
+            position: relative;
+            cursor: pointer;
+            span {
+                font-family: Ilisarniq-Bold;
+                margin: 0 0.5em;
+                font-size: 0.9rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1rem;
+                }
+            }
+            .gem-icon {
+                position: absolute;
+                left: 10px;
+                width: 18px;
+                @media only screen and (min-width: 768px) {
+                    width: 24px;
+                }
+            }
+            .add-gems-icon {
+                position: absolute;
+                right: 10px;
+                width: 18px;
+                @media only screen and (min-width: 768px) {
+                    width: 22px;
+                }
+            }
+        }
+    }
+    .notification {
+        background: #ffffff 0% 0% no-repeat padding-box;
+        border-radius: 100%;
+        position: relative;
+        width: 35px;
+        height: 35px;
+        @media only screen and (min-width: 768px) {
+            width: 40px;
+            height: 40px;
+        }
+        .icon {
+            width: 20px;
+            @media only screen and (min-width: 768px) {
+                width: 24px;
+            }
+        }
+        .notification-number {
+            position: absolute;
+            top: -0.5em;
+            right: -1em;
+            background: #ff2c44;
+            color: white;
+            border-radius: 100%;
+            width: 20px;
+            height: 20px;
+            padding: 0.25em 0;
+            font-size: 0.625rem;
+            font-family: Ilisarniq-Bold;
+            span {
+                position: relative;
+                top: -1px;
+            }
+        }
+    }
+    .nav-items {
+        a {
+            color: #636363 !important;
+        }
+        a.active {
+            font-family: Ilisarniq-Bold;
+            color: black !important;
+        }
+    }
+}
+// TICKET VALUE PANEL - TOURNAMENT & LEADERBOARD COMPONENT
+.ticket-values {
+    background: linear-gradient(90deg, #ffc742 0%, #eaa400 100%);
+    border-radius: 30px;
+    box-shadow: 5px 10px 30px #00000029;
+    padding: 0.25em;
+    border: 5px solid white;
+    @media only screen and (min-width: 1441px) {
+        padding: 0.3em;
+    }
+    p {
+        font-size: 0.5rem;
+        @media only screen and (min-width: 768px) {
+            font-size: 0.75rem;
+        }
+        display: flex;
+        align-items: center;
+        color: white;
+        span {
+            font-size: 1.125rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.5rem;
+            }
+            color: white;
+            font-family: Ilisarniq-Bold;
+            margin-left: 0.5em;
+        }
+    }
+}
+
+// BOTTOM NAVBAR COMPONENT
+.navbar-bottom {
+    position: fixed;
+    z-index: 1;
+    bottom: 1em;
+    right: 1em;
+    height: 4em;
+    width: 92%;
+    .navigation-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35) !important;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        min-height: 4em;
+        @media only screen and (max-width: 425px) {
+            min-height: 3.375em;
+        }
+        width: 100%;
+        transform-origin: left;
+        a {
+            opacity: 1;
+            visibility: visible;
+            p {
+                font-size: 0.75rem;
+                font-family: Ilisarniq-Bold;
+            }
+        }
+        .hamburger {
+            position: relative;
+            right: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: left;
+            .point {
+                width: 7px;
+                height: 7px;
+                background-color: #d6d6d6;
+                border-radius: 100%;
+            }
+        }
+    }
+}
+
+// NOTIFICATION COMPONENT
+.notification-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+#notification-panel {
+    position: fixed;
+    top: 5em;
+    right: 3%;
+    @media only screen and (min-width: 768px) {
+        right: 6%;
+    }
+    @media only screen and (min-width: 992px) {
+        right: 18%;
+    }
+    @media only screen and (min-width: 1200px) {
+        right: 17.6%;
+    }
+    z-index: 3;
+    height: auto;
+    width: 18.5em;
+    @media only screen and (min-width: 360px) {
+        width: 21em;
+    }
+    @media only screen and (min-width: 375px) {
+        width: 22em;
+    }
+    @media only screen and (min-width: 768px) {
+        width: 25rem;
+    }
+    padding: 1em;
+    border-radius: 20px;
+    box-shadow: 0px 18px 26px #00000029;
+    background: white;
+    .ui-wrapper {
+        p,
+        button {
+            font-size: 0.875rem;
+            color: #5a5a5a;
+        }
+        button {
+            font-family: Ilisarniq-Bold;
+        }
+    }
+    .winner-card {
+        .card-wrapper {
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+            min-height: 4.5em;
+            border-radius: 12px;
+            .inner-panel {
+                position: relative;
+                z-index: 1;
+            }
+            .prize-img {
+                border-radius: 100%;
+                width: 60px;
+                height: 60px;
+            }
+            .inner-wrapper {
+                min-height: 3.5em;
+                @supports not (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: rgba(244, 244, 244, 0.9);
+                }
+                @supports (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
+                }
+                &:after {
+                    content: "";
+                    background-color: black;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                    border-radius: 6px;
+                    opacity: 0.65;
+                }
+                .game-name {
+                    font-size: 0.813rem;
+                }
+                .reward-name {
+                    font-size: 0.563rem;
+                }
+                .avatar-img {
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
+    .all-seen {
+        min-height: 10vh;
+        p {
+            font-family: Ilisarniq-Bold;
+        }
+        small {
+            color: #8a8a8a;
+        }
+    }
+}
+#notification-panel,
+#notification {
+    .notification-card {
+        cursor: pointer;
+        .card-wrapper {
+            border-radius: 12px;
+            .prize-img {
+                position: absolute;
+                top: 0.3em;
+                left: 0.2em;
+                width: 3.5em;
+                @media only screen and (min-width: 425px) {
+                    width: 3.6em;
+                    top: 0.2em;
+                }
+                z-index: 1;
+                border-radius: 12px;
+                border: 2px solid white;
+            }
+            .prize-info {
+                min-height: 2.7em;
+                background: #f2f2f2;
+                font-size: 0.625rem;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                p {
+                    @media only screen and (max-width: 425px) {
+                        font-size: 0.5rem;
+                    }
+                    &:nth-child(1) {
+                        color: #5a5a5a;
+                    }
+                    &:nth-child(2) {
+                        color: #b7b7b7;
+                    }
+                }
+            }
+            .game-info,
+            .invite-info {
+                height: 2.3em;
+                @media only screen and (max-width: 425px) {
+                    height: 1.9em;
+                }
+                background: linear-gradient(270deg, #ffc742 0%, #eaa400 100%);
+                font-size: 1rem;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                p {
+                    height: 2.3em;
+                    font-family: Ilisarniq-Bold;
+                    font-size: 0.875rem;
+                    @media only screen and (min-width: 375px) {
+                        font-size: 1rem;
+                    }
+                }
+                .title {
+                    @media only screen and (max-width: 425px) {
+                        font-size: 0.75rem;
+                    }
+                }
+                .ticket {
+                    @media only screen and (max-width: 425px) {
+                        font-size: 1rem;
+                    }
+                }
+            }
+            .invite-info {
+                background-color: #d6d6d6;
+            }
+        }
+    }
+}
+
+// CARDS MIX - HOME, ACITVITY & WINNERS
+.premium,
+.automatedEntry,
+#activity,
+#winners {
+    .description {
+        h1 {
+            font-family: Ilisarniq-Bold;
+            color: black;
+            font-size: 1.5rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 2.25rem;
+            }
+        }
+        p {
+            color: #868686;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 0.875rem;
+            }
+            line-height: 1.5;
+        }
+    }
+}
+#activity,
+#winners {
+    padding: 6em 0;
+}
+
+// PAYMENT METHODS MODALS
+.payment-success,
+.payment-failed,
+.payment-methods,
+.payment-process,
+.payment-failed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    width: 100%;
+    height: 100%;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrapper {
+        padding: 1.5em 0.6em 0.6em 0.6em;
+        max-width: 400px;
+        width: 75%;
+        min-height: auto;
+        background-color: white;
+        box-shadow: 0px 18px 26px #00000029;
+        border-radius: 20px;
+        .subtitle {
+            color: #868686;
+            font-size: 0.875rem;
+        }
+        .btn-wrapper {
+            button {
+                &:not(:last-child) {
+                    margin-bottom: 1em;
+                }
+                padding: 0.5em 0;
+                background-color: white;
+                box-shadow: 0px 5px 10px #0000000d;
+                border: 1px solid #7070701a;
+                border-radius: 10px;
+                width: 100%;
+                img.grabpay {
+                    width: 100px;
+                    object-fit: cover;
+                }
+            }
+        }
+        .close-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            background-color: white;
+            box-shadow: 0px 18px 26px #00000029;
+            padding: 0.25em;
+            svg {
+                border-radius: 100%;
+                padding: 0.4em;
+                background: linear-gradient(225deg, #ff4242 0%, #a0084e 100%);
+            }
+        }
+        @media only screen and (max-width: 767px) {
+            p {
+                font-size: 12px;
+            }
+        }
+    }
+}
+.payment-success,
+.payment-failed {
+    .wrapper {
+        .title {
+            font-family: Ilisarniq-Bold;
+            font-size: 1.25rem;
+            color: #14daa7;
+        }
+        .btn-continue {
+            width: 100%;
+            button {
+                background: #14daa7;
+            }
+        }
+        button {
+            width: 100%;
+            color: white;
+            font-size: 1.25rem;
+            font-family: Ilisarniq-Bold;
+            margin-top: 1em;
+            padding: 0.7em 4em;
+            border-radius: 12px;
+        }
+    }
+}
+.payment-failed {
+    .wrapper {
+        .title {
+            color: #ff2c44;
+        }
+        .btn-close {
+            background: #ff2c44;
+        }
+    }
+}
+
+// MODAL COMPONENT
+.modal-pop {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    min-height: 100vh;
+    min-width: 100vw;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .modal-body,
+    .modal-body-small {
+        .close-button {
+            top: -12px;
+            right: -12px;
+        }
+        background: white;
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 12px;
+        padding: 0.7em;
+        width: 400px;
+        .prize-img {
+            width: 18em;
+            height: auto;
+        }
+        .result-info {
+            font-size: 1em;
+        }
+        .title {
+            font-size: 20px;
+            font-family: Ilisarniq-Bold;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #868686;
+            line-height: 1.5;
+            .email {
+                color: #7824f8 !important;
+                font-family: Ilisarniq-Bold;
+            }
+        }
+        ul {
+            font-size: 14px;
+            color: #868686;
+            li {
+                line-height: 2;
+                .step {
+                    p {
+                        font-family: Ilisarniq-Bold;
+                    }
+                }
+            }
+        }
+        .earn-tickets,
+        .earn-exp {
+            background: linear-gradient(90deg, #fdc43d 0%, #efa500 100%);
+            border-radius: 6px;
+            width: 80px;
+            height: 40px;
+            font-size: 18px;
+            font-family: Ilisarniq-Bold;
+        }
+        .earn-exp {
+            background: linear-gradient(90deg, #fdc33d73 0%, #efa30065 100%);
+        }
+        button {
+            height: 3.5em;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        .btn-yes,
+        .btn-results {
+            font-family: Ilisarniq-Bold;
+            background: linear-gradient(257deg, #04e4aa 0%, #01b789 100%);
+            color: white;
+            margin-left: 0.25em;
+        }
+        .btn-no {
+            margin-right: 0.25em;
+            background: #f2f2f2;
+            color: #707070;
+            font-family: Ilisarniq-Regular;
+        }
+        .btn-results,
+        .btn-continue {
+            width: 90%;
+            margin: auto;
+        }
+        .continue {
+            color: black;
+            background: linear-gradient(264deg, #fdc43d 0%, #efa500 100%);
+        }
+        .claim-later-btn {
+            color: #868686;
+        }
+    }
+}
+
+// INFO PAGES
+.tnc,
+.privacy-policy,
+.tournament-rules {
+    padding: 12em 0 3em 0;
+    .main-desc {
+        .title {
+            font-size: 1.25rem;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            font-family: Ilisarniq-Bold;
+        }
+    }
+    .title {
+        color: #000000;
+        font-family: Ilisarniq-Bold;
+    }
+    .description {
+        font-size: 0.75rem;
+        color: #868686;
+        line-height: 1.5;
+        .email {
+            color: #7824f8 !important;
+            font-family: Ilisarniq-Bold;
+        }
+    }
+    ul.description {
+        list-style-type: decimal;
+        li {
+            margin-bottom: 1.5em;
+            line-height: 1.5;
+        }
+    }
+}
+
+// LANDSCAPE ORIENTATION MODAL COMPONENT
+.orientation {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+    .title {
+        font-size: 1.25rem;
+        font-family: Ilisarniq-Bold;
+        text-align: center;
+        width: 30ch;
+    }
+}
+
+@import "./assets/css/all";

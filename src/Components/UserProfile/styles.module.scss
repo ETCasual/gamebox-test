@@ -1,0 +1,174 @@
+// CLOSE BUTTON
+.close-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    box-shadow: 0px 10px 18px #00000029;
+}
+
+// BACK BUTTON
+.back-button {
+    box-shadow: 0px 18px 26px #00000029;
+    border-radius: 100%;
+    // height: fit-content;
+}
+
+// CLAIMED PRIZE DETAILS MODAL
+.claim-prize-detail-modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(244, 244, 244, 0.9);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrapper {
+        background-color: white;
+        border-radius: 20px;
+        color: #868686;
+        font-size: 0.875rem;
+        min-height: 65vh;
+        .close-button {
+            right: 0;
+            z-index: 3;
+        }
+        .prize-info {
+            position: relative;
+            .overlay {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                z-index: 0;
+                background: linear-gradient(
+                    183deg,
+                    rgba(black, 0) 0%,
+                    rgba(#3f3f3f, 0.2) 60%,
+                    rgba(black, 0.577766) 100%
+                );
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+            }
+            img {
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+                min-height: 13em;
+                @media only screen and (min-width: 360px) {
+                    min-height: 16.438em;
+                }
+                width: 100%;
+                object-fit: cover;
+            }
+            .badge {
+                position: absolute;
+                top: 1em;
+                left: 1em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 70px;
+                width: -webkit-fit-content;
+                width: -moz-fit-content;
+                width: fit-content;
+                min-height: 25px;
+                padding: 0 1em;
+                color: white;
+                @supports not (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: rgba(244, 244, 244, 0.9);
+                }
+                @supports (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: #a4a4a582;
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px);
+                }
+                font-size: 0.5rem;
+                @media only screen and (min-width: 360px) {
+                    font-size: 0.625rem;
+                }
+            }
+            .prize-text {
+                width: 100%;
+                position: absolute;
+                bottom: 1em;
+                padding: 1em 1em 0 1em;
+                .title {
+                    font-family: Ilisarniq-Bold;
+                    font-size: 1rem;
+                    @media only screen and (min-width: 360px) {
+                        font-size: 0.875rem;
+                    }
+                    @media only screen and (min-width: 768px) {
+                        font-size: 1.5rem;
+                    }
+                    @media only screen and (min-width: 1200px) {
+                        font-size: 1.125rem;
+                    }
+                    @media only screen and (min-width: 1320px) {
+                        font-size: 1.25rem;
+                    }
+                    color: white;
+                    line-height: 120%;
+                }
+                .subtitle {
+                    font-size: 0.75rem;
+                    @media only screen and (min-width: 1320px) {
+                        font-size: 0.875rem;
+                    }
+                    line-height: 120%;
+                    color: white;
+                }
+            }
+        }
+        .claim-info {
+            .claimed-date {
+                .date {
+                    color: #000000;
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+            .separator {
+                width: 100%;
+                height: 1px;
+                background-color: #d6d6d6;
+            }
+            .delivery-address {
+                .name {
+                    color: #000000;
+                    font-family: Ilisarniq-Bold;
+                }
+                .email,
+                .phone,
+                .city,
+                .zipcode,
+                .state,
+                .country,
+                .address {
+                    color: #000000;
+                }
+            }
+            .tracking {
+                .tracking-number {
+                    font-family: Ilisarniq-Bold;
+                }
+                .tracking-number,
+                .company-name {
+                    color: #000000;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,330 @@
+// PROFILE COMPONENT
+#profile {
+    padding: 6em 0;
+    .profile-info {
+        img {
+            border-radius: 100%;
+            width: 140px;
+            height: 140px;
+            @media only screen and (min-width: 768px) {
+                width: 107px;
+                height: 107px;
+            }
+            object-fit: contain;
+            border: 6.5px solid var(--white);
+            box-shadow: 0px 12px 15px 0px #cbcbcb;
+            background-color: #e8e8e8;
+            @media only screen and (min-width: 768px) {
+                width: 14.125em;
+                height: 14.125em;
+            }
+        }
+        h3 {
+            font-family: Ilisarniq-Bold;
+            text-transform: capitalize;
+            font-size: 1.5rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.75rem;
+            }
+        }
+        p {
+            color: black;
+        }
+        .email-text {
+            font-family: Ilisarniq-Regular;
+            color: #868686;
+            margin-bottom: 39px;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1rem;
+            }
+        }
+        .user-name {
+            margin-top: 18px;
+            margin-bottom: 6px;
+        }
+    }
+    .gem-balance {
+        cursor: default;
+        p {
+            font-size: 14px;
+            color: #868686;
+        }
+        .gem-balance-text {
+            font-family: Ilisarniq-Regular;
+            font-size: 0.75rem;
+            color: #868686;
+            @media only screen and (min-width: 768px) {
+                font-size: 1rem;
+            }
+        }
+        .gem-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            min-width: 7em;
+            padding: 0 0.8em;
+            min-height: 40px;
+            background: white;
+            border-radius: 20px;
+            color: #14daa7;
+            position: relative;
+            cursor: pointer;
+            span.gems {
+                font-family: Ilisarniq-Bold;
+                margin: 0 0.5em;
+                font-size: 1.125em;
+            }
+            .add-icon {
+                background: linear-gradient(180deg, #04e4aa 0%, #01b789 100%);
+                width: 1.5em;
+                height: 1.5em;
+                border-radius: 100%;
+                color: white;
+                font-family: Ilisarniq-Bold;
+                span {
+                    font-size: 1em;
+                    margin-bottom: 0.15em;
+                }
+            }
+        }
+    }
+    .multiplier-holder {
+        margin-top: 20px;
+        .multiplier {
+            background: white;
+            position: relative;
+            box-shadow: 0px 10px 15px #0000000d;
+            @media only screen and (min-width: 768px) {
+                min-height: 9em;
+            }
+            border-radius: 20px;
+            cursor: pointer;
+            p {
+                margin-bottom: 0.625rem;
+            }
+            .multiplier-info {
+                color: black;
+                font-family: Ilisarniq-Bold;
+                font-size: 0.875rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1.25rem;
+                }
+                span {
+                    color: #7824f8;
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+            .level {
+                .current-level {
+                    color: #868686;
+                    font-size: 0.75rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 1rem;
+                    }
+                }
+                .exp {
+                    font-size: 14px;
+                    color: #868686;
+                    background: #f4f4f4;
+                    border-radius: 17px;
+                    min-width: 6.5em;
+                    min-height: 2.25em;
+                    padding: 0.1em 1.1em;
+                    .player-exp {
+                        font-family: Ilisarniq-Bold;
+                        font-size: 0.75rem;
+                        @media only screen and (min-width: 768px) {
+                            font-size: 1rem;
+                        }
+                    }
+                    .current-multiplier-total,
+                    span {
+                        font-size: 0.75rem;
+                        @media only screen and (min-width: 768px) {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+            .progress {
+                position: relative;
+                margin-top: 1em;
+                width: 100%;
+                border-radius: 1em;
+                background-color: #f4f4f4;
+                height: 1.5em;
+                @media only screen and (min-width: 768px) {
+                    height: 2em;
+                }
+                .progress-bar {
+                    background: linear-gradient(267deg, #04e4aa, #01b789);
+                    box-shadow: 0px 10px 20px #6c38ef3f;
+                    border-radius: 1em;
+                    height: inherit;
+                }
+            }
+            .progressbar-shadow {
+                box-shadow: 0px 10px 20px #64d6aa67;
+                position: absolute;
+                bottom: 0;
+                border-radius: 1em;
+                transition: all 0.5s ease;
+                height: 1.45em;
+            }
+        }
+    }
+    .invite-friends-holder {
+        margin-top: 20px;
+        .team {
+            padding: 1.5rem;
+            @media only screen and (min-width: 768px) {
+                padding-bottom: 3rem;
+                min-height: 15.375em;
+            }
+            cursor: default;
+            position: relative;
+            background: #fdfcfc;
+            border-radius: 20px;
+            box-shadow: 0px 10px 15px #0000000d;
+            .team-title {
+                position: relative;
+                z-index: 1;
+                font-family: Ilisarniq-Bold;
+                color: black;
+                font-size: 0.875rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1.25rem;
+                }
+            }
+            .refer-text {
+                position: relative;
+                z-index: 1;
+                font-family: Ilisarniq-Bold;
+                color: black;
+                font-size: 0.75rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 1rem;
+                }
+                span {
+                    color: #14daa7;
+                    font-size: 20px;
+                    font-family: Ilisarniq-Bold;
+                }
+            }
+            .share-text {
+                position: relative;
+                z-index: 1;
+                color: #868686;
+                font-size: 10px;
+                line-height: 2;
+                width: auto;
+                @media only screen and (min-width: 768px) {
+                    width: 35ch;
+                }
+            }
+            .bg-d {
+                width: 250px;
+            }
+            .bg-m {
+                position: absolute;
+                top: 1.5em;
+                right: 2em;
+                width: 80px;
+                @media only screen and (min-width: 360px) {
+                    top: 1em;
+                    width: 100px;
+                }
+            }
+        }
+        .invite-btn {
+            display: none;
+            @media only screen and (min-width: 768px) {
+                display: unset;
+                position: relative;
+                z-index: 1;
+                position: absolute;
+                top: 59%;
+                left: 50%;
+                transform: translate(-50%, 50%);
+                z-index: 1;
+                background: transparent
+                    linear-gradient(180deg, #04e4aa 0%, #01b789 100%) 0% 0%
+                    no-repeat padding-box;
+                box-shadow: 0px 18px 20px #00000029;
+                border-radius: 12px;
+                font-size: 14px;
+                color: white;
+                min-height: 3.5em;
+                min-width: 14.3em;
+            }
+        }
+    }
+    .highscore,
+    .rewards {
+        cursor: pointer;
+        background: #fdfcfc;
+        min-height: 3.625em;
+        @media only screen and (min-width: 768px) {
+            min-height: 6.188em;
+        }
+        box-shadow: 0px 10px 15px #0000000d;
+        color: black;
+        font-family: Ilisarniq-Bold;
+        font-size: 16px;
+        border-radius: 20px;
+        p {
+            min-height: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            font-family: Ilisarniq-Bold;
+            font-size: 0.875rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.25rem;
+            }
+        }
+        .icon {
+            width: 32px;
+            height: 32px;
+            @media only screen and (min-width: 768px) {
+                width: 46px;
+                height: 46px;
+            }
+        }
+    }
+    .settings {
+        background: #fdfcfc;
+        min-height: 3.625em;
+        @media only screen and (min-width: 768px) {
+            min-height: 6.188em;
+        }
+        box-shadow: 0px 10px 15px #0000000d;
+        border-radius: 20px;
+        p {
+            color: black;
+            font-family: Ilisarniq-Bold;
+            font-size: 0.875rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.25rem;
+            }
+        }
+        .icon {
+            width: 32px;
+            height: 32px;
+            @media only screen and (min-width: 768px) {
+                width: 46px;
+                height: 46px;
+            }
+        }
+    }
+    .logout {
+        color: #ff2c44;
+        font-family: Ilisarniq-Bold;
+        margin-bottom: 2em;
+        font-size: 0.875rem;
+        @media only screen and (min-width: 768px) {
+            font-size: 1.25rem;
+        }
+    }
+}

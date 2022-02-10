@@ -1,0 +1,70 @@
+// WINNERS COMPONENT
+#winners {
+    .month-year {
+        font-size: 0.75rem;
+        font-family: Ilisarniq-Regular;
+        @media only screen and (min-width: 768px) {
+            font-size: 1.25rem;
+            font-family: Ilisarniq-Bold;
+        }
+    }
+    .winner-card {
+        min-height: 55px;
+        @media only screen and (min-width: 768px) {
+            border-radius: 1.25rem;
+            min-height: 85px;
+        }
+        cursor: pointer;
+        .date {
+            color: #868686;
+            font-size: 0.688rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 0.875rem;
+            }
+        }
+        .player-name {
+            width: 20ch;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.25rem;
+            }
+
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+        }
+        .player-reward {
+            margin-top: 0.5em;
+            font-family: Ilisarniq-Bold;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.25rem;
+            }
+            color: black;
+            width: 110px;
+            @media only screen and (min-width: 480px) {
+                width: 220px;
+            }
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            text-overflow: ellipsis;
+        }
+        img {
+            background: white;
+            border-radius: 100%;
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            @media only screen and (min-width: 768px) {
+                width: 64px;
+                height: 64px;
+            }
+        }
+    }
+    .winner-card.active {
+        cursor: pointer;
+        background-color: rgba(#d6d6d6, 0.2);
+    }
+}

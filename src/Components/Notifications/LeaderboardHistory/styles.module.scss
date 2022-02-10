@@ -1,0 +1,200 @@
+#leaderboard-history {
+    .wrapper {
+        .leaderboard {
+            height: 80vh;
+            @media only screen and (min-width: 768px) {
+                height: 90vh;
+            }
+            border-radius: 10px;
+            position: relative;
+            .leaderboard-game {
+                background-color: white;
+                padding: 0.4em 0.65em;
+                border-radius: 10px 10px 0px 0px;
+                margin: 0;
+                .game-thumbnail {
+                    height: 60px;
+                    @media only screen and (min-width: 768px) {
+                        height: 80px;
+                    }
+                    width: auto;
+                    object-fit: cover;
+                    object-position: top;
+                    border-radius: 4px;
+                }
+                .prize-name {
+                    width: fit-content;
+                    background-color: rgba(black, 0.35);
+                    border-radius: 16px;
+                    padding: 0.4em;
+                    color: white;
+                    font-size: 0.65rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 0.75rem;
+                    }
+                }
+                .game-name {
+                    font-size: 0.813rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 1.65rem;
+                    }
+                    font-family: Ilisarniq-Bold;
+                }
+                .date {
+                    font-size: 0.625rem;
+                    @media only screen and (min-width: 768px) {
+                        font-size: 0.75rem;
+                    }
+                    color: #868686;
+                }
+            }
+            .leaderboard-rank-wrapper {
+                background: white;
+                box-shadow: 0px 18px 26px #00000029;
+                overflow: auto;
+                .leaderboard-rank-layer {
+                    max-height: 100%;
+                    overflow-y: scroll;
+                    -ms-overflow-style: none; /* Internet Explorer 10+ */
+                    scrollbar-width: none; /* Firefox */
+                }
+                .leaderboard-rank-layer::-webkit-scrollbar {
+                    width: 0; /* Safari and Chrome */
+                }
+            }
+            .leaderboard-user-wrapper {
+                background: #f4f4f4;
+                position: relative;
+                top: -12px;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0px 18px 26px #00000029;
+            }
+            .leader-player-card {
+                background-color: #f2f2f2;
+                min-height: 3.5em;
+                border-radius: 7px;
+                position: relative;
+                .user-avatar {
+                    position: relative;
+                    .rank-star {
+                        position: absolute;
+                        bottom: -0.2em;
+                        right: -0.3em;
+                        img {
+                            width: 16px;
+                        }
+                    }
+                    .avatar {
+                        border-radius: 100%;
+                        object-fit: contain;
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+                p {
+                    font-size: 0.875rem;
+                    font-family: Ilisarniq-Bold;
+                    margin: 0;
+                }
+                .player-name {
+                    width: 80px;
+                    @media only screen and (min-width: 768px) {
+                        width: 300px;
+                    }
+                    white-space: nowrap;
+                    overflow: hidden;
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                }
+                .points {
+                    font-family: Ilisarniq-Bold;
+                    color: #14daa7;
+                    flex-wrap: nowrap;
+                    white-space: nowrap;
+                }
+                .tickets {
+                    background: linear-gradient(
+                        90deg,
+                        #fdc43d 0%,
+                        #efa500 100%
+                    );
+                    border-radius: 30px;
+                    height: 100%;
+                    span {
+                        font-size: 1rem;
+                        font-family: Ilisarniq-Bold;
+                    }
+                }
+                .rank-number {
+                    font-family: Ilisarniq-Bold;
+                    background: #e0e0e0;
+                    border-radius: 30px;
+                    font-size: 0.875rem;
+                    text-align: center;
+                    min-width: 20px;
+                    padding: 0.25em 0.5em;
+                }
+            }
+            .leader-player-card.current-user {
+                background: #fdc43d;
+                .points {
+                    color: #7824f8;
+                }
+                .tickets {
+                    background: #b5891f;
+                    color: #fdc43d;
+                }
+            }
+            .leaderboard-level,
+            .leaderboard-exp {
+                color: #383838;
+                width: 85%;
+                margin: 0 auto;
+                font-size: 0.75rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 0.938rem;
+                    width: 75%;
+                }
+                p {
+                    color: #868686;
+                }
+                .tickets {
+                    background: linear-gradient(
+                        90deg,
+                        #fdc43d 0%,
+                        #efa500 100%
+                    );
+                    border-radius: 30px;
+                    height: 100%;
+                    min-width: 85px;
+                    span {
+                        font-size: 1rem;
+                        font-family: Ilisarniq-Bold;
+                    }
+                }
+            }
+            .earned-points {
+                padding: 1.25em;
+                background-color: white;
+                border-radius: 0px 0px 10px 10px;
+                .leaderboard-level,
+                .leaderboard-exp {
+                    width: 100%;
+                    .tickets {
+                        min-width: 90px;
+                        border-radius: 7px;
+                    }
+                }
+                .leaderboard-exp {
+                    .tickets {
+                        background: linear-gradient(
+                            90deg,
+                            #fdc33d73 0%,
+                            #efa30065 100%
+                        );
+                    }
+                }
+            }
+        }
+    }
+}

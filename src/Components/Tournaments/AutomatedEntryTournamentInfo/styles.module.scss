@@ -1,0 +1,195 @@
+// AUTOMATED GAME MAIN PANEL
+#automatedEntryTournamentInfo {
+    margin: 160px 0 60px 0;
+    .wrapper {
+        box-shadow: 0px 10px 15px #00000029;
+        border-radius: 20px;
+        .card-wrapper {
+            position: relative;
+            background-size: cover;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            position: relative;
+            padding: 5em;
+            .overlay {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                z-index: 0;
+                background: linear-gradient(
+                    183deg,
+                    rgba(black, 0) 0%,
+                    rgba(#3f3f3f, 0.2) 60%,
+                    rgba(black, 0.577766) 100%
+                );
+                border-top-left-radius: 17px;
+                border-top-right-radius: 17px;
+            }
+            .badge {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 70px;
+                width: -webkit-fit-content;
+                width: -moz-fit-content;
+                width: fit-content;
+                min-height: 25px;
+                padding: 0 1em;
+                color: white;
+                @supports not (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: rgba(244, 244, 244, 0.9);
+                }
+                @supports (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px);
+                }
+                font-size: 0.625rem;
+                background-color: rgba(#fdc43d, 0.45);
+            }
+            .timer {
+                color: white;
+                background-color: rgba(#14daa7, 0.45);
+                border-radius: 12px;
+                @supports not (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: rgba(244, 244, 244, 0.9);
+                }
+                @supports (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px);
+                }
+                min-height: 40px;
+                min-width: 125px;
+                @media only screen and (min-width: 768px) {
+                    min-width: 230px;
+                }
+                .icon {
+                    width: 18px;
+                }
+                .label {
+                    font-size: 0.75rem;
+                    @media only screen and (min-width: 1200px) {
+                        font-size: 0.625rem;
+                    }
+                }
+                .countdown {
+                    text-align: left;
+                    min-width: 80px;
+                    font-size: 0.625rem;
+                    @media only screen and (min-width: 360px) {
+                        font-size: 0.75rem;
+                    }
+                    @media only screen and (min-width: 768px) {
+                        font-size: 1.25rem;
+                        min-width: 140px;
+                    }
+                    font-family: Ilisarniq-Bold;
+                    margin-bottom: 0.1em;
+                }
+            }
+            .ticket-wrapper {
+                position: absolute;
+                bottom: -4em;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                .ticket-info {
+                    background: white;
+                    border-radius: 8px;
+                    .your-tickets {
+                        min-height: 3em;
+                        background: linear-gradient(
+                            262deg,
+                            #fdc43d 0%,
+                            #efa500 100%
+                        );
+                        box-shadow: 0px 18px 26px #00000029;
+                        border-radius: 8px;
+                        color: white;
+                        .label {
+                            font-size: 0.5rem;
+                            @media only screen and (min-width: 768px) {
+                                font-size: 0.75rem;
+                            }
+                            line-height: 133%;
+                        }
+                        .tickets {
+                            font-family: Ilisarniq-Bold;
+                            font-size: 1.125rem;
+                            @media only screen and (min-width: 768px) {
+                                font-size: 1.5rem;
+                            }
+                        }
+                        img.icon {
+                            width: 18px;
+                            @media only screen and (min-width: 480px) {
+                                width: 28px;
+                            }
+                            box-shadow: 0px 5px 10px #ff8900e5;
+                        }
+                    }
+                }
+            }
+        }
+        .title {
+            font-family: Ilisarniq-Bold;
+            font-size: 1.125rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.75rem;
+            }
+            color: white;
+            line-height: 120%;
+            @media only screen and (min-width: 1200px) {
+                max-width: 200px;
+            }
+        }
+        .subtitle {
+            color: white;
+            font-size: 0.75rem;
+            @media only screen and (min-width: 768px) {
+                font-size: 1.25rem;
+            }
+        }
+        .instructions {
+            background: white;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            p {
+                font-size: 0.75rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 0.875rem;
+                }
+                &:nth-child(1) {
+                    color: #7824f8;
+                    font-family: Ilisarniq-Bold;
+                }
+                &:nth-child(2),
+                &:nth-child(3) {
+                    color: #868686;
+                    line-height: 1.5;
+                }
+            }
+            button {
+                border-radius: 12px;
+                background: linear-gradient(270deg, #04e4aa 0%, #01b789 100%);
+                box-shadow: 0px 18px 26px #00000029;
+                color: white;
+                padding: 1.25em 2em;
+                font-family: Ilisarniq-Bold;
+                font-size: 1rem;
+                width: 100%;
+                @media only screen and (min-width: 768px) {
+                    width: 90%;
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+// DAILY COMPONENT
+.daily {
+    margin: 0.5em 0;
+    .card-wrapper {
+        cursor: pointer;
+        background-color: #14DAA7;
+        min-height: 39vh;
+        background-size: 220px;
+        background-position: right 15px;
+        @media only screen and (min-width: 1200px) {
+            background-size: contain;
+            background-position: right 15px;
+        }
+        .content {
+            .top-content {
+                .card-title {
+                    font-size: 1.5rem;
+                    max-width: 200px;
+                    text-shadow: 1px 1px 2px black;
+                }
+            }
+            .bottom-content {
+                .bottom-wrapper {
+                    background: #14DAA7;
+                    height: 100px;
+                    .game-icon {
+                        img {
+                            width: 80px;
+                            height: 80px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .find-out-more {
+        display: flex;
+        align-items: flex-end;
+        color: white;
+        text-decoration: underline;
+    }
+}

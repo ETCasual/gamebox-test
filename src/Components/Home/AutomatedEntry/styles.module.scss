@@ -1,0 +1,121 @@
+// AUTOMATED ENTRY COMPONENT
+.automatedEntry {
+    .card-wrapper {
+        cursor: pointer;
+        border-radius: 17px;
+        picture {
+            img {
+                height: 30vh;
+                @media only screen and (min-width: 360px) {
+                    height: 31vh;
+                }
+                border-radius: 17px;
+            }
+        }
+        .overlay {
+            border-radius: 17px;
+            @media only screen and (max-width: 360px) {
+                background: linear-gradient(
+                    183deg,
+                    rgba(black, 0) 0%,
+                    rgba(#3f3f3f, 0.6) 55%,
+                    rgba(black, 0.577766) 100%
+                );
+            }
+        }
+        .badges {
+            background-color: rgba(#fdc43d, 0.45);
+        }
+        .timer {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            color: white;
+            border-radius: 12px;
+            @supports not (
+                (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+            ) {
+                background-color: rgba(#14daa7, 0.4);
+            }
+            @supports (
+                (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+            ) {
+                background-color: rgba(#14daa7, 0.45);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+            min-height: 30px;
+            @media only screen and (min-width: 768px) {
+                min-height: 50px;
+            }
+            .icon {
+                width: 18px;
+                @media only screen and (min-width: 480px) {
+                    width: 28px;
+                }
+            }
+            .label {
+                font-size: 1rem;
+            }
+            .countdown {
+                text-align: left;
+                min-width: 80px;
+                font-size: 0.625rem;
+                @media only screen and (min-width: 360px) {
+                    font-size: 0.75rem;
+                }
+                @media only screen and (min-width: 768px) {
+                    font-size: 1.25rem;
+                    min-width: 140px;
+                }
+                font-family: Ilisarniq-Bold;
+                margin-bottom: 0.1em;
+            }
+        }
+        .prize-text {
+            .card-title,
+            .card-subtitle {
+                width: fit-content;
+                width: -webkit-fit-content;
+                width: -moz-fit-content;
+            }
+            .ticket-info {
+                border-radius: 8px;
+                min-height: 35px;
+                @media only screen and (min-width: 768px) {
+                    min-height: 50px;
+                }
+                .your-tickets {
+                    img.icon {
+                        width: 18px;
+                        @media only screen and (min-width: 480px) {
+                            width: 40px;
+                            height: 24px;
+                            object-fit: cover;
+                        }
+                    }
+                    .label {
+                        font-size: 0.625rem;
+                        @media only screen and (min-width: 480px) {
+                            font-size: 0.75rem;
+                        }
+                        @media only screen and (min-width: 768px) {
+                            font-size: 1rem;
+                        }
+                        color: #868686;
+                    }
+                    .tickets {
+                        font-size: 0.75rem;
+                        @media only screen and (min-width: 360px) {
+                            font-size: 1rem;
+                        }
+                        @media only screen and (min-width: 768px) {
+                            font-size: 1.5rem;
+                        }
+                        font-family: Ilisarniq-Bold;
+                    }
+                }
+            }
+        }
+    }
+}

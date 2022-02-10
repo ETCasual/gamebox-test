@@ -1,0 +1,242 @@
+// REACT
+import React from "react";
+
+// HELPER FUNCTIONS
+import {
+    getCurrentLevelNo,
+    getCurrentMultiplier,
+    getLevelProgress,
+    getCurrentLevelExp,
+} from "Utils/CurrentLevel";
+
+const PlayerLevel = ({ user, ranks, handleBackButton }) => {
+    return (
+        <section id="player-level">
+            <div className="container level-modal">
+                <div className="row justify-content-center">
+                    <div className="col-11 col-md-8 col-lg-5">
+                        <div className="row">
+                            <div className="col-12 level-wrapper">
+                                {/* INNER SCROLLING WRAPPER */}
+                                <div className="scrolling-wrapper-y flex-column flex-nowrap">
+                                    {/* CURRENT LEVEL & MULTIPLIER */}
+                                    <div className="col-12 mt-3 p-1 p-md-3">
+                                        <div className="current-level-wrapper d-flex flex-column justify-content-center align-items-center">
+                                            <div className="level-indicator-wrapper">
+                                                <div className="level-indicator">
+                                                    <span>Level</span>
+                                                    <p className="mb-0 level text-center">
+                                                        {getCurrentLevelNo(
+                                                            user,
+                                                            ranks
+                                                        )}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <p className="statement ">
+                                                Increase your multiplier with
+                                                every level!
+                                            </p>
+                                            <div className="current-level-details-wrapper">
+                                                {/* MULTIPLIER & EXP */}
+                                                <div className="exp mb-2 w-100 d-flex align-items-center justify-content-between">
+                                                    {/* MULTIPLIER */}
+                                                    <div className="d-flex multiplier-text">
+                                                        <p className="mb-0 pr-1">
+                                                            Multiplier
+                                                        </p>
+                                                        <p className="mb-0 multiplier-value">
+                                                            {getCurrentMultiplier(
+                                                                user,
+                                                                ranks
+                                                            )}
+                                                            %
+                                                        </p>
+                                                    </div>
+                                                    {/* EXP COUNT */}
+                                                    <div className="d-flex exp-count">
+                                                        <span className="bold mr-1">
+                                                            {user.exp >
+                                                            ranks[
+                                                                ranks.length - 1
+                                                            ]?.exp
+                                                                ? ranks[
+                                                                      ranks.length -
+                                                                          1
+                                                                  ]?.exp.toLocaleString()
+                                                                : user.exp.toLocaleString()}
+                                                        </span>
+                                                        <span className="mx-1">
+                                                            /
+                                                        </span>
+                                                        <span>
+                                                            {getCurrentLevelExp(
+                                                                user,
+                                                                ranks
+                                                            ).toLocaleString()}
+                                                        </span>{" "}
+                                                        <img
+                                                            className="ml-2"
+                                                            width="14"
+                                                            src={`${window.cdn}art_assets/icons/exp_01.png`}
+                                                            alt="star"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                {/* PROGRESS BAR */}
+                                                <div className="col-12 px-0">
+                                                    <div className="progress mt-2">
+                                                        <div
+                                                            className="progress-bar"
+                                                            role="progressbar"
+                                                            style={{
+                                                                width: `${getLevelProgress(
+                                                                    user,
+                                                                    ranks
+                                                                )}%`,
+                                                            }}
+                                                            aria-valuemin="0"
+                                                            aria-valuemax="100"
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className="progressbar-shadow"
+                                                        role="progressbar"
+                                                        style={{
+                                                            width: `${
+                                                                getLevelProgress(
+                                                                    user,
+                                                                    ranks
+                                                                ) >= 100
+                                                                    ? 100
+                                                                    : getLevelProgress(
+                                                                          user,
+                                                                          ranks
+                                                                      )
+                                                            }%`,
+                                                        }}
+                                                        aria-valuemin="0"
+                                                        aria-valuemax="100"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* GAP */}
+                                    <div className="col-12 mt-4">
+                                        <div className="gap">
+                                            <img
+                                                className="img-fluid"
+                                                src={`${window.cdn}art_assets/icons/arrow_down.png`}
+                                                alt="next"
+                                            />
+                                        </div>
+                                    </div>
+                                    {/* LEVELS */}
+                                    {ranks.map((rank, i) => {
+                                        return (
+                                            rank.exp > user.exp && (
+                                                <React.Fragment
+                                                    key={`rank-${i}`}
+                                                >
+                                                    <div
+                                                        className={
+                                                            ranks.length - 1 ===
+                                                            i
+                                                                ? "col-12 mb-3"
+                                                                : "col-12 p-0 p-md-3"
+                                                        }
+                                                    >
+                                                        <div className="level-type p-3">
+                                                            <div className="level-type-head d-flex align-items-center justify-content-between">
+                                                                {/* LEVEL TITLE */}
+                                                                <p className="mb-0">
+                                                                    {rank.title}
+                                                                </p>
+                                                                {/* LEVEL EXP */}
+                                                                <div className="d-flex align-items-center justify-content-center px-2 level-exp">
+                                                                    <span className="ml-1">
+                                                                        {rank.exp.toLocaleString()}
+                                                                    </span>
+                                                                    <img
+                                                                        className="d-flex ml-1"
+                                                                        width="14"
+                                                                        src={`${window.cdn}art_assets/icons/exp_01.png`}
+                                                                        alt="star"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            {/* CONTENT */}
+                                                            <div className="level-type-content mt-2">
+                                                                <p className="mb-0 pt-3 reward-text">
+                                                                    Rewards
+                                                                </p>
+                                                                <div className="my-3 d-flex justify-content-center ticket-text">
+                                                                    <p className="ticket pr-1 mb-0">
+                                                                        Ticket
+                                                                        Multiplier
+                                                                    </p>
+                                                                    <p className="mb-0 ticket-value">
+                                                                        {Math.floor(
+                                                                            rank.multiplier *
+                                                                                100
+                                                                        )}
+                                                                        %
+                                                                    </p>
+                                                                </div>
+                                                                <div className="pb-3 d-flex align-items-center justify-content-center gems">
+                                                                    <p className="mb-0">
+                                                                        {`+ ${rank.gems}`}
+                                                                    </p>
+                                                                    <img
+                                                                        className="ml-1"
+                                                                        width="17"
+                                                                        src={`${window.cdn}art_assets/gems/gems.png`}
+                                                                        alt="gems"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className={
+                                                            ranks.length - 1 ===
+                                                            i
+                                                                ? "d-none col-12 text-center"
+                                                                : "col-12 text-center"
+                                                        }
+                                                    >
+                                                        <div className="gap">
+                                                            <img
+                                                                className="img-fluid"
+                                                                src={`${window.cdn}art_assets/icons/arrow_down.png`}
+                                                                alt="next"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </React.Fragment>
+                                            )
+                                        );
+                                    })}
+                                </div>
+                                {/* CLOSE BUTTON */}
+                                <div
+                                    className="close-button"
+                                    onClick={handleBackButton}
+                                >
+                                    <img
+                                        width="38"
+                                        src={`${window.cdn}art_assets/buttons/button_close_01.png`}
+                                        alt="close-btn"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default PlayerLevel;
