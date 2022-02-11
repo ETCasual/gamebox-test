@@ -17,7 +17,7 @@ const Index = ({ isProfilePanelShown, handleBackButton }) => {
     const [isPlayerLevelShown, setIsPlayerLevelShown] = useState(false);
     const [isTeamShown, setIsTeamShown] = useState(false);
     const [isHighScoreShown, setIsHighScoreShown] = useState(false);
-
+    
     useEffect(() => {
         dispatch(loadHighScore());
     }, [dispatch]);

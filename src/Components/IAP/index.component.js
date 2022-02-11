@@ -19,6 +19,7 @@ const Index = () => {
     const history = useHistory();
 
     const { ipInfo } = useSelector((state) => state.exchangeRate);
+    const { user } = useSelector((state) => state.userData);
 
     const [isCardPaymentShown, setIsCardPaymentShown] = useState(false);
     const [isFPXPaymentShown, setIsFPXPaymentShown] = useState(false);
@@ -26,15 +27,52 @@ const Index = () => {
     const [isPaymentMethodShown, setIsPaymentMethodShown] = useState(false);
     const [productInfo, setProductInfo] = useState({});
 
+    // SIMULATION STATES
+    const [tokenPaymentProcess, setTokenPaymentProcess] = useState({
+        insufficent: false,
+        inProcess: false,
+        haveGems: false,
+        status: false,
+    });
+    const [tokenPurchaseText, setTokenPurchaseText] = useState({
+        insufficent: {
+            title: "",
+            subTitle: "",
+        },
+        inProcess: {
+            title: "",
+            subTitle: "",
+        },
+        haveGems: {
+            title: "",
+            subTitle: "",
+        },
+    });
+
     // PAYMENT
     const handleGemsPaymentPanel = (id, price, type, quantity) => {
-        setIsPaymentMethodShown(true);
-        setProductInfo({
-            type,
-            price,
-            id,
-            quantity,
-        });
+        // setIsPaymentMethodShown(true);
+        if (user.gems > 0) {
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                haveGems: true,
+                status: true,
+            }));
+            setTokenPurchaseText((prev) => ({
+                ...prev,
+                haveGems: {
+                    title: "",
+                    subTitle: "",
+                },
+            }));
+        } else if (user.gems <= 0) {
+        }
+        // setProductInfo({
+        //     type,
+        //     price,
+        //     id,
+        //     quantity,
+        // });
     };
     const handleSubscriptionPaymentPanel = (id, details, type) => {
         setIsCardPaymentShown(true);
@@ -67,6 +105,7 @@ const Index = () => {
         )
             setIsPaymentMethodShown(false);
     };
+
     // BACK BUTTON
     const handlePaymentBackButton = (type, status, productInfo) => {
         setIsCardPaymentShown(false);
@@ -84,7 +123,10 @@ const Index = () => {
             });
     };
     const handlePaymentMethodBackButton = () => setIsPaymentMethodShown(false);
-
+    // PAY WITH TOKENS
+    const handlePayWithTokens = () => {
+        console.log("PAY WITH TOKENS " + user.gems);
+    };
     // CARD PAYMENTS
     if (isCardPaymentShown) {
         return (
@@ -118,6 +160,7 @@ const Index = () => {
             </Elements>
         );
     }
+
     // IAP
     else {
         return (
@@ -130,11 +173,48 @@ const Index = () => {
                     }
                 />
                 {/* PAYMENT METHODS MODAL */}
-                {isPaymentMethodShown && (
+                {tokenPaymentProcess.status && (
                     <div className="payment-methods">
                         <div className="wrapper d-flex flex-column align-items-start justify-content-start position-relative">
-                            <p className="mb-4">Please select payment method</p>
+                            <p className="mb-4">Simulation of payment</p>
                             <div className="btn-wrapper w-100">
+                                <div className="modal-body-small">
+                                    <p className="pt-4 mb-2 title pl-2 text-danger">
+                                        {}
+                                    </p>
+                                    <p className="subtitle pl-2 mb-3">
+                                        {tokenPaymentProcess.haveGems &&
+                                            tokenPurchaseText.haveGems.title}
+                                        {tokenPaymentProcess.insufficent &&
+                                            tokenPurchaseText.insufficent.title}
+                                        {tokenPaymentProcess.inProcess &&
+                                            tokenPurchaseText.inProcess.title}
+                                    </p>
+                                    <div className="p-0 btn-wrapper d-flex mt-4">
+                                        <button
+                                            className="col btn-no"
+                                            onClick={() =>
+                                                setTokenPaymentProcess({
+                                                    haveGems: false,
+                                                    inProcess: false,
+                                                    insufficent: false,
+                                                    status: false,
+                                                })
+                                            }
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            className="col bg-danger text-white"
+                                            onClick={() =>
+                                                handlePayWithTokens()
+                                            }
+                                        >
+                                            Use 5 Froyo Tokens
+                                        </button>
+                                    </div>
+                                </div>
+
                                 {/* FPX BUTTON */}
                                 {/* {ipInfo?.country_name === "Malaysia" && (
                                     <button
@@ -150,7 +230,7 @@ const Index = () => {
                                     </button>
                                 )} */}
                                 {/* CARD BUTTON */}
-                                <button
+                                {/* <button
                                     className="d-flex align-items-center justify-content-center"
                                     onClick={() =>
                                         handleSelectPaymentMethod("card")
@@ -171,9 +251,9 @@ const Index = () => {
                                         src={`${window.cdn}art_assets/payment/paymentmethods-02._AmericanExpress.png`}
                                         alt="american_express"
                                     />
-                                </button>
+                                </button> */}
                                 {/* GRABPAY BUTTON */}
-                                {(ipInfo?.country_name === "Malaysia" ||
+                                {/* {(ipInfo?.country_name === "Malaysia" ||
                                     ipInfo?.country_name === "Singapore") && (
                                     <button
                                         className="d-flex align-items-center justify-content-center"
@@ -187,7 +267,7 @@ const Index = () => {
                                             alt="grabpay"
                                         />
                                     </button>
-                                )}
+                                )} */}
                             </div>
                             {/* CLOSE BUTTON */}
                             <div
