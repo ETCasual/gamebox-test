@@ -20,7 +20,7 @@
             }
         }
         h3 {
-            font-family: Ilisarniq-Bold;
+            
             text-transform: capitalize;
             font-size: 1.5rem;
             @media only screen and (min-width: 768px) {
@@ -31,7 +31,7 @@
             color: black;
         }
         .email-text {
-            font-family: Ilisarniq-Regular;
+            
             color: #868686;
             margin-bottom: 39px;
             font-size: 0.75rem;
@@ -51,7 +51,7 @@
             color: #868686;
         }
         .gem-balance-text {
-            font-family: Ilisarniq-Regular;
+            
             font-size: 0.75rem;
             color: #868686;
             @media only screen and (min-width: 768px) {
@@ -71,7 +71,7 @@
             position: relative;
             cursor: pointer;
             span.gems {
-                font-family: Ilisarniq-Bold;
+                
                 margin: 0 0.5em;
                 font-size: 1.125em;
             }
@@ -81,7 +81,7 @@
                 height: 1.5em;
                 border-radius: 100%;
                 color: white;
-                font-family: Ilisarniq-Bold;
+                
                 span {
                     font-size: 1em;
                     margin-bottom: 0.15em;
@@ -105,14 +105,14 @@
             }
             .multiplier-info {
                 color: black;
-                font-family: Ilisarniq-Bold;
+                
                 font-size: 0.875rem;
                 @media only screen and (min-width: 768px) {
                     font-size: 1.25rem;
                 }
                 span {
                     color: #7824f8;
-                    font-family: Ilisarniq-Bold;
+                    
                 }
             }
             .level {
@@ -132,7 +132,7 @@
                     min-height: 2.25em;
                     padding: 0.1em 1.1em;
                     .player-exp {
-                        font-family: Ilisarniq-Bold;
+                        
                         font-size: 0.75rem;
                         @media only screen and (min-width: 768px) {
                             font-size: 1rem;
@@ -190,7 +190,7 @@
             .team-title {
                 position: relative;
                 z-index: 1;
-                font-family: Ilisarniq-Bold;
+                
                 color: black;
                 font-size: 0.875rem;
                 @media only screen and (min-width: 768px) {
@@ -200,7 +200,7 @@
             .refer-text {
                 position: relative;
                 z-index: 1;
-                font-family: Ilisarniq-Bold;
+                
                 color: black;
                 font-size: 0.75rem;
                 @media only screen and (min-width: 768px) {
@@ -209,7 +209,7 @@
                 span {
                     color: #14daa7;
                     font-size: 20px;
-                    font-family: Ilisarniq-Bold;
+                    
                 }
             }
             .share-text {
@@ -270,7 +270,7 @@
         }
         box-shadow: 0px 10px 15px #0000000d;
         color: black;
-        font-family: Ilisarniq-Bold;
+        
         font-size: 16px;
         border-radius: 20px;
         p {
@@ -278,7 +278,7 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            font-family: Ilisarniq-Bold;
+            
             font-size: 0.875rem;
             @media only screen and (min-width: 768px) {
                 font-size: 1.25rem;
@@ -303,7 +303,7 @@
         border-radius: 20px;
         p {
             color: black;
-            font-family: Ilisarniq-Bold;
+            
             font-size: 0.875rem;
             @media only screen and (min-width: 768px) {
                 font-size: 1.25rem;
@@ -320,7 +320,7 @@
     }
     .logout {
         color: #ff2c44;
-        font-family: Ilisarniq-Bold;
+        
         margin-bottom: 2em;
         font-size: 0.875rem;
         @media only screen and (min-width: 768px) {

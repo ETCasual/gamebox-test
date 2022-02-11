@@ -2,7 +2,7 @@
 #rewards-panel {
     padding-top: 12em;
     .title {
-        font-family: Ilisarniq-Bold;
+        
         font-size: 1.5rem;
         @media only screen and (min-width: 768px) {
             font-size: 28px;
@@ -20,7 +20,7 @@
             color: #d6d6d6;
             p {
                 opacity: 0.4;
-                font-family: Ilisarniq-Bold;
+                
                 font-size: 0.875rem;
                 @media only screen and (min-width: 768px) {
                     font-size: 1.25rem;
@@ -83,7 +83,7 @@
             position: absolute;
             bottom: 1em;
             .card-title {
-                font-family: Ilisarniq-Bold;
+                
                 font-size: 1rem;
                 @media only screen and (min-width: 360px) {
                     font-size: 0.875rem;
@@ -118,7 +118,7 @@
     .unclaimed,
     .claimed {
         h4 {
-            font-family: Ilisarniq-Bold;
+            
             font-size: 16px;
             @media only screen and (min-width: 768px) {
                 font-size: 28px;

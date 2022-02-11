@@ -16,7 +16,7 @@ iframe#demo-game {
         position: relative;
         z-index: 0;
         color: #7824f8;
-        font-family: Ilisarniq-Bold;
+        
         &::before {
             content: attr(data-title);
             position: absolute;

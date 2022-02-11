@@ -2,7 +2,7 @@
 #settings {
     padding-top: 12em;
     .title {
-        font-family: Ilisarniq-Bold;
+        
         font-size: 1.5rem;
         @media only screen and(min-width: 768px) {
             font-size: 28px;
@@ -52,7 +52,7 @@
                     font-size: 16px;
                 }
                 color: #14daa7;
-                font-family: Ilisarniq-Bold;
+                
                 padding-bottom: 0.3em;
             }
         }
@@ -134,7 +134,7 @@
             }
         }
         .plan-status {
-            font-family: Ilisarniq-Bold;
+            
         }
         .plan-status.active {
             color: #14daa7;
@@ -144,11 +144,11 @@
             border-radius: 8px;
             .plan-title,
             .plan-price {
-                font-family: Ilisarniq-Bold;
+                
             }
             .expiry-date-time {
                 span {
-                    font-family: Ilisarniq-Bold;
+                    
                 }
             }
 

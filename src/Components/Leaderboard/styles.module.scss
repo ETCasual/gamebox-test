@@ -4,7 +4,7 @@
     margin-top: 140px;
     .title {
         font-size: 1.125em;
-        font-family: Ilisarniq-Bold;
+        
         @media only screen and (min-width: 768px) {
             font-size: 1.8em;
         }
@@ -31,7 +31,7 @@
             align-items: center;
             .end-text {
                 font-size: 12px;
-                font-family: Ilisarniq-Regular;
+                
                 color: #868686;
                 margin-bottom: 0.1em;
                 @media only screen and (min-width: 768px) {
@@ -40,7 +40,7 @@
             }
             .timer-text {
                 font-size: 1rem;
-                font-family: Ilisarniq-Bold;
+                
                 color: #14daa7;
                 text-align: center;
                 @media only screen and (min-width: 768px) {
@@ -52,7 +52,7 @@
             .tickets-text-end {
                 position: relative;
                 top: 0.2em;
-                font-family: Ilisarniq-Bold;
+                
                 font-size: 20px;
                 @media screen and (min-width: 360px) {
                     font-size: 24;
@@ -107,7 +107,7 @@
                 }
             }
             p {
-                font-family: Ilisarniq-Bold;
+                
                 margin: 0;
                 font-size: 14px;
             }
@@ -122,7 +122,7 @@
                 text-overflow: ellipsis;
             }
             .points {
-                font-family: "Ilisarniq-Regular";
+                
                 color: #14daa7;
                 flex-wrap: nowrap;
                 white-space: nowrap;
@@ -132,12 +132,12 @@
                 border-radius: 30px;
                 height: 100%;
                 span {
-                    font-family: Ilisarniq-Bold;
+                    
                     font-size: 16px;
                 }
             }
             .rank-number {
-                font-family: Ilisarniq-Bold;
+                
                 background: #e0e0e0;
                 border-radius: 30px;
                 font-size: 0.75rem;
@@ -183,7 +183,7 @@
         border-radius: 10px;
         color: #fdc43d;
         font-size: 18px;
-        font-family: Ilisarniq-Bold;
+        
         min-width: 80%;
         @media only screen and (min-width: 375px) {
             min-width: 20em;
@@ -201,7 +201,7 @@
         border-radius: 10px;
         color: white;
         font-size: 18px;
-        font-family: Ilisarniq-Bold;
+        
         min-width: 85%;
         @media only screen and (min-width: 375px) {
             min-width: 20em;
@@ -250,7 +250,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-family: Ilisarniq-Bold;
+        
         .btn-wrapper {
             button {
                 color: white;
@@ -294,7 +294,7 @@
         justify-content: center;
         background: black;
         .loading-text {
-            font-family: Ilisarniq-Bold;
+            
             font-size: 1.25rem;
             color: white;
         }

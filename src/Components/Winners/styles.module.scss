@@ -2,10 +2,10 @@
 #winners {
     .month-year {
         font-size: 0.75rem;
-        font-family: Ilisarniq-Regular;
+        
         @media only screen and (min-width: 768px) {
             font-size: 1.25rem;
-            font-family: Ilisarniq-Bold;
+            
         }
     }
     .winner-card {
@@ -36,7 +36,7 @@
         }
         .player-reward {
             margin-top: 0.5em;
-            font-family: Ilisarniq-Bold;
+            
             font-size: 0.75rem;
             @media only screen and (min-width: 768px) {
                 font-size: 1.25rem;
