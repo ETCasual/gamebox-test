@@ -251,10 +251,10 @@ const Index = ({ match }) => {
                 {type !== "automated" && (
                     <>
                         <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center mx-auto">
-                            <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8 justify-content-between">
+                            <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8">
                                 {/* BACK BUTTON */}
                                 <Link
-                                    className="d-flex align-items-center justify-content-center"
+                                    className="d-flex align-items-center"
                                     onClick={handleHomeNavLink}
                                     to={{
                                         pathname: "/",
@@ -270,8 +270,12 @@ const Index = ({ match }) => {
                                         alt="back-btn"
                                     />
                                 </Link>
+                                {/* BACK TEXT */}
+                                <div className="back-text d-flex align-items-center">
+                                    Back
+                                </div>
                                 {/* YOUR TICKETS */}
-                                <div className="ticket-values px-3">
+                                {/* <div className="ticket-values px-3">
                                     <p className="mb-0">
                                         You have{" "}
                                         <span className="mx-2">
@@ -286,7 +290,7 @@ const Index = ({ match }) => {
                                             alt="tickets"
                                         />
                                     </p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
@@ -295,138 +299,111 @@ const Index = ({ match }) => {
                                 <div className="row justify-content-center">
                                     <div className="col-12 col-md-10 col-lg-8 col-xl-8">
                                         {/* TICKETS AND POOL INFO */}
-                                        <div className="row prize-detail-panel my-4">
-                                            <div className="prize-detail-header col-12 d-flex justify-content-between mb-3">
-                                                <div className="d-flex align-items-end">
-                                                    <img
-                                                        className="prize-img mr-2"
-                                                        src={
-                                                            currentPrize?.prizeBG
-                                                        }
-                                                        alt="prize"
-                                                    />
-                                                    <div className="title-info d-flex flex-column">
-                                                        <p className="prizeId mb-0 mb-md-2">
-                                                            {
-                                                                currentPrize?.prizeContent
-                                                            }
-                                                        </p>
-                                                        <p className="mb-0 title">
-                                                            {currentPrize?.prizeTitle ||
-                                                                "-"}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                {OverTimeModeChecker(
-                                                    currentPrize?.prizeId,
-                                                    currentPrize?.ticketsRequired,
-                                                    prizeTicketCollection
-                                                ) && (
-                                                    <div className="progress-perc text-danger">
-                                                        Overtime
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <div className="col-12 mb-3">
-                                                <div className="progress align-items-center">
-                                                    <div
-                                                        className="progress-bar"
-                                                        role="progressbar"
-                                                        style={{
-                                                            width: `${getPrizeProgress(
-                                                                prizeTicketCollection,
-                                                                id,
-                                                                currentPrize?.ticketsRequired
-                                                            )}%`,
-                                                        }}
-                                                        aria-valuemin="0"
-                                                        aria-valuemax="100"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className="progressbar-shadow"
-                                                    role="progressbar"
-                                                    style={{
-                                                        width: `${
-                                                            getPrizeProgress(
-                                                                prizeTicketCollection,
-                                                                id,
-                                                                currentPrize?.ticketsRequired
-                                                            ) >= 100
-                                                                ? 100
-                                                                : getPrizeProgress(
-                                                                      prizeTicketCollection,
-                                                                      id,
-                                                                      currentPrize?.ticketsRequired
-                                                                  )
-                                                        }%`,
-                                                    }}
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100"
+                                        <div className="row prize-detail-panel my-4 col-12">
+                                            <div className="prize-info-holder d-flex">
+                                                <img
+                                                    className="prize-img"
+                                                    src={currentPrize?.prizeBG}
+                                                    alt="prize"
                                                 />
-                                            </div>
-                                            <div className="col-12 d-flex align-items-end justify-content-between">
-                                                <button
-                                                    className="instructions mb-0 mb-md-1"
-                                                    onClick={
-                                                        handleInstructionPanel
-                                                    }
-                                                >
-                                                    How it works?
-                                                </button>
-                                                <div className="d-flex align-items-end">
-                                                    <span className="draw-text mb-0 mb-md-1">
-                                                        {`Draw starts in \u00A0`}
-                                                    </span>
-                                                    <span
-                                                        className={`${
-                                                            OverTimeModeChecker(
+                                                <div className="prize-text-holder d-flex flex-column">
+                                                    <div className="prize-id">
+                                                        {
+                                                            currentPrize?.prizeContent
+                                                        }
+                                                    </div>
+                                                    <div className="prize-title">
+                                                        {currentPrize?.prizeTitle ||
+                                                            "-"}
+                                                    </div>{" "}
+                                                    <div className="prize-description">
+                                                        {currentPrize?.prizeTitle ||
+                                                            "-"}
+                                                    </div>
+                                                    <div className="token-and-draw-start-holder d-flex align-items-end justify-content-between mt-auto">
+                                                        <div className="token-text-holder d-flex align-items-end justify-content-start">
+                                                            <div className="your-tokens-text">
+                                                                {`Your tokens `}
+                                                            </div>
+                                                            <div className="your-tokens-number">
+                                                                {getPoolTickets(
+                                                                    poolTickets,
+                                                                    id
+                                                                )?.toLocaleString() ||
+                                                                    0}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="draw-start-holder d-flex align-items-end ms-auto">
+                                                            <div className="draw-text mb-0 mb-md-1">
+                                                                {`Draw starts in \u00A0`}
+                                                            </div>
+
+                                                            {/* COUNT DOWN TIME */}
+                                                            <span
+                                                                className={`${
+                                                                    OverTimeModeChecker(
+                                                                        currentPrize?.prizeId,
+                                                                        currentPrize?.ticketsRequired,
+                                                                        prizeTicketCollection
+                                                                    )
+                                                                        ? "text-danger tickets-text-end"
+                                                                        : "tickets-text"
+                                                                }`}
+                                                            >
+                                                                {OverTimeModeChecker(
+                                                                    currentPrize?.prizeId,
+                                                                    currentPrize?.ticketsRequired,
+                                                                    prizeTicketCollection
+                                                                )
+                                                                    ? timer
+                                                                    : getPrizeTicketCollected(
+                                                                          prizeTicketCollection,
+                                                                          id
+                                                                      )?.toLocaleString() ||
+                                                                      0}
+                                                            </span>
+
+                                                            {/* TICKETS REQUIRED NUMBER */}
+                                                            {!OverTimeModeChecker(
                                                                 currentPrize?.prizeId,
                                                                 currentPrize?.ticketsRequired,
                                                                 prizeTicketCollection
-                                                            )
-                                                                ? "text-danger tickets-text-end"
-                                                                : "tickets-text"
-                                                        }`}
-                                                    >
-                                                        {OverTimeModeChecker(
-                                                            currentPrize?.prizeId,
-                                                            currentPrize?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
-                                                            ? timer
-                                                            : getPrizeTicketCollected(
-                                                                  prizeTicketCollection,
-                                                                  id
-                                                              )?.toLocaleString() ||
-                                                              0}
-                                                    </span>
-                                                    {!OverTimeModeChecker(
-                                                        currentPrize?.prizeId,
-                                                        currentPrize?.ticketsRequired,
-                                                        prizeTicketCollection
-                                                    ) && (
-                                                        <span className="total-tickets-text mb-0 mb-md-1">
-                                                            {`\u00A0 / ${
-                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                0
-                                                            }`}
-                                                        </span>
-                                                    )}
+                                                            ) && (
+                                                                <span className="total-tickets-text mb-0 mb-md-1">
+                                                                    {`\u00A0 / ${
+                                                                        currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                        0
+                                                                    }`}
+                                                                </span>
+                                                            )}
+
+                                                            {/* OVERTIME TEXT */}
+                                                            {OverTimeModeChecker(
+                                                                currentPrize?.prizeId,
+                                                                currentPrize?.ticketsRequired,
+                                                                prizeTicketCollection
+                                                            ) && (
+                                                                <div className="progress-perc text-danger">
+                                                                    Overtime!
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         {/* GAME INFO */}
-                                        <div className="row game-detail-panel pt-4 mb-4">
+                                        <div className="row game-detail-panel pt-4">
                                             <div className="col-12">
-                                                <h2 className="statement-title">
-                                                    Join Tournaments
-                                                </h2>
-                                                <p className="statement-subtitle">
+                                                <div className="statement-title">
+                                                    JOIN TOURNAMENTS!
+                                                </div>
+                                                <div className="statement-subtitle">
                                                     Compete with other players,
-                                                    collect tickets and stand a
-                                                    chance to win the prize!
-                                                </p>
+                                                    collect tokens and stand a
+                                                    chance to own this NFT!
+                                                </div>
                                             </div>
                                             {currentPrize?.gameInfo?.map(
                                                 (game, index) => (

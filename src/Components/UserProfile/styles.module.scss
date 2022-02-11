@@ -9,13 +9,6 @@
     box-shadow: 0px 10px 18px #00000029;
 }
 
-// BACK BUTTON
-.back-button {
-    box-shadow: 0px 18px 26px #00000029;
-    border-radius: 100%;
-    // height: fit-content;
-}
-
 // CLAIMED PRIZE DETAILS MODAL
 .claim-prize-detail-modal {
     position: fixed;
@@ -106,7 +99,6 @@
                 bottom: 1em;
                 padding: 1em 1em 0 1em;
                 .title {
-                    
                     font-size: 1rem;
                     @media only screen and (min-width: 360px) {
                         font-size: 0.875rem;
@@ -137,7 +129,6 @@
             .claimed-date {
                 .date {
                     color: #000000;
-                    
                 }
             }
             .separator {
@@ -148,7 +139,6 @@
             .delivery-address {
                 .name {
                     color: #000000;
-                    
                 }
                 .email,
                 .phone,
@@ -162,7 +152,6 @@
             }
             .tracking {
                 .tracking-number {
-                    
                 }
                 .tracking-number,
                 .company-name {

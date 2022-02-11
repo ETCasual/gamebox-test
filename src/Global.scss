@@ -92,6 +92,18 @@ button {
         -webkit-backdrop-filter: blur(12px);
     }
 }
+// BACK BUTTON AND BACK TEXT (USED IN MULTIPLE SEPARATED COMPONENTS)
+.back-button {
+    box-shadow: 0px 18px 26px #00000029;
+    border-radius: 100%;
+}
+
+.back-text {
+    font-family: $fnt-fam;
+    font-size: $fnt-sz-12;
+    color: #f8ba29;
+    margin-left: 10px;
+}
 
 // **********************
 /****** COMPONENTS *******/
