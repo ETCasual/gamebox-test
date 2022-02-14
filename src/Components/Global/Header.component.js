@@ -53,76 +53,65 @@ const Header = ({
         <>
             <div className="blur-overlay" />
             <div className="container-fluid navbar-top d-flex flex-column justify-content-center">
-                <div className="row">
-                    <div className="col-12 mx-auto d-flex flex-row justify-content-center">
+                <div className="row justify-content-center">
+                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-flex align-items-center">
                         {/* LOGO */}
-                        <div className="col-3 col-md-2 col-lg-1 col-xl-1 d-flex align-items-center justify-content-between px-0 pl-md-1">
-                            <Link
-                                to="/"
-                                className="d-flex"
-                                onClick={handleHomeNavLink}
-                            >
-                                <img
-                                    width={110}
-                                    className="img-fluid"
-                                    src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                                    alt="Esports Mini"
-                                />
-                            </Link>
-                        </div>
+                        <Link
+                            to="/"
+                            className="d-flex"
+                            onClick={handleHomeNavLink}
+                        >
+                            <img
+                                width={110}
+                                className="img-fluid"
+                                src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
+                                alt="Esports Mini"
+                            />
+                        </Link>
 
                         {/* NAV LINKS */}
-                        <div className="col-md-5 col-lg-4 col-xl-4 d-none d-md-flex align-items-center justify-content-start nav-items">
+                        <div className="pl-3 d-none d-md-flex nav-items">
                             <NavLink
                                 onClick={handleHomeNavLink}
                                 exact
                                 to={{
                                     pathname: "/",
                                     state: {
-                                        prevPath:
-                                            history.location.pathname,
+                                        prevPath: history.location.pathname,
                                     },
                                 }}
                                 activeClassName="active"
                             >
-                                <div className="py-4 px-2 mx-2">
-                                    Home
-                                </div>
+                                <div className="py-4 px-2 mx-2">Home</div>
                             </NavLink>
                             <NavLink
                                 onClick={scrollToTop}
                                 to={{
                                     pathname: "/activity",
                                     state: {
-                                        prevPath:
-                                            history.location.pathname,
+                                        prevPath: history.location.pathname,
                                     },
                                 }}
                                 activeClassName="active"
                             >
-                                <div className="py-4 px-2 mx-2">
-                                    Activities
-                                </div>
+                                <div className="py-4 px-2 mx-2">Activities</div>
                             </NavLink>
                             <NavLink
                                 onClick={scrollToTop}
                                 to={{
                                     pathname: "/winners",
                                     state: {
-                                        prevPath:
-                                            history.location.pathname,
+                                        prevPath: history.location.pathname,
                                     },
                                 }}
                                 activeClassName="active"
                             >
-                                <div className="py-4 px-2 mx-2">
-                                    Winners
-                                </div>
+                                <div className="py-4 px-2 mx-2">Winners</div>
                             </NavLink>
                         </div>
 
                         {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
-                        <div className="col-9 col-md-4 col-lg-3 col-xl-3 d-flex align-items-center justify-content-end pr-1">
+                        <div className="d-flex align-items-center justify-content-end w-100">
                             <div className="gems position-relative d-flex flex-nowrap align-items-center mr-2">
                                 <div className="gem-wrapper">
                                     <img
@@ -198,8 +187,7 @@ const Header = ({
                                     to={{
                                         pathname: "/profile",
                                         state: {
-                                            prevPath:
-                                                history.location.pathname,
+                                            prevPath: history.location.pathname,
                                         },
                                     }}
                                 >

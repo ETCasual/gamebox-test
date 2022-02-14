@@ -83,8 +83,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                         },
                                     }}
                                 >
-                                    <div className="card-wrapper d-md-flex p-3">
-                                        <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative">
+                                    <div className="card-wrapper d-md-flex">
+                                        <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3">
                                             {/* PRIZE TYPE */}
                                             <div className="prize-type">
                                                 Featured NFT
@@ -151,8 +151,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                                            <picture className="d-flex align-items-center justify-content-center w-100 h-100">
+                                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-end px-0">
+                                            <picture className="d-flex align-items-center justify-content-end w-100 h-100">
                                                 <source
                                                     media="(max-width:768px)"
                                                     srcSet={data.prizeBG2}
