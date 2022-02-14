@@ -397,8 +397,13 @@ const Index = ({ match }) => {
                                         <div className="game-info-background col-12">
                                             <div className="row game-detail-panel">
                                                 <div className="col-12">
-                                                    <div className="statement-title">
-                                                        JOIN TOURNAMENTS!
+                                                    <div className="join-tournament-container"> 
+                                                        <div className="statement-title">
+                                                            JOIN TOURNAMENTS!
+                                                        </div>
+                                                        <div className="question-mark">
+                                                            ?
+                                                        </div>
                                                     </div>
                                                     <div className="statement-subtitle">
                                                         Compete with other
