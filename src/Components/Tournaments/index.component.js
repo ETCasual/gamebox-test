@@ -335,7 +335,7 @@ const Index = ({ match }) => {
                                                         </div>
 
                                                         <div className="draw-start-holder d-flex align-items-end ms-auto">
-                                                            <div className="draw-text mb-0 mb-md-1">
+                                                            <div className="draw-text">
                                                                 {`Draw starts in \u00A0`}
                                                             </div>
 
