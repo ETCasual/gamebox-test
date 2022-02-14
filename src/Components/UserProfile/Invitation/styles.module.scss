@@ -19,7 +19,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         .team-wrapper {
-            background: white;
+            background: linear-gradient(135deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
             box-shadow: 0px 18px 26px #00000029;
             border-radius: 20px;
             border-radius: 15px;
@@ -30,15 +30,15 @@
             }
             .copied {
                 font-size: 10px;
-                color: #14daa7;
+                color: #0CBE90;
             }
             .main-title {
-                margin-top: 2.5em;
+                margin-top: 4.5em;
                 .title {
-                    
                     font-size: 1.125rem;
+                    font-weight: $fnt-wgt-700;
                     @media only screen and (min-width: 768px) {
-                        font-size: 20px;
+                        font-size: $fnt-sz-18;
                     }
                 }
                 .subtitle {
@@ -46,7 +46,7 @@
                     color: #868686;
                     font-size: 0.75rem;
                     @media only screen and (min-width: 768px) {
-                        font-size: 14px;
+                        font-size: $fnt-sz-14;
                     }
                 }
             }
@@ -61,14 +61,14 @@
                     cursor: pointer;
                     box-shadow: 0px 5px 10px #00000014;
                     .invite-label {
-                        font-size: 10px;
+                        font-size: $fnt-sz-10;
                         color: #868686;
                     }
                     .invite-link {
-                        font-size: 18px;
-                        
+                        font-size: $fnt-sz-18;
+                        font-weight: $fnt-wgt-700;
                         overflow-wrap: anywhere;
-                        color: #7824f8;
+                        color: #D7076B;
                     }
                 }
             }
@@ -82,8 +82,8 @@
                     flex-direction: unset;
                 }
                 .terms-conditions {
-                    font-size: 10px;
-                    color: #5a5a5a;
+                    font-size: $fnt-sz-10;
+                    color: #868686;
                 }
             }
         }

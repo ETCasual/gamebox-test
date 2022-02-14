@@ -72,7 +72,7 @@ const Invitation = ({ handleBackButton }) => {
                                         {/* COPIED TEXT */}
                                         {copiedText && (
                                             <p className="text-center copied">
-                                                copied!
+                                                Copied!
                                             </p>
                                         )}
                                         <p className="invite-link mb-1">
@@ -87,15 +87,9 @@ const Invitation = ({ handleBackButton }) => {
                                 </div>
                                 {/* FOOTER */}
                                 <div className="invitation-footer d-flex justify-content-between mt-3">
-                                    <p className="terms-conditions">
+                                    <p className="terms-conditions mt-3">
                                         Terms and conditions apply.
                                     </p>
-                                    <img
-                                        width="143"
-                                        className="mr-0 mr-md-5 d-flex"
-                                        src={`${window.cdn}art_assets/illustrations/friends_01.png`}
-                                        alt="star"
-                                    />
                                 </div>
                             </div>
                         </div>
