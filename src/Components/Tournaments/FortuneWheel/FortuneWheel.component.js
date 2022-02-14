@@ -129,118 +129,63 @@ const FortuneWheel = ({
 
     return (
         <>
-            <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100">
-                <div className="row justify-content-center w-100">
-                    <div className="col-12 col-md-8 col-lg-6 fortune-wheel-wrapper position-relative">
-                        {/* CLOSE BUTTON */}
-                        <img
-                            onClick={() =>
-                                !isClickedSpin
-                                    ? setFortuneWheelShown(false)
-                                    : null
-                            }
-                            className="close-button"
-                            width="38"
-                            src={`${window.cdn}art_assets/buttons/button_close_01.png`}
-                            alt="close-btn"
-                        />
-                        {!isProbabilityShown && (
-                            <>
-                                {/* PROBABILITY INFO ICON */}
-                                <img
-                                    width="20"
+            {/* <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100"> */}
+            <div className="mx-auto">
+                {/* <div className="row justify-content-center w-100"> */}
+                <div className="fortune-wheel-wrapper position-relative">
+                    {!isProbabilityShown && (
+                        <div className="fortune-wheel-flex-row-container">
+                            <div className="navigation-container">
+                                <div
                                     onClick={() =>
                                         !isClickedSpin
-                                            ? setIsProbabilityShown(true)
+                                            ? setFortuneWheelShown(false)
                                             : null
                                     }
-                                    className="spinner-info-icon"
-                                    src={`${window.cdn}art_assets/buttons/button_info.png`}
-                                    alt="spinner-info-icon"
-                                />
-                                {/* TICKETS */}
-                                <div className="col-12 tickets d-flex flex-column align-items-center justify-content-center mt-4">
-                                    {/* TITLE */}
-                                    <p className="text-center title">
-                                        Daily Spinner
-                                    </p>
-                                    {/* TICKETS */}
-                                    <div className="tickets-wrapper d-flex flex-column align-items-center justify-content-center">
-                                        <p className="text-center mb-1 ticket-text">
-                                            Your Tickets
-                                        </p>
-                                        <p className="text-center mb-0 ticket-value">
+                                    className="question-mark"
+                                >
+                                    X
+                                </div>
+                                <div className="question-mark">?</div>
+                            </div>
+                            <div className="spinner-control-container">
+                                <div className="the-spinner-text">
+                                    The spinner
+                                </div>
+
+                                <div className="earn-more-tickets-text">
+                                    Earn more tickets here
+                                </div>
+
+                                <div className="spin-amount-left-text-container">
+                                    <span className="you-have-text">{`You have `}</span>
+                                    <span className="spin-number">
+                                        {spinner?.freeSpins > 0
+                                            ? spinner?.freeSpins
+                                            : 0}
+                                    </span>
+                                    <span className="spins-left-text">{` spins left`}</span>
+                                </div>
+
+                                <div className="ticket-amount-outer">
+                                    <div className="ticket-amount-inner">
+                                        <div className="your-tickets-text">
+                                            Your tickets
+                                        </div>
+                                        <div className="ticket-number">
                                             {getPoolTickets(
                                                 poolTickets,
                                                 prizeId
                                             )?.toLocaleString() || 0}
-                                            <img
-                                                width="24"
-                                                className="ml-2"
-                                                src={`${window.cdn}art_assets/icons/tickets.png`}
-                                                alt="tickets"
-                                            />
-                                        </p>
-                                    </div>
-                                </div>
-                                {/* FORTUNE WHEEL */}
-                                <div className="col-12 wheel-spinner d-flex flex-column mt-5">
-                                    <div className="spin-wrapper mx-auto">
-                                        <FortuneWheelSVG
-                                            spinnerRules={spinnerRules}
-                                        />
-                                        <img
-                                            className="img-fluid pointer-img"
-                                            src={`${window.cdn}art_assets/icons/spinner_icon.png`}
-                                            alt="fortune-wheel"
-                                        />
-                                        <div className="spin-shadow"></div>
-                                        <div className="btn-spin-wrapper d-flex justify-content-center align-items-center">
-                                            <button
-                                                disabled={
-                                                    spinner.freeSpins <= 0 ||
-                                                    isClickedSpin
-                                                        ? true
-                                                        : false
-                                                }
-                                                className={`btn-spin my-3 text-white ${
-                                                    spinner.freeSpins <= 0 ||
-                                                    isClickedSpin
-                                                        ? "opacity-0-5"
-                                                        : ""
-                                                }`}
-                                                onClick={onClickSpinButton}
-                                            >
-                                                SPIN
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                                {/* AVAIABLE SPINS */}
-                                <div
-                                    className={`col-12 d-flex justify-content-center spin-available mt-4 ${
-                                        spinner?.freeSpins <= 0 &&
-                                        !isClickedSpin
-                                            ? "mb-3"
-                                            : "mb-5"
-                                    }`}
-                                >
-                                    <p className="mb-0">
-                                        You have{" "}
-                                        <span className="count">
-                                            {spinner?.freeSpins > 0
-                                                ? spinner?.freeSpins
-                                                : 0}
-                                        </span>{" "}
-                                        spins left today
-                                    </p>
-                                </div>
-                                {/* BUY MORE SPINS */}
+
                                 {spinner?.freeSpins <= 0 &&
                                     user?.gems >= config.useGems &&
                                     !isClickedSpin && (
-                                        <button
-                                            className="buy-more-spins mb-3"
+                                        <div
+                                            className="use-gems-button"
                                             disabled={
                                                 spinBuyProcess ? true : false
                                             }
@@ -252,57 +197,120 @@ const FortuneWheel = ({
                                                     : null
                                             }
                                         >
-                                            Get {config.useGemsSpin} more spins
-                                            with {config.useGems} gems
-                                        </button>
+                                            <div className="use-gems-text">
+                                                Use {config.useGems} Gems
+                                            </div>
+                                            <div className="get-spins-text">
+                                                Get {config.useGemsSpin} more
+                                                spins
+                                            </div>
+                                        </div>
                                     )}
-                                {/* INSUFFICIENT GEMS */}
+
                                 {spinner?.freeSpins <= 0 &&
                                     user?.gems <= config.useGems &&
                                     !isClickedSpin && (
                                         <Link
                                             to={"/iap"}
-                                            className="buy-more-gems mb-3 d-flex flex-column align-items-center justify-content-center"
+                                            className="purchase-gems-button"
                                         >
-                                            Insufficient gems.
-                                            <span className="pt-1">
-                                                Click here to purchase
-                                            </span>
+                                            <div className="insufficient-gems-text">
+                                                Insufficient gems.
+                                            </div>
+                                            <div className="purchase-text">
+                                                Click here to purchase.
+                                            </div>
                                         </Link>
                                     )}
-                            </>
-                        )}
-                        {/* PROBABLITIES */}
-                        {isProbabilityShown && (
-                            <div className="spinner-rules h-100 col-12 py-3">
-                                <p className="mt-3 mb-4 title">
-                                    Spinner Chances
-                                </p>
-                                <div className="col-6 col-md-5 p-0 probability">
-                                    <ul className="list-unstyled">
-                                        {spinnerRules?.map((rule, idx) => (
-                                            <li key={`prob-${idx}`}>
-                                                <div className="wrapper d-flex align-items-center justify-content-between">
-                                                    <p>{rule?.probability}%</p>
-                                                    <p>
-                                                        {rule?.tickets} tickets
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
+
+                                <div className="probability-table">
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
+                                    <div className="probability-row">
+                                        <div className="probability-percentage">
+                                            5%
+                                        </div>
+                                        <div className="probability-tickets-text">
+                                            500 tickets
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="separator"></div>
-                                <button
-                                    className="d-flex align-items-center justify-content-center text-white pt-4 pb-3 w-100"
-                                    onClick={() => setIsProbabilityShown(false)}
-                                >
-                                    Back
-                                </button>
                             </div>
-                        )}
-                    </div>
+                            <div className="fortune-wheel-container"></div>
+                        </div>
+                    )}
                 </div>
+                {/* </div> */}
             </div>
             {/* POPUP MODAL FOR BUYING SPINS WITH GEMS */}
             {isBuySpinConfirmModalShown && (
