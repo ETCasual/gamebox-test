@@ -174,8 +174,9 @@
                 position: relative;
                 flex: 0 0 33.333333%;
                 max-width: 240px;
-                padding-right: 16px;
-                padding-bottom: 16px;
+                height: fit-content;
+                margin-right: 16px;
+                margin-bottom: 16px;
             }
         }
     }

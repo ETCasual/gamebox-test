@@ -407,31 +407,42 @@ const Index = ({ match }) => {
                                                         own this NFT!
                                                     </div>
                                                 </div>
-                                                {currentPrize?.gameInfo?.map(
-                                                    (game, index) => (
-                                                        <React.Fragment
-                                                            key={`time-${index}`}
-                                                        >
-                                                            <GameDuration
-                                                                game={game}
-                                                                index={index}
-                                                                data={
-                                                                    currentPrize
-                                                                }
-                                                                timer={timer}
-                                                                setTimer={
-                                                                    setTimer
-                                                                }
-                                                                handleGameLeaderPanel={
-                                                                    handleGameLeaderPanel
-                                                                }
-                                                                setEarnAdditionalDisabledStatus={
-                                                                    setEarnAdditionalDisabledStatus
-                                                                }
-                                                            />
-                                                        </React.Fragment>
-                                                    )
-                                                )}
+                                                <div
+                                                    className="game-container"
+                                                    style={{
+                                                        marginLeft: "15px",
+                                                    }}
+                                                >
+                                                    {currentPrize?.gameInfo?.map(
+                                                        (game, index) => (
+                                                            <React.Fragment
+                                                                key={`time-${index}`}
+                                                            >
+                                                                <GameDuration
+                                                                    game={game}
+                                                                    index={
+                                                                        index
+                                                                    }
+                                                                    data={
+                                                                        currentPrize
+                                                                    }
+                                                                    timer={
+                                                                        timer
+                                                                    }
+                                                                    setTimer={
+                                                                        setTimer
+                                                                    }
+                                                                    handleGameLeaderPanel={
+                                                                        handleGameLeaderPanel
+                                                                    }
+                                                                    setEarnAdditionalDisabledStatus={
+                                                                        setEarnAdditionalDisabledStatus
+                                                                    }
+                                                                />
+                                                            </React.Fragment>
+                                                        )
+                                                    )}
+                                                </div>
                                             </div>
                                             {type !== "automated" && (
                                                 <div
