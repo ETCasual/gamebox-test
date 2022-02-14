@@ -1,101 +1,46 @@
 // PREMIUM COMPONENT
 .premium {
-    .px-custom {
-        padding: 0 1rem !important;
-        @media only screen and (min-width: 768px) {
-            padding: 0 5.5rem !important;
-        }
-        @media only screen and (min-width: 992px) {
-            padding: 0 1rem !important;
-        }
-        @media only screen and (min-width: 1200px) {
-            padding: 0 1.1rem !important;
-        }
-        @media only screen and (min-width: 1920px) {
-            padding: 0 1rem !important;
-        }
-    }
     .card-wrapper {
-        min-height: 40vh;
-        @media only screen and (min-width: 767px) {
-            min-height: 25vh;
-        }
-        @media only screen and (min-width: 1200px) {
-            min-height: 45vh;
-        }
-    }
-    .ticket-info {
-        padding: 0.7em;
-        .your-tickets {
-            img.icon {
-                width: 18px;
-                @media only screen and (min-width: 480px) {
-                    width: 29px;
-                    height: 17px;
-                    object-fit: cover;
+        background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
+        border-radius: 17px;
+        min-height: clamp(10rem, 30vh, 20rem);
+        picture {
+            img {
+                width: 100%;
+                @media only screen and (min-width: 768px) {
+                    min-height: 18.125rem;
                 }
+                object-fit: cover;
+                border-top-right-radius: 17px;
+                border-top-left-radius: 17px;
             }
         }
-        .pool-tickets {
-            img.icon {
-                width: 18px;
-                @media only screen and (min-width: 480px) {
-                    width: 24px;
-                    height: 27px;
-                    object-fit: cover;
-                }
+        .prize-info {
+            .prize-title {
+                font-size: $fnt-sz-14;
+                font-weight: $fnt-wgt-600;
+                
+            }
+            .prize-subtitle {
+                font-size: $fnt-sz-12;
+            }
+            .token-label {
+                color: #00c1b9;
+                font-size: $fnt-sz-10;
+            }
+            .token-value {
+                font-size: $fnt-sz-12;
             }
         }
-        .ticket-wrapper {
-            .your-tickets,
-            .pool-tickets {
-                .label {
-                    font-size: 0.625rem;
-                    @media only screen and (min-width: 360px) {
-                        font-size: 0.75rem;
-                    }
-                    @media only screen and (min-width: 1320px) {
-                        font-size: 0.875rem;
-                    }
-                    line-height: 133%;
-                    color: #868686;
-                }
-                .tickets {
-                    font-size: 0.75rem;
-                    @media only screen and (min-width: 360px) {
-                        font-size: 0.875rem;
-                    }
-                    @media only screen and (min-width: 768px) {
-                        font-size: 1.5rem;
-                    }
-                    @media only screen and (min-width: 1200px) {
-                        font-size: 1.125rem;
-                    }
-                    @media only screen and (min-width: 1320px) {
-                        font-size: 1.25rem;
-                    }
-                    
-                }
-                .required-tickets {
-                    color: #868686;
-                    font-size: 0.625rem;
-                    @media only screen and (min-width: 768px) {
-                        font-size: 0.875rem;
-                    }
-                }
-            }
-        }
-        .game-icon {
-            width: 80px;
-            height: 70px;
-            object-fit: cover;
+        .remaining-tokens {
+            font-size: $fnt-sz-12;
+            color: #9d9d9d;
+            background: #1d1d1d;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 0px 0px 10px 10px;
+            min-height: 2.5rem;
             @media only screen and (min-width: 768px) {
-                height: 90px;
-                width: 95px;
-            }
-            @media only screen and (min-width: 1315px) {
-                height: 90px;
-                width: 100px;
+                min-height: 3.5rem;
             }
         }
     }

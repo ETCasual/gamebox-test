@@ -11,7 +11,7 @@ import loadAutomatedEntryTickets from "redux/thunks/AutomatedEntryTickets.thunk"
 import convertSecondsToHours from "Utils/TimeConversion";
 import { scrollToTop } from "Utils/ScrollToTop";
 
-const AutomatedEntry = ({ data, length }) => {
+const AutomatedEntry = ({ data }) => {
     const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.userData);
@@ -110,6 +110,59 @@ const AutomatedEntry = ({ data, length }) => {
         return 0;
     };
 
+    const getTimerFullUnits = (timer) => {
+        const splitTIme = timer?.split(" ");
+
+        const daysIdx = splitTIme.findIndex((s) => s.includes("d"));
+        const hoursIdx = splitTIme.findIndex((s) => s.includes("h"));
+        const minutesIdx = splitTIme.findIndex((s) => s.includes("m"));
+        const secondsIdx = splitTIme.findIndex((s) => s.includes("s"));
+
+        const daysIncludeS =
+            daysIdx > -1
+                ? parseInt(splitTIme[daysIdx].split("d")[0]) > 1
+                    ? "days"
+                    : "day"
+                : "";
+        const hoursIncludeS =
+            hoursIdx > -1
+                ? parseInt(splitTIme[hoursIdx].split("h")[0]) > 1
+                    ? "hours"
+                    : "hour"
+                : "";
+        const minutesIncludeS =
+            minutesIdx > -1
+                ? parseInt(splitTIme[minutesIdx].split("m")[0]) > 1
+                    ? "minutes"
+                    : "minute"
+                : "";
+        const secondsIncludeS =
+            secondsIdx > -1
+                ? parseInt(splitTIme[secondsIdx].split("s")[0]) > 1
+                    ? "seconds"
+                    : "second"
+                : "";
+
+        const replacedTimeUnits = `${
+            daysIdx > -1
+                ? splitTIme[daysIdx]?.replaceAll("d", daysIncludeS)
+                : "0day"
+        } ${
+            hoursIdx > -1
+                ? splitTIme[hoursIdx]?.replace("h", hoursIncludeS)
+                : "0hour"
+        } ${
+            minutesIdx > -1
+                ? splitTIme[minutesIdx]?.replace("m", minutesIncludeS)
+                : "0minute"
+        } ${
+            secondsIdx > -1
+                ? splitTIme[secondsIdx]?.replace("s", secondsIncludeS)
+                : "0second"
+        }`;
+        return replacedTimeUnits;
+    };
+
     if (timer === "Ended" || timer === "0d 0h 0m 0s") return "";
     else
         return (
@@ -122,47 +175,41 @@ const AutomatedEntry = ({ data, length }) => {
                     },
                 }}
             >
-                <div className={`card-wrapper ${length > 1 ? "my-3" : "mt-3"}`}>
-                    <picture>
-                        <source
-                            media="(max-width:768px)"
-                            srcSet={data.prizeBG2}
-                        />
-                        <img src={data.prizeBG} alt={data.prizeTitle} />
-                    </picture>
-                    <div className="overlay"></div>
-                    <div className="badges">
-                        {data.prizeContent || "Daily Bonus Reward"}
-                    </div>
-                    <div className="timer d-flex align-items-center justify-content-space px-3">
-                        <img
-                            className="icon"
-                            src={`${window.cdn}art_assets/icons/timer_normal.png`}
-                            alt="timer"
-                        />
-                        <p className="mb-0 label d-none d-md-block">Draw in</p>
-                        <p className="countdown">{`\u00A0 ${timer}`}</p>
-                    </div>
-                    <div className="prize-text col-12">
-                        {/* PRIZE NAME */}
-                        <div className="card-title">{data.prizeTitle}</div>
-                        <div className="card-subtitle text-white">
-                            {data.prizeSubtitle || "Version 2"}
-                        </div>
-                        {/* TICKETS */}
-                        <div className="col-12 ticket-info d-flex align-items-center py-1 mt-3">
-                            <div className="w-100 your-tickets d-flex justify-content-between">
-                                <div className="d-flex align-items-center">
-                                    <p className="mb-0 label d-flex align-items-center pl-2">
-                                        Your collected tickets
-                                    </p>
-                                </div>
-                                <p className="mb-0 tickets">
+                <div className="card-wrapper p-3">
+                    <div className="row">
+                        {/* PRIZE INFO */}
+                        <div className="col-6 col-md-8 d-flex flex-column align-items-start justify-content-end position-relative">
+                            {/* PRIZE NAME */}
+                            <div className="prize-title mt-2">
+                                {data.prizeTitle}
+                            </div>
+                            {/* TICKETS */}
+                            <div className="ticket-info d-flex flex-column align-items-start mt-2 p-2">
+                                <p className="mb-2 ticket-label d-flex align-items-center">
+                                    Your total tickets
+                                </p>
+                                <p className="mb-0 tickets-value">
                                     {getTickets()?.toLocaleString() || "-"}
                                 </p>
                             </div>
                         </div>
+                        {/* PRIZE PICTURE */}
+                        <div className="col-6 col-md-4 d-flex align-items-center justify-content-end position-relative">
+                            <picture>
+                                <source
+                                    media="(max-width:768px)"
+                                    srcSet={data.prizeBG2}
+                                />
+                                <img src={data.prizeBG} alt={data.prizeTitle} />
+                            </picture>
+                        </div>
                     </div>
+                </div>
+                {/* TIMER */}
+                <div className="timer d-flex align-items-center justify-content-center px-3">
+                    <p className="countdown mb-0">{`\u00A0 ${getTimerFullUnits(
+                        timer
+                    )} left`}</p>
                 </div>
             </Link>
         );
