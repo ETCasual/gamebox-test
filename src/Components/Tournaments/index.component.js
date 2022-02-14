@@ -435,7 +435,13 @@ const Index = ({ match }) => {
                                             </div>
                                             {type !== "automated" && (
                                                 <div
-                                                    className="fortune-wheel-fixed-btn"
+                                                    className="fortune-wheel-fixed-btn-container"
+                                                    // style={{
+                                                    //     background:
+                                                    //         "background: transparent linear-gradient(134deg, #1C1C1C 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;",
+                                                    //     borderRadius: "12px",
+                                                    //     padding: "12px",
+                                                    // }}
                                                     onClick={() =>
                                                         setFortuneWheelShown(
                                                             true
@@ -443,7 +449,26 @@ const Index = ({ match }) => {
                                                     }
                                                     ref={spinnerFixedButtonRef}
                                                 >
-                                                    <div className="spinner-wrapper">
+                                                    <div
+                                                        className="the-spinner-text-wrapper"
+                                                        style={{
+                                                            color: "#00C1B9",
+                                                            marginBottom: "3px",
+                                                        }}
+                                                    >
+                                                        The spinner
+                                                    </div>
+                                                    <div
+                                                        className="earn-more-tickets-text-wrapper"
+                                                        // style={{
+                                                        //     fontWeight: "bold",
+                                                        //     fontSize: "12px",
+                                                        // }}
+                                                    >
+                                                        Earn more tickets here
+                                                    </div>
+                                                    <div className="earn-more-tickets-img-wrapper"></div>
+                                                    {/* <div className="spinner-wrapper">
                                                         <img
                                                             className="spinner"
                                                             src={`${window.cdn}art_assets/buttons/button_floatspinner.png`}
@@ -454,7 +479,7 @@ const Index = ({ match }) => {
                                                         <button>
                                                             Play Spinner
                                                         </button>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             )}
                                         </div>

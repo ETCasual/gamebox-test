@@ -1,7 +1,10 @@
 // FORTUNE WHEEL COMPONENT
-.fortune-wheel-fixed-btn {
+.fortune-wheel-fixed-btn-container {
     cursor: pointer;
     position: absolute;
+    background: "transparent linear-gradient(134deg, #1C1C1C 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box";
+    border-radius: 12px;
+    padding: 12px;
     bottom: 0px;
     // right: 0px;
     left: 802px;
@@ -9,8 +12,8 @@
     //     right: 1em;
     //     bottom: 0;
     // }
-    min-width: 140px;
-    min-height: 170px;
+    min-width: 103px;
+    min-height: 142px;
     // transition: all 0.3s ease-in;
     // &:hover {
     //     right: 1em;
@@ -56,6 +59,15 @@
             min-width: 100%;
             padding: 1em;
         }
+    }
+    .the-spinner-text-wrapper {
+        color: "#00C1B9";
+        margin-bottom: 3px;
+    }
+    .earn-more-tickets-text-wrapper {
+        font-weight: bold;
+        font-size: $fnt-sz-12;
+        margin-bottom: 3px;
     }
 }
 .fortune-wheel {
