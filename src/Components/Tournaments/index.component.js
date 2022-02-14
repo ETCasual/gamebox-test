@@ -394,37 +394,68 @@ const Index = ({ match }) => {
                                             </div>
                                         </div>
                                         {/* GAME INFO */}
-                                        <div className="row game-detail-panel pt-4">
-                                            <div className="col-12">
-                                                <div className="statement-title">
-                                                    JOIN TOURNAMENTS!
+                                        <div className="game-info-background col-12">
+                                            <div className="row game-detail-panel">
+                                                <div className="col-12">
+                                                    <div className="statement-title">
+                                                        JOIN TOURNAMENTS!
+                                                    </div>
+                                                    <div className="statement-subtitle">
+                                                        Compete with other
+                                                        players, collect tokens
+                                                        and stand a chance to
+                                                        own this NFT!
+                                                    </div>
                                                 </div>
-                                                <div className="statement-subtitle">
-                                                    Compete with other players,
-                                                    collect tokens and stand a
-                                                    chance to own this NFT!
-                                                </div>
+                                                {currentPrize?.gameInfo?.map(
+                                                    (game, index) => (
+                                                        <React.Fragment
+                                                            key={`time-${index}`}
+                                                        >
+                                                            <GameDuration
+                                                                game={game}
+                                                                index={index}
+                                                                data={
+                                                                    currentPrize
+                                                                }
+                                                                timer={timer}
+                                                                setTimer={
+                                                                    setTimer
+                                                                }
+                                                                handleGameLeaderPanel={
+                                                                    handleGameLeaderPanel
+                                                                }
+                                                                setEarnAdditionalDisabledStatus={
+                                                                    setEarnAdditionalDisabledStatus
+                                                                }
+                                                            />
+                                                        </React.Fragment>
+                                                    )
+                                                )}
                                             </div>
-                                            {currentPrize?.gameInfo?.map(
-                                                (game, index) => (
-                                                    <React.Fragment
-                                                        key={`time-${index}`}
-                                                    >
-                                                        <GameDuration
-                                                            game={game}
-                                                            index={index}
-                                                            data={currentPrize}
-                                                            timer={timer}
-                                                            setTimer={setTimer}
-                                                            handleGameLeaderPanel={
-                                                                handleGameLeaderPanel
-                                                            }
-                                                            setEarnAdditionalDisabledStatus={
-                                                                setEarnAdditionalDisabledStatus
-                                                            }
+                                            {type !== "automated" && (
+                                                <div
+                                                    className="fortune-wheel-fixed-btn"
+                                                    onClick={() =>
+                                                        setFortuneWheelShown(
+                                                            true
+                                                        )
+                                                    }
+                                                    ref={spinnerFixedButtonRef}
+                                                >
+                                                    <div className="spinner-wrapper">
+                                                        <img
+                                                            className="spinner"
+                                                            src={`${window.cdn}art_assets/buttons/button_floatspinner.png`}
+                                                            alt="spinner"
                                                         />
-                                                    </React.Fragment>
-                                                )
+                                                    </div>
+                                                    <div className="button-wrapper">
+                                                        <button>
+                                                            Play Spinner
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             )}
                                         </div>
                                     </div>
@@ -438,24 +469,6 @@ const Index = ({ match }) => {
                         data={currentPrize}
                         type={type}
                     />
-                )}
-                {type !== "automated" && (
-                    <div
-                        className="fortune-wheel-fixed-btn"
-                        onClick={() => setFortuneWheelShown(true)}
-                        ref={spinnerFixedButtonRef}
-                    >
-                        <div className="spinner-wrapper">
-                            <img
-                                className="spinner"
-                                src={`${window.cdn}art_assets/buttons/button_floatspinner.png`}
-                                alt="spinner"
-                            />
-                        </div>
-                        <div className="button-wrapper">
-                            <button>Play Spinner</button>
-                        </div>
-                    </div>
                 )}
 
                 {/* FORTUNE WHEEL */}

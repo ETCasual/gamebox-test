@@ -135,28 +135,40 @@
             }
         }
     }
-    .game-detail-panel {
-        max-width: 792px;
-        height: 383px;
-        .statement-title {
-            font-size: $fnt-sz-18;
-            margin-bottom: 2px;
-            min-height: 24px;
-            font-weight: bold;
-            // @media only screen and (min-width: 768px) {
-            //     font-size: 2.25rem;
-            // }
-            // font-family: Ilisarniq-Bold;
-        }
-        .statement-subtitle {
-            // line-height: 1.5;
-            font-size: $fnt-sz-14;
-            margin-bottom: 21px;
-            min-height: 19px;
-            // @media only screen and (min-width: 768px) {
-            //     font-size: 0.875rem;
-            // }
-            // color: #868686;
+    .game-info-background {
+        background: transparent
+            linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0% no-repeat
+            padding-box;
+        border-radius: 10px;
+        .game-detail-panel {
+            max-width: 792px;
+            height: 383px;
+            margin-top: 1.5rem;
+            width: 792px;
+            padding: 5px 5px 5px 5px;
+            .statement-title {
+                margin-top: 15px;
+                font-size: $fnt-sz-18;
+                margin-bottom: 2px;
+                min-height: 24px;
+                font-weight: bold;
+                // @media only screen and (min-width: 768px) {
+                //     font-size: 2.25rem;
+                // }
+                // font-family: Ilisarniq-Bold;
+            }
+            .statement-subtitle {
+                // line-height: 1.5;
+                font-size: $fnt-sz-14;
+                margin-bottom: 21px;
+                min-height: 19px;
+                width: fit-content;
+                display: inline-block;
+                // @media only screen and (min-width: 768px) {
+                //     font-size: 0.875rem;
+                // }
+                // color: #868686;
+            }
         }
     }
 }
