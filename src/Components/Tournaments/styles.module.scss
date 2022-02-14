@@ -140,6 +140,7 @@
             linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0% no-repeat
             padding-box;
         border-radius: 10px;
+        width: fit-content;
         .game-detail-panel {
             max-width: 792px;
             height: 383px;
@@ -168,6 +169,13 @@
                 //     font-size: 0.875rem;
                 // }
                 // color: #868686;
+            }
+            .individual-game {
+                position: relative;
+                flex: 0 0 33.333333%;
+                max-width: 240px;
+                padding-right: 16px;
+                padding-bottom: 16px;
             }
         }
     }

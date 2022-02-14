@@ -89,13 +89,14 @@ const GameDuration = ({
     return (
         <>
             <div
-                className="col-12 col-md-6 col-lg-6 col-xl-4 mb-4"
-                onClick={onClickEnterGame}
+                // className="col-12 col-md-6 col-lg-6 col-xl-4 mb-4"
+                className="individual-game"
                 style={{
                     opacity: isGameAvailable ? "1" : "0.5",
                     cursor: isGameAvailable ? "pointer" : "default",
                     pointerEvents: isGameAvailable ? "" : "none",
                 }}
+                onClick={onClickEnterGame}
             >
                 <div className="game-card">
                     <div
