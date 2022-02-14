@@ -17,9 +17,10 @@ const Rewards = () => {
 
     const history = useHistory();
 
-    const [claimedPrizesData, setClaimedPrizesData] = useState([]);
-    const [unClaimedPrizesData, setUnClaimedPrizesData] = useState([]);
-    const [currentButtonType, setCurrentButtonType] = useState("");
+    const [allPrizesData, setAllPrizesData] = useState([]);
+    // const [claimedPrizesData, setClaimedPrizesData] = useState([]);
+    // const [unClaimedPrizesData, setUnClaimedPrizesData] = useState([]);
+    // const [currentButtonType, setCurrentButtonType] = useState("");
     const [isClaimedPrizeDetailPopupOpen, setIsClaimedDetailPopupOpen] =
         useState(false);
     const [claimedPrizeDetails, setClaimedPrizeDetails] = useState("");
@@ -37,128 +38,135 @@ const Rewards = () => {
     };
 
     useEffect(() => {
-        window.addEventListener("resize", handleResize, false);
+        let allPrizes = [].concat(claimedPrizes, unClaimedPrizes);
+        setAllPrizesData(allPrizes);
+        console.log(allPrizes);
 
-        function handleResize() {
-            if (currentButtonType === "Unclaimed Rewards") {
-                gliderRef.current.style.width = `${unClaimedPrizeButtonRef.current.offsetWidth}px`;
-                gliderRef.current.style.transform = `translateX(${
-                    unClaimedPrizeButtonRef.current.offsetWidth +
-                    (window.innerWidth <= 768 ? 5 : 25)
-                }px)`;
-            } else {
-                setTimeout(() => {
-                    gliderRef.current.style.width = `${claimedPrizeButtonRef.current.offsetWidth}px`;
-                    gliderRef.current.style.transform = `translateX(0px)`;
-                }, 200);
-            }
-        }
+    }, [claimedPrizes, unClaimedPrizes])
 
-        return () => window.removeEventListener("resize", handleResize, false);
-    }, [currentButtonType]);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize, false);
 
-    useEffect(() => {
-        gliderRef.current.style.width = `${claimedPrizeButtonRef.current.offsetWidth}px`;
-        setClaimedPrizesData(claimedPrizes);
-    }, [claimedPrizes]);
+    //     function handleResize() {
+    //         if (currentButtonType === "Unclaimed Rewards") {
+    //             gliderRef.current.style.width = `${unClaimedPrizeButtonRef.current.offsetWidth}px`;
+    //             gliderRef.current.style.transform = `translateX(${
+    //                 unClaimedPrizeButtonRef.current.offsetWidth +
+    //                 (window.innerWidth <= 768 ? 5 : 25)
+    //             }px)`;
+    //         } else {
+    //             setTimeout(() => {
+    //                 gliderRef.current.style.width = `${claimedPrizeButtonRef.current.offsetWidth}px`;
+    //                 gliderRef.current.style.transform = `translateX(0px)`;
+    //             }, 200);
+    //         }
+    //     }
 
-    useEffect(() => {
-        const tl = gsap.timeline();
+    //     return () => window.removeEventListener("resize", handleResize, false);
+    // }, [currentButtonType]);
 
-        if (unClaimedPrizes.length > 0) {
-            setUnClaimedPrizesData(unClaimedPrizes);
-            tl.to(unClaimedPrizeAvailableRef.current, {
-                duration: 0.7,
-                opacity: 1,
-                repeat: -1,
-                yoyo: true,
-                backgroundColor: "#FDC43D",
-                ease: "power2.out",
-            });
-        } else {
-            unClaimedPrizeAvailableRef.current.style = "";
-        }
+    // useEffect(() => {
+    //     gliderRef.current.style.width = `${claimedPrizeButtonRef.current.offsetWidth}px`;
+    //     setClaimedPrizesData(claimedPrizes);
+    // }, [claimedPrizes]);
 
-        return () => tl.kill();
-    }, [unClaimedPrizes]);
+    // useEffect(() => {
+    //     const tl = gsap.timeline();
 
-    const handleRewards = (item) => {
-        let selectedElement = item.target.textContent;
-        if (currentButtonType === selectedElement) return;
+    //     if (unClaimedPrizes.length > 0) {
+    //         setUnClaimedPrizesData(unClaimedPrizes);
+    //         tl.to(unClaimedPrizeAvailableRef.current, {
+    //             duration: 0.7,
+    //             opacity: 1,
+    //             repeat: -1,
+    //             yoyo: true,
+    //             backgroundColor: "#FDC43D",
+    //             ease: "power2.out",
+    //         });
+    //     } else {
+    //         unClaimedPrizeAvailableRef.current.style = "";
+    //     }
 
-        if (selectedElement === "Claimed Rewards") {
-            gliderRef.current.style.width = `${claimedPrizeButtonRef.current.offsetWidth}px`;
-            gliderRef.current.style.transform = "translateX(0%)";
+    //     return () => tl.kill();
+    // }, [unClaimedPrizes]);
 
-            setCurrentButtonType("Claimed Rewards");
+    // const handleRewards = (item) => {
+    //     let selectedElement = item.target.textContent;
+    //     if (currentButtonType === selectedElement) return;
 
-            const tl = gsap.timeline();
-            tl.to(".unclaimed", {
-                duration: 0.3,
-                scale: 0,
-                ease: "power4.out",
-                onStart: () => {
-                    document
-                        .querySelectorAll("#rewards-panel .filter button")
-                        .forEach((e) => e.classList.remove("active"));
-                    document
-                        .querySelector(".btn_claim")
-                        .classList.add("active");
-                },
-                onComplete: () => {
-                    document.querySelectorAll(".unclaimed").forEach((e) => {
-                        e.classList.add("d-none");
-                    });
-                },
-            }).to(".claimed", {
-                duration: 0.3,
-                scale: 1,
-                ease: "power4.out",
-                onStart: () => {
-                    document.querySelectorAll(".claimed").forEach((e) => {
-                        e.classList.remove("d-none");
-                    });
-                },
-            });
-        } else if (selectedElement === "Unclaimed Rewards") {
-            gliderRef.current.style.width = `${unClaimedPrizeButtonRef.current.offsetWidth}px`;
-            gliderRef.current.style.transform = `translateX(${
-                unClaimedPrizeButtonRef.current.offsetWidth +
-                (window.innerWidth <= 768 ? 5 : 25)
-            }px)`;
+    //     if (selectedElement === "Claimed Rewards") {
+    //         gliderRef.current.style.width = `${claimedPrizeButtonRef.current.offsetWidth}px`;
+    //         gliderRef.current.style.transform = "translateX(0%)";
 
-            setCurrentButtonType("Unclaimed Rewards");
+    //         setCurrentButtonType("Claimed Rewards");
 
-            const tl = gsap.timeline();
-            tl.to(".claimed", {
-                duration: 0.3,
-                scale: 0,
-                ease: "power4.out",
-                onStart: () => {
-                    document
-                        .querySelectorAll("#rewards-panel .filter button")
-                        .forEach((e) => e.classList.remove("active"));
-                    document
-                        .querySelector(".btn_unclaim")
-                        .classList.add("active");
-                },
-                onComplete: () => {
-                    document.querySelectorAll(".claimed").forEach((e) => {
-                        e.classList.add("d-none");
-                    });
-                },
-            }).to(".unclaimed", {
-                duration: 0.3,
-                scale: 1,
-                ease: "power4.out",
-                onStart: () => {
-                    document.querySelectorAll(".unclaimed").forEach((e) => {
-                        e.classList.remove("d-none");
-                    });
-                },
-            });
-        }
-    };
+    //         const tl = gsap.timeline();
+    //         tl.to(".unclaimed", {
+    //             duration: 0.3,
+    //             scale: 0,
+    //             ease: "power4.out",
+    //             onStart: () => {
+    //                 document
+    //                     .querySelectorAll("#rewards-panel .filter button")
+    //                     .forEach((e) => e.classList.remove("active"));
+    //                 document
+    //                     .querySelector(".btn_claim")
+    //                     .classList.add("active");
+    //             },
+    //             onComplete: () => {
+    //                 document.querySelectorAll(".unclaimed").forEach((e) => {
+    //                     e.classList.add("d-none");
+    //                 });
+    //             },
+    //         }).to(".claimed", {
+    //             duration: 0.3,
+    //             scale: 1,
+    //             ease: "power4.out",
+    //             onStart: () => {
+    //                 document.querySelectorAll(".claimed").forEach((e) => {
+    //                     e.classList.remove("d-none");
+    //                 });
+    //             },
+    //         });
+    //     } else if (selectedElement === "Unclaimed Rewards") {
+    //         gliderRef.current.style.width = `${unClaimedPrizeButtonRef.current.offsetWidth}px`;
+    //         gliderRef.current.style.transform = `translateX(${
+    //             unClaimedPrizeButtonRef.current.offsetWidth +
+    //             (window.innerWidth <= 768 ? 5 : 25)
+    //         }px)`;
+
+    //         setCurrentButtonType("Unclaimed Rewards");
+
+    //         const tl = gsap.timeline();
+    //         tl.to(".claimed", {
+    //             duration: 0.3,
+    //             scale: 0,
+    //             ease: "power4.out",
+    //             onStart: () => {
+    //                 document
+    //                     .querySelectorAll("#rewards-panel .filter button")
+    //                     .forEach((e) => e.classList.remove("active"));
+    //                 document
+    //                     .querySelector(".btn_unclaim")
+    //                     .classList.add("active");
+    //             },
+    //             onComplete: () => {
+    //                 document.querySelectorAll(".claimed").forEach((e) => {
+    //                     e.classList.add("d-none");
+    //                 });
+    //             },
+    //         }).to(".unclaimed", {
+    //             duration: 0.3,
+    //             scale: 1,
+    //             ease: "power4.out",
+    //             onStart: () => {
+    //                 document.querySelectorAll(".unclaimed").forEach((e) => {
+    //                     e.classList.remove("d-none");
+    //                 });
+    //             },
+    //         });
+    //     }
+    // };
 
     const getClaimedDate = (claimedOn) => {
         let playerTimeZone = (new Date().getTimezoneOffset() / 60) * -1;
@@ -200,36 +208,36 @@ const Rewards = () => {
                     }}
                 />
             )}
-            {/* BACK BUTTON */}
-            <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center mx-auto">
-                <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8 px-md-0 px-lg-3 px-xl-4 justify-content-between">
-                    <Link
-                        onClick={scrollToTop}
-                        to={{
-                            pathname: history?.location?.state?.prevPath || "/",
-                            state: {
-                                prevPath: "/",
-                            },
-                        }}
-                    >
-                        <img
-                            className="back-button"
-                            width="42"
-                            src={`${window.cdn}art_assets/buttons/button_back.png`}
-                            alt="back-btn"
-                        />
-                    </Link>
-                </div>
-            </div>
             {/* REWARDS */}
             <section id="rewards-panel">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-11 col-lg-8 col-xl-8">
+                        <div className="col-12 col-md-10 col-lg-8 wrapper">
                             <div className="row">
+                                {/* BACK BUTTON */}
+                                <div className="col-12 justify-content-between mb-4 back-button-wrapper">
+                                    <Link
+                                        onClick={scrollToTop}
+                                        to={{
+                                            pathname: history?.location?.state?.prevPath || "/",
+                                            state: {
+                                                prevPath: "/",
+                                            },
+                                        }}
+                                    >
+                                        <img
+                                            className="back-button"
+                                            width="42"
+                                            src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                            alt="back-btn"
+                                        />
+                                        <span className="ml-2">Back</span>
+                                    </Link>
+                                </div>
+
                                 <div className="col-12 mb-4">
-                                    <h4 className="title mb-4">Rewards</h4>
-                                    <div className="col-12 px-0 filter d-flex w-100">
+                                    <h3 className="title my-4">Rewards</h3>
+                                    {/* <div className="col-12 px-0 filter d-flex w-100">
                                         <button
                                             ref={claimedPrizeButtonRef}
                                             className="btn_claim active mr-4 mr-md-5"
@@ -256,60 +264,68 @@ const Rewards = () => {
                                             className="glider"
                                             ref={gliderRef}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {/* CLAIMED */}
-                                {claimedPrizesData?.map((data, i) => {
+                                {allPrizesData?.map((data, i) => {
                                     return (
-                                        data?.claimedOn > 0 && (
+                                        // data?.claimedOn > 0 && (
+                                        <div
+                                            className="col-12 col-md-6 mb-3 prize"
+                                            key={`prizes-${i}`}
+                                        >
                                             <div
-                                                className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3 claimed"
-                                                key={`claimed-${i}`}
+                                                className="card-wrapper d-flex"
+                                                onClick={() => {
+                                                    setClaimedPrizeDetails(
+                                                        data
+                                                    );
+                                                    setIsClaimedDetailPopupOpen(
+                                                        true
+                                                    );
+                                                }}
                                             >
-                                                <div className="row">
-                                                    <div className="col-12 px-md-2">
-                                                        <div
-                                                            className="card-wrapper"
-                                                            style={{
-                                                                backgroundImage: `url("${data.prizeImageUrl}")`,
-                                                            }}
-                                                            onClick={() => {
-                                                                setClaimedPrizeDetails(
-                                                                    data
-                                                                );
-                                                                setIsClaimedDetailPopupOpen(
-                                                                    true
-                                                                );
-                                                            }}
-                                                        >
-                                                            <div className="overlay"></div>
-                                                            <div className="badges">
-                                                                {data.prizeContent ||
-                                                                    prizeTypeDict[
-                                                                        data
-                                                                            .prizeType
-                                                                    ]}
-                                                            </div>
-                                                            <div className="prize-text">
-                                                                <div className="card-title pl-3">
-                                                                    {
-                                                                        data.prizeTitle
-                                                                    }
-                                                                </div>
-                                                                <div className="card-subtitle pl-3">
-                                                                    {`Claimed on ${getClaimedDate(
-                                                                        data.claimedOn
-                                                                    )}`}
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                <div className="col-auto p-2">
+                                                    <div
+                                                        className="prize-image"
+                                                        style={{
+                                                            backgroundImage: `url("${data.prizeImageUrl}")`,
+                                                        }}
+                                                    >
                                                     </div>
                                                 </div>
+                                                <div className="col py-2 px-0 mt-1">
+                                                    <div className="prize-text">
+                                                        <div className="card-title">
+                                                            {
+                                                                data.prizeTitle
+                                                            }
+                                                        </div>
+                                                        <div className="card-subtitle">
+                                                            {
+                                                                data.prizeSubtitle
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    {data.claimedOn > 0 
+                                                        ?
+                                                        <div className="prize-claimed py-2">
+                                                            {`Claimed on ${getClaimedDate(
+                                                                data.claimedOn
+                                                            )}`}
+                                                        </div>
+                                                        :
+                                                        <div className="prize-claimed text-red py-2">
+                                                            {`Connect wallet to receive NFT`}
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
-                                        )
+                                        </div>
+                                        // )
                                     );
                                 })}
-                                {claimedPrizes.length === 0 && (
+                                {/* {claimedPrizes.length === 0 && (
                                     <div className="col-12 claimed">
                                         <h4>
                                             You have not won any rewards yet.
@@ -323,22 +339,23 @@ const Rewards = () => {
                                             one might be yours.
                                         </p>
                                     </div>
-                                )}
+                                )} */}
                                 {/* UNCLAIMED */}
-                                {unClaimedPrizesData?.map((data, i) => (
+                                {/* {unClaimedPrizesData?.map((data, i) => (
                                     <div
-                                        className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3 unclaimed d-none"
-                                        key={`unclaimed-${i}`}
+                                        className="col-12 col-md-6 col-lg-6 col-xl-4 mb-3 unclaimed"
+                                        key={`unclaimed-${i}`} 
+                                        onClick={() => {
+                                            setClaimedPrizeDetails(
+                                                data
+                                            );
+                                            setIsClaimedDetailPopupOpen(
+                                                true
+                                            );
+                                        }}
+
                                     >
-                                        <Link
-                                            to={{
-                                                pathname:
-                                                    getRemainingDaysToClaim(
-                                                        data?.createdOn
-                                                    ) !== "Expired"
-                                                        ? `/claim/${data.id}`
-                                                        : "#",
-                                            }}
+                                        <div
                                         >
                                             <div className="row">
                                                 <div className="col-12 px-md-2">
@@ -373,10 +390,10 @@ const Rewards = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </Link>
+                                        </div>
                                     </div>
-                                ))}
-                                {unClaimedPrizesData.length === 0 && (
+                                ))} */}
+                                {/* {unClaimedPrizesData.length === 0 && (
                                     <div className="col-12 unclaimed d-none">
                                         <h4>You have no rewards to claim.</h4>
                                         <p>
@@ -388,7 +405,7 @@ const Rewards = () => {
                                             one might be yours.
                                         </p>
                                     </div>
-                                )}
+                                )} */}
                             </div>
                         </div>
                     </div>
