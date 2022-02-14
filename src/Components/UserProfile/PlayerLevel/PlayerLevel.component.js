@@ -7,6 +7,7 @@ import {
     getCurrentMultiplier,
     getLevelProgress,
     getCurrentLevelExp,
+    getCurrentMultiplierX,
 } from "Utils/CurrentLevel";
 
 const PlayerLevel = ({ user, ranks, handleBackButton }) => {
@@ -33,7 +34,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                     </p>
                                                 </div>
                                             </div>
-                                            <p className="statement ">
+                                            <p className="statement">
                                                 Increase your multiplier with
                                                 every level!
                                             </p>
@@ -46,16 +47,16 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             Multiplier
                                                         </p>
                                                         <p className="mb-0 multiplier-value">
-                                                            {getCurrentMultiplier(
+                                                            {getCurrentMultiplierX(
                                                                 user,
                                                                 ranks
                                                             )}
-                                                            %
+                                                            x
                                                         </p>
                                                     </div>
                                                     {/* EXP COUNT */}
                                                     <div className="d-flex exp-count">
-                                                        <span className="bold mr-1">
+                                                        <span className="player-exp mr-1">
                                                             {user.exp >
                                                             ranks[
                                                                 ranks.length - 1
@@ -73,19 +74,13 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             {getCurrentLevelExp(
                                                                 user,
                                                                 ranks
-                                                            ).toLocaleString()}
+                                                            ).toLocaleString()} exp
                                                         </span>{" "}
-                                                        <img
-                                                            className="ml-2"
-                                                            width="14"
-                                                            src={`${window.cdn}art_assets/icons/exp_01.png`}
-                                                            alt="star"
-                                                        />
                                                     </div>
                                                 </div>
                                                 {/* PROGRESS BAR */}
                                                 <div className="col-12 px-0">
-                                                    <div className="progress mt-2">
+                                                    <div className="progress mt-3">
                                                         <div
                                                             className="progress-bar"
                                                             role="progressbar"
@@ -148,52 +143,41 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                         }
                                                     >
                                                         <div className="level-type p-3">
-                                                            <div className="level-type-head d-flex align-items-center justify-content-between">
-                                                                {/* LEVEL TITLE */}
-                                                                <p className="mb-0">
-                                                                    {rank.title}
-                                                                </p>
-                                                                {/* LEVEL EXP */}
-                                                                <div className="d-flex align-items-center justify-content-center px-2 level-exp">
-                                                                    <span className="ml-1">
-                                                                        {rank.exp.toLocaleString()}
-                                                                    </span>
-                                                                    <img
-                                                                        className="d-flex ml-1"
-                                                                        width="14"
-                                                                        src={`${window.cdn}art_assets/icons/exp_01.png`}
-                                                                        alt="star"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            {/* CONTENT */}
-                                                            <div className="level-type-content mt-2">
-                                                                <p className="mb-0 pt-3 reward-text">
-                                                                    Rewards
-                                                                </p>
-                                                                <div className="my-3 d-flex justify-content-center ticket-text">
-                                                                    <p className="ticket pr-1 mb-0">
-                                                                        Ticket
-                                                                        Multiplier
-                                                                    </p>
-                                                                    <p className="mb-0 ticket-value">
-                                                                        {Math.floor(
-                                                                            rank.multiplier *
-                                                                                100
-                                                                        )}
-                                                                        %
-                                                                    </p>
-                                                                </div>
-                                                                <div className="pb-3 d-flex align-items-center justify-content-center gems">
+                                                            <div className="level-type-wrapper">
+                                                                <div className="level-type-head d-flex align-items-center justify-content-between">
+                                                                    {/* LEVEL TITLE */}
                                                                     <p className="mb-0">
-                                                                        {`+ ${rank.gems}`}
+                                                                        {rank.title}
                                                                     </p>
-                                                                    <img
-                                                                        className="ml-1"
-                                                                        width="17"
-                                                                        src={`${window.cdn}art_assets/gems/gems.png`}
-                                                                        alt="gems"
-                                                                    />
+                                                                    {/* LEVEL EXP */}
+                                                                    <div className="d-flex align-items-center justify-content-center px-2 level-exp">
+                                                                        <span className="ml-1">
+                                                                            {rank.exp.toLocaleString()} exp
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                {/* CONTENT */}
+                                                                <div className="level-type-content mt-3">
+                                                                    <p className="mb-0 pt-3 reward-text">
+                                                                        Rewards
+                                                                    </p>
+                                                                    <div className="my-3 d-flex justify-content-center ticket-text">
+                                                                        <p className="ticket pr-1 mb-0">
+                                                                            Ticket
+                                                                            Multiplier
+                                                                        </p>
+                                                                        <p className="mb-0 ticket-value">
+                                                                            {
+                                                                                Math.round((rank.multiplier + 1) * 100)/100
+                                                                            }
+                                                                            x
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="pb-3 d-flex align-items-center justify-content-center gems">
+                                                                        <p className="mb-0">
+                                                                            {`+ ${rank.gems}`} gems
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

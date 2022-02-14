@@ -51,6 +51,11 @@ const getCurrentMultiplier = (user, ranks) => {
     } else return 0;
 };
 
+const getCurrentMultiplierX = (user, rank) => {
+    const res = getCurrentMultiplier(user, rank);
+    return (res/100) + 1;
+}
+
 const getLevelProgress = (user, ranks) => {
     let _ranks = [...ranks];
     if (user?.exp === 0) return 0;
@@ -79,6 +84,7 @@ export {
     getCurrentLevel,
     getCurrentLevelNo,
     getCurrentMultiplier,
+    getCurrentMultiplierX,
     getLevelProgress,
     getCurrentLevelExp,
 };

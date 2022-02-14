@@ -10,7 +10,7 @@ import { defaultUserImage } from "Utils/DefaultImage";
 import {
     getCurrentLevelExp,
     getCurrentLevel,
-    getCurrentMultiplier,
+    getCurrentMultiplierX,
     getLevelProgress,
 } from "Utils/CurrentLevel";
 
@@ -37,37 +37,27 @@ const Profile = ({
                             {/* PROFILE INFO */}
                             <div className="col-12 text-center">
                                 <div className="profile-info">
-                                    <Link
-                                        to={{
-                                            pathname: "/profile/edit",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
-                                    >
-                                        <img
-                                            onError={(e) => defaultUserImage(e)}
-                                            src={
-                                                user
-                                                    ? user.picture
-                                                    : `${window.cdn}art_assets/avatars/avatar_01.png`
-                                            }
-                                            alt="avatar"
-                                        />
-                                        <h3 className="user-name">
-                                            {user.username}
-                                        </h3>
-                                        <p className="email-text">
-                                            {user ? user.email : "..."}
-                                        </p>
-                                    </Link>
+                                    <img className="p-2"
+                                        onError={(e) => defaultUserImage(e)}
+                                        src={
+                                            user
+                                                ? user.picture
+                                                : `${window.cdn}art_assets/avatars/avatar_01.png`
+                                        }
+                                        alt="avatar"
+                                    />
+                                    <h3 className="user-name">
+                                        {user.username}
+                                    </h3>
+                                    <p className="email-text">
+                                        {user ? user.email : "..."}
+                                    </p>
                                 </div>
                             </div>
                             {/* GEMS BALANCE */}
                             <div className="col-12 gem-balance d-flex align-items-center justify-content-between">
                                 <p className="gem-balance-text mb-0 mb-md-2">
-                                    Your gems balance
+                                    Gems balance
                                 </p>
                                 <Link
                                     onClick={scrollToTop}
@@ -95,8 +85,24 @@ const Profile = ({
                                     </div>
                                 </Link>
                             </div>
+                            {/* TOKEN BALANCE */}
+                            <div className="col-12 mt-3 gem-balance d-flex align-items-center justify-content-between">
+                                <p className="gem-balance-text mb-0 mb-md-2">
+                                    Froyo Tokens available
+                                </p>
+                                <div className="gem-wrapper">
+                                    <img
+                                        width="24"
+                                        src={`${window.cdn}art_assets/gems/gems.png`}
+                                        alt="gems"
+                                    />
+                                    <span className="gems">
+                                        {user.gems}
+                                    </span>
+                                </div>
+                            </div>
                             {/* MULTIPLIER */}
-                            <div className="col-12 multiplier-holder">
+                            <div className="col-12 multiplier-holder mt-4">
                                 <div
                                     className="multiplier p-4 d-flex flex-column align-items-start"
                                     onClick={handlePlayerLevelPanel}
@@ -104,11 +110,11 @@ const Profile = ({
                                     <p className="multiplier-info">
                                         Multiplier{" "}
                                         <span>
-                                            {getCurrentMultiplier(
+                                            {getCurrentMultiplierX(
                                                 user,
                                                 ranks
                                             ) || 0}
-                                            %
+                                            x
                                         </span>
                                     </p>
                                     {/* LEVEL */}
@@ -131,19 +137,14 @@ const Profile = ({
                                                           ]?.exp?.toLocaleString()
                                                         : user.exp?.toLocaleString()}
                                                 </span>
-                                                <span className="px-2">/</span>
+                                                <span className="px-1">/</span>
                                                 <span className="current-multiplier-total">
                                                     {getCurrentLevelExp(
                                                         user,
                                                         ranks
-                                                    )?.toLocaleString()}
+                                                    )?.toLocaleString() + ' exp'}
                                                 </span>{" "}
-                                                <img
-                                                    className="ml-1"
-                                                    width="18"
-                                                    src={`${window.cdn}art_assets/icons/exp_01.png`}
-                                                    alt="coin"
-                                                />
+                                                
                                             </div>
                                         </div>
                                         <div className="col-12 px-0">
@@ -185,25 +186,19 @@ const Profile = ({
                                 </div>
                             </div>
                             {/* INVITE FRIENDS */}
-                            <div className="col-12 invite-friends-holder">
-                                <div className="team d-flex">
-                                    <div
-                                        className="col-12 col-md-6"
-                                        onClick={handleTeamPanel}
-                                    >
+                            <div className="col-12 invite-friends-holder mt-4">
+                                <div className="team d-flex"
+                                    onClick={handleTeamPanel}
+                                >
+                                    <div className="col-12 col-md p-0 pb-4">
                                         <p className="team-title">
                                             Invite Friends
                                         </p>
-                                        <p className="mb-2 d-flex align-items-center refer-text">
+                                        <p className="pt-2 mb-2 d-flex align-items-center refer-text">
                                             Refer and get{" "}
                                             <span className="px-1">
-                                                {config.gemsPerInvite}
+                                                {config.gemsPerInvite} gems
                                             </span>
-                                            <img
-                                                width="24"
-                                                src={`${window.cdn}art_assets/gems/gems.png`}
-                                                alt="gems"
-                                            />
                                         </p>
                                         <p className="mb-1 share-text">
                                             {`Share your referral code with
@@ -213,7 +208,7 @@ const Profile = ({
                                                 account with us.`}
                                         </p>
                                     </div>
-                                    <div className="d-none col-md-6 px-0 px-md-3 d-flex align-items-center justify-content-center">
+                                    <div className="d-none col-md-5 px-0 d-flex align-items-end justify-content-end">
                                         <img
                                             className="img-fluid bg-d"
                                             src={`${window.cdn}art_assets/illustrations/friends_01.png`}
@@ -226,12 +221,6 @@ const Profile = ({
                                         alt="invite"
                                     />
                                 </div>
-                                <button
-                                    className="invite-btn"
-                                    onClick={handleTeamPanel}
-                                >
-                                    Invite friends
-                                </button>
                             </div>
                             {/* HIGHSCORE & REWARDS */}
                             <div className="col-12 mt-4">
@@ -241,11 +230,6 @@ const Profile = ({
                                         onClick={handleHighScorePanel}
                                     >
                                         <div className="highscore d-flex align-items-center justify-content-center">
-                                            <img
-                                                className="mr-2 icon"
-                                                src={`${window.cdn}art_assets/icons/trophy.png`}
-                                                alt="highscores"
-                                            />
                                             <p className="mb-0 pl-1">
                                                 Highscores
                                             </p>
@@ -264,11 +248,6 @@ const Profile = ({
                                             }}
                                         >
                                             <div className="rewards d-flex align-items-center justify-content-center">
-                                                <img
-                                                    className="mb-1 mr-2 icon"
-                                                    src={`${window.cdn}art_assets/illustrations/rewards_close.png`}
-                                                    alt="highscores"
-                                                />
                                                 <p className="d-flex align-items-center justify-content-around mb-0">
                                                     Rewards
                                                 </p>
@@ -289,11 +268,6 @@ const Profile = ({
                                     }}
                                 >
                                     <div className="settings d-flex align-items-center justify-content-center">
-                                        <img
-                                            className="mr-2 icon"
-                                            src={`${window.cdn}art_assets/icons/settings.png`}
-                                            alt="setting"
-                                        />{" "}
                                         <p className="mb-0">Settings</p>
                                     </div>
                                 </Link>
@@ -304,7 +278,7 @@ const Profile = ({
                                     className="logout"
                                     onClick={() => handleSignOut(dispatch)}
                                 >
-                                    Log out
+                                    Sign out
                                 </button>
                             </div>
                         </div>

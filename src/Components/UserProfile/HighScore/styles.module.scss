@@ -1,15 +1,23 @@
 // HIGHSCORE
 #high-score {
     position: relative;
-    margin-top: 140px;
+    margin-top: 9em;
     .wrapper {
         .title {
             
             margin-top: 1rem;
             font-size: 1.5rem;
+            font-weight: $fnt-wgt-700;
             @media only screen and (min-width: 768px) {
-                font-size: 28px;
+                font-size: $fnt-sz-18;
                 margin-top: 2rem;
+            }
+        }
+        .back-button-wrapper {
+            span {
+                color: #F8BA29;
+                font-size: $fnt-sz-12;
+                font-weight: $fnt-wgt-700;
             }
         }
         .highscore-card {
@@ -17,7 +25,6 @@
             min-height: 4.5em;
             font-size: 12px;
             img {
-                border: 2px solid white;
                 border-radius: 7px;
                 width: 76px;
                 @media only screen and (min-width: 991px) {
@@ -28,7 +35,8 @@
                 }
             }
             .game-title {
-                font-size: 16px;
+                font-size: $fnt-sz-16;
+                font-weight: $fnt-wgt-600;
                 
             }
             .score {
@@ -38,13 +46,13 @@
                 justify-content: flex-end;
                 
                 font-size: 0.75rem;
+                font-weight: $fnt-wgt-600;
                 @media only screen and (min-width: 768px) {
-                    font-size: 14px;
+                    font-size: $fnt-sz-16;
                 }
             }
             .score-date {
-                font-size: 12px;
-                color: #868686;
+                font-size: $fnt-sz-12;
             }
             .game-icon {
                 min-width: 58px;

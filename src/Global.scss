@@ -707,10 +707,10 @@ button {
 #winners {
     .description {
         h1 {
-            color: black;
+            color: white;
             font-size: 1.5rem;
             @media only screen and (min-width: 768px) {
-                font-size: 2.25rem;
+                font-size: $fnt-sz-18;
             }
         }
         p {
@@ -725,7 +725,7 @@ button {
 }
 #activity,
 #winners {
-    padding: 6em 0;
+    padding: 10em 0;
 }
 
 // PAYMENT METHODS MODALS
