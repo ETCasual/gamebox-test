@@ -19,7 +19,7 @@ const convertSecondsToHours = (timestamp) => {
         return "0d 0h 0m 0s";
     else {
         if (days >= 0 && hours >= 0 && minutes >= 0 && seconds >= 0)
-            return `${days > 0 ? `${days}d ` : ""}${hours > 0 ? `${hours}h ` : ""}${minutes}m ${seconds}s`;
+            return `${days > 0 ? `${days}d` : ""} ${hours > 0 ? `${hours}h` : ""} ${minutes}m ${seconds}s`;
         else return "0d 0h 0m 0s";
     }
 };

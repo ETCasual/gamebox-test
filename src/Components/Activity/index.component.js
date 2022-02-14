@@ -1,5 +1,3 @@
-import "./styles.module.scss";
-
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -76,9 +74,8 @@ const Index = () => {
         <section id="activity">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto description mb-2 mb-md-4">
-                        <h1 className="mb-2">Your Activity</h1>
-                        <p>Continue playing and get more tickets</p>
+                    <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto description mb-2">
+                        <h1 className="mb-2">Your Activities</h1>
                     </div>
                 </div>
                 <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto px-1 px-md-2">
@@ -115,64 +112,61 @@ const Index = () => {
                                             },
                                         }}
                                     >
-                                        <div
-                                            className="card-wrapper"
-                                            style={{
-                                                backgroundImage: `url("${card?.prizeImage}")`,
-                                            }}
-                                        >
-                                            <div className="overlay"></div>
-                                            <div className="col-12 py-3">
-                                                <div className="badges mb-1">
-                                                    {card?.prizeContent ||
-                                                        getPrizeType(
-                                                            card?.prizeType
-                                                        )}
+                                        <div className="row w-100">
+                                            <div
+                                                className="card-wrapper col"
+                                                style={{
+                                                    backgroundImage: `url("${card?.prizeImage}")`,
+                                                }}
+                                            >
+                                                <div className="col-12 py-3 px-2">
+                                                    <div className="prize-id">
+                                                        {card?.prizeContent ||
+                                                            getPrizeType(
+                                                                card?.prizeType
+                                                            )}
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="prize-info pl-3 mb-3">
-                                                <div className="prize-title">
-                                                    {card?.prizeTitle}
+                                            {/* INFO */}
+                                            <div className="ticket-info p-0 align-items-center justify-content-between col">
+                                                <div className="prize-info p-3">
+                                                    <div className="prize-title">
+                                                        {card?.prizeTitle}
+                                                    </div>
+                                                    <div className="prize-subtitle mt-2">
+                                                        {card?.prizeSubtitle}
+                                                    </div>
                                                 </div>
-                                                <div className="prize-subtitle">
-                                                    {card?.prizeSubtitle}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* INFO */}
-                                        <div className="ticket-info p-2 d-flex align-items-center justify-content-between">
-                                            <div className="px-2 py-2 ticket-wrapper w-100">
-                                                <div className="your-tickets d-flex flex-md-column align-items-center align-items-md-start justify-content-between justify-content-md-start">
-                                                    <p className="mb-0 label">
-                                                        Your tickets
-                                                    </p>
-                                                    <p className="mb-0 tickets">
-                                                        {`\u00A0${
-                                                            getPoolTickets(
-                                                                poolTickets,
-                                                                card?.prizeId
-                                                            )?.toLocaleString() ||
-                                                            0
-                                                        }`}
-                                                    </p>
-                                                </div>
-                                                <div className="pool-tickets mt-3 d-flex flex-md-column align-items-center align-items-md-start justify-content-between justify-content-md-start">
-                                                    <p className="mb-0 label">
-                                                        Draw starts in
-                                                    </p>
-                                                    <div className="d-flex align-items-center px-0">
-                                                        <p className="mb-0 tickets">
-                                                            {`\u00A0${
-                                                                getPrizeTicketCollected(
-                                                                    prizeTicketCollection,
+
+                                                <div className="ticket-wrapper w-100">
+                                                    <div className="your-tickets p-3">
+                                                        <p className="label my-2">
+                                                            Your tickets
+                                                        </p>
+                                                        <p className="tickets mb-0 ">
+                                                            {`${
+                                                                getPoolTickets(
+                                                                    poolTickets,
                                                                     card?.prizeId
                                                                 )?.toLocaleString() ||
                                                                 0
                                                             }`}
                                                         </p>
-                                                        <p className="required-tickets mb-0 mt-1">
-                                                            {`\u00A0/ ${card?.ticketsRequired?.toLocaleString()}`}
-                                                        </p>
+                                                    </div>
+
+                                                    <div className="pool-tickets px-2 py-3 d-flex flex-md-column align-items-center">
+                                                        <div className="d-flex align-items-center px-0">
+                                                            <p className="mb-0 required-tickets">
+                                                                {`\u00A0${
+                                                                    (card?.ticketsRequired - 
+                                                                    getPrizeTicketCollected(
+                                                                        prizeTicketCollection,
+                                                                        card?.prizeId
+                                                                    ) || 0).toLocaleString()
+                                                                }`} tickets remaining
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

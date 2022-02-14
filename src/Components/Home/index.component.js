@@ -326,18 +326,13 @@ const Index = () => {
                     {/* AUTOMATED */}
                     {!noDataLoaded.automated && (
                         <div className="container-fluid mt-4 mb-3 mt-md-5 mb-md-5 automatedEntry">
-                            <div className="row justify-content-start">
-                                <div className="col-12 col-md-10 col-lg-8 col-xl-8 px-custom mx-auto d-flex flex-column">
-                                    <div className="col-12 px-0">
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-flex">
+                                    <div className="col-12 col-md-6 px-0">
                                         <div className="description w-100">
-                                            <h1 className="mb-1">
-                                                Daily Rewards!
-                                            </h1>
-                                            <p className="mt-2 mb-0 mb-md-4">
-                                                Win Daily Bonus Reward tickets
-                                                by playing in any tournament in
-                                                the platform.
-                                            </p>
+                                            <h2 className="mb-3">
+                                                Bonus Rewards
+                                            </h2>
                                         </div>
                                         {automatedEntryData.length <= 0 && (
                                             <AutomatedEntryLoader />
@@ -349,14 +344,12 @@ const Index = () => {
                                                 >
                                                     <AutomatedEntry
                                                         data={prize}
-                                                        length={
-                                                            automatedEntryData?.length
-                                                        }
                                                     />
                                                 </React.Fragment>
                                             )
                                         )}
                                     </div>
+                                    <div className="col-12 col-md-6 px-0" />
                                 </div>
                             </div>
                         </div>
@@ -365,18 +358,13 @@ const Index = () => {
                     {/* PREMIUM & PREMIUM COMPLETED*/}
                     {!noDataLoaded.premium && (
                         <div className="container-fluid premium">
-                            <div className="row justify-content-start">
-                                <div className="col-12 col-lg-8 col-xl-8 px-custom mx-lg-auto">
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
                                         <div className="col-12 description">
-                                            <h1 className="mb-1">
-                                                Play and Win Rewards
-                                            </h1>
-                                            <p className="mt-2 mb-3 mb-md-4">
-                                                Pick your prize and enter
-                                                tournaments to stand a chance to
-                                                win!
-                                            </p>
+                                            <h2 className="mb-3">
+                                                Premium NFT Rewards
+                                            </h2>
                                         </div>
                                         {PremiumData.length <= 0 && (
                                             <PremiumLoader />

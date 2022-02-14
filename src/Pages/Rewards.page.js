@@ -21,13 +21,13 @@ const RewardsPage = () => {
     }, [user.id, dispatch]);
 
     // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
-    useEffect(() => {
-        const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
-        return () => {
-            overlay?.removeAttribute("style");
-        };
-    }, []);
+    // useEffect(() => {
+    //     const overlay = document.querySelector(".blur-overlay");
+    //     overlay?.setAttribute("style", `min-height: 145px`);
+    //     return () => {
+    //         overlay?.removeAttribute("style");
+    //     };
+    // }, []);
 
     return isRewardsShown && <Rewards />;
 };

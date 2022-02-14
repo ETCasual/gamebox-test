@@ -1,11 +1,18 @@
 // CLAIMED / UNCLAIMED REWARDS COMPONENT
 #rewards-panel {
-    padding-top: 12em;
+    padding-top: 9em;
     .title {
-        
         font-size: 1.5rem;
+        font-weight: $fnt-wgt-700;
         @media only screen and (min-width: 768px) {
-            font-size: 28px;
+            font-size: $fnt-sz-18;
+        }
+    }
+    .back-button-wrapper {
+        span {
+            color: #F8BA29;
+            font-size: $fnt-sz-12;
+            font-weight: $fnt-wgt-700;
         }
     }
     .filter {
@@ -57,13 +64,20 @@
         }
     }
     .card-wrapper {
-        min-height: 12em;
-        border-radius: 17px;
-        background-color: #ff2c44;
+        border-radius: 10px;
+        background: linear-gradient(116deg, #302F2F 0%, #101010 100%) 0% 0% no-repeat padding-box;;
         position: relative;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position-x: center;
+        .prize-image {
+            height: 6.5rem;
+            width: 6.5rem;
+            border-radius: 10px;
+            position: relative;
+            
+            // background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-x: center;
+        }
         cursor: pointer;
         .overlay {
             width: 100%;
@@ -80,30 +94,29 @@
             border-radius: 17px;
         }
         .prize-text {
-            position: absolute;
-            bottom: 1em;
             .card-title {
                 
-                font-size: 1rem;
-                @media only screen and (min-width: 360px) {
-                    font-size: 0.875rem;
-                }
-                @media only screen and (min-width: 768px) {
-                    font-size: 1.5rem;
-                }
-                @media only screen and (min-width: 1200px) {
-                    font-size: 1.125rem;
-                }
-                @media only screen and (min-width: 1320px) {
-                    font-size: 1.25rem;
-                }
+                font-size: $fnt-sz-14;
+                font-weight: $fnt-wgt-700;
+                // @media only screen and (min-width: 360px) {
+                //     font-size: 0.875rem;
+                // }
+                // @media only screen and (min-width: 768px) {
+                //     font-size: 1.5rem;
+                // }
+                // @media only screen and (min-width: 1200px) {
+                //     font-size: 1.125rem;
+                // }
+                // @media only screen and (min-width: 1320px) {
+                //     font-size: 1.25rem;
+                // }
                 color: white;
                 line-height: 120%;
-                white-space: nowrap;
-                width: 15ch;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: inline-block;
+                // white-space: nowrap;
+                // width: 15ch;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                // display: inline-block;
             }
             .card-subtitle {
                 font-size: 0.75rem;
@@ -114,9 +127,17 @@
                 line-height: 120%;
             }
         }
+        .prize-claimed {
+            position: absolute;
+            bottom: 0;
+            font-size: $fnt-sz-12;
+        }
+        .text-red {
+            font-weight: $fnt-wgt-700;
+            color: #BF0000;
+        }
     }
-    .unclaimed,
-    .claimed {
+    .prize {
         h4 {
             
             font-size: 16px;

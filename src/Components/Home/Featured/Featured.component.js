@@ -72,20 +72,87 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                         }`}
                     >
                         <div className="row justify-content-center">
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-8 d-flex">
-                                <div className="w-100">
-                                    <Link
-                                        onClick={scrollToTop}
-                                        to={{
-                                            pathname: `${`/prize/featured/${data?.prizeId}`}`,
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
-                                    >
-                                        <div className="card-wrapper">
-                                            <picture>
+                            <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-flex">
+                                <Link
+                                    className="w-100"
+                                    onClick={scrollToTop}
+                                    to={{
+                                        pathname: `${`/prize/featured/${data?.prizeId}`}`,
+                                        state: {
+                                            prevPath: history.location.pathname,
+                                        },
+                                    }}
+                                >
+                                    <div className="card-wrapper d-md-flex p-3">
+                                        <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative">
+                                            {/* PRIZE TYPE */}
+                                            <div className="prize-type">
+                                                Featured NFT
+                                            </div>
+                                            {/* PRIZE TITLE, DESCRIPTION & ID */}
+                                            <div className="prize-text mb-2 w-100">
+                                                <div className="prize-id">
+                                                    ID: {data?.prizeContent}
+                                                </div>
+                                                <div className="prize-title mt-2 mb-3">
+                                                    {data?.prizeTitle}
+                                                </div>
+                                                <div className="prize-subtitle">
+                                                    {data?.prizeSubtitle}
+                                                </div>
+
+                                                {/* HR SEPARATOR */}
+                                                <hr className="separator" />
+
+                                                {/* TICKETS INFO */}
+                                                <p className="ticket-label">
+                                                    Your tickets
+                                                </p>
+                                                <div className="col-12 d-flex align-items-center justify-content-between pl-0">
+                                                    {/* YOUR TICKETS */}
+                                                    <p className="mb-0 your-tickets d-flex align-items-end">
+                                                        {getPoolTickets(
+                                                            poolTickets,
+                                                            data?.prizeId
+                                                        )?.toLocaleString() ||
+                                                            0}
+                                                    </p>
+                                                    <div className="d-flex">
+                                                        {/* TOTAL POOL TICKETS COLLECTED */}
+                                                        <p
+                                                            className={`mb-0 d-flex align-items-center ${
+                                                                OverTimeModeChecker(
+                                                                    data?.prizeId,
+                                                                    data?.ticketsRequired,
+                                                                    prizeTicketCollection
+                                                                )
+                                                                    ? "text-danger timer"
+                                                                    : "remaining-tickets"
+                                                            }`}
+                                                        >
+                                                            {OverTimeModeChecker(
+                                                                data?.prizeId,
+                                                                data?.ticketsRequired,
+                                                                prizeTicketCollection
+                                                            )
+                                                                ? timer
+                                                                : `${
+                                                                      (
+                                                                          data?.ticketsRequired -
+                                                                          getPrizeTicketCollected(
+                                                                              prizeTicketCollection,
+                                                                              data?.prizeId
+                                                                          )
+                                                                      )?.toLocaleString() ||
+                                                                      "-"
+                                                                  } tickets remaining`}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                                            <picture className="d-flex align-items-center justify-content-center w-100 h-100">
                                                 <source
                                                     media="(max-width:768px)"
                                                     srcSet={data.prizeBG2}
@@ -95,90 +162,9 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                     alt={data.prizeTitle}
                                                 />
                                             </picture>
-                                            <div className="overlay"></div>
-                                            <div className="badges">
-                                                {data?.prizeContent ||
-                                                    "Featured"}
-                                            </div>
-                                            <div className="prize-text">
-                                                <div className="card-title pl-3">
-                                                    {data?.prizeTitle}
-                                                </div>
-                                                <div className="card-subtitle pl-3">
-                                                    {data?.prizeSubtitle ||
-                                                        "Version 2"}
-                                                </div>
-                                            </div>
                                         </div>
-                                        <div className="col-12 d-flex flex-row align-items-center ticket-info py-2 py-md-0 px-2 px-md-3">
-                                            <div className="col px-0">
-                                                <div className="px-2 py-2 py-md-1 ticket-wrapper d-md-flex align-items-md-center justify-content-md-between">
-                                                    <div className="your-tickets d-flex justify-content-between">
-                                                        <p className="mb-0 px-md-2 label d-flex align-self-end">
-                                                            Your tickets
-                                                        </p>
-                                                        <p className="mb-0 tickets d-flex align-items-end">
-                                                            {getPoolTickets(
-                                                                poolTickets,
-                                                                data?.prizeId
-                                                            )?.toLocaleString() ||
-                                                                0}
-                                                        </p>
-                                                    </div>
-                                                    <div className="pool-tickets d-flex justify-content-between mt-3 mt-md-0">
-                                                        <p className="mb-0 pl-md-1 pr-md-2 label d-flex align-items-end">
-                                                            Draw starts in
-                                                        </p>
-                                                        <div className="d-flex">
-                                                            <p
-                                                                className={`mb-0 d-flex align-items-center ${
-                                                                    OverTimeModeChecker(
-                                                                        data?.prizeId,
-                                                                        data?.ticketsRequired,
-                                                                        prizeTicketCollection
-                                                                    )
-                                                                        ? "text-danger timer"
-                                                                        : "tickets"
-                                                                }`}
-                                                            >
-                                                                {OverTimeModeChecker(
-                                                                    data?.prizeId,
-                                                                    data?.ticketsRequired,
-                                                                    prizeTicketCollection
-                                                                )
-                                                                    ? timer
-                                                                    : getPrizeTicketCollected(
-                                                                          prizeTicketCollection,
-                                                                          data?.prizeId
-                                                                      )?.toLocaleString() ||
-                                                                      0}
-                                                            </p>
-                                                            {!OverTimeModeChecker(
-                                                                data?.prizeId,
-                                                                data?.ticketsRequired,
-                                                                prizeTicketCollection
-                                                            ) && (
-                                                                <p className="required-tickets mb-0 mt-1 d-flex align-items-center">
-                                                                    {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
-                                                                </p>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="pl-2 game-icon d-flex justify-content-center">
-                                                {data.gameInfo.map((e, i) => (
-                                                    <img
-                                                        key={`icon-${i}`}
-                                                        className="img-fluid"
-                                                        src={e.gameIcon}
-                                                        alt="game-icon"
-                                                    />
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </div>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                     </div>

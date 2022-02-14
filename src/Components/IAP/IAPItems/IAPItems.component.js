@@ -170,7 +170,7 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                     {/* SUB & GEMS */}
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-8">
-                            {/* MONTHLY SUBSCRIPTION */}
+                            {/* MONTHLY SUBSCRIPTION 
                             <div className="subscription-wrapper d-md-flex flex-md-row">
                                 <div className="col-12 col-md-6 col-lg-6 col-xl-5 px-0">
                                     <h1 className="subs-title">
@@ -230,7 +230,7 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                                             </p>
                                         </div>
 
-                                        {/* LOAD SUBSCRIPTION RESPECTIVE BUTTON */}
+                                        {/* LOAD SUBSCRIPTION RESPECTIVE BUTTON 
                                         <p className="sub-info mb-0 text-center">
                                             Automatically renews every month.
                                             Cancel anytime.
@@ -241,20 +241,21 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                                 <p className="terms-apply d-block d-md-none mt-4">
                                     Terms of use apply
                                 </p>
-                            </div>
+                            </div> */}
+
                             {/* GEMS */}
                             <div className="gems-wrapper mt-5">
-                                <p className="title mb-2 d-flex align-items-end">
-                                    Gems{" "}
-                                    <img
+                                <p className="title mb-4 ml-2 d-flex align-items-end">
+                                    Purchase Gems{" "}
+                                    {/* <img
                                         className="ml-2"
                                         src={`${window.cdn}art_assets/gems/gems.png`}
                                         alt="gems"
-                                    />
+                                    /> */}
                                 </p>
-                                <p className="subtitle mb-4">
+                                {/* <p className="subtitle mb-4">
                                     Purchase gems here.
-                                </p>
+                                </p> */}
                                 <div className="col-12">
                                     <div className="row">
                                         {gemList.map((gem, i) => (
@@ -266,12 +267,15 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                                                         gem.id,
                                                         gem.price,
                                                         "gems",
-                                                        gem.quantity
+                                                        gem.quantity,
                                                     )
                                                 }
                                             >
                                                 <div className="gem-inner">
-                                                    <div className="gem-type p-2">
+                                                    <div className="gem-pack p-2">
+                                                        <p className="mb-1">
+                                                            {gem.title}
+                                                            <div className="gem-type p-2">
                                                         <p className="mb-1">
                                                             {gem.quantity?.toLocaleString()}{" "}
                                                             GEMS
@@ -282,12 +286,16 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                                                             src={gem.ImageUrl}
                                                             alt={gem.title}
                                                         />
+                                                        
+                                                    </div>
+                                                    
+                                                        </p>
                                                     </div>
                                                     <div className="mb-0 price d-flex flex-column">
-                                                        {` SGD ${gem?.price?.toFixed(
-                                                            2
-                                                        )}`}
-                                                        {ipInfo?.currency && (
+                                                        {`${gem?.price?.toFixed(
+                                                            0
+                                                        )} Froyo Tokens`}
+                                                        {/* {ipInfo?.currency && (
                                                             <div className="w-100 d-flex d-md-block d-xl-flex align-items-center justify-content-center">
                                                                 <p className="mb-0 estimated-text mr-md-1">
                                                                     Estimated
@@ -311,8 +319,9 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                                                                     )}`}
                                                                 </p>
                                                             </div>
-                                                        )}
+                                                        )} */}
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                         ))}

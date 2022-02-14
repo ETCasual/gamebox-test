@@ -11,6 +11,7 @@ import GrabPayment from "Components/PaymentGateway/GrabPayment.component";
 import FpxPaymentReturn from "Components/PaymentGatewayStatus/FpxPaymentReturn.component";
 import GrabPaymentReturn from "Components/PaymentGatewayStatus/GrabPaymentReturn.component";
 import CardPaymentReturn from "Components/PaymentGatewayStatus/CardPaymentReturn.component";
+import GenericLoader from "Components/Loader/Generic.loader";
 
 const Index = () => {
     const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
@@ -19,6 +20,7 @@ const Index = () => {
     const history = useHistory();
 
     const { ipInfo } = useSelector((state) => state.exchangeRate);
+    const { user } = useSelector((state) => state.userData);
 
     const [isCardPaymentShown, setIsCardPaymentShown] = useState(false);
     const [isFPXPaymentShown, setIsFPXPaymentShown] = useState(false);
@@ -26,9 +28,72 @@ const Index = () => {
     const [isPaymentMethodShown, setIsPaymentMethodShown] = useState(false);
     const [productInfo, setProductInfo] = useState({});
 
+    // SIMULATION STATES
+    const [tokenPaymentProcess, setTokenPaymentProcess] = useState({
+        insufficent: false,
+        haveGems: false,
+        noWallet: true,
+        isProcess: false,
+        isSuccess: false,
+        panel1: false,
+        panel2: false,
+    });
+    const [tokenPurchaseText, setTokenPurchaseText] = useState({
+        insufficent: {
+            title: "Insufficient Froyo Tokens.",
+            subTitle: "Please purchase Froyo Tokens to continue.",
+            button: "Purchase Froyo Tokens",
+        },
+
+        haveGems: {
+            subTitle:
+                "Froyo Tokens will be deducted from your wallet ending …04O4.",
+        },
+        noWallet: {
+            title: "Wallet not connected.",
+            subTitle: "Please connect your wallet to continue.",
+            button: "Connect wallet",
+        },
+        isSuccess: {
+            title: "Purchase successful.",
+            subTitle: "You have successfully purchased 100 gems.",
+            button: "Continue",
+        },
+        isFail: {
+            title: "Purchase unsuccessful.",
+            subTitle: "Something went wrong. Please try again later.",
+            button: "Close",
+        },
+        isProcess: {
+            title: "",
+            subTitle: "Processing your purchase",
+        },
+    });
+
     // PAYMENT
     const handleGemsPaymentPanel = (id, price, type, quantity) => {
-        setIsPaymentMethodShown(true);
+        // setIsPaymentMethodShown(true);
+
+        if (tokenPaymentProcess.noWallet) {
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                noWallet: true,
+                panel1: true,
+            }));
+        } else if (user.gems > 0) {
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                haveGems: true,
+                panel1: true,
+            }));
+        } else {
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                insufficent: true,
+                panel1: true,
+            }));
+        }
+
         setProductInfo({
             type,
             price,
@@ -67,24 +132,71 @@ const Index = () => {
         )
             setIsPaymentMethodShown(false);
     };
+
     // BACK BUTTON
-    const handlePaymentBackButton = (type, status, productInfo) => {
+    const handlePaymentBackButton = (type, panel1, productInfo) => {
         setIsCardPaymentShown(false);
         setIsFPXPaymentShown(false);
         setIsGrabPaymentShown(false);
-        if (status && type === "gems")
+        if (panel1 && type === "gems")
             history.push({
                 pathname: "/iap",
                 search: `?return_card=true&qty=${productInfo}&type=${type}`,
             });
-        else if (status && type === "subscription")
+        else if (panel1 && type === "subscription")
             history.push({
                 pathname: "/iap",
                 search: `?return_card=true&type=${type}&title=${productInfo}`,
             });
     };
-    const handlePaymentMethodBackButton = () => setIsPaymentMethodShown(false);
+    const handlePaymentMethodBackButton = () =>
+        setTokenPaymentProcess({
+            insufficent: false,
+            haveGems: false,
+            noWallet: false,
+            isProcess: false,
+            isSuccess: false,
+            panel1: false,
+            panel2: false,
+        });
 
+    // PROCESS CONFIRM ACTION
+    const handleConfirmAction = () => {
+        if (tokenPaymentProcess.noWallet) {
+            handlePaymentMethodBackButton();
+        } else if (tokenPaymentProcess.haveGems) {
+            handlePaymentMethodBackButton();
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                isProcess: true,
+                panel2: true,
+            }));
+            startProcessDelay();
+        } else if (tokenPaymentProcess.insufficent) {
+            handlePaymentMethodBackButton();
+            startProcessDelay();
+        } else if (tokenPaymentProcess.isSuccess) {
+            handlePaymentMethodBackButton();
+            user.gems+=productInfo.quantity;
+        } else if (!tokenPaymentProcess.isSuccess) {
+            handlePaymentMethodBackButton();
+        }
+    };
+    const startProcessDelay = () => {
+        setTimeout(function () {
+            if (tokenPaymentProcess.haveGems) {
+                handlePaymentMethodBackButton();
+                setTokenPaymentProcess((prev) => ({
+                    ...prev,
+                    isSuccess: false,
+                    // isSuccess: false,
+                    panel2: true,
+                }));
+            } else if (tokenPaymentProcess.insufficent) {
+                handlePaymentMethodBackButton();
+            }
+        }, 1000);
+    };
     // CARD PAYMENTS
     if (isCardPaymentShown) {
         return (
@@ -118,6 +230,7 @@ const Index = () => {
             </Elements>
         );
     }
+
     // IAP
     else {
         return (
@@ -130,11 +243,60 @@ const Index = () => {
                     }
                 />
                 {/* PAYMENT METHODS MODAL */}
-                {isPaymentMethodShown && (
+                {tokenPaymentProcess.panel1 && (
                     <div className="payment-methods">
                         <div className="wrapper d-flex flex-column align-items-start justify-content-start position-relative">
-                            <p className="mb-4">Please select payment method</p>
                             <div className="btn-wrapper w-100">
+                                <p className="pt-2 mb-4  title pl-2">
+                                    {tokenPaymentProcess.haveGems &&
+                                        "Purchase " +
+                                            productInfo.quantity +
+                                            " gems with " +
+                                            productInfo.price?.toFixed(0) +
+                                            " Froyo Tokens?"}
+                                    {tokenPaymentProcess.insufficent &&
+                                        tokenPurchaseText.insufficent.title}
+                                    {tokenPaymentProcess.noWallet &&
+                                        tokenPurchaseText.noWallet.title}
+                                </p>
+                                <p className="subtitle pl-2 mb-4">
+                                    {tokenPaymentProcess.haveGems &&
+                                        tokenPurchaseText.haveGems.subTitle}
+                                    {tokenPaymentProcess.insufficent &&
+                                        tokenPurchaseText.insufficent.subTitle}
+                                    {tokenPaymentProcess.noWallet &&
+                                        tokenPurchaseText.noWallet.subTitle}
+                                </p>
+                                <div className="p-0 btn-wrapper d-flex justify-content-between mt-4">
+                                    <button
+                                        className="col btn-no cancel-button"
+                                        onClick={() =>
+                                            setTokenPaymentProcess({
+                                                haveGems: false,
+                                                isProcess: false,
+                                                insufficent: false,
+                                                panel1: false,
+                                            })
+                                        }
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        className="col confirm-button"
+                                        onClick={() => handleConfirmAction()}
+                                    >
+                                        {tokenPaymentProcess.haveGems &&
+                                            "Use " +
+                                                productInfo.price?.toFixed(0) +
+                                                " Froyo Tokens"}
+                                        {tokenPaymentProcess.insufficent &&
+                                            tokenPurchaseText.insufficent
+                                                .button}
+                                        {tokenPaymentProcess.noWallet &&
+                                            tokenPurchaseText.noWallet.button}
+                                    </button>
+                                </div>
+
                                 {/* FPX BUTTON */}
                                 {/* {ipInfo?.country_name === "Malaysia" && (
                                     <button
@@ -150,7 +312,7 @@ const Index = () => {
                                     </button>
                                 )} */}
                                 {/* CARD BUTTON */}
-                                <button
+                                {/* <button
                                     className="d-flex align-items-center justify-content-center"
                                     onClick={() =>
                                         handleSelectPaymentMethod("card")
@@ -171,9 +333,9 @@ const Index = () => {
                                         src={`${window.cdn}art_assets/payment/paymentmethods-02._AmericanExpress.png`}
                                         alt="american_express"
                                     />
-                                </button>
+                                </button> */}
                                 {/* GRABPAY BUTTON */}
-                                {(ipInfo?.country_name === "Malaysia" ||
+                                {/* {(ipInfo?.country_name === "Malaysia" ||
                                     ipInfo?.country_name === "Singapore") && (
                                     <button
                                         className="d-flex align-items-center justify-content-center"
@@ -187,7 +349,7 @@ const Index = () => {
                                             alt="grabpay"
                                         />
                                     </button>
-                                )}
+                                )} */}
                             </div>
                             {/* CLOSE BUTTON */}
                             <div
@@ -208,6 +370,93 @@ const Index = () => {
                  L284.286,256.002z"
                                     />
                                 </svg>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {tokenPaymentProcess.panel2 && (
+                    <div className="payment-result">
+                        <div className="wrapper d-flex flex-column align-items-start justify-content-start position-relative">
+                            <div className="btn-wrapper w-100">
+                                {/* TITLE */}
+                                {tokenPaymentProcess.isSuccess && (
+                                    <p className="pt-2 mb-4  title pl-2 success-title">
+                                        {tokenPurchaseText.isSuccess.title}
+                                    </p>
+                                )}
+                                {!tokenPaymentProcess.isSuccess &&
+                                    !tokenPaymentProcess.isProcess && (
+                                        <p className="pt-2 mb-4  fail-title pl-2 fail-title">
+                                            {tokenPurchaseText.isFail.title}
+                                        </p>
+                                    )}
+
+                                {/* SUBTITLE */}
+                                {tokenPaymentProcess.isSuccess && (
+                                    <p className="subtitle pl-2 mb-4">
+                                        {tokenPurchaseText.isSuccess.subTitle}
+                                    </p>
+                                )}
+                                {tokenPaymentProcess.isProcess && (
+                                    <p className="process-subtitle">
+                                        {tokenPurchaseText.isProcess.subTitle}
+                                    </p>
+                                )}
+                                {!tokenPaymentProcess.isSuccess &&
+                                    !tokenPaymentProcess.isProcess && (
+                                        <p className="subtitle pl-2 mb-4">
+                                            {tokenPurchaseText.isFail.subTitle}
+                                        </p>
+                                    )}
+
+                                {/* BUTTON */}
+                                {tokenPaymentProcess.isSuccess && (
+                                    <div className="p-0 btn-wrapper d-flex justify-content-center mt-4">
+                                        <button
+                                            className="col confirm-button"
+                                            onClick={() =>
+                                                handleConfirmAction()
+                                            }
+                                        >
+                                            {tokenPurchaseText.isSuccess.button}
+                                        </button>
+                                    </div>
+                                )}
+                                {!tokenPaymentProcess.isSuccess &&
+                                    !tokenPaymentProcess.isProcess && (
+                                        <div className="p-0 btn-wrapper d-flex justify-content-center mt-4">
+                                            <button
+                                                className="col fail-button"
+                                                onClick={() =>
+                                                    handleConfirmAction()
+                                                }
+                                            >
+                                                {
+                                                    tokenPurchaseText.isFail
+                                                        .button
+                                                }
+                                            </button>
+                                        </div>
+                                    )}
+                                {/* LOADER */}
+                                {tokenPaymentProcess.isProcess && (
+                                    <GenericLoader
+                                        height="30"
+                                        bg="#FF007C"
+                                        cx1={
+                                            window.innerWidth > 1200
+                                                ? "38%"
+                                                : "36%"
+                                        }
+                                        cx2="50%"
+                                        cx3={
+                                            window.innerWidth > 1200
+                                                ? "62%"
+                                                : "64%"
+                                        }
+                                        cy="15"
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>
