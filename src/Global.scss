@@ -351,7 +351,7 @@ button {
             color: #696969 !important;
         }
         a.active {
-            color: #FF007C !important;
+            color: #ff007c !important;
 
             div {
                 border-bottom: 4px solid;
@@ -621,9 +621,7 @@ button {
 
 // CARDS MIX - HOME, ACITVITY & WINNERS
 .premium,
-.automatedEntry,
-#activity,
-#winners {
+.automatedEntry {
     .description {
         h1,
         h2 {
@@ -631,10 +629,6 @@ button {
             font-weight: $fnt-wgt-700;
         }
     }
-}
-#activity,
-#winners {
-    padding: 10em 0;
 }
 
 // PAYMENT METHODS MODALS

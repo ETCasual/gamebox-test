@@ -73,12 +73,9 @@ const Index = () => {
     return (
         <section id="activity">
             <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto description mb-2 px-0">
-                        <h1 className="mb-2">Your Activities</h1>
-                    </div>
-                </div>
-                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto px-1 px-md-2">
+                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
+                    <h1 className="title mb-4">Your Activities</h1>
+
                     {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">No activities yet!</p>
@@ -100,7 +97,7 @@ const Index = () => {
                                     className="col-12 col-md-6 col-lg-6 col-xl-6 mb-4 mb-md-3 px-md-2"
                                 >
                                     {/* CARD WRAPPER */}
-                                    <Link
+                                    <Link className="d-flex"
                                         onClick={scrollToTop}
                                         to={{
                                             pathname: `/prize/${getPrizeType(
@@ -112,61 +109,52 @@ const Index = () => {
                                             },
                                         }}
                                     >
-                                        <div className="row w-100">
-                                            <div
-                                                className="card-wrapper col"
-                                                style={{
-                                                    backgroundImage: `url("${card?.prizeImage}")`,
-                                                }}
-                                            >
-                                                <div className="col-12 py-3 px-2">
-                                                    <div className="prize-id">
-                                                        {card?.prizeContent ||
-                                                            getPrizeType(
-                                                                card?.prizeType
-                                                            )}
-                                                    </div>
+                                        {/* IMAGE */}
+                                        <div
+                                            className="card-wrapper col"
+                                            style={{
+                                                backgroundImage: `url("${card?.prizeImage}")`,
+                                            }}
+                                        />
+                                        {/* INFO */}
+                                        <div className="ticket-info p-0 align-items-center justify-content-between col">
+                                            <div className="prize-info p-3">
+                                                <div className="prize-title">
+                                                    {card?.prizeTitle}
+                                                </div>
+                                                <div className="prize-subtitle mt-2">
+                                                    {card?.prizeSubtitle}
                                                 </div>
                                             </div>
-                                            {/* INFO */}
-                                            <div className="ticket-info p-0 align-items-center justify-content-between col">
-                                                <div className="prize-info p-3">
-                                                    <div className="prize-title">
-                                                        {card?.prizeTitle}
-                                                    </div>
-                                                    <div className="prize-subtitle mt-2">
-                                                        {card?.prizeSubtitle}
-                                                    </div>
+
+                                            <div className="ticket-wrapper w-100">
+                                                <div className="your-tickets p-3">
+                                                    <p className="label my-2">
+                                                        Your tickets
+                                                    </p>
+                                                    <p className="tickets mb-0 ">
+                                                        {`${
+                                                            getPoolTickets(
+                                                                poolTickets,
+                                                                card?.prizeId
+                                                            )?.toLocaleString() ||
+                                                            0
+                                                        }`}
+                                                    </p>
                                                 </div>
 
-                                                <div className="ticket-wrapper w-100">
-                                                    <div className="your-tickets p-3">
-                                                        <p className="label my-2">
-                                                            Your tickets
-                                                        </p>
-                                                        <p className="tickets mb-0 ">
-                                                            {`${
-                                                                getPoolTickets(
-                                                                    poolTickets,
-                                                                    card?.prizeId
-                                                                )?.toLocaleString() ||
-                                                                0
-                                                            }`}
-                                                        </p>
-                                                    </div>
-
-                                                    <div className="pool-tickets px-2 py-3 d-flex flex-md-column align-items-center">
-                                                        <div className="d-flex align-items-center px-0">
-                                                            <p className="mb-0 required-tickets">
-                                                                {`\u00A0${
-                                                                    (card?.ticketsRequired - 
+                                                <div className="pool-tickets px-2 py-3 d-flex flex-md-column align-items-center">
+                                                    <div className="d-flex align-items-center px-0">
+                                                        <p className="mb-0 required-tickets">
+                                                            {`\u00A0${(
+                                                                card?.ticketsRequired -
                                                                     getPrizeTicketCollected(
                                                                         prizeTicketCollection,
                                                                         card?.prizeId
-                                                                    ) || 0).toLocaleString()
-                                                                }`} tickets remaining
-                                                            </p>
-                                                        </div>
+                                                                    ) || 0
+                                                            ).toLocaleString()}`}{" "}
+                                                            tickets remaining
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
