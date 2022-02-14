@@ -269,22 +269,22 @@ button {
         }
     }
     .gems {
-        background: #ffffff 0% 0% no-repeat padding-box;
         border-radius: 20px;
         .gem-wrapper {
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
-            width: 6em;
-            padding: 0 3.3em;
-            @media only screen and (min-width: 768px) {
-                width: 7em;
-                padding: 0 4em;
-            }
-            min-height: 40px;
-            color: #14daa7;
+            min-width: 6em;
+            padding: 0 0.8em;
+            // padding: 0 3.3em;
+            background: #555555;
+            border-radius: 20px;
             position: relative;
-            cursor: pointer;
+            min-height: 40px;
+            position: relative;
+            @media only screen and (min-width: 768px) {
+                // width: 7em;
+                // padding: 0 4em;
+            }
             span {
                 margin: 0 0.5em;
                 font-size: 0.9rem;
@@ -293,16 +293,16 @@ button {
                 }
             }
             .gem-icon {
-                position: absolute;
-                left: 10px;
+                // position: absolute;
+                // left: 10px;
                 width: 18px;
                 @media only screen and (min-width: 768px) {
                     width: 24px;
                 }
             }
             .add-gems-icon {
-                position: absolute;
-                right: 10px;
+                // position: absolute;
+                // right: 10px;
                 width: 18px;
                 @media only screen and (min-width: 768px) {
                     width: 22px;
@@ -311,7 +311,7 @@ button {
         }
     }
     .notification {
-        background: #ffffff 0% 0% no-repeat padding-box;
+        background: #555555;
         border-radius: 100%;
         position: relative;
         width: 35px;
@@ -345,11 +345,17 @@ button {
         }
     }
     .nav-items {
+        font-size: $fnt-sz-14;
+        font-weight: $fnt-wgt-700;
         a {
-            color: #636363 !important;
+            color: #696969 !important;
         }
         a.active {
-            color: black !important;
+            color: #FF007C !important;
+
+            div {
+                border-bottom: 4px solid;
+            }
         }
     }
 }
