@@ -73,58 +73,66 @@ const Header = ({
 
                         {/* NAV LINKS */}
                         <div className="col-md-5 col-lg-4 col-xl-4 d-none d-md-flex align-items-center justify-content-start nav-items">
-                            <ul className="mb-0 d-flex list-unstyled">
-                                <li>
-                                    <NavLink
-                                        onClick={handleHomeNavLink}
-                                        exact
-                                        to={{
-                                            pathname: "/",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
-                                        activeClassName="active"
-                                    >
-                                        Home
-                                    </NavLink>
-                                </li>
-                                <li className="mx-5">
-                                    <NavLink
-                                        onClick={scrollToTop}
-                                        to={{
-                                            pathname: "/activity",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
-                                        activeClassName="active"
-                                    >
-                                        Activities
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink
-                                        onClick={scrollToTop}
-                                        to={{
-                                            pathname: "/winners",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
-                                        activeClassName="active"
-                                    >
-                                        Winners
-                                    </NavLink>
-                                </li>
-                            </ul>
+                            <NavLink
+                                onClick={handleHomeNavLink}
+                                exact
+                                to={{
+                                    pathname: "/",
+                                    state: {
+                                        prevPath:
+                                            history.location.pathname,
+                                    },
+                                }}
+                                activeClassName="active"
+                            >
+                                <div className="py-4 px-2 mx-2">
+                                    Home
+                                </div>
+                            </NavLink>
+                            <NavLink
+                                onClick={scrollToTop}
+                                to={{
+                                    pathname: "/activity",
+                                    state: {
+                                        prevPath:
+                                            history.location.pathname,
+                                    },
+                                }}
+                                activeClassName="active"
+                            >
+                                <div className="py-4 px-2 mx-2">
+                                    Activities
+                                </div>
+                            </NavLink>
+                            <NavLink
+                                onClick={scrollToTop}
+                                to={{
+                                    pathname: "/winners",
+                                    state: {
+                                        prevPath:
+                                            history.location.pathname,
+                                    },
+                                }}
+                                activeClassName="active"
+                            >
+                                <div className="py-4 px-2 mx-2">
+                                    Winners
+                                </div>
+                            </NavLink>
                         </div>
 
                         {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
                         <div className="col-9 col-md-4 col-lg-3 col-xl-3 d-flex align-items-center justify-content-end pr-1">
+                            <div className="gems position-relative d-flex flex-nowrap align-items-center mr-2">
+                                <div className="gem-wrapper">
+                                    <img
+                                        className="gem-icon"
+                                        src={`${window.cdn}art_assets/gems/gems.png`}
+                                        alt="gems"
+                                    />
+                                    <span>{getGems() || 0}</span>
+                                </div>
+                            </div>
                             <div className="gems position-relative d-flex flex-nowrap align-items-center mr-2">
                                 <Link
                                     onClick={scrollToTop}
@@ -150,29 +158,7 @@ const Header = ({
                                     </div>
                                 </Link>
                             </div>
-                            <div className="d-flex align-items-center">
-                                <div className="profile d-flex position-relative ml-2 order-1 order-lg-2">
-                                    <Link
-                                        onClick={scrollToTop}
-                                        to={{
-                                            pathname: "/profile",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
-                                    >
-                                        <img
-                                            onError={(e) => defaultUserImage(e)}
-                                            className="img-fluid"
-                                            src={
-                                                userImage ||
-                                                `${window.cdn}art_assets/icons/user.png`
-                                            }
-                                            alt="profile"
-                                        />
-                                    </Link>
-                                </div>
+                            <div className="m-3">
                                 <button
                                     className="notification p-0 semi-transparent"
                                     onClick={handleOnClickNotificationIcon}
@@ -205,6 +191,28 @@ const Header = ({
                                         </span>
                                     </div>
                                 </button>
+                            </div>
+                            <div className="profile d-flex position-relative m-1 order-1 order-lg-2">
+                                <Link
+                                    onClick={scrollToTop}
+                                    to={{
+                                        pathname: "/profile",
+                                        state: {
+                                            prevPath:
+                                                history.location.pathname,
+                                        },
+                                    }}
+                                >
+                                    <img
+                                        onError={(e) => defaultUserImage(e)}
+                                        className="img-fluid"
+                                        src={
+                                            userImage ||
+                                            `${window.cdn}art_assets/icons/user.png`
+                                        }
+                                        alt="profile"
+                                    />
+                                </Link>
                             </div>
                         </div>
 
