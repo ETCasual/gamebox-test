@@ -370,7 +370,7 @@ const Index = ({ match }) => {
                                                                 currentPrize?.ticketsRequired,
                                                                 prizeTicketCollection
                                                             ) && (
-                                                                <span className="total-tickets-text mb-0 mb-md-1">
+                                                                <span className="total-tickets-text">
                                                                     {`\u00A0 / ${
                                                                         currentPrize?.ticketsRequired?.toLocaleString() ||
                                                                         0
