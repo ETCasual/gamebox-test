@@ -74,11 +74,11 @@ const Index = () => {
         <section id="activity">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto description mb-2">
+                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto description mb-2 px-0">
                         <h1 className="mb-2">Your Activities</h1>
                     </div>
                 </div>
-                <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto px-1 px-md-2">
+                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto px-1 px-md-2">
                     {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">No activities yet!</p>
