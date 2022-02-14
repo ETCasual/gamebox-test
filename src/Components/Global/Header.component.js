@@ -102,7 +102,7 @@ const Header = ({
                                         }}
                                         activeClassName="active"
                                     >
-                                        Activity
+                                        Activities
                                     </NavLink>
                                 </li>
                                 <li>
