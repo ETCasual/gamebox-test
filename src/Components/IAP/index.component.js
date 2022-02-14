@@ -11,6 +11,7 @@ import GrabPayment from "Components/PaymentGateway/GrabPayment.component";
 import FpxPaymentReturn from "Components/PaymentGatewayStatus/FpxPaymentReturn.component";
 import GrabPaymentReturn from "Components/PaymentGatewayStatus/GrabPaymentReturn.component";
 import CardPaymentReturn from "Components/PaymentGatewayStatus/CardPaymentReturn.component";
+import GenericLoader from "Components/Loader/Generic.loader";
 
 const Index = () => {
     const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
@@ -30,49 +31,75 @@ const Index = () => {
     // SIMULATION STATES
     const [tokenPaymentProcess, setTokenPaymentProcess] = useState({
         insufficent: false,
-        inProcess: false,
         haveGems: false,
-        status: false,
+        noWallet: true,
+        isProcess: false,
+        isSuccess: false,
+        panel1: false,
+        panel2: false,
     });
     const [tokenPurchaseText, setTokenPurchaseText] = useState({
         insufficent: {
-            title: "",
-            subTitle: "",
+            title: "Insufficient Froyo Tokens.",
+            subTitle: "Please purchase Froyo Tokens to continue.",
+            button: "Purchase Froyo Tokens",
         },
-        inProcess: {
-            title: "",
-            subTitle: "",
-        },
+
         haveGems: {
+            subTitle:
+                "Froyo Tokens will be deducted from your wallet ending …04O4.",
+        },
+        noWallet: {
+            title: "Wallet not connected.",
+            subTitle: "Please connect your wallet to continue.",
+            button: "Connect wallet",
+        },
+        isSuccess: {
+            title: "Purchase successful.",
+            subTitle: "You have successfully purchased 100 gems.",
+            button: "Continue",
+        },
+        isFail: {
+            title: "Purchase unsuccessful.",
+            subTitle: "Something went wrong. Please try again later.",
+            button: "Close",
+        },
+        isProcess: {
             title: "",
-            subTitle: "",
+            subTitle: "Processing your purchase",
         },
     });
 
     // PAYMENT
     const handleGemsPaymentPanel = (id, price, type, quantity) => {
         // setIsPaymentMethodShown(true);
-        if (user.gems > 0) {
+
+        if (tokenPaymentProcess.noWallet) {
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                noWallet: true,
+                panel1: true,
+            }));
+        } else if (user.gems > 0) {
             setTokenPaymentProcess((prev) => ({
                 ...prev,
                 haveGems: true,
-                status: true,
+                panel1: true,
             }));
-            setTokenPurchaseText((prev) => ({
+        } else {
+            setTokenPaymentProcess((prev) => ({
                 ...prev,
-                haveGems: {
-                    title: "",
-                    subTitle: "",
-                },
+                insufficent: true,
+                panel1: true,
             }));
-        } else if (user.gems <= 0) {
         }
-        // setProductInfo({
-        //     type,
-        //     price,
-        //     id,
-        //     quantity,
-        // });
+
+        setProductInfo({
+            type,
+            price,
+            id,
+            quantity,
+        });
     };
     const handleSubscriptionPaymentPanel = (id, details, type) => {
         setIsCardPaymentShown(true);
@@ -107,25 +134,68 @@ const Index = () => {
     };
 
     // BACK BUTTON
-    const handlePaymentBackButton = (type, status, productInfo) => {
+    const handlePaymentBackButton = (type, panel1, productInfo) => {
         setIsCardPaymentShown(false);
         setIsFPXPaymentShown(false);
         setIsGrabPaymentShown(false);
-        if (status && type === "gems")
+        if (panel1 && type === "gems")
             history.push({
                 pathname: "/iap",
                 search: `?return_card=true&qty=${productInfo}&type=${type}`,
             });
-        else if (status && type === "subscription")
+        else if (panel1 && type === "subscription")
             history.push({
                 pathname: "/iap",
                 search: `?return_card=true&type=${type}&title=${productInfo}`,
             });
     };
-    const handlePaymentMethodBackButton = () => setIsPaymentMethodShown(false);
-    // PAY WITH TOKENS
-    const handlePayWithTokens = () => {
-        console.log("PAY WITH TOKENS " + user.gems);
+    const handlePaymentMethodBackButton = () =>
+        setTokenPaymentProcess({
+            insufficent: false,
+            haveGems: false,
+            noWallet: false,
+            isProcess: false,
+            isSuccess: false,
+            panel1: false,
+            panel2: false,
+        });
+
+    // PROCESS CONFIRM ACTION
+    const handleConfirmAction = () => {
+        if (tokenPaymentProcess.noWallet) {
+            handlePaymentMethodBackButton();
+        } else if (tokenPaymentProcess.haveGems) {
+            handlePaymentMethodBackButton();
+            setTokenPaymentProcess((prev) => ({
+                ...prev,
+                isProcess: true,
+                panel2: true,
+            }));
+            startProcessDelay();
+        } else if (tokenPaymentProcess.insufficent) {
+            handlePaymentMethodBackButton();
+            startProcessDelay();
+        } else if (tokenPaymentProcess.isSuccess) {
+            handlePaymentMethodBackButton();
+            user.gems+=productInfo.quantity;
+        } else if (!tokenPaymentProcess.isSuccess) {
+            handlePaymentMethodBackButton();
+        }
+    };
+    const startProcessDelay = () => {
+        setTimeout(function () {
+            if (tokenPaymentProcess.haveGems) {
+                handlePaymentMethodBackButton();
+                setTokenPaymentProcess((prev) => ({
+                    ...prev,
+                    isSuccess: false,
+                    // isSuccess: false,
+                    panel2: true,
+                }));
+            } else if (tokenPaymentProcess.insufficent) {
+                handlePaymentMethodBackButton();
+            }
+        }, 1000);
     };
     // CARD PAYMENTS
     if (isCardPaymentShown) {
@@ -173,46 +243,58 @@ const Index = () => {
                     }
                 />
                 {/* PAYMENT METHODS MODAL */}
-                {tokenPaymentProcess.status && (
+                {tokenPaymentProcess.panel1 && (
                     <div className="payment-methods">
                         <div className="wrapper d-flex flex-column align-items-start justify-content-start position-relative">
-                            <p className="mb-4">Simulation of payment</p>
                             <div className="btn-wrapper w-100">
-                                <div className="modal-body-small">
-                                    <p className="pt-4 mb-2 title pl-2 text-danger">
-                                        {}
-                                    </p>
-                                    <p className="subtitle pl-2 mb-3">
+                                <p className="pt-2 mb-4  title pl-2">
+                                    {tokenPaymentProcess.haveGems &&
+                                        "Purchase " +
+                                            productInfo.quantity +
+                                            " gems with " +
+                                            productInfo.price?.toFixed(0) +
+                                            " Froyo Tokens?"}
+                                    {tokenPaymentProcess.insufficent &&
+                                        tokenPurchaseText.insufficent.title}
+                                    {tokenPaymentProcess.noWallet &&
+                                        tokenPurchaseText.noWallet.title}
+                                </p>
+                                <p className="subtitle pl-2 mb-4">
+                                    {tokenPaymentProcess.haveGems &&
+                                        tokenPurchaseText.haveGems.subTitle}
+                                    {tokenPaymentProcess.insufficent &&
+                                        tokenPurchaseText.insufficent.subTitle}
+                                    {tokenPaymentProcess.noWallet &&
+                                        tokenPurchaseText.noWallet.subTitle}
+                                </p>
+                                <div className="p-0 btn-wrapper d-flex justify-content-between mt-4">
+                                    <button
+                                        className="col btn-no cancel-button"
+                                        onClick={() =>
+                                            setTokenPaymentProcess({
+                                                haveGems: false,
+                                                isProcess: false,
+                                                insufficent: false,
+                                                panel1: false,
+                                            })
+                                        }
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        className="col confirm-button"
+                                        onClick={() => handleConfirmAction()}
+                                    >
                                         {tokenPaymentProcess.haveGems &&
-                                            tokenPurchaseText.haveGems.title}
+                                            "Use " +
+                                                productInfo.price?.toFixed(0) +
+                                                " Froyo Tokens"}
                                         {tokenPaymentProcess.insufficent &&
-                                            tokenPurchaseText.insufficent.title}
-                                        {tokenPaymentProcess.inProcess &&
-                                            tokenPurchaseText.inProcess.title}
-                                    </p>
-                                    <div className="p-0 btn-wrapper d-flex mt-4">
-                                        <button
-                                            className="col btn-no"
-                                            onClick={() =>
-                                                setTokenPaymentProcess({
-                                                    haveGems: false,
-                                                    inProcess: false,
-                                                    insufficent: false,
-                                                    status: false,
-                                                })
-                                            }
-                                        >
-                                            Cancel
-                                        </button>
-                                        <button
-                                            className="col bg-danger text-white"
-                                            onClick={() =>
-                                                handlePayWithTokens()
-                                            }
-                                        >
-                                            Use 5 Froyo Tokens
-                                        </button>
-                                    </div>
+                                            tokenPurchaseText.insufficent
+                                                .button}
+                                        {tokenPaymentProcess.noWallet &&
+                                            tokenPurchaseText.noWallet.button}
+                                    </button>
                                 </div>
 
                                 {/* FPX BUTTON */}
@@ -288,6 +370,93 @@ const Index = () => {
                  L284.286,256.002z"
                                     />
                                 </svg>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {tokenPaymentProcess.panel2 && (
+                    <div className="payment-result">
+                        <div className="wrapper d-flex flex-column align-items-start justify-content-start position-relative">
+                            <div className="btn-wrapper w-100">
+                                {/* TITLE */}
+                                {tokenPaymentProcess.isSuccess && (
+                                    <p className="pt-2 mb-4  title pl-2 success-title">
+                                        {tokenPurchaseText.isSuccess.title}
+                                    </p>
+                                )}
+                                {!tokenPaymentProcess.isSuccess &&
+                                    !tokenPaymentProcess.isProcess && (
+                                        <p className="pt-2 mb-4  fail-title pl-2 fail-title">
+                                            {tokenPurchaseText.isFail.title}
+                                        </p>
+                                    )}
+
+                                {/* SUBTITLE */}
+                                {tokenPaymentProcess.isSuccess && (
+                                    <p className="subtitle pl-2 mb-4">
+                                        {tokenPurchaseText.isSuccess.subTitle}
+                                    </p>
+                                )}
+                                {tokenPaymentProcess.isProcess && (
+                                    <p className="process-subtitle">
+                                        {tokenPurchaseText.isProcess.subTitle}
+                                    </p>
+                                )}
+                                {!tokenPaymentProcess.isSuccess &&
+                                    !tokenPaymentProcess.isProcess && (
+                                        <p className="subtitle pl-2 mb-4">
+                                            {tokenPurchaseText.isFail.subTitle}
+                                        </p>
+                                    )}
+
+                                {/* BUTTON */}
+                                {tokenPaymentProcess.isSuccess && (
+                                    <div className="p-0 btn-wrapper d-flex justify-content-center mt-4">
+                                        <button
+                                            className="col confirm-button"
+                                            onClick={() =>
+                                                handleConfirmAction()
+                                            }
+                                        >
+                                            {tokenPurchaseText.isSuccess.button}
+                                        </button>
+                                    </div>
+                                )}
+                                {!tokenPaymentProcess.isSuccess &&
+                                    !tokenPaymentProcess.isProcess && (
+                                        <div className="p-0 btn-wrapper d-flex justify-content-center mt-4">
+                                            <button
+                                                className="col fail-button"
+                                                onClick={() =>
+                                                    handleConfirmAction()
+                                                }
+                                            >
+                                                {
+                                                    tokenPurchaseText.isFail
+                                                        .button
+                                                }
+                                            </button>
+                                        </div>
+                                    )}
+                                {/* LOADER */}
+                                {tokenPaymentProcess.isProcess && (
+                                    <GenericLoader
+                                        height="30"
+                                        bg="#FF007C"
+                                        cx1={
+                                            window.innerWidth > 1200
+                                                ? "38%"
+                                                : "36%"
+                                        }
+                                        cx2="50%"
+                                        cx3={
+                                            window.innerWidth > 1200
+                                                ? "62%"
+                                                : "64%"
+                                        }
+                                        cy="15"
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>
