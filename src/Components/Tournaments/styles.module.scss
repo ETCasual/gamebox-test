@@ -113,7 +113,7 @@
                         margin-right: 10px;
                     }
                     .total-tickets-text {
-                        color: #868686;
+                        color: #ffffff;
                         font-size: $fnt-sz-12;
                         // @media screen and (min-width: 768px) {
                         //     font-size: 0.875rem;
@@ -121,6 +121,7 @@
                     }
                     .tickets-text {
                         font-size: $fnt-sz-18;
+                        font-weight: bold;
                     }
                     .tickets-text-end {
                         font-size: $fnt-sz-18;
