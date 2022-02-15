@@ -73,8 +73,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div class="col-4">
-                </div>
+                <div class="col-4"></div>
                 <div class="col">
                     <div class="d-flex mt-5">
                         <ul class="list list-unstyled">
@@ -188,6 +187,38 @@ const Footer = () => {
                             </div>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <ul className="d-flex mt-5">
+                    <li class="list-unstyled lower-link mt-5 mr-3">
+                        <Link to="/terms-and-conditions" onClick={scrollToTop}>
+                            © {new Date().getFullYear()} GameBox
+                        </Link>
+                    </li>
+                    <li class="lower-link  mt-5 mr-3">
+                        <Link to="/terms-and-conditions" onClick={scrollToTop}>
+                            Terms and Conditions
+                        </Link>
+                    </li>
+                    <li class="lower-link  mt-5 mr-3">
+                        <Link to="/privacy-policy" onClick={scrollToTop}>
+                            Privacy Policy
+                        </Link>
+                    </li>
+                    <li class="lower-link  mt-5 mr-3">
+                        <Link to="/tournament-rules" onClick={scrollToTop}>
+                            Tournament Rules
+                        </Link>
+                    </li>
+                </ul>
+                <div class="game-box-logo">
+                    <Link to="/" onClick={scrollToTop}>
+                        <img
+                            src={`https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png`}
+                            alt="game-box-logo"
+                        />
+                    </Link>
                 </div>
             </div>
         </div>

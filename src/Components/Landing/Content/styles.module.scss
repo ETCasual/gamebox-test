@@ -1,5 +1,5 @@
 // LEFT HERO OFFSET
-$hero-left-off-x: 250px;
+$hero-left-off-x: 300px;
 $hero-left-off-Y: 180px;
 
 
@@ -125,24 +125,11 @@ $hero-left-off-Y: 180px;
             visibility: hidden;
             transform: translateY(60px);
         }
-        .prize-image-1
-        {
-            width: clamp(5rem, 6vw, 8rem);
-            bottom: -0.5rem;
-            left: 1rem;
-           
-        }
-        .prize-image-2
-        {
-            bottom: 10rem;
-            left: 0.25rem;
-            width: clamp(8rem, 13vw, 20rem);
-        }
-        .prize-image-3
-        {
-            bottom: -0.9rem;
-            right: 1rem;
-            width: clamp(8rem, 13vw, 20rem);
+        .game-box-logo{
+            // transform: translate($hero-left-off-x, $hero-left-off-Y);
+       
+            transform: translate(55%, -50%);
+
         }
         .icon {
             position: absolute;

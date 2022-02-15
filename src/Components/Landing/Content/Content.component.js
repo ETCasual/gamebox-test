@@ -36,6 +36,14 @@ const Content = ({
                         <button className="login-button" onClick={handleSignUp}>
                             Login
                         </button>
+                        <div class="game-box-logo">
+                            {/* <Link to="/" onClick={scrollToTop}> */}
+                                <img
+                                    src={`https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png`}
+                                    alt="game-box-logo"
+                                />
+                            {/* </Link> */}
+                        </div>
 
                         {/*SAMPLE IMAGES*/}
                         {/* <img
@@ -237,10 +245,8 @@ const Content = ({
                                 />
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-                
             </div>
             {/* FOOTER */}
             <Footer />
