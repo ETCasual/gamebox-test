@@ -112,7 +112,7 @@ const Header = ({
 
                         {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
                         <div className="d-flex align-items-center justify-content-end w-100">
-                            <div className="gems position-relative d-flex flex-nowrap align-items-center mr-2">
+                            <div className="gems position-relative d-flex flex-nowrap align-items-center">
                                 <div className="gem-wrapper">
                                     <img
                                         className="gem-icon"
@@ -122,7 +122,7 @@ const Header = ({
                                     <span>{getGems() || 0}</span>
                                 </div>
                             </div>
-                            <div className="gems position-relative d-flex flex-nowrap align-items-center mr-2">
+                            <div className="gems position-relative d-flex flex-nowrap align-items-center mx-2">
                                 <Link
                                     onClick={scrollToTop}
                                     to={{
@@ -147,7 +147,7 @@ const Header = ({
                                     </div>
                                 </Link>
                             </div>
-                            <div className="m-3">
+                            <div className="mr-1">
                                 <button
                                     className="notification p-0 semi-transparent"
                                     onClick={handleOnClickNotificationIcon}
