@@ -290,6 +290,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 .question-mark {
+                    cursor: pointer;
                     width: 20px;
                     height: 20px;
                     line-height: 20px;
@@ -409,31 +410,46 @@
                         font-size: $fnt-sz-10;
                     }
                 }
-                .probability-table {
+                table.probability-table {
                     width: 225px;
                     height: 341px;
-                    border: 1px solid #ffffff;
-                    border-radius: 10px;
                     opacity: 1;
-                    margin-top: 96px;
-                    .probability-row {
+                    position: absolute;
+                    top: 278px;
+
+                    tr:first-child td:first-child {
+                        border-top-left-radius: 10px;
+                    }
+                    tr:first-child td:last-child {
+                        border-top-right-radius: 10px;
+                    }
+                    tr:last-child td:first-child {
+                        border-bottom-left-radius: 10px;
+                    }
+                    tr:last-child td:last-child {
+                        border-bottom-right-radius: 10px;
+                    }
+
+                    tr.probability-row {
                         display: flex;
                         text-align: center;
-                        .probability-percentage {
-                            flex-grow: 0.42;
-                            border-right: 1px solid #ffffff;
-                            border-bottom: 1px solid #ffffff;
-                            line-height: 34.1px;
-                            // margin-top: 10px;
-                            // margin-bottom: 10px;
+                        td.probability-percentage {
+                            font-size: $fnt-sz-12;
+                            font-weight: bold;
+                            width: 93.75px;
+                            border: 1px solid #ffffff;
+                            line-height: 30px;
                         }
-                        .probability-tickets-text {
-                            flex-grow: 0.58;
-                            border-bottom: 1px solid #ffffff;
-                            line-height: 34.1px;
-                            // margin-top: 10px;
-                            // margin-bottom: 10px;
+                        td.probability-tickets-text {
+                            font-size: $fnt-sz-12;
+                            width: 131.25px;
+                            border: 1px solid #ffffff;
+                            line-height: 30px;
                         }
+                    }
+
+                    td:hover {
+                        background-color: #4573f1;
                     }
                 }
             }

@@ -9,7 +9,7 @@ const BuySpinConfirmModalPopup = ({
             <div className="modal-body-small">
                 <p className="pt-4 mb-2 title pl-2">Out of spins?</p>
                 <p className="subtitle pl-2">
-                    Use {gemAmount} gems to get another {spinAmount}
+                    Use {gemAmount} gems to get another {spinAmount + " "}
                     spins!
                 </p>
 

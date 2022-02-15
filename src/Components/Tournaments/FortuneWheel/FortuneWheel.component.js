@@ -36,7 +36,7 @@ const FortuneWheel = ({
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [wheelRotation, setWheelRotation] = useState(0);
     const [isBuySpinConfirmModalShown, setIsBuySpinConfirmModalShown] =
-        useState(false);
+        useState(true);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
     const spinDuration = 3;
 
@@ -133,182 +133,118 @@ const FortuneWheel = ({
             <div className="mx-auto">
                 {/* <div className="row justify-content-center w-100"> */}
                 <div className="fortune-wheel-wrapper position-relative">
-                    {!isProbabilityShown && (
-                        <div className="fortune-wheel-flex-row-container">
-                            <div className="navigation-container">
-                                <div
-                                    onClick={() =>
-                                        !isClickedSpin
-                                            ? setFortuneWheelShown(false)
-                                            : null
-                                    }
-                                    className="question-mark"
-                                >
-                                    X
-                                </div>
-                                <div className="question-mark">?</div>
+                    <div className="fortune-wheel-flex-row-container">
+                        <div className="navigation-container">
+                            <div
+                                className="question-mark"
+                                onClick={() =>
+                                    !isClickedSpin
+                                        ? setFortuneWheelShown(false)
+                                        : null
+                                }
+                            >
+                                X
                             </div>
-                            <div className="spinner-control-container">
-                                <div className="the-spinner-text">
-                                    The spinner
-                                </div>
-
-                                <div className="earn-more-tickets-text">
-                                    Earn more tickets here
-                                </div>
-
-                                <div className="spin-amount-left-text-container">
-                                    <span className="you-have-text">{`You have `}</span>
-                                    <span className="spin-number">
-                                        {spinner?.freeSpins > 0
-                                            ? spinner?.freeSpins
-                                            : 0}
-                                    </span>
-                                    <span className="spins-left-text">{` spins left`}</span>
-                                </div>
-
-                                <div className="ticket-amount-outer">
-                                    <div className="ticket-amount-inner">
-                                        <div className="your-tickets-text">
-                                            Your tickets
-                                        </div>
-                                        <div className="ticket-number">
-                                            {getPoolTickets(
-                                                poolTickets,
-                                                prizeId
-                                            )?.toLocaleString() || 0}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {spinner?.freeSpins <= 0 &&
-                                    user?.gems >= config.useGems &&
-                                    !isClickedSpin && (
-                                        <div
-                                            className="use-gems-button"
-                                            disabled={
-                                                spinBuyProcess ? true : false
-                                            }
-                                            onClick={() =>
-                                                spinner?.freeSpins <= 0
-                                                    ? setIsBuySpinConfirmModalShown(
-                                                          true
-                                                      )
-                                                    : null
-                                            }
-                                        >
-                                            <div className="use-gems-text">
-                                                Use {config.useGems} Gems
-                                            </div>
-                                            <div className="get-spins-text">
-                                                Get {config.useGemsSpin} more
-                                                spins
-                                            </div>
-                                        </div>
-                                    )}
-
-                                {spinner?.freeSpins <= 0 &&
-                                    user?.gems <= config.useGems &&
-                                    !isClickedSpin && (
-                                        <Link
-                                            to={"/iap"}
-                                            className="purchase-gems-button"
-                                        >
-                                            <div className="insufficient-gems-text">
-                                                Insufficient gems.
-                                            </div>
-                                            <div className="purchase-text">
-                                                Click here to purchase.
-                                            </div>
-                                        </Link>
-                                    )}
-
-                                <div className="probability-table">
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                    <div className="probability-row">
-                                        <div className="probability-percentage">
-                                            5%
-                                        </div>
-                                        <div className="probability-tickets-text">
-                                            500 tickets
-                                        </div>
-                                    </div>
-                                </div>
+                            <div
+                                className="question-mark"
+                                onClick={() => {
+                                    let currentShownFlag = isProbabilityShown;
+                                    setIsProbabilityShown(!currentShownFlag);
+                                }}
+                            >
+                                ?
                             </div>
-                            <div className="fortune-wheel-container"></div>
                         </div>
-                    )}
+                        <div className="spinner-control-container">
+                            <div className="the-spinner-text">The spinner</div>
+
+                            <div className="earn-more-tickets-text">
+                                Earn more tickets here
+                            </div>
+
+                            <div className="spin-amount-left-text-container">
+                                <span className="you-have-text">{`You have `}</span>
+                                <span className="spin-number">
+                                    {spinner?.freeSpins > 0
+                                        ? spinner?.freeSpins
+                                        : 0}
+                                </span>
+                                <span className="spins-left-text">{` spins left`}</span>
+                            </div>
+
+                            <div className="ticket-amount-outer">
+                                <div className="ticket-amount-inner">
+                                    <div className="your-tickets-text">
+                                        Your tickets
+                                    </div>
+                                    <div className="ticket-number">
+                                        {getPoolTickets(
+                                            poolTickets,
+                                            prizeId
+                                        )?.toLocaleString() || 0}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {spinner?.freeSpins <= 0 &&
+                                user?.gems >= config.useGems &&
+                                !isClickedSpin && (
+                                    <div
+                                        className="use-gems-button"
+                                        disabled={spinBuyProcess ? true : false}
+                                        onClick={() =>
+                                            spinner?.freeSpins <= 0
+                                                ? setIsBuySpinConfirmModalShown(
+                                                      true
+                                                  )
+                                                : null
+                                        }
+                                    >
+                                        <div className="use-gems-text">
+                                            Use {config.useGems} Gems
+                                        </div>
+                                        <div className="get-spins-text">
+                                            Get {config.useGemsSpin} more spins
+                                        </div>
+                                    </div>
+                                )}
+
+                            {spinner?.freeSpins <= 0 &&
+                                user?.gems <= config.useGems &&
+                                !isClickedSpin && (
+                                    <Link
+                                        to={"/iap"}
+                                        className="purchase-gems-button"
+                                    >
+                                        <div className="insufficient-gems-text">
+                                            Insufficient gems.
+                                        </div>
+                                        <div className="purchase-text">
+                                            Click here to purchase.
+                                        </div>
+                                    </Link>
+                                )}
+
+                            {isProbabilityShown && (
+                                <table className="probability-table">
+                                    {spinnerRules?.map((rule, idx) => (
+                                        <tr
+                                            className="probability-row"
+                                            id={idx}
+                                        >
+                                            <td className="probability-percentage">
+                                                {rule?.probability}%
+                                            </td>
+                                            <td className="probability-tickets-text">
+                                                {rule?.tickets} tickets
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </table>
+                            )}
+                        </div>
+                        <div className="fortune-wheel-container"></div>
+                    </div>
                 </div>
                 {/* </div> */}
             </div>
