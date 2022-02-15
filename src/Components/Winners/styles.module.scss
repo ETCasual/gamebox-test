@@ -6,9 +6,10 @@
         font-weight: $fnt-wgt-700;
     }
     .winner-card-wrapper {
+        position: relative;
         width: 100%;
         @media only screen and (min-width: 1200px) {
-            width: 50%;
+            width: 100%;
         }
         .month-year {
             font-size: $fnt-sz-14;
@@ -75,6 +76,49 @@
             cursor: pointer;
             background: #131313;
             border-radius: 10px 0px 0px 10px;
+        }
+    }
+    .winner-card-prize-info {
+        opacity: 0;
+        visibility: hidden;
+        margin-top: 5rem;
+        .prize-img {
+            min-height: 11.063rem;
+            max-width: 11.063rem;
+            border-radius: 17px 0 0 17px;
+            position: relative;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+            cursor: pointer;
+        }
+        .info {
+            background: transparent
+                linear-gradient(124deg, #1c1c1c 0%, #101010 100%) 0% 0%
+                no-repeat padding-box;
+            border-radius: 0 17px 17px 0;
+            .prize-info {
+                .prize-title {
+                    font-weight: $fnt-wgt-600;
+                    font-size: $fnt-sz-14;
+                    color: white;
+                    margin-bottom: 0.3em;
+                }
+                .prize-subtitle {
+                    color: white;
+                    font-size: $fnt-sz-12;
+                    line-height: 120%;
+                }
+            }
+
+            .participants {
+                .total-label {
+                    font-size: $fnt-sz-10;
+                }
+                .total-player {
+                    font-size: $fnt-sz-14;
+                }
+            }
         }
     }
 }

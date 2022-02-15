@@ -5,88 +5,73 @@
     .profile-info {
         img {
             border-radius: 100%;
-            width: 14.125em;
-            height: 14.125em;
+            width: 9.375rem;
+            height: 9.375rem;
             object-fit: contain;
-            border: 8px solid white;
-            box-shadow: 0px 12px 15px 0px #cbcbcb;
-            background-color: #e8e8e8;
+            border: 5px solid #2a2a2a;
         }
-        h3 {
-            
-            font-size: 1.75rem;
+        h2 {
+            font-size: $fnt-sz-18;
+            font-weight: $fnt-wgt-600;
             text-transform: capitalize;
+        }
+        p {
+            font-size: $fnt-sz-14;
+            color: #868686;
         }
     }
     .multiplier {
-        background: white;
+        background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
+        border-radius: 10px;
         position: relative;
-        box-shadow: 0px 10px 15px #0000000d;
-        min-height: 10em;
-        border-radius: 20px;
+        min-height: 10rem;
         .multiplier-info {
-            color: black;
-            
-            font-size: 1.25rem;
+            font-size: $fnt-sz-16;
             span {
-                color: #7824f8;
-                
+                color: #00c1b9;
             }
         }
         .level {
             .current-level {
-                color: #868686;
-                font-size: 0.875rem;
+                font-size: $fnt-sz-14;
             }
             .exp {
-                font-size: 0.875rem;
+                font-size: $fnt-sz-14;
+                background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
                 color: #868686;
-                background: #f4f4f4;
                 border-radius: 17px;
-                min-width: 6.5em;
-                min-height: 2.25em;
-                padding: 0.1em 1.1em;
+                min-width: 6.5rem;
+                min-height: 2.25rem;
+                padding: 0.1rem 1.1rem;
                 .player-exp {
-                    
+                    font-weight: $fnt-wgt-700;
                 }
             }
         }
         .progress {
-            margin-top: 1em;
+            margin-top: 1rem;
             width: 100%;
-            height: 2em;
-            border-radius: 1em;
+            height: 2rem;
+            border-radius: 2.313rem;
             background-color: #f4f4f4;
             position: relative;
             .progress-bar {
-                background: linear-gradient(267deg, #04e4aa, #01b789);
-                border-radius: 1em;
+                background: linear-gradient(266deg, #00c1b9 0%, #047c98 100%);
+                border-radius: 2.313rem;
                 height: inherit;
             }
-        }
-        .progressbar-shadow {
-            position: absolute;
-            bottom: 0;
-            border-radius: 1em;
-            height: 1.45em;
-            box-shadow: 0px 10px 20px #64d6aa67;
-            transition: all 0.5s ease;
         }
     }
     .high-score {
         .title {
-            
-            font-size: 1.75rem;
+            font-size: $fnt-sz-18;
+            font-weight: $fnt-wgt-600;
         }
         .highscore-card {
             border-radius: 12px;
             min-height: 4.5em;
             font-size: 0.75rem;
             .game-details {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: center;
                 min-height: inherit;
             }
             p {
@@ -95,28 +80,26 @@
             img {
                 border: 2px solid white;
                 border-radius: 7px;
-                width: 76px;
+                width: 4.75rem;
                 @media only screen and (min-width: 991px) {
                     width: 100%;
                 }
                 @media only screen and (min-width: 1200px) {
-                    width: 76px;
+                    width: 4.75rem;
                 }
             }
             .game-title {
-                font-size: 1rem;
-                
+                font-size: $fnt-sz-14;
             }
             .score {
-                font-size: 0.875rem;
+                font-size: $fnt-sz-14;
                 color: #14daa7;
                 display: flex;
                 align-self: flex-start;
                 justify-content: flex-end;
-                
             }
             .score-date {
-                font-size: 0.625rem;
+                font-size: $fnt-sz-10;
                 color: #868686;
             }
         }
