@@ -52,7 +52,7 @@ const StayTune = () => {
                     <img
                         className="ml-1 mt-1 quit-demo-btn"
                         width="40"
-                        src={`${window.cdn}art_assets/buttons/button_close_02.png`}
+                        src={`${window.cdn}buttons/button_close_02.png`}
                         alt="Close Button"
                         onClick={handleQuitGame}
                     />

@@ -70,7 +70,7 @@ const Notification = ({
                                     src={
                                         n?.type === "tour"
                                             ? n?.picture
-                                            : `${window.cdn}art_assets/illustrations/friends_03.jpg`
+                                            : `${window.cdn}illustrations/friends_03.jpg`
                                     }
                                     alt="icon"
                                 />
@@ -119,8 +119,8 @@ const Notification = ({
                                                 width="24"
                                                 src={`${
                                                     n?.type === "tour"
-                                                        ? `${window.cdn}art_assets/icons/tickets.png`
-                                                        : `${window.cdn}art_assets/gems/gems.png`
+                                                        ? `${window.cdn}icons/tickets.png`
+                                                        : `${window.cdn}gems/gems.png`
                                                 }`}
                                                 alt="ticket"
                                             />

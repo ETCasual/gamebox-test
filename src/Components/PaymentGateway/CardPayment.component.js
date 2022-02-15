@@ -198,15 +198,15 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                                       ?.productName
                                         )
                                     }
-                                    src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                    src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
                             </button>
                             <img
                                 width={110}
                                 className="img-fluid"
-                                src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                                alt="Esports Mini"
+                                src={`${window.cdn}logo/logo_gamebox.png`}
+                                alt="GameBox"
                             />
                         </div>
                         <div className="row mt-5">
@@ -289,7 +289,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                                         cardType === "") && (
                                                         <img
                                                             width="24"
-                                                            src={`${window.cdn}art_assets/payment/paymentmethods-04_Visa.png`}
+                                                            src={`${window.cdn}payment/paymentmethods-04_Visa.png`}
                                                             alt="visa"
                                                         />
                                                     )}
@@ -298,7 +298,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                                         cardType === "") && (
                                                         <img
                                                             width="24"
-                                                            src={`${window.cdn}art_assets/payment/paymentmethods-03_MasterCard.png`}
+                                                            src={`${window.cdn}payment/paymentmethods-03_MasterCard.png`}
                                                             alt="mastercard"
                                                         />
                                                     )}
@@ -306,7 +306,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                                         cardType === "") && (
                                                         <img
                                                             width="24"
-                                                            src={`${window.cdn}art_assets/payment/paymentmethods-02._AmericanExpress.png`}
+                                                            src={`${window.cdn}payment/paymentmethods-02._AmericanExpress.png`}
                                                             alt="american_express"
                                                         />
                                                     )}
@@ -321,7 +321,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                                     <img
                                                         className="img-wrapper"
                                                         width="24"
-                                                        src={`${window.cdn}art_assets/payment/paymentmethods-07_CVC.png`}
+                                                        src={`${window.cdn}payment/paymentmethods-07_CVC.png`}
                                                         alt="cvc"
                                                     />
                                                 </div>

@@ -35,15 +35,15 @@ const OrientationModal = () => {
             <img
                 className="img-fluid mb-3"
                 width={150}
-                src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                alt="Esports Mini"
+                src={`${window.cdn}logo/logo_gamebox.png`}
+                alt="GameBox"
             />
             <p className="title mb-4">
-                For best experience, Please switch to portriat orientation.
+                For best experience, Please switch to portrait orientation.
             </p>
             <img
                 width={100}
-                src={`${window.cdn}art_assets/illustrations/rotatescreen.png`}
+                src={`${window.cdn}illustrations/rotatescreen.png`}
                 alt="rotate"
             />
         </div>

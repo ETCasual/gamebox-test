@@ -165,7 +165,7 @@ const Index = () => {
                                                                 n.type ===
                                                                 "tour"
                                                                     ? n?.picture
-                                                                    : `${window.cdn}art_assets/illustrations/friends_03.jpg`
+                                                                    : `${window.cdn}illustrations/friends_03.jpg`
                                                             }
                                                             alt="icon"
                                                         />
@@ -224,7 +224,7 @@ const Index = () => {
                                                                             className="ml-1 img-fluid"
                                                                             width="24"
                                                                             height="16"
-                                                                            src={`${window.cdn}art_assets/icons/tickets.png`}
+                                                                            src={`${window.cdn}icons/tickets.png`}
                                                                             alt="ticket"
                                                                         />
                                                                     )}
@@ -234,7 +234,7 @@ const Index = () => {
                                                                             className="ml-1"
                                                                             width="24"
                                                                             height="16"
-                                                                            src={`${window.cdn}art_assets/gems/gems.png`}
+                                                                            src={`${window.cdn}gems/gems.png`}
                                                                             alt="ticket"
                                                                         />
                                                                     )}

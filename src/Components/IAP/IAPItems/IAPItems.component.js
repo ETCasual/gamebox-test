@@ -249,7 +249,7 @@ const IAP = ({ handleGemsPaymentPanel, handleSubscriptionPaymentPanel }) => {
                                     Purchase Gems{" "}
                                     {/* <img
                                         className="ml-2"
-                                        src={`${window.cdn}art_assets/gems/gems.png`}
+                                        src={`${window.cdn}gems/gems.png`}
                                         alt="gems"
                                     /> */}
                                 </p>

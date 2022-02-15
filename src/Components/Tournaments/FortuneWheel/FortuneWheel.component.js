@@ -283,7 +283,7 @@ const FortuneWheel = ({
                             <div className="pointer-img-wrapper">
                                 <img
                                     className="img-fluid pointer-img"
-                                    src={`${window.cdn}art_assets/icons/spinner_icon.png`}
+                                    src={`${window.cdn}icons/spinner_icon.png`}
                                     alt="fortune-wheel"
                                 />
                             </div>

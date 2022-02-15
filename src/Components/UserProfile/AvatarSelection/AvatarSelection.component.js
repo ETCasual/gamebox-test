@@ -9,26 +9,26 @@ const AvatarSelection = ({ handleSelectedAvatar, handleBackButton }) => {
     let bottomRef = useRef(null);
 
     const avatarArr = [
-        window.cdn + "art_assets/avatars/avatar_01.png",
-        window.cdn + "art_assets/avatars/avatar_02.png",
-        window.cdn + "art_assets/avatars/avatar_03.png",
-        window.cdn + "art_assets/avatars/avatar_04.png",
-        window.cdn + "art_assets/avatars/avatar_05.png",
-        window.cdn + "art_assets/avatars/avatar_06.png",
-        window.cdn + "art_assets/avatars/avatar_07.png",
-        window.cdn + "art_assets/avatars/avatar_08.png",
-        window.cdn + "art_assets/avatars/avatar_09.png",
-        window.cdn + "art_assets/avatars/avatar_10.png",
-        window.cdn + "art_assets/avatars/avatar_11.png",
-        window.cdn + "art_assets/avatars/avatar_12.png",
-        window.cdn + "art_assets/avatars/avatar_13.png",
-        window.cdn + "art_assets/avatars/avatar_14.png",
-        window.cdn + "art_assets/avatars/avatar_15.png",
-        window.cdn + "art_assets/avatars/avatar_16.png",
-        window.cdn + "art_assets/avatars/avatar_17.png",
-        window.cdn + "art_assets/avatars/avatar_18.png",
-        window.cdn + "art_assets/avatars/avatar_19.png",
-        window.cdn + "art_assets/avatars/avatar_20.png",
+        window.cdn + "avatars/avatar_01.png",
+        window.cdn + "avatars/avatar_02.png",
+        window.cdn + "avatars/avatar_03.png",
+        window.cdn + "avatars/avatar_04.png",
+        window.cdn + "avatars/avatar_05.png",
+        window.cdn + "avatars/avatar_06.png",
+        window.cdn + "avatars/avatar_07.png",
+        window.cdn + "avatars/avatar_08.png",
+        window.cdn + "avatars/avatar_09.png",
+        window.cdn + "avatars/avatar_10.png",
+        window.cdn + "avatars/avatar_11.png",
+        window.cdn + "avatars/avatar_12.png",
+        window.cdn + "avatars/avatar_13.png",
+        window.cdn + "avatars/avatar_14.png",
+        window.cdn + "avatars/avatar_15.png",
+        window.cdn + "avatars/avatar_16.png",
+        window.cdn + "avatars/avatar_17.png",
+        window.cdn + "avatars/avatar_18.png",
+        window.cdn + "avatars/avatar_19.png",
+        window.cdn + "avatars/avatar_20.png",
     ];
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const AvatarSelection = ({ handleSelectedAvatar, handleBackButton }) => {
                         <img
                             onClick={handleBackButton}
                             className="close-btn"
-                            src={`${window.cdn}art_assets/buttons/button_close_01.png`}
+                            src={`${window.cdn}buttons/button_close_01.png`}
                             alt="close-btn"
                         />
                         <div className="edge-blur top"></div>

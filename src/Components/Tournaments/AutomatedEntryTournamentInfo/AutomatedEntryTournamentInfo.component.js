@@ -93,7 +93,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                         <img
                             className="back-button"
                             width="42"
-                            src={`${window.cdn}art_assets/buttons/button_back.png`}
+                            src={`${window.cdn}buttons/button_back.png`}
                             alt="back-btn"
                         />
                     </Link>
@@ -130,7 +130,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             <div className="timer d-flex align-items-center justify-content-center px-3">
                                                 <img
                                                     className="icon mr-2"
-                                                    src={`${window.cdn}art_assets/icons/timer_normal.png`}
+                                                    src={`${window.cdn}icons/timer_normal.png`}
                                                     alt="timer"
                                                 />
                                                 <p className="mb-0 label d-none d-md-block">
@@ -153,7 +153,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                                         </p>
                                                         <img
                                                             className="icon"
-                                                            src={`${window.cdn}art_assets/icons/tickets.png`}
+                                                            src={`${window.cdn}icons/tickets.png`}
                                                             alt="tickets"
                                                         />
                                                     </div>

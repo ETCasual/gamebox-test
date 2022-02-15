@@ -110,7 +110,7 @@ const GameEndModal = ({ handleContinueButton }) => {
                                             + {extraEarning.ticket}
                                             <img
                                                 width="20"
-                                                src={`${window.cdn}art_assets/icons/tickets.png`}
+                                                src={`${window.cdn}icons/tickets.png`}
                                                 alt="tickets"
                                             />
                                         </p>
@@ -124,7 +124,7 @@ const GameEndModal = ({ handleContinueButton }) => {
                                             + {extraEarning.experience}{" "}
                                             <img
                                                 width="20"
-                                                src={`${window.cdn}art_assets/icons/exp_01.png`}
+                                                src={`${window.cdn}icons/exp_01.png`}
                                                 alt="star"
                                             />
                                         </p>

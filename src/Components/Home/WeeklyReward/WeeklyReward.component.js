@@ -41,6 +41,7 @@ const WeeklyRewards = ({ weeklyRewardsData, usertickets }) => {
                                 //     backgroundImage: `url(${card.backgroundImage})`,
                                 // }}
                                 style={{
+                                    // Old reference from DigitalOcean times
                                     backgroundImage: `url(.${window.cdn}images/home/amazon.png)`,
                                 }}
                             >

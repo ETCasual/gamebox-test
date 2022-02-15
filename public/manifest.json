@@ -1,10 +1,10 @@
 {
     "short_name": "ESM",
-    "description": "Esports Mini - A multiplayer H5 games platform.",
-    "name": "Esports Mini",
+    "description": "GameBox - A multiplayer H5 games platform.",
+    "name": "GameBox",
     "icons": [
         {
-            "src": "https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png",
+            "src": "https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/logo/logo_gamebox.png",
             "type": "image/png",
             "sizes": "512x512"
         }

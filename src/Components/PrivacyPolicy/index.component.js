@@ -33,7 +33,7 @@ const Index = () => {
                         <img
                             className="back-button"
                             width="42"
-                            src={`${window.cdn}art_assets/buttons/button_back.png`}
+                            src={`${window.cdn}buttons/button_back.png`}
                             alt="back-btn"
                         />
                     </Link>
@@ -57,7 +57,7 @@ const Index = () => {
                                         collection, use and disclosure of
                                         personal information we receive from
                                         users. This Privacy Policy applies to
-                                        Esports Mini’s games, websites and
+                                        GameBox’s games, websites and
                                         related services, which we here
                                         collectively call the Service. We will
                                         notify you of any material changes by

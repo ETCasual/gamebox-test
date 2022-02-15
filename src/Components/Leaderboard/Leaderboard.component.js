@@ -378,7 +378,7 @@ const Leaderboard = ({
                             <img
                                 className="avatar"
                                 onError={(e) => defaultUserImage(e)}
-                                src={`${window.cdn}art_assets/icons/user.png`}
+                                src={`${window.cdn}icons/user.png`}
                                 alt="player"
                             />
                         </div>
@@ -391,7 +391,7 @@ const Leaderboard = ({
                             <img
                                 className="ml-1"
                                 width="16"
-                                src={`${window.cdn}art_assets/icons/tickets.png`}
+                                src={`${window.cdn}icons/tickets.png`}
                                 alt="tickets"
                             />
                         </div>
@@ -430,7 +430,7 @@ const Leaderboard = ({
                                 onError={(e) => defaultUserImage(e)}
                                 src={
                                     leaderboardList[i]?.avatarUrl ||
-                                    `${window.cdn}art_assets/icons/user.png`
+                                    `${window.cdn}icons/user.png`
                                 }
                                 alt="player"
                             />
@@ -459,7 +459,7 @@ const Leaderboard = ({
                             <img
                                 className="ml-1"
                                 width="16"
-                                src={`${window.cdn}art_assets/icons/tickets.png`}
+                                src={`${window.cdn}icons/tickets.png`}
                                 alt="tickets"
                             />
                         </div>
@@ -507,7 +507,7 @@ const Leaderboard = ({
                         className="ml-1 mt-1 quit-btn"
                         width="40"
                         onClick={handleQuitGame}
-                        src={`${window.cdn}art_assets/buttons/button_close_02.png`}
+                        src={`${window.cdn}buttons/button_close_02.png`}
                         alt="Close Button"
                     />
                 )}
@@ -555,7 +555,7 @@ const Leaderboard = ({
                                 className="back-button"
                                 width="42"
                                 height="42"
-                                src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                src={`${window.cdn}buttons/button_back.png`}
                                 alt="back-btn"
                             />
                         </button>
@@ -571,7 +571,7 @@ const Leaderboard = ({
                                 </span>
                                 <img
                                     width="24"
-                                    src={`${window.cdn}art_assets/icons/tickets.png`}
+                                    src={`${window.cdn}icons/tickets.png`}
                                     alt="tickets"
                                 />
                             </p>
@@ -611,7 +611,7 @@ const Leaderboard = ({
                                                     <div className="counter justify-content-start justify-content-md-end">
                                                         <img
                                                             width="17"
-                                                            src={`${window.cdn}art_assets/icons/timer_normal.png`}
+                                                            src={`${window.cdn}icons/timer_normal.png`}
                                                             alt="timer"
                                                         />
                                                         <p className="end-text mb-0 mb-md-1 mb-lg-0 ml-2 mr-1">
@@ -684,7 +684,7 @@ const Leaderboard = ({
                                                                 }
                                                                 src={
                                                                     user.picture ||
-                                                                    `${window.cdn}art_assets/icons/user.png`
+                                                                    `${window.cdn}icons/user.png`
                                                                 }
                                                                 alt="player"
                                                             />
@@ -713,7 +713,7 @@ const Leaderboard = ({
                                                             <img
                                                                 className="ml-1"
                                                                 width="16"
-                                                                src={`${window.cdn}art_assets/icons/tickets.png`}
+                                                                src={`${window.cdn}icons/tickets.png`}
                                                                 alt="tickets"
                                                             />
                                                         </div>

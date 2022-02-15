@@ -64,8 +64,8 @@ const Header = ({
                             <img
                                 width={110}
                                 className="img-fluid"
-                                src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                                alt="Esports Mini"
+                                src={`${window.cdn}logo/logo_gamebox.png`}
+                                alt="GameBox"
                             />
                         </Link>
 
@@ -116,7 +116,7 @@ const Header = ({
                                 <div className="gem-wrapper">
                                     <img
                                         className="gem-icon"
-                                        src={`${window.cdn}art_assets/gems/gems.png`}
+                                        src={`${window.cdn}gems/gems.png`}
                                         alt="gems"
                                     />
                                     <span>{getGems() || 0}</span>
@@ -135,13 +135,13 @@ const Header = ({
                                     <div className="gem-wrapper">
                                         <img
                                             className="gem-icon"
-                                            src={`${window.cdn}art_assets/gems/gems.png`}
+                                            src={`${window.cdn}gems/gems.png`}
                                             alt="gems"
                                         />
                                         <span>{getGems() || 0}</span>
                                         <img
                                             className="add-gems-icon"
-                                            src={`${window.cdn}art_assets/buttons/button_addgems.png`}
+                                            src={`${window.cdn}buttons/button_addgems.png`}
                                             alt="add-gems"
                                         />
                                     </div>
@@ -154,9 +154,7 @@ const Header = ({
                                 >
                                     <img
                                         className="icon"
-                                        src={`${
-                                            window.cdn
-                                        }art_assets/icons/notification_${
+                                        src={`${window.cdn}icons/notification_${
                                             notificationNumber.count > 0 &&
                                             notificationData.length > 0
                                                 ? "yes"
@@ -196,7 +194,7 @@ const Header = ({
                                         className="img-fluid"
                                         src={
                                             userImage ||
-                                            `${window.cdn}art_assets/icons/user.png`
+                                            `${window.cdn}icons/user.png`
                                         }
                                         alt="profile"
                                     />

@@ -101,7 +101,7 @@ export function getLeaderboardList(
                             onError={(e) => defaultUserImage(e)}
                             src={
                                 _leaderboardHistory[x]?.avatarUrl ||
-                                `${window.cdn}art_assets/icons/user.png`
+                                `${window.cdn}icons/user.png`
                             }
                             alt="player"
                         />
@@ -123,7 +123,7 @@ export function getLeaderboardList(
                         <img
                             className="ml-1"
                             width="24"
-                            src={`${window.cdn}art_assets/icons/tickets.png`}
+                            src={`${window.cdn}icons/tickets.png`}
                             alt="tickets"
                         />
                     </div>

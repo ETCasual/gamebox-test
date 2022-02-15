@@ -19,34 +19,34 @@ const OnBoarding = ({ handleOnBoardingClose }) => {
 
     const onBoardingData = [
         {
-            img: `${window.cdn}art_assets/illustrations/friends_01.png`,
+            img: `${window.cdn}illustrations/friends_01.png`,
             title: "Hello and welcome!",
             description:
-                "We’re glad you decided to join us. Please take a few minutes to read through our short introduction on what Esports Mini is all about.",
+                "We’re glad you decided to join us. Please take a few minutes to read through our short introduction on what GameBox is all about.",
         },
         {
-            img: `${window.cdn}art_assets/illustrations/steps_01.png`,
+            img: `${window.cdn}illustrations/steps_01.png`,
             title: "A platform that offers a variety of premium prizes",
             description:
                 "With just a few simple steps, you stand a chance to win premium prizes from us. Simply choose a prize, participate in the tournament to win tickets and wait for the prize draw to start.",
             extra: "",
         },
         {
-            img: `${window.cdn}art_assets/illustrations/steps_02.png`,
+            img: `${window.cdn}illustrations/steps_02.png`,
             title: "Play off with other players and compete to get the top score",
             description:
                 "Compete with players from around the world to get the highest score points to win more tickets in the tournament. Your tickets will automatically be added into the prize draw pool.",
             extra: "",
         },
         {
-            img: `${window.cdn}art_assets/illustrations/steps_03.png`,
+            img: `${window.cdn}illustrations/steps_03.png`,
             title: "WINNER WINNER CHICKEN DINNER!",
             description:
                 "The prize draw pool will start once the total number of tickets reaches the pool limit. A winner will be drawn from the pool of tickets.",
             extra: "",
         },
         {
-            img: `${window.cdn}art_assets/illustrations/bonus_05.png`,
+            img: `${window.cdn}illustrations/bonus_05.png`,
             title: "THAT'S NOT ALL!",
             description:
                 "You also stand a chance to win our Daily Bonus Prize. How so? Tickets won in any tournaments throughout the platform for the day will automatically be cloned and added into the Daily Bonus Prize.",

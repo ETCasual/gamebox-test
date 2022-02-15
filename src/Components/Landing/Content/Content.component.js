@@ -33,49 +33,49 @@ const Content = ({
                             <img
                                 ref={(elem) => (iconsRef.current[0] = elem)}
                                 className="icon icon-1"
-                                src={`${window.cdn}art_assets/illustrations/bonus_04.png`}
+                                src={`${window.cdn}illustrations/bonus_04.png`}
                                 alt="icon_01"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[1] = elem)}
                                 className="icon icon-2"
-                                src={`${window.cdn}art_assets/illustrations/landing_rewards.png`}
+                                src={`${window.cdn}illustrations/landing_rewards.png`}
                                 alt="icon_02"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[2] = elem)}
                                 className="icon game-icon-0"
-                                src={`${window.cdn}art_assets/illustrations/landing_game.png`}
+                                src={`${window.cdn}illustrations/landing_game.png`}
                                 alt="game-controller"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[3] = elem)}
                                 className="icon game-icon-1"
-                                src={`${window.cdn}art_assets/illustrations/landing_gameicon_01.png`}
+                                src={`${window.cdn}illustrations/landing_gameicon_01.png`}
                                 alt="game-1"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[4] = elem)}
                                 className="icon game-icon-2"
-                                src={`${window.cdn}art_assets/illustrations/landing_gameicon_02.png`}
+                                src={`${window.cdn}illustrations/landing_gameicon_02.png`}
                                 alt="game-2"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[5] = elem)}
                                 className="icon game-icon-3"
-                                src={`${window.cdn}art_assets/illustrations/landing_gameicon_03.png`}
+                                src={`${window.cdn}illustrations/landing_gameicon_03.png`}
                                 alt="game-3"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[6] = elem)}
                                 className="icon game-icon-4"
-                                src={`${window.cdn}art_assets/illustrations/landing_gameicon_04.png`}
+                                src={`${window.cdn}illustrations/landing_gameicon_04.png`}
                                 alt="game-4"
                             />
                             <img
                                 ref={(elem) => (iconsRef.current[7] = elem)}
                                 className="icon game-icon-5"
-                                src={`${window.cdn}art_assets/illustrations/landing_gameicon_05.png`}
+                                src={`${window.cdn}illustrations/landing_gameicon_05.png`}
                                 alt="game-5"
                             />
                         </div>
@@ -95,7 +95,7 @@ const Content = ({
                                     >
                                         <img
                                             className="img-fluid"
-                                            src={`${window.cdn}art_assets/illustrations/steps_01.png`}
+                                            src={`${window.cdn}illustrations/steps_01.png`}
                                             alt="discover rewards"
                                         />
                                         <p className="mb-2 step">STEP 1</p>
@@ -117,7 +117,7 @@ const Content = ({
                                     >
                                         <img
                                             className="img-fluid"
-                                            src={`${window.cdn}art_assets/illustrations/steps_02.png`}
+                                            src={`${window.cdn}illustrations/steps_02.png`}
                                             alt="play games"
                                         />
                                         <p className="mb-2 step">STEP 2</p>
@@ -138,7 +138,7 @@ const Content = ({
                                     >
                                         <img
                                             className="img-fluid"
-                                            src={`${window.cdn}art_assets/illustrations/steps_03.png`}
+                                            src={`${window.cdn}illustrations/steps_03.png`}
                                             alt="win rewards"
                                         />
                                         <p className="mb-2 step">STEP 3</p>
@@ -177,22 +177,22 @@ const Content = ({
                                 </div>
                                 <img
                                     className="icon icon-1 d-none d-md-block"
-                                    src={`${window.cdn}art_assets/illustrations/bonus_04.png`}
+                                    src={`${window.cdn}illustrations/bonus_04.png`}
                                     alt="bonus_04"
                                 />
                                 <img
                                     className="icon icon-2 d-none d-md-block"
-                                    src={`${window.cdn}art_assets/illustrations/bonus_05.png`}
+                                    src={`${window.cdn}illustrations/bonus_05.png`}
                                     alt="bonus_05"
                                 />
                                 <img
                                     className="icon icon-1 d-block d-md-none"
-                                    src={`${window.cdn}art_assets/illustrations/bonus_01.png`}
+                                    src={`${window.cdn}illustrations/bonus_01.png`}
                                     alt="bonus_01"
                                 />
                                 <img
                                     className="icon icon-2 d-block d-md-none"
-                                    src={`${window.cdn}art_assets/illustrations/bonus_02.png`}
+                                    src={`${window.cdn}illustrations/bonus_02.png`}
                                     alt="bonus_02"
                                 />
                             </div>

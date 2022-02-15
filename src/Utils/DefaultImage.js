@@ -1,5 +1,5 @@
 const defaultUserImage = (e) => {
-    e.target.src = `${window.cdn}art_assets/icons/user.png`;
+    e.target.src = `${window.cdn}icons/user.png`;
 };
 
 const defaultGameImage = () => {

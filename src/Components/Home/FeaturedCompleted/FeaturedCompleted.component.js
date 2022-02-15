@@ -55,7 +55,7 @@ const FeaturedCompleted = ({ data, handleWinnerModal }) => {
                             <div className="wrapper d-flex flex-column align-items-center justify-content-end w-100">
                                 <img
                                     className="mt-4 mb-3 mb-md-4 reward-icon"
-                                    src={`${window.cdn}art_assets/illustrations/rewards_close.png`}
+                                    src={`${window.cdn}illustrations/rewards_close.png`}
                                     alt="discover rewards"
                                 />
                                 {loading && (

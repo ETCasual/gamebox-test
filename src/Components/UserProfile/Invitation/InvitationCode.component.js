@@ -17,7 +17,7 @@ const Invitation = ({ handleBackButton }) => {
     ).toString();
     const ciphertext = encodeURIComponent(encryption);
 
-    shareUrl = `Hey! Use my link to sign up for Esports Mini and get ${config.gemsPerInvite} gems immediately after you register. \n\nSign up at: ${window.location.origin}/invite/${ciphertext}`;
+    shareUrl = `Hey! Use my link to sign up for GameBox and get ${config.gemsPerInvite} gems immediately after you register. \n\nSign up at: ${window.location.origin}/invite/${ciphertext}`;
 
     const handleInvite = () => {
         navigator.clipboard.writeText(shareUrl);
@@ -42,7 +42,7 @@ const Invitation = ({ handleBackButton }) => {
                                 >
                                     <img
                                         width="38"
-                                        src={`${window.cdn}art_assets/buttons/button_close_01.png`}
+                                        src={`${window.cdn}buttons/button_close_01.png`}
                                         alt="close-btn"
                                     />
                                 </div>

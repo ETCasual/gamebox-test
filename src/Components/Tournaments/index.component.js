@@ -266,7 +266,7 @@ const Index = ({ match }) => {
                                     <img
                                         className="back-button"
                                         width="42"
-                                        src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                        src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
                                 </Link>
@@ -286,7 +286,7 @@ const Index = ({ match }) => {
                                         </span>
                                         <img
                                             width="24"
-                                            src={`${window.cdn}art_assets/icons/tickets.png`}
+                                            src={`${window.cdn}icons/tickets.png`}
                                             alt="tickets"
                                         />
                                     </p>
@@ -487,7 +487,7 @@ const Index = ({ match }) => {
                                                     {/* <div className="spinner-wrapper">
                                                         <img
                                                             className="spinner"
-                                                            src={`${window.cdn}art_assets/buttons/button_floatspinner.png`}
+                                                            src={`${window.cdn}buttons/button_floatspinner.png`}
                                                             alt="spinner"
                                                         />
                                                     </div>
