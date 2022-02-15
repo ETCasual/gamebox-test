@@ -7,80 +7,109 @@ const Content = ({
     workRef,
     workCardRef,
     dailyRewardRef,
-    dailyRewardCardRef
+    dailyRewardCardRef,
 }) => {
     return (
         <section id="landing">
             <div className="container-fluid">
                 <div className="row">
                     {/* HERO */}
-                    <div
-                            className="hero w-100 text-center p-4 d-flex flex-column align-items-center justify-content-center"
-                            ref={heroRef}
+                    <div className="hero  d-flex flex-column" ref={heroRef}>
+                        <p className="intro mt-4 mb-0">Introducing</p>
+                        <h1 className="title my-2">
+                            THE ULTIMATE<br></br>GAMING PLATFORM
+                        </h1>
+                        <p className="subtitle mb-5">
+                            Discover rewards and win them for free!<br></br>
+                            {/* adipiscing elit. Etiam efficitur lorem et erat
+                            <br></br>
+                            convallis, a tempus libero convallis. Aenean
+                            <br></br>
+                            maximus nulla quis mi tempus dapibus. */}
+                        </p>
+                        <button
+                            className="register-now-button mb-4 mt-2"
+                            onClick={handleSignUp}
                         >
-                            <p className="intro mt-4 mb-0">Introducing</p>
-                            <h1 className="title my-2">
-                                THE ULTIMATE GAMING PLATFORM
-                            </h1>
-                            <p className="subtitle">
-                                Discover rewards and win them for free!
-                            </p>
-                            <button className="signup" onClick={handleSignUp}>
-                                Sign up now!
-                            </button>
-                            {/* ICONS */}
-                            <img
+                            Register now!
+                        </button>
+                        <button className="login-button" onClick={handleSignUp}>
+                            Login
+                        </button>
+
+                        {/*SAMPLE IMAGES*/}
+                        {/* <img
+                            ref={(elem) => (iconsRef.current[0] = elem)}
+                            className="icon icon-1"
+                            src={`https://drive.google.com/file/d/1xHQOgSBi-CxaqUm1V_5hKFkZ2bHZH0uJ/view?usp=sharing`}
+                            alt="sample-image-1"
+                        />
+
+                        <img
+                            ref={(elem) => (iconsRef.current[0] = elem)}
+                            className="icon icon-1"
+                            src={`https://drive.google.com/file/d/1wQYDR0uWmqqXR0KY1dLeNDWrGQQFfWO6/view?usp=sharing`}
+                            alt="sample-image-2"
+                        />
+                         <img
+                            ref={(elem) => (iconsRef.current[0] = elem)}
+                            className="icon icon-1"
+                            src="https://drive.google.com/file/d/1xHQOgSBi-CxaqUm1V_5hKFkZ2bHZH0uJ/view?usp=sharing"
+                            alt="sample-image-3"
+                        /> */}
+                        {/* ICONS */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[0] = elem)}
                                 className="icon icon-1"
                                 src={`${window.cdn}art_assets/illustrations/bonus_04.png`}
                                 alt="icon_01"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[1] = elem)}
                                 className="icon icon-2"
                                 src={`${window.cdn}art_assets/illustrations/landing_rewards.png`}
                                 alt="icon_02"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[2] = elem)}
                                 className="icon game-icon-0"
                                 src={`${window.cdn}art_assets/illustrations/landing_game.png`}
                                 alt="game-controller"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[3] = elem)}
                                 className="icon game-icon-1"
                                 src={`${window.cdn}art_assets/illustrations/landing_gameicon_01.png`}
                                 alt="game-1"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[4] = elem)}
                                 className="icon game-icon-2"
                                 src={`${window.cdn}art_assets/illustrations/landing_gameicon_02.png`}
                                 alt="game-2"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[5] = elem)}
                                 className="icon game-icon-3"
                                 src={`${window.cdn}art_assets/illustrations/landing_gameicon_03.png`}
                                 alt="game-3"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[6] = elem)}
                                 className="icon game-icon-4"
                                 src={`${window.cdn}art_assets/illustrations/landing_gameicon_04.png`}
                                 alt="game-4"
-                            />
-                            <img
+                            /> */}
+                        {/* <img
                                 ref={(elem) => (iconsRef.current[7] = elem)}
                                 className="icon game-icon-5"
                                 src={`${window.cdn}art_assets/illustrations/landing_gameicon_05.png`}
                                 alt="game-5"
-                            />
-                        </div>
+                            /> */}
+                    </div>
                     <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto d-flex flex-column justify-content-center">
-                         {/* WORK */}
-                         <div className="works w-100 mt-5" ref={workRef}>
+                        {/* WORK */}
+                        <div className="works w-100 mt-5" ref={workRef}>
                             <h1 className="title mb-1">HOW IT WORKS?</h1>
                             <p className="subtitle">
                                 Just follow these 3 simple steps.
@@ -174,11 +203,11 @@ const Content = ({
                                         tournaments!
                                     </p>
                                     <div className="d-flex align-items-start flex-column ">
-                                        <button className="countdown-button mb-4">
+                                        {/* <button className="countdown-button mb-4">
                                             3 days 23 hours 15 minutes left
-                                        </button>
+                                        </button> */}
                                         <button
-                                            className="register-now-button "
+                                            className="register-now-button mt-4 "
                                             onClick={handleSignUp}
                                         >
                                             Register now!
@@ -208,11 +237,13 @@ const Content = ({
                                 />
                             </div>
                         </div>
-                        {/* FOOTER */}
-                        <Footer />
+                        
                     </div>
                 </div>
+                
             </div>
+            {/* FOOTER */}
+            <Footer />
         </section>
     );
 };
