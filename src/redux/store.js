@@ -8,7 +8,7 @@ const middleware = [thunk];
 
 // REDUX STORE INSTANCE WITH DEV TOOLS & MIDDLEWARE
 const composeEnhancers =
-    process.env.REACT_APP_NODE_ENV === "production" ? composeWithDevTools : compose;
+    process.env.REACT_APP_NODE_ENV === "development" ? composeWithDevTools : compose;
 const enhancer = composeEnhancers(applyMiddleware(...middleware));
 const store = createStore(rootReducer, enhancer);
 

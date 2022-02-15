@@ -9,13 +9,6 @@
     box-shadow: 0px 10px 18px #00000029;
 }
 
-// BACK BUTTON
-.back-button {
-    box-shadow: 0px 18px 26px #00000029;
-    border-radius: 100%;
-    // height: fit-content;
-}
-
 // CLAIMED PRIZE DETAILS MODAL
 .claim-prize-detail-modal {
     position: fixed;
@@ -33,7 +26,7 @@
     align-items: center;
     justify-content: center;
     .wrapper {
-        background-color: white;
+        // background-color: white;
         border-radius: 20px;
         color: #868686;
         font-size: 0.875rem;
@@ -42,8 +35,26 @@
             right: 0;
             z-index: 3;
         }
+        .prize-img {
+            width: 85%;
+            background: #0b0b0b;
+            img {                
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+                min-height: 13em;
+                @media only screen and (min-width: 360px) {
+                    min-height: 16.438em;
+                }
+                width: 100%;
+                object-fit: cover;
+            }
+        }
         .prize-info {
             position: relative;
+            background: #1D1D1D 0% 0% no-repeat padding-box;
+            box-shadow: inset 0px 3px 6px #0000000F;
+            border-radius: 5px;
+
             .overlay {
                 width: 100%;
                 height: 100%;
@@ -58,16 +69,6 @@
                 );
                 border-top-right-radius: 20px;
                 border-top-left-radius: 20px;
-            }
-            img {
-                border-top-right-radius: 20px;
-                border-top-left-radius: 20px;
-                min-height: 13em;
-                @media only screen and (min-width: 360px) {
-                    min-height: 16.438em;
-                }
-                width: 100%;
-                object-fit: cover;
             }
             .badge {
                 position: absolute;
@@ -102,71 +103,55 @@
             }
             .prize-text {
                 width: 100%;
-                position: absolute;
-                bottom: 1em;
-                padding: 1em 1em 0 1em;
+                color: #F8BA29;
                 .title {
-                    
-                    font-size: 1rem;
-                    @media only screen and (min-width: 360px) {
-                        font-size: 0.875rem;
-                    }
-                    @media only screen and (min-width: 768px) {
-                        font-size: 1.5rem;
-                    }
-                    @media only screen and (min-width: 1200px) {
-                        font-size: 1.125rem;
-                    }
-                    @media only screen and (min-width: 1320px) {
-                        font-size: 1.25rem;
-                    }
-                    color: white;
+                    font-size: $fnt-sz-14;
+                    font-weight: $fnt-wgt-700;
+                    // @media only screen and (min-width: 360px) {
+                    //     font-size: 0.875rem;
+                    // }
+                    // @media only screen and (min-width: 768px) {
+                    //     font-size: 1.5rem;
+                    // }
+                    // @media only screen and (min-width: 1200px) {
+                    //     font-size: 1.125rem;
+                    // }
+                    // @media only screen and (min-width: 1320px) {
+                    //     font-size: 1.25rem;
+                    // }
                     line-height: 120%;
                 }
                 .subtitle {
-                    font-size: 0.75rem;
-                    @media only screen and (min-width: 1320px) {
-                        font-size: 0.875rem;
-                    }
+                    font-size: $fnt-sz-12;
+                    // @media only screen and (min-width: 1320px) {
+                    //     font-size: 0.875rem;
+                    // }
                     line-height: 120%;
-                    color: white;
+                }
+                .content {
+                    color: #868686;
+                    font-size: $fnt-sz-10;
                 }
             }
         }
         .claim-info {
+            background: linear-gradient(141deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+            box-shadow: 0px 3px 6px #00000029;
+            border-radius: 10px;
             .claimed-date {
                 .date {
-                    color: #000000;
-                    
+                    font-size: $fnt-sz-12;
                 }
             }
             .separator {
                 width: 100%;
                 height: 1px;
-                background-color: #d6d6d6;
+                background-color: #434343;
             }
             .delivery-address {
-                .name {
-                    color: #000000;
-                    
-                }
-                .email,
-                .phone,
-                .city,
-                .zipcode,
-                .state,
-                .country,
-                .address {
-                    color: #000000;
-                }
-            }
-            .tracking {
-                .tracking-number {
-                    
-                }
-                .tracking-number,
-                .company-name {
-                    color: #000000;
+                .wallet-address {
+                    font-size: $fnt-sz-14;
+                    font-weight: $fnt-wgt-700;
                 }
             }
         }

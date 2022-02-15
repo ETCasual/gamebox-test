@@ -1,24 +1,28 @@
 // FORTUNE WHEEL COMPONENT
-.fortune-wheel-fixed-btn {
+.fortune-wheel-fixed-btn-container {
     cursor: pointer;
-    position: fixed;
-    bottom: -4.5em;
-    right: -4.5em;
-    @media only screen and (min-width: 1024px) {
-        right: 1em;
-        bottom: 0;
-    }
-    min-width: 140px;
-    min-height: 170px;
-    transition: all 0.3s ease-in;
-    &:hover {
-        right: 1em;
-        bottom: 0;
-        .button-wrapper {
-            opacity: 1;
-            visibility: visible;
-        }
-    }
+    position: absolute;
+    background: "transparent linear-gradient(134deg, #1C1C1C 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box";
+    border-radius: 12px;
+    padding: 12px;
+    bottom: 0px;
+    // right: 0px;
+    left: 802px;
+    // @media only screen and (min-width: 1024px) {
+    //     right: 1em;
+    //     bottom: 0;
+    // }
+    min-width: 103px;
+    min-height: 142px;
+    // transition: all 0.3s ease-in;
+    // &:hover {
+    //     right: 1em;
+    //     bottom: 0;
+    //     .button-wrapper {
+    //         opacity: 1;
+    //         visibility: visible;
+    //     }
+    // }
     .spinner-wrapper {
         position: relative;
         height: 118px;
@@ -47,7 +51,7 @@
         }
         button {
             font-size: 0.875rem;
-            
+
             background: #14daa7;
             box-shadow: 0px 10px 15px #00000026;
             border-radius: 5px;
@@ -56,14 +60,27 @@
             padding: 1em;
         }
     }
+    .the-spinner-text-wrapper {
+        color: "#00C1B9";
+        margin-bottom: 3px;
+    }
+    .earn-more-tickets-text-wrapper {
+        font-weight: bold;
+        font-size: $fnt-sz-12;
+        margin-bottom: 3px;
+    }
 }
 .fortune-wheel {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0px;
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         background-color: rgba(244, 244, 244, 0.9);
     }
@@ -73,11 +90,16 @@
     }
     z-index: 3;
     .fortune-wheel-wrapper {
-        background: linear-gradient(0deg, #6c25ffd6 0%, #9d20e4d6 100%);
+        background: transparent
+            linear-gradient(145deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0% no-repeat
+            padding-box;
+        border-radius: 10px;
+        opacity: 1;
         box-shadow: 0px 15px 20px #6d38ef80;
-        border: 5px solid #ffffff;
-        border-radius: 20px;
+        height: 639px;
         min-height: 70vh;
+        width: 905px;
+        max-width: 100%;
         @media only screen and (min-width: 1024px) {
             min-height: 85vh;
         }
@@ -119,7 +141,6 @@
                     @media only screen and (min-width: 1441px) {
                         font-size: 1.5rem;
                     }
-                    
                 }
             }
         }
@@ -188,7 +209,6 @@
                     position: relative;
                     z-index: 0;
                     text {
-                        
                         font-size: 16px;
                     }
                     .max {
@@ -222,7 +242,7 @@
                 @media only screen and (min-width: 1441px) {
                     font-size: 1.75rem;
                 }
-                
+
                 color: #fdc43d;
             }
         }
@@ -242,14 +262,12 @@
             @media only screen and (min-width: 768px) {
                 font-size: 20px;
             }
-            
         }
         .buy-more-gems {
             background: #ff2c44;
             color: white !important;
             span {
                 font-size: 12px;
-                
             }
         }
         .buy-more-spins {
@@ -261,6 +279,252 @@
                 font-size: 1.25rem;
             }
         }
+        .fortune-wheel-flex-row-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            .navigation-container {
+                width: 75px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .question-mark {
+                    cursor: pointer;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    text-align: center;
+                    align-self: center;
+                    background: #4573f1;
+                    border-radius: 50%;
+                    margin-top: 30px;
+                    margin-bottom: 22px;
+                }
+            }
+            .spinner-control-container {
+                width: 302px;
+                display: flex;
+                flex-direction: column;
+                margin-left: 36px;
+                .the-spinner-text {
+                    margin-top: 25px;
+                    margin-bottom: 2px;
+                    font-size: $fnt-sz-12;
+                    color: #00c1b9;
+                }
+                .earn-more-tickets-text {
+                    margin-bottom: 8px;
+                    font-size: $fnt-sz-18;
+                    font-weight: bold;
+                }
+                .spin-amount-left-text-container {
+                    margin-bottom: 19px;
+                    .spins-left-text,
+                    .you-have-text {
+                        font-size: $fnt-sz-12;
+                    }
+                    .spin-number {
+                        font-size: $fnt-sz-18;
+                        font-weight: bold;
+                        color: #fdc43d;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                }
+                .ticket-amount-outer {
+                    width: 225px;
+                    height: 70px;
+                    background: #ffffff 0% 0% no-repeat padding-box;
+                    box-shadow: 0px 15px 20px #00000029;
+                    border-radius: 10px;
+                    opacity: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .ticket-amount-inner {
+                        width: 213px;
+                        height: 58px;
+                        background: transparent
+                            linear-gradient(105deg, #fdc43d 0%, #efa500 100%) 0%
+                            0% no-repeat padding-box;
+                        box-shadow: 0px 10px 15px #00000029;
+                        border-radius: 5px;
+                        opacity: 1;
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        .your-tickets-text {
+                            font-size: $fnt-sz-10;
+                            margin-top: 9px;
+                            margin-bottom: 2px;
+                        }
+                        .ticket-number {
+                            font-size: $fnt-sz-18;
+                            margin-bottom: 9px;
+                            font-weight: bold;
+                        }
+                    }
+                }
+                .use-gems-button {
+                    cursor: pointer;
+                    width: 226px;
+                    height: 54px;
+                    background: transparent
+                        linear-gradient(180deg, #04e4aa 0%, #01b789 100%) 0% 0%
+                        no-repeat padding-box;
+                    border-radius: 10px;
+                    opacity: 1;
+                    margin-top: 20px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    .use-gems-text {
+                        font-size: $fnt-sz-14;
+                        font-weight: bold;
+                        margin-top: 9px;
+                        margin-bottom: 1px;
+                    }
+                    .get-spins-text {
+                        font-size: $fnt-sz-10;
+                    }
+                }
+                .purchase-gems-button {
+                    cursor: pointer;
+                    width: 226px;
+                    height: 54px;
+                    background: #ff2c44 0% 0% no-repeat padding-box;
+                    border-radius: 10px;
+                    opacity: 1;
+                    margin-top: 20px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    .insufficient-gems-text {
+                        font-size: $fnt-sz-14;
+                        font-weight: bold;
+                        margin-top: 9px;
+                        margin-bottom: 1px;
+                    }
+                    .purchase-text {
+                        font-size: $fnt-sz-10;
+                    }
+                }
+                table.probability-table {
+                    width: 225px;
+                    height: 341px;
+                    opacity: 1;
+                    position: absolute;
+                    top: 278px;
+
+                    tr:first-child td:first-child {
+                        border-top-left-radius: 10px;
+                    }
+                    tr:first-child td:last-child {
+                        border-top-right-radius: 10px;
+                    }
+                    tr:last-child td:first-child {
+                        border-bottom-left-radius: 10px;
+                    }
+                    tr:last-child td:last-child {
+                        border-bottom-right-radius: 10px;
+                    }
+
+                    tr.probability-row {
+                        display: flex;
+                        text-align: center;
+                        td.probability-percentage {
+                            font-size: $fnt-sz-12;
+                            font-weight: bold;
+                            width: 93.75px;
+                            border: 1px solid #ffffff;
+                            line-height: 30px;
+                        }
+                        td.probability-tickets-text {
+                            font-size: $fnt-sz-12;
+                            width: 131.25px;
+                            border: 1px solid #ffffff;
+                            line-height: 30px;
+                        }
+                    }
+
+                    td:hover {
+                        background-color: #4573f1;
+                    }
+                }
+            }
+            .fortune-wheel-container {
+                width: 528px;
+                margin-top: auto;
+                margin-bottom: auto;
+                .spin-button {
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 507px;
+                    top: 50%;
+                    .spin-button-white-outline {
+                        width: 97px;
+                        height: 97px;
+                        background: #f4f4f4 0% 0% no-repeat padding-box;
+                        box-shadow: 0px 12px 20px #c48a00b2;
+                        opacity: 1;
+                        border-radius: 50%;
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .spin-button-inner-orange {
+                            width: 77px;
+                            height: 77px;
+                            background: transparent
+                                linear-gradient(
+                                    180deg,
+                                    #fdc43d 0%,
+                                    #ff9300 100%
+                                )
+                                0% 0% no-repeat padding-box;
+                            opacity: 1;
+                            border-radius: 50%;
+                            display: inherit;
+                            align-items: inherit;
+                            justify-content: inherit;
+                            cursor: pointer;
+                            .spin-button-white-shine {
+                                width: 66px;
+                                height: 66px;
+                                background: transparent
+                                    radial-gradient(
+                                        closest-side at 50% 0%,
+                                        #ffffff72 0%,
+                                        #ffffff00 100%
+                                    )
+                                    0% 0% no-repeat padding-box;
+                                opacity: 1;
+                                border-radius: 50%;
+                                font-size: $fnt-sz-16;
+                                font-weight: bold;
+                                display: inherit;
+                                align-items: inherit;
+                                justify-content: inherit;
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                }
+                .pointer-img-wrapper {
+                    width: 507px;
+                    display: flex;
+                    justify-content: center;
+                    position: absolute;
+                    top: 30%;
+                    .pointer-img {
+                        width: clamp(1rem, 2vw, 1.7rem);
+                    }
+                }
+            }
+        }
     }
     .spinner-rules {
         .title {
@@ -268,7 +532,7 @@
             @media only screen and (min-width: 768px) {
                 font-size: 0.875rem;
             }
-            
+
             color: white;
         }
         .probability {
@@ -290,7 +554,6 @@
                                 margin-bottom: 1.25rem;
                             }
                             &:nth-child(1) {
-                                
                             }
                         }
                     }
