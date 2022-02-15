@@ -34,7 +34,7 @@ const Index = () => {
                         <img
                             className="back-button"
                             width="42"
-                            src={`${window.cdn}art_assets/buttons/button_back.png`}
+                            src={`${window.cdn}buttons/button_back.png`}
                             alt="back-btn"
                         />
                     </Link>
@@ -54,14 +54,14 @@ const Index = () => {
                                     </h4>
                                     <small>Effective date: Dec 15, 2021</small>
                                     <p className="subtitle my-4">
-                                        Welcome to Esports Mini.
+                                        Welcome to GameBox.
                                     </p>
                                 </div>
                                 {/* GENERAL */}
                                 <div className="col-12 mb-4">
                                     <p className="title">General</p>
                                     <p className="description">
-                                        To win prizes / rewards in Esports Mini,
+                                        To win prizes / rewards in GameBox,
                                         there is no purchase or payment of any
                                         kind required to enter the tournaments
                                         for the prizes / rewards.
@@ -90,8 +90,8 @@ const Index = () => {
                                     <p className="title">Participants</p>
                                     <p className="description">
                                         The Prize / Reward / Tournament is open
-                                        to all registered users of Esports Mini,
-                                        who have reached the age of 18 or the
+                                        to all registered users of GameBox, who
+                                        have reached the age of 18 or the
                                         applicable age of the majority (which is
                                         higher) at the time of entry
                                         ("Participants") and where local
@@ -107,29 +107,29 @@ const Index = () => {
                                     </p>
                                     <p className="description">
                                         The Prize / Reward is announced in the
-                                        Esports Mini application and/or on
-                                        Esports Mini web as a total number of
-                                        tickets the prize / reward has
-                                        collected, that displays the period
-                                        until the prize / reward has a winner.
+                                        GameBox application and/or on GameBox
+                                        web as a total number of tickets the
+                                        prize / reward has collected, that
+                                        displays the period until the prize /
+                                        reward has a winner.
                                     </p>
                                     <p className="description">
                                         The Bonus Prize / Reward is announced in
-                                        the Esports Mini application and/or on
-                                        Esports Mini web as a countdown that
-                                        displays the time until the bonus prize
-                                        / reward ends.
+                                        the GameBox application and/or on
+                                        GameBox web as a countdown that displays
+                                        the time until the bonus prize / reward
+                                        ends.
                                     </p>
                                     <p className="description">
                                         The Tournament is announced in the
-                                        Esports Mini application and/or on
-                                        Esports Mini web as a countdown that
-                                        displays the time until the next
-                                        Tournament. It is Esports Mini's sole
-                                        discretion to announce a new prize /
-                                        reward / tournament or cancel upcoming
-                                        prize / reward / tournament, at any
-                                        time, without any reason whatsoever.
+                                        GameBox application and/or on GameBox
+                                        web as a countdown that displays the
+                                        time until the next Tournament. It is
+                                        GameBox's sole discretion to announce a
+                                        new prize / reward / tournament or
+                                        cancel upcoming prize / reward /
+                                        tournament, at any time, without any
+                                        reason whatsoever.
                                     </p>
                                 </div>
                                 {/* PARTICIPATION */}
@@ -150,12 +150,12 @@ const Index = () => {
                                             18 years of age.
                                         </li>
                                         <li>
-                                            Use Esports Mini App and/or Web to
-                                            earn tickets ("Tickets") that are
-                                            each worth one (1) entry into the
-                                            prize / reward played. Tickets can
-                                            be earned in various ways, including
-                                            (i) participating in tournaments
+                                            Use GameBox App and/or Web to earn
+                                            tickets ("Tickets") that are each
+                                            worth one (1) entry into the prize /
+                                            reward played. Tickets can be earned
+                                            in various ways, including (i)
+                                            participating in tournaments
                                             (playing games), (ii) using the
                                             spinner, (iii) other defined
                                             activities in the application.
@@ -227,9 +227,9 @@ const Index = () => {
                                         </li>
                                         <li>
                                             The Prize / Reward winner is
-                                            announced through Esports Mini App
-                                            or/and Esports Mini Web, right after
-                                            the Prize / Reward Draw.
+                                            announced through GameBox App or/and
+                                            GameBox Web, right after the Prize /
+                                            Reward Draw.
                                         </li>
                                         <li>
                                             Odds of winning the Prize / Reward
@@ -249,8 +249,7 @@ const Index = () => {
                                             is offered as long as participants
                                             enter and win tickets from any
                                             tournament or via the spinner in the
-                                            Esports Mini App or/and Esports Mini
-                                            Web.
+                                            GameBox App or/and GameBox Web.
                                         </li>
                                         <li>
                                             Bonus prizes / rewards offer prizes
@@ -327,9 +326,8 @@ const Index = () => {
                                         <li>
                                             Winners must accept the Terms and
                                             Conditions, Privacy Policy and
-                                            Tournament Rules of Esports Mini
-                                            before submitting the claim
-                                            submission.
+                                            Tournament Rules of GameBox before
+                                            submitting the claim submission.
                                         </li>
                                         <li>
                                             Once participants submit their prize
@@ -392,8 +390,8 @@ const Index = () => {
                                         Prize / Reward sponsor rewards existing
                                         users for inviting their friends to the
                                         service. Users get 5 gems added to their
-                                        Esports Mini account for each friend
-                                        that registers using the user’s provided
+                                        GameBox account for each friend that
+                                        registers using the user’s provided
                                         link. The invited friend will also get 5
                                         gems upon registering with the link
                                         provided. Prize / Reward sponsor
@@ -414,9 +412,9 @@ const Index = () => {
                                         Prize / Reward sponsor rewards existing
                                         users for inviting their friends to the
                                         service. Users get 5 gems added to their
-                                        Esports Mini account for each user that
-                                        reaches level 3 on Esports Mini. The
-                                        invited friend will also get 5 gems upon
+                                        GameBox account for each user that
+                                        reaches level 3 on GameBox. The invited
+                                        friend will also get 5 gems upon
                                         registering with the link provided; the
                                         Prize / Reward sponsor reserves the
                                         right to evaluate and reject such reward
@@ -498,30 +496,29 @@ const Index = () => {
                                         Each Participant shall keep confidential
                                         any information which the Participant
                                         knows or reasonably ought to know is
-                                        confidential and relates to Esports
-                                        Mini, Esports Mini’s business or the
-                                        prize / reward / tournament.
+                                        confidential and relates to GameBox,
+                                        GameBox’s business or the prize / reward
+                                        / tournament.
                                     </p>
                                     <p className="description">
                                         Each Participant agrees to participate,
-                                        at Esports Mini’s request, in publicity
+                                        at GameBox’s request, in publicity
                                         (including interviews) and further
-                                        agrees that Esports Mini owns all
+                                        agrees that GameBox owns all
                                         Intellectual Property Rights in, and may
-                                        use at Esports Mini’s absolute
-                                        discretion, such publicity/interviews.
-                                        Esports Mini may refer to the
-                                        Participant’s association with the prize
-                                        / reward / tournament in all publicity,
-                                        marketing and materials.
+                                        use at GameBox’s absolute discretion,
+                                        such publicity/interviews. GameBox may
+                                        refer to the Participant’s association
+                                        with the prize / reward / tournament in
+                                        all publicity, marketing and materials.
                                     </p>
                                     <p className="description">
                                         The Participant shall not publicise his
                                         or her involvement in the prize / reward
                                         / tournament or the fact that the
                                         Participant has won any prize (including
-                                        giving interviews) except with Esports
-                                        Mini’s prior written consent.
+                                        giving interviews) except with GameBox’s
+                                        prior written consent.
                                     </p>
                                     <p className="description">
                                         By entering a Tournament or submitting a
@@ -529,45 +526,45 @@ const Index = () => {
                                         materials in relation to a Tournament or
                                         Prize / Reward (the Products) each
                                         Participant: (i) confirms the grant by
-                                        the Participant to Esports Mini of a
+                                        the Participant to GameBox of a
                                         worldwide, perpetual, royalty free
                                         licence in the Intellectual Property
                                         Rights in the Products or Prize / Reward
                                         / Tournament entry, (ii) waives any
                                         moral rights and like rights the
                                         Participant has in relation to the
-                                        Products or Esports Mini entry so that
-                                        Esports Mini shall be entitled to use
-                                        the Products or Esports Mini entry in
-                                        any and all media at no cost to Esports
-                                        Mini and (iii) warrants to Esports Mini
-                                        that the Products or Esports Mini entry:
-                                        (a) are personal and related
-                                        specifically to the Participant; (b) are
-                                        owned and controlled by the Participant
-                                        and that the Participant has the right,
-                                        power and authority to grant the rights
-                                        set out in these terms and conditions;
-                                        (c) will not infringe the Intellectual
-                                        Property Rights, privacy or any other
-                                        rights of any third party; (d) will not
-                                        contain anything which is untrue,
-                                        defamatory, obscene, indecent, harassing
-                                        or threatening; (e) do not violate any
-                                        applicable law or regulation (including
-                                        any laws regarding anti-discrimination
-                                        or false advertising); (f) are not
-                                        obscene or pornographic; (g) do not, to
-                                        the best of the Participant’s knowledge,
-                                        contain any viruses or other computer
-                                        programming routines that are intended
-                                        to damage, detrimentally interfere with,
+                                        Products or GameBox entry so that
+                                        GameBox shall be entitled to use the
+                                        Products or GameBox entry in any and all
+                                        media at no cost to GameBox and (iii)
+                                        warrants to GameBox that the Products or
+                                        GameBox entry: (a) are personal and
+                                        related specifically to the Participant;
+                                        (b) are owned and controlled by the
+                                        Participant and that the Participant has
+                                        the right, power and authority to grant
+                                        the rights set out in these terms and
+                                        conditions; (c) will not infringe the
+                                        Intellectual Property Rights, privacy or
+                                        any other rights of any third party; (d)
+                                        will not contain anything which is
+                                        untrue, defamatory, obscene, indecent,
+                                        harassing or threatening; (e) do not
+                                        violate any applicable law or regulation
+                                        (including any laws regarding
+                                        anti-discrimination or false
+                                        advertising); (f) are not obscene or
+                                        pornographic; (g) do not, to the best of
+                                        the Participant’s knowledge, contain any
+                                        viruses or other computer programming
+                                        routines that are intended to damage,
+                                        detrimentally interfere with,
                                         surreptitiously intercept or expropriate
                                         any system, data or personal
                                         information; (h) are free from any
-                                        encumbrances such that Esports Mini may
-                                        use the Products in accordance with and
-                                        in the manner set out in these Official
+                                        encumbrances such that GameBox may use
+                                        the Products in accordance with and in
+                                        the manner set out in these Official
                                         Prize / Reward / Tournament Rules.
                                     </p>
                                     <p className="description">
@@ -576,10 +573,10 @@ const Index = () => {
                                         Tournament (including the name, title
                                         and format of the Prize / Reward /
                                         Tournament ) will vest exclusively in
-                                        Esports Mini for our own use (in our
-                                        absolute discretion). Unless otherwise
-                                        stated, prize / reward / tournament
-                                        entries will not be returned to you.
+                                        GameBox for our own use (in our absolute
+                                        discretion). Unless otherwise stated,
+                                        prize / reward / tournament entries will
+                                        not be returned to you.
                                     </p>
                                 </div>
                                 {/* LIMITATION OF LIABILITY & RELEASE */}

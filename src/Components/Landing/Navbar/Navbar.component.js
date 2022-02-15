@@ -9,8 +9,8 @@ const Navbar = ({ handleSignUp }) => {
                     <div className="col px-0 d-flex align-items-center">
                         <img
                             className="img-fluid logo"
-                            src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                            alt="Esports Mini"
+                            src={`${window.cdn}logo/logo_gamebox.png`}
+                            alt="GameBox"
                         />
                     </div>
                     <div className="col px-0 d-flex align-items-center justify-content-end">

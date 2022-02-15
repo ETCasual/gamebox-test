@@ -54,7 +54,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                             onClick={handleBackButton}
                             className="back-button"
                             width="42"
-                            src={`${window.cdn}art_assets/buttons/button_back.png`}
+                            src={`${window.cdn}buttons/button_back.png`}
                             alt="back-btn"
                         />
                     </button>
@@ -131,7 +131,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                         <img
                                                             className="ml-1"
                                                             width="18"
-                                                            src={`${window.cdn}art_assets/icons/exp_01.png`}
+                                                            src={`${window.cdn}icons/exp_01.png`}
                                                             alt="coin"
                                                         />
                                                     </div>

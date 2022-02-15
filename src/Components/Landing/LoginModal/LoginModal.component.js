@@ -168,7 +168,7 @@ const LoginModal = ({ loginRef, loginWrapperRef }) => {
                         <div className="row align-items-center">
                             <div className="col-2 px-1">
                                 <img
-                                    src={`${window.cdn}art_assets/social_media/logo_facebook.png`}
+                                    src={`${window.cdn}social_media/logo_facebook.png`}
                                     alt="facebook"
                                 />
                             </div>
@@ -181,7 +181,7 @@ const LoginModal = ({ loginRef, loginWrapperRef }) => {
                         <div className="row align-items-center">
                             <div className="col-2">
                                 <img
-                                    src={`${window.cdn}art_assets/social_media/logo_google.png`}
+                                    src={`${window.cdn}social_media/logo_google.png`}
                                     alt="google"
                                 />
                             </div>

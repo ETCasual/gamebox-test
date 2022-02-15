@@ -120,15 +120,15 @@ const ClaimPrizeForm = () => {
                                 <img
                                     className="back-button"
                                     width="42"
-                                    src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                    src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
                             </Link>
                             <img
                                 className="img-fluid"
                                 width={110}
-                                src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                                alt="Esports Mini"
+                                src={`${window.cdn}logo/logo_gamebox.png`}
+                                alt="GameBox"
                             />
                         </div>
                         <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto mb-5">
@@ -300,7 +300,7 @@ const ClaimPrizeForm = () => {
                                         </div>
                                     </div>
                                     <label className="checkbox-wrapper mt-4">
-                                        I agree to the Esports Mini{" "}
+                                        I agree to the GameBox{" "}
                                         <span className="terms">
                                             <Link to="#">
                                                 terms and conditions

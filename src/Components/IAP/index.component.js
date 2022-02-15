@@ -306,7 +306,7 @@ const Index = () => {
                                         }
                                     >
                                         <img
-                                            src={`${window.cdn}art_assets/payment/paymentmethods-01_FPX.png`}
+                                            src={`${window.cdn}payment/paymentmethods-01_FPX.png`}
                                             alt="fpx"
                                         />
                                     </button>
@@ -320,17 +320,17 @@ const Index = () => {
                                 >
                                     <img
                                         width="56"
-                                        src={`${window.cdn}art_assets/payment/paymentmethods-04_Visa.png`}
+                                        src={`${window.cdn}payment/paymentmethods-04_Visa.png`}
                                         alt="visa"
                                     />
                                     <img
                                         width="56"
-                                        src={`${window.cdn}art_assets/payment/paymentmethods-03_MasterCard.png`}
+                                        src={`${window.cdn}payment/paymentmethods-03_MasterCard.png`}
                                         alt="mastercard"
                                     />
                                     <img
                                         width="48"
-                                        src={`${window.cdn}art_assets/payment/paymentmethods-02._AmericanExpress.png`}
+                                        src={`${window.cdn}payment/paymentmethods-02._AmericanExpress.png`}
                                         alt="american_express"
                                     />
                                 </button> */}
@@ -345,7 +345,7 @@ const Index = () => {
                                     >
                                         <img
                                             className="grabpay"
-                                            src={`${window.cdn}art_assets/payment/paymentmethods-06_GrabPay-2.png`}
+                                            src={`${window.cdn}payment/paymentmethods-06_GrabPay-2.png`}
                                             alt="grabpay"
                                         />
                                     </button>

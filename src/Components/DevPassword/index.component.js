@@ -37,8 +37,8 @@ const Index = () => {
                         <img
                             className="img-fluid mb-4 mx-auto"
                             width="200"
-                            src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                            alt="Esports Mini"
+                            src={`${window.cdn}logo/logo_gamebox.png`}
+                            alt="GameBox"
                         />
                         <input
                             className="p-2 rounded border"

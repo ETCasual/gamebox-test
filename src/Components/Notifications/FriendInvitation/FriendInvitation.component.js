@@ -45,7 +45,7 @@ const NotificationFriendInvitation = ({
                             }
                             className="close-button"
                             width="38"
-                            src={`${window.cdn}art_assets/buttons/button_close_01.png`}
+                            src={`${window.cdn}buttons/button_close_01.png`}
                             alt="close-btn"
                         />
                         {/* INVITATION MODAL */}
@@ -69,14 +69,14 @@ const NotificationFriendInvitation = ({
                                         <img
                                             width="22"
                                             className="ml-2"
-                                            src={`${window.cdn}art_assets/Gems/gems.png`}
+                                            src={`${window.cdn}gems/gems.png`}
                                             alt="gems"
                                         />
                                     </div>
                                 </div>
                                 <img
                                     width="124"
-                                    src={`${window.cdn}art_assets/illustrations/friends_01.png`}
+                                    src={`${window.cdn}illustrations/friends_01.png`}
                                     alt=""
                                 />
                             </div>

@@ -9,8 +9,8 @@ const Index = () => {
                     <img
                         width={110}
                         className="logo img-fluid"
-                        src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                        alt="Esports Mini"
+                        src={`${window.cdn}logo/logo_gamebox.png`}
+                        alt="GameBox"
                     />
                     <div className="col-12 d-flex flex-column align-items-center justify-content-center min-vh-100">
                         <h1
@@ -20,7 +20,7 @@ const Index = () => {
                             Sorry
                         </h1>
                         <p className="mb-2 mb-md-0">
-                            Esports Mini is not available in your country yet.
+                            GameBox is not available in your country yet.
                         </p>
                     </div>
                 </div>

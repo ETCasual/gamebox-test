@@ -75,15 +75,15 @@ const FpxPayment = ({ productInfo, handleBackButton }) => {
                                     className="back-button"
                                     width="42"
                                     onClick={handleBackButton}
-                                    src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                    src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
                             </button>
                             <img
                                 width={110}
                                 className="img-fluid"
-                                src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                                alt="Esports Mini"
+                                src={`${window.cdn}logo/logo_gamebox.png`}
+                                alt="GameBox"
                             />
                         </div>
                         <div className="row mt-5">

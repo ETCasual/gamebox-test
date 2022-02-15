@@ -75,7 +75,7 @@ const EditUserInfo = ({ avatar, handleAvatarSelectionPanel }) => {
                             <img
                                 className="back-button"
                                 width="42"
-                                src={`${window.cdn}art_assets/buttons/button_back.png`}
+                                src={`${window.cdn}buttons/button_back.png`}
                                 alt="back-btn"
                             />
                         </Link>

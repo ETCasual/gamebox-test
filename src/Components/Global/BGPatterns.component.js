@@ -33,7 +33,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[0] = elem)}
                 width="77"
                 height="77"
-                src={`${window.cdn}art_assets/icons/Shape-04.png`}
+                src={`${window.cdn}icons/Shape-04.png`}
             />
 
             {/* <!-- CIRCLE 2 --> */}
@@ -43,7 +43,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[1] = elem)}
                 width="77"
                 height="77"
-                src={`${window.cdn}/art_assets/icons/Shape-07.png`}
+                src={`${window.cdn}icons/Shape-07.png`}
             />
 
             {/* <!-- CIRCLE 3 --> */}
@@ -53,7 +53,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[2] = elem)}
                 width="77"
                 height="77"
-                src={`${window.cdn}art_assets/icons/Shape-01.png`}
+                src={`${window.cdn}icons/Shape-01.png`}
             />
 
             {/* <!-- BOX 1 --> */}
@@ -63,7 +63,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[3] = elem)}
                 width="77"
                 height="77"
-                src={`${window.cdn}art_assets/icons/Shape-09.png`}
+                src={`${window.cdn}icons/Shape-09.png`}
             />
 
             {/* <!-- BOX 2 --> */}
@@ -73,7 +73,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[4] = elem)}
                 width="100"
                 height="100"
-                src={`${window.cdn}art_assets/icons/Shape-06.png`}
+                src={`${window.cdn}icons/Shape-06.png`}
             />
 
             {/* <!-- BOX 3 --> */}
@@ -83,7 +83,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[5] = elem)}
                 width="100"
                 height="100"
-                src={`${window.cdn}art_assets/icons/Shape-03.png`}
+                src={`${window.cdn}icons/Shape-03.png`}
             />
 
             {/* <!-- TRIANGLE 1 --> */}
@@ -93,7 +93,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[6] = elem)}
                 width="80"
                 height="80"
-                src={`${window.cdn}art_assets/icons/Shape-05.png`}
+                src={`${window.cdn}icons/Shape-05.png`}
             />
 
             {/* <!-- TRIANGLE 2 --> */}
@@ -103,7 +103,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[7] = elem)}
                 width="80"
                 height="80"
-                src={`${window.cdn}art_assets/icons/Shape-08.png`}
+                src={`${window.cdn}icons/Shape-08.png`}
             />
 
             {/* <!-- TRIANGLE 3 --> */}
@@ -113,7 +113,7 @@ const BGPatterns = () => {
                 ref={(elem) => (iconsRef.current[8] = elem)}
                 width="80"
                 height="80"
-                src={`${window.cdn}art_assets/icons/Shape-02.png`}
+                src={`${window.cdn}icons/Shape-02.png`}
             />
         </div>
     );

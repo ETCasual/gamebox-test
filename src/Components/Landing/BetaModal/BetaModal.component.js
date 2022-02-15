@@ -7,11 +7,11 @@ const BetaModal = ({ setModal }) => {
                 <img
                     width={110}
                     className="img-fluid"
-                    src={`${window.cdn}art_assets/logo/logo_esportsmini.png`}
-                    alt="Esports Mini"
+                    src={`${window.cdn}logo/logo_gamebox.png`}
+                    alt="GameBox"
                 />
                 <p className="mt-4 mb-5">
-                    Welcome to Esports Mini. We have closed our Playtest Phase
+                    Welcome to GameBox. We have closed our Playtest Phase
                     1. As of 30 December 2021, no real prize will be given to
                     the winners.
                     <br />

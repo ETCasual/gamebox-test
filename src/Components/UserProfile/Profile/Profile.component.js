@@ -42,7 +42,7 @@ const Profile = ({
                                         src={
                                             user
                                                 ? user.picture
-                                                : `${window.cdn}art_assets/avatars/avatar_01.png`
+                                                : `${window.cdn}avatars/avatar_01.png`
                                         }
                                         alt="avatar"
                                     />
@@ -71,7 +71,7 @@ const Profile = ({
                                     <div className="gem-wrapper">
                                         <img
                                             width="24"
-                                            src={`${window.cdn}art_assets/gems/gems.png`}
+                                            src={`${window.cdn}gems/gems.png`}
                                             alt="gems"
                                         />
                                         <span className="gems">
@@ -79,7 +79,7 @@ const Profile = ({
                                         </span>
                                         <img
                                             width="22"
-                                            src={`${window.cdn}art_assets/buttons/button_addgems.png`}
+                                            src={`${window.cdn}buttons/button_addgems.png`}
                                             alt="add-gems"
                                         />
                                     </div>
@@ -93,7 +93,7 @@ const Profile = ({
                                 <div className="gem-wrapper">
                                     <img
                                         width="24"
-                                        src={`${window.cdn}art_assets/gems/gems.png`}
+                                        src={`${window.cdn}gems/gems.png`}
                                         alt="gems"
                                     />
                                     <span className="gems">
@@ -211,13 +211,13 @@ const Profile = ({
                                     <div className="d-none col-md-5 px-0 d-flex align-items-end justify-content-end">
                                         <img
                                             className="img-fluid bg-d"
-                                            src={`${window.cdn}art_assets/illustrations/friends_01.png`}
+                                            src={`${window.cdn}illustrations/friends_01.png`}
                                             alt="invite"
                                         />
                                     </div>
                                     <img
                                         className="img-fluid bg-m d-md-none"
-                                        src={`${window.cdn}art_assets/illustrations/friends_01.png`}
+                                        src={`${window.cdn}illustrations/friends_01.png`}
                                         alt="invite"
                                     />
                                 </div>

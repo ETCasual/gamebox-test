@@ -137,7 +137,7 @@ const EarnAdditionalTickets = ({
                                     <div className="col-3 col-md-12 p-0 text-center">
                                         <img
                                             className="watch-ads-img my-3"
-                                            src={`${window.cdn}art_assets/illustrations/tickets_ads.png`}
+                                            src={`${window.cdn}illustrations/tickets_ads.png`}
                                             alt="watch ads"
                                         />
                                     </div>
@@ -154,7 +154,7 @@ const EarnAdditionalTickets = ({
                                             </p>
                                             <img
                                                 width="24"
-                                                src={`${window.cdn}art_assets/icons/tickets.png`}
+                                                src={`${window.cdn}icons/tickets.png`}
                                                 alt="tickets"
                                             />
                                         </div>
@@ -187,7 +187,7 @@ const EarnAdditionalTickets = ({
                                     <div className="col-3 col-md-12 p-0 text-center">
                                         <img
                                             className="use-gems-img"
-                                            src={`${window.cdn}art_assets/gems/gems_01.png`}
+                                            src={`${window.cdn}gems/gems_01.png`}
                                             alt="watch ads"
                                         />
                                     </div>
@@ -205,7 +205,7 @@ const EarnAdditionalTickets = ({
                                                 </p>
                                                 <img
                                                     width="24"
-                                                    src={`${window.cdn}art_assets/icons/tickets.png`}
+                                                    src={`${window.cdn}icons/tickets.png`}
                                                     alt="tickets"
                                                 />
                                             </div>
@@ -219,7 +219,7 @@ const EarnAdditionalTickets = ({
                                                 <img
                                                     width="14"
                                                     height="14"
-                                                    src={`${window.cdn}art_assets/icons/exp_01.png`}
+                                                    src={`${window.cdn}icons/exp_01.png`}
                                                     alt="exp"
                                                 />
                                             </div>

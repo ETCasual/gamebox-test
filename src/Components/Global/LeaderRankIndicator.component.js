@@ -4,17 +4,17 @@ const LeaderRankIndicator = ({ index, type }) => {
     if (type === "lb") {
         return index === 0 ? (
             <img
-                src={`${window.cdn}art_assets/icons/leaderboard-ranks_01_gold.png`}
+                src={`${window.cdn}icons/leaderboard-ranks_01_gold.png`}
                 alt="gold"
             />
         ) : index === 1 ? (
             <img
-                src={`${window.cdn}art_assets/icons/leaderboard-ranks_02_silver.png`}
+                src={`${window.cdn}icons/leaderboard-ranks_02_silver.png`}
                 alt="silver"
             />
         ) : index === 2 ? (
             <img
-                src={`${window.cdn}art_assets/icons/leaderboard-ranks_03_bronze.png`}
+                src={`${window.cdn}icons/leaderboard-ranks_03_bronze.png`}
                 alt="bronze"
             />
         ) : (
@@ -23,17 +23,17 @@ const LeaderRankIndicator = ({ index, type }) => {
     } else if (type === "current") {
         return index === 1 ? (
             <img
-                src={`${window.cdn}art_assets/icons/leaderboard-ranks_01_gold.png`}
+                src={`${window.cdn}icons/leaderboard-ranks_01_gold.png`}
                 alt="gold"
             />
         ) : index === 2 ? (
             <img
-                src={`${window.cdn}art_assets/icons/leaderboard-ranks_02_silver.png`}
+                src={`${window.cdn}icons/leaderboard-ranks_02_silver.png`}
                 alt="silver"
             />
         ) : index === 3 ? (
             <img
-                src={`${window.cdn}art_assets/icons/leaderboard-ranks_03_bronze.png`}
+                src={`${window.cdn}icons/leaderboard-ranks_03_bronze.png`}
                 alt="bronze"
             />
         ) : (

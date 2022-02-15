@@ -25,7 +25,7 @@ const NotificationLeaderboard = ({
                             onClick={handleCloseLeaderboardHistory}
                             className="close-button"
                             width="38"
-                            src={`${window.cdn}art_assets/buttons/button_close_01.png`}
+                            src={`${window.cdn}buttons/button_close_01.png`}
                             alt="close-btn"
                         />
                         {/* TOP - PRIZE AND GAME INFO */}
@@ -155,7 +155,7 @@ const NotificationLeaderboard = ({
                                     <img
                                         className="ml-1"
                                         width="24"
-                                        src={`${window.cdn}art_assets/icons/tickets.png`}
+                                        src={`${window.cdn}icons/tickets.png`}
                                         alt="tickets"
                                     />
                                 </div>
@@ -191,7 +191,7 @@ const NotificationLeaderboard = ({
                                         <img
                                             className="ml-1"
                                             width="24"
-                                            src={`${window.cdn}art_assets/icons/tickets.png`}
+                                            src={`${window.cdn}icons/tickets.png`}
                                             alt="exp"
                                         />
                                     </div>
@@ -221,7 +221,7 @@ const NotificationLeaderboard = ({
                                     <img
                                         className="ml-1"
                                         width="24"
-                                        src={`${window.cdn}art_assets/icons/exp_01.png`}
+                                        src={`${window.cdn}icons/exp_01.png`}
                                         alt="exp"
                                     />
                                 </div>
