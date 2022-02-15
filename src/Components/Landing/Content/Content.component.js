@@ -13,9 +13,8 @@ const Content = ({
         <section id="landing">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto d-flex flex-column justify-content-center">
-                        {/* HERO */}
-                        <div
+                    {/* HERO */}
+                    <div
                             className="hero w-100 text-center p-4 d-flex flex-column align-items-center justify-content-center"
                             ref={heroRef}
                         >
@@ -79,14 +78,15 @@ const Content = ({
                                 alt="game-5"
                             />
                         </div>
-                        {/* WORK */}
-                        <div className="works w-100 mt-5" ref={workRef}>
-                            <h1 className="title mb-1">How it works?</h1>
+                    <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto d-flex flex-column justify-content-center">
+                         {/* WORK */}
+                         <div className="works w-100 mt-5" ref={workRef}>
+                            <h1 className="title mb-1">HOW IT WORKS?</h1>
                             <p className="subtitle">
-                                Discover prizes, play games and win them.
+                                Just follow these 3 simple steps.
                             </p>
-                            <div className="row">
-                                <div className="col-12 col-md-4 px-md-2">
+                            <div className="row d-flex justify-content-center">
+                                <div className="col-12 col-md-4 px-md-4">
                                     <div
                                         className="work-card"
                                         ref={(elem) => {
@@ -100,11 +100,11 @@ const Content = ({
                                         />
                                         <p className="mb-2 step">STEP 1</p>
                                         <h5 className="title">
-                                            Discover Rewards
+                                            Discover NFT’s
                                         </h5>
                                         <p className="description">
-                                            Discover and choose from a variety
-                                            Of rewards
+                                            A wide collection of NFT’s waiting
+                                            just to be discovered.
                                         </p>
                                     </div>
                                 </div>
@@ -121,11 +121,13 @@ const Content = ({
                                             alt="play games"
                                         />
                                         <p className="mb-2 step">STEP 2</p>
-                                        <h5 className="title">Play Games</h5>
+                                        <h5 className="title">
+                                            Compete in tournaments
+                                        </h5>
                                         <p className="description">
                                             Compete with players around the
                                             world and get the highest score to
-                                            win
+                                            win.
                                         </p>
                                     </div>
                                 </div>
@@ -142,10 +144,10 @@ const Content = ({
                                             alt="win rewards"
                                         />
                                         <p className="mb-2 step">STEP 3</p>
-                                        <h5 className="title">Win Rewards</h5>
+                                        <h5 className="title">Win NFT’s</h5>
                                         <p className="description">
                                             Collect tickets and stand a chance
-                                            To win the reward of your dreams
+                                            to win the NFT of your choice.
                                         </p>
                                     </div>
                                 </div>
@@ -158,23 +160,32 @@ const Content = ({
                         >
                             <h1 className="title mb-1">That's not all!</h1>
                             <p className="subtitle">
-                                Get FREE rewards everyday
+                                FREE NFT’s for you every week.
                             </p>
                             <div
                                 className="col-12 wrapper text-center d-flex align-items-center justify-content-center"
                                 ref={dailyRewardCardRef}
                             >
-                                <div className="w-100 p-3">
-                                    <h2>Daily Bonus Reward</h2>
+                                <div className="w-100 p-3 ">
+                                    <h2>Get premium NFT’s every week!</h2>
                                     <p>
-                                        Get tickets automatically for daily
-                                        bonus reward when you win in any
+                                        Collect tickets automatically for weekly
+                                        NFT reward when you win in any
                                         tournaments!
                                     </p>
-                                    <button onClick={handleSignUp}>
-                                        Sign up now!
-                                    </button>
+                                    <div className="d-flex align-items-start flex-column ">
+                                        <button className="countdown-button mb-4">
+                                            3 days 23 hours 15 minutes left
+                                        </button>
+                                        <button
+                                            className="register-now-button "
+                                            onClick={handleSignUp}
+                                        >
+                                            Register now!
+                                        </button>
+                                    </div>
                                 </div>
+
                                 <img
                                     className="icon icon-1 d-none d-md-block"
                                     src={`${window.cdn}art_assets/illustrations/bonus_04.png`}
