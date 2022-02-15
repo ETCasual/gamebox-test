@@ -89,32 +89,34 @@ const GameDuration = ({
     return (
         <>
             <div
-                className="col-12 col-md-6 col-lg-6 col-xl-4 mb-4"
-                onClick={onClickEnterGame}
+                // className="col-12 col-md-6 col-lg-6 col-xl-4 mb-4"
+                className="individual-game"
                 style={{
                     opacity: isGameAvailable ? "1" : "0.5",
                     cursor: isGameAvailable ? "pointer" : "default",
                     pointerEvents: isGameAvailable ? "" : "none",
                 }}
+                onClick={onClickEnterGame}
             >
                 <div className="game-card">
                     <div
                         className="game-info"
                         style={{ backgroundImage: `url(${game.gameIcon})` }}
                     >
-                        <div className="overlay"></div>
-                        <p className="game-title mb-0">{game.gameTitle}</p>
-                        <div className="timer badges">
-                            <img
-                                className="mr-2"
-                                width="18"
-                                src={`${window.cdn}art_assets/icons/timer_normal.png`}
-                                alt="timer"
-                            />
-                            <p className="mb-0">{timer || "0d 0h 0m 0s"}</p>
+                        <div className="transparent-overlay">
+                            <div className="game-title">{game.gameTitle}</div>
+                            <div className="duration-holder">
+                                <div className="tournament-end-in-text">
+                                    Tournament ends in
+                                </div>
+                                <div className="game-duration">
+                                    {timer || "0d 0h 0m 0s"}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="p-2">
+
+                    <div>
                         <button className="join">Join Tournament</button>
                     </div>
                 </div>

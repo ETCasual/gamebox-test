@@ -129,180 +129,168 @@ const FortuneWheel = ({
 
     return (
         <>
-            <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100">
-                <div className="row justify-content-center w-100">
-                    <div className="col-12 col-md-8 col-lg-6 fortune-wheel-wrapper position-relative">
-                        {/* CLOSE BUTTON */}
-                        <img
-                            onClick={() =>
-                                !isClickedSpin
-                                    ? setFortuneWheelShown(false)
-                                    : null
-                            }
-                            className="close-button"
-                            width="38"
-                            src={`${window.cdn}art_assets/buttons/button_close_01.png`}
-                            alt="close-btn"
-                        />
-                        {!isProbabilityShown && (
-                            <>
-                                {/* PROBABILITY INFO ICON */}
-                                <img
-                                    width="20"
-                                    onClick={() =>
-                                        !isClickedSpin
-                                            ? setIsProbabilityShown(true)
-                                            : null
-                                    }
-                                    className="spinner-info-icon"
-                                    src={`${window.cdn}art_assets/buttons/button_info.png`}
-                                    alt="spinner-info-icon"
-                                />
-                                {/* TICKETS */}
-                                <div className="col-12 tickets d-flex flex-column align-items-center justify-content-center mt-4">
-                                    {/* TITLE */}
-                                    <p className="text-center title">
-                                        Daily Spinner
-                                    </p>
-                                    {/* TICKETS */}
-                                    <div className="tickets-wrapper d-flex flex-column align-items-center justify-content-center">
-                                        <p className="text-center mb-1 ticket-text">
-                                            Your Tickets
-                                        </p>
-                                        <p className="text-center mb-0 ticket-value">
-                                            {getPoolTickets(
-                                                poolTickets,
-                                                prizeId
-                                            )?.toLocaleString() || 0}
-                                            <img
-                                                width="24"
-                                                className="ml-2"
-                                                src={`${window.cdn}art_assets/icons/tickets.png`}
-                                                alt="tickets"
-                                            />
-                                        </p>
+            {/* <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100"> */}
+            <div className="spin-wrapper mx-auto">
+                {/* <div className="row justify-content-center w-100"> */}
+                <div className="fortune-wheel-wrapper position-relative">
+                    <div className="fortune-wheel-flex-row-container">
+                        {/* FIRST COLUMN */}
+                        <div className="navigation-container">
+                            {/* BACK BUTTON */}
+                            <div
+                                className="question-mark"
+                                onClick={() =>
+                                    !isClickedSpin
+                                        ? setFortuneWheelShown(false)
+                                        : null
+                                }
+                            >
+                                X
+                            </div>
+
+                            {/* PROBABILITY DISPLAY BUTTON */}
+                            <div
+                                className="question-mark"
+                                onClick={() => {
+                                    let currentShownFlag = isProbabilityShown;
+                                    setIsProbabilityShown(!currentShownFlag);
+                                }}
+                            >
+                                ?
+                            </div>
+                        </div>
+
+                        {/* SECOND COLUMN */}
+                        <div className="spinner-control-container">
+                            <div className="the-spinner-text">The spinner</div>
+
+                            <div className="earn-more-tickets-text">
+                                Earn more tickets here
+                            </div>
+
+                            <div className="spin-amount-left-text-container">
+                                <span className="you-have-text">{`You have `}</span>
+                                <span className="spin-number">
+                                    {spinner?.freeSpins > 0
+                                        ? spinner?.freeSpins
+                                        : 0}
+                                </span>
+                                <span className="spins-left-text">{` spins left`}</span>
+                            </div>
+
+                            <div className="ticket-amount-outer">
+                                <div className="ticket-amount-inner">
+                                    <div className="your-tickets-text">
+                                        Your tickets
+                                    </div>
+                                    <div className="ticket-number">
+                                        {getPoolTickets(
+                                            poolTickets,
+                                            prizeId
+                                        )?.toLocaleString() || 0}
                                     </div>
                                 </div>
-                                {/* FORTUNE WHEEL */}
-                                <div className="col-12 wheel-spinner d-flex flex-column mt-5">
-                                    <div className="spin-wrapper mx-auto">
-                                        <FortuneWheelSVG
-                                            spinnerRules={spinnerRules}
-                                        />
-                                        <img
-                                            className="img-fluid pointer-img"
-                                            src={`${window.cdn}art_assets/icons/spinner_icon.png`}
-                                            alt="fortune-wheel"
-                                        />
-                                        <div className="spin-shadow"></div>
-                                        <div className="btn-spin-wrapper d-flex justify-content-center align-items-center">
-                                            <button
-                                                disabled={
-                                                    spinner.freeSpins <= 0 ||
-                                                    isClickedSpin
-                                                        ? true
-                                                        : false
-                                                }
-                                                className={`btn-spin my-3 text-white ${
-                                                    spinner.freeSpins <= 0 ||
-                                                    isClickedSpin
-                                                        ? "opacity-0-5"
-                                                        : ""
-                                                }`}
-                                                onClick={onClickSpinButton}
-                                            >
-                                                SPIN
-                                            </button>
+                            </div>
+
+                            {/* USE GEMS BUTTON */}
+                            {spinner?.freeSpins <= 0 &&
+                                user?.gems >= config.useGems &&
+                                !isClickedSpin && (
+                                    <div
+                                        className="use-gems-button"
+                                        disabled={spinBuyProcess ? true : false}
+                                        onClick={() =>
+                                            spinner?.freeSpins <= 0
+                                                ? setIsBuySpinConfirmModalShown(
+                                                      true
+                                                  )
+                                                : null
+                                        }
+                                    >
+                                        <div className="use-gems-text">
+                                            Use {config.useGems} Gems
+                                        </div>
+                                        <div className="get-spins-text">
+                                            Get {config.useGemsSpin} more spins
                                         </div>
                                     </div>
-                                </div>
-                                {/* AVAIABLE SPINS */}
-                                <div
-                                    className={`col-12 d-flex justify-content-center spin-available mt-4 ${
-                                        spinner?.freeSpins <= 0 &&
-                                        !isClickedSpin
-                                            ? "mb-3"
-                                            : "mb-5"
-                                    }`}
-                                >
-                                    <p className="mb-0">
-                                        You have{" "}
-                                        <span className="count">
-                                            {spinner?.freeSpins > 0
-                                                ? spinner?.freeSpins
-                                                : 0}
-                                        </span>{" "}
-                                        spins left today
-                                    </p>
-                                </div>
-                                {/* BUY MORE SPINS */}
-                                {spinner?.freeSpins <= 0 &&
-                                    user?.gems >= config.useGems &&
-                                    !isClickedSpin && (
-                                        <button
-                                            className="buy-more-spins mb-3"
-                                            disabled={
-                                                spinBuyProcess ? true : false
-                                            }
-                                            onClick={() =>
-                                                spinner?.freeSpins <= 0
-                                                    ? setIsBuySpinConfirmModalShown(
-                                                          true
-                                                      )
-                                                    : null
-                                            }
-                                        >
-                                            Get {config.useGemsSpin} more spins
-                                            with {config.useGems} gems
-                                        </button>
-                                    )}
-                                {/* INSUFFICIENT GEMS */}
-                                {spinner?.freeSpins <= 0 &&
-                                    user?.gems <= config.useGems &&
-                                    !isClickedSpin && (
-                                        <Link
-                                            to={"/iap"}
-                                            className="buy-more-gems mb-3 d-flex flex-column align-items-center justify-content-center"
-                                        >
+                                )}
+
+                            {/* PURCHASE GEMS BUTTON */}
+                            {spinner?.freeSpins <= 0 &&
+                                user?.gems <= config.useGems &&
+                                !isClickedSpin && (
+                                    <Link
+                                        to={"/iap"}
+                                        className="purchase-gems-button"
+                                    >
+                                        <div className="insufficient-gems-text">
                                             Insufficient gems.
-                                            <span className="pt-1">
-                                                Click here to purchase
-                                            </span>
-                                        </Link>
-                                    )}
-                            </>
-                        )}
-                        {/* PROBABLITIES */}
-                        {isProbabilityShown && (
-                            <div className="spinner-rules h-100 col-12 py-3">
-                                <p className="mt-3 mb-4 title">
-                                    Spinner Chances
-                                </p>
-                                <div className="col-6 col-md-5 p-0 probability">
-                                    <ul className="list-unstyled">
-                                        {spinnerRules?.map((rule, idx) => (
-                                            <li key={`prob-${idx}`}>
-                                                <div className="wrapper d-flex align-items-center justify-content-between">
-                                                    <p>{rule?.probability}%</p>
-                                                    <p>
-                                                        {rule?.tickets} tickets
-                                                    </p>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                        </div>
+                                        <div className="purchase-text">
+                                            Click here to purchase.
+                                        </div>
+                                    </Link>
+                                )}
+
+                            {/* PROBABILITY TABLE */}
+                            {isProbabilityShown && (
+                                <table className="probability-table">
+                                    {spinnerRules?.map((rule, idx) => (
+                                        <tr
+                                            className="probability-row"
+                                            id={idx}
+                                        >
+                                            <td className="probability-percentage">
+                                                {rule?.probability}%
+                                            </td>
+                                            <td className="probability-tickets-text">
+                                                {rule?.tickets} tickets
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </table>
+                            )}
+                        </div>
+
+                        {/* THIRD COLUMN */}
+                        <div className="fortune-wheel-container">
+                            <FortuneWheelSVG
+                                spinnerRules={spinnerRules}
+                            ></FortuneWheelSVG>
+
+                            {/* SPIN BUTTON*/}
+                            <div className="spin-button">
+                                <div className="spin-button-white-outline">
+                                    <button
+                                        disabled={
+                                            spinner.freeSpins <= 0 ||
+                                            isClickedSpin
+                                                ? true
+                                                : false
+                                        }
+                                        onClick={onClickSpinButton}
+                                        className="spin-button-inner-orange"
+                                    >
+                                        <div className="spin-button-white-shine">
+                                            SPIN
+                                        </div>
+                                    </button>
                                 </div>
-                                <div className="separator"></div>
-                                <button
-                                    className="d-flex align-items-center justify-content-center text-white pt-4 pb-3 w-100"
-                                    onClick={() => setIsProbabilityShown(false)}
-                                >
-                                    Back
-                                </button>
                             </div>
-                        )}
+
+                            {/* TRIANGLE POINTER */}
+                            <div className="pointer-img-wrapper">
+                                <img
+                                    className="img-fluid pointer-img"
+                                    src={`${window.cdn}art_assets/icons/spinner_icon.png`}
+                                    alt="fortune-wheel"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {/* </div> */}
             </div>
             {/* POPUP MODAL FOR BUYING SPINS WITH GEMS */}
             {isBuySpinConfirmModalShown && (
