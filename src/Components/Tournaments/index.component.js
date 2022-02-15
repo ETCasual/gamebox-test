@@ -397,7 +397,7 @@ const Index = ({ match }) => {
                                         <div className="game-info-background col-12">
                                             <div className="row game-detail-panel">
                                                 <div className="col-12">
-                                                    <div className="join-tournament-container"> 
+                                                    <div className="join-tournament-container">
                                                         <div className="statement-title">
                                                             JOIN TOURNAMENTS!
                                                         </div>

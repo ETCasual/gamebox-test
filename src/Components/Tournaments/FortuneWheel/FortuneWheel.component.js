@@ -36,7 +36,7 @@ const FortuneWheel = ({
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [wheelRotation, setWheelRotation] = useState(0);
     const [isBuySpinConfirmModalShown, setIsBuySpinConfirmModalShown] =
-        useState(true);
+        useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
     const spinDuration = 3;
 
@@ -130,11 +130,13 @@ const FortuneWheel = ({
     return (
         <>
             {/* <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100"> */}
-            <div className="mx-auto">
+            <div className="spin-wrapper mx-auto">
                 {/* <div className="row justify-content-center w-100"> */}
                 <div className="fortune-wheel-wrapper position-relative">
                     <div className="fortune-wheel-flex-row-container">
+                        {/* FIRST COLUMN */}
                         <div className="navigation-container">
+                            {/* BACK BUTTON */}
                             <div
                                 className="question-mark"
                                 onClick={() =>
@@ -145,6 +147,8 @@ const FortuneWheel = ({
                             >
                                 X
                             </div>
+
+                            {/* PROBABILITY DISPLAY BUTTON */}
                             <div
                                 className="question-mark"
                                 onClick={() => {
@@ -155,6 +159,8 @@ const FortuneWheel = ({
                                 ?
                             </div>
                         </div>
+
+                        {/* SECOND COLUMN */}
                         <div className="spinner-control-container">
                             <div className="the-spinner-text">The spinner</div>
 
@@ -186,6 +192,7 @@ const FortuneWheel = ({
                                 </div>
                             </div>
 
+                            {/* USE GEMS BUTTON */}
                             {spinner?.freeSpins <= 0 &&
                                 user?.gems >= config.useGems &&
                                 !isClickedSpin && (
@@ -209,6 +216,7 @@ const FortuneWheel = ({
                                     </div>
                                 )}
 
+                            {/* PURCHASE GEMS BUTTON */}
                             {spinner?.freeSpins <= 0 &&
                                 user?.gems <= config.useGems &&
                                 !isClickedSpin && (
@@ -225,6 +233,7 @@ const FortuneWheel = ({
                                     </Link>
                                 )}
 
+                            {/* PROBABILITY TABLE */}
                             {isProbabilityShown && (
                                 <table className="probability-table">
                                     {spinnerRules?.map((rule, idx) => (
@@ -243,7 +252,42 @@ const FortuneWheel = ({
                                 </table>
                             )}
                         </div>
-                        <div className="fortune-wheel-container"></div>
+
+                        {/* THIRD COLUMN */}
+                        <div className="fortune-wheel-container">
+                            <FortuneWheelSVG
+                                spinnerRules={spinnerRules}
+                            ></FortuneWheelSVG>
+
+                            {/* SPIN BUTTON*/}
+                            <div className="spin-button">
+                                <div className="spin-button-white-outline">
+                                    <button
+                                        disabled={
+                                            spinner.freeSpins <= 0 ||
+                                            isClickedSpin
+                                                ? true
+                                                : false
+                                        }
+                                        onClick={onClickSpinButton}
+                                        className="spin-button-inner-orange"
+                                    >
+                                        <div className="spin-button-white-shine">
+                                            SPIN
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* TRIANGLE POINTER */}
+                            <div className="pointer-img-wrapper">
+                                <img
+                                    className="img-fluid pointer-img"
+                                    src={`${window.cdn}art_assets/icons/spinner_icon.png`}
+                                    alt="fortune-wheel"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {/* </div> */}

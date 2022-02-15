@@ -455,6 +455,74 @@
             }
             .fortune-wheel-container {
                 width: 528px;
+                margin-top: auto;
+                margin-bottom: auto;
+                .spin-button {
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 507px;
+                    top: 50%;
+                    .spin-button-white-outline {
+                        width: 97px;
+                        height: 97px;
+                        background: #f4f4f4 0% 0% no-repeat padding-box;
+                        box-shadow: 0px 12px 20px #c48a00b2;
+                        opacity: 1;
+                        border-radius: 50%;
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .spin-button-inner-orange {
+                            width: 77px;
+                            height: 77px;
+                            background: transparent
+                                linear-gradient(
+                                    180deg,
+                                    #fdc43d 0%,
+                                    #ff9300 100%
+                                )
+                                0% 0% no-repeat padding-box;
+                            opacity: 1;
+                            border-radius: 50%;
+                            display: inherit;
+                            align-items: inherit;
+                            justify-content: inherit;
+                            cursor: pointer;
+                            .spin-button-white-shine {
+                                width: 66px;
+                                height: 66px;
+                                background: transparent
+                                    radial-gradient(
+                                        closest-side at 50% 0%,
+                                        #ffffff72 0%,
+                                        #ffffff00 100%
+                                    )
+                                    0% 0% no-repeat padding-box;
+                                opacity: 1;
+                                border-radius: 50%;
+                                font-size: $fnt-sz-16;
+                                font-weight: bold;
+                                display: inherit;
+                                align-items: inherit;
+                                justify-content: inherit;
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                }
+                .pointer-img-wrapper {
+                    width: 507px;
+                    display: flex;
+                    justify-content: center;
+                    position: absolute;
+                    top: 30%;
+                    .pointer-img {
+                        width: clamp(1rem, 2vw, 1.7rem);
+                    }
+                }
             }
         }
     }
