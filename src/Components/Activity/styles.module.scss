@@ -14,25 +14,6 @@
         background-size: cover;
         background-position: top;
         cursor: pointer;
-        .overlay {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            z-index: 0;
-            background: linear-gradient(
-                183deg,
-                rgba(black, 0) 0%,
-                rgba(#3f3f3f, 0.2) 60%,
-                rgba(black, 0.577766) 100%
-            );
-            border-top-left-radius: 17px;
-            border-top-right-radius: 17px;
-        }
-        .prize-id {
-            color: white;
-            font-size: $fnt-sz-10;
-        }
     }
     .ticket-info {
         background: transparent
@@ -40,33 +21,15 @@
             padding-box;
         border-radius: 0 17px 17px 0;
         .prize-info {
-            width: fit-content;
-            width: -webkit-fit-content;
-            width: -moz-fit-content;
             .prize-title {
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-14;
-                // @media only screen and (min-width: 480px) {
-                //     font-size: 0.875rem;
-                // }
-                // @media only screen and (min-width: 768px) {
-                //     font-size: 1.5rem;
-                // }
-                // @media only screen and (min-width: 1200px) {
-                //     font-size: 1.125rem;
-                // }
-                // @media only screen and (min-width: 1320px) {
-                //     font-size: 1.25rem;
-                // }
                 color: white;
                 margin-bottom: 0.3em;
             }
             .prize-subtitle {
                 color: white;
                 font-size: $fnt-sz-12;
-                // @media only screen and (min-width: 1320px) {
-                //     font-size: 0.875rem;
-                // }
                 line-height: 120%;
             }
         }
@@ -89,47 +52,9 @@
             .pool-tickets {
                 background-color: #1d1d1d;
                 border-bottom-right-radius: 17px;
-
-                img.icon {
-                    width: 18px;
-                    @media only screen and (min-width: 480px) {
-                        width: 24px;
-                        height: 27px;
-                        object-fit: cover;
-                    }
-                }
-                .label {
-                    font-size: 0.625rem;
-                    @media only screen and (min-width: 360px) {
-                        font-size: 0.75rem;
-                    }
-                    @media only screen and (min-width: 1320px) {
-                        font-size: 0.625rem;
-                    }
-                    line-height: 133%;
-                    color: #868686;
-                }
-                .tickets {
-                    font-size: 0.75rem;
-                    @media only screen and (min-width: 360px) {
-                        font-size: 0.875rem;
-                    }
-                    @media only screen and (min-width: 768px) {
-                        font-size: 1.5rem;
-                    }
-                    @media only screen and (min-width: 1200px) {
-                        font-size: 1.125rem;
-                    }
-                    @media only screen and (min-width: 1320px) {
-                        font-size: 1.25rem;
-                    }
-                }
                 .required-tickets {
                     color: #9d9d9d;
-                    font-size: $fnt-sz-10;
-                    @media only screen and (min-width: 768px) {
-                        font-size: $fnt-sz-10;
-                    }
+                    font-size: $fnt-sz-12;
                 }
             }
         }

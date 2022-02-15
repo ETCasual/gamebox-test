@@ -97,7 +97,8 @@ const Index = () => {
                                     className="col-12 col-md-6 col-lg-6 col-xl-6 mb-4 mb-md-3 px-md-2"
                                 >
                                     {/* CARD WRAPPER */}
-                                    <Link className="d-flex"
+                                    <Link
+                                        className="d-flex"
                                         onClick={scrollToTop}
                                         to={{
                                             pathname: `/prize/${getPrizeType(
@@ -144,18 +145,16 @@ const Index = () => {
                                                 </div>
 
                                                 <div className="pool-tickets px-2 py-3 d-flex flex-md-column align-items-center">
-                                                    <div className="d-flex align-items-center px-0">
-                                                        <p className="mb-0 required-tickets">
-                                                            {`\u00A0${(
-                                                                card?.ticketsRequired -
-                                                                    getPrizeTicketCollected(
-                                                                        prizeTicketCollection,
-                                                                        card?.prizeId
-                                                                    ) || 0
-                                                            ).toLocaleString()}`}{" "}
-                                                            tickets remaining
-                                                        </p>
-                                                    </div>
+                                                    <p className="mb-0 required-tickets">
+                                                        {`\u00A0${(
+                                                            card?.ticketsRequired -
+                                                                getPrizeTicketCollected(
+                                                                    prizeTicketCollection,
+                                                                    card?.prizeId
+                                                                ) || 0
+                                                        ).toLocaleString()}`}{" "}
+                                                        tickets remaining
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

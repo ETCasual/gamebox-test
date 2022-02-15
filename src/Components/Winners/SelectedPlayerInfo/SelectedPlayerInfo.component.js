@@ -21,15 +21,6 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
     const [ranksList, setRanksList] = useState([]);
     const [playersHighScoreList, setPlayerHighScoreList] = useState([]);
 
-    // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
-    useEffect(() => {
-        const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
-        return () => {
-            overlay?.removeAttribute("style");
-        };
-    }, []);
-
     useEffect(() => {
         const navBottom = document.querySelector(".navbar-bottom");
         if (navBottom)
@@ -47,25 +38,25 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
     return (
         <>
             {/* BACK BUTTON */}
-            <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center mx-auto">
-                <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8 justify-content-between">
-                    <button className="d-flex align-items-center justify-content-center p-0">
-                        <img
-                            onClick={handleBackButton}
-                            className="back-button"
-                            width="42"
-                            src={`${window.cdn}buttons/button_back.png`}
-                            alt="back-btn"
-                        />
-                    </button>
+            <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center">
+                <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-7 mx-auto d-flex align-items-center">
+                    <img
+                        onClick={handleBackButton}
+                        className="back-button"
+                        width="42"
+                        src={`${window.cdn}buttons/button_back.png`}
+                        alt="back-btn"
+                    />
+                    <span className="ml-2">Back</span>
                 </div>
             </div>
             {/* PLAYER INFO */}
-            <section id="selected-player-info" className="absolute-panel">
+            <section id="selected-player-info">
                 <div className="container-fluid">
-                    <div className="col-12 px-0 mb-5">
+                    <div className="col-12 mb-5">
                         <div className="row flex-column align-items-center justify-content-center">
-                            <div className="col-12 col-md-8 col-lg-6">
+                            {/* PLAYER, LEVEL, EXP & MULTIPLIER */}
+                            <div className="col-12 col-md-8 col-lg-5">
                                 <div className="row">
                                     {/* PLAYER INFO */}
                                     <div className="col-12 text-center">
@@ -77,15 +68,16 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                 src={playerDetailsData.picture}
                                                 alt="avatar"
                                             />
-                                            <h3 className="my-3">
+                                            <h2 className="mt-3 mb-1">
                                                 {playerDetailsData.name}
-                                            </h3>
+                                            </h2>
+                                            <p>user@froyo.games</p>
                                         </div>
                                     </div>
                                     {/* PLAYER MULTIPLIER */}
                                     <div className="col-12 mt-3">
                                         <div className="multiplier p-4 d-flex flex-column align-items-start">
-                                            <p className="mb-auto multiplier-info">
+                                            <p className="mb-3 multiplier-info">
                                                 Multiplier{" "}
                                                 <span>
                                                     {getCurrentMultiplier(
@@ -119,21 +111,16 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                                   ]?.exp?.toLocaleString()
                                                                 : playerDetailsData?.exp?.toLocaleString()}
                                                         </span>
-                                                        <span className="px-2">
+                                                        <span className="px-1">
                                                             /
                                                         </span>
-                                                        <span className="current-mutliplier-total">
+                                                        <span className="current-mutliplier-total pr-1">
                                                             {getCurrentLevelExp(
                                                                 playerDetailsData,
                                                                 ranksList
                                                             )?.toLocaleString()}
-                                                        </span>{" "}
-                                                        <img
-                                                            className="ml-1"
-                                                            width="18"
-                                                            src={`${window.cdn}icons/exp_01.png`}
-                                                            alt="coin"
-                                                        />
+                                                        </span>
+                                                        <span>exp</span>
                                                     </div>
                                                 </div>
                                                 <div className="col-12 position-relative px-0">
@@ -151,25 +138,6 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                             aria-valuemax="100"
                                                         />
                                                     </div>
-                                                    <div
-                                                        className="progressbar-shadow"
-                                                        role="progressbar"
-                                                        style={{
-                                                            width: `${
-                                                                getLevelProgress(
-                                                                    playerDetailsData,
-                                                                    ranksList
-                                                                ) >= 100
-                                                                    ? 100
-                                                                    : getLevelProgress(
-                                                                          playerDetailsData,
-                                                                          ranksList
-                                                                      )
-                                                            }%`,
-                                                        }}
-                                                        aria-valuemin="0"
-                                                        aria-valuemax="100"
-                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -177,7 +145,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                 </div>
                             </div>
                             {/* HIGHSCORES */}
-                            <div className="col-12 col-md-8 col-lg-6 high-score mt-5">
+                            <div className="col-12 col-md-8 col-lg-5 high-score mt-5">
                                 <div className="row">
                                     <div className="col-12">
                                         <p className="title mb-4">Highscores</p>
@@ -189,7 +157,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                             key={`highscore-${i}`}
                                             className="col-12"
                                         >
-                                            <div className="row mb-3 px-3 align-items-center justify-content-between highscore-card">
+                                            <div className="row mb-4 px-3 align-items-center justify-content-between highscore-card">
                                                 <div className="col-2 col-xl-1 px-0">
                                                     <img
                                                         className="img-fluid"
@@ -197,8 +165,8 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                         alt="game"
                                                     />
                                                 </div>
-                                                <div className="col-10 col-xl-11 game-details">
-                                                    <p className="game-title">
+                                                <div className="col-10 col-xl-11 game-details d-flex flex-column align-items-start justify-content-end">
+                                                    <p className="game-title mb-2">
                                                         {card.gameTitle}
                                                     </p>
                                                     <div className="w-100 d-flex align-items-end justify-content-between">

@@ -42,19 +42,17 @@ const HighScore = ({ handleBackButton }) => {
                         <div className="col-12 col-md-10 col-lg-8 wrapper">
                             <div className="row">
                                 {/* BACK BUTTON */}
-                                <div className="col-12 justify-content-between mb-4 back-button-wrapper">
-                                    <button 
-                                        className="d-flex align-items-center justify-content-center p-0"
-                                        onClick={handleBackButton}
-                                    >
-                                        <img
-                                            className="back-button"
-                                            width="42"
-                                            src={`${window.cdn}buttons/button_back.png`}
-                                            alt="back-btn"
-                                        />
-                                        <span className="ml-2">Back</span>
-                                    </button>
+                                <div
+                                    className="mb-4 back-button-wrapper"
+                                    onClick={handleBackButton}
+                                >
+                                    <img
+                                        className="back-button"
+                                        width="42"
+                                        src={`${window.cdn}buttons/button_back.png`}
+                                        alt="back-btn"
+                                    />
+                                    <span className="ml-2">Back</span>
                                 </div>
 
                                 <div className="col-12 mb-4">
