@@ -36,7 +36,6 @@ import loadExchangeRate from "redux/thunks/ExchangeRate.thunk";
 import loadRanks from "redux/thunks/Ranks.thunk";
 import loadConfig from "redux/thunks/Config.thunk";
 import loadGemsList from "redux/thunks/GemsList.thunk";
-import { loadSubscriptionList } from "redux/thunks/Subscription.thunk";
 import loadSpinnerRules from "redux/thunks/SpinnerRules.thunk";
 import loadNotificationToken from "redux/thunks/UpdateNotificationToken.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
@@ -84,7 +83,6 @@ const App = () => {
                     dispatch(loadRanks());
                     dispatch(loadConfig());
                     dispatch(loadGemsList());
-                    dispatch(loadSubscriptionList());
                     dispatch(loadSpinnerRules());
                     dispatch(loadGamesList());
 

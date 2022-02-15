@@ -25,7 +25,6 @@ import playerSpinnerInfoReducer from "redux/reducers/PlayerSpinnerInfo.reducer";
 import playerTicketsReducer from "redux/reducers/PlayerTickets.reducer";
 import prizePoolTicketsReducer from "redux/reducers/PrizePoolTickets.reducer";
 import spinnerRulesReducer from "redux/reducers/SpinnerRules.reducer";
-import subscriptionReducer from "redux/reducers/Subscription.reducer";
 import unClaimedPrizesReducer from "redux/reducers/UnClaimedPrizes.reducer";
 import updateNotificationTokenReducer from "redux/reducers/UpdateNotificationToken.reducer";
 import winnersReducer from "redux/reducers/Winners.reducer";
@@ -67,7 +66,6 @@ const appReducer = combineReducers({
     userData: loginReducer,
     unClaimedPrizes: unClaimedPrizesReducer,
     updateNotificationToken: updateNotificationTokenReducer,
-    subscription: subscriptionReducer,
     spinnerRules: spinnerRulesReducer,
     winners: winnersReducer,
 });

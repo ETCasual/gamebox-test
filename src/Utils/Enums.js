@@ -27,13 +27,6 @@ export const monthYearDict = {
     11: "December",
 };
 
-export const subTypeDict = {
-    1: "day",
-    2: "week",
-    3: "month",
-    4: "year",
-};
-
 export const timeOptions = {
     hour: "2-digit",
     minute: "2-digit",

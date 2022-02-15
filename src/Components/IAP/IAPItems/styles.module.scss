@@ -1,204 +1,27 @@
 // SUBSCRIPTION COMPONENT
-#subscription-panel {
-    padding: 6em 0;
-    .subs-title {
-        font-size: 1.5rem;
-        @media only screen and (min-width: 768px) {
-            font-size: 2rem;
-            width: 12ch;
-        }
-        @media only screen and (min-width: 1024px) {
-            font-size: 2.3rem;
-            width: 12ch;
-        }
-        @media only screen and (min-width: 1200px) {
-            font-size: 36px;
-            width: 12ch;
-        }
-        color: black;
-
-        text-align: left;
-    }
-    .subtitle {
-        line-height: 1.5;
-        font-size: 0.75rem;
-        @media only screen and (min-width: 768px) {
-            font-size: 0.875rem;
-            width: 26ch;
-        }
-        color: #868686;
-    }
-    .terms-apply {
-        font-size: 10px;
-        color: #868686;
-    }
-    .subscription-wrapper {
-        .monthly-sub {
-            min-height: 20.25em;
-            background: radial-gradient(
-                closest-side at 50% 50%,
-                white 0%,
-                #f4f4f4 100%
-            );
-            border-radius: 15px;
-            padding: 0.6em;
-            box-shadow: 15px 15px 15px #00000029;
-            @media only screen and (min-width: 768px) {
-                box-shadow: -7px -7px 15px white, 15px 15px 15px #00000029;
-            }
-            .monthly-sub-inner {
-                background: white;
-                border-radius: 15px;
-                padding: 1em;
-                .monthly-title {
-                    color: #000000;
-                    font-size: 0.75rem;
-                    @media only screen and (min-width: 768px) {
-                        font-size: 0.875rem;
-                    }
-                }
-                .sub-detail {
-                    color: #000000;
-
-                    font-size: 1rem;
-                    @media only screen and (min-width: 768px) {
-                        font-size: 1.25rem;
-                    }
-                    span {
-                        font-size: 1.125rem;
-                        @media only screen and (min-width: 768px) {
-                            font-size: 1.25rem;
-                        }
-
-                        color: #14daa7;
-                    }
-                }
-                .price {
-                    position: relative;
-                    z-index: 0;
-                    color: #7824f8;
-
-                    font-size: 2.25rem;
-                    @media only screen and (min-width: 768px) {
-                        font-size: 2.875rem;
-                    }
-                    &::before {
-                        content: attr(data-title);
-                        position: absolute;
-                        z-index: -1;
-                        top: 0;
-                        -webkit-transform: translate(0.1em, 0.05em);
-                        transform: translate(0.1em, 0.05em);
-                        color: transparent;
-                        -webkit-text-stroke-color: #868686;
-                        -webkit-text-stroke-width: 1px;
-                    }
-                }
-                .sub-estimated {
-                    font-size: 0.75rem;
-                    @media only screen and (min-width: 768px) {
-                        font-size: 0.875rem;
-                    }
-                    color: #868686;
-                    span {
-                        color: #7824f8;
-                    }
-                }
-            }
-        }
-        .stay-ahead {
-            font-size: 0.75rem;
-            margin-block: 1.5em;
-        }
-        .sub-info {
-            color: #868686;
-            font-size: 0.625rem;
-        }
-        button {
-            box-shadow: 0px 18px 26px #00000029;
-            border-radius: 12px;
-            width: 100%;
-            margin: 0 auto;
-
-            color: white;
-            min-height: 3em;
-            font-size: 1rem;
-            @media only screen and (min-width: 768px) {
-                font-size: 1.125rem;
-            }
-        }
-        .btn-subscribe {
-            background: linear-gradient(259deg, #00ffbd 0%, #00aa7f 100%);
-        }
-    }
+#iap-items {
+    padding: 6rem 0;
     .gems-wrapper {
         .title {
-            color: #ffffff;
-
-            text-align: left;
-            font-size: $fnt-sz-24;
-            font-weight: $fnt-wgt-500;
-            // @media only screen and (min-width: 768px) {
-            //     font-size: 2.25rem;
-            // }
-            img {
-                width: 32px;
-                transform: rotate(30deg);
-            }
+            font-size: $fnt-sz-18;
+            font-weight: $fnt-wgt-600;
         }
-        .subtitle {
-            font-size: 0.75rem;
-            @media only screen and (min-width: 768px) {
-                font-size: 0.875rem;
-            }
-            color: #868686;
-            text-align: left;
-        }
-        color: white;
-        text-align: center;
-        margin-bottom: 2em;
-        .gem-inner {
-            // background: #f4f4f4;
-            // border-radius: 10px;
-            // // padding: 0.5em;
+        .pack {
             cursor: pointer;
-            // box-shadow: 0px 6px 30px #00000029;
-            .gem-pack{
+            .gem-info {
                 background: linear-gradient(160deg, #302f2f 0%, #0b0b0b 100%);
                 box-shadow: 0px 3px 6px #00000029;
                 border-radius: 10px 10px 0px 0px;
                 height: 238px;
-                p {
-                    
-                    // padding: 0.5em;
-                    // border-radius: 5px;
-                    // background-color: #fdc43d;
-                    color: #FDFDFD;
-                    font-size: $fnt-sz-18;
+                .gem-title {
+                    font-size: $fnt-sz-12;
                     font-weight: $fnt-wgt-300;
                 }
-            }
-            .gem-type {
-                // margin-bottom: 0.5em;
-                p {
-                    // padding: 0.5em;
-                    // border-radius: 5px;
-                    // background-color: #fdc43d;
-                    color: #fdfdfd;
-                    font-size: $fnt-sz-22;
-                    font-weight: $fnt-wgt-500;
-                    // @media only screen and (min-width: 768px) {
-                    //     font-size: 1.25rem;
-                    // }
-                    // @media only screen and (min-width: 1200px) {
-                    //     font-size: 1.1rem;
-                    // }
-                    // @media only screen and (min-width: 1480px) {
-                    //     font-size: 1.25rem;
-                    // }
+                .quantity {
+                    font-size: $fnt-sz-16;
+                    font-weight: $fnt-wgt-600;
                 }
             }
-           
             .price {
                 border-radius: 0px 0px 10px 10px;
                 padding: 1.35em;

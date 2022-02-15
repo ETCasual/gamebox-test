@@ -7,7 +7,6 @@ import store from "redux/store";
 import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
 
-// window.cdn = "https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/";
 window.cdn =
     "https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/";
 

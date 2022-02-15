@@ -1,9 +1,7 @@
 import {
     AddUserRequest,
     AddInviteRequest,
-    ActivateRequest,
     BuyRequest,
-    CancelRequest,
     ClaimWinnerRequest,
     ListPrizeRequest,
     ListRankRequest,
@@ -13,7 +11,6 @@ import {
     ListGameLeaderRuleRequest,
     ListLogGRequest,
     ListItemRequest,
-    ListSubscriptionRequest,
     ListSpinnerRuleRequest,
     ListWinnerUnclaimedRequest,
     ListWinnerClaimedRequest,
@@ -1041,38 +1038,6 @@ export async function getGemsList() {
 }
 
 //
-//     GET SUBSCRIPTION LIST
-//
-export async function getSubscriptionList() {
-    const token = sessionStorage.getItem("token");
-    const request = new ListSubscriptionRequest();
-    request.setLimit(20);
-    request.setOffset(0);
-    const response = await client.listSubscription(request, {
-        authorization: token,
-    });
-    const subscriptionResultList = response.getResultList();
-    const subscription = [];
-    subscriptionResultList.forEach((e) => {
-        subscription.push({
-            id: e.getId(),
-            title: e.getTitle(),
-            subtitle: e.getSubtitle(),
-            content: e.getContent(),
-            ImageUrl: e.getImgUrl(),
-            typeId: e.getTypeId(),
-            price: e.getPrice(),
-            quantity: e.getQuantity(),
-            status: e.getStatus(),
-            dailyMultiplier: e.getDailyMultiplier(),
-            dailyGem: e.getDailyGem(),
-            oneTimeGem: e.getOneTimeGem(),
-        });
-    });
-    return subscription;
-}
-
-//
 //  GET EXCHANGE RATE
 //
 export async function getExchangeRate() {
@@ -1133,36 +1098,9 @@ export async function getExchangeRate() {
     return { exchangeRate, ipInfo };
 }
 
-//
-// CANCEL SUBSCRIPTION
-//
-export async function cancelSubscription(user, expiryDate) {
-    const token = sessionStorage.getItem("token");
-    const request = new CancelRequest();
-    request.setUserId(user?.id);
-    request.setSubExpireDate(expiryDate);
 
-    const response = await client.cancel(request, {
-        authorization: token,
-        uid: user.providerUID,
-    });
-    console.log("Cancel Subscription:", response);
-}
 
-//
-// ACTIVE SUBSCRIPTION
-//
-export async function reActivateSubscription(user) {
-    const token = sessionStorage.getItem("token");
-    const request = new ActivateRequest();
-    request.setUserId(user?.id);
 
-    const response = await client.activate(request, {
-        authorization: token,
-        uid: user?.providerUID,
-    });
-    console.log("ReActivate Subscription:", response);
-}
 
 //
 //     GET SPINNER RULES
