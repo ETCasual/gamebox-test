@@ -149,115 +149,9 @@ button {
     }
 }
 
-// TOAST COMPONENT
-.toasty {
-    position: fixed;
-    top: 5rem;
-    right: 1rem;
-    background: white;
-    z-index: 3;
-    border-radius: 12px;
-    min-width: 20rem;
-    min-height: 5rem;
-    padding: 1rem;
-    transform: translateX(120%);
-    opacity: 0;
-    visibility: hidden;
-}
-
-// BACKGROUND PATTERNS COMPONENT
-.patter-wrapper {
-    @supports not ((-webkit-filter: none) or (filter: none)) {
-        background-color: rgba(244, 244, 244, 0.9);
-    }
-    @supports ((-webkit-filter: none) or (filter: none)) {
-        filter: blur(12px);
-        -webkit-filter: blur(12px);
-    }
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    z-index: -1;
-    .patterns {
-        position: fixed;
-    }
-    .triangle-1 {
-        top: 40%;
-        left: 32%;
-
-        @media only screen and (min-width: 1200px) {
-            top: 10em;
-            left: 10em;
-        }
-    }
-    .triangle-2 {
-        top: 9em;
-        right: -3em;
-
-        @media only screen and (min-width: 1200px) {
-            top: 9em;
-            right: 28em;
-        }
-    }
-    .triangle-3 {
-        bottom: 8em;
-        right: 6em;
-
-        @media only screen and (min-width: 1200px) {
-            bottom: 5em;
-            right: 6em;
-        }
-    }
-
-    .box-1 {
-        top: -2em;
-        left: -3em;
-
-        @media only screen and (min-width: 1200px) {
-            top: unset;
-            bottom: 10em;
-            left: 25em;
-        }
-    }
-    .box-2 {
-        top: 22em;
-        right: 5em;
-    }
-    .box-3 {
-        top: 5em;
-        left: 35em;
-    }
-
-    .circle-1 {
-        bottom: -3em;
-        left: -2em;
-
-        @media only screen and (min-width: 1200px) {
-            bottom: 5em;
-            left: -2em;
-        }
-    }
-    .circle-2 {
-        bottom: -3em;
-        right: -2em;
-        @media only screen and (min-width: 1200px) {
-            bottom: 10em;
-            right: 40em;
-        }
-    }
-    .circle-3 {
-        top: -1em;
-        right: 0em;
-    }
-}
-
-.nav-top-back-btn-wrapper {
-    cursor: default;
-    position: fixed;
-    top: 71px;
-    z-index: 2;
-    width: 100%;
-    min-height: 60px;
+// BACK BUTTON
+.back-button {
+    cursor: pointer;
     span {
         color: #f8ba29;
         font-size: $fnt-sz-12;
@@ -1046,6 +940,50 @@ button {
         font-size: 1.25rem;
         text-align: center;
         width: 30ch;
+    }
+}
+
+// TOAST COMPONENT
+.toasty {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    background: white;
+    z-index: 3;
+    border-radius: 12px;
+    min-width: 20rem;
+    min-height: 5rem;
+    padding: 1rem;
+    transform: translateX(120%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+// EMPTY PAGE - ACTIVITY, WINNERS, HIGHSCORE & NOTIFICATIONS
+.no-result {
+    min-height: 55vh;
+    @media only screen and (min-width: 375px) {
+        min-height: 65vh;
+    }
+    @media only screen and (min-width: 768px) {
+        min-height: 60vh;
+    }
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .title {
+        font-size: 1.75rem;
+    }
+    .subtitle {
+        font-size: 0.9rem;
+        color: #868686;
+        max-width: 38ch;
+        line-height: 1.5;
+        a {
+            color: #7824f8 !important;
+        }
     }
 }
 

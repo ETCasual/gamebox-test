@@ -78,7 +78,7 @@ const Index = () => {
 
                     {noDataLoaded && (
                         <div className="no-result">
-                            <p className="title mb-2">No activities yet!</p>
+                            <p className="title mb-2">No activity found yet!</p>
                             <p className="subtitle mt-1 mb-0">
                                 Looks like you've not played for any prizes yet.{" "}
                             </p>

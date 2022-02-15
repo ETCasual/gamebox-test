@@ -1,122 +1,31 @@
-// CLAIMED / UNCLAIMED REWARDS COMPONENT
+// REWARDS
 #rewards-panel {
-    padding-top: 9em;
+    padding-top: 6rem;
     .title {
-        font-size: 1.5rem;
         font-weight: $fnt-wgt-700;
-        @media only screen and (min-width: 768px) {
-            font-size: $fnt-sz-18;
-        }
-    }
-    .back-button-wrapper {
-        span {
-            color: #F8BA29;
-            font-size: $fnt-sz-12;
-            font-weight: $fnt-wgt-700;
-        }
-    }
-    .filter {
-        position: relative;
-        button {
-            padding: 1em 0em 0.5em 0;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #d6d6d6;
-            p {
-                opacity: 0.4;
-                
-                font-size: 0.875rem;
-                @media only screen and (min-width: 768px) {
-                    font-size: 1.25rem;
-                }
-            }
-        }
-        button.active {
-            p {
-                opacity: 1;
-                color: #7824f8;
-            }
-        }
-        .unclaimed-status-icon {
-            position: absolute;
-            top: 17px;
-            right: -12px;
-            width: 5px;
-            height: 5px;
-            @media only screen and (min-width: 768px) {
-                top: 20px;
-                right: -15px;
-                width: 8px;
-                height: 8px;
-            }
-            border-radius: 100%;
-        }
-        .glider {
-            position: absolute;
-            bottom: 0;
-            height: 2px;
-            background: linear-gradient(264deg, #5725ff 0%, #04e4aa 100%);
-            transition: all 0.25s ease-out;
-            transform: translateX(0%);
-        }
+        font-size: $fnt-sz-18;
     }
     .card-wrapper {
         border-radius: 10px;
-        background: linear-gradient(116deg, #302F2F 0%, #101010 100%) 0% 0% no-repeat padding-box;;
+        background: linear-gradient(116deg, #302f2f 0%, #101010 100%);
         position: relative;
+        cursor: pointer;
         .prize-image {
             height: 6.5rem;
             width: 6.5rem;
             border-radius: 10px;
             position: relative;
-            
-            // background-position: top;
             background-repeat: no-repeat;
             background-size: cover;
             background-position-x: center;
         }
-        cursor: pointer;
-        .overlay {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            z-index: 0;
-            background: linear-gradient(
-                183deg,
-                rgba(black, 0) 0%,
-                rgba(#3f3f3f, 0.2) 60%,
-                rgba(black, 0.577766) 100%
-            );
-            border-radius: 17px;
-        }
+
         .prize-text {
             .card-title {
-                
                 font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-700;
-                // @media only screen and (min-width: 360px) {
-                //     font-size: 0.875rem;
-                // }
-                // @media only screen and (min-width: 768px) {
-                //     font-size: 1.5rem;
-                // }
-                // @media only screen and (min-width: 1200px) {
-                //     font-size: 1.125rem;
-                // }
-                // @media only screen and (min-width: 1320px) {
-                //     font-size: 1.25rem;
-                // }
                 color: white;
                 line-height: 120%;
-                // white-space: nowrap;
-                // width: 15ch;
-                // overflow: hidden;
-                // text-overflow: ellipsis;
-                // display: inline-block;
             }
             .card-subtitle {
                 font-size: 0.75rem;
@@ -134,12 +43,11 @@
         }
         .text-red {
             font-weight: $fnt-wgt-700;
-            color: #BF0000;
+            color: #bf0000;
         }
     }
     .prize {
         h4 {
-            
             font-size: 16px;
             @media only screen and (min-width: 768px) {
                 font-size: 28px;

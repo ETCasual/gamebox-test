@@ -89,7 +89,7 @@ const Index = () => {
                                     {noDataLoaded && (
                                         <div className="no-result">
                                             <p className="title mb-2">
-                                                No Winners yet!
+                                                No Winners found yet!
                                             </p>
                                             <p className="subtitle mt-1 mb-0">
                                                 Looks like you've not played for
