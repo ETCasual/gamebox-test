@@ -151,14 +151,12 @@
                 // }
                 // font-family: Ilisarniq-Bold;
             }
-            .question-mark {
+            img.question-mark-img {
+                align-self: center;
                 width: 20px;
                 height: 20px;
                 line-height: 20px;
-                text-align: center;
-                align-self: center;
-                background: #4573f1;
-                border-radius: 50%;
+                cursor: pointer;
             }
             .join-tournament-container {
                 display: flex;
