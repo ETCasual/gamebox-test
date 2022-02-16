@@ -565,7 +565,7 @@ const Leaderboard = ({
                             Back
                         </div>
                         {/* YOUR TICKETS */}
-                        <div className="ticket-values px-3 ml-auto">
+                        {/* <div className="ticket-values px-3 ml-auto">
                             <p className="mb-0">
                                 You have{" "}
                                 <span className="mx-2">
@@ -580,7 +580,7 @@ const Leaderboard = ({
                                     alt="tickets"
                                 />
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <section
