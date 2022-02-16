@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Header from "Components/Global/Header.component";
@@ -11,8 +10,6 @@ import loadResetNotificationNumber from "redux/thunks/RestNotificationNumber.thu
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 
 const HeaderHOC = () => {
-    const { search } = useLocation();
-
     const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.userData);
@@ -25,9 +22,7 @@ const HeaderHOC = () => {
     );
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
 
-    const [userImage, setUserImage] = useState(
-        `${window.cdn}icons/user.png`
-    );
+    const [userImage, setUserImage] = useState(`${window.cdn}icons/user.png`);
     const [userGems, setUserGems] = useState(user.gems);
     const [isNotificationShown, setIsNotificationShown] = useState(false);
     const [notificationData, setNotificationData] = useState([]);
@@ -129,25 +124,23 @@ const HeaderHOC = () => {
 
     return (
         <>
-            {token !== null &&
-                user.id > 0 &&
-                !search.includes("isNewUser=true") && (
-                    <Header
-                        userImage={userImage}
-                        userGems={userGems}
-                        isNotificationShown={isNotificationShown}
-                        handleNotificationPanelBackButton={
-                            handleNotificationPanelBackButton
-                        }
-                        notificationData={notificationData}
-                        handleOnClickNotificationIcon={
-                            handleOnClickNotificationIcon
-                        }
-                        handleNotificationLeaderboardHistory={
-                            handleNotificationLeaderboardHistory
-                        }
-                    />
-                )}
+            {token !== null && user.id > 0 && (
+                <Header
+                    userImage={userImage}
+                    userGems={userGems}
+                    isNotificationShown={isNotificationShown}
+                    handleNotificationPanelBackButton={
+                        handleNotificationPanelBackButton
+                    }
+                    notificationData={notificationData}
+                    handleOnClickNotificationIcon={
+                        handleOnClickNotificationIcon
+                    }
+                    handleNotificationLeaderboardHistory={
+                        handleNotificationLeaderboardHistory
+                    }
+                />
+            )}
             {/* LEADERBOARD HISTORY */}
             {isSelectedNotificationShown.status &&
                 isSelectedNotificationShown.type === "tour" && (

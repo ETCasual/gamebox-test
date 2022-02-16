@@ -161,11 +161,9 @@ const App = () => {
             .finally(() => setPendingRegion(false));
     }, []);
 
-    if (pendingRegion) {
-        return null;
-    } else if (!regionAllow) {
-        return <LaunchingSoon />;
-    } else {
+    if (pendingRegion) return null;
+    else if (!regionAllow) return <LaunchingSoon />;
+    else {
         return (
             <Router>
                 <Toasty />

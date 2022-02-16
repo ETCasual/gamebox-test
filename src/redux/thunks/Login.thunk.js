@@ -1,6 +1,6 @@
 import { addUser, userSignIn } from "redux/services/index.service";
 import { handleSignOut } from "Utils/SignOut";
-import { LOGIN_SUCCESS } from 'redux/types';
+import { LOGIN_SUCCESS } from "redux/types";
 
 export default function loadLoginUser(authUser, isNewUser) {
     return async (dispatch) => {

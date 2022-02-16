@@ -54,20 +54,16 @@ const LoginModal = ({ loginRef, loginWrapperRef }) => {
                 //         : result.user.providerData[0].photoURL,
                 // });
 
-                // ADD localStorage ONLY IF USER IS NEW
-                if (result.additionalUserInfo.isNewUser) {
+                // ADD LOCALSTORAGE ONLY IF USER IS NEW
+                if (result.additionalUserInfo.isNewUser)
                     localStorage.setItem(
                         "isNewUser",
                         result.additionalUserInfo.isNewUser
                     );
-                    setTimeout(() => {
-                        history.push("/profile/edit?isNewUser=true");
-                    }, 500);
-                } else {
-                    setTimeout(() => {
-                        history.push("/");
-                    }, 500);
-                }
+
+                setTimeout(() => {
+                    history.push("/");
+                }, 500);
             }
         } catch (error) {
             console.log(error.message);
@@ -109,20 +105,16 @@ const LoginModal = ({ loginRef, loginWrapperRef }) => {
                 //     });
 
                 function nextStep(result) {
-                    if (result.additionalUserInfo.isNewUser) {
+                    if (result.additionalUserInfo.isNewUser)
                         localStorage.setItem(
                             "isNewUser",
                             result.additionalUserInfo.isNewUser
                         );
-                        setTimeout(() => history.push("/profile/edit"), 500);
-                    } else {
-                        setTimeout(() => history.push("/"), 500);
-                    }
+
+                    setTimeout(() => history.push("/"), 500);
                 }
             }
         } catch (error) {
-            console.log(error.code);
-            console.log(error.message);
             if (
                 error.code === "auth/account-exists-with-different-credential"
             ) {
