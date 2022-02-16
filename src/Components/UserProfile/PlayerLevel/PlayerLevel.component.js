@@ -4,7 +4,6 @@ import React from "react";
 // HELPER FUNCTIONS
 import {
     getCurrentLevelNo,
-    getCurrentMultiplier,
     getLevelProgress,
     getCurrentLevelExp,
     getCurrentMultiplierX,
@@ -15,7 +14,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
         <section id="player-level">
             <div className="container level-modal">
                 <div className="row justify-content-center">
-                    <div className="col-11 col-md-8 col-lg-5">
+                    <div className="col-11 col-md-8 col-lg-5 col-xl-6">
                         <div className="row">
                             <div className="col-12 level-wrapper">
                                 {/* INNER SCROLLING WRAPPER */}
@@ -74,7 +73,8 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             {getCurrentLevelExp(
                                                                 user,
                                                                 ranks
-                                                            ).toLocaleString()} exp
+                                                            ).toLocaleString()}{" "}
+                                                            exp
                                                         </span>{" "}
                                                     </div>
                                                 </div>
@@ -94,33 +94,15 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             aria-valuemax="100"
                                                         />
                                                     </div>
-                                                    <div
-                                                        className="progressbar-shadow"
-                                                        role="progressbar"
-                                                        style={{
-                                                            width: `${
-                                                                getLevelProgress(
-                                                                    user,
-                                                                    ranks
-                                                                ) >= 100
-                                                                    ? 100
-                                                                    : getLevelProgress(
-                                                                          user,
-                                                                          ranks
-                                                                      )
-                                                            }%`,
-                                                        }}
-                                                        aria-valuemin="0"
-                                                        aria-valuemax="100"
-                                                    />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     {/* GAP */}
                                     <div className="col-12 mt-4">
-                                        <div className="gap">
+                                        <div className="gap text-center">
                                             <img
+                                                width={20}
                                                 className="img-fluid"
                                                 src={`${window.cdn}icons/arrow_down.png`}
                                                 alt="next"
@@ -144,15 +126,19 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                     >
                                                         <div className="level-type p-3">
                                                             <div className="level-type-wrapper">
+                                                                {/* LEVEL */}
                                                                 <div className="level-type-head d-flex align-items-center justify-content-between">
                                                                     {/* LEVEL TITLE */}
                                                                     <p className="mb-0">
-                                                                        {rank.title}
+                                                                        {
+                                                                            rank.title
+                                                                        }
                                                                     </p>
                                                                     {/* LEVEL EXP */}
                                                                     <div className="d-flex align-items-center justify-content-center px-2 level-exp">
                                                                         <span className="ml-1">
-                                                                            {rank.exp.toLocaleString()} exp
+                                                                            {rank.exp.toLocaleString()}{" "}
+                                                                            exp
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -167,15 +153,19 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                                             Multiplier
                                                                         </p>
                                                                         <p className="mb-0 ticket-value">
-                                                                            {
-                                                                                Math.round((rank.multiplier + 1) * 100)/100
-                                                                            }
+                                                                            {Math.round(
+                                                                                (rank.multiplier +
+                                                                                    1) *
+                                                                                    100
+                                                                            ) /
+                                                                                100}
                                                                             x
                                                                         </p>
                                                                     </div>
                                                                     <div className="pb-3 d-flex align-items-center justify-content-center gems">
                                                                         <p className="mb-0">
-                                                                            {`+ ${rank.gems}`} gems
+                                                                            {`+ ${rank.gems}`}{" "}
+                                                                            gems
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -192,6 +182,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                     >
                                                         <div className="gap">
                                                             <img
+                                                                width={20}
                                                                 className="img-fluid"
                                                                 src={`${window.cdn}icons/arrow_down.png`}
                                                                 alt="next"
@@ -209,8 +200,8 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                     onClick={handleBackButton}
                                 >
                                     <img
-                                        width="38"
-                                        src={`${window.cdn}buttons/button_close_01.png`}
+                                        width="32"
+                                        src={`${window.cdn}icon_close.png`}
                                         alt="close-btn"
                                     />
                                 </div>

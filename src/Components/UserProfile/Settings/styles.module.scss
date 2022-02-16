@@ -30,28 +30,26 @@
             color: white;
             text-transform: capitalize;
         }
-        .bottom-wrapper {
-            .player-email {
-                color: #868686;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: inline-block;
-                font-size: 0.75rem;
-                width: 17ch;
-                @media only screen and(min-width: 768px) {
-                    font-size: $fnt-sz-14;
-                    width: 30ch;
-                }
+        .player-email {
+            color: #868686;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            font-size: 0.75rem;
+            width: 17ch;
+            @media only screen and(min-width: 768px) {
+                font-size: $fnt-sz-14;
+                width: 30ch;
             }
-            .profile-edit {
-                font-size: 0.625rem;
-                color: #14DAA7;
-                padding-bottom: 0.3em;
-                font-weight: $fnt-wgt-600;
-                @media only screen and(min-width: 768px) {
-                    font-size: $fnt-sz-14;
-                }
+        }
+        .profile-edit {
+            font-size: 0.625rem;
+            color: #14daa7;
+            padding-bottom: 0.3em;
+            font-weight: $fnt-wgt-600;
+            @media only screen and(min-width: 768px) {
+                font-size: $fnt-sz-14;
             }
         }
     }
@@ -147,7 +145,7 @@
     .connect-wallet {
         font-size: $fnt-sz-14;
         button {
-            color: #14DAA7;
+            color: #14daa7;
             font-weight: $fnt-wgt-600;
         }
         .wallet-address {

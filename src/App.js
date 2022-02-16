@@ -18,7 +18,6 @@ import Tournament from "Pages/Tournament.page";
 import Activity from "Pages/Activity.page";
 import Winners from "Pages/Winners.page";
 import Profile from "Pages/Profile.page";
-import ProfileEdit from "Pages/ProfileEdit.page";
 import Invite from "Pages/Invite.page";
 import Settings from "Pages/Settings.page";
 import Rewards from "Pages/Rewards.page";
@@ -195,10 +194,6 @@ const App = () => {
                     <ProtectedRoute
                         path="/profile/settings"
                         component={Settings}
-                    />
-                    <ProtectedRoute
-                        path="/profile/edit"
-                        component={ProfileEdit}
                     />
                     <ProtectedRoute path="/iap" component={IAP} />
                     <Route

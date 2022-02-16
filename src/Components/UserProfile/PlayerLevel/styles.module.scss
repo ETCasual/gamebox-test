@@ -18,59 +18,61 @@
         left: 50%;
         transform: translate(-50%, -50%);
         .level-wrapper {
-            box-shadow: 0px 18px 26px #00000029;
             border-radius: 12px;
-            padding: 0 0.7em;
+            padding: 0 0.7rem;
             .close-button {
-                top: -8px;
+                top: 0;
                 right: -8px;
             }
             .scrolling-wrapper-y {
                 border-radius: 6px;
-                margin: 0.7em 0 1.5em 0;
-                height: 67.5em;
-                background: linear-gradient(160deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+                margin: 0.7rem 0 1.5rem 0;
+                height: 80vh;
+                background: linear-gradient(160deg, #302f2f 0%, #0b0b0b 100%) 0%
+                    0% no-repeat padding-box;
                 overflow-y: scroll;
                 -ms-overflow-style: none;
                 scrollbar-width: none;
-                .bold {
-                    
-                }
+                padding: 1rem;
                 .current-level-wrapper {
                     position: relative;
-                    background: linear-gradient(180deg, #1C1C1C 0%, #141414 100%) 0% 0% no-repeat padding-box;
-                    box-shadow: 0px 10px 15px #00000029;
+                    background: linear-gradient(
+                            180deg,
+                            #1c1c1c 0%,
+                            #141414 100%
+                        )
+                        0% 0% no-repeat padding-box;
                     border-radius: 20px;
-                    margin-top: 8em;
-                    padding: 5em 1em 1.5em 1em;
+                    margin-top: 6rem;
+                    padding: 4rem 0.5rem 0.5rem 0.5rem;
                     @media only screen and (min-width: 768px) {
-                        padding: 6em 1.5em 1.5em 1.5em;
+                        padding: 4rem 1rem 1rem 1rem;
                     }
                     .level-indicator-wrapper {
-                        width: 10.8em;
-                        height: 10.8em;
-                        border-radius: 100%;
-                        background: #404040;
-                        box-shadow: 0px 20px 30px #00000029;
                         position: absolute;
-                        top: -80px;
+                        top: -20px;
                         left: 50%;
                         transform: translate(-50%, 0);
                         .level-indicator {
-                            background: linear-gradient(135deg, #393939 0%, #171717 100%) 0% 0% no-repeat padding-box;
+                            background: linear-gradient(
+                                    135deg,
+                                    #393939 0%,
+                                    #171717 100%
+                                )
+                                0% 0% no-repeat padding-box;
                             position: absolute;
                             top: 50%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-                            width: 10em;
-                            height: 10em;
+                            width: 7rem;
+                            height: 7rem;
                             border-radius: 100%;
                             margin: 0 auto;
                             display: flex;
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;
-                            color: #ffffff;
+                            border: 4px solid #404040;
                             .level {
                                 font-size: 46px;
                                 font-weight: $fnt-wgt-700;
@@ -83,7 +85,7 @@
                     }
                     .statement {
                         color: white;
-                        padding: 0 3.5rem;                        
+                        padding: 0 3.5rem;
                         width: 100%;
                         text-align: center;
                         margin-bottom: 2em;
@@ -105,7 +107,7 @@
                             .multiplier-text {
                                 p {
                                     color: white;
-                                    
+
                                     font-size: 0.75rem;
                                     font-weight: $fnt-wgt-600;
                                     @media only screen and (min-width: 768px) {
@@ -115,64 +117,61 @@
                                 .multiplier-value {
                                     font-size: $fnt-sz-16;
                                     font-weight: $fnt-wgt-600;
-                                    color: #00C1B9;
+                                    color: #00c1b9;
                                 }
                             }
                             .exp-count {
                                 background: #313131;
                                 color: #868686;
                                 border-radius: 20px;
-                                padding: 0 10px;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
                                 font-size: $fnt-sz-14;
-                                min-height: 2.25em;
+                                min-height: 2.2rem;
                                 .player-exp {
                                     font-weight: $fnt-wgt-700;
                                     font-size: $fnt-sz-12;
                                     @media only screen and (min-width: 768px) {
                                         font-size: $fnt-sz-14;
-                                    }            
+                                    }
                                 }
                             }
                         }
                         .progress {
                             position: relative;
                             width: 100%;
-                            border-radius: 1em;
+                            border-radius: 1rem;
                             background-color: #313131;
                             height: 1rem;
                             @media only screen and (min-width: 768px) {
                                 height: 1.5rem;
                             }
                             .progress-bar {
-                                border-radius: 1em;
-                                background: linear-gradient(266deg, #00C1B9 0%, #047C98 100%);
+                                border-radius: 1rem;
+                                background: linear-gradient(
+                                    266deg,
+                                    #00c1b9 0%,
+                                    #047c98 100%
+                                );
                                 height: inherit;
                             }
-                        }
-                        .progressbar-shadow {
-                            position: absolute;
-                            bottom: 0;
-                            border-radius: 1em;
-                            // box-shadow: 0px 10px 20px #64d6aa67;
-                            transition: all 0.5s ease;
-                            height: 1.45em;
                         }
                     }
                 }
                 .gap {
-                    width: 15px;
-                    height: 39px;
-                    margin: 1em auto;
+                    margin: 0.8rem auto;
                     img {
-                        margin: 0.9em auto 1em auto;
-                        transform: scale(1.5);
+                        margin: 0.7rem auto 0.8rem auto;
                     }
                 }
                 .level-type {
-                    background: linear-gradient(180deg, #1C1C1C 0%, #141414 100%) 0% 0% no-repeat padding-box;;
+                    background: linear-gradient(
+                            180deg,
+                            #1c1c1c 0%,
+                            #141414 100%
+                        )
+                        0% 0% no-repeat padding-box;
                     border-radius: 12px;
                     .level-type-wrapper {
                         padding: 0.7rem 1.2rem;
@@ -187,15 +186,9 @@
                             background: #313131;
                             color: #868686;
                             border-radius: 20px;
-                            padding: 0 10px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
                             font-size: $fnt-sz-12;
-                            min-height: 2.25em;
-                            span {
-                                
-                            }
+                            min-height: 2.25rem;
+                            min-width: 4.5rem;
                         }
                     }
                     .level-type-content {
@@ -209,22 +202,18 @@
                         .ticket-text {
                             font-size: 0.75rem;
                             font-weight: $fnt-wgt-600;
-                            color: white;
                             @media only screen and (min-width: 768px) {
-                                font-size: 14px;
-                            }
-                            .ticket {
-                                
+                                font-size: $fnt-sz-14;
                             }
                             .ticket-value {
-                                color: #14DAA7;
+                                color: #14daa7;
                             }
                         }
                         .gems {
                             p {
                                 font-size: $fnt-sz-14;
                                 font-weight: $fnt-wgt-600;
-                                color: #14DAA7;
+                                color: #14daa7;
                             }
                         }
                     }

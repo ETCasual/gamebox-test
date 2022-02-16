@@ -37,8 +37,8 @@ const HighScore = ({ handleBackButton }) => {
                                 onClick={handleBackButton}
                             >
                                 <img
-                                    width="40"
-                                    src={`${window.cdn}icon_back.png`}
+                                    width="42"
+                                    src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
                                 <span className="ml-2">Back</span>

@@ -41,8 +41,8 @@ const Invitation = ({ handleBackButton }) => {
                                     onClick={handleBackButton}
                                 >
                                     <img
-                                        width="38"
-                                        src={`${window.cdn}buttons/button_close_01.png`}
+                                        width="32"
+                                        src={`${window.cdn}icon_close.png`}
                                         alt="close-btn"
                                     />
                                 </div>

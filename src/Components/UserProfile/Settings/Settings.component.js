@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Toggle from "react-toggle";
 
@@ -11,8 +11,6 @@ import { defaultUserImage } from "Utils/DefaultImage";
 const Settings = () => {
     const { user } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
-
-    const history = useHistory();
 
     // TOOGLE NOTIFICATION
     const handleNotificationToggle = () => {
@@ -46,8 +44,8 @@ const Settings = () => {
                                     }}
                                 >
                                     <img
-                                        width="40"
-                                        src={`${window.cdn}icon_back.png`}
+                                        width="42"
+                                        src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
                                     <span className="ml-2">Back</span>
@@ -58,16 +56,12 @@ const Settings = () => {
                                 <h3 className="title my-4">Settings</h3>
                                 {/* ITEM 1 - USER INFO */}
                                 <div className="row py-4">
-                                    <Link
-                                        onClick={scrollToTop}
-                                        to={{
-                                            pathname: "/profile/edit",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
+                                    <a
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        href="https://froyo.games/my-profile"
                                         className="w-100"
+                                        onClick={scrollToTop}
                                     >
                                         <div className="col-12 d-flex flex-row px-0">
                                             <div className="col-12 d-flex align-items-center profile-info">
@@ -96,7 +90,7 @@ const Settings = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </a>
                                 </div>
                                 {/* ITEM 2 - CONNECTED WALLET */}
                                 <div className="row py-5">
