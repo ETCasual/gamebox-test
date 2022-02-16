@@ -93,10 +93,10 @@ button {
     }
 }
 // BACK BUTTON AND BACK TEXT (USED IN MULTIPLE SEPARATED COMPONENTS)
-.back-button {
-    box-shadow: 0px 18px 26px #00000029;
-    border-radius: 100%;
-}
+// .back-button {
+//     box-shadow: 0px 18px 26px #00000029;
+//     border-radius: 100%;
+// }
 
 .back-text {
     font-family: $fnt-fam;
@@ -150,8 +150,18 @@ button {
 }
 
 // BACK BUTTON
+.nav-top-back-btn-wrapper {
+    cursor: default;
+    position: fixed;
+    top: 71px;
+    z-index: 2;
+    width: 100%;
+    min-height: 60px;
+}
 .back-button {
     cursor: pointer;
+    box-shadow: 0px 18px 26px #00000029;
+    border-radius: 100%;
     span {
         color: #f8ba29;
         font-size: $fnt-sz-12;

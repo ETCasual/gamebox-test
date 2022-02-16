@@ -149,15 +149,15 @@ const FortuneWheel = ({
                             </div>
 
                             {/* PROBABILITY DISPLAY BUTTON */}
-                            <div
-                                className="question-mark"
+                            <img
                                 onClick={() => {
                                     let currentShownFlag = isProbabilityShown;
                                     setIsProbabilityShown(!currentShownFlag);
                                 }}
-                            >
-                                ?
-                            </div>
+                                src={`${window.cdn}icons/icon_question_01.png`}
+                                className="question-mark-img"
+                                alt="question-mark"
+                            ></img>
                         </div>
 
                         {/* SECOND COLUMN */}

@@ -92,7 +92,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                     >
                         <img
                             className="back-button"
-                            width="42"
+                            width="40"
                             src={`${window.cdn}buttons/button_back.png`}
                             alt="back-btn"
                         />

@@ -137,7 +137,7 @@ const EarnAdditionalTickets = ({
                                     <div className="col-3 col-md-12 p-0 text-center">
                                         <img
                                             className="watch-ads-img my-3"
-                                            src={`${window.cdn}illustrations/tickets_ads.png`}
+                                            src={`${window.cdn}illustrations/watch_ads.png`}
                                             alt="watch ads"
                                         />
                                     </div>
@@ -187,7 +187,7 @@ const EarnAdditionalTickets = ({
                                     <div className="col-3 col-md-12 p-0 text-center">
                                         <img
                                             className="use-gems-img"
-                                            src={`${window.cdn}gems/gems_01.png`}
+                                            src={`${window.cdn}illustrations/use_gems.png`}
                                             alt="watch ads"
                                         />
                                     </div>

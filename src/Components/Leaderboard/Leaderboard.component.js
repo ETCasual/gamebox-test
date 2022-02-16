@@ -93,7 +93,8 @@ const Leaderboard = ({
 
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
-        if (gameInfo.gameId > 0) dispatch(loadLeaderboardRanks(gameInfo.gameId));
+        if (gameInfo.gameId > 0)
+            dispatch(loadLeaderboardRanks(gameInfo.gameId));
     }, [gameInfo.gameId, dispatch]);
 
     // COUNTDOWN TIMER
@@ -547,20 +548,24 @@ const Leaderboard = ({
         return (
             <>
                 <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center mx-auto">
-                    <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8 justify-content-between">
+                    <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8">
                         {/* BACK BUTTON */}
                         <button className="d-flex align-items-center justify-content-center p-0">
                             <img
                                 onClick={handleBackButton}
                                 className="back-button"
-                                width="42"
-                                height="42"
+                                width="40"
+                                height="40"
                                 src={`${window.cdn}buttons/button_back.png`}
                                 alt="back-btn"
                             />
                         </button>
+                        {/* BACK TEXT */}
+                        <div className="back-text d-flex align-items-center">
+                            Back
+                        </div>
                         {/* YOUR TICKETS */}
-                        <div className="ticket-values px-3">
+                        {/* <div className="ticket-values px-3 ml-auto">
                             <p className="mb-0">
                                 You have{" "}
                                 <span className="mx-2">
@@ -575,7 +580,7 @@ const Leaderboard = ({
                                     alt="tickets"
                                 />
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <section

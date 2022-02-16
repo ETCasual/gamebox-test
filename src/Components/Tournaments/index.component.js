@@ -265,7 +265,7 @@ const Index = ({ match }) => {
                                 >
                                     <img
                                         className="back-button"
-                                        width="42"
+                                        width="40"
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
@@ -401,9 +401,11 @@ const Index = ({ match }) => {
                                                         <div className="statement-title">
                                                             JOIN TOURNAMENTS!
                                                         </div>
-                                                        <div className="question-mark">
-                                                            ?
-                                                        </div>
+                                                        <img
+                                                            src={`${window.cdn}icons/icon_question_01.png`}
+                                                            className="question-mark-img"
+                                                            alt="question-mark"
+                                                        ></img>
                                                     </div>
                                                     <div className="statement-subtitle">
                                                         Compete with other
@@ -452,12 +454,6 @@ const Index = ({ match }) => {
                                             {type !== "automated" && (
                                                 <div
                                                     className="fortune-wheel-fixed-btn-container"
-                                                    // style={{
-                                                    //     background:
-                                                    //         "background: transparent linear-gradient(134deg, #1C1C1C 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;",
-                                                    //     borderRadius: "12px",
-                                                    //     padding: "12px",
-                                                    // }}
                                                     onClick={() =>
                                                         setFortuneWheelShown(
                                                             true
@@ -474,28 +470,14 @@ const Index = ({ match }) => {
                                                     >
                                                         The spinner
                                                     </div>
-                                                    <div
-                                                        className="earn-more-tickets-text-wrapper"
-                                                        // style={{
-                                                        //     fontWeight: "bold",
-                                                        //     fontSize: "12px",
-                                                        // }}
-                                                    >
+                                                    <div className="earn-more-tickets-text-wrapper">
                                                         Earn more tickets here
                                                     </div>
-                                                    <div className="earn-more-tickets-img-wrapper"></div>
-                                                    {/* <div className="spinner-wrapper">
-                                                        <img
-                                                            className="spinner"
-                                                            src={`${window.cdn}buttons/button_floatspinner.png`}
-                                                            alt="spinner"
-                                                        />
-                                                    </div>
-                                                    <div className="button-wrapper">
-                                                        <button>
-                                                            Play Spinner
-                                                        </button>
-                                                    </div> */}
+                                                    <img
+                                                        className="earn-more-tickets-img"
+                                                        src={`${window.cdn}icons/spinner_column.png`}
+                                                        alt="earn-more-tickets"
+                                                    ></img>
                                                 </div>
                                             )}
                                         </div>
