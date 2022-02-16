@@ -31,11 +31,12 @@ const Settings = () => {
         <section id="settings">
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-8 wrapper">
+                    <div className="col-12 col-md-10 col-lg-7 wrapper">
                         <div className="row">
                             {/* BACK BUTTON */}
-                            <div className="col-12 justify-content-between mb-4 back-button-wrapper">
+                            <div className="col-12 mb-4">
                                 <Link
+                                    className="back-button"
                                     onClick={scrollToTop}
                                     to={{
                                         pathname: "/profile",
@@ -45,7 +46,6 @@ const Settings = () => {
                                     }}
                                 >
                                     <img
-                                        className="back-button"
                                         width="42"
                                         src={`${window.cdn}icon_back.png`}
                                         alt="back-btn"
@@ -53,7 +53,7 @@ const Settings = () => {
                                     <span className="ml-2">Back</span>
                                 </Link>
                             </div>
-
+                            {/* SETTING ITEMS */}
                             <div className="col-12 mb-4">
                                 <h3 className="title my-4">Settings</h3>
                                 {/* ITEM 1 - USER INFO */}

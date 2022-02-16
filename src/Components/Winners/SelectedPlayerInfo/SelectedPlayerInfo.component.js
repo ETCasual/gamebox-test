@@ -37,26 +37,23 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
 
     return (
         <>
-            {/* BACK BUTTON */}
-            <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center">
-                <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-7 mx-auto d-flex align-items-center">
-                    <img
-                        onClick={handleBackButton}
-                        className="back-button"
-                        width="42"
-                        src={`${window.cdn}buttons/button_back.png`}
-                        alt="back-btn"
-                    />
-                    <span className="ml-2">Back</span>
-                </div>
-            </div>
             {/* PLAYER INFO */}
             <section id="selected-player-info">
                 <div className="container-fluid">
-                    <div className="col-12 mb-5">
-                        <div className="row flex-column align-items-center justify-content-center">
+                    <div className="col-12 col-md-8 col-lg-5 mb-5 mx-auto">
+                        <div className="row">
+                            {/* BACK BUTTON */}
+                            <div className="d-flex align-items-center back-button">
+                                <img
+                                    onClick={handleBackButton}
+                                    width="42"
+                                    src={`${window.cdn}icon_back.png`}
+                                    alt="back-btn"
+                                />
+                                <span className="ml-2">Back</span>
+                            </div>
                             {/* PLAYER, LEVEL, EXP & MULTIPLIER */}
-                            <div className="col-12 col-md-8 col-lg-5">
+                            <div className="col-12">
                                 <div className="row">
                                     {/* PLAYER INFO */}
                                     <div className="col-12 text-center">
@@ -145,7 +142,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                 </div>
                             </div>
                             {/* HIGHSCORES */}
-                            <div className="col-12 col-md-8 col-lg-5 high-score mt-5">
+                            <div className="col-12 high-score mt-5">
                                 <div className="row">
                                     <div className="col-12">
                                         <p className="title mb-4">Highscores</p>

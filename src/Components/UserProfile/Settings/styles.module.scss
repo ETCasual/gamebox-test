@@ -1,18 +1,11 @@
 // SETTINGS COMPONENT
 #settings {
-    padding-top: 9em;
+    padding-top: 6rem;
     .title {
         font-size: 1.5rem;
         font-weight: $fnt-wgt-700;
         @media only screen and(min-width: 768px) {
             font-size: $fnt-sz-18;
-        }
-    }
-    .back-button-wrapper {
-        span {
-            color: #F8BA29;
-            font-size: $fnt-sz-12;
-            font-weight: $fnt-wgt-700;
         }
     }
     .profile-info {
@@ -128,42 +121,6 @@
                 background: #d6d6d6;
                 box-shadow: 0px 6px 30px #00000029;
                 left: 26px;
-            }
-        }
-    }
-    .subscription {
-        p {
-            font-size: 0.75rem;
-            @media only screen and (min-width: 768px) {
-                font-size: 1rem;
-            }
-        }
-        .plan-status {
-            
-        }
-        .plan-status.active {
-            color: #14daa7;
-        }
-        .subscription-wrapper {
-            background: #f4f4f4;
-            border-radius: 8px;
-            .plan-title,
-            .plan-price {
-                
-            }
-            .expiry-date-time {
-                span {
-                    
-                }
-            }
-
-            .btn-sub,
-            .re-active {
-                font-size: 0.875rem;
-                @media only screen and (min-width: 768px) {
-                    font-size: 1rem;
-                }
-                color: #14daa7 !important;
             }
         }
     }
