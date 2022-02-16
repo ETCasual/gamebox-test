@@ -80,7 +80,7 @@ const Leaderboard = ({
     // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
     useEffect(() => {
         const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
+        // overlay?.setAttribute("style", `min-height: 145px`);
         return () => {
             overlay?.removeAttribute("style");
         };
@@ -157,9 +157,10 @@ const Leaderboard = ({
             let nav =
                 document.querySelector(".blur-overlay")?.clientHeight || 154;
             let gameInfo =
-                document.querySelector(".game-info")?.clientHeight || 122;
+                document.querySelector(".leaderboard-game-info-flex-container")
+                    ?.clientHeight || 122;
             let readyButton =
-                document.querySelector(".leaderboard-bottom-wrapper")
+                document.querySelector(".bottom-ready-tournament")
                     ?.clientHeight || 100;
             if (
                 nav > 0 &&
@@ -170,7 +171,7 @@ const Leaderboard = ({
                 leaderboardLayerRef.current.style.height = `${
                     window.innerHeight -
                     (nav + gameInfo + readyButton) -
-                    (window.innerWidth > 767 ? 69 : 50)
+                    (window.innerWidth > 767 ? 91 : 50)
                 }px`;
         }
         leaderboardLayerRef.current && handleResize();
@@ -370,7 +371,7 @@ const Leaderboard = ({
         let rankList = [];
         for (let x = 0; x < rankLength; x++) {
             rankList.push(
-                <div key={`leaderboard-${x}`} className="mb-2">
+                <div key={`leaderboard-${x}`} className="individual-rank">
                     <div className="leader-player-card px-2 d-flex align-items-center">
                         <div className="text-center px-0 ml-1 ml-md-3 user-avatar">
                             <div className="rank-star">
@@ -583,7 +584,128 @@ const Leaderboard = ({
                         </div> */}
                     </div>
                 </div>
-                <section
+
+                <section id="game-leaderboard-screen" ref={leaderboardRef}>
+                    <div className="leaderboard-background-wrapper">
+                        <img
+                            alt="game-icon"
+                            src={gameInfo?.gameIcon}
+                            className="leaderboard-background"
+                        ></img>
+                    </div>
+                    <div className="leaderboard-flex-container">
+                        <div className="top-leaderboard">
+                            <div className="leaderboard-game-info-flex-container">
+                                <div
+                                    className="game-icon"
+                                    style={{
+                                        backgroundImage: `url("${gameInfo?.gameIcon}")`,
+                                    }}
+                                ></div>
+                                <div className="game-details-container">
+                                    <div className="game-name">
+                                        {gameInfo.gameTitle}
+                                    </div>
+                                    <div className="tournament-end-container">
+                                        <div className="tournament-end-text">
+                                            Tournament ends in
+                                        </div>
+                                        <div className="timer-text">
+                                            {timer || "0d 0h 0m 0s"}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* <div className="leaderboard-rank-detail"> */}
+                            <div className="leaderboard-holder">
+                                <div
+                                    className="leaderboard"
+                                    // className={`leaderboard mb-2 mb-md-3 ${
+                                    //     currentUserRank.rank > rankLength
+                                    //         ? ""
+                                    //         : "pb-2 pb-md-3"
+                                    // }`}
+                                >
+                                    <div
+                                        ref={leaderboardLayerRef}
+                                        className={`leaderboard-rank-layer ${
+                                            currentUserRank.rank > rankLength ||
+                                            currentUserRank.rank === "-"
+                                                ? ""
+                                                : "leaderboard-rank-layer-without-user"
+                                        }`}
+                                    >
+                                        {leaderboardList.length > 0
+                                            ? getLeaderboardList()
+                                            : getEmptyLeaderboardList()}
+                                    </div>
+
+                                    {currentUserRank.rank > rankLength ? (
+                                        <div className="leaderboard-user-wrapper w-100 p-3">
+                                            <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
+                                                <div className="text-center px-0 ml-3 user-avatar">
+                                                    <div className="rank-star">
+                                                        <LeaderRankIndicator
+                                                            index={
+                                                                currentUserRank.rank
+                                                            }
+                                                            type="current"
+                                                        />
+                                                    </div>
+                                                    <img
+                                                        className="avatar"
+                                                        onError={(e) =>
+                                                            defaultUserImage(e)
+                                                        }
+                                                        src={
+                                                            user.picture ||
+                                                            `${window.cdn}icons/user.png`
+                                                        }
+                                                        alt="player"
+                                                    />
+                                                </div>
+                                                <div className="px-2 ml-3">
+                                                    <p className="player-name">
+                                                        {user.username}
+                                                    </p>
+                                                    <p className="points">
+                                                        {leaderboard.find(
+                                                            (e) =>
+                                                                e.userId ===
+                                                                user.id
+                                                        )?.gameScore ||
+                                                            "-"}{" "}
+                                                        pts
+                                                    </p>
+                                                </div>
+                                                <div className="tickets ml-auto d-flex align-items-center justify-content-center py-2 px-2">
+                                                    <span>
+                                                        {getRankTickets(
+                                                            currentUserRank.rank -
+                                                                1
+                                                        ) || "-"}
+                                                    </span>
+                                                    <img
+                                                        className="ml-1"
+                                                        width="16"
+                                                        src={`${window.cdn}icons/tickets.png`}
+                                                        alt="tickets"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                            </div>
+                            {/* </div> */}
+                        </div>
+                        <div className="bottom-ready-tournament"></div>
+                    </div>
+                </section>
+
+                {/* <section
                     id="game-leaderboard-screen"
                     ref={leaderboardRef}
                     onClick={() =>
@@ -595,10 +717,8 @@ const Leaderboard = ({
                 >
                     <div className="container-fluid">
                         <div className="row justify-content-center">
-                            {/* INFO & LEADERBOARD */}
                             <div className="col-12 col-md-10 col-lg-8 col-xl-8">
                                 <div className="row">
-                                    {/* GAME INFO & TIMER */}
                                     <div className="col-12">
                                         <div className="game-info d-flex align-items-center align-items-md-end mt-4 p-3">
                                             <img
@@ -641,7 +761,7 @@ const Leaderboard = ({
                                             </div>
                                         </div>
                                     </div>
-                                    {/* LEADERBOARD */}
+
                                     <div className="col-12">
                                         <div
                                             className={`leaderboard mb-2 mb-md-3 ${
@@ -666,7 +786,6 @@ const Leaderboard = ({
                                                     : getEmptyLeaderboardList()}
                                             </div>
 
-                                            {/* CURRENT USER RANK  */}
                                             {currentUserRank.rank >
                                             rankLength ? (
                                                 <div className="leaderboard-user-wrapper w-100 p-3">
@@ -733,9 +852,9 @@ const Leaderboard = ({
                             </div>
                         </div>
                     </div>
-                </section>
-                {/* EARN ADDITINAL TICKETS */}
-                <div className="leaderboard-bottom-wrapper">
+                </section> */}
+
+                {/* <div className="leaderboard-bottom-wrapper">
                     {!modalStatus.isEarnAdditionalInfoShown && (
                         <button
                             className="ready-tournament"
@@ -778,7 +897,7 @@ const Leaderboard = ({
                             </button>
                         </>
                     )}
-                </div>
+                </div> */}
             </>
         );
     }
