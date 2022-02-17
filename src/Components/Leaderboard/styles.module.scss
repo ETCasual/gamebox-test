@@ -332,7 +332,6 @@
         .leader-player-card {
             background-color: #0e0e0e;
             min-height: 3.5em;
-            border-radius: 7px;
             height: inherit;
             padding: 10px;
             .user-avatar {
@@ -394,16 +393,29 @@
                 }
             }
         }
-    }
-    .leader-curr-player-card {
-        // temp
-        background: #fdc43d !important;
-        .points {
-            color: #7824f8 !important;
-        }
-        .tickets {
-            background: #b5891f !important;
-            color: #fdc43d;
+        .leader-curr-player-card {
+            // temp
+            background: #fdc43d !important;
+            .tickets {
+                background: #b5891f !important;
+                color: #fdc43d;
+            }
+            .player-name {
+                color: #000000;
+            }
+            .points {
+                color: #000000;
+            }
+            .number-holder {
+                .rank-number {
+                    color: #000000;
+                }
+            }
+            .tokens {
+                span {
+                    color: #000000;
+                }
+            }
         }
     }
 }

@@ -570,7 +570,10 @@ const Leaderboard = ({
                             />
                         </button>
                         {/* BACK TEXT */}
-                        <div className="back-text d-flex align-items-center">
+                        <div
+                            onClick={handleBackButton}
+                            className="back-text d-flex align-items-center"
+                        >
                             Back
                         </div>
                         {/* YOUR TICKETS */}
