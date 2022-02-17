@@ -79,7 +79,7 @@ const Index = ({ match }) => {
     // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
     useEffect(() => {
         const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
+        // overlay?.setAttribute("style", `min-height: 145px`);
         return () => {
             overlay?.removeAttribute("style");
         };

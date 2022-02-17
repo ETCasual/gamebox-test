@@ -100,147 +100,123 @@ const EarnAdditionalTickets = ({
 
     return (
         <>
-            <div
-                id="earn-additional-tickets"
-                className="container py-2 py-md-3 px-0"
-            >
-                <div className="row justify-content-center">
-                    <div className="col-12 col-md-11 col-lg-8 col-xl-8">
-                        <div className="row px-3 px-md-0">
-                            {/* TITLE & SUBTITLE */}
-                            <div className="col-12 text-center">
-                                <p className="title mb-1">Earn More Tickets</p>
-                                <p className="subtitle mb-1 mb-md-3">
-                                    Please select one
-                                </p>
+            <div className="increase-earning-text">
+                Increase your ticket earnings
+            </div>
+
+            <div className="select-one-option-text">Select only one option</div>
+
+            {/* BOTH OPTIONS*/}
+            <div className="option-buttons-container">
+                {/* WATCH ADS */}
+                <div
+                    className={`button-flex-container ${
+                        earnAdditionalDisabledStatus.gems
+                            ? "opacity-0-5"
+                            : "cursor-pointer"
+                    }`}
+                    onClick={
+                        earnAdditionalDisabledStatus.ads ||
+                        earnAdditionalDisabledStatus.gem
+                            ? null
+                            : () => {
+                                  setIsWatchAdConfirmationModalShown(true);
+                              }
+                    }
+                >
+                    <div className="top-row-flex-container">
+                        <div className="left-row">
+                            <div className="watch-ads-text">Watch ads</div>
+                            <div className="get-additional-text">
+                                Get additional
                             </div>
-                            {/* WATCH ADS */}
-                            <div className="col-12 col-md-6 mb-2 mb-md-0 p-0 p-md-3">
-                                <div
-                                    className={`earn-panel row p-2 ${
-                                        earnAdditionalDisabledStatus.gems
-                                            ? "opacity-0-5"
-                                            : "cursor-pointer"
-                                    }`}
-                                    onClick={
-                                        earnAdditionalDisabledStatus.ads ||
-                                        earnAdditionalDisabledStatus.gem
-                                            ? null
-                                            : () => {
-                                                  setIsWatchAdConfirmationModalShown(
-                                                      true
-                                                  );
-                                              }
-                                    }
-                                >
-                                    {/* ICON */}
-                                    <div className="col-3 col-md-12 p-0 text-center">
-                                        <img
-                                            className="watch-ads-img my-3"
-                                            src={`${window.cdn}illustrations/watch_ads.png`}
-                                            alt="watch ads"
-                                        />
-                                    </div>
-                                    {/* INFO */}
-                                    <div className="info-wrapper col-9 col-md-12">
-                                        <p className="text-center mb-0 earn-title">
-                                            Watch ads and get additional
-                                        </p>
-                                        <div className="earn-tickets d-flex align-items-center justify-content-center py-1 py-md-2 px-2 my-3 mx-auto">
-                                            <p className="mb-0 mr-1">
-                                                {
-                                                    currentGameRules.watchAdTickets
-                                                }
-                                            </p>
-                                            <img
-                                                width="24"
-                                                src={`${window.cdn}icons/tickets.png`}
-                                                alt="tickets"
-                                            />
-                                        </div>
-                                        <p className="text-center mb-0 earn-desc">
-                                            for every{" "}
-                                            <span>
-                                                {currentGameRules.score} points{" "}
-                                            </span>
-                                            you score
-                                        </p>
-                                    </div>
+                            <div className="ticket-flex-holder">
+                                <div className="ticket-amount">
+                                    {currentGameRules.watchAdTickets}
                                 </div>
-                            </div>
-                            {/* CONSUME GEMS */}
-                            <div className="col-12 col-md-6 p-0 p-md-3">
-                                <div
-                                    className={`earn-panel row p-2 ${
-                                        earnAdditionalDisabledStatus.ads
-                                            ? "opacity-0-5"
-                                            : "cursor-pointer"
-                                    }`}
-                                    onClick={
-                                        earnAdditionalDisabledStatus.ads ||
-                                        earnAdditionalDisabledStatus.gems
-                                            ? null
-                                            : onClickUseGems
-                                    }
-                                >
-                                    {/* ICON */}
-                                    <div className="col-3 col-md-12 p-0 text-center">
-                                        <img
-                                            className="use-gems-img"
-                                            src={`${window.cdn}illustrations/use_gems.png`}
-                                            alt="watch ads"
-                                        />
-                                    </div>
-                                    {/* INFO */}
-                                    <div className="info-wrapper col-9 col-md-12">
-                                        <p className="text-center mb-0 earn-title">
-                                            {`Use ${currentGameRules.useHowManyGems} gems and get additional`}
-                                        </p>
-                                        <div className="d-flex align-items-center justify-content-center w-100 my-3">
-                                            <div className="earn-tickets d-flex align-items-center justify-content-center py-1 py-md-2 px-2">
-                                                <p className="mb-0 mr-1">
-                                                    {
-                                                        currentGameRules.useGemTickets
-                                                    }
-                                                </p>
-                                                <img
-                                                    width="24"
-                                                    src={`${window.cdn}icons/tickets.png`}
-                                                    alt="tickets"
-                                                />
-                                            </div>
-                                            <p className="mx-1 mx-md-3 mb-0">
-                                                {"&"}
-                                            </p>
-                                            <div className="earn-exp d-flex align-items-center justify-content-center py-1 py-md-2 px-2">
-                                                <p className="mb-0 mr-1">
-                                                    {currentGameRules.useGemExp}
-                                                </p>
-                                                <img
-                                                    width="14"
-                                                    height="14"
-                                                    src={`${window.cdn}icons/exp_01.png`}
-                                                    alt="exp"
-                                                />
-                                            </div>
-                                        </div>
-                                        <p className="text-center mb-0 earn-desc">
-                                            for every{" "}
-                                            <span>
-                                                {currentGameRules.score} points{" "}
-                                            </span>
-                                            you score
-                                        </p>
-                                    </div>
+                                <div className="ticket-img">
+                                    <img
+                                        className="ticket-img "
+                                        src={`${window.cdn}icons/tickets.png`}
+                                        alt="tickets"
+                                    />
                                 </div>
                             </div>
                         </div>
-
-                        <p className="mt-2 mt-md-4 text-center note">
-                            Earn additional tickets or start playing immediately
-                        </p>
+                        <div className="watch-ads-img-wrapper">
+                            <img
+                                width="120"
+                                height="120"
+                                className="watch-ads-img "
+                                src={`${window.cdn}illustrations/watch_ads.png`}
+                                alt="watch ads"
+                            />
+                        </div>
+                    </div>
+                    <div className="bottom-row">
+                        for every{" "}
+                        <span>{currentGameRules.score} score points</span>
                     </div>
                 </div>
+
+                {/* USE GEMS*/}
+                <div
+                    className={`button-flex-container ${
+                        earnAdditionalDisabledStatus.ads
+                            ? "opacity-0-5"
+                            : "cursor-pointer"
+                    }`}
+                    onClick={
+                        earnAdditionalDisabledStatus.ads ||
+                        earnAdditionalDisabledStatus.gems
+                            ? null
+                            : onClickUseGems
+                    }
+                >
+                    <div className="top-row-flex-container">
+                        <div className="left-row">
+                            <div className="use-gems-text">
+                                Use {currentGameRules.useHowManyGems} Gems
+                            </div>
+                            <div className="get-additional-text">
+                                Get additional
+                            </div>
+                            <div className="ticket-flex-holder">
+                                <div className="ticket-amount">
+                                    {currentGameRules.useGemTickets}
+                                </div>
+                                <div className="ticket-img">
+                                    <img
+                                        className="ticket-img"
+                                        src={`${window.cdn}icons/tickets.png`}
+                                        alt="tickets"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="use-gems-img-wrapper">
+                            <img
+                                width="100"
+                                height="100"
+                                className="use-gems-img "
+                                src={`${window.cdn}illustrations/use_gems.png`}
+                                alt="use gems"
+                            />
+                        </div>
+                    </div>
+                    <div className="bottom-row">
+                        for every{" "}
+                        <span>{currentGameRules.score} score points</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="play-immediately-container">
+                <div className="line"></div>
+                <div className="play-immediately-text">
+                    or start playing immediately
+                </div>
+                <div className="line"></div>
             </div>
             {isSubscriptionModalShown && (
                 <SubscriptionModal
