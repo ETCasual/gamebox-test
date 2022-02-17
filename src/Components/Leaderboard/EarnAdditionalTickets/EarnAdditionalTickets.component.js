@@ -112,7 +112,7 @@ const EarnAdditionalTickets = ({
                 <div
                     className={`button-flex-container ${
                         earnAdditionalDisabledStatus.gems
-                            ? "opacity-0-5"
+                            ? "opacity-0-2"
                             : "cursor-pointer"
                     }`}
                     onClick={
@@ -163,7 +163,7 @@ const EarnAdditionalTickets = ({
                 <div
                     className={`button-flex-container ${
                         earnAdditionalDisabledStatus.ads
-                            ? "opacity-0-5"
+                            ? "opacity-0-2"
                             : "cursor-pointer"
                     }`}
                     onClick={
