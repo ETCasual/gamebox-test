@@ -2,9 +2,240 @@
 #game-leaderboard-screen {
     position: relative;
     margin-top: 140px;
+    justify-content: center;
+    display: flex;
+    .leaderboard-background-wrapper {
+        width: 905px;
+        height: 590px;
+        margin-right: auto;
+        margin-left: auto;
+        overflow: hidden;
+        border-radius: 10px;
+        .leaderboard-background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(15px);
+        }
+    }
+    .leaderboard-flex-container {
+        width: 905px;
+        height: 590px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        .top-leaderboard {
+            height: 504px;
+            width: 393.5px;
+            margin-left: auto;
+            margin-right: auto;
+            .leaderboard-game-info-flex-container {
+                background: transparent
+                    linear-gradient(114deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0%
+                    no-repeat padding-box;
+                opacity: 1;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 86px;
+                padding: 10px;
+                .game-icon {
+                    width: 65px;
+                    height: 65px;
+                    border-radius: 10px;
+                    margin-right: 10px;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+                .game-details-container {
+                    display: flex;
+                    flex-direction: column;
+                    height: 66px;
+                    justify-content: space-evenly;
+                    .game-name {
+                        font-size: $fnt-sz-14;
+                    }
+                    .tournament-end-container {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 298.5px;
+                        .tournament-end-text {
+                            font-size: $fnt-sz-14;
+                        }
+                        .timer-text {
+                            font-size: $fnt-sz-14;
+                        }
+                    }
+                }
+            }
+            .leaderboard-rank-detail {
+                background: red;
+            }
+        }
+    }
+    .earn-additional-tickets-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        position: absolute;
+        bottom: 0px;
+        height: 428px;
+        width: 905px;
+        background: transparent
+            linear-gradient(133deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0% no-repeat
+            padding-box;
+        border-radius: 0px 0px 10px 10px;
+        opacity: 1;
+        .increase-earning-text {
+            font-size: $fnt-sz-18;
+            font-weight: bold;
+            margin-top: 29px;
+        }
+        .select-one-option-text {
+            margin-top: 6px;
+            font-size: $fnt-sz-12;
+        }
+        .option-buttons-container {
+            display: flex;
+            margin-top: 30px;
+            .button-flex-container {
+                cursor: pointer;
+                width: 260px;
+                height: 184px;
+                border-radius: 10px;
+                margin-left: 10px;
+                margin-right: 10px;
+                background: #262626;
+                .top-row-flex-container {
+                    display: flex;
+                    .left-row {
+                        margin-left: 20px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        .use-gems-text,
+                        .watch-ads-text {
+                            font-size: $fnt-sz-18;
+                            margin-top: 25px;
+                            font-weight: bold;
+                            color: #f8ba29;
+                            width: max-content;
+                        }
+                        .get-additional-text {
+                            margin-top: 15px;
+                            font-size: $fnt-sz-14;
+                        }
+                        .ticket-flex-holder {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            width: 94px;
+                            height: 42px;
+                            background: #141414;
+                            border-radius: 10px;
+                            margin-top: 10px;
+                            .ticket-amount {
+                                color: #f8ba29;
+                                font-size: $fnt-sz-18;
+                                font-weight: bold;
+                            }
+                            .ticket-img {
+                                width: 40px;
+                                height: 40px;
+                            }
+                        }
+                    }
+                    .watch-ads-img-wrapper,
+                    .use-gems-img-wrapper {
+                        display: flex;
+                        width: 100%;
+                        justify-content: center;
+                        align-items: center;
+                        height: 120px;
+                    }
+                }
+                .bottom-row {
+                    margin-left: 20px;
+                    margin-top: 10px;
+                    font-size: $fnt-sz-12;
+                    span {
+                        font-size: $fnt-sz-14;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+        .play-immediately-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 26px;
+            width: 540px;
+            .line {
+                height: 1px;
+                width: 168px;
+                background: white;
+            }
+            .play-immediately-text {
+                font-size: $fnt-sz-12;
+                text-align: center;
+                width: 200px;
+            }
+        }
+
+        .play-button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 28px;
+            button.play-button {
+                width: 247px;
+                height: 46px;
+                background: #07cc9f 0% 0% no-repeat padding-box;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                border-radius: 10px;
+                opacity: 1;
+                font-size: $fnt-sz-14;
+                font-weight: bold;
+                color: #ffffff;
+            }
+        }
+    }
+    .bottom-ready-tournament {
+        height: 86px;
+        min-height: 86px;
+        position: absolute;
+        bottom: 0px;
+        width: 905px;
+        background: transparent
+            linear-gradient(101deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0% no-repeat
+            padding-box;
+        border-radius: 0px 0px 10px 10px;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button.ready-tournament-button {
+            background: #cc0767 0% 0% no-repeat padding-box;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 10px;
+            opacity: 1;
+            text-align: center;
+            font: normal normal bold 14px/20px Open Sans;
+            letter-spacing: 0px;
+            color: #ffffff;
+            opacity: 1;
+            width: 247px;
+            height: 46px;
+        }
+    }
     .title {
         font-size: 1.125em;
-        
+
         @media only screen and (min-width: 768px) {
             font-size: 1.8em;
         }
@@ -31,7 +262,7 @@
             align-items: center;
             .end-text {
                 font-size: 12px;
-                
+
                 color: #868686;
                 margin-bottom: 0.1em;
                 @media only screen and (min-width: 768px) {
@@ -40,7 +271,7 @@
             }
             .timer-text {
                 font-size: 1rem;
-                
+
                 color: #14daa7;
                 text-align: center;
                 @media only screen and (min-width: 768px) {
@@ -52,7 +283,7 @@
             .tickets-text-end {
                 position: relative;
                 top: 0.2em;
-                
+
                 font-size: 20px;
                 @media screen and (min-width: 360px) {
                     font-size: 24;
@@ -63,15 +294,28 @@
             }
         }
     }
+    .leaderboard-holder {
+        position: relative;
+        width: 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
     .leaderboard {
         width: 100%;
-        border-radius: 0 0 20px 20px;
         position: relative;
-        background: linear-gradient(1deg, #ffffff 85%, #ffffff08 100%);
+        // background: linear-gradient(1deg, #ffffff 85%, #ffffff08 100%);
+        background: #191919;
         .leaderboard-rank-layer {
             overflow-y: scroll;
             -ms-overflow-style: none; /* Internet Explorer 10+ */
             scrollbar-width: none; /* Firefox */
+            max-height: 418px;
+            .individual-rank {
+                margin-bottom: 1.5px;
+                height: 61px;
+                width: 394px;
+            }
         }
         .leaderboard-rank-layer-without-user {
             max-height: 300px;
@@ -86,11 +330,13 @@
             box-shadow: 0px 18px 26px #00000029;
         }
         .leader-player-card {
-            background-color: #f2f2f2;
+            background-color: #0e0e0e;
             min-height: 3.5em;
-            border-radius: 7px;
+            height: inherit;
+            padding: 10px;
             .user-avatar {
                 position: relative;
+                margin-left: 24px;
                 .rank-star {
                     position: absolute;
                     bottom: -0.2em;
@@ -107,12 +353,14 @@
                 }
             }
             p {
-                
                 margin: 0;
                 font-size: 14px;
             }
             .player-name {
                 width: 12ch;
+                color: #f7f7f7;
+                font-size: $fnt-sz-12;
+                font-weight: bold;
                 @media only screen and (min-width: 768px) {
                     width: 25ch;
                 }
@@ -122,40 +370,52 @@
                 text-overflow: ellipsis;
             }
             .points {
-                
-                color: #14daa7;
+                color: #f7f7f7;
+                font-size: $fnt-sz-10;
                 flex-wrap: nowrap;
                 white-space: nowrap;
             }
-            .tickets {
-                background: linear-gradient(90deg, #fdc43d 0%, #efa500 100%);
-                border-radius: 30px;
+            .tokens {
                 height: 100%;
                 span {
-                    
-                    font-size: 16px;
+                    font-size: $fnt-sz-14;
+                    font-weight: bold;
+                    color: #f8ba29;
                 }
             }
-            .rank-number {
-                
-                background: #e0e0e0;
-                border-radius: 30px;
-                font-size: 0.75rem;
-                text-align: center;
-                min-width: 20px;
-                padding: 0.25em 0.5em;
+            .number-holder {
+                margin-left: 0.5px;
+                width: 6.88px;
+                .rank-number {
+                    font-size: $fnt-sz-12;
+                    font-weight: bold;
+                    text-align: center;
+                }
             }
         }
-    }
-    .leader-curr-player-card {
-        // temp
-        background: #fdc43d !important;
-        .points {
-            color: #7824f8 !important;
-        }
-        .tickets {
-            background: #b5891f !important;
-            color: #fdc43d;
+        .leader-curr-player-card {
+            // temp
+            background: #fdc43d !important;
+            .tickets {
+                background: #b5891f !important;
+                color: #fdc43d;
+            }
+            .player-name {
+                color: #000000;
+            }
+            .points {
+                color: #000000;
+            }
+            .number-holder {
+                .rank-number {
+                    color: #000000;
+                }
+            }
+            .tokens {
+                span {
+                    color: #000000;
+                }
+            }
         }
     }
 }
@@ -183,7 +443,7 @@
         border-radius: 10px;
         color: #fdc43d;
         font-size: 18px;
-        
+
         min-width: 80%;
         @media only screen and (min-width: 375px) {
             min-width: 20em;
@@ -201,7 +461,7 @@
         border-radius: 10px;
         color: white;
         font-size: 18px;
-        
+
         min-width: 85%;
         @media only screen and (min-width: 375px) {
             min-width: 20em;
@@ -250,7 +510,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        
+
         .btn-wrapper {
             button {
                 color: white;
@@ -294,7 +554,6 @@
         justify-content: center;
         background: black;
         .loading-text {
-            
             font-size: 1.25rem;
             color: white;
         }

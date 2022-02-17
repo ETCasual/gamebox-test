@@ -80,7 +80,7 @@ const Leaderboard = ({
     // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
     useEffect(() => {
         const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
+        // overlay?.setAttribute("style", `min-height: 145px`);
         return () => {
             overlay?.removeAttribute("style");
         };
@@ -157,9 +157,10 @@ const Leaderboard = ({
             let nav =
                 document.querySelector(".blur-overlay")?.clientHeight || 154;
             let gameInfo =
-                document.querySelector(".game-info")?.clientHeight || 122;
+                document.querySelector(".leaderboard-game-info-flex-container")
+                    ?.clientHeight || 122;
             let readyButton =
-                document.querySelector(".leaderboard-bottom-wrapper")
+                document.querySelector(".bottom-ready-tournament")
                     ?.clientHeight || 100;
             if (
                 nav > 0 &&
@@ -167,11 +168,12 @@ const Leaderboard = ({
                 readyButton > 0 &&
                 leaderboardLayerRef.current
             )
-                leaderboardLayerRef.current.style.height = `${
-                    window.innerHeight -
-                    (nav + gameInfo + readyButton) -
-                    (window.innerWidth > 767 ? 69 : 50)
-                }px`;
+                console.table([nav, gameInfo, readyButton, window.innerWidth]);
+            leaderboardLayerRef.current.style.height = `${
+                window.innerHeight -
+                (nav + gameInfo + readyButton) -
+                (window.innerWidth > 767 ? 91 : 50)
+            }px`;
         }
         leaderboardLayerRef.current && handleResize();
 
@@ -370,12 +372,14 @@ const Leaderboard = ({
         let rankList = [];
         for (let x = 0; x < rankLength; x++) {
             rankList.push(
-                <div key={`leaderboard-${x}`} className="mb-2">
-                    <div className="leader-player-card px-2 d-flex align-items-center">
-                        <div className="text-center px-0 ml-1 ml-md-3 user-avatar">
-                            <div className="rank-star">
-                                <LeaderRankIndicator index={x} type="lb" />
-                            </div>
+                <div key={`leaderboard-${x}`} className="individual-rank">
+                    <div className="leader-player-card d-flex align-items-center">
+                        <div className="number-holder">
+                            <LeaderRankIndicator index={x} type="lb" />
+                        </div>
+
+                        <div className="user-avatar">
+                            <div className="rank-star"></div>
                             <img
                                 className="avatar"
                                 onError={(e) => defaultUserImage(e)}
@@ -383,18 +387,19 @@ const Leaderboard = ({
                                 alt="player"
                             />
                         </div>
+
                         <div className="px-2 ml-3">
                             <p className="player-name">-</p>
-                            <p className="points">- pts</p>
+                            <p className="points">0 pts</p>
                         </div>
-                        <div className="tickets ml-auto d-flex align-items-center justify-content-center py-2 px-2 px-md-3">
-                            <span>{getRankTickets(x)}</span>
-                            <img
+                        <div className="tokens ml-auto d-flex align-items-center justify-content-center">
+                            <span>{getRankTickets(x)} Tokens</span>
+                            {/* <img
                                 className="ml-1"
                                 width="16"
                                 src={`${window.cdn}icons/tickets.png`}
                                 alt="tickets"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -412,9 +417,9 @@ const Leaderboard = ({
 
         for (let i = 0; i < rankLength; i++) {
             _leaderboardList.push(
-                <div key={`leaderboard-${i}`} className="mb-2">
+                <div key={`leaderboard-${i}`} className="individual-rank">
                     <div
-                        className={`leader-player-card px-2 d-flex align-items-center ${
+                        className={`leader-player-card d-flex align-items-center ${
                             leaderboardList[i]?.userId
                                 ? isCurrentUser(leaderboardList[i]?.userId)
                                     ? "leader-curr-player-card"
@@ -422,10 +427,12 @@ const Leaderboard = ({
                                 : ""
                         }`}
                     >
-                        <div className="text-center px-0 ml-3 user-avatar">
-                            <div className="rank-star">
-                                <LeaderRankIndicator index={i} type="lb" />
-                            </div>
+                        <div className="number-holder">
+                            <LeaderRankIndicator index={i} type="lb" />
+                        </div>
+
+                        <div className="user-avatar">
+                            <div className="rank-star"></div>
                             <img
                                 className="avatar"
                                 onError={(e) => defaultUserImage(e)}
@@ -436,6 +443,7 @@ const Leaderboard = ({
                                 alt="player"
                             />
                         </div>
+
                         <div className="px-2 ml-3">
                             <p className="player-name">
                                 {leaderboardList[i]?.userId
@@ -451,18 +459,19 @@ const Leaderboard = ({
                             <p className="points">
                                 {leaderboardList[i]?.gameScore >= 0
                                     ? leaderboardList[i]?.gameScore
-                                    : "-"}{" "}
+                                    : "0"}{" "}
                                 pts
                             </p>
                         </div>
-                        <div className="tickets ml-auto d-flex align-items-center justify-content-center py-2 px-2 px-md-3">
-                            <span>{getRankTickets(i)}</span>
-                            <img
+
+                        <div className="tokens ml-auto d-flex align-items-center justify-content-center">
+                            <span>{getRankTickets(i)} Tokens</span>
+                            {/* <img
                                 className="ml-1"
                                 width="16"
                                 src={`${window.cdn}icons/tickets.png`}
                                 alt="tickets"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -561,7 +570,10 @@ const Leaderboard = ({
                             />
                         </button>
                         {/* BACK TEXT */}
-                        <div className="back-text d-flex align-items-center">
+                        <div
+                            onClick={handleBackButton}
+                            className="back-text d-flex align-items-center"
+                        >
                             Back
                         </div>
                         {/* YOUR TICKETS */}
@@ -583,175 +595,209 @@ const Leaderboard = ({
                         </div> */}
                     </div>
                 </div>
+
                 <section
                     id="game-leaderboard-screen"
                     ref={leaderboardRef}
-                    onClick={() =>
-                        setModalStatus((prev) => ({
-                            ...prev,
-                            isEarnAdditionalInfoShown: false,
-                        }))
-                    }
+                    onClick={(e) => {
+                        if (
+                            !e.target.closest(".bottom-ready-tournament") &&
+                            !e.target.closest(
+                                ".earn-additional-tickets-container"
+                            )
+                        ) {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isEarnAdditionalInfoShown: false,
+                            }));
+                        }
+                    }}
                 >
-                    <div className="container-fluid">
-                        <div className="row justify-content-center">
-                            {/* INFO & LEADERBOARD */}
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-8">
-                                <div className="row">
-                                    {/* GAME INFO & TIMER */}
-                                    <div className="col-12">
-                                        <div className="game-info d-flex align-items-center align-items-md-end mt-4 p-3">
-                                            <img
-                                                className="img-fluid game-thumbnail"
-                                                src={gameInfo.gameIcon}
-                                                alt="game"
-                                            />
-                                            <div className="col d-flex flex-column flex-md-row p-0">
-                                                <div className="col-12 col-md game-name mb-2 mb-md-0 px-3 px-md-3">
-                                                    <span className="mb-0 title col px-0 px-md-1">
-                                                        {gameInfo.gameTitle}
-                                                    </span>
-                                                </div>
-                                                <div className="col-12 col-md px-3 p-md-0 d-flex align-items-end justify-content-start justify-content-md-end">
-                                                    <div className="counter justify-content-start justify-content-md-end">
-                                                        <img
-                                                            width="17"
-                                                            src={`${window.cdn}icons/timer_normal.png`}
-                                                            alt="timer"
-                                                        />
-                                                        <p className="end-text mb-0 mb-md-1 mb-lg-0 ml-2 mr-1">
-                                                            Ends in
-                                                        </p>
-                                                        <p
-                                                            className={`mb-0 ${
-                                                                OverTimeModeChecker(
-                                                                    data?.prizeId,
-                                                                    data?.ticketsRequired,
-                                                                    prizeTicketCollection
-                                                                )
-                                                                    ? "text-danger tickets-text-end"
-                                                                    : "timer-text"
-                                                            }`}
-                                                        >
-                                                            {timer ||
-                                                                "0d 0h 0m 0s"}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* LEADERBOARD */}
-                                    <div className="col-12">
-                                        <div
-                                            className={`leaderboard mb-2 mb-md-3 ${
-                                                currentUserRank.rank >
-                                                rankLength
-                                                    ? ""
-                                                    : "pb-2 pb-md-3"
-                                            }`}
-                                        >
-                                            <div
-                                                ref={leaderboardLayerRef}
-                                                className={`leaderboard-rank-layer p-2 p-md-3 ${
-                                                    currentUserRank.rank >
-                                                        rankLength ||
-                                                    currentUserRank.rank === "-"
-                                                        ? ""
-                                                        : "leaderboard-rank-layer-without-user"
-                                                }`}
-                                            >
-                                                {leaderboardList.length > 0
-                                                    ? getLeaderboardList()
-                                                    : getEmptyLeaderboardList()}
-                                            </div>
+                    <div className="leaderboard-background-wrapper">
+                        <img
+                            alt="game-icon"
+                            src={gameInfo?.gameIcon}
+                            className="leaderboard-background"
+                        ></img>
+                    </div>
 
-                                            {/* CURRENT USER RANK  */}
-                                            {currentUserRank.rank >
-                                            rankLength ? (
-                                                <div className="leaderboard-user-wrapper w-100 p-3">
-                                                    <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
-                                                        <div className="text-center px-0 ml-3 user-avatar">
-                                                            <div className="rank-star">
-                                                                <LeaderRankIndicator
-                                                                    index={
-                                                                        currentUserRank.rank
-                                                                    }
-                                                                    type="current"
-                                                                />
-                                                            </div>
-                                                            <img
-                                                                className="avatar"
-                                                                onError={(e) =>
-                                                                    defaultUserImage(
-                                                                        e
-                                                                    )
-                                                                }
-                                                                src={
-                                                                    user.picture ||
-                                                                    `${window.cdn}icons/user.png`
-                                                                }
-                                                                alt="player"
-                                                            />
-                                                        </div>
-                                                        <div className="px-2 ml-3">
-                                                            <p className="player-name">
-                                                                {user.username}
-                                                            </p>
-                                                            <p className="points">
-                                                                {leaderboard.find(
-                                                                    (e) =>
-                                                                        e.userId ===
-                                                                        user.id
-                                                                )?.gameScore ||
-                                                                    "-"}{" "}
-                                                                pts
-                                                            </p>
-                                                        </div>
-                                                        <div className="tickets ml-auto d-flex align-items-center justify-content-center py-2 px-2">
-                                                            <span>
-                                                                {getRankTickets(
-                                                                    currentUserRank.rank -
-                                                                        1
-                                                                ) || "-"}
-                                                            </span>
-                                                            <img
-                                                                className="ml-1"
-                                                                width="16"
-                                                                src={`${window.cdn}icons/tickets.png`}
-                                                                alt="tickets"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                ""
-                                            )}
+                    <div className="leaderboard-flex-container">
+                        <div className="top-leaderboard">
+                            <div className="leaderboard-game-info-flex-container">
+                                <div
+                                    className="game-icon"
+                                    style={{
+                                        backgroundImage: `url("${gameInfo?.gameIcon}")`,
+                                    }}
+                                ></div>
+                                <div className="game-details-container">
+                                    <div className="game-name">
+                                        {gameInfo.gameTitle}
+                                    </div>
+                                    <div className="tournament-end-container">
+                                        <div className="tournament-end-text">
+                                            Tournament ends in
+                                        </div>
+                                        <div className="timer-text">
+                                            {timer || "0d 0h 0m 0s"}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div className="leaderboard-holder">
+                                <div
+                                    className="leaderboard"
+                                    // className={`leaderboard mb-2 mb-md-3 ${
+                                    //     currentUserRank.rank > rankLength
+                                    //         ? ""
+                                    //         : "pb-2 pb-md-3"
+                                    // }`}
+                                >
+                                    <div
+                                        ref={leaderboardLayerRef}
+                                        className={`leaderboard-rank-layer ${
+                                            currentUserRank.rank > rankLength ||
+                                            currentUserRank.rank === "-"
+                                                ? ""
+                                                : "leaderboard-rank-layer-without-user"
+                                        }`}
+                                    >
+                                        {leaderboardList.length > 0
+                                            ? getLeaderboardList()
+                                            : getEmptyLeaderboardList()}
+                                    </div>
+
+                                    {currentUserRank.rank > rankLength ? (
+                                        <div className="leaderboard-user-wrapper w-100 p-3">
+                                            <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
+                                                <div className="user-avatar">
+                                                    <div className="rank-star">
+                                                        <LeaderRankIndicator
+                                                            index={
+                                                                currentUserRank.rank
+                                                            }
+                                                            type="current"
+                                                        />
+                                                    </div>
+                                                    <img
+                                                        className="avatar"
+                                                        onError={(e) =>
+                                                            defaultUserImage(e)
+                                                        }
+                                                        src={
+                                                            user.picture ||
+                                                            `${window.cdn}icons/user.png`
+                                                        }
+                                                        alt="player"
+                                                    />
+                                                </div>
+
+                                                <div className="px-2 ml-3">
+                                                    <p className="player-name">
+                                                        {user.username}
+                                                    </p>
+                                                    <p className="points">
+                                                        {leaderboard.find(
+                                                            (e) =>
+                                                                e.userId ===
+                                                                user.id
+                                                        )?.gameScore ||
+                                                            "0"}{" "}
+                                                        pts
+                                                    </p>
+                                                </div>
+                                                <div className="tokens ml-auto d-flex align-items-center justify-content-center">
+                                                    <span>
+                                                        {getRankTickets(
+                                                            currentUserRank.rank -
+                                                                1
+                                                        ) || "0"}{" "}
+                                                        Tokens
+                                                    </span>
+                                                    {/* <img
+                                                        className="ml-1"
+                                                        width="16"
+                                                        src={`${window.cdn}icons/tickets.png`}
+                                                        alt="tickets"
+                                                    /> */}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                            </div>
                         </div>
+
+                        {/* {!modalStatus.isEarnAdditionalInfoShown && (
+                            <div className="bottom-ready-tournament">
+                                <button
+                                    onClick={() => {
+                                        setModalStatus((prev) => ({
+                                            ...prev,
+                                            isEarnAdditionalInfoShown: true,
+                                        }));
+                                    }}
+                                    className="ready-tournament-button"
+                                >
+                                    Ready Tournament
+                                </button>
+                            </div>
+                        )} */}
+
+                        {/* {modalStatus.isEarnAdditionalInfoShown && (
+                            <>
+                                <EarnAdditionalTickets
+                                    style={{ background: "red" }}
+                                    gameId={gameInfo.gameId}
+                                    prizeId={data?.prizeId}
+                                    earnAdditionalDisabledStatus={
+                                        earnAdditionalDisabledStatus
+                                    }
+                                    setEarnAdditionalDisabledStatus={
+                                        setEarnAdditionalDisabledStatus
+                                    }
+                                />
+                                <button
+                                    className={`play-btn ${
+                                        timer !== "Ended" ||
+                                        timer !== "0d 0h 0m 0s"
+                                            ? ""
+                                            : "opacity-0-5"
+                                    }`}
+                                    onClick={
+                                        timer !== "Ended" ||
+                                        timer !== "0d 0h 0m 0s"
+                                            ? handleOnClickPlayButton
+                                            : null
+                                    }
+                                >
+                                    Play!
+                                </button>
+                            </>
+                        )} */}
                     </div>
-                </section>
-                {/* EARN ADDITINAL TICKETS */}
-                <div className="leaderboard-bottom-wrapper">
+
                     {!modalStatus.isEarnAdditionalInfoShown && (
-                        <button
-                            className="ready-tournament"
-                            onClick={() =>
-                                setModalStatus((prev) => ({
-                                    ...prev,
-                                    isEarnAdditionalInfoShown: true,
-                                }))
-                            }
-                        >
-                            Ready Tournament!
-                        </button>
+                        <div className="bottom-ready-tournament">
+                            <button
+                                onClick={() => {
+                                    setModalStatus((prev) => ({
+                                        ...prev,
+                                        isEarnAdditionalInfoShown: true,
+                                    }));
+                                }}
+                                className="ready-tournament-button"
+                            >
+                                Ready Tournament
+                            </button>
+                        </div>
                     )}
 
+                    {/* EARN ADDITIONAL BENEFITS */}
                     {modalStatus.isEarnAdditionalInfoShown && (
-                        <>
+                        <div className="earn-additional-tickets-container">
                             <EarnAdditionalTickets
                                 gameId={gameInfo.gameId}
                                 prizeId={data?.prizeId}
@@ -762,23 +808,29 @@ const Leaderboard = ({
                                     setEarnAdditionalDisabledStatus
                                 }
                             />
-                            <button
-                                className={`play-btn ${
+                            {/* PLAY BUTTON*/}
+                            <div
+                                className={`play-button-container ${
                                     timer !== "Ended" || timer !== "0d 0h 0m 0s"
                                         ? ""
                                         : "opacity-0-5"
                                 }`}
-                                onClick={
-                                    timer !== "Ended" || timer !== "0d 0h 0m 0s"
-                                        ? handleOnClickPlayButton
-                                        : null
-                                }
                             >
-                                Play!
-                            </button>
-                        </>
+                                <button
+                                    onClick={
+                                        timer !== "Ended" ||
+                                        timer !== "0d 0h 0m 0s"
+                                            ? handleOnClickPlayButton
+                                            : null
+                                    }
+                                    className="play-button"
+                                >
+                                    Play Tournament!
+                                </button>
+                            </div>
+                        </div>
                     )}
-                </div>
+                </section>
             </>
         );
     }

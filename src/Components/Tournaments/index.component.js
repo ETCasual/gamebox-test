@@ -79,7 +79,7 @@ const Index = ({ match }) => {
     // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
     useEffect(() => {
         const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
+        // overlay?.setAttribute("style", `min-height: 145px`);
         return () => {
             overlay?.removeAttribute("style");
         };
@@ -271,7 +271,10 @@ const Index = ({ match }) => {
                                     />
                                 </Link>
                                 {/* BACK TEXT */}
-                                <div className="back-text d-flex align-items-center">
+                                <div
+                                    onClick={handleHomeNavLink}
+                                    className="back-text d-flex align-items-center"
+                                >
                                     Back
                                 </div>
                                 {/* YOUR TICKETS */}
