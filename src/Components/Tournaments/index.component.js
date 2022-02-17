@@ -24,7 +24,6 @@ import { scrollToTop } from "Utils/ScrollToTop";
 import { PRIZE_TYPE } from "Utils/Enums";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
-import getPrizeProgress from "Utils/PrizeProgress";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 
 const Index = ({ match }) => {
@@ -250,59 +249,34 @@ const Index = ({ match }) => {
             <>
                 {type !== "automated" && (
                     <>
-                        <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center mx-auto">
-                            <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8">
-                                {/* BACK BUTTON */}
-                                <Link
-                                    className="d-flex align-items-center"
-                                    onClick={handleHomeNavLink}
-                                    to={{
-                                        pathname: "/",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
-                                    }}
-                                >
-                                    <img
-                                        className="back-button"
-                                        width="40"
-                                        src={`${window.cdn}buttons/button_back.png`}
-                                        alt="back-btn"
-                                    />
-                                </Link>
-                                {/* BACK TEXT */}
-                                <div
-                                    onClick={handleHomeNavLink}
-                                    className="back-text d-flex align-items-center"
-                                >
-                                    Back
-                                </div>
-                                {/* YOUR TICKETS */}
-                                {/* <div className="ticket-values px-3">
-                                    <p className="mb-0">
-                                        You have{" "}
-                                        <span className="mx-2">
-                                            {getPoolTickets(
-                                                poolTickets,
-                                                id
-                                            )?.toLocaleString() || 0}
-                                        </span>
-                                        <img
-                                            width="24"
-                                            src={`${window.cdn}icons/tickets.png`}
-                                            alt="tickets"
-                                        />
-                                    </p>
-                                </div> */}
-                            </div>
-                        </div>
-
                         <section id="game-screen">
                             <div className="container-fluid">
                                 <div className="row justify-content-center">
-                                    <div className="col-12 col-md-10 col-lg-8 col-xl-8">
+                                    <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                                        {/* BACK BUTTON */}
+                                        <div className="d-flex align-items-center back-button">
+                                            <Link
+                                                className="d-flex align-items-center"
+                                                onClick={handleHomeNavLink}
+                                                to={{
+                                                    pathname: "/",
+                                                    state: {
+                                                        prevPath:
+                                                            history.location
+                                                                .pathname,
+                                                    },
+                                                }}
+                                            >
+                                                <img
+                                                    width="42"
+                                                    src={`${window.cdn}buttons/button_back.png`}
+                                                    alt="back-btn"
+                                                />
+                                            </Link>
+                                            <span className="ml-2">Back</span>
+                                        </div>
                                         {/* TICKETS AND POOL INFO */}
-                                        <div className="row prize-detail-panel my-4 col-12">
+                                        <div className="row prize-detail-panel mt-4 mb-5 col-12">
                                             <div className="prize-info-holder d-flex">
                                                 <img
                                                     className="prize-img"
@@ -408,7 +382,10 @@ const Index = ({ match }) => {
                                                             src={`${window.cdn}icons/icon_question_01.png`}
                                                             className="question-mark-img"
                                                             alt="question-mark"
-                                                        ></img>
+                                                            onClick={
+                                                                handleInstructionPanel
+                                                            }
+                                                        />
                                                     </div>
                                                     <div className="statement-subtitle">
                                                         Compete with other

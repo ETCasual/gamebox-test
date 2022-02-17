@@ -45,7 +45,7 @@ const HighScore = ({ handleBackButton }) => {
                             </div>
                             {/* IF LIST NOT AVAILABLE */}
                             <div className="col-12 mb-4">
-                                <h3 className="title my-4">Highscores</h3>
+                                <h1 className="main-title my-4">Highscores</h1>
                                 {noDataLoaded && (
                                     <div className="no-result">
                                         <p className="title mb-1">

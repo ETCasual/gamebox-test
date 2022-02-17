@@ -85,7 +85,7 @@ const Index = () => {
             sessionStorage.getItem("sessionTimeStamp")
         );
         const diff = Date.now() - sessionTimeStamp;
-        if (diff <= 15000) console.log("HOME PAGE TIMER CALLING TICKETS", diff);
+        // if (diff <= 15000) console.log("HOME PAGE TIMER CALLING TICKETS", diff);
 
         clearTimeout(timeOutRef1.current);
         timeOutRef1.current = setTimeout(() => {

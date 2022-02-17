@@ -45,8 +45,8 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
     }, []);
 
     return (
-        <div className="col-12 col-md-6 d-flex mb-4">
-            <div className="w-100 position-relative ">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-4 d-flex align-items-center justify-content-center mb-4">
+            <div className="w-100 position-relative">
                 <div
                     className="complete-overlay"
                     onClick={() => handleWinnerRevealCard(data?.type)}
@@ -70,11 +70,15 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                             </div>
                         )}
                         {!loading && (
-                            <div className="content text-center w-100 p-3">
-                                <p className="title mb-2">{data.prizeTitle}</p>
-                                <p className="subtitle mb-4">
-                                    {data.prizeSubtitle}
-                                </p>
+                            <div className="content text-center d-flex flex-column align-items-center justify-content-end">
+                                <div className="prize-info p-3 w-100">
+                                    <p className="title mb-2 px-3">
+                                        {data.prizeTitle}
+                                    </p>
+                                    <p className="subtitle mb-0 px-3">
+                                        {data.prizeSubtitle}
+                                    </p>
+                                </div>
                                 <p className="tap-btn mb-0">
                                     Tap to reveal the winner
                                 </p>
@@ -90,90 +94,26 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                         />
                         <img src={data.prizeBG} alt={data.prizeTitle} />
                     </picture>
-                    <div className="overlay"></div>
-                    <div className="badges mb-1">
-                        {data.prizeContent || "Premium"}
-                    </div>
-                    <div className="prize-text">
-                        <div className="card-title pl-3">{data.prizeTitle}</div>
-                        <div className="card-subtitle pl-3">
-                            {data.prizeSubtitle}
+                    <div className="prize-info py-3">
+                        <div className="col-12 d-flex align-items-center justify-content-between mb-2">
+                            <div className="prize-title">{data.prizeTitle}</div>
+                            <p className="mb-1 token-label d-flex align-items-center">
+                                Your tickets
+                            </p>
+                        </div>
+                        <div className="col-12 d-flex align-items-center justify-content-between">
+                            <div className="prize-subtitle">
+                                {data.prizeSubtitle}
+                            </div>
+                            <p className="mb-0 token-value d-flex align-items-center">
+                                {data?.ticketsRequired?.toLocaleString()}
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div className="col-12 d-flex flex-row align-items-center ticket-info">
-                    <div className="col px-0">
-                        {/* MOBILE */}
-                        <div className="px-2 py-2 ticket-wrapper d-block d-md-none">
-                            <div className="your-tickets d-flex justify-content-end">
-                                <div className="col d-flex flex-row px-0">
-                                    <p className="mb-0 px-2 label d-flex align-items-center">
-                                        Your tickets
-                                    </p>
-                                </div>
-                                <p className="mb-0 tickets d-flex align-items-center">
-                                    {data.ticketsRequired?.toLocaleString() ||
-                                        0}
-                                </p>
-                            </div>
-                            <div className="pool-tickets d-flex justify-content-end mt-3">
-                                <div className="col d-flex flex-row px-0">
-                                    <p className="mb-1 px-2 label d-flex align-items-end">
-                                        Draw starts in
-                                    </p>
-                                </div>
-                                <p className="mb-0 tickets d-flex align-items-center">
-                                    {data.ticketsRequired?.toLocaleString() ||
-                                        0}
-                                    <span>
-                                        {`\u00A0/ ${
-                                            data.ticketsRequired?.toLocaleString() ||
-                                            0
-                                        }`}
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
-                        {/* DESKTOP */}
-                        <div className="px-2 py-2 ticket-wrapper d-none d-md-block">
-                            <div className="your-tickets">
-                                <p className="mb-0 label d-flex align-items-center">
-                                    Your tickets
-                                </p>
-                                <div className="col d-flex flex-row px-0">
-                                    <p className="mb-0 tickets d-flex align-items-center">
-                                        {`\u00A0${data.ticketsRequired?.toLocaleString()}` ||
-                                            0}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="pool-tickets mt-2">
-                                <p className="mb-0 label d-flex align-items-end">
-                                    Draw starts in
-                                </p>
-                                <div className="col d-flex px-0">
-                                    <p className="mb-0 tickets d-flex align-items-center">
-                                        {`\u00A0${
-                                            data.ticketsRequired?.toLocaleString() ||
-                                            0
-                                        }`}
-                                    </p>
-                                    <p className="mb-0 required-tickets d-flex align-items-center">
-                                        {`\u00A0/ ${
-                                            data.ticketsRequired?.toLocaleString() ||
-                                            0
-                                        }`}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="pl-2 game-icon d-flex justify-content-center position-relative">
-                        <img
-                            className="img-fluid"
-                            src={data.gameIcon}
-                            alt="game-icon"
-                        />
+                    <div
+                        className={`d-flex align-items-center justify-content-center remaining-tokens`}
+                    >
+                        {data?.ticketsRequired?.toLocaleString()}
                     </div>
                 </div>
             </div>

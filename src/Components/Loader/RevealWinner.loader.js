@@ -4,6 +4,7 @@ import ContentLoader from "react-content-loader";
 const RevealWinnerLoader = ({ cx1, cx2, cx3, cx4 }) => (
     <ContentLoader
         style={{ width: "100%", height: "5vh" }}
+        speed={1.5}
         backgroundColor="transparent"
         foregroundColor="#8E21EC"
     >

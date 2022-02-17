@@ -9,7 +9,9 @@
             object-fit: contain;
             // border: 6.5px solid var(--white);
             // box-shadow: 0px 12px 15px 0px #cbcbcb;
-            background: transparent linear-gradient(135deg, #393939 0%, #171717 100%) 0% 0% no-repeat padding-box;
+            background: transparent
+                linear-gradient(135deg, #393939 0%, #171717 100%) 0% 0%
+                no-repeat padding-box;
             @media only screen and (min-width: 768px) {
                 width: 14.125em;
                 height: 14.125em;
@@ -43,7 +45,6 @@
     .gem-balance {
         cursor: default;
         .gem-balance-text {
-            
             font-size: 0.75rem;
             color: #868686;
             @media only screen and (min-width: 768px) {
@@ -75,7 +76,7 @@
                 height: 1.5em;
                 border-radius: 100%;
                 color: white;
-                
+
                 span {
                     font-size: 1em;
                     margin-bottom: 0.15em;
@@ -85,7 +86,8 @@
     }
     .multiplier-holder {
         .multiplier {
-            background: linear-gradient(120deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+            background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
+                no-repeat padding-box;
             position: relative;
             box-shadow: 0px 10px 15px #0000000d;
             @media only screen and (min-width: 768px) {
@@ -104,7 +106,7 @@
                     font-size: $fnt-sz-16;
                 }
                 span {
-                    color: #00C1B9;
+                    color: #00c1b9;
                     font-weight: $fnt-wgt-600;
                 }
             }
@@ -120,10 +122,12 @@
                     font-size: 14px;
                     color: #868686;
                     background: #313131;
-                    border-radius: 17px;
-                    min-width: 6.5em;
-                    min-height: 2.25em;
-                    padding: 0.1em 1.1em;
+                    border-radius: 20px;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 2.2rem;
+                    min-width: 6.5rem;
+                    padding: 0 1rem;
                     .player-exp {
                         font-weight: $fnt-wgt-700;
                         font-size: $fnt-sz-12;
@@ -151,7 +155,11 @@
                     height: 2em;
                 }
                 .progress-bar {
-                    background: linear-gradient(266deg, #00C1B9 0%, #047C98 100%);
+                    background: linear-gradient(
+                        266deg,
+                        #00c1b9 0%,
+                        #047c98 100%
+                    );
                     box-shadow: 0px 10px 20px #6c38ef3f;
                     border-radius: 1em;
                     height: inherit;
@@ -177,7 +185,8 @@
                 min-height: 15.375em;
             }
             position: relative;
-            background: linear-gradient(120deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+            background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
+                no-repeat padding-box;
             border-radius: 10px;
             box-shadow: 0px 10px 15px #0000000d;
             .team-title {
@@ -200,9 +209,8 @@
                     font-size: $fnt-sz-16;
                 }
                 span {
-                    color: #00C1B9;
+                    color: #00c1b9;
                     font-size: $fnt-sz-16;
-                    
                 }
             }
             .share-text {
@@ -256,7 +264,8 @@
     .highscore,
     .rewards {
         cursor: pointer;
-        background: linear-gradient(120deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+        background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
+            no-repeat padding-box;
         min-height: 3.625em;
         @media only screen and (min-width: 768px) {
             min-height: 6.188em;
@@ -271,7 +280,7 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            
+
             font-weight: $fnt-wgt-600;
             font-size: 0.875rem;
             @media only screen and (min-width: 768px) {
@@ -288,7 +297,8 @@
         }
     }
     .settings {
-        background: linear-gradient(120deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+        background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
+            no-repeat padding-box;
         min-height: 3.625em;
         @media only screen and (min-width: 768px) {
             min-height: 6.188em;
@@ -316,7 +326,7 @@
     }
     .logout {
         color: #ff2c44;
-        
+
         margin-bottom: 2em;
         font-size: 0.875rem;
         font-weight: $fnt-wgt-600;

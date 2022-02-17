@@ -72,7 +72,7 @@ const Rewards = () => {
                             </div>
                             {/* TABS */}
                             <div className="col-12 mb-4">
-                                <h2 className="title my-4">Rewards</h2>
+                                <h1 className="main-title my-4">Rewards</h1>
                             </div>
                             {/* CLAIMED */}
                             {claimedPrizes.length > 0 &&

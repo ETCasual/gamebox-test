@@ -14,66 +14,146 @@
         -webkit-backdrop-filter: blur(20px);
     }
     .wrapper {
-        background-color: white;
-        border-radius: 20px;
+        background: linear-gradient(145deg, #302f2f 0%, #0b0b0b 100%);
+        box-shadow: 0px 5px 10px #00000029;
+        border-radius: 10px;
+        min-height: 26rem;
+        @media only screen and (min-width: 1200px) {
+            min-height: 24.938rem;
+        }
         .swiper {
             .swiper-wrapper {
                 align-items: center;
-                .steps {
-                    .icon {
-                        width: 200px;
-                        @media only screen and (min-width: 375px) {
-                            width: 250px;
-                            height: 250px;
+                .swiper-slide {
+                    .steps {
+                        width: 100%;
+                        .icon {
+                            width: 9.125rem;
+                            height: 9.125rem;
                             object-fit: contain;
                         }
-                    }
-                    .title {
-                        text-align: center;
-                        
-                        font-size: 1rem;
-                        @media only screen and (min-width: 375px) {
-                            font-size: 1.25rem;
+                        .icon-0 {
+                            width: 12rem;
+                            height: 12rem;
+                            object-fit: cover;
+                            object-position: top;
                         }
-                        max-width: 30ch;
-                    }
-                    .description {
-                        text-align: center;
-                        max-width: 39ch;
-                        color: #868686;
-                        font-size: 0.875rem;
-                    }
-                    .extra {
-                        text-align: center;
-                        color: #868686;
-                        font-size: 0.875rem;
+                        // SLIDE 2 IMAGES
+                        .position-alter-1-slide-2 {
+                            position: absolute;
+                            top: 2rem;
+                            left: 30%;
+                            @media only screen and (min-width: 1200px) {
+                                left: 38%;
+                            }
+                            transform: translate(-50%, -50%) rotateX(0deg)
+                                rotateY(180deg);
+                        }
+                        .position-alter-2-slide-2 {
+                            position: relative;
+                            right: -3.5rem;
+                            @media only screen and (min-width: 1200px) {
+                                right: -2.5rem;
+                            }
+                        }
+                        // SLIDE 3 IMAGES
+                        .position-alter-1-slide-3 {
+                            position: absolute;
+                            z-index: 2;
+                            top: 5.5rem;
+                            left: 25%;
+                            width: 7rem;
+                            @media only screen and (min-width: 1200px) {
+                                left: 37%;
+                            }
+                            transform: translate(-50%, -50%);
+                        }
+                        .position-alter-2-slide-3 {
+                            position: relative;
+                            z-index: 1;
+                            top: -2rem;
+                            right: -3rem;
+                            width: 6rem;
+                            @media only screen and (min-width: 1200px) {
+                                width: 7.188rem;
+                                right: -5rem;
+                            }
+                        }
+                        .position-alter-3-slide-3 {
+                            position: absolute;
+                            z-index: 0;
+                            top: 3rem;
+                            left: 7rem;
+                            right: unset;
+                            width: 4rem;
+                            @media only screen and (min-width: 1200px) {
+                                width: 5.063rem;
+                                right: 15rem;
+                            }
+                            transform: translate(-50%, -50%);
+                        }
+                        .title {
+                            text-align: center;
+                            font-size: $fnt-sz-18;
+                            max-width: 40ch;
+                        }
+                        .description {
+                            text-align: center;
+                            max-width: 50ch;
+                            color: #868686;
+                            font-size: $fnt-sz-14;
+                        }
+                        .continue {
+                            background-color: #cc0767;
+                            color: white;
+                            box-shadow: inset 0px 3px 6px #0000000f;
+                            border-radius: 10px;
+                            padding: 1rem;
+                            min-width: 15.438rem;
+                            font-size: $fnt-sz-14;
+                        }
                     }
                 }
             }
         }
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: #7824f8;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+            transform: translate(40%, -50%) rotate(-180deg);
+        }
         .swiper-nav {
-            position: relative;
+            position: absolute;
+            bottom: 0.5rem;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 3;
             .custom-pagination {
                 .swiper-pagination-bullet {
-                    margin: 0.15em;
-                    padding: 0.2em;
+                    background-color: white;
+                    opacity: 1;
+                    margin: 0.15rem;
+                    padding: 0.2rem;
                     @media only screen and (min-width: 375px) {
-                        margin: 0.3em;
-                        padding: 0.4em;
+                        margin: 0.3rem;
+                        padding: 0.4rem;
                     }
                 }
                 .swiper-pagination-bullet-active {
-                    background-color: #7824f8;
-                    box-shadow: 0px 2px 2px #cac9ca;
+                    background-color: #cc0767;
                 }
             }
-            .prev,
-            .next {
-                cursor: pointer;
-                font-size: 0.875rem;
-                color: #7824f8;
-            }
+
             .swiper-button-disabled {
                 cursor: pointer;
                 font-size: 0.875rem;

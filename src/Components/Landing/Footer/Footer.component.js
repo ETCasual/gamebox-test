@@ -3,14 +3,14 @@ import { scrollToTop } from "Utils/ScrollToTop";
 
 const Footer = () => {
     return (
-        <div class="footer">
-            <div class="row ">
-                <div class="col">
-                    <div class="d-flex mt-5">
-                        <ul class="list list-unstyled mx-auto justify-content-center">
+        <div className="footer">
+            <div className="row ">
+                <div className="col">
+                    <div className="d-flex mt-5">
+                        <ul className="list list-unstyled mx-auto justify-content-center">
                             {/* ABOUT */}
-                            <li class=" title list-item">ABOUT</li>
-                            <li class=" subtitle list-item mt-2">
+                            <li className=" title list-item">ABOUT</li>
+                            <li className=" subtitle list-item mt-2">
                                 <Link
                                     target="_blank"
                                     to={{
@@ -21,7 +21,7 @@ const Footer = () => {
                                     GameBox
                                 </Link>
                             </li>
-                            <li class="subtitle list-item mt-2">
+                            <li className="subtitle list-item mt-2">
                                 <Link
                                     target="_blank"
                                     to={{
@@ -35,12 +35,12 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div class="col">
+                <div className="col">
                     {/* HELP */}
-                    <div class="d-flex mt-5">
-                        <ul class="list list-unstyled mx-auto justify-content-center">
-                            <li class=" title list-item">HELP</li>
-                            <li class=" subtitle list-item mt-2">
+                    <div className="d-flex mt-5">
+                        <ul className="list list-unstyled mx-auto justify-content-center">
+                            <li className=" title list-item">HELP</li>
+                            <li className=" subtitle list-item mt-2">
                                 <Link
                                     target="_blank"
                                     to={{
@@ -54,12 +54,12 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div class="col">
+                <div className="col">
                     {/* FROYO COIN */}
-                    <div class="d-flex mt-5">
-                        <ul class="list list-unstyled mx-auto justify-content-center">
-                            <li class=" title list-item">FROYO COIN</li>
-                            <li class=" subtitle list-item mt-2">
+                    <div className="d-flex mt-5">
+                        <ul className="list list-unstyled mx-auto justify-content-center">
+                            <li className=" title list-item">FROYO COIN</li>
+                            <li className=" subtitle list-item mt-2">
                                 <Link
                                     target="_blank"
                                     to={{
@@ -73,13 +73,13 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                <div class="col-4"></div>
-                <div class="col">
-                    <div class="d-flex mt-5">
-                        <ul class="list list-unstyled">
+                <div className="col-4"></div>
+                <div className="col">
+                    <div className="d-flex mt-5">
+                        <ul className="list list-unstyled">
                             {/* JOIN OUR COMMUNITY */}
-                            <li class=" title list-item">JOIN OUR COMMUNITY</li>
-                            <div class="align-items-center d-flex mt-4">
+                            <li className=" title list-item">JOIN OUR COMMUNITY</li>
+                            <div className="align-items-center d-flex mt-4">
                                 {/* FACEBOOK */}
                                 <li>
                                     <Link
@@ -189,30 +189,30 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div className="row">
                 <ul className="d-flex mt-5">
-                    <li class="list-unstyled lower-link mt-5 mr-3">
+                    <li className="list-unstyled lower-link mt-5 mr-3">
                         <Link to="/terms-and-conditions" onClick={scrollToTop}>
                             © {new Date().getFullYear()} GameBox
                         </Link>
                     </li>
-                    <li class="lower-link  mt-5 mr-3">
+                    <li className="lower-link  mt-5 mr-3">
                         <Link to="/terms-and-conditions" onClick={scrollToTop}>
                             Terms and Conditions
                         </Link>
                     </li>
-                    <li class="lower-link  mt-5 mr-3">
+                    <li className="lower-link  mt-5 mr-3">
                         <Link to="/privacy-policy" onClick={scrollToTop}>
                             Privacy Policy
                         </Link>
                     </li>
-                    <li class="lower-link  mt-5 mr-3">
+                    <li className="lower-link  mt-5 mr-3">
                         <Link to="/tournament-rules" onClick={scrollToTop}>
                             Tournament Rules
                         </Link>
                     </li>
                 </ul>
-                <div class="game-box-logo">
+                <div className="game-box-logo">
                     <Link to="/" onClick={scrollToTop}>
                         <img
                             src={`https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png`}

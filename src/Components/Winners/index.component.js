@@ -83,7 +83,7 @@ const Index = () => {
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
                             <div className="row">
                                 <div className="col-12 col-lg-6 pl-2">
-                                    <h1 className="title mb-2">
+                                    <h1 className="main-title mb-2">
                                         Latest Winners
                                     </h1>
                                     {noDataLoaded && (

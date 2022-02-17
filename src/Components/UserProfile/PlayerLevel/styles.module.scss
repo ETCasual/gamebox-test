@@ -121,14 +121,15 @@
                                 }
                             }
                             .exp-count {
+                                font-size: $fnt-sz-14;
                                 background: #313131;
                                 color: #868686;
                                 border-radius: 20px;
-                                display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                font-size: $fnt-sz-14;
                                 min-height: 2.2rem;
+                                min-width: 6.5rem;
+                                padding: 0 1rem;
                                 .player-exp {
                                     font-weight: $fnt-wgt-700;
                                     font-size: $fnt-sz-12;

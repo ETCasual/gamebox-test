@@ -53,7 +53,7 @@ const Settings = () => {
                             </div>
                             {/* SETTING ITEMS */}
                             <div className="col-12 mb-4">
-                                <h3 className="title my-4">Settings</h3>
+                                <h1 className="main-title my-4">Settings</h1>
                                 {/* ITEM 1 - USER INFO */}
                                 <div className="row py-4">
                                     <a

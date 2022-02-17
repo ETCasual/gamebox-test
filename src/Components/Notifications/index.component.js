@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
+import NotificationLeaderboardHistory from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
 import NotificationFriendInvitation from "Components/Notifications/FriendInvitation/FriendInvitation.component";
 import WinnerLoader from "Components/Loader/Winner.loader";
 
@@ -93,11 +93,11 @@ const Index = () => {
 
     return (
         <section>
-            <div className="container-fluid" id="notification">
+            <div className="container-fluid px-0 px-md-3" id="notification">
                 {/* NOTIFICATIONS */}
                 <div className="row justify-content-center">
-                    <div className="col-11 col-md-10 col-lg-8 col-xl-8">
-                        <h4 className="mb-0">Notifications</h4>
+                    <div className="col-11 col-md-10 col-lg-8 col-xl-7">
+                        <h1 className="mb-0 main-title">Notifications</h1>
                         {noDataLoaded && (
                             <div className="no-result">
                                 <p className="title mb-2">
@@ -121,7 +121,7 @@ const Index = () => {
                                                     i === 0
                                                         ? "mt-primary"
                                                         : "mt-secondary"
-                                                } month-year`}
+                                                } month-year mb-4`}
                                             >
                                                 {notice?.monthYear}
                                             </p>
@@ -131,115 +131,103 @@ const Index = () => {
                                                 n.type === "invite" ? (
                                                 <div
                                                     key={`n-${idx}`}
-                                                    className="col-12 mb-3 notification-card px-0"
+                                                    className={`col-12 d-flex align-items-center notification-card px-0 mb-4`}
+                                                    onClick={() =>
+                                                        n?.type === "tour"
+                                                            ? handleOnClickSelectedNotification(
+                                                                  n?.cgId,
+                                                                  n?.gameId,
+                                                                  n?.type,
+                                                                  n?.createdOn,
+                                                                  idx
+                                                              )
+                                                            : n?.type ===
+                                                              "invite"
+                                                            ? handleOnClickSelectedNotification(
+                                                                  n?.cgId,
+                                                                  n?.id,
+                                                                  n?.type,
+                                                                  n?.createdOn,
+                                                                  idx
+                                                              )
+                                                            : null
+                                                    }
                                                 >
-                                                    <div
-                                                        className="col d-flex flex-column card-wrapper px-0 position-relative"
-                                                        onClick={() =>
-                                                            n?.type === "tour"
-                                                                ? handleOnClickSelectedNotification(
-                                                                      n?.cgId,
-                                                                      n?.gameId,
-                                                                      n?.type,
-                                                                      n?.createdOn,
-                                                                      idx
-                                                                  )
-                                                                : n?.type ===
-                                                                  "invite"
-                                                                ? handleOnClickSelectedNotification(
-                                                                      n?.cgId,
-                                                                      n?.id,
-                                                                      n?.type,
-                                                                      n?.createdOn,
-                                                                      idx
-                                                                  )
-                                                                : null
+                                                    <img
+                                                        width={50}
+                                                        className="prize-img"
+                                                        onError={
+                                                            defaultGameImage
                                                         }
-                                                    >
-                                                        <img
-                                                            className="prize-img"
-                                                            onError={
-                                                                defaultGameImage
-                                                            }
-                                                            src={
-                                                                n.type ===
+                                                        src={
+                                                            n.type === "tour"
+                                                                ? n?.picture
+                                                                : `${window.cdn}illustrations/friends_03.jpg`
+                                                        }
+                                                        alt="icon"
+                                                    />
+                                                    <div className="w-100">
+                                                        {/* PRIZE INFO */}
+                                                        <div className="col-12 d-flex align-items-center justify-content-between prize-info mb-2">
+                                                            <p className="mb-0">
+                                                                {n?.type ===
                                                                 "tour"
-                                                                    ? n?.picture
-                                                                    : `${window.cdn}illustrations/friends_03.jpg`
-                                                            }
-                                                            alt="icon"
-                                                        />
-                                                        <div className="col-12 d-flex flex-row prize-info">
-                                                            <div className="col-12 col-md-11 pr-0 pl-5 pl-md-4 ml-2 ml-md-auto d-flex align-items-center justify-content-between">
-                                                                <p className="mb-0">
-                                                                    {n?.type ===
-                                                                    "tour"
-                                                                        ? n?.title
-                                                                        : "Friend Invite"}
-                                                                </p>
-                                                                <p className="mb-0">
-                                                                    {new Date(
-                                                                        n?.createdOn *
-                                                                            1000
-                                                                    )?.toDateString()}{" "}
-                                                                    |{" "}
-                                                                    {new Date(
-                                                                        n?.createdOn *
-                                                                            1000
+                                                                    ? n?.title
+                                                                    : "Friend Invite"}
+                                                            </p>
+                                                            <p className="mb-0">
+                                                                {new Date(
+                                                                    n?.createdOn *
+                                                                        1000
+                                                                )?.toDateString()}{" "}
+                                                                |{" "}
+                                                                {new Date(
+                                                                    n?.createdOn *
+                                                                        1000
+                                                                )
+                                                                    ?.toLocaleTimeString(
+                                                                        "en-us",
+                                                                        timeOptions
                                                                     )
-                                                                        ?.toLocaleTimeString(
-                                                                            "en-us",
-                                                                            timeOptions
-                                                                        )
-                                                                        ?.replace(
-                                                                            "AM",
-                                                                            ""
-                                                                        )
-                                                                        ?.replace(
-                                                                            "PM",
-                                                                            ""
-                                                                        )}
-                                                                </p>
-                                                            </div>
+                                                                    ?.replace(
+                                                                        "AM",
+                                                                        ""
+                                                                    )
+                                                                    ?.replace(
+                                                                        "PM",
+                                                                        ""
+                                                                    )}
+                                                            </p>
                                                         </div>
-                                                        <div className="col-12 d-flex flex-row game-info">
-                                                            <div className="col-12 col-md-11 pr-0 pl-5 pl-md-4 ml-2 ml-md-auto d-flex align-items-center justify-content-between">
-                                                                <p className="mb-0 d-flex align-items-center title">
-                                                                    {n?.type ===
+                                                        {/* TOURNAMENT OR INVITE INFO */}
+                                                        <div
+                                                            className={`col-12 d-flex align-items-center justify-content-between ${
+                                                                n?.type ===
+                                                                "tour"
+                                                                    ? "game-info"
+                                                                    : "invite-info"
+                                                            }`}
+                                                        >
+                                                            <p className="mb-0 d-flex align-items-center title">
+                                                                {n?.type ===
+                                                                "tour"
+                                                                    ? n?.description
+                                                                    : "Invite Redemption"}
+                                                            </p>
+                                                            <p
+                                                                className={`mb-0 d-flex align-items-center ${
+                                                                    n?.type ===
                                                                     "tour"
-                                                                        ? n?.description
-                                                                        : "Invite Redemption"}
-                                                                </p>
-                                                                <p
-                                                                    className={`mb-0 ticket d-flex align-items-center`}
-                                                                >
-                                                                    +
-                                                                    {n?.type ===
-                                                                    "tour"
-                                                                        ? n?.tickets
-                                                                        : n?.gem}
-                                                                    {n?.type ===
-                                                                        "tour" && (
-                                                                        <img
-                                                                            className="ml-1 img-fluid"
-                                                                            width="24"
-                                                                            height="16"
-                                                                            src={`${window.cdn}icons/tickets.png`}
-                                                                            alt="ticket"
-                                                                        />
-                                                                    )}
-                                                                    {n?.type ===
-                                                                        "invite" && (
-                                                                        <img
-                                                                            className="ml-1"
-                                                                            width="24"
-                                                                            height="16"
-                                                                            src={`${window.cdn}gems/gems.png`}
-                                                                            alt="ticket"
-                                                                        />
-                                                                    )}
-                                                                </p>
-                                                            </div>
+                                                                        ? "tickets"
+                                                                        : "gems"
+                                                                }`}
+                                                            >
+                                                                +
+                                                                {n?.type ===
+                                                                "tour"
+                                                                    ? `${n?.tickets} tickets`
+                                                                    : `${n?.gem} gems`}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -254,7 +242,7 @@ const Index = () => {
                         {/* LEADERBOARD HISTORY */}
                         {isSelectedNotificationShown.status &&
                             isSelectedNotificationShown.type === "tour" && (
-                                <NotificationLeaderboard
+                                <NotificationLeaderboardHistory
                                     id={isSelectedNotificationShown.cgId}
                                     notificationList={notificationList}
                                     leaderboardHistory={leaderboardHistory}
