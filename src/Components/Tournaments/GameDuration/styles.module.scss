@@ -1,110 +1,39 @@
 .game-card {
-    text-align: center;
-    border-radius: 20px;
-    box-shadow: 0px 10px 15px #00000026;
-    max-width: 240px;
-    width: 240px;
-    .game-info {
-        position: relative;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        width: 100%;
-        min-height: 229px;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .transparent-overlay {
-            position: absolute;
-            width: 220px;
-            height: 60px;
-            bottom: 11px;
-            border-radius: 8px;
-            opacity: 1;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .overlay {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            z-index: 0;
-            background: linear-gradient(
-                183deg,
-                rgba(black, 0) 0%,
-                rgba(#3f3f3f, 0.2) 60%,
-                rgba(black, 0.577766) 100%
-            );
-            border-top-left-radius: 17px;
-            border-top-right-radius: 17px;
-        }
-        .tournament-end-in-text {
-            font-size: $fnt-sz-12;
-        }
-        .duration-holder {
-            display: flex;
-            margin-left: 10px;
-            margin-right: 10px;
-            align-items: center;
-            margin-top: 5px;
-            justify-content: space-between;
-        }
-        .game-title {
-            text-align: left;
-            color: white;
-            font-size: $fnt-sz-14;
-            font-weight: bold;
-            margin-top: 9px;
-            margin-left: 10px;
-            width: 194px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            // @media only screen and (min-width: 768px) {
-            //     font-size: 1.25rem;
-            // }
-        }
-        .game-duration {
-            text-align: left;
-            color: white;
-            font-size: $fnt-sz-14;
-            font-weight: bold;
-        }
-        .timer {
-            top: 1em;
-            left: unset;
-            right: 10px;
-            padding: 0.5em 1em;
-            min-width: 120px;
-            font-size: $fnt-sz-14;
-            font-weight: bold;
-            // font-size: 0.75rem;
-            // @media only screen and (min-width: 768px) {
-            //     font-size: 0.875rem;
-            // }
-            // p {
-            //     min-width: 60px;
-            // }
-        }
+    position: relative;
+    width: 100%;
+    min-height: 14.313rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    .transparent-overlay {
+        width: 90%;
+        margin: 0 auto 0.5rem auto;
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
-    .join {
-        width: 100%;
-        background: transparent
-            linear-gradient(259deg, #cc0767 0%, #ff007c 100%) 0% 0% no-repeat
-            padding-box;
-        box-shadow: inset 0px 3px 6px #0000000f;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        color: #ffffff;
-        min-height: 48px;
-        font-weight: bold;
+    .tournament-end-in-text {
+        font-size: $fnt-sz-12;
+    }
+    .game-title {
         font-size: $fnt-sz-14;
-        // @media only screen and (min-width: 768px) {
-        //     min-height: 68px;
-        //     font-size: 1.25rem;
-        // }
+        font-weight: $fnt-wgt-700;
     }
+    .game-duration {
+        font-size: $fnt-sz-14;
+        font-weight: $fnt-wgt-700;
+    }
+}
+.join {
+    width: 100%;
+    background: transparent linear-gradient(259deg, #cc0767 0%, #ff007c 100%) 0%
+        0% no-repeat padding-box;
+    box-shadow: inset 0px 3px 6px #0000000f;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: #ffffff;
+    min-height: 48px;
+    font-weight: bold;
+    font-size: $fnt-sz-14;
 }

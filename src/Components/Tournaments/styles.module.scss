@@ -2,182 +2,120 @@
 #game-screen {
     position: relative;
     padding-top: 6rem;
-    .prize-detail-panel {
-        .prize-info-holder {
-            .prize-img {
-                height: 158px;
-                width: 158px;
-                margin-right: 26px;
-                // @media screen and (min-width: 768px) {
-                //     height: 63px;
-                //     width: 75px;
-                // }
-                border-radius: 0.5em;
-                object-fit: cover;
+    .prize-info-wrapper {
+        margin-bottom: 2.5rem;
+        min-height: 5rem;
+        @media only screen and (min-width: 992px) {
+            min-height: 10rem;
+        }
+        .prize-img {
+            height: 5rem;
+            width: 5rem;
+            @media only screen and (min-width: 992px) {
+                height: 9.875rem;
+                width: 9.875rem;
             }
-            .prize-text-holder {
-                width: clamp(300px, 60vw, 721px);
-                .prize-id {
-                    font-size: $fnt-sz-10;
-                    margin-bottom: 2px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .prize-text-holder {
+            min-height: inherit;
+            .prize-id {
+                font-size: $fnt-sz-10;
+            }
+            .prize-title {
+                font-size: $fnt-sz-18;
+                font-weight: $fnt-wgt-700;
+            }
+            .prize-description {
+                font-size: $fnt-sz-12;
+                color: white;
+            }
+            .token-and-draw-start-holder {
+                .your-tokens-text {
+                    font-family: $fnt-fam;
+                    font-size: 0.75rem;
+                    color: #00c1b9;
                 }
-                .prize-title {
+                .your-tokens-number {
+                    font-family: $fnt-fam;
+                    font-size: 1.125rem;
+                    color: #ffffff;
+                    margin-left: 10px;
+                    font-weight: bold;
+                }
+                .draw-text {
+                    color: #ffffff;
+                    font-size: $fnt-sz-12;
+                    margin-right: 10px;
+                }
+                .total-tickets-text {
+                    color: #ffffff;
+                    font-size: $fnt-sz-12;
+                    // @media screen and (min-width: 768px) {
+                    //     font-size: 0.875rem;
+                    // }
+                }
+                .tickets-text {
                     font-size: $fnt-sz-18;
                     font-weight: bold;
-                    margin-bottom: 11px;
-                    // @media only screen and (min-width: 768px) {
-                    //     font-size: 1.75rem;
-                    // }
-                    // font-family: Ilisarniq-Bold;
                 }
-                .prize-description {
-                    font-size: $fnt-sz-12;
-                    color: white;
-                }
-                .token-and-draw-start-holder {
-                    .your-tokens-text {
-                        font-family: $fnt-fam;
-                        font-size: 0.75rem;
-                        color: #00c1b9;
-                    }
-                    .your-tokens-number {
-                        font-family: $fnt-fam;
-                        font-size: 1.125rem;
-                        color: #ffffff;
-                        margin-left: 10px;
-                        font-weight: bold;
-                    }
-                    .progress {
-                        // overflow: visible !important;
-                        position: relative;
-                        border-radius: 1em;
-                        background: #e6e6e6;
-                        height: 1.5em;
-                        @media only screen and (min-width: 768px) {
-                            height: 2em;
-                        }
-                        .progress-bar {
-                            height: inherit;
-                            border-radius: 1em;
-                            background: linear-gradient(
-                                267deg,
-                                #04e4aa,
-                                #01b789
-                            );
-                        }
-                    }
-                    .progressbar-shadow {
-                        position: absolute;
-                        top: 0;
-                        border-radius: 1em;
-                        box-shadow: 0 18px 26px #64d6aa67;
-                        transition: all 0.5s ease;
-                        height: 1.45em;
-                    }
-                    .progress-perc {
-                        position: absolute;
-                        right: 0;
-                        bottom: 100%;
-                        font-size: $fnt-sz-20;
-                        font-weight: bold;
-                        // @media only screen and (min-width: 360px) {
-                        //     font-size: 26px;
-                        // }
-                        // @media only screen and (min-width: 768px) {
-                        //     font-size: 33px;
-                        // }
-                        // @media only screen and (min-width: 1441px) {
-                        //     font-size: 38px;
-                        // }
-                        // color: #7824f8;
-                        // font-family: Ilisarniq-Bold;
-                    }
-                    .instructions,
-                    .draw-start-holder {
-                        position: relative;
-                    }
-                    .draw-text {
-                        color: #ffffff;
-                        font-size: $fnt-sz-12;
-                        margin-right: 10px;
-                    }
-                    .total-tickets-text {
-                        color: #ffffff;
-                        font-size: $fnt-sz-12;
-                        // @media screen and (min-width: 768px) {
-                        //     font-size: 0.875rem;
-                        // }
-                    }
-                    .tickets-text {
-                        font-size: $fnt-sz-18;
-                        font-weight: bold;
-                    }
-                    .tickets-text-end {
-                        font-size: $fnt-sz-18;
-                        // font-family: Ilisarniq-Bold;
-                        // font-size: 1em;
-                        // @media only screen and (min-width: 768px) {
-                        //     font-size: 1.75rem;
-                        // }
-                    }
+                .tickets-text-end {
+                    font-size: $fnt-sz-18;
                 }
             }
         }
     }
-    .game-info-background {
-        background: transparent
-            linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%) 0% 0% no-repeat
-            padding-box;
+    .game-info {
+        background: linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%);
         border-radius: 10px;
-        width: fit-content;
-        .game-detail-panel {
-            max-width: 792px;
-            height: 383px;
-            margin-top: 1.5rem;
-            width: 792px;
-            padding: 5px 5px 5px 5px;
+        .join-tournament-wrapper {
             .statement-title {
-                margin-top: 15px;
                 font-size: $fnt-sz-18;
-                margin-bottom: 2px;
-                min-height: 24px;
-                font-weight: bold;
-                // @media only screen and (min-width: 768px) {
-                //     font-size: 2.25rem;
-                // }
-                // font-family: Ilisarniq-Bold;
+                font-weight: $fnt-wgt-700;
+                text-transform: uppercase;
             }
             img.question-mark-img {
-                align-self: center;
-                width: 20px;
-                height: 20px;
-                line-height: 20px;
                 cursor: pointer;
             }
-            .join-tournament-container {
-                display: flex;
-                justify-content: space-between;
+        }
+        .statement-subtitle {
+            font-size: $fnt-sz-14;
+        }
+        .scrolling-wrapper {
+            @media only screen and (max-width: 992px) {
+                overflow-x: scroll;
+                flex-wrap: nowrap;
+                flex-direction: row;
+                &:hover {
+                    cursor: grab;
+                }
+                &::-webkit-scrollbar {
+                    display: none;
+                }
             }
-            .statement-subtitle {
-                // line-height: 1.5;
-                font-size: $fnt-sz-14;
-                margin-bottom: 21px;
-                min-height: 19px;
-                width: fit-content;
-                display: inline-block;
-                // @media only screen and (min-width: 768px) {
-                //     font-size: 0.875rem;
-                // }
-                // color: #868686;
-            }
-            .individual-game {
-                position: relative;
-                flex: 0 0 33.333333%;
-                max-width: 240px;
-                height: fit-content;
-                margin-right: 16px;
-                margin-bottom: 16px;
-            }
+        }
+        .scrolling-wrapper.active {
+            cursor: grabbing;
+        }
+    }
+    .fortune-wheel-btn {
+        cursor: pointer;
+        background: linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%);
+        border-radius: 12px;
+        .the-spinner-text {
+            font-size: $fnt-sz-10;
+            color: #00c1b9;
+        }
+        .earn-more-tickets-text {
+            font-weight: $fnt-wgt-600;
+            font-size: $fnt-sz-12;
+            margin-bottom: 3px;
+        }
+        img.earn-more-tickets-img {
+            align-self: center;
+            justify-self: center;
+            width: 100%;
         }
     }
 }

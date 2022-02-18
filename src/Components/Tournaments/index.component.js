@@ -1,5 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -72,50 +72,6 @@ const Index = ({ match }) => {
         });
     const [, setIsTicketsUpdated] = useState(false);
     const [timer, setTimer] = useState("calculating");
-
-    const spinnerFixedButtonRef = useRef(null);
-
-    // SCROLL POSITION FOR SPINNER FIXED BUTTON
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll, false);
-
-        function handleScroll() {
-            const doc = document.documentElement;
-            const top =
-                (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-            const maxScrollHeight = doc.scrollHeight - window.innerHeight;
-            if (
-                spinnerFixedButtonRef.current &&
-                type !== "automated" &&
-                window.innerWidth <= 480 &&
-                top > 0 &&
-                top >= Math.ceil(maxScrollHeight / 2)
-            ) {
-                spinnerFixedButtonRef.current.style.bottom = "2em";
-                spinnerFixedButtonRef.current.style.right = "30%";
-                spinnerFixedButtonRef.current.childNodes[1].style.opacity = "1";
-                spinnerFixedButtonRef.current.childNodes[1].style.visibility =
-                    "visible";
-            } else {
-                if (
-                    window.innerWidth <= 480 &&
-                    type !== "automated" &&
-                    spinnerFixedButtonRef.current
-                ) {
-                    spinnerFixedButtonRef.current?.removeAttribute("style");
-                    spinnerFixedButtonRef.current.childNodes[1].removeAttribute(
-                        "style"
-                    );
-                }
-            }
-        }
-        handleScroll();
-
-        return () => {
-            spinnerFixedButtonRef.current = null;
-            window.removeEventListener("scroll", handleScroll, false);
-        };
-    }, [type]);
 
     // LOAD PRIZES WHEN TIMER END WITH 2S DELAY
     useEffect(() => {
@@ -239,137 +195,135 @@ const Index = ({ match }) => {
         return (
             <>
                 {type !== "automated" && (
-                    <>
-                        <section id="game-screen">
-                            <div className="container-fluid">
-                                <div className="row justify-content-center">
-                                    <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                                        {/* BACK BUTTON */}
-                                        <div className="d-flex align-items-center back-button">
-                                            <Link
-                                                className="d-flex align-items-center"
-                                                onClick={handleHomeNavLink}
-                                                to={{
-                                                    pathname: "/",
-                                                    state: {
-                                                        prevPath:
-                                                            history.location
-                                                                .pathname,
-                                                    },
-                                                }}
-                                            >
-                                                <img
-                                                    width="42"
-                                                    src={`${window.cdn}buttons/button_back.png`}
-                                                    alt="back-btn"
-                                                />
-                                            </Link>
-                                            <span className="ml-2">Back</span>
-                                        </div>
-                                        {/* TICKETS AND POOL INFO */}
-                                        <div className="row prize-detail-panel mt-4 mb-5 col-12">
-                                            <div className="prize-info-holder d-flex">
-                                                <img
-                                                    className="prize-img"
-                                                    src={currentPrize?.prizeBG}
-                                                    alt="prize"
-                                                />
-                                                <div className="prize-text-holder d-flex flex-column">
-                                                    <div className="prize-id">
-                                                        {
-                                                            currentPrize?.prizeContent
-                                                        }
+                    <section id="game-screen">
+                        <div className="container-fluid">
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                                    {/* BACK BUTTON */}
+                                    <div className="d-flex align-items-center back-button mb-5">
+                                        <Link
+                                            className="d-flex align-items-center"
+                                            onClick={handleHomeNavLink}
+                                            to={{
+                                                pathname: "/",
+                                                state: {
+                                                    prevPath:
+                                                        history.location
+                                                            .pathname,
+                                                },
+                                            }}
+                                        >
+                                            <img
+                                                width="42"
+                                                src={`${window.cdn}buttons/button_back.png`}
+                                                alt="back-btn"
+                                            />
+                                        </Link>
+                                        <span className="ml-2">Back</span>
+                                    </div>
+                                    {/* TICKETS AND POOL INFO */}
+                                    <div className="col-12 px-0 d-flex align-items-start justify-content-start prize-info-wrapper">
+                                        <img
+                                            className="prize-img mr-3"
+                                            src={currentPrize?.prizeBG}
+                                            alt="prize"
+                                        />
+                                        <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
+                                            <div className="prize-id mb-lg-1">
+                                                {currentPrize?.prizeContent}
+                                            </div>
+                                            <div className="prize-title mb-lg-3">
+                                                {currentPrize?.prizeTitle ||
+                                                    "-"}
+                                            </div>
+                                            <div className="prize-description">
+                                                {currentPrize?.prizeTitle ||
+                                                    "-"}
+                                            </div>
+                                            <div className="token-and-draw-start-holder mt-auto mb-1 d-none d-lg-flex align-items-end justify-content-between w-100">
+                                                <div className="token-text-holder d-flex align-items-end justify-content-start">
+                                                    <div className="your-tokens-text">
+                                                        Your tokens
                                                     </div>
-                                                    <div className="prize-title">
-                                                        {currentPrize?.prizeTitle ||
-                                                            "-"}
-                                                    </div>{" "}
-                                                    <div className="prize-description">
-                                                        {currentPrize?.prizeTitle ||
-                                                            "-"}
+                                                    <div className="your-tokens-number">
+                                                        {getPoolTickets(
+                                                            poolTickets,
+                                                            id
+                                                        )?.toLocaleString() ||
+                                                            0}
                                                     </div>
-                                                    <div className="token-and-draw-start-holder d-flex align-items-end justify-content-between mt-auto">
-                                                        <div className="token-text-holder d-flex align-items-end justify-content-start">
-                                                            <div className="your-tokens-text">
-                                                                {`Your tokens `}
-                                                            </div>
-                                                            <div className="your-tokens-number">
-                                                                {getPoolTickets(
-                                                                    poolTickets,
-                                                                    id
-                                                                )?.toLocaleString() ||
-                                                                    0}
-                                                            </div>
-                                                        </div>
+                                                </div>
 
-                                                        <div className="draw-start-holder d-flex align-items-end ms-auto">
-                                                            <div className="draw-text">
-                                                                {`Draw starts in \u00A0`}
-                                                            </div>
+                                                <div className="draw-start-holder d-flex align-items-end ms-auto">
+                                                    <div className="draw-text">
+                                                        {`Draw starts in \u00A0`}
+                                                    </div>
 
-                                                            {/* COUNT DOWN TIME */}
-                                                            <span
-                                                                className={`${
-                                                                    OverTimeModeChecker(
-                                                                        currentPrize?.prizeId,
-                                                                        currentPrize?.ticketsRequired,
-                                                                        prizeTicketCollection
-                                                                    )
-                                                                        ? "text-danger tickets-text-end"
-                                                                        : "tickets-text"
-                                                                }`}
-                                                            >
-                                                                {OverTimeModeChecker(
-                                                                    currentPrize?.prizeId,
-                                                                    currentPrize?.ticketsRequired,
-                                                                    prizeTicketCollection
-                                                                )
-                                                                    ? timer
-                                                                    : getPrizeTicketCollected(
-                                                                          prizeTicketCollection,
-                                                                          id
-                                                                      )?.toLocaleString() ||
-                                                                      0}
-                                                            </span>
-
-                                                            {/* TICKETS REQUIRED NUMBER */}
-                                                            {!OverTimeModeChecker(
+                                                    {/* COUNT DOWN TIME */}
+                                                    <span
+                                                        className={`${
+                                                            OverTimeModeChecker(
                                                                 currentPrize?.prizeId,
                                                                 currentPrize?.ticketsRequired,
                                                                 prizeTicketCollection
-                                                            ) && (
-                                                                <span className="total-tickets-text">
-                                                                    {`\u00A0 / ${
-                                                                        currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                        0
-                                                                    }`}
-                                                                </span>
-                                                            )}
+                                                            )
+                                                                ? "text-danger tickets-text-end"
+                                                                : "tickets-text"
+                                                        }`}
+                                                    >
+                                                        {OverTimeModeChecker(
+                                                            currentPrize?.prizeId,
+                                                            currentPrize?.ticketsRequired,
+                                                            prizeTicketCollection
+                                                        )
+                                                            ? timer
+                                                            : getPrizeTicketCollected(
+                                                                  prizeTicketCollection,
+                                                                  id
+                                                              )?.toLocaleString() ||
+                                                              0}
+                                                    </span>
 
-                                                            {/* OVERTIME TEXT */}
-                                                            {OverTimeModeChecker(
-                                                                currentPrize?.prizeId,
-                                                                currentPrize?.ticketsRequired,
-                                                                prizeTicketCollection
-                                                            ) && (
-                                                                <div className="progress-perc text-danger">
-                                                                    Overtime!
-                                                                </div>
-                                                            )}
+                                                    {/* TICKETS REQUIRED NUMBER */}
+                                                    {!OverTimeModeChecker(
+                                                        currentPrize?.prizeId,
+                                                        currentPrize?.ticketsRequired,
+                                                        prizeTicketCollection
+                                                    ) && (
+                                                        <span className="total-tickets-text">
+                                                            {`\u00A0 / ${
+                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                0
+                                                            }`}
+                                                        </span>
+                                                    )}
+
+                                                    {/* OVERTIME TEXT */}
+                                                    {OverTimeModeChecker(
+                                                        currentPrize?.prizeId,
+                                                        currentPrize?.ticketsRequired,
+                                                        prizeTicketCollection
+                                                    ) && (
+                                                        <div className="progress-perc text-danger">
+                                                            Overtime!
                                                         </div>
-                                                    </div>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* GAME INFO */}
-                                        <div className="game-info-background col-12">
-                                            <div className="row game-detail-panel">
-                                                <div className="col-12">
-                                                    <div className="join-tournament-container">
-                                                        <div className="statement-title">
-                                                            JOIN TOURNAMENTS!
-                                                        </div>
+                                    </div>
+                                    {/* GAME INFO */}
+                                    <div className="d-flex align-items-end">
+                                        {/* JOIN TITLE & STATEMENT */}
+                                        <div className="col-12 col-md-9 col-xl-10 game-info px-3 pt-3">
+                                            <div className="row">
+                                                <div className="col-12 mb-4">
+                                                    <div className="join-tournament-wrapper d-flex align-items-center justify-content-between">
+                                                        <p className="statement-title mb-2 algin">
+                                                            Join Tournaments!
+                                                        </p>
                                                         <img
+                                                            width={20}
                                                             src={`${window.cdn}icons/icon_question_01.png`}
                                                             className="question-mark-img"
                                                             alt="question-mark"
@@ -378,85 +332,91 @@ const Index = ({ match }) => {
                                                             }
                                                         />
                                                     </div>
-                                                    <div className="statement-subtitle">
+                                                    <p className="statement-subtitle mb-0">
                                                         Compete with other
                                                         players, collect tokens
                                                         and stand a chance to
                                                         own this NFT!
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    className="game-container"
-                                                    style={{
-                                                        marginLeft: "15px",
-                                                    }}
-                                                >
-                                                    {currentPrize?.gameInfo?.map(
-                                                        (game, index) => (
-                                                            <React.Fragment
-                                                                key={`time-${index}`}
-                                                            >
-                                                                <GameDuration
-                                                                    game={game}
-                                                                    index={
-                                                                        index
-                                                                    }
-                                                                    data={
-                                                                        currentPrize
-                                                                    }
-                                                                    timer={
-                                                                        timer
-                                                                    }
-                                                                    setTimer={
-                                                                        setTimer
-                                                                    }
-                                                                    handleGameLeaderPanel={
-                                                                        handleGameLeaderPanel
-                                                                    }
-                                                                    setEarnAdditionalDisabledStatus={
-                                                                        setEarnAdditionalDisabledStatus
-                                                                    }
-                                                                />
-                                                            </React.Fragment>
-                                                        )
-                                                    )}
+                                                    </p>
                                                 </div>
                                             </div>
+                                            {/* GAME INFO CARDS */}
+                                            <div className="row scrolling-wrapper">
+                                                {/* GAME INFO & TIMER */}
+                                                {currentPrize?.gameInfo?.map(
+                                                    (game, index) => (
+                                                        <React.Fragment
+                                                            key={`time-${index}`}
+                                                        >
+                                                            <GameDuration
+                                                                game={game}
+                                                                index={index}
+                                                                data={
+                                                                    currentPrize
+                                                                }
+                                                                timer={timer}
+                                                                setTimer={
+                                                                    setTimer
+                                                                }
+                                                                handleGameLeaderPanel={
+                                                                    handleGameLeaderPanel
+                                                                }
+                                                                setEarnAdditionalDisabledStatus={
+                                                                    setEarnAdditionalDisabledStatus
+                                                                }
+                                                            />
+                                                            <GameDuration
+                                                                game={game}
+                                                                index={index}
+                                                                data={
+                                                                    currentPrize
+                                                                }
+                                                                timer={timer}
+                                                                setTimer={
+                                                                    setTimer
+                                                                }
+                                                                handleGameLeaderPanel={
+                                                                    handleGameLeaderPanel
+                                                                }
+                                                                setEarnAdditionalDisabledStatus={
+                                                                    setEarnAdditionalDisabledStatus
+                                                                }
+                                                            />
+                                                        </React.Fragment>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                        {/* SPINNER BUTTON */}
+                                        <div className="col-2 col-md-3 col-xl-2">
                                             {type !== "automated" && (
                                                 <div
-                                                    className="fortune-wheel-fixed-btn-container"
+                                                    className="fortune-wheel-btn p-3"
                                                     onClick={() =>
                                                         setFortuneWheelShown(
                                                             true
                                                         )
                                                     }
-                                                    ref={spinnerFixedButtonRef}
                                                 >
-                                                    <div
-                                                        className="the-spinner-text-wrapper"
-                                                        style={{
-                                                            color: "#00C1B9",
-                                                            marginBottom: "3px",
-                                                        }}
-                                                    >
+                                                    <p className="the-spinner-text mb-1">
                                                         The spinner
-                                                    </div>
-                                                    <div className="earn-more-tickets-text-wrapper">
+                                                    </p>
+                                                    <p className="earn-more-tickets-text">
                                                         Earn more tickets here
-                                                    </div>
+                                                    </p>
                                                     <img
                                                         className="earn-more-tickets-img"
                                                         src={`${window.cdn}icons/spinner_column.png`}
                                                         alt="earn-more-tickets"
-                                                    ></img>
+                                                    />
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                    </>
+                        </div>
+                    </section>
                 )}
                 {type === "automated" && (
                     <AutomatedEntryTournamentInfo

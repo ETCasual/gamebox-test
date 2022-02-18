@@ -89,37 +89,30 @@ const GameDuration = ({
     return (
         <>
             <div
-                // className="col-12 col-md-6 col-lg-6 col-xl-4 mb-4"
-                className="individual-game"
+                className={`col-10 col-md-7 col-lg-6 col-xl-4 mb-3`}
                 style={{
                     opacity: isGameAvailable ? "1" : "0.5",
-                    cursor: isGameAvailable ? "pointer" : "default",
                     pointerEvents: isGameAvailable ? "" : "none",
                 }}
                 onClick={onClickEnterGame}
             >
-                <div className="game-card">
-                    <div
-                        className="game-info"
-                        style={{ backgroundImage: `url(${game.gameIcon})` }}
-                    >
-                        <div className="transparent-overlay">
-                            <div className="game-title">{game.gameTitle}</div>
-                            <div className="duration-holder">
-                                <div className="tournament-end-in-text">
-                                    Tournament ends in
-                                </div>
-                                <div className="game-duration">
-                                    {timer || "0d 0h 0m 0s"}
-                                </div>
+                <div
+                    className="game-card d-flex flex-column align-items-end justify-content-end"
+                    style={{ backgroundImage: `url(${game.gameIcon})` }}
+                >
+                    <div className="transparent-overlay p-2 text-left">
+                        <div className="game-title mb-1">{game.gameTitle}</div>
+                        <div className="d-flex align-items-center justify-content-between">
+                            <div className="tournament-end-in-text">
+                                Tournament ends in
+                            </div>
+                            <div className="game-duration">
+                                {timer || "0d 0h 0m 0s"}
                             </div>
                         </div>
                     </div>
-
-                    <div>
-                        <button className="join">Join Tournament</button>
-                    </div>
                 </div>
+                <button className="join">Join Tournament</button>
             </div>
         </>
     );
