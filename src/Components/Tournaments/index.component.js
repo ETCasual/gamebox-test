@@ -75,15 +75,6 @@ const Index = ({ match }) => {
 
     const spinnerFixedButtonRef = useRef(null);
 
-    // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
-    useEffect(() => {
-        const overlay = document.querySelector(".blur-overlay");
-        // overlay?.setAttribute("style", `min-height: 145px`);
-        return () => {
-            overlay?.removeAttribute("style");
-        };
-    }, [isGameLeaderboardShown]);
-
     // SCROLL POSITION FOR SPINNER FIXED BUTTON
     useEffect(() => {
         window.addEventListener("scroll", handleScroll, false);

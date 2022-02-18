@@ -1,19 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { scrollToTop } from "Utils/ScrollToTop";
 
 const Index = () => {
     const history = useHistory();
-
-    // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
-    useEffect(() => {
-        const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
-        return () => {
-            overlay?.removeAttribute("style");
-        };
-    });
 
     return (
         <>
@@ -57,15 +48,15 @@ const Index = () => {
                                         collection, use and disclosure of
                                         personal information we receive from
                                         users. This Privacy Policy applies to
-                                        GameBox’s games, websites and
-                                        related services, which we here
-                                        collectively call the Service. We will
-                                        notify you of any material changes by
-                                        posting the new Privacy Policy on the
-                                        primary access points to our games
-                                        service which may be updated from time
-                                        to time. You are advised to consult this
-                                        policy regularly for any changes.
+                                        GameBox’s games, websites and related
+                                        services, which we here collectively
+                                        call the Service. We will notify you of
+                                        any material changes by posting the new
+                                        Privacy Policy on the primary access
+                                        points to our games service which may be
+                                        updated from time to time. You are
+                                        advised to consult this policy regularly
+                                        for any changes.
                                     </p>
                                 </div>
                                 {/* INFO COLLECTION */}
