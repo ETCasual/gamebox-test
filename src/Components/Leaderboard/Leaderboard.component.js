@@ -634,11 +634,22 @@ const Leaderboard = ({
                                     <div className="game-name">
                                         {gameInfo.gameTitle}
                                     </div>
+
                                     <div className="tournament-end-container">
                                         <div className="tournament-end-text">
                                             Tournament ends in
                                         </div>
-                                        <div className="timer-text">
+                                        <div
+                                            className={`${
+                                                OverTimeModeChecker(
+                                                    data?.prizeId,
+                                                    data?.ticketsRequired,
+                                                    prizeTicketCollection
+                                                )
+                                                    ? "text-danger"
+                                                    : "timer-text"
+                                            }`}
+                                        >
                                             {timer || "0d 0h 0m 0s"}
                                         </div>
                                     </div>
