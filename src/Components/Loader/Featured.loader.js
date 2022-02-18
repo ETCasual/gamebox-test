@@ -4,7 +4,7 @@ import ContentLoader from "react-content-loader";
 const FeaturedLoader = (props) => (
     <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto mb-4">
         <ContentLoader
-            style={{ width: "100%", minHeight: "70vh", height:"70vh" }}
+            style={{ width: "100%", minHeight: "70vh" }}
             speed={2}
             backgroundColor="#d4d4d4"
             foregroundColor="#ecebeb"
