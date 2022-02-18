@@ -15,8 +15,8 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     <feOffset dy="12" input="SourceAlpha" />
                     <feGaussianBlur stdDeviation="10" result="blur" />
                     <feFlood
-                        flood-color="#c48a00"
-                        flood-opacity="0.161"
+                        floodColor="#c48a00"
+                        floodOpacity="0.161"
                         result="color"
                     />
                     <feComposite operator="out" in="SourceGraphic" in2="blur" />
@@ -30,8 +30,8 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     y2="1"
                     gradientUnits="objectBoundingBox"
                 >
-                    <stop offset="0" stop-color="#fdc43d" />
-                    <stop offset="1" stop-color="#efa500" />
+                    <stop offset="0" stopColor="#fdc43d" />
+                    <stop offset="1" stopColor="#efa500" />
                 </linearGradient>
                 <filter
                     id="Path_26883"
@@ -43,7 +43,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                 >
                     <feOffset dy="12" input="SourceAlpha" />
                     <feGaussianBlur stdDeviation="10" result="blur-2" />
-                    <feFlood flood-color="#c48a00" flood-opacity="0.698" />
+                    <feFlood floodColor="#c48a00" floodOpacity="0.698" />
                     <feComposite operator="in" in2="blur-2" />
                     <feComposite in="SourceGraphic" />
                 </filter>
@@ -54,8 +54,8 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     y2="1"
                     gradientUnits="objectBoundingBox"
                 >
-                    <stop offset="0" stop-color="#fdc43d" />
-                    <stop offset="1" stop-color="#ff9300" />
+                    <stop offset="0" stopColor="#fdc43d" />
+                    <stop offset="1" stopColor="#ff9300" />
                 </linearGradient>
                 <radialGradient
                     id="radial-gradient"
@@ -64,8 +64,8 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     r="0.641"
                     gradientUnits="objectBoundingBox"
                 >
-                    <stop offset="0" stop-color="#fff" stop-opacity="0.447" />
-                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                    <stop offset="0" stopColor="#fff" stopOpacity="0.447" />
+                    <stop offset="1" stopColor="#fff" stopOpacity="0" />
                 </radialGradient>
                 <radialGradient
                     id="radial-gradient-2"
@@ -75,8 +75,8 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     gradientTransform="translate(0 -0.005) scale(1 1.149)"
                     gradientUnits="objectBoundingBox"
                 >
-                    <stop offset="0" stop-color="#fff" stop-opacity="0.506" />
-                    <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                    <stop offset="0" stopColor="#fff" stopOpacity="0.506" />
+                    <stop offset="1" stopColor="#fff" stopOpacity="0" />
                 </radialGradient>
                 <clipPath id="clip-Landing_Page">
                     <rect width="500" height="500" />
@@ -85,7 +85,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
             <g
                 id="Landing_Page"
                 data-name="Landing Page"
-                clip-path="url(#clip-Landing_Page)"
+                clipPath="url(#clip-Landing_Page)"
             >
                 <rect width="500" height="500" fill="none" />
                 <circle
@@ -143,9 +143,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="500"
                     transform="translate(249 79)"
                     fill="#fff"
-                    font-size="22"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="22"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-18.836" y="0">
                         {spinnerRules[0].tickets}
@@ -170,9 +170,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="350"
                     transform="matrix(0.809, 0.588, -0.588, 0.809, 352.993, 107.379)"
                     fill="#fff"
-                    font-size="15"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="15"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
                         {spinnerRules[1].tickets}
@@ -197,9 +197,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="250"
                     transform="matrix(0.809, -0.588, 0.588, 0.809, 147.138, 108.276)"
                     fill="#fff"
-                    font-size="15"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="15"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
                         {spinnerRules[2].tickets}
@@ -224,9 +224,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="100"
                     transform="translate(416.783 194.543) rotate(72)"
                     fill="#fff"
-                    font-size="15"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="15"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
                         {spinnerRules[3].tickets}
@@ -251,9 +251,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="50"
                     transform="matrix(0.309, -0.951, 0.951, 0.309, 84.541, 195.733)"
                     fill="#fff"
-                    font-size="16"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="16"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
                         {spinnerRules[4].tickets}
@@ -278,9 +278,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="400"
                     transform="translate(251.4 419.182) rotate(180)"
                     fill="#fff"
-                    font-size="22"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="22"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-18.836" y="0">
                         {spinnerRules[5].tickets}
@@ -305,9 +305,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="300"
                     transform="matrix(-0.809, -0.588, 0.588, -0.809, 147.665, 391.165)"
                     fill="#fff"
-                    font-size="15"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="15"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
                         {spinnerRules[6].tickets}
@@ -332,9 +332,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="200"
                     transform="matrix(-0.809, 0.588, -0.588, -0.809, 353.519, 390.269)"
                     fill="#fff"
-                    font-size="15"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="15"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
                         {spinnerRules[7].tickets}
@@ -359,9 +359,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="75"
                     transform="translate(84.641 303.121) rotate(-108)"
                     fill="#fff"
-                    font-size="16"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="16"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
                         {spinnerRules[8].tickets}
@@ -386,9 +386,9 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     data-name="10"
                     transform="matrix(-0.309, 0.951, -0.951, -0.309, 416.117, 302.812)"
                     fill="#fff"
-                    font-size="16"
-                    font-family="OpenSans-Bold, Open Sans"
-                    font-weight="700"
+                    fontSize="16"
+                    fontFamily="OpenSans-Bold, Open Sans"
+                    fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
                         {spinnerRules[9].tickets}
