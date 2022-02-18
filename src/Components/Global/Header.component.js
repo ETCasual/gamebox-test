@@ -55,18 +55,18 @@ const Header = ({
                 <div className="navbar-row justify-content-center">
                     <div className="navbar-flex-container col-12 col-md-10 col-lg-8 col-xl-7 d-flex align-items-center">
                         {/* LOGO */}
-                        {/* <Link
+                        <Link
                             to="/"
                             className="d-flex"
                             onClick={handleHomeNavLink}
                         >
                             <img
-                                width={110}
+                                width={120}
                                 className="img-fluid"
                                 src={`${window.cdn}logo/logo_gamebox.png`}
                                 alt="GameBox"
                             />
-                        </Link> */}
+                        </Link>
 
                         {/* NAV LINKS */}
                         <div className="pl-3 d-none d-md-flex nav-items">

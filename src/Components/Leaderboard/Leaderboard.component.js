@@ -77,15 +77,6 @@ const Leaderboard = ({
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
-    // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
-    useEffect(() => {
-        const overlay = document.querySelector(".blur-overlay");
-        // overlay?.setAttribute("style", `min-height: 145px`);
-        return () => {
-            overlay?.removeAttribute("style");
-        };
-    }, []);
-
     // SORTING LEADERBOARD
     useEffect(() => {
         setLeaderboardList(leaderboard);
@@ -155,7 +146,7 @@ const Leaderboard = ({
 
         function handleResize() {
             let nav =
-                document.querySelector(".blur-overlay")?.clientHeight || 154;
+                document.querySelector(".navbar-top")?.clientHeight || 154;
             let gameInfo =
                 document.querySelector(".leaderboard-game-info-flex-container")
                     ?.clientHeight || 122;

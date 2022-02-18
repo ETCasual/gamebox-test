@@ -1,19 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { scrollToTop } from "Utils/ScrollToTop";
 
 const Index = () => {
     const history = useHistory();
-
-    // BLUR BACKGROUND FOR NAVBAR & SCROLL TO TOP
-    useEffect(() => {
-        const overlay = document.querySelector(".blur-overlay");
-        overlay?.setAttribute("style", `min-height: 145px`);
-        return () => {
-            overlay?.removeAttribute("style");
-        };
-    });
 
     return (
         <>
