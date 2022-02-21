@@ -2,19 +2,22 @@ import React from "react";
 
 const Navbar = ({ handleSignUp }) => {
     return (
-        <div className="landing-nav">
-            <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto d-flex flex-row justify-content-center wrapper">
-                <div className="col px-0 d-flex align-items-center">
-                    <img
-                        className="img-fluid logo"
-                        src={`${window.cdn}logo/logo_gamebox.png`}
-                        alt="GameBox"
-                    />
-                </div>
-                <div className="col px-0 d-flex align-items-center justify-content-end">
-                    <button className="sign-in" onClick={handleSignUp}>
-                        Sign in
-                    </button>
+        <div className="nav-bar position-fixed">
+            <div className="position-relative w-100 h-100">
+                <div className="blur-background position-absolute w-100 h-100"></div>
+                <div className="items position-absolute d-flex flex-row align-items-center justify-content-between w-100 h-100">
+                    <div className="logo-img-wrapper">
+                        <img
+                            className="logo"
+                            src={`${window.cdn}logo/logo_gamebox.png`}
+                            alt="GameBox"
+                        />
+                    </div>
+                    <div className="login-button-wrapper">
+                        <button className="nav-login" onClick={handleSignUp}>
+                            Login
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
