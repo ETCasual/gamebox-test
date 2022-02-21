@@ -17,11 +17,11 @@
     }
     .items {
         // padding: 0px 231px;
-        @media only screen and (max-width: 768px) and (min-width: 320px) {
+        @media only screen and (max-width: 425px) and (min-width: 320px) {
             padding-left: min(21px, 5.83333vw);
             padding-right: min(21px, 5.83333vw);
         }
-        @media only screen and (min-width: 768px) {
+        @media only screen and (min-width: 425px) {
             padding-left: min(17.29vw, 231px);
             padding-right: min(17.29vw, 231px);
         }
