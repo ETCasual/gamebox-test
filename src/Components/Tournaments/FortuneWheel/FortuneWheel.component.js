@@ -186,11 +186,11 @@ const FortuneWheel = ({
                         <div className="row">
                             {/* FIRST COLUMN */}
                             <div
-                                className="col-12 col-xl-1 py-3 flex-column align-items-center justify-content-start align-items-xl-center justify-content-xl-between wrapper-col"
+                                className="col-12 col-xl-1 py-3 flex-column align-items-center justify-content-start justify-content-xl-between wrapper-col"
                                 style={{ height: modalHeight.cols }}
                             >
                                 {/* BACK BUTTON */}
-                                <div className="w-100 d-flex aling-items-start justify-content-between">
+                                <div className="w-100 h-100 d-flex flex-xl-column align-items-start align-items-xl-center justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
                                         <img
                                             width={20}
