@@ -1,12 +1,12 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { gsap } from "gsap";
 
 // COMPONENTS
 import FortuneWheelSVG from "Components/Tournaments/FortuneWheel/FortuneWheelSVG.component";
 import BuySpinConfirmModal from "Components/Modals/BuySpinConfirm.modal";
+import InsufficientGemsModal from "Components/Modals/InsufficientGems.modal";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerSpinnerSpin from "redux/thunks/PlayerSpinnerSpin.thunk";
@@ -35,7 +35,7 @@ const FortuneWheel = ({
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [wheelRotation, setWheelRotation] = useState(0);
-    const [isBuySpinConfirmModalShown, setIsBuySpinConfirmModalShown] =
+    const [, setIsBuySpinConfirmModalShown] =
         useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
     const [modalHeight, setModalHeight] = useState({
@@ -45,6 +45,7 @@ const FortuneWheel = ({
     });
     const spinDuration = 3;
 
+    // DISABLE HTML SCROLL
     useEffect(() => {
         window.scrollTo(0, 0);
         document.documentElement.style.overflowY = "hidden";
@@ -52,6 +53,7 @@ const FortuneWheel = ({
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
 
+    // RESIZE EVENT
     useEffect(() => {
         window.addEventListener("resize", handleResize);
 
@@ -77,6 +79,7 @@ const FortuneWheel = ({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // SPINNER DICT FOR SPINNER POSITIONS
     useEffect(() => {
         setTimeout(() => {
             let _spinnerDict = {};
@@ -306,50 +309,6 @@ const FortuneWheel = ({
                                     </div>
                                 </div>
 
-                                {/* USE GEMS BUTTON */}
-                                {spinner?.freeSpins <= 0 &&
-                                    user?.gems >= config.useGems &&
-                                    !isClickedSpin && (
-                                        <div
-                                            className="use-gems-button"
-                                            disabled={
-                                                spinBuyProcess ? true : false
-                                            }
-                                            onClick={() =>
-                                                spinner?.freeSpins <= 0
-                                                    ? setIsBuySpinConfirmModalShown(
-                                                          true
-                                                      )
-                                                    : null
-                                            }
-                                        >
-                                            <div className="use-gems-text">
-                                                Use {config.useGems} Gems
-                                            </div>
-                                            <div className="get-spins-text">
-                                                Get {config.useGemsSpin} more
-                                                spins
-                                            </div>
-                                        </div>
-                                    )}
-
-                                {/* PURCHASE GEMS BUTTON */}
-                                {spinner?.freeSpins <= 0 &&
-                                    user?.gems <= config.useGems &&
-                                    !isClickedSpin && (
-                                        <Link
-                                            to={"/iap"}
-                                            className="purchase-gems-button"
-                                        >
-                                            <div className="insufficient-gems-text">
-                                                Insufficient gems.
-                                            </div>
-                                            <div className="purchase-text">
-                                                Click here to purchase.
-                                            </div>
-                                        </Link>
-                                    )}
-
                                 {/* PROBABILITY TABLE */}
                                 {isProbabilityShown && (
                                     <table className="probability-table mt-auto d-none d-lg-block">
@@ -381,7 +340,14 @@ const FortuneWheel = ({
                                     />
 
                                     {/* SPIN BUTTON*/}
-                                    <div className="spin-button">
+                                    <div
+                                        className={`spin-button ${
+                                            spinner.freeSpins <= 0 ||
+                                            isClickedSpin
+                                                ? "opacity-0-5"
+                                                : ""
+                                        }`}
+                                    >
                                         <button
                                             disabled={
                                                 spinner.freeSpins <= 0 ||
@@ -423,7 +389,7 @@ const FortuneWheel = ({
             </div>
 
             {/* POPUP MODAL FOR BUYING SPINS WITH GEMS */}
-            {isBuySpinConfirmModalShown && (
+            {/* {isBuySpinConfirmModalShown && (
                 <BuySpinConfirmModal
                     handleYes={handleBuySpinModalYesButton}
                     handleNo={() => {
@@ -432,7 +398,30 @@ const FortuneWheel = ({
                     gemAmount={config.useGems}
                     spinAmount={config.useGemsSpin}
                 />
-            )}
+            )} */}
+
+            {/* USE GEMS BUTTON */}
+            {spinner?.freeSpins <= 0 &&
+                user?.gems >= config.useGems &&
+                !isClickedSpin && (
+                    <BuySpinConfirmModal
+                        handleYes={handleBuySpinModalYesButton}
+                        handleNo={() => {
+                            setFortuneWheelShown(false);
+                        }}
+                        gemAmount={config.useGems}
+                        spinAmount={config.useGemsSpin}
+                    />
+                )}
+
+            {/* PURCHASE GEMS BUTTON */}
+            {spinner?.freeSpins <= 0 &&
+                user?.gems <= config.useGems &&
+                !isClickedSpin && (
+                    <InsufficientGemsModal
+                        setFortuneWheelShown={setFortuneWheelShown}
+                    />
+                )}
         </div>
     );
 };

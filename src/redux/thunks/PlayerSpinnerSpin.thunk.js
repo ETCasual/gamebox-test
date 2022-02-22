@@ -12,6 +12,7 @@ export default function loadPlayerSpinnerSpin(prizeId, spinWheel) {
             // SPINNER ENTER ID
             return logSEnter(user, prizeId, spinner)
                 .then((data) => {
+                    console.log(data)
                     dispatch({
                         type: SPINNER_LOG_SPIN,
                         payload: data,

@@ -529,14 +529,12 @@ const Index = ({ match }) => {
 
                 {/* FORTUNE WHEEL */}
                 {fortuneWheelShown && (
-                    // <div className="fortune-wheel">
                     <FortuneWheel
                         prizeId={parseInt(id)}
                         setIsTicketsUpdated={setIsTicketsUpdated}
                         ticketsRequired={currentPrize?.ticketsRequired}
                         setFortuneWheelShown={setFortuneWheelShown}
                     />
-                    // </div>
                 )}
                 {/* POPUP MODAL FOR OUT OF GEMS */}
                 {isSubscriptionModalShown && (
