@@ -388,18 +388,6 @@ const FortuneWheel = ({
                 </div>
             </div>
 
-            {/* POPUP MODAL FOR BUYING SPINS WITH GEMS */}
-            {/* {isBuySpinConfirmModalShown && (
-                <BuySpinConfirmModal
-                    handleYes={handleBuySpinModalYesButton}
-                    handleNo={() => {
-                        setIsBuySpinConfirmModalShown(false);
-                    }}
-                    gemAmount={config.useGems}
-                    spinAmount={config.useGemsSpin}
-                />
-            )} */}
-
             {/* USE GEMS BUTTON */}
             {spinner?.freeSpins <= 0 &&
                 user?.gems >= config.useGems &&
