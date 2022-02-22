@@ -686,6 +686,75 @@ section.landing-container {
             padding-left: min(17.29vw, 231px);
             padding-right: min(17.29vw, 231px);
         }
+        .title-text {
+            font-size: $fnt-sz-18;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .subtitle-text {
+            font-size: $fnt-sz-14;
+        }
+        .get-nft-container {
+            width: 903px;
+            height: 276px;
+            .background-img-container {
+                overflow: hidden;
+                height: 100%;
+                width: 100%;
+                align-items: center;
+                .left-img {
+                    width: 373px;
+                    left: -45px;
+                    position: absolute;
+                }
+                .right-img {
+                    width: 213px;
+                    height: 213px;
+                    right: 43.41px;
+                    position: absolute;
+                    transform: matrix(0.99, 0.14, -0.14, 0.99, 0, 0);
+                }
+            }
+            .info-container {
+                .title-text {
+                    margin-top: 32px;
+                    margin-bottom: 16px;
+                    font-size: $fnt-sz-18;
+                    font-weight: bold;
+                }
+                .subtitle-text {
+                    width: 278px;
+                    height: 37px;
+                    font-size: $fnt-sz-12;
+                    text-align: center;
+                    margin-bottom: 26px;
+                }
+                .count-down-text {
+                    width: 300px;
+                    height: 42px;
+                    background: #1d1d1d 0% 0% no-repeat padding-box;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border-radius: 10px;
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    margin-bottom: 29px;
+                    font-size: $fnt-sz-12;
+                    font-weight: bold;
+                    color: #00c1b9;
+                    text-align: center;
+                }
+                .register-now-button {
+                    width: 247px;
+                    height: 46px;
+                    background: #cc0767 0% 0% no-repeat padding-box;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border-radius: 10px;
+                    font-size: $fnt-sz-14;
+                    font-weight: bold;
+                    color: #ffffff;
+                }
+            }
+        }
     }
     .check-out-our-nfts-container {
         background: red;

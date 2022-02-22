@@ -20,11 +20,11 @@ const Content = ({
                 <div className="hero-text-container">
                     <div className="intro-text">Introducing</div>
                     <h1 className="title-text">
-                        The Ultimate Gaming Platform!
+                        The ultimate gaming platform!
                     </h1>
-                    <div className="subtitle-text">
+                    <p className="subtitle-text">
                         Discover rewards and win them for free!
-                    </div>
+                    </p>
                     {/* <div className="subtitle-text">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Etiam efficitur lorem et erat convallis, a tempus libero
@@ -189,52 +189,43 @@ const Content = ({
                 className="thats-not-all-container d-flex"
                 ref={dailyRewardRef}
             >
-                <div className="daily-reward w-100 my-5">
-                    <h1 className="title mb-1">That's not all!</h1>
-                    <p className="subtitle">FREE NFTs for you every week.</p>
-                    <div
-                        className="col-12 wrapper text-center d-flex align-items-center justify-content-center"
-                        ref={dailyRewardCardRef}
-                    >
-                        <div className="w-100 p-3 ">
-                            <h2>Get premium NFTs every week!</h2>
-                            <p>
-                                Collect tickets automatically for weekly NFT
-                                reward when you win in any tournaments!
-                            </p>
-                            <div className="d-flex align-items-start flex-column ">
-                                {/* <button className="countdown-button mb-4">
-                                            3 days 23 hours 15 minutes left
-                                        </button> */}
-                                <button
-                                    className="register-now-button mt-4 "
-                                    onClick={handleSignUp}
-                                >
-                                    Register now!
-                                </button>
-                            </div>
-                        </div>
+                <h1 className="title-text">That's not all!</h1>
+                <p className="subtitle-text">FREE NFTs for you every week.</p>
 
+                <div
+                    className="get-nft-container position-relative"
+                    ref={dailyRewardCardRef}
+                >
+                    <div className="background-img-container position-absolute d-flex flex-row">
                         <img
-                            className="icon icon-1 d-none d-md-block"
-                            src={`${window.cdn}illustrations/bonus_04.png`}
-                            alt="bonus_04"
+                            className="left-img"
+                            src={`${window.cdn}illustrations/bonusreward_01.png`}
+                            alt="bonus-rewards"
                         />
                         <img
-                            className="icon icon-2 d-none d-md-block"
-                            src={`${window.cdn}illustrations/bonus_05.png`}
-                            alt="bonus_05"
+                            className="right-img"
+                            src={`${window.cdn}illustrations/bonusreward_02.png`}
+                            alt="bonus-rewards"
                         />
-                        <img
-                            className="icon icon-1 d-block d-md-none"
-                            src={`${window.cdn}illustrations/bonus_01.png`}
-                            alt="bonus_01"
-                        />
-                        <img
-                            className="icon icon-2 d-block d-md-none"
-                            src={`${window.cdn}illustrations/bonus_02.png`}
-                            alt="bonus_02"
-                        />
+                    </div>
+
+                    <div className="info-container position-absolute d-flex align-items-center flex-column w-100 h-100">
+                        <h2 className="title-text">
+                            Get premium NFTs every week!
+                        </h2>
+                        <p className="subtitle-text">
+                            Collect tickets automatically for weekly NFT reward
+                            when you win in any tournaments!
+                        </p>
+                        <p className="count-down-text d-flex align-items-center justify-content-center">
+                            3 days 23 hours 15 minutes left
+                        </p>
+                        <button
+                            className="register-now-button"
+                            onClick={handleSignUp}
+                        >
+                            Register now!
+                        </button>
                     </div>
                 </div>
             </div>
