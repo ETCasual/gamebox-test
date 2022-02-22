@@ -94,6 +94,11 @@
                 @include media-max($lg) {
                     background-color: #2b2b2b;
                 }
+                .first-row {
+                    @include media-min($xl) {
+                        height: 100%;
+                    }
+                }
                 .tap-btn {
                     display: none;
                 }

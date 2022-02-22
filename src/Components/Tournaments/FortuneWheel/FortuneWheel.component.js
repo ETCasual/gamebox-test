@@ -62,6 +62,15 @@ const FortuneWheel = ({
                 wrapper: (window.innerWidth >= 1200 ? 25 : 0) + elem,
                 cols: window.innerWidth < 1200 ? "auto" : elem + 25,
             });
+            const col2 = document.querySelector(".wrapper-col:nth-child(2)");
+            const col3 = document.querySelector(".wrapper-col:nth-child(3)");
+            if (
+                col2.style.display === "none" ||
+                col3.style.display === "none"
+            ) {
+                col2.style.display = "flex";
+                col3.style.display = "flex";
+            }
         }
         handleResize();
 
@@ -189,8 +198,8 @@ const FortuneWheel = ({
                                 className="col-12 col-xl-1 py-3 flex-column align-items-center justify-content-start justify-content-xl-between wrapper-col"
                                 style={{ height: modalHeight.cols }}
                             >
-                                {/* BACK BUTTON */}
-                                <div className="w-100 h-100 d-flex flex-xl-column align-items-start align-items-xl-center justify-content-between">
+                                {/* ICONS */}
+                                <div className="first-row w-100 d-flex flex-xl-column align-items-start align-items-xl-center justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
                                         <img
                                             width={20}
@@ -223,10 +232,10 @@ const FortuneWheel = ({
                                         alt="question-mark"
                                     />
                                 </div>
+                                {/* PROBABILITY TABLE */}
                                 <div className="w-100">
-                                    {/* PROBABILITY TABLE */}
                                     {isProbabilityShown && (
-                                        <table className="probability-table d-block d-lg-none mt-4 mb-3 mx-auto">
+                                        <table className="probability-table d-block d-lg-none mt-3 mb-3 mx-auto">
                                             {spinnerRules?.map((rule, idx) => (
                                                 <tr
                                                     className="probability-row"
@@ -244,7 +253,7 @@ const FortuneWheel = ({
                                         </table>
                                     )}
                                     <div
-                                        className="tap-btn w-100 text-center"
+                                        className="tap-btn w-100 text-center d-xl-none"
                                         onClick={handleProbabilityInfo}
                                     >
                                         <img
