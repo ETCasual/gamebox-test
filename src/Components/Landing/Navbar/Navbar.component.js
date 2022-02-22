@@ -5,7 +5,7 @@ const Navbar = ({ handleSignUp }) => {
         <div className="nav-bar position-fixed">
             <div className="position-relative w-100 h-100">
                 <div className="blur-background position-absolute w-100 h-100"></div>
-                <div className="items position-absolute d-flex flex-row align-items-center justify-content-between w-100 h-100">
+                <div className="items position-absolute d-flex flex-row align-items-center justify-content-between h-100 mx-auto">
                     <div className="logo-img-wrapper">
                         <img
                             className="logo"
