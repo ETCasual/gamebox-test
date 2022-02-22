@@ -198,9 +198,9 @@ const Index = ({ match }) => {
                     <section id="game-screen">
                         <div className="container-fluid">
                             <div className="row justify-content-center">
-                                <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 px-0 full-wrapper">
                                     {/* BACK BUTTON */}
-                                    <div className="d-flex align-items-center back-button mb-5">
+                                    <div className="d-flex align-items-center back-button mb-3 mb-md-5 px-3">
                                         <Link
                                             className="d-flex align-items-center"
                                             onClick={handleHomeNavLink}
@@ -222,7 +222,7 @@ const Index = ({ match }) => {
                                         <span className="ml-2">Back</span>
                                     </div>
                                     {/* TICKETS AND POOL INFO */}
-                                    <div className="col-12 px-0 d-flex align-items-start justify-content-start prize-info-wrapper">
+                                    <div className="col-12 px-3 d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-lg-5">
                                         <img
                                             className="prize-img mr-3"
                                             src={currentPrize?.prizeBG}
@@ -240,12 +240,13 @@ const Index = ({ match }) => {
                                                 {currentPrize?.prizeTitle ||
                                                     "-"}
                                             </div>
+                                            {/* DESKTOP - TICKETS, TIMER & OVERTIME */}
                                             <div className="token-and-draw-start-holder mt-auto mb-1 d-none d-lg-flex align-items-end justify-content-between w-100">
                                                 <div className="token-text-holder d-flex align-items-end justify-content-start">
                                                     <div className="your-tokens-text">
-                                                        Your tokens
+                                                        Your tickets
                                                     </div>
-                                                    <div className="your-tokens-number">
+                                                    <div className="your-tokens-number ml-0 ml-md-2">
                                                         {getPoolTickets(
                                                             poolTickets,
                                                             id
@@ -254,12 +255,100 @@ const Index = ({ match }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className="draw-start-holder d-flex align-items-end ms-auto">
-                                                    <div className="draw-text">
-                                                        {`Draw starts in \u00A0`}
-                                                    </div>
+                                                <div className="overtime-and-total-tickets-wrapper">
+                                                    {/* OVERTIME TEXT */}
+                                                    {OverTimeModeChecker(
+                                                        currentPrize?.prizeId,
+                                                        currentPrize?.ticketsRequired,
+                                                        prizeTicketCollection
+                                                    ) && (
+                                                        <p className="overtime-text mb-1 text-right text-danger">
+                                                            Overtime!
+                                                        </p>
+                                                    )}
+                                                    {/* TICKETS & OVERTIME TIMER */}
+                                                    <div className="draw-start-holder d-flex align-items-end ms-auto">
+                                                        <div className="draw-text mr-0 mr-md-2">
+                                                            {`Draw starts in \u00A0`}
+                                                        </div>
 
-                                                    {/* COUNT DOWN TIME */}
+                                                        {/* COUNT DOWN TIME */}
+                                                        <span
+                                                            className={`${
+                                                                OverTimeModeChecker(
+                                                                    currentPrize?.prizeId,
+                                                                    currentPrize?.ticketsRequired,
+                                                                    prizeTicketCollection
+                                                                )
+                                                                    ? "text-danger tickets-text-end"
+                                                                    : "tickets-text"
+                                                            }`}
+                                                        >
+                                                            {OverTimeModeChecker(
+                                                                currentPrize?.prizeId,
+                                                                currentPrize?.ticketsRequired,
+                                                                prizeTicketCollection
+                                                            )
+                                                                ? timer
+                                                                : getPrizeTicketCollected(
+                                                                      prizeTicketCollection,
+                                                                      id
+                                                                  )?.toLocaleString() ||
+                                                                  0}
+                                                        </span>
+
+                                                        {/* TICKETS REQUIRED NUMBER */}
+                                                        {!OverTimeModeChecker(
+                                                            currentPrize?.prizeId,
+                                                            currentPrize?.ticketsRequired,
+                                                            prizeTicketCollection
+                                                        ) && (
+                                                            <span className="total-tickets-text">
+                                                                {`\u00A0 / ${
+                                                                    currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                    0
+                                                                }`}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* MOBILE - SEPARATOR */}
+                                    <div className="separator d-block d-lg-none px-3" />
+                                    {/* MOBILE - TICKETS, TIMER & OVERTIME */}
+                                    <div className="token-and-draw-start-holder px-3 mt-auto mb-1 d-flex d-lg-none align-items-end justify-content-between w-100">
+                                        <div className="token-text-holder">
+                                            <p className="your-tokens-text mb-0">
+                                                Your tickets
+                                            </p>
+                                            <p className="your-tokens-number mt-2">
+                                                {getPoolTickets(
+                                                    poolTickets,
+                                                    id
+                                                )?.toLocaleString() || 0}
+                                            </p>
+                                        </div>
+                                        <div className="overtime-and-total-tickets-wrapper">
+                                            {/* OVERTIME TEXT */}
+                                            {OverTimeModeChecker(
+                                                currentPrize?.prizeId,
+                                                currentPrize?.ticketsRequired,
+                                                prizeTicketCollection
+                                            ) && (
+                                                <p className="overtime-text mb-1 text-right text-danger">
+                                                    Overtime!
+                                                </p>
+                                            )}
+                                            {/* TICKETS & OVERTIME TIMER */}
+                                            <div className="draw-start-holder">
+                                                <p className="draw-text mb-0">
+                                                    Draw starts in
+                                                </p>
+
+                                                {/* COUNT DOWN TIME */}
+                                                <p className="mt-2">
                                                     <span
                                                         className={`${
                                                             OverTimeModeChecker(
@@ -297,29 +386,18 @@ const Index = ({ match }) => {
                                                             }`}
                                                         </span>
                                                     )}
-
-                                                    {/* OVERTIME TEXT */}
-                                                    {OverTimeModeChecker(
-                                                        currentPrize?.prizeId,
-                                                        currentPrize?.ticketsRequired,
-                                                        prizeTicketCollection
-                                                    ) && (
-                                                        <div className="progress-perc text-danger">
-                                                            Overtime!
-                                                        </div>
-                                                    )}
-                                                </div>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                     {/* GAME INFO */}
-                                    <div className="d-flex align-items-end">
+                                    <div className="d-flex align-items-end px-0 px-md-3">
                                         {/* JOIN TITLE & STATEMENT */}
-                                        <div className="col-12 col-md-9 col-xl-10 game-info px-3 pt-3">
+                                        <div className="col-12 col-xl-10 game-info px-3 pt-3">
                                             <div className="row">
                                                 <div className="col-12 mb-4">
-                                                    <div className="join-tournament-wrapper d-flex align-items-center justify-content-between">
-                                                        <p className="statement-title mb-2 algin">
+                                                    <div className="join-tournament-wrapper d-flex align-items-center justify-content-between mb-2">
+                                                        <p className="statement-title algin mb-0">
                                                             Join Tournaments!
                                                         </p>
                                                         <img
@@ -385,10 +463,35 @@ const Index = ({ match }) => {
                                                         </React.Fragment>
                                                     )
                                                 )}
+                                                <div className="col-6 col-md-4 col-lg-3 d-flex d-xl-none mb-3 align-self-end">
+                                                    {type !== "automated" && (
+                                                        <div
+                                                            className="fortune-wheel-btn p-3"
+                                                            onClick={() =>
+                                                                setFortuneWheelShown(
+                                                                    true
+                                                                )
+                                                            }
+                                                        >
+                                                            <p className="the-spinner-text mb-1">
+                                                                The spinner
+                                                            </p>
+                                                            <p className="earn-more-tickets-text">
+                                                                Earn more
+                                                                tickets here
+                                                            </p>
+                                                            <img
+                                                                className="earn-more-tickets-img"
+                                                                src={`${window.cdn}icons/spinner_column.png`}
+                                                                alt="earn-more-tickets"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                         {/* SPINNER BUTTON */}
-                                        <div className="col-2 col-md-3 col-xl-2">
+                                        <div className="col-2 col-md-3 col-xl-2 d-none d-xl-block">
                                             {type !== "automated" && (
                                                 <div
                                                     className="fortune-wheel-btn p-3"
@@ -427,14 +530,14 @@ const Index = ({ match }) => {
 
                 {/* FORTUNE WHEEL */}
                 {fortuneWheelShown && (
-                    <div className="fortune-wheel">
-                        <FortuneWheel
-                            prizeId={parseInt(id)}
-                            setIsTicketsUpdated={setIsTicketsUpdated}
-                            ticketsRequired={currentPrize?.ticketsRequired}
-                            setFortuneWheelShown={setFortuneWheelShown}
-                        />
-                    </div>
+                    // <div className="fortune-wheel">
+                    <FortuneWheel
+                        prizeId={parseInt(id)}
+                        setIsTicketsUpdated={setIsTicketsUpdated}
+                        ticketsRequired={currentPrize?.ticketsRequired}
+                        setFortuneWheelShown={setFortuneWheelShown}
+                    />
+                    // </div>
                 )}
                 {/* POPUP MODAL FOR OUT OF GEMS */}
                 {isSubscriptionModalShown && (
