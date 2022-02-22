@@ -202,7 +202,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[2].tickets}
+                        {spinnerRules[9].tickets}
                     </tspan>
                 </text>
                 <path
@@ -229,7 +229,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[3].tickets}
+                        {spinnerRules[2].tickets}
                     </tspan>
                 </text>
                 <path
@@ -256,7 +256,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
-                        {spinnerRules[4].tickets}
+                        {spinnerRules[8].tickets}
                     </tspan>
                 </text>
                 <path
@@ -337,7 +337,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[7].tickets}
+                        {spinnerRules[4].tickets}
                     </tspan>
                 </text>
                 <path
@@ -364,7 +364,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
-                        {spinnerRules[8].tickets}
+                        {spinnerRules[7].tickets}
                     </tspan>
                 </text>
                 <path
@@ -391,7 +391,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
-                        {spinnerRules[9].tickets}
+                        {spinnerRules[3].tickets}
                     </tspan>
                 </text>
             </g>
