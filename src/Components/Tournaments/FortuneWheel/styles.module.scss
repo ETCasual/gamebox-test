@@ -10,7 +10,10 @@
     transform: translate(-50%, 0%);
     z-index: 3;
     .wrapper {
-        background: linear-gradient(145deg, #1c1c1c 0%, #0b0b0b 100%);
+        background: linear-gradient(146deg, #292929 0%, #191919 100%);
+        @include media-min($xl) {
+            background: linear-gradient(145deg, #1c1c1c 10%, #0b0b0b 140%);
+        }
         border-radius: 10px;
         .wrapper-col {
             .the-spinner-text {
@@ -91,7 +94,7 @@
                 display: flex;
             }
             &:nth-child(1) {
-                @include media-max($lg) {
+                @include media-max($xl) {
                     background-color: #2b2b2b;
                 }
                 .first-row {
@@ -104,11 +107,11 @@
                 }
             }
             &:nth-child(2) {
-                @include media-min($lg) {
+                @include media-min($xl) {
                     background: linear-gradient(
                         155deg,
-                        #212121 0%,
-                        #0b0b0b 100%
+                        #212121 17%,
+                        #0b0b0b 110%
                     );
                 }
                 .your-tickets {

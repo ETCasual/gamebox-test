@@ -145,6 +145,12 @@ button {
     cursor: pointer;
     box-shadow: 0px 18px 26px #00000029;
     border-radius: 100%;
+    img {
+        width: 36px;
+        @include media-min($md) {
+            width: 42px;
+        }
+    }
     span {
         color: #f8ba29;
         font-size: clamp($fnt-sz-10, $fnt-sz-12, $fnt-sz-12);

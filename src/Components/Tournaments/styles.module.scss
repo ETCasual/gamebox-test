@@ -1,7 +1,10 @@
 // TOURNAMENT PANEL COMPONENT
 #game-screen {
     position: relative;
-    padding-top: 6rem;
+    padding-top: 5rem;
+    @include media-min($md) {
+        padding-top: 6rem;
+    }
     .prize-info-wrapper {
         min-height: 5rem;
         @include media-min($lg) {

@@ -176,8 +176,7 @@ const FortuneWheel = ({
             tapBackButton.style.display = !currentShownFlag ? "block" : "none";
             col2.style.display = !currentShownFlag ? "none" : "flex";
             col3.style.display = !currentShownFlag ? "none" : "flex";
-
-            col1.style.height = !currentShownFlag ? "90vh" : "auto";
+            col1.style.height = "auto";
         }
     };
 
@@ -198,7 +197,7 @@ const FortuneWheel = ({
                                 className="col-12 col-xl-1 py-3 flex-column align-items-center justify-content-start justify-content-xl-between wrapper-col"
                                 style={{ height: modalHeight.cols }}
                             >
-                                {/* ICONS */}
+                                {/* FIRST ROW - SPINNER TEXT AND ICONS */}
                                 <div className="first-row w-100 d-flex flex-xl-column align-items-start align-items-xl-center justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
                                         <img
@@ -232,7 +231,7 @@ const FortuneWheel = ({
                                         alt="question-mark"
                                     />
                                 </div>
-                                {/* PROBABILITY TABLE */}
+                                {/* SECOND ROW - PROBABILITY TABLE */}
                                 <div className="w-100">
                                     {isProbabilityShown && (
                                         <table className="probability-table d-block d-lg-none mt-3 mb-3 mx-auto">
