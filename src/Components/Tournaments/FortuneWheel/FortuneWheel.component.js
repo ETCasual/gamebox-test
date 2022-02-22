@@ -35,8 +35,7 @@ const FortuneWheel = ({
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [wheelRotation, setWheelRotation] = useState(0);
-    const [, setIsBuySpinConfirmModalShown] =
-        useState(false);
+    const [, setIsBuySpinConfirmModalShown] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
     const [modalHeight, setModalHeight] = useState({
         windowWidth: 0,
@@ -238,20 +237,28 @@ const FortuneWheel = ({
                                 <div className="w-100">
                                     {isProbabilityShown && (
                                         <table className="probability-table d-block d-lg-none mt-3 mb-3 mx-auto">
-                                            {spinnerRules?.map((rule, idx) => (
-                                                <tr
-                                                    className="probability-row"
-                                                    id={idx}
-                                                    key={`prob-${idx}`}
-                                                >
-                                                    <td className="probability-percentage">
-                                                        {rule?.probability}%
-                                                    </td>
-                                                    <td className="probability-tickets-text">
-                                                        {rule?.tickets} tickets
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                            <tbody>
+                                                {spinnerRules?.map(
+                                                    (rule, idx) => (
+                                                        <tr
+                                                            className="probability-row"
+                                                            id={idx}
+                                                            key={`prob-${idx}`}
+                                                        >
+                                                            <td className="probability-percentage">
+                                                                {
+                                                                    rule?.probability
+                                                                }
+                                                                %
+                                                            </td>
+                                                            <td className="probability-tickets-text">
+                                                                {rule?.tickets}{" "}
+                                                                tickets
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                )}
+                                            </tbody>
                                         </table>
                                     )}
                                     <div
@@ -312,20 +319,22 @@ const FortuneWheel = ({
                                 {/* PROBABILITY TABLE */}
                                 {isProbabilityShown && (
                                     <table className="probability-table mt-auto d-none d-lg-block">
-                                        {spinnerRules?.map((rule, idx) => (
-                                            <tr
-                                                className="probability-row"
-                                                id={idx}
-                                                key={`prob-d-${idx}`}
-                                            >
-                                                <td className="probability-percentage">
-                                                    {rule?.probability}%
-                                                </td>
-                                                <td className="probability-tickets-text">
-                                                    {rule?.tickets} tickets
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        <tbody>
+                                            {spinnerRules?.map((rule, idx) => (
+                                                <tr
+                                                    className="probability-row"
+                                                    id={idx}
+                                                    key={`prob-d-${idx}`}
+                                                >
+                                                    <td className="probability-percentage">
+                                                        {rule?.probability}%
+                                                    </td>
+                                                    <td className="probability-tickets-text">
+                                                        {rule?.tickets} tickets
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
                                     </table>
                                 )}
                             </div>
