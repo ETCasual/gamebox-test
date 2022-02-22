@@ -1,12 +1,143 @@
 // FOOTER
 .footer {
-    // margin: 6rem 0 2rem 0;
-    font-size: 10px;
-    background-color: #2a2a2a;
-    min-height: 259px;
-    padding-left: 190px;
-    padding-right: 230px;
+    width: 100%;
+    background: #2a2a2a 0% 0% no-repeat padding-box;
+    position: relative;
+    @media only screen and (max-width: 425px) and (min-width: 320px) {
+        min-height: 463px;
+    }
+    @media only screen and (min-width: 425px) {
+        min-height: 259px;
+    }
 
+    .footer-container {
+        position: absolute;
+        max-width: 904px;
+        height: inherit;
+        inset: 0;
+        @media only screen and (max-width: 425px) and (min-width: 320px) {
+            width: max(88.33%, 278px);
+        }
+        @media only screen and (min-width: 425px) {
+            width: 66.18%;
+        }
+
+        .about-info-container {
+            @media only screen and (max-width: 425px) and (min-width: 320px) {
+                top: 111.87px;
+                flex-direction: column;
+            }
+            @media only screen and (min-width: 425px) {
+                flex-direction: row;
+            }
+            .title-text {
+                font-size: $fnt-sz-14;
+                font-weight: bold;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-bottom: 4px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-bottom: 10px;
+                }
+            }
+            .subtitle-text {
+                font-size: $fnt-sz-12;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-bottom: 2px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-bottom: 10px;
+                }
+            }
+            .about-detail-container {
+                width: fit-content;
+                margin-right: 80px;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-top: 30px;
+                }
+            }
+            .help-detail-container {
+                width: fit-content;
+                margin-right: 70px;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-top: 20px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-top: 30px;
+                }
+            }
+            .froyo-coin-detail-container {
+                width: fit-content;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-top: 20px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-top: 30px;
+                }
+            }
+        }
+
+        .join-community-container {
+            @media only screen and (max-width: 425px) and (min-width: 320px) {
+                top: 310.87px;
+            }
+            @media only screen and (min-width: 425px) {
+                top: 30px;
+                right: 0px;
+            }
+            padding-left: inherit;
+            padding-right: inherit;
+            .title-text {
+                font-size: $fnt-sz-14;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+        }
+
+        .terms-and-conditions-container {
+            font-size: $fnt-sz-10;
+            @media only screen and (max-width: 425px) and (min-width: 320px) {
+                top: 401.87px;
+                flex-direction: column-reverse;
+            }
+            @media only screen and (min-width: 425px) {
+                bottom: 32px;
+                flex-direction: row;
+            }
+            .trademark-container {
+                display: flex;
+                gap: 10px;
+            }
+            .clickable-container {
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-bottom: 4px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-left: 10px;
+                }
+                display: flex;
+                gap: 10px;
+            }
+        }
+        .logo-image-container {
+            @media only screen and (max-width: 425px) and (min-width: 320px) {
+                top: 10px;
+                left: 0px;
+            }
+            @media only screen and (min-width: 425px) {
+                bottom: 32px;
+                right: 0px;
+            }
+            width: fit-content;
+            height: fit-content;
+            .footer-img {
+                width: 150px;
+                height: auto;
+            }
+        }
+    }
     .copyright {
         color: #868686;
     }
@@ -32,7 +163,7 @@
         img {
             height: 40%;
             width: auto;
-            transform: translate(300px,50px);
+            transform: translate(300px, 50px);
         }
     }
     // ul.paths {

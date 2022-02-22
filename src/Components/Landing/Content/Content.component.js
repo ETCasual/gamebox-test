@@ -15,7 +15,7 @@ const Content = ({
             className="landing-container w-100 mx-auto d-flex flex-column"
         >
             {/* HERO SECTION*/}
-            <div className="hero-container d-flex" ref={heroRef}>
+            <div className="hero-container mx-auto d-flex" ref={heroRef}>
                 {/* LEFT OR UP SIDE OF THE HERO SECTION*/}
                 <div className="hero-text-container">
                     <div className="intro-text">Introducing</div>
@@ -65,7 +65,10 @@ const Content = ({
             </div>
 
             {/* HOW DOES IT WORK SECTION */}
-            <div className="how-does-it-work-container d-flex" ref={workRef}>
+            <div
+                className="how-does-it-work-container d-flex mx-auto"
+                ref={workRef}
+            >
                 {/* HOW DOES IT WORK */}
                 <h1 className="title-text">HOW DOES IT WORK?</h1>
 
@@ -186,11 +189,13 @@ const Content = ({
 
             {/* THAT'S NOT ALL SECTION*/}
             <div
-                className="thats-not-all-container d-flex"
+                className="thats-not-all-container d-flex mx-auto"
                 ref={dailyRewardRef}
             >
                 <h1 className="title-text">That's not all!</h1>
-                <p className="subtitle-text">FREE NFTs for you every week.</p>
+                <p className="subtitle-text">
+                    We’ve got a weekly bonus just for you.
+                </p>
 
                 <div
                     className="get-nft-container position-relative"
@@ -211,11 +216,11 @@ const Content = ({
 
                     <div className="info-container position-absolute d-flex align-items-center flex-column w-100 h-100">
                         <h2 className="title-text">
-                            Get premium NFTs every week!
+                            We’re giving out FREE NFTs every week!
                         </h2>
                         <p className="subtitle-text">
-                            Collect tickets automatically for weekly NFT reward
-                            when you win in any tournaments!
+                            You heard that right! All you need to do is play any
+                            tournaments in the platform and win tickets.
                         </p>
                         <p className="count-down-text d-flex align-items-center justify-content-center">
                             3 days 23 hours 15 minutes left
@@ -230,8 +235,9 @@ const Content = ({
                 </div>
             </div>
 
+            {/* TODO AFTER LANDING PAGE HAS DATA TO DISPLAY */}
             {/* CHECK OUT OUR NFTS SECTION*/}
-            <div className="check-out-our-nfts-container"></div>
+            {/* <div className="check-out-our-nfts-container"></div> */}
 
             {/* LOGO + ABOUT + TERMS AND CONDITIONS + JOIN COMMUNITY */}
             <Footer />
