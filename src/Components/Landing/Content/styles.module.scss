@@ -469,17 +469,13 @@ section.landing-container {
             // TODO: card anim
             .first-image {
                 z-index: 3;
-                top: 145px;
-                // left: 112px;
-                left: min(20.25%, 112px);
                 @media only screen and (max-width: 425px) and (min-width: 320px) {
                     display: none !important;
                 }
                 @media only screen and (min-width: 425px) {
                     z-index: 2;
-                    top: 206px;
-                    // left: 375px;
-                    left: min(67.81%, 375px);
+                    top: 145px;
+                    left: min(20.25%, 112px);
                 }
                 &:hover {
                     z-index: 5;
@@ -487,17 +483,13 @@ section.landing-container {
             }
             .second-image {
                 z-index: 1;
-                top: 34px;
-                // left: 247px;
-                left: min(44.66%, 247px);
                 @media only screen and (max-width: 425px) and (min-width: 320px) {
                     display: none !important;
                 }
                 @media only screen and (min-width: 425px) {
                     z-index: 2;
-                    top: 206px;
-                    // left: 375px;
-                    left: min(67.81%, 375px);
+                    top: 34px;
+                    left: min(44.66%, 247px);
                 }
                 &:hover {
                     z-index: 5;
@@ -510,7 +502,6 @@ section.landing-container {
                 @media only screen and (min-width: 425px) {
                     z-index: 2;
                     top: 206px;
-                    // left: 375px;
                     left: min(67.81%, 375px);
                 }
                 &:hover {
