@@ -442,23 +442,6 @@ const Index = ({ match }) => {
                                                                     setEarnAdditionalDisabledStatus
                                                                 }
                                                             />
-                                                            <GameDuration
-                                                                game={game}
-                                                                index={index}
-                                                                data={
-                                                                    currentPrize
-                                                                }
-                                                                timer={timer}
-                                                                setTimer={
-                                                                    setTimer
-                                                                }
-                                                                handleGameLeaderPanel={
-                                                                    handleGameLeaderPanel
-                                                                }
-                                                                setEarnAdditionalDisabledStatus={
-                                                                    setEarnAdditionalDisabledStatus
-                                                                }
-                                                            />
                                                         </React.Fragment>
                                                     )
                                                 )}
