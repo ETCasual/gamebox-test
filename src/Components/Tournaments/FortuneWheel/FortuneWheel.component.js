@@ -316,6 +316,7 @@ const FortuneWheel = ({
                                             <tr
                                                 className="probability-row"
                                                 id={idx}
+                                                key={`prob-d-${idx}`}
                                             >
                                                 <td className="probability-percentage">
                                                     {rule?.probability}%
