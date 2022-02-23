@@ -45,18 +45,21 @@ const Content = ({
                 <div className="hero-image-container position-relative">
                     <div className="first-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
+                            ref={(elem) => (iconsRef.current[0] = elem)}
                             src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_1.png"
                             alt="Sample NFT"
                         />
                     </div>
                     <div className="second-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
+                            ref={(elem) => (iconsRef.current[1] = elem)}
                             src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_2.png"
                             alt="Sample NFT"
                         />
                     </div>
                     <div className="third-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
+                            ref={(elem) => (iconsRef.current[2] = elem)}
                             src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_3.png"
                             alt="Sample NFT"
                         />
