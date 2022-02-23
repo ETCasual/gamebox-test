@@ -159,12 +159,12 @@ const Leaderboard = ({
                 readyButton > 0 &&
                 leaderboardLayerRef.current
             )
-                console.table([nav, gameInfo, readyButton, window.innerWidth]);
-            leaderboardLayerRef.current.style.height = `${
-                window.innerHeight -
-                (nav + gameInfo + readyButton) -
-                (window.innerWidth > 767 ? 91 : 50)
-            }px`;
+                // console.table([nav, gameInfo, readyButton, window.innerWidth]);
+                leaderboardLayerRef.current.style.height = `${
+                    window.innerHeight -
+                    (nav + gameInfo + readyButton) -
+                    (window.innerWidth > 767 ? 91 : 50)
+                }px`;
         }
         leaderboardLayerRef.current && handleResize();
 
