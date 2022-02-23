@@ -401,7 +401,7 @@ const Index = ({ match }) => {
                                                         </p>
                                                         <img
                                                             width={20}
-                                                            src={`${window.cdn}icons/icon_question_01.png`}
+                                                            src={`${window.cdn}buttons/button_question_01.png`}
                                                             className="question-mark-img"
                                                             alt="question-mark"
                                                             onClick={
@@ -491,7 +491,7 @@ const Index = ({ match }) => {
                                                     </p>
                                                     <img
                                                         className="earn-more-tickets-img"
-                                                        src={`${window.cdn}icons/spinner_column.png`}
+                                                        src={`${window.cdn}spinner/spinner_column_01.png`}
                                                         alt="earn-more-tickets"
                                                     />
                                                 </div>

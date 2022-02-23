@@ -203,7 +203,6 @@ const FortuneWheel = ({
                                 <div className="first-row w-100 d-flex flex-xl-column align-items-start align-items-xl-center justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
                                         <img
-                                            width={20}
                                             onClick={() =>
                                                 !isClickedSpin
                                                     ? setFortuneWheelShown(
@@ -211,7 +210,7 @@ const FortuneWheel = ({
                                                       )
                                                     : null
                                             }
-                                            src={`${window.cdn}icons/arrow_bottom_icon.png`}
+                                            src={`${window.cdn}icons/icon_minimize.png`}
                                             alt="arrow-button"
                                         />
                                         <div className="text-wrapper ml-3">
@@ -229,7 +228,7 @@ const FortuneWheel = ({
                                         width={20}
                                         height={20}
                                         onClick={handleProbabilityInfo}
-                                        src={`${window.cdn}icons/icon_question_01.png`}
+                                        src={`${window.cdn}buttons/button_question_01.png`}
                                         alt="question-mark"
                                     />
                                 </div>
@@ -375,7 +374,7 @@ const FortuneWheel = ({
                                     {/* TRIANGLE POINTER */}
                                     <img
                                         className="img-fluid pointer-img"
-                                        src={`${window.cdn}icons/spinner_icon.png`}
+                                        src={`${window.cdn}spinner/spinner_arrow_01.png`}
                                         alt="fortune-wheel"
                                     />
                                 </div>

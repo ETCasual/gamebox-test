@@ -101,7 +101,7 @@ export function getLeaderboardList(
                             onError={(e) => defaultUserImage(e)}
                             src={
                                 _leaderboardHistory[x]?.avatarUrl ||
-                                `${window.cdn}icons/user.png`
+                                `${window.cdn}icons/icon_profile.png`
                             }
                             alt="player"
                         />

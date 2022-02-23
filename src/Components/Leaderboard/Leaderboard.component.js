@@ -72,8 +72,10 @@ const Leaderboard = ({
     });
 
     let watcherRef = useRef(null);
+    let leaderBoardBackgroundRef = useRef(null);
+    let leaderBoardGameInfoRef = useRef(null);
     let leaderboardRef = useRef(null);
-    let leaderboardLayerRef = useRef(null);
+    let readyTournamentButtonRef = useRef(null);
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
@@ -145,31 +147,33 @@ const Leaderboard = ({
         window.addEventListener("resize", handleResize, false);
 
         function handleResize() {
-            let nav =
-                document.querySelector(".navbar-top")?.clientHeight || 154;
-            let gameInfo =
-                document.querySelector(".leaderboard-game-info-flex-container")
-                    ?.clientHeight || 122;
-            let readyButton =
-                document.querySelector(".bottom-ready-tournament")
-                    ?.clientHeight || 100;
             if (
-                nav > 0 &&
-                gameInfo > 0 &&
-                readyButton > 0 &&
-                leaderboardLayerRef.current
-            )
-                // console.table([nav, gameInfo, readyButton, window.innerWidth]);
-                leaderboardLayerRef.current.style.height = `${
-                    window.innerHeight -
-                    (nav + gameInfo + readyButton) -
-                    (window.innerWidth > 767 ? 91 : 50)
+                leaderboardRef.current &&
+                leaderBoardBackgroundRef.current &&
+                leaderBoardGameInfoRef.current &&
+                readyTournamentButtonRef.current
+            ) {
+                console.log(
+                    leaderBoardBackgroundRef.current.clientHeight -
+                        leaderBoardGameInfoRef.current.clientHeight -
+                        readyTournamentButtonRef.current.clientHeight
+                );
+                leaderboardRef.current.style.height = `${
+                    leaderBoardBackgroundRef.current.clientHeight -
+                    leaderBoardGameInfoRef.current.clientHeight -
+                    readyTournamentButtonRef.current.clientHeight
                 }px`;
+            }
         }
-        leaderboardLayerRef.current && handleResize();
+        let timeoutRef;
+        clearTimeout(timeoutRef);
+        timeoutRef = setTimeout(() => {
+            leaderboardRef.current && handleResize();
+        }, 300);
 
         return () => {
             window.removeEventListener("resize", handleResize, false);
+            clearTimeout(timeoutRef);
         };
     }, [modalStatus.isGameReady]);
 
@@ -374,7 +378,7 @@ const Leaderboard = ({
                             <img
                                 className="avatar"
                                 onError={(e) => defaultUserImage(e)}
-                                src={`${window.cdn}icons/user.png`}
+                                src={`${window.cdn}icons/icon_profile.png`}
                                 alt="player"
                             />
                         </div>
@@ -384,13 +388,7 @@ const Leaderboard = ({
                             <p className="points">0 pts</p>
                         </div>
                         <div className="tokens ml-auto d-flex align-items-center justify-content-center">
-                            <span>{getRankTickets(x)} Tokens</span>
-                            {/* <img
-                                className="ml-1"
-                                width="16"
-                                src={`${window.cdn}icons/tickets.png`}
-                                alt="tickets"
-                            /> */}
+                            <span>{getRankTickets(x)} tickets</span>
                         </div>
                     </div>
                 </div>
@@ -410,26 +408,19 @@ const Leaderboard = ({
             _leaderboardList.push(
                 <div key={`leaderboard-${i}`} className="individual-rank">
                     <div
-                        className={`leader-player-card d-flex align-items-center ${
-                            leaderboardList[i]?.userId
-                                ? isCurrentUser(leaderboardList[i]?.userId)
-                                    ? "leader-curr-player-card"
-                                    : ""
-                                : ""
-                        }`}
+                        className={`leader-player-card d-flex align-items-center`}
                     >
                         <div className="number-holder">
                             <LeaderRankIndicator index={i} type="lb" />
                         </div>
 
                         <div className="user-avatar">
-                            <div className="rank-star"></div>
                             <img
                                 className="avatar"
                                 onError={(e) => defaultUserImage(e)}
                                 src={
                                     leaderboardList[i]?.avatarUrl ||
-                                    `${window.cdn}icons/user.png`
+                                    `${window.cdn}icons/icon_profile.png`
                                 }
                                 alt="player"
                             />
@@ -456,13 +447,7 @@ const Leaderboard = ({
                         </div>
 
                         <div className="tokens ml-auto d-flex align-items-center justify-content-center">
-                            <span>{getRankTickets(i)} Tokens</span>
-                            {/* <img
-                                className="ml-1"
-                                width="16"
-                                src={`${window.cdn}icons/tickets.png`}
-                                alt="tickets"
-                            /> */}
+                            <span>{getRankTickets(i)} tickets</span>
                         </div>
                     </div>
                 </div>
@@ -546,141 +531,115 @@ const Leaderboard = ({
         );
     } else {
         return (
-            <>
-                <div className="nav-top-back-btn-wrapper d-flex align-items-center justify-content-center mx-auto">
-                    <div className="d-flex col-12 col-md-10 col-lg-8 col-xl-8">
-                        {/* BACK BUTTON */}
-                        <button className="d-flex align-items-center justify-content-center p-0">
-                            <img
-                                onClick={handleBackButton}
-                                className="back-button"
-                                width="40"
-                                height="40"
-                                src={`${window.cdn}buttons/button_back.png`}
-                                alt="back-btn"
-                            />
-                        </button>
-                        {/* BACK TEXT */}
-                        <div
-                            onClick={handleBackButton}
-                            className="back-text d-flex align-items-center"
-                        >
-                            Back
-                        </div>
-                        {/* YOUR TICKETS */}
-                        {/* <div className="ticket-values px-3 ml-auto">
-                            <p className="mb-0">
-                                You have{" "}
-                                <span className="mx-2">
-                                    {getPoolTickets(
-                                        poolTickets,
-                                        data?.prizeId
-                                    )?.toLocaleString() || 0}
-                                </span>
+            <section
+                id="game-leaderboard-screen"
+                onClick={(e) => {
+                    if (
+                        !e.target.closest(".bottom-ready-tournament") &&
+                        !e.target.closest(".earn-additional-tickets-container")
+                    ) {
+                        setModalStatus((prev) => ({
+                            ...prev,
+                            isEarnAdditionalInfoShown: false,
+                        }));
+                    }
+                }}
+            >
+                <div className="container-fluid">
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                            {/* BACK BUTTON */}
+                            <div className="d-flex align-items-center back-button mb-3 mb-md-4">
                                 <img
-                                    width="24"
-                                    src={`${window.cdn}icons/tickets.png`}
-                                    alt="tickets"
+                                    onClick={handleBackButton}
+                                    src={`${window.cdn}buttons/button_back.png`}
+                                    alt="back-btn"
                                 />
-                            </p>
-                        </div> */}
-                    </div>
-                </div>
-
-                <section
-                    id="game-leaderboard-screen"
-                    ref={leaderboardRef}
-                    onClick={(e) => {
-                        if (
-                            !e.target.closest(".bottom-ready-tournament") &&
-                            !e.target.closest(
-                                ".earn-additional-tickets-container"
-                            )
-                        ) {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isEarnAdditionalInfoShown: false,
-                            }));
-                        }
-                    }}
-                >
-                    <div className="leaderboard-background-wrapper">
-                        <img
-                            alt="game-icon"
-                            src={gameInfo?.gameIcon}
-                            className="leaderboard-background"
-                        ></img>
-                    </div>
-
-                    <div className="leaderboard-flex-container">
-                        <div className="top-leaderboard">
-                            <div className="leaderboard-game-info-flex-container">
-                                <div
-                                    className="game-icon"
-                                    style={{
-                                        backgroundImage: `url("${gameInfo?.gameIcon}")`,
-                                    }}
-                                ></div>
-                                <div className="game-details-container">
-                                    <div className="game-name">
-                                        {gameInfo.gameTitle}
-                                    </div>
-
-                                    <div className="tournament-end-container">
-                                        <div className="tournament-end-text">
-                                            Tournament ends in
-                                        </div>
-                                        <div
-                                            className={`${
-                                                OverTimeModeChecker(
-                                                    data?.prizeId,
-                                                    data?.ticketsRequired,
-                                                    prizeTicketCollection
-                                                )
-                                                    ? "text-danger"
-                                                    : "timer-text"
-                                            }`}
-                                        >
-                                            {timer || "0d 0h 0m 0s"}
-                                        </div>
-                                    </div>
-                                </div>
+                                <span className="ml-2">Back</span>
                             </div>
-                            <div className="leaderboard-holder">
-                                <div
-                                    className="leaderboard"
-                                    // className={`leaderboard mb-2 mb-md-3 ${
-                                    //     currentUserRank.rank > rankLength
-                                    //         ? ""
-                                    //         : "pb-2 pb-md-3"
-                                    // }`}
-                                >
+                            {/* BACKGROUND IMAGE */}
+                            <div
+                                className="col-12 px-0 leaderboard-background-wrapper position-relative"
+                                ref={leaderBoardBackgroundRef}
+                            >
+                                <img
+                                    className="leaderboard-background"
+                                    src={gameInfo?.gameIcon}
+                                    alt={gameInfo?.gameTitle}
+                                />
+                                {/* LEADERBOARD */}
+                                <div className="leaderboard-wrapper">
+                                    {/* GAME INFO & TIMER */}
                                     <div
-                                        ref={leaderboardLayerRef}
-                                        className={`leaderboard-rank-layer ${
+                                        className="leaderboard-game-info d-flex align-items-center justify-content-start"
+                                        ref={leaderBoardGameInfoRef}
+                                    >
+                                        <img
+                                            className="game-icon"
+                                            src={gameInfo?.gameIcon}
+                                            alt={gameInfo?.gameIcon}
+                                        />
+                                        <div className="game-details w-100 px-3">
+                                            <p className="game-name w-100 mb-2">
+                                                {gameInfo?.gameTitle}
+                                            </p>
+
+                                            <div className="w-100 d-flex align-items-center justify-content-between">
+                                                <p className="tournament-end-text mb-0">
+                                                    Tournament ends in
+                                                </p>
+                                                <p
+                                                    className={`mb-0 ${
+                                                        OverTimeModeChecker(
+                                                            data?.prizeId,
+                                                            data?.ticketsRequired,
+                                                            prizeTicketCollection
+                                                        )
+                                                            ? "text-danger"
+                                                            : "timer-text"
+                                                    }`}
+                                                >
+                                                    {timer || "0d 0h 0m 0s"}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* LEADERBOARD LIST */}
+                                    <div
+                                        ref={leaderboardRef}
+                                        className={`leaderboard ${
                                             currentUserRank.rank > rankLength ||
                                             currentUserRank.rank === "-"
                                                 ? ""
                                                 : "leaderboard-rank-layer-without-user"
                                         }`}
+                                        style={{
+                                            padding: `${
+                                                currentUserRank.rank >
+                                                rankLength
+                                                    ? "0.25rem 0.25rem 5rem 0.25rem"
+                                                    : "0.25rem"
+                                            }`,
+                                        }}
                                     >
                                         {leaderboardList.length > 0
                                             ? getLeaderboardList()
                                             : getEmptyLeaderboardList()}
                                     </div>
 
+                                    {/* CURRENT USER RANK IF IT'S MORE THAN THE RANK LIST LENGTH */}
                                     {currentUserRank.rank > rankLength ? (
-                                        <div className="leaderboard-user-wrapper w-100 p-3">
+                                        <div className="leaderboard-user-wrapper w-100">
                                             <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
+                                                <div className="number-holder">
+                                                    <LeaderRankIndicator
+                                                        index={
+                                                            currentUserRank.rank
+                                                        }
+                                                        type="current"
+                                                    />
+                                                </div>
                                                 <div className="user-avatar">
-                                                    <div className="rank-star">
-                                                        <LeaderRankIndicator
-                                                            index={
-                                                                currentUserRank.rank
-                                                            }
-                                                            type="current"
-                                                        />
-                                                    </div>
                                                     <img
                                                         className="avatar"
                                                         onError={(e) =>
@@ -688,7 +647,7 @@ const Leaderboard = ({
                                                         }
                                                         src={
                                                             user.picture ||
-                                                            `${window.cdn}icons/user.png`
+                                                            `${window.cdn}icons/icon_profile.png`
                                                         }
                                                         alt="player"
                                                     />
@@ -714,14 +673,8 @@ const Leaderboard = ({
                                                             currentUserRank.rank -
                                                                 1
                                                         ) || "0"}{" "}
-                                                        Tokens
+                                                        tickets
                                                     </span>
-                                                    {/* <img
-                                                        className="ml-1"
-                                                        width="16"
-                                                        src={`${window.cdn}icons/tickets.png`}
-                                                        alt="tickets"
-                                                    /> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -729,111 +682,68 @@ const Leaderboard = ({
                                         ""
                                     )}
                                 </div>
+
+                                {/* READY TOURNAMENT BUTTON */}
+                                {!modalStatus.isEarnAdditionalInfoShown && (
+                                    <div
+                                        className="bottom-ready-tournament d-flex align-items-center justify-content-center"
+                                        ref={readyTournamentButtonRef}
+                                    >
+                                        <button
+                                            onClick={() => {
+                                                setModalStatus((prev) => ({
+                                                    ...prev,
+                                                    isEarnAdditionalInfoShown: true,
+                                                }));
+                                            }}
+                                            className="ready-tournament-button"
+                                        >
+                                            Ready Tournament
+                                        </button>
+                                    </div>
+                                )}
+
+                                {/* EARN ADDITIONAL BENEFITS */}
+                                {modalStatus.isEarnAdditionalInfoShown && (
+                                    <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
+                                        <EarnAdditionalTickets
+                                            gameId={gameInfo.gameId}
+                                            prizeId={data?.prizeId}
+                                            earnAdditionalDisabledStatus={
+                                                earnAdditionalDisabledStatus
+                                            }
+                                            setEarnAdditionalDisabledStatus={
+                                                setEarnAdditionalDisabledStatus
+                                            }
+                                        />
+                                        {/* PLAY BUTTON*/}
+                                        <div
+                                            className={`play-button-container d-flex justify-content-center ${
+                                                timer !== "Ended" ||
+                                                timer !== "0d 0h 0m 0s"
+                                                    ? ""
+                                                    : "opacity-0-5"
+                                            }`}
+                                        >
+                                            <button
+                                                onClick={
+                                                    timer !== "Ended" ||
+                                                    timer !== "0d 0h 0m 0s"
+                                                        ? handleOnClickPlayButton
+                                                        : null
+                                                }
+                                                className="play-button"
+                                            >
+                                                Play Tournament!
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
-
-                        {/* {!modalStatus.isEarnAdditionalInfoShown && (
-                            <div className="bottom-ready-tournament">
-                                <button
-                                    onClick={() => {
-                                        setModalStatus((prev) => ({
-                                            ...prev,
-                                            isEarnAdditionalInfoShown: true,
-                                        }));
-                                    }}
-                                    className="ready-tournament-button"
-                                >
-                                    Ready Tournament
-                                </button>
-                            </div>
-                        )} */}
-
-                        {/* {modalStatus.isEarnAdditionalInfoShown && (
-                            <>
-                                <EarnAdditionalTickets
-                                    style={{ background: "red" }}
-                                    gameId={gameInfo.gameId}
-                                    prizeId={data?.prizeId}
-                                    earnAdditionalDisabledStatus={
-                                        earnAdditionalDisabledStatus
-                                    }
-                                    setEarnAdditionalDisabledStatus={
-                                        setEarnAdditionalDisabledStatus
-                                    }
-                                />
-                                <button
-                                    className={`play-btn ${
-                                        timer !== "Ended" ||
-                                        timer !== "0d 0h 0m 0s"
-                                            ? ""
-                                            : "opacity-0-5"
-                                    }`}
-                                    onClick={
-                                        timer !== "Ended" ||
-                                        timer !== "0d 0h 0m 0s"
-                                            ? handleOnClickPlayButton
-                                            : null
-                                    }
-                                >
-                                    Play!
-                                </button>
-                            </>
-                        )} */}
                     </div>
-
-                    {!modalStatus.isEarnAdditionalInfoShown && (
-                        <div className="bottom-ready-tournament">
-                            <button
-                                onClick={() => {
-                                    setModalStatus((prev) => ({
-                                        ...prev,
-                                        isEarnAdditionalInfoShown: true,
-                                    }));
-                                }}
-                                className="ready-tournament-button"
-                            >
-                                Ready Tournament
-                            </button>
-                        </div>
-                    )}
-
-                    {/* EARN ADDITIONAL BENEFITS */}
-                    {modalStatus.isEarnAdditionalInfoShown && (
-                        <div className="earn-additional-tickets-container">
-                            <EarnAdditionalTickets
-                                gameId={gameInfo.gameId}
-                                prizeId={data?.prizeId}
-                                earnAdditionalDisabledStatus={
-                                    earnAdditionalDisabledStatus
-                                }
-                                setEarnAdditionalDisabledStatus={
-                                    setEarnAdditionalDisabledStatus
-                                }
-                            />
-                            {/* PLAY BUTTON*/}
-                            <div
-                                className={`play-button-container ${
-                                    timer !== "Ended" || timer !== "0d 0h 0m 0s"
-                                        ? ""
-                                        : "opacity-0-5"
-                                }`}
-                            >
-                                <button
-                                    onClick={
-                                        timer !== "Ended" ||
-                                        timer !== "0d 0h 0m 0s"
-                                            ? handleOnClickPlayButton
-                                            : null
-                                    }
-                                    className="play-button"
-                                >
-                                    Play Tournament!
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </section>
-            </>
+                </div>
+            </section>
         );
     }
 };

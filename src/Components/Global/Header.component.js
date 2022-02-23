@@ -44,6 +44,11 @@ const Header = ({
         return userGems;
     };
 
+    const getWalletAmount = () => {
+        const amount = 99999;
+        return amount.toFixed(2).toLocaleString();
+    };
+
     const handleHomeNavLink = () => {
         scrollToTop();
         dispatch(loadPrizes());
@@ -115,10 +120,16 @@ const Header = ({
                                 <div className="gem-wrapper">
                                     <img
                                         className="gem-icon"
-                                        src={`${window.cdn}gems/gems.png`}
-                                        alt="gems"
+                                        src={`${window.cdn}assets/wallet_01.png`}
+                                        alt="wallet"
                                     />
-                                    <span>{getGems() || 0}</span>
+                                    <div className="info-wrapper ml-1">
+                                        <p className="mb-1">
+                                            {getWalletAmount() || 0}{" "}
+                                            froyo
+                                        </p>
+                                        <p className="mb-0">7647...9747</p>
+                                    </div>
                                 </div>
                             </div>
                             <div className="gems position-relative d-flex flex-nowrap align-items-center mx-2">
@@ -134,13 +145,13 @@ const Header = ({
                                     <div className="gem-wrapper">
                                         <img
                                             className="gem-icon"
-                                            src={`${window.cdn}gems/gems.png`}
+                                            src={`${window.cdn}assets/additional_gems_01.png`}
                                             alt="gems"
                                         />
                                         <span>{getGems() || 0}</span>
                                         <img
                                             className="add-gems-icon"
-                                            src={`${window.cdn}buttons/button_addgems.png`}
+                                            src={`${window.cdn}buttons/button_plus.png`}
                                             alt="add-gems"
                                         />
                                     </div>
@@ -152,13 +163,15 @@ const Header = ({
                                     onClick={handleOnClickNotificationIcon}
                                 >
                                     <img
+                                        style={{
+                                            filter:
+                                                notificationNumber.count > 0 &&
+                                                notificationData.length > 0
+                                                    ? "none"
+                                                    : "grayscale(0.9)",
+                                        }}
                                         className="icon"
-                                        src={`${window.cdn}icons/notification_${
-                                            notificationNumber.count > 0 &&
-                                            notificationData.length > 0
-                                                ? "yes"
-                                                : "no"
-                                        }.png`}
+                                        src={`${window.cdn}icons/icon_notification.png`}
                                         alt="bell"
                                     />
                                     <div
@@ -193,7 +206,7 @@ const Header = ({
                                         className="img-fluid"
                                         src={
                                             userImage ||
-                                            `${window.cdn}icons/user.png`
+                                            `${window.cdn}icons/icons/icon_profile.png`
                                         }
                                         alt="profile"
                                     />

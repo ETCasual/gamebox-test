@@ -107,10 +107,10 @@ const EarnAdditionalTickets = ({
             <div className="select-one-option-text">Select only one option</div>
 
             {/* BOTH OPTIONS*/}
-            <div className="option-buttons-container">
+            <div className="option-buttons-container d-flex">
                 {/* WATCH ADS */}
                 <div
-                    className={`button-flex-container ${
+                    className={`button-flex-container p-3 mx-2 mx-md-3 position-relative ${
                         earnAdditionalDisabledStatus.gems
                             ? "opacity-0-2"
                             : "cursor-pointer"
@@ -124,44 +124,28 @@ const EarnAdditionalTickets = ({
                               }
                     }
                 >
-                    <div className="top-row-flex-container">
-                        <div className="left-row">
-                            <div className="watch-ads-text">Watch ads</div>
-                            <div className="get-additional-text">
-                                Get additional
-                            </div>
-                            <div className="ticket-flex-holder">
-                                <div className="ticket-amount">
-                                    {currentGameRules.watchAdTickets}
-                                </div>
-                                <div className="ticket-img">
-                                    <img
-                                        className="ticket-img "
-                                        src={`${window.cdn}icons/tickets.png`}
-                                        alt="tickets"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="watch-ads-img-wrapper">
-                            <img
-                                width="120"
-                                height="120"
-                                className="watch-ads-img "
-                                src={`${window.cdn}illustrations/watch_ads.png`}
-                                alt="watch ads"
-                            />
-                        </div>
-                    </div>
-                    <div className="bottom-row">
-                        for every{" "}
-                        <span>{currentGameRules.score} score points</span>
+                    <img
+                        className="earn-type-img"
+                        src={`${window.cdn}assets/additional_ads_01.png`}
+                        alt="watch ads"
+                    />
+                    <p className="boost-tickets mb-1 mb-md-2">
+                        Boost Tickets by
+                    </p>
+                    <p className="earn-type-text">Watching ads</p>
+                    <div className="ticket-holder p-3 d-flex flex-column alig-gn-self-center justify-content-center">
+                        <p className="ticket-amount mb-1">
+                            +{currentGameRules.watchAdTickets} tickets
+                        </p>
+                        <p className="score-condition mb-0">
+                            every{" "}
+                            <span>{currentGameRules.score} score points</span>
+                        </p>
                     </div>
                 </div>
-
                 {/* USE GEMS*/}
                 <div
-                    className={`button-flex-container ${
+                    className={`button-flex-container p-3 mx-2 mx-md-3 position-relative ${
                         earnAdditionalDisabledStatus.ads
                             ? "opacity-0-2"
                             : "cursor-pointer"
@@ -173,50 +157,35 @@ const EarnAdditionalTickets = ({
                             : onClickUseGems
                     }
                 >
-                    <div className="top-row-flex-container">
-                        <div className="left-row">
-                            <div className="use-gems-text">
-                                Use {currentGameRules.useHowManyGems} Gems
-                            </div>
-                            <div className="get-additional-text">
-                                Get additional
-                            </div>
-                            <div className="ticket-flex-holder">
-                                <div className="ticket-amount">
-                                    {currentGameRules.useGemTickets}
-                                </div>
-                                <div className="ticket-img">
-                                    <img
-                                        className="ticket-img"
-                                        src={`${window.cdn}icons/tickets.png`}
-                                        alt="tickets"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="use-gems-img-wrapper">
-                            <img
-                                width="100"
-                                height="100"
-                                className="use-gems-img "
-                                src={`${window.cdn}illustrations/use_gems.png`}
-                                alt="use gems"
-                            />
-                        </div>
-                    </div>
-                    <div className="bottom-row">
-                        for every{" "}
-                        <span>{currentGameRules.score} score points</span>
+                    <img
+                        className="earn-type-img"
+                        src={`${window.cdn}assets/additional_gems_01.png`}
+                        alt="use gems"
+                    />
+                    <p className="boost-tickets mb-1 mb-md-2">
+                        Boost Tickets by
+                    </p>
+                    <p className="earn-type-text">
+                        {currentGameRules.useHowManyGems} Gems
+                    </p>
+                    <div className="ticket-holder p-3 d-flex flex-column alig-gn-self-center justify-content-center">
+                        <p className="ticket-amount mb-1">
+                            +{currentGameRules.useGemTickets} tickets
+                        </p>
+                        <p className="score-condition mb-0">
+                            every{" "}
+                            <span>{currentGameRules.score} score points</span>
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div className="play-immediately-container">
-                <div className="line"></div>
-                <div className="play-immediately-text">
+            <div className="play-immediately-text-container d-flex align-items-center justify-content-evenly">
+                <div className="line" />
+                <div className="play-immediately-text text-center">
                     or start playing immediately
                 </div>
-                <div className="line"></div>
+                <div className="line" />
             </div>
             {isSubscriptionModalShown && (
                 <SubscriptionModal

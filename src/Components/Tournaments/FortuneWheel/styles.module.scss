@@ -45,9 +45,9 @@
             }
             .text-icon-wrapper {
                 img {
-                    width: 0.875rem;
+                    width: 1.5rem;
                     @include media-min($xl) {
-                        width: 1.25rem;
+                        width: 2rem;
                     }
                 }
             }
