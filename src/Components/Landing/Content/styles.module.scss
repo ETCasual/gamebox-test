@@ -379,7 +379,7 @@ section.landing-container {
         inset: 0;
         @media only screen and (max-width: 425px) and (min-width: 320px) {
             flex-direction: column-reverse;
-            width: max(88.33%, 278px);
+            width: Max(88.33%, 278px);
         }
         @media only screen and (min-width: 425px) {
             flex-direction: row;
@@ -477,7 +477,7 @@ section.landing-container {
                 @media only screen and (min-width: 425px) {
                     z-index: 2;
                     top: 145px;
-                    left: min(20.25%, 112px);
+                    left: Min(20.25%, 112px);
                 }
                 &:hover {
                     z-index: 5;
@@ -491,7 +491,7 @@ section.landing-container {
                 @media only screen and (min-width: 425px) {
                     z-index: 2;
                     top: 34px;
-                    left: min(44.66%, 247px);
+                    left: Min(44.66%, 247px);
                 }
                 &:hover {
                     z-index: 5;
@@ -504,7 +504,7 @@ section.landing-container {
                 @media only screen and (min-width: 425px) {
                     z-index: 2;
                     top: 206px;
-                    left: min(67.81%, 375px);
+                    left: Min(67.81%, 375px);
                 }
                 &:hover {
                     z-index: 5;
@@ -517,7 +517,7 @@ section.landing-container {
         max-width: 904px;
         inset: 0;
         @media only screen and (max-width: 425px) and (min-width: 320px) {
-            width: max(88.33%, 278px);
+            width: Max(88.33%, 278px);
             margin-top: 74px;
         }
         @media only screen and (min-width: 425px) {
@@ -670,7 +670,7 @@ section.landing-container {
         inset: 0;
         margin-bottom: 111px;
         @media only screen and (max-width: 425px) and (min-width: 320px) {
-            width: max(88.33%, 278px);
+            width: Max(88.33%, 278px);
             margin-top: 80px;
         }
         @media only screen and (min-width: 425px) {
