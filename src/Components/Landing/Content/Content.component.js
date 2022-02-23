@@ -10,245 +10,239 @@ const Content = ({
     dailyRewardCardRef,
 }) => {
     return (
-        <section id="landing">
-            <div className="container-fluid">
-                <div className="row">
-                    {/* HERO */}
-                    <div className="hero  d-flex flex-column" ref={heroRef}>
-                        <p className="intro mt-4 mb-0">Introducing</p>
-                        <h1 className="title my-2">
-                            THE ULTIMATE<br></br>GAMING PLATFORM
-                        </h1>
-                        <p className="subtitle mb-5">
-                            Discover rewards and win them for free!<br></br>
-                            {/* adipiscing elit. Etiam efficitur lorem et erat
-                            <br></br>
-                            convallis, a tempus libero convallis. Aenean
-                            <br></br>
-                            maximus nulla quis mi tempus dapibus. */}
-                        </p>
-                        <button
-                            className="register-now-button mb-4 mt-2"
-                            onClick={handleSignUp}
-                        >
-                            Register now!
-                        </button>
-                        <button className="login-button" onClick={handleSignUp}>
-                            Login
-                        </button>
-                        <div className="game-box-logo">
-                            {/* <Link to="/" onClick={scrollToTop}> */}
-                                <img
-                                    src={`https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png`}
-                                    alt="game-box-logo"
-                                />
-                            {/* </Link> */}
-                        </div>
+        <section
+            id="landing"
+            className="landing-container w-100 mx-auto d-flex flex-column"
+        >
+            {/* HERO SECTION*/}
+            <div className="hero-container mx-auto d-flex" ref={heroRef}>
+                {/* LEFT OR UP SIDE OF THE HERO SECTION*/}
+                <div className="hero-text-container">
+                    <div className="intro-text">Introducing</div>
+                    <h1 className="title-text">
+                        The ultimate gaming platform!
+                    </h1>
+                    <p className="subtitle-text">
+                        Discover rewards and win them for free!
+                    </p>
+                    {/* <div className="subtitle-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Etiam efficitur lorem et erat convallis, a tempus libero
+                        convallis. Aenean maximus nulla quis mi tempus dapibus.
+                    </div> */}
+                    <button
+                        className="register-now-button"
+                        onClick={handleSignUp}
+                    >
+                        Register now!
+                    </button>
+                    <button className="login-button" onClick={handleSignUp}>
+                        Login
+                    </button>
+                </div>
 
-                        {/*SAMPLE IMAGES*/}
-                        {/* <img
-                            ref={(elem) => (iconsRef.current[0] = elem)}
-                            className="icon icon-1"
-                            src={`https://drive.google.com/file/d/1xHQOgSBi-CxaqUm1V_5hKFkZ2bHZH0uJ/view?usp=sharing`}
-                            alt="sample-image-1"
-                        />
-
+                {/* RIGHT OR DOWN SIDE OF THE HERO SECTION*/}
+                <div className="hero-image-container position-relative">
+                    <div className="first-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
                             ref={(elem) => (iconsRef.current[0] = elem)}
-                            className="icon icon-1"
-                            src={`https://drive.google.com/file/d/1wQYDR0uWmqqXR0KY1dLeNDWrGQQFfWO6/view?usp=sharing`}
-                            alt="sample-image-2"
+                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_1.png"
+                            alt="Sample NFT"
                         />
-                         <img
-                            ref={(elem) => (iconsRef.current[0] = elem)}
-                            className="icon icon-1"
-                            src="https://drive.google.com/file/d/1xHQOgSBi-CxaqUm1V_5hKFkZ2bHZH0uJ/view?usp=sharing"
-                            alt="sample-image-3"
-                        /> */}
-                        {/* ICONS */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[0] = elem)}
-                                className="icon icon-1"
-                                src={`${window.cdn}illustrations/bonus_04.png`}
-                                alt="icon_01"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[1] = elem)}
-                                className="icon icon-2"
-                                src={`${window.cdn}illustrations/landing_rewards.png`}
-                                alt="icon_02"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[2] = elem)}
-                                className="icon game-icon-0"
-                                src={`${window.cdn}illustrations/landing_game.png`}
-                                alt="game-controller"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[3] = elem)}
-                                className="icon game-icon-1"
-                                src={`${window.cdn}illustrations/landing_gameicon_01.png`}
-                                alt="game-1"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[4] = elem)}
-                                className="icon game-icon-2"
-                                src={`${window.cdn}illustrations/landing_gameicon_02.png`}
-                                alt="game-2"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[5] = elem)}
-                                className="icon game-icon-3"
-                                src={`${window.cdn}illustrations/landing_gameicon_03.png`}
-                                alt="game-3"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[6] = elem)}
-                                className="icon game-icon-4"
-                                src={`${window.cdn}illustrations/landing_gameicon_04.png`}
-                                alt="game-4"
-                            /> */}
-                        {/* <img
-                                ref={(elem) => (iconsRef.current[7] = elem)}
-                                className="icon game-icon-5"
-                                src={`${window.cdn}illustrations/landing_gameicon_05.png`}
-                                alt="game-5"
-                            /> */}
                     </div>
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-8 mx-auto d-flex flex-column justify-content-center">
-                        {/* WORK */}
-                        <div className="works w-100 mt-5" ref={workRef}>
-                            <h1 className="title mb-1">HOW IT WORKS?</h1>
-                            <p className="subtitle">
-                                Just follow these 3 simple steps.
-                            </p>
-                            <div className="row d-flex justify-content-center">
-                                <div className="col-12 col-md-4 px-md-4">
-                                    <div
-                                        className="work-card"
-                                        ref={(elem) => {
-                                            workCardRef.current[0] = elem;
-                                        }}
-                                    >
-                                        <img
-                                            className="img-fluid"
-                                            src={`${window.cdn}illustrations/steps_01.png`}
-                                            alt="discover rewards"
-                                        />
-                                        <p className="mb-2 step">STEP 1</p>
-                                        <h5 className="title">
-                                            Discover NFT’s
-                                        </h5>
-                                        <p className="description">
-                                            A wide collection of NFT’s waiting
-                                            just to be discovered.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-4 px-md-2">
-                                    <div
-                                        className="work-card"
-                                        ref={(elem) => {
-                                            workCardRef.current[1] = elem;
-                                        }}
-                                    >
-                                        <img
-                                            className="img-fluid"
-                                            src={`${window.cdn}illustrations/steps_02.png`}
-                                            alt="play games"
-                                        />
-                                        <p className="mb-2 step">STEP 2</p>
-                                        <h5 className="title">
-                                            Compete in tournaments
-                                        </h5>
-                                        <p className="description">
-                                            Compete with players around the
-                                            world and get the highest score to
-                                            win.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-4 px-md-2">
-                                    <div
-                                        className="work-card"
-                                        ref={(elem) => {
-                                            workCardRef.current[2] = elem;
-                                        }}
-                                    >
-                                        <img
-                                            className="img-fluid"
-                                            src={`${window.cdn}illustrations/steps_03.png`}
-                                            alt="win rewards"
-                                        />
-                                        <p className="mb-2 step">STEP 3</p>
-                                        <h5 className="title">Win NFT’s</h5>
-                                        <p className="description">
-                                            Collect tickets and stand a chance
-                                            to win the NFT of your choice.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* DAILY BONUS REWARD */}
-                        <div
-                            className="daily-reward w-100 my-5"
-                            ref={dailyRewardRef}
-                        >
-                            <h1 className="title mb-1">That's not all!</h1>
-                            <p className="subtitle">
-                                FREE NFT’s for you every week.
-                            </p>
-                            <div
-                                className="col-12 wrapper text-center d-flex align-items-center justify-content-center"
-                                ref={dailyRewardCardRef}
-                            >
-                                <div className="w-100 p-3 ">
-                                    <h2>Get premium NFT’s every week!</h2>
-                                    <p>
-                                        Collect tickets automatically for weekly
-                                        NFT reward when you win in any
-                                        tournaments!
-                                    </p>
-                                    <div className="d-flex align-items-start flex-column ">
-                                        {/* <button className="countdown-button mb-4">
-                                            3 days 23 hours 15 minutes left
-                                        </button> */}
-                                        <button
-                                            className="register-now-button mt-4 "
-                                            onClick={handleSignUp}
-                                        >
-                                            Register now!
-                                        </button>
-                                    </div>
-                                </div>
+                    <div className="second-image hero-image position-absolute d-flex justify-content-center align-items-center">
+                        <img
+                            ref={(elem) => (iconsRef.current[1] = elem)}
+                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_2.png"
+                            alt="Sample NFT"
+                        />
+                    </div>
+                    <div className="third-image hero-image position-absolute d-flex justify-content-center align-items-center">
+                        <img
+                            ref={(elem) => (iconsRef.current[2] = elem)}
+                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_3.png"
+                            alt="Sample NFT"
+                        />
+                    </div>
+                </div>
+            </div>
 
-                                <img
-                                    className="icon icon-1 d-none d-md-block"
-                                    src={`${window.cdn}illustrations/bonus_04.png`}
-                                    alt="bonus_04"
-                                />
-                                <img
-                                    className="icon icon-2 d-none d-md-block"
-                                    src={`${window.cdn}illustrations/bonus_05.png`}
-                                    alt="bonus_05"
-                                />
-                                <img
-                                    className="icon icon-1 d-block d-md-none"
-                                    src={`${window.cdn}illustrations/bonus_01.png`}
-                                    alt="bonus_01"
-                                />
-                                <img
-                                    className="icon icon-2 d-block d-md-none"
-                                    src={`${window.cdn}illustrations/bonus_02.png`}
-                                    alt="bonus_02"
-                                />
-                            </div>
+            {/* HOW DOES IT WORK SECTION */}
+            <div
+                className="how-does-it-work-container d-flex mx-auto"
+                ref={workRef}
+            >
+                {/* HOW DOES IT WORK */}
+                <h1 className="title-text">HOW DOES IT WORK?</h1>
+
+                {/* FOLLOW STEPS */}
+                <p className="subtitle-text">
+                    Just follow these 3 simple steps.
+                </p>
+
+                {/* STEP 1 2 3*/}
+                <div className="multiple-steps-container">
+                    {/* STEP 1*/}
+                    <div
+                        className="step-container"
+                        ref={(elem) => {
+                            workCardRef.current[0] = elem;
+                        }}
+                    >
+                        <div className="multiple-imgs-container">
+                            <img
+                                className="frame-1-img-1"
+                                src={`${window.cdn}illustrations/howto_frame1_01.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-1-img-2"
+                                src={`${window.cdn}illustrations/howto_frame1_02.png`}
+                                alt="discover rewards"
+                            />
+                        </div>
+                        <div className="step-text">STEP 1</div>
+                        <div className="title-text">Discover NFTs</div>
+                        <div className="description-text">
+                            A wide collection of NFTs waiting just to be
+                            discovered.
+                        </div>
+                    </div>
+
+                    {/* STEP 2*/}
+                    <div
+                        className="step-container"
+                        ref={(elem) => {
+                            workCardRef.current[1] = elem;
+                        }}
+                    >
+                        <div className="multiple-imgs-container">
+                            <img
+                                className="frame-2-img-1"
+                                src={`${window.cdn}illustrations/howto_frame2_01.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-2-img-2"
+                                src={`${window.cdn}illustrations/howto_frame2_02.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-2-img-3"
+                                src={`${window.cdn}illustrations/howto_frame2_03.png`}
+                                alt="discover rewards"
+                            />
+                        </div>
+                        <div className="step-text">STEP 2</div>
+                        <div className="title-text">Compete in tournaments</div>
+                        <div className="description-text">
+                            Compete with players around the world and get the
+                            highest score to win.
+                        </div>
+                    </div>
+
+                    {/* STEP 3*/}
+                    <div
+                        className="step-container"
+                        ref={(elem) => {
+                            workCardRef.current[2] = elem;
+                        }}
+                    >
+                        <div className="multiple-imgs-container">
+                            <img
+                                className="frame-3-img-1"
+                                src={`${window.cdn}illustrations/howto_frame3_01.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-3-img-2"
+                                src={`${window.cdn}illustrations/tickets_02.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-3-img-3"
+                                src={`${window.cdn}illustrations/tickets_01.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-3-img-4"
+                                src={`${window.cdn}illustrations/tickets_02.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-3-img-5"
+                                src={`${window.cdn}illustrations/tickets_01.png`}
+                                alt="discover rewards"
+                            />
+                            <img
+                                className="frame-3-img-6"
+                                src={`${window.cdn}illustrations/tickets_02.png`}
+                                alt="discover rewards"
+                            />
+                        </div>
+                        <div className="step-text">STEP 3</div>
+                        <div className="title-text">Win NFTs</div>
+                        <div className="description-text">
+                            Collect tickets and stand a chance to win the NFT of
+                            your choice.
                         </div>
                     </div>
                 </div>
             </div>
-            {/* FOOTER */}
+
+            {/* THAT'S NOT ALL SECTION*/}
+            <div
+                className="thats-not-all-container d-flex mx-auto"
+                ref={dailyRewardRef}
+            >
+                <h1 className="title-text">That's not all!</h1>
+                <p className="subtitle-text">
+                    We’ve got a weekly bonus just for you.
+                </p>
+
+                <div
+                    className="get-nft-container position-relative"
+                    ref={dailyRewardCardRef}
+                >
+                    <div className="background-img-container position-absolute d-flex flex-row">
+                        <img
+                            className="left-img"
+                            src={`${window.cdn}illustrations/bonusreward_01.png`}
+                            alt="bonus-rewards"
+                        />
+                        <img
+                            className="right-img"
+                            src={`${window.cdn}illustrations/bonusreward_02.png`}
+                            alt="bonus-rewards"
+                        />
+                    </div>
+
+                    <div className="info-container position-absolute d-flex align-items-center flex-column w-100 h-100">
+                        <h2 className="title-text">
+                            We’re giving out FREE NFTs every week!
+                        </h2>
+                        <p className="subtitle-text">
+                            You heard that right! All you need to do is play any
+                            tournaments in the platform and win tickets.
+                        </p>
+                        <p className="count-down-text d-flex align-items-center justify-content-center">
+                            3 days 23 hours 15 minutes left
+                        </p>
+                        <button
+                            className="register-now-button"
+                            onClick={handleSignUp}
+                        >
+                            Register now!
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* TODO AFTER LANDING PAGE HAS DATA TO DISPLAY */}
+            {/* CHECK OUT OUR NFTS SECTION*/}
+            {/* <div className="check-out-our-nfts-container"></div> */}
+
+            {/* LOGO + ABOUT + TERMS AND CONDITIONS + JOIN COMMUNITY */}
             <Footer />
         </section>
     );

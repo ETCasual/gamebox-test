@@ -2,215 +2,209 @@
 $hero-left-off-x: 300px;
 $hero-left-off-Y: 180px;
 
-
 #landing {
-    
-    padding-top: 6em;
-    .hero {
-        overflow: hidden;
-        position: relative;
-        // min-height: 550px;
-        height: 721px;
-        width: 100vw;
-        // @media only screen and (min-width: 768px) {
-        //     min-height: 480px;
-        // }
-        background: transparent
-            linear-gradient(137deg, #302f2f 0%, #0b0b0b 100%) 0% 0% no-repeat
-            padding-box;
-        // border-radius: 17px;
-        color: white;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(20px);
-        .intro,
-        .intro,
-        .subtitle,
-        .signup {
+    .hero-flex-container {
+        .hero-text {
+            overflow: hidden;
             position: relative;
-            z-index: 1;
-        }
-        .intro
-        {
-            font-size:$fnt-sz-10;
-            font-weight: $fnt-wgt-300;
-            transform: translate($hero-left-off-x, $hero-left-off-Y);
-
-            
-            // @media only screen and (min-width: 360px) {
-            //     font-size: 0.875rem;
-            // }
-        }
-        .subtitle {
-            font-size:$fnt-sz-12;
-            font-weight: $fnt-wgt-300;
-            transform: translate($hero-left-off-x, $hero-left-off-Y);
-
-
-            // @media only screen and (min-width: 360px) {
-            //     font-size: 0.875rem;
-            // }
-        }
-        .title {
-            max-width: auto;
-            font-size: $fnt-sz-30;
-            font-weight:$fnt-wgt-600;
-            transform: translate($hero-left-off-x, $hero-left-off-Y);
-
-
-            // @media only screen and (min-width: 360px) {
-            //     font-size: 1.75rem;
-            // }
+            // min-height: 550px;
+            height: 721px;
+            width: 100vw;
             // @media only screen and (min-width: 768px) {
-            //     font-size: 2.875rem;
-            //     max-width: 480px;
+            //     min-height: 480px;
             // }
-        }
-        .signup {
-            background: linear-gradient(261deg, #fdc43d 0%, #efa500 100%);
-            box-shadow: 0px 10px 10px #d1910080;
-            border-radius: 15px;
-            min-width: 70%;
-            margin-top: 10rem;
-            @media only screen and (min-width: 768px) {
-                min-width: 35%;
-                margin-top: 1.5rem;
-            }
-            min-height: 50px;
-            font-size: 0.875rem;
-        }
-        .register-now-button {
-            background: #cc0767;
-            box-shadow: inset 0px 3px 6px #0000000f;
-            color: #ffffff;
-            border-radius: 10px;
-            font-size: $fnt-sz-14;
-            width: 247px;
-            height: 46px;
-            font-weight: $fnt-wgt-400;
-            transform: translate($hero-left-off-x, $hero-left-off-Y);
-
-
-            // min-width: 80%;
-            // @media only screen and (min-width: 768px) {
-            //     min-width: 35%;
-            // }
-            // min-height: 50px;
-        }
-        .login-button {
-            background: black;
-            color: #FF027D;
-            border-radius: 10px;
-            font-size: $fnt-sz-14;
-            width: 247px;
-            height: 40px;
-            font-weight: $fnt-wgt-400;
-            border: 2px solid #ff007c;
-            border-radius: 10px;
-            opacity: 1;
-            transform: translate($hero-left-off-x, $hero-left-off-Y);
-
-
-            // min-width: 80%;
-            // @media only screen and (min-width: 768px) {
-            //     min-width: 35%;
-            // }
-            // min-height: 50px;
-        }
-        .prize-image
-        {
-            position: absolute;
-            z-index: -1;
+            background: transparent
+                linear-gradient(137deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
+                no-repeat padding-box;
+            // border-radius: 17px;
+            color: white;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(60px);
-        }
-        .game-box-logo{
-            // transform: translate($hero-left-off-x, $hero-left-off-Y);
-       
-            transform: translate(55%, -50%);
+            transform: translateY(20px);
+            .intro,
+            .intro,
+            .subtitle,
+            .signup {
+                position: relative;
+                z-index: 1;
+            }
+            .intro {
+                font-size: $fnt-sz-10;
+                font-weight: $fnt-wgt-300;
+                transform: translate($hero-left-off-x, $hero-left-off-Y);
 
-        }
-        .icon {
-            position: absolute;
-            z-index: -1;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(60px);
-        }
-        .icon-1 {
-            bottom: 10rem;
-            @media only screen and (min-width: 786px) {
-                bottom: 0rem;
+                // @media only screen and (min-width: 360px) {
+                //     font-size: 0.875rem;
+                // }
             }
-            left: 0.25rem;
-            width: clamp(8rem, 13vw, 20rem);
-        }
-        .icon-2 {
-            bottom: -0.9rem;
-            right: 1rem;
-            @media only screen and (min-width: 786px) {
-                right: 3rem;
+            .subtitle {
+                font-size: $fnt-sz-12;
+                font-weight: $fnt-wgt-300;
+                transform: translate($hero-left-off-x, $hero-left-off-Y);
+
+                // @media only screen and (min-width: 360px) {
+                //     font-size: 0.875rem;
+                // }
             }
-            width: clamp(8rem, 13vw, 20rem);
-        }
-        .game-icon-0 {
-            width: clamp(4rem, 5vw, 7rem);
-            top: 7rem;
-            right: 2rem;
-            @media only screen and (min-width: 786px) {
-                top: 10rem;
-                right: 6rem;
+            .title {
+                max-width: auto;
+                font-size: $fnt-sz-30;
+                font-weight: $fnt-wgt-600;
+                transform: translate($hero-left-off-x, $hero-left-off-Y);
+
+                // @media only screen and (min-width: 360px) {
+                //     font-size: 1.75rem;
+                // }
+                // @media only screen and (min-width: 768px) {
+                //     font-size: 2.875rem;
+                //     max-width: 480px;
+                // }
             }
-            @media only screen and (min-width: 1200px) {
-                top: 10rem;
-                right: 10rem;
+            .signup {
+                background: linear-gradient(261deg, #fdc43d 0%, #efa500 100%);
+                box-shadow: 0px 10px 10px #d1910080;
+                border-radius: 15px;
+                min-width: 70%;
+                margin-top: 10rem;
+                @media only screen and (min-width: 768px) {
+                    min-width: 35%;
+                    margin-top: 1.5rem;
+                }
+                min-height: 50px;
+                font-size: 0.875rem;
             }
-            transform: translateY(40px) rotate(35deg);
-        }
-        .game-icon-1 {
-            width: clamp(2rem, 3vw, 5rem);
-            top: 1rem;
-            left: 1rem;
-            @media only screen and (min-width: 786px) {
-                top: 2rem;
+            .register-now-button {
+                background: #cc0767;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                color: #ffffff;
+                border-radius: 10px;
+                font-size: $fnt-sz-14;
+                width: 247px;
+                height: 46px;
+                font-weight: $fnt-wgt-400;
+                transform: translate($hero-left-off-x, $hero-left-off-Y);
+
+                // min-width: 80%;
+                // @media only screen and (min-width: 768px) {
+                //     min-width: 35%;
+                // }
+                // min-height: 50px;
+            }
+            .login-button {
+                background: black;
+                color: #ff027d;
+                border-radius: 10px;
+                font-size: $fnt-sz-14;
+                width: 247px;
+                height: 40px;
+                font-weight: $fnt-wgt-400;
+                border: 2px solid #ff007c;
+                border-radius: 10px;
+                opacity: 1;
+                transform: translate($hero-left-off-x, $hero-left-off-Y);
+
+                // min-width: 80%;
+                // @media only screen and (min-width: 768px) {
+                //     min-width: 35%;
+                // }
+                // min-height: 50px;
+            }
+            .prize-image {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(60px);
+            }
+            .game-box-logo {
+                // transform: translate($hero-left-off-x, $hero-left-off-Y);
+
+                transform: translate(55%, -50%);
+            }
+            .icon {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(60px);
+            }
+            .icon-1 {
+                bottom: 10rem;
+                @media only screen and (min-width: 786px) {
+                    bottom: 0rem;
+                }
+                left: 0.25rem;
+                width: clamp(8rem, 13vw, 20rem);
+            }
+            .icon-2 {
+                bottom: -0.9rem;
+                right: 1rem;
+                @media only screen and (min-width: 786px) {
+                    right: 3rem;
+                }
+                width: clamp(8rem, 13vw, 20rem);
+            }
+            .game-icon-0 {
+                width: clamp(4rem, 5vw, 7rem);
+                top: 7rem;
+                right: 2rem;
+                @media only screen and (min-width: 786px) {
+                    top: 10rem;
+                    right: 6rem;
+                }
+                @media only screen and (min-width: 1200px) {
+                    top: 10rem;
+                    right: 10rem;
+                }
+                transform: translateY(40px) rotate(35deg);
+            }
+            .game-icon-1 {
+                width: clamp(2rem, 3vw, 5rem);
+                top: 1rem;
+                left: 1rem;
+                @media only screen and (min-width: 786px) {
+                    top: 2rem;
+                    left: 3rem;
+                }
+            }
+            .game-icon-2 {
+                width: clamp(5rem, 6vw, 8rem);
+                bottom: -0.5rem;
+                left: 1rem;
+                @media only screen and (min-width: 786px) {
+                    left: 12rem;
+                }
+            }
+            .game-icon-3 {
+                width: clamp(4rem, 5vw, 7rem);
+                top: 5rem;
                 left: 3rem;
+                @media only screen and (min-width: 786px) {
+                    left: 7rem;
+                    top: 6.5rem;
+                }
             }
-        }
-        .game-icon-2 {
-            width: clamp(5rem, 6vw, 8rem);
-            bottom: -0.5rem;
-            left: 1rem;
-            @media only screen and (min-width: 786px) {
-                left: 12rem;
+            .game-icon-4 {
+                width: clamp(2rem, 3vw, 5rem);
+                top: 0.5rem;
+                right: 1rem;
+                @media only screen and (min-width: 786px) {
+                    top: 4rem;
+                    right: 15rem;
+                }
             }
-        }
-        .game-icon-3 {
-            width: clamp(4rem, 5vw, 7rem);
-            top: 5rem;
-            left: 3rem;
-            @media only screen and (min-width: 786px) {
-                left: 7rem;
-                top: 6.5rem;
-            }
-        }
-        .game-icon-4 {
-            width: clamp(2rem, 3vw, 5rem);
-            top: 0.5rem;
-            right: 1rem;
-            @media only screen and (min-width: 786px) {
-                top: 4rem;
-                right: 15rem;
-            }
-        }
-        .game-icon-5 {
-            width: clamp(5rem, 6vw, 8rem);
-            top: 17rem;
-            right: 3rem;
-            @media only screen and (min-width: 786px) {
-                top: 15rem;
+            .game-icon-5 {
+                width: clamp(5rem, 6vw, 8rem);
+                top: 17rem;
                 right: 3rem;
+                @media only screen and (min-width: 786px) {
+                    top: 15rem;
+                    right: 3rem;
+                }
             }
+        }
+        .hero-cards {
+            background: red;
         }
     }
     .works {
@@ -375,5 +369,424 @@ $hero-left-off-Y: 180px;
                 margin: 0 auto;
             }
         }
+    }
+}
+
+section.landing-container {
+    padding-top: 60px; //Same for both mobile and web
+    .hero-container {
+        max-width: 904px;
+        inset: 0;
+        @media only screen and (max-width: 425px) and (min-width: 320px) {
+            flex-direction: column-reverse;
+            width: max(88.33%, 278px);
+        }
+        @media only screen and (min-width: 425px) {
+            flex-direction: row;
+            width: 66.18%;
+        }
+        .hero-text-container {
+            @media only screen and (max-width: 425px) and (min-width: 320px) {
+                width: 100%;
+            }
+            @media only screen and (min-width: 425px) {
+                // width: calc(1 / 3 * 100%);
+                width: 33.333333%;
+            }
+            margin-top: 159px;
+            .intro-text {
+                font-size: $fnt-sz-10;
+                letter-spacing: 0px;
+                height: 14px;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-bottom: 6px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-bottom: 2px;
+                }
+            }
+            .title-text {
+                letter-spacing: 0px;
+                font-weight: bold;
+                overflow-x: overlay;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    line-height: 32px;
+                    font-size: $fnt-sz-24;
+                    margin-bottom: 9px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-bottom: 2px;
+                    line-height: 41px;
+                    width: 275px;
+                    height: 82px;
+                    font-size: $fnt-sz-30;
+                }
+            }
+            .subtitle-text {
+                width: 260px;
+                height: 77px;
+                font-size: $fnt-sz-12;
+                letter-spacing: 0px;
+                line-height: 20px;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    margin-bottom: 33px;
+                }
+                @media only screen and (min-width: 425px) {
+                    margin-bottom: 59px;
+                }
+            }
+            button {
+                width: 100%;
+                height: 46px; // Same for both mobile and desktop
+                border-radius: 10px;
+                font-size: $fnt-sz-14;
+                font-weight: bold;
+                padding: 0;
+                margin: 0;
+            }
+            .register-now-button {
+                background: #f20086 0% 0% no-repeat padding-box;
+                color: #ffffff;
+                margin-bottom: 16px;
+            }
+            .login-button {
+                border: 1px solid #f20086;
+                color: #ff027d;
+            }
+        }
+        .hero-image-container {
+            // width: calc(2 / 3 * 100%);
+            width: 66.666667%;
+            .hero-image {
+                width: clamp(126px, 35%, 290px);
+                height: clamp(126px, 35%, 290px);
+                border-radius: 10px;
+                img {
+                    margin-top: 20px;
+                    width: clamp(284px, 88.17vw, 350px);
+                    // height: 350px;
+                    height: clamp(284px, 88.17vw, 350px);
+                }
+            }
+            // TODO: card anim
+            .first-image {
+                z-index: 3;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    display: none !important;
+                }
+                @media only screen and (min-width: 425px) {
+                    z-index: 2;
+                    top: 145px;
+                    left: min(20.25%, 112px);
+                }
+                &:hover {
+                    z-index: 5;
+                }
+            }
+            .second-image {
+                z-index: 1;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    display: none !important;
+                }
+                @media only screen and (min-width: 425px) {
+                    z-index: 2;
+                    top: 34px;
+                    left: min(44.66%, 247px);
+                }
+                &:hover {
+                    z-index: 5;
+                }
+            }
+            .third-image {
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    display: none !important;
+                }
+                @media only screen and (min-width: 425px) {
+                    z-index: 2;
+                    top: 206px;
+                    left: min(67.81%, 375px);
+                }
+                &:hover {
+                    z-index: 5;
+                }
+            }
+        }
+    }
+    .how-does-it-work-container {
+        flex-direction: column;
+        max-width: 904px;
+        inset: 0;
+        @media only screen and (max-width: 425px) and (min-width: 320px) {
+            width: max(88.33%, 278px);
+            margin-top: 74px;
+        }
+        @media only screen and (min-width: 425px) {
+            width: 66.18%;
+            margin-top: 208px;
+        }
+        .title-text {
+            font-size: $fnt-sz-18;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .subtitle-text {
+            font-size: $fnt-sz-14;
+        }
+        .multiple-steps-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            @media only screen and (max-width: 425px) and (min-width: 320px) {
+                flex-direction: column;
+                gap: 16px;
+            }
+            @media only screen and (min-width: 425px) {
+                flex-direction: row;
+                gap: 17px;
+            }
+            .step-container {
+                width: 290px;
+                height: 320px;
+                border-radius: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                background: transparent
+                    linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 100%) 0% 0%
+                    no-repeat padding-box;
+                // margin-left: 8.5px;
+                // margin-right: 8.5px;
+                .multiple-imgs-container {
+                    position: relative;
+                    height: 208px;
+                    img {
+                        position: absolute;
+                    }
+                    .frame-1-img-1 {
+                        width: 164px;
+                        height: 128px;
+                        top: 15px;
+                        left: 1px;
+                        transform: scaleX(-1);
+                    }
+                    .frame-1-img-2 {
+                        width: 159px;
+                        height: 159px;
+                        top: 55px;
+                        left: 90px;
+                    }
+                    .frame-2-img-1 {
+                        width: 160px;
+                        height: 160px;
+                        top: 72px;
+                        left: 10px;
+                        z-index: 2;
+                    }
+                    .frame-2-img-2 {
+                        width: 128px;
+                        height: 128px;
+                        top: 40px;
+                        left: 112px;
+                    }
+                    .frame-2-img-3 {
+                        width: 90px;
+                        height: 90px;
+                        top: 20px;
+                        left: 34px;
+                    }
+                    .frame-3-img-1 {
+                        width: 164px;
+                        height: 164px;
+                        top: 38px;
+                        left: 43px;
+                        box-shadow: 0px 5px 10px #00000080;
+                        z-index: 2;
+                    }
+                    .frame-3-img-2 {
+                        width: 68px;
+                        height: 68px;
+                        transform: matrix(-0.89, 0.45, -0.45, -0.89, 0, 0);
+                        box-shadow: 0px 3px 6px #00000029;
+                        top: 21.9px;
+                        left: -0.41px;
+                    }
+                    .frame-3-img-3 {
+                        width: 39px;
+                        height: 39px;
+                        top: 15.84px;
+                        left: 93.1px;
+                        transform: matrix(-0.05, 1, -1, -0.05, 0, 0);
+                        filter: blur(1px);
+                    }
+                    .frame-3-img-4 {
+                        width: 49px;
+                        height: 49px;
+                        top: 13.64px;
+                        left: 187.26px;
+                        transform: matrix(0.97, 0.26, -0.26, 0.97, 0, 0);
+                        box-shadow: 0px 3px 6px #00000029;
+                    }
+                    .frame-3-img-5 {
+                        width: 88px;
+                        height: 88px;
+                        top: 85.12px;
+                        left: 19.03px;
+                        transform: matrix(0.5, -0.87, 0.87, 0.5, 0, 0);
+                        box-shadow: 0px 5px 10px #00000029;
+                    }
+                    .frame-3-img-6 {
+                        width: 74px;
+                        height: 74px;
+                        top: 104.18px;
+                        left: 147.91px;
+                        transform: matrix(-0.99, 0.16, -0.16, -0.99, 0, 0);
+                        box-shadow: 0px 3px 6px #00000080;
+                        z-index: 3;
+                    }
+                }
+                .step-text {
+                    font-size: $fnt-sz-10;
+                    color: #ffffff;
+                    line-height: 20px;
+                    height: 14px;
+                    margin-bottom: 8px;
+                }
+                .title-text {
+                    font-size: $fnt-sz-14;
+                    font-weight: bold;
+                    color: #ffffff;
+                    margin-bottom: 8px;
+                }
+                .description-text {
+                    font-size: $fnt-sz-12;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+    .thats-not-all-container {
+        flex-direction: column;
+        max-width: 904px;
+        inset: 0;
+        margin-bottom: 111px;
+        @media only screen and (max-width: 425px) and (min-width: 320px) {
+            width: max(88.33%, 278px);
+            margin-top: 80px;
+        }
+        @media only screen and (min-width: 425px) {
+            margin-top: 54px;
+            width: 66.18%;
+        }
+        .title-text {
+            font-size: $fnt-sz-18;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .subtitle-text {
+            font-size: $fnt-sz-14;
+        }
+        .get-nft-container {
+            width: 100%;
+            height: 276px;
+            .background-img-container {
+                height: 100%;
+                width: 100%;
+                align-items: center;
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    overflow: visible;
+                }
+                @media only screen and (min-width: 425px) {
+                    overflow: hidden;
+                }
+                .left-img {
+                    position: absolute;
+                    @media only screen and (max-width: 425px) and (min-width: 320px) {
+                        z-index: 2;
+                        width: 124px;
+                        top: 0px;
+                        left: -55px;
+                    }
+                    @media only screen and (min-width: 425px) {
+                        width: 373px;
+                        left: -45px;
+                    }
+                }
+                .right-img {
+                    position: absolute;
+                    transform: matrix(0.99, 0.14, -0.14, 0.99, 0, 0);
+                    @media only screen and (max-width: 425px) and (min-width: 320px) {
+                        z-index: 2;
+                        width: 80px;
+                        height: 80px;
+                        right: 0px;
+                        bottom: -65px;
+                    }
+                    @media only screen and (min-width: 425px) {
+                        width: 213px;
+                        height: 213px;
+                        right: 43.41px;
+                    }
+                }
+            }
+            .info-container {
+                @media only screen and (max-width: 425px) and (min-width: 320px) {
+                    width: 100%;
+                    background: transparent
+                        linear-gradient(131deg, #333333 0%, #0f0f0f 100%) 0% 0%
+                        no-repeat padding-box;
+                    box-shadow: 0px 5px 10px #00000073;
+                    border-radius: 10px;
+                }
+                @media only screen and (min-width: 425px) {
+                }
+                .title-text {
+                    margin-bottom: 16px;
+                    font-size: $fnt-sz-18;
+                    font-weight: bold;
+                    text-align: center;
+                    @media only screen and (max-width: 425px) and (min-width: 320px) {
+                        width: 210px;
+                        margin-top: 20px;
+                    }
+                    @media only screen and (min-width: 425px) {
+                        margin-top: 32px;
+                    }
+                }
+                .subtitle-text {
+                    width: 278px;
+                    height: 37px;
+                    font-size: $fnt-sz-12;
+                    text-align: center;
+                    margin-bottom: 26px;
+                }
+                .count-down-text {
+                    width: 300px;
+                    height: 42px;
+                    background: #1d1d1d 0% 0% no-repeat padding-box;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border-radius: 10px;
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    margin-bottom: 29px;
+                    font-size: $fnt-sz-12;
+                    font-weight: bold;
+                    color: #00c1b9;
+                    text-align: center;
+                }
+                .register-now-button {
+                    width: 247px;
+                    height: 46px;
+                    background: #cc0767 0% 0% no-repeat padding-box;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border-radius: 10px;
+                    font-size: $fnt-sz-14;
+                    font-weight: bold;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+    .check-out-our-nfts-container {
+        background: red;
     }
 }

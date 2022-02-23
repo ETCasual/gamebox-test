@@ -9,7 +9,7 @@ import Login from "Components/Landing/LoginModal/LoginModal.component";
 import Content from "Components/Landing/Content/Content.component";
 
 import BlockedUserModal from "Components/Landing/BlockedUserModal/BlockedUserModal.component";
-import BetaModal from "Components/Landing/BetaModal/BetaModal.component";
+// import BetaModal from "Components/Landing/BetaModal/BetaModal.component";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,7 +24,7 @@ const Index = () => {
     let dailyRewardCardRef = useRef(null);
     let iconsRef = useRef([]);
 
-    const [betaModal, setModal] = useState(false);
+    // const [betaModal, setModal] = useState(false);
     const [blockedArchivedModal, setBlockedArchivedModal] = useState(
         sessionStorage.getItem("errorType") !== null ? true : false
     );
@@ -173,10 +173,10 @@ const Index = () => {
 
     return (
         <>
-            {/* NAV */}
+            {/* TOP NAVIGATION BAR */}
             <Navbar handleSignUp={handleOnClickSignUp} />
 
-            {/* CONTENT */}
+            {/* MIDDLE CONTENT */}
             <Content
                 handleSignUp={handleOnClickSignUp}
                 heroRef={heroRef}
@@ -187,11 +187,11 @@ const Index = () => {
                 dailyRewardCardRef={dailyRewardCardRef}
             />
 
-            {/* LOGIN MODAL */}
+            {/* BOTTOM LOGIN MODAL */}
             <Login loginRef={loginRef} loginWrapperRef={loginWrapperRef} />
 
             {/* BETA POPUP MODAL */}
-            {betaModal && <BetaModal setModal={setModal} />}
+            {/* {betaModal && <BetaModal setModal={setModal} />} */}
 
             {/* BLOCKED USER MODAL */}
             {blockedArchivedModal && (
