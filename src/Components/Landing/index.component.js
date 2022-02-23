@@ -9,7 +9,7 @@ import Login from "Components/Landing/LoginModal/LoginModal.component";
 import Content from "Components/Landing/Content/Content.component";
 
 import BlockedUserModal from "Components/Landing/BlockedUserModal/BlockedUserModal.component";
-import BetaModal from "Components/Landing/BetaModal/BetaModal.component";
+// import BetaModal from "Components/Landing/BetaModal/BetaModal.component";
 
 gsap.registerPlugin(ScrollTrigger);
 
