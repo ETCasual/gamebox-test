@@ -44,7 +44,6 @@ const Settings = () => {
                                     }}
                                 >
                                     <img
-                                        width="42"
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />

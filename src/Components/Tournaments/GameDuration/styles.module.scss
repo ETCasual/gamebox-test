@@ -1,11 +1,16 @@
 .game-card {
     position: relative;
     width: 100%;
-    min-height: 14.313rem;
+    min-height: 11.188rem;
+    @include media-min($md) {
+        min-height: 14.313rem;
+    }
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
     .transparent-overlay {
         width: 90%;
         margin: 0 auto 0.5rem auto;
@@ -13,27 +18,35 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
     }
-    .tournament-end-in-text {
-        font-size: $fnt-sz-12;
-    }
     .game-title {
-        font-size: $fnt-sz-14;
+        font-size: $fnt-sz-10;
+        @include media-min($md) {
+            font-size: $fnt-sz-14;
+        }
         font-weight: $fnt-wgt-700;
     }
+    .tournament-end-in-text {
+        font-size: $fnt-sz-8;
+        @include media-min($md) {
+            font-size: $fnt-sz-12;
+        }
+    }
     .game-duration {
-        font-size: $fnt-sz-14;
+        font-size: $fnt-sz-10;
+        @include media-min($md) {
+            font-size: $fnt-sz-14;
+        }
         font-weight: $fnt-wgt-700;
     }
 }
 .join {
     width: 100%;
-    background: transparent linear-gradient(259deg, #cc0767 0%, #ff007c 100%) 0%
-        0% no-repeat padding-box;
+    background: linear-gradient(259deg, #cc0767 0%, #ff007c 100%);
     box-shadow: inset 0px 3px 6px #0000000f;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     color: #ffffff;
-    min-height: 48px;
-    font-weight: bold;
+    min-height: 3rem;
+    font-weight: $fnt-wgt-700;
     font-size: $fnt-sz-14;
 }

@@ -1,15 +1,23 @@
+import { useEffect } from "react";
+
 const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
+
     return (
-        <div className="container-fluid d-flex align-items-center justify-content-center modal-pop ">
+        <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
             <div className="modal-body-small position-relative">
                 <img
                     className="close-button"
                     onClick={handleInstructionsCloseBtn}
                     width="38"
-                    src={`${window.cdn}buttons/button_close_01.png`}
+                    src={`${window.cdn}icon_close.png`}
                     alt="close-btn"
                 />
-                <div className="col-12">
+                <div className="col-12 p-3">
                     <h5 className="title">How to win prizes?</h5>
                     <p className="subtitle">Follow these 4 simple steps.</p>
                     <ul className="my-4 list-unstyled">

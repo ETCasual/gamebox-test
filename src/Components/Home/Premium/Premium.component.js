@@ -136,7 +136,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                           data?.prizeId
                                                       )
                                                   )?.toLocaleString() || "-"
-                                              } tokens remaining`
+                                              } tickets remaining`
                                     }`}
                                 </div>
                             </Link>
