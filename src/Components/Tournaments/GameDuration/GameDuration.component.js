@@ -88,7 +88,7 @@ const GameDuration = ({
 
     return (
         <div
-            className={`col-8 col-md-6 col-lg-5 col-xl-4 mb-3 ${
+            className={`col-8 col-md-6 col-lg-5 col-xl-5 mb-3 ${
                 index > 0 ? "px-2" : ""
             } ${isGameAvailable ? "" : "opacity-0-5"}`}
             style={{

@@ -200,7 +200,7 @@ const Index = ({ match }) => {
                             <div className="row justify-content-center">
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 px-0 full-wrapper">
                                     {/* BACK BUTTON */}
-                                    <div className="d-flex align-items-center back-button mb-3 mb-md-5 px-3">
+                                    <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
                                         <Link
                                             className="d-flex align-items-center"
                                             onClick={handleHomeNavLink}
@@ -221,7 +221,7 @@ const Index = ({ match }) => {
                                         <span className="ml-2">Back</span>
                                     </div>
                                     {/* TICKETS AND POOL INFO */}
-                                    <div className="col-12 px-3 d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-lg-5">
+                                    <div className="col-12 px-3 d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
                                         <img
                                             className="prize-img mr-3"
                                             src={currentPrize?.prizeBG}
