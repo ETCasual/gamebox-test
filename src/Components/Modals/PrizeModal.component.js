@@ -70,7 +70,7 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                     width={28}
                                     className="close-btn"
                                     onClick={() => handleBackButton(e?.prizeId)}
-                                    src={`${window.cdn}icon_close.png`}
+                                    src={`${window.cdn}buttons/button_close.png`}
                                     alt="close-btn"
                                 />
                             </div>

@@ -37,7 +37,8 @@ const Profile = ({
                             {/* PROFILE INFO */}
                             <div className="col-12 text-center">
                                 <div className="profile-info">
-                                    <img className="p-2"
+                                    <img
+                                        className="p-2"
                                         onError={(e) => defaultUserImage(e)}
                                         src={
                                             user
@@ -71,7 +72,7 @@ const Profile = ({
                                     <div className="gem-wrapper">
                                         <img
                                             width="24"
-                                            src={`${window.cdn}gems/gems.png`}
+                                            src={`${window.cdn}assets/additional_gems_01.png`}
                                             alt="gems"
                                         />
                                         <span className="gems">
@@ -79,7 +80,7 @@ const Profile = ({
                                         </span>
                                         <img
                                             width="22"
-                                            src={`${window.cdn}buttons/button_addgems.png`}
+                                            src={`${window.cdn}buttons/button_plus.png`}
                                             alt="add-gems"
                                         />
                                     </div>
@@ -93,12 +94,10 @@ const Profile = ({
                                 <div className="gem-wrapper">
                                     <img
                                         width="24"
-                                        src={`${window.cdn}gems/gems.png`}
-                                        alt="gems"
+                                        src={`${window.cdn}assets/wallet_01.png`}
+                                        alt="wallet"
                                     />
-                                    <span className="gems">
-                                        {user.gems}
-                                    </span>
+                                    <span className="gems">4.00</span>
                                 </div>
                             </div>
                             {/* MULTIPLIER */}
@@ -142,9 +141,9 @@ const Profile = ({
                                                     {getCurrentLevelExp(
                                                         user,
                                                         ranks
-                                                    )?.toLocaleString() + ' exp'}
+                                                    )?.toLocaleString() +
+                                                        " exp"}
                                                 </span>{" "}
-                                                
                                             </div>
                                         </div>
                                         <div className="col-12 px-0">
@@ -187,10 +186,11 @@ const Profile = ({
                             </div>
                             {/* INVITE FRIENDS */}
                             <div className="col-12 invite-friends-holder mt-4">
-                                <div className="team d-flex"
+                                <div
+                                    className="team d-flex align-items-center justify-content-between"
                                     onClick={handleTeamPanel}
                                 >
-                                    <div className="col-12 col-md p-0 pb-4">
+                                    <div className="col-7 col-md-6 p-0 pb-4">
                                         <p className="team-title">
                                             Invite Friends
                                         </p>
@@ -208,18 +208,18 @@ const Profile = ({
                                                 account with us.`}
                                         </p>
                                     </div>
-                                    <div className="d-none col-md-5 px-0 d-flex align-items-end justify-content-end">
+                                    <div className="col-4 col-md-6 px-0 d-flex align-items-end justify-content-end">
                                         <img
-                                            className="img-fluid bg-d"
-                                            src={`${window.cdn}illustrations/friends_01.png`}
+                                            className="img-fluid bg d-none d-md-block"
+                                            src={`${window.cdn}assets/model_friend_01.png`}
+                                            alt="invite"
+                                        />
+                                        <img
+                                            className="img-fluid bg"
+                                            src={`${window.cdn}assets/model_friend_02.png`}
                                             alt="invite"
                                         />
                                     </div>
-                                    <img
-                                        className="img-fluid bg-m d-md-none"
-                                        src={`${window.cdn}illustrations/friends_01.png`}
-                                        alt="invite"
-                                    />
                                 </div>
                             </div>
                             {/* HIGHSCORE & REWARDS */}

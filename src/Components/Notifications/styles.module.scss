@@ -1,5 +1,5 @@
 #notification {
-    padding: 8rem 0;
+    padding: 6rem 0;
     .main-title {
         font-size: $fnt-sz-18;
         font-weight: $fnt-wgt-700;
@@ -10,7 +10,7 @@
     }
     .mt-primary {
         margin-top: 0.6875rem;
-        @media only screen and (min-width: 768px) {
+        @include media-min($md) {
             margin-top: 1.5rem;
         }
     }

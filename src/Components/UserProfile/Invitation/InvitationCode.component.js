@@ -42,7 +42,7 @@ const Invitation = ({ handleBackButton }) => {
                                 >
                                     <img
                                         width="32"
-                                        src={`${window.cdn}icon_close.png`}
+                                        src={`${window.cdn}buttons/button_close.png`}
                                         alt="close-btn"
                                     />
                                 </div>

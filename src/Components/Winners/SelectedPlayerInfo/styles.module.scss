@@ -1,22 +1,32 @@
 // SELECTED PLAYER INFO COMPONENT
 #selected-player-info {
     position: relative;
-    margin-top: 6.25rem;
+    margin-top: 6rem;
     .profile-info {
         img {
             border-radius: 100%;
-            width: 9.375rem;
-            height: 9.375rem;
+            width: 6.813rem;
+            height: 6.813rem;
+            @include media-min($md) {
+                width: 9.375rem;
+                height: 9.375rem;
+            }
             object-fit: contain;
             border: 5px solid #2a2a2a;
         }
         h2 {
-            font-size: $fnt-sz-18;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
             font-weight: $fnt-wgt-600;
             text-transform: capitalize;
         }
         p {
-            font-size: $fnt-sz-14;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
             color: #868686;
         }
     }
@@ -24,25 +34,41 @@
         background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
         border-radius: 10px;
         position: relative;
-        min-height: 10rem;
+        height: 6.8rem;
+        @include media-min($md) {
+            height: 10rem;
+        }
         .multiplier-info {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-16;
+            }
             span {
                 color: #00c1b9;
             }
         }
         .level {
             .current-level {
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
             }
             .exp {
-                font-size: $fnt-sz-14;
-                background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                    background: linear-gradient(
+                        120deg,
+                        #302f2f 0%,
+                        #0b0b0b 100%
+                    );
+                    min-height: 2.25rem;
+                    padding: 0.1rem 1.1rem;
+                }
                 color: #868686;
                 border-radius: 17px;
                 min-width: 6.5rem;
-                min-height: 2.25rem;
-                padding: 0.1rem 1.1rem;
                 .player-exp {
                     font-weight: $fnt-wgt-700;
                 }
@@ -51,7 +77,10 @@
         .progress {
             margin-top: 1rem;
             width: 100%;
-            height: 2rem;
+            height: 1.063rem;
+            @include media-min($md) {
+                height: 2rem;
+            }
             border-radius: 2.313rem;
             background-color: #f4f4f4;
             position: relative;
@@ -64,7 +93,10 @@
     }
     .high-score {
         .title {
-            font-size: $fnt-sz-18;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
             font-weight: $fnt-wgt-600;
         }
         .highscore-card {
@@ -78,21 +110,26 @@
                 margin-bottom: 0;
             }
             img {
-                border: 2px solid white;
                 border-radius: 7px;
-                width: 4.75rem;
-                @media only screen and (min-width: 991px) {
+                width: 3.5rem;
+                @include media-min($lg) {
                     width: 100%;
                 }
-                @media only screen and (min-width: 1200px) {
+                @include media-min($xl) {
                     width: 4.75rem;
                 }
             }
             .game-title {
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
             }
             .score {
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
                 color: #14daa7;
                 display: flex;
                 align-self: flex-start;

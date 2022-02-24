@@ -7,8 +7,6 @@
             width: 140px;
             height: 140px;
             object-fit: contain;
-            // border: 6.5px solid var(--white);
-            // box-shadow: 0px 12px 15px 0px #cbcbcb;
             background: transparent
                 linear-gradient(135deg, #393939 0%, #171717 100%) 0% 0%
                 no-repeat padding-box;
@@ -181,7 +179,6 @@
             padding: 1.5rem;
             padding-bottom: 0;
             @media only screen and (min-width: 768px) {
-                // padding-bottom: 3rem;
                 min-height: 15.375em;
             }
             position: relative;
@@ -220,22 +217,16 @@
                 font-size: $fnt-sz-14;
                 line-height: 1.7;
                 width: auto;
-                // @media only screen and (min-width: 768px) {
-                //     width: 35ch;
-                // }
             }
-            .bg-d {
-                width: 200px;
-            }
-            .bg-m {
-                position: absolute;
-                top: 1.5em;
-                right: 2em;
-                width: 80px;
-                @media only screen and (min-width: 360px) {
-                    top: 1em;
-                    width: 100px;
+            .bg {
+                width: 100px;
+                height: 140px;
+                @include media-min($md) {
+                    width: 136px;
+                    height: 200px;
                 }
+                object-fit: cover;
+                object-position: top;
             }
         }
         .invite-btn {

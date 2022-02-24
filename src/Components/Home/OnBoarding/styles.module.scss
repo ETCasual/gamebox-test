@@ -61,34 +61,38 @@
                             position: absolute;
                             z-index: 2;
                             top: 5.5rem;
-                            left: 25%;
-                            width: 7rem;
-                            @media only screen and (min-width: 1200px) {
-                                left: 37%;
+                            left: 32%;
+                            @media only screen and (min-width: 768px) {
+                                left: 36%;
                             }
+                            @media only screen and (min-width: 1200px) {
+                                left: 40%;
+                            }
+                            width: 7rem;
                             transform: translate(-50%, -50%);
                         }
                         .position-alter-2-slide-3 {
                             position: relative;
                             z-index: 1;
                             top: -2rem;
-                            right: -3rem;
+                            left: 28%;
                             width: 6rem;
+                            @media only screen and (min-width: 768px) {
+                                left: 14%;
+                            }
                             @media only screen and (min-width: 1200px) {
                                 width: 7.188rem;
-                                right: -5rem;
+                                left: 13%;
                             }
                         }
                         .position-alter-3-slide-3 {
                             position: absolute;
                             z-index: 0;
                             top: 3rem;
-                            left: 7rem;
-                            right: unset;
+                            left: 50%;
                             width: 4rem;
                             @media only screen and (min-width: 1200px) {
                                 width: 5.063rem;
-                                right: 15rem;
                             }
                             transform: translate(-50%, -50%);
                         }

@@ -7,10 +7,7 @@
         padding-top: 6rem;
     }
     .leaderboard-background-wrapper {
-        // height: 77vh;
-        // @include media-min($md) {
-        //     height: 80vh;
-        // }
+        height: 80vh;
         overflow: hidden;
         border-radius: 10px;
         .leaderboard-background {

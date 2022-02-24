@@ -45,7 +45,7 @@ const Header = ({
     };
 
     const getWalletAmount = () => {
-        const amount = 99999;
+        const amount = 4;
         return amount.toFixed(2).toLocaleString();
     };
 

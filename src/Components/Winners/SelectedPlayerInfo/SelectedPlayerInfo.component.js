@@ -52,7 +52,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                 <span className="ml-2">Back</span>
                             </div>
                             {/* PLAYER, LEVEL, EXP & MULTIPLIER */}
-                            <div className="col-12">
+                            <div className="col-12 mb-2 mb-md-0">
                                 <div className="row">
                                     {/* PLAYER INFO */}
                                     <div className="col-12 text-center">
@@ -72,8 +72,8 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                     </div>
                                     {/* PLAYER MULTIPLIER */}
                                     <div className="col-12 mt-3">
-                                        <div className="multiplier p-4 d-flex flex-column align-items-start">
-                                            <p className="mb-3 multiplier-info">
+                                        <div className="multiplier p-3 p-md-4 d-flex flex-column align-items-start">
+                                            <p className="mb-md-3 multiplier-info">
                                                 Multiplier{" "}
                                                 <span>
                                                     {getCurrentMultiplier(
@@ -85,7 +85,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                             </p>
                                             {/* LEVEL */}
                                             <div className="w-100">
-                                                <div className="level mb-2 d-flex align-items-center justify-content-between">
+                                                <div className="level mb-0 mb-md-2 d-flex align-items-center justify-content-between">
                                                     <p className="mb-0 current-level">
                                                         <span>
                                                             {getCurrentLevel(
@@ -94,7 +94,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                             )}
                                                         </span>
                                                     </p>
-                                                    <div className="mb-0 d-flex align-items-center exp">
+                                                    <div className="mb-0 d-flex align-items-center justify-content-end exp">
                                                         <span className="player-exp">
                                                             {playerDetailsData?.exp >
                                                             ranksList[
@@ -141,7 +141,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                 </div>
                             </div>
                             {/* HIGHSCORES */}
-                            <div className="col-12 high-score mt-5">
+                            <div className="col-12 high-score mt-4 mt-md-5">
                                 <div className="row">
                                     <div className="col-12">
                                         <p className="title mb-4">Highscores</p>
@@ -153,7 +153,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                             key={`highscore-${i}`}
                                             className="col-12"
                                         >
-                                            <div className="row mb-4 px-3 align-items-center justify-content-between highscore-card">
+                                            <div className="row mb-3 mb-md-4 px-3 align-items-center justify-content-between highscore-card">
                                                 <div className="col-2 col-xl-1 px-0">
                                                     <img
                                                         className="img-fluid"
@@ -161,7 +161,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                         alt="game"
                                                     />
                                                 </div>
-                                                <div className="col-10 col-xl-11 game-details d-flex flex-column align-items-start justify-content-end">
+                                                <div className="col-10 col-xl-11 game-details d-flex flex-column align-items-start justify-content-center justify-content-md-end">
                                                     <p className="game-title mb-2">
                                                         {card.gameTitle}
                                                     </p>
