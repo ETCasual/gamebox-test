@@ -153,15 +153,17 @@ const Leaderboard = ({
                 leaderBoardGameInfoRef.current &&
                 readyTournamentButtonRef.current
             ) {
-                console.log(
-                    leaderBoardBackgroundRef.current.clientHeight -
-                        leaderBoardGameInfoRef.current.clientHeight -
-                        readyTournamentButtonRef.current.clientHeight
-                );
+                leaderBoardBackgroundRef.current.style.height =
+                    window.innerWidth > 1200
+                        ? `${window.innerHeight - 60 * 2.8}px`
+                        : window.innerWidth >= 768 && window.innerWidth <= 1024
+                        ? "60vh"
+                        : "75vh";
                 leaderboardRef.current.style.height = `${
                     leaderBoardBackgroundRef.current.clientHeight -
                     leaderBoardGameInfoRef.current.clientHeight -
-                    readyTournamentButtonRef.current.clientHeight
+                    readyTournamentButtonRef.current.clientHeight +
+                    1
                 }px`;
             }
         }
