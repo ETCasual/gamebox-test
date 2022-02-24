@@ -57,11 +57,16 @@ const FortuneWheel = ({
         window.addEventListener("resize", handleResize);
 
         function handleResize() {
-            const elem = document.querySelector(".full-wrapper")?.offsetHeight;
+            const minus = window.innerWidth < 1200 ? 100 : 85;
+            const mainElemHeight =
+                window.innerWidth < 1200
+                    ? document.querySelector(".full-wrapper")?.offsetHeight
+                    : window.innerHeight - minus;
+            const height = mainElemHeight;
             setModalHeight({
                 windowWidth: window.innerWidth,
-                wrapper: (window.innerWidth >= 1200 ? 25 : 0) + elem,
-                cols: window.innerWidth < 1200 ? "auto" : elem + 25,
+                wrapper: height,
+                cols: window.innerWidth < 1200 ? "auto" : height,
             });
             const col2 = document.querySelector(".wrapper-col:nth-child(2)");
             const col3 = document.querySelector(".wrapper-col:nth-child(3)");
@@ -267,7 +272,7 @@ const FortuneWheel = ({
                                         <img
                                             className="mb-2"
                                             width={14}
-                                            src={`${window.cdn}icons/arrow-top.png`}
+                                            src={`${window.cdn}icons/icon_arrow_up.png`}
                                             alt="arrow-top"
                                         />
                                         <p className=" mb-0">

@@ -464,7 +464,7 @@ const Index = ({ match }) => {
                                                             </p>
                                                             <img
                                                                 className="earn-more-tickets-img"
-                                                                src={`${window.cdn}icons/spinner_column.png`}
+                                                                src={`${window.cdn}spinner/spinner_column_01.png`}
                                                                 alt="earn-more-tickets"
                                                             />
                                                         </div>
