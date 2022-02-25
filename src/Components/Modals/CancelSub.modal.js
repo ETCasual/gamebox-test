@@ -6,7 +6,7 @@ const CancelSubModalPopup = ({ setCancelModal }) => {
                     className="close-button"
                     onClick={() => setCancelModal(false)}
                     width="38"
-                    src={`${window.cdn}buttons/button_close_01.png`}
+                    src={`${window.cdn}buttons/button_close.png`}
                     alt="close-btn"
                 />
                 <div className="col-12">
