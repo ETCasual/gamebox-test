@@ -46,21 +46,21 @@ const Content = ({
                     <div className="first-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
                             ref={(elem) => (iconsRef.current[0] = elem)}
-                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_1.png"
+                            src={`${window.cdn}temp_img/sample_nft_1.png`}
                             alt="Sample NFT"
                         />
                     </div>
                     <div className="second-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
                             ref={(elem) => (iconsRef.current[1] = elem)}
-                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_2.png"
+                            src={`${window.cdn}temp_img/sample_nft_2.png`}
                             alt="Sample NFT"
                         />
                     </div>
                     <div className="third-image hero-image position-absolute d-flex justify-content-center align-items-center">
                         <img
                             ref={(elem) => (iconsRef.current[2] = elem)}
-                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/illustrations/sample_nft_3.png"
+                            src={`${window.cdn}temp_img/sample_nft_3.png`}
                             alt="Sample NFT"
                         />
                     </div>
@@ -92,12 +92,12 @@ const Content = ({
                         <div className="multiple-imgs-container">
                             <img
                                 className="frame-1-img-1"
-                                src={`${window.cdn}illustrations/howto_frame1_01.png`}
+                                src={`${window.cdn}assets/howto_frame1_01.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-1-img-2"
-                                src={`${window.cdn}illustrations/howto_frame1_02.png`}
+                                src={`${window.cdn}assets/howto_frame1_02.png`}
                                 alt="discover rewards"
                             />
                         </div>
@@ -119,17 +119,17 @@ const Content = ({
                         <div className="multiple-imgs-container">
                             <img
                                 className="frame-2-img-1"
-                                src={`${window.cdn}illustrations/howto_frame2_01.png`}
+                                src={`${window.cdn}assets/howto_frame2_01.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-2-img-2"
-                                src={`${window.cdn}illustrations/howto_frame2_02.png`}
+                                src={`${window.cdn}assets/howto_frame2_02.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-2-img-3"
-                                src={`${window.cdn}illustrations/howto_frame2_03.png`}
+                                src={`${window.cdn}assets/howto_frame2_03.png`}
                                 alt="discover rewards"
                             />
                         </div>
@@ -151,32 +151,32 @@ const Content = ({
                         <div className="multiple-imgs-container">
                             <img
                                 className="frame-3-img-1"
-                                src={`${window.cdn}illustrations/howto_frame3_01.png`}
+                                src={`${window.cdn}assets/howto_frame3_01.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-3-img-2"
-                                src={`${window.cdn}illustrations/tickets_02.png`}
+                                src={`${window.cdn}assets/tickets_02.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-3-img-3"
-                                src={`${window.cdn}illustrations/tickets_01.png`}
+                                src={`${window.cdn}assets/tickets_01.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-3-img-4"
-                                src={`${window.cdn}illustrations/tickets_02.png`}
+                                src={`${window.cdn}assets/tickets_02.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-3-img-5"
-                                src={`${window.cdn}illustrations/tickets_01.png`}
+                                src={`${window.cdn}assets/tickets_01.png`}
                                 alt="discover rewards"
                             />
                             <img
                                 className="frame-3-img-6"
-                                src={`${window.cdn}illustrations/tickets_02.png`}
+                                src={`${window.cdn}assets/tickets_02.png`}
                                 alt="discover rewards"
                             />
                         </div>
@@ -207,12 +207,12 @@ const Content = ({
                     <div className="background-img-container position-absolute d-flex flex-row">
                         <img
                             className="left-img"
-                            src={`${window.cdn}illustrations/bonusreward_01.png`}
+                            src={`${window.cdn}assets/bonusreward_01.png`}
                             alt="bonus-rewards"
                         />
                         <img
                             className="right-img"
-                            src={`${window.cdn}illustrations/bonusreward_02.png`}
+                            src={`${window.cdn}assets/bonusreward_02.png`}
                             alt="bonus-rewards"
                         />
                     </div>
