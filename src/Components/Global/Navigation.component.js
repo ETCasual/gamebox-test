@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { gsap } from "gsap";
 import { scrollToTop } from "Utils/ScrollToTop";
 
@@ -10,23 +10,10 @@ const Navigation = () => {
 
     const navWrapperRef = useRef(null);
 
-    const onClickNavigationTabs = (e) => {
-        gsap.to(e.target, {
-            duration: 0.3,
-            y: -5,
-            ease: "power4.out",
-            onComplete: () =>
-                gsap.to(e.target, {
-                    duration: 0.7,
-                    y: 0,
-                    ease: "Bounce.easeOut",
-                }),
-        });
-    };
-
     const handleMobileNavbarBottom = useCallback(() => {
         const tl = gsap.timeline();
-        const routes = path === "/profile" || path === "/notifications" || path === "/iap";
+        const routes =
+            path === "/profile" || path === "/notifications" || path === "/iap";
         tl.to(
             [
                 navWrapperRef.current?.childNodes[0],
@@ -57,7 +44,8 @@ const Navigation = () => {
                 navWrapperRef.current,
                 {
                     duration: 0.5,
-                    width: routes ? 54 : "100%",
+                    width: routes ? 60 : "100%",
+                    borderRadius: '12px',
                     ease: "power2.out",
                 },
                 0
@@ -90,7 +78,8 @@ const Navigation = () => {
 
     const handleOnClickHamburger = () => {
         const tl = gsap.timeline();
-        const routes = path === "/profile" || path === "/notifications" || path === "/iap";
+        const routes =
+            path === "/profile" || path === "/notifications" || path === "/iap";
         tl.to(
             [
                 navWrapperRef.current?.childNodes[0],
@@ -149,29 +138,24 @@ const Navigation = () => {
     };
 
     return (
-        <div className="container-fluid navbar-bottom d-block d-md-none">
+        <div className="container-fluid navbar-bottom px-0 d-block d-md-none">
             <div className="navigation-wrapper" ref={navWrapperRef}>
-                <Link
+                <NavLink
                     onClick={scrollToTop}
+                    exact
                     to={{
                         pathname: "/",
                         state: {
                             prevPath: history.location.pathname,
                         },
                     }}
+                    activeClassName="active"
                 >
-                    <p
-                        className="mb-0"
-                        style={{
-                            color: path === "/" ? "#7824F8" : "#D6D6D6",
-                        }}
-                        onClick={onClickNavigationTabs}
-                        data-name="home"
-                    >
+                    <p className="mb-0" data-name="home">
                         Home
                     </p>
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                     onClick={scrollToTop}
                     to={{
                         pathname: "/activity",
@@ -179,19 +163,13 @@ const Navigation = () => {
                             prevPath: history.location.pathname,
                         },
                     }}
+                    activeClassName="active"
                 >
-                    <p
-                        className="mb-0"
-                        style={{
-                            color: path === "/activity" ? "#7824F8" : "#D6D6D6",
-                        }}
-                        onClick={onClickNavigationTabs}
-                        data-name="activity"
-                    >
+                    <p className="mb-0" data-name="activity">
                         Activity
                     </p>
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                     onClick={scrollToTop}
                     to={{
                         pathname: "/winners",
@@ -199,18 +177,12 @@ const Navigation = () => {
                             prevPath: history.location.pathname,
                         },
                     }}
+                    activeClassName="active"
                 >
-                    <p
-                        className="mb-0"
-                        style={{
-                            color: path === "/winners" ? "#7824F8" : "#D6D6D6",
-                        }}
-                        onClick={onClickNavigationTabs}
-                        data-name="winner"
-                    >
+                    <p className="mb-0" data-name="winner">
                         Winner
                     </p>
-                </Link>
+                </NavLink>
                 <div
                     className={`hamburger d-none`}
                     onClick={handleOnClickHamburger}

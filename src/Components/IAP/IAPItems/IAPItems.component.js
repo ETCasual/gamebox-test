@@ -35,7 +35,7 @@ const IAP = ({ handleGemsPaymentPanel }) => {
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7">
                             {/* GEMS */}
-                            <div className="gems-wrapper mt-5">
+                            <div className="gems-wrapper">
                                 <p className="title mb-4 ml-2 d-flex align-items-end">
                                     Purchase Gems
                                 </p>
