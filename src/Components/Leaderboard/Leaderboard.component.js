@@ -514,7 +514,7 @@ const Leaderboard = ({
                             </p>
                             <GenericLoader
                                 height="30"
-                                bg="#7824f8"
+                                bg="#FF007C"
                                 cx1={window.innerWidth > 1200 ? "48%" : "46%"}
                                 cx2="50%"
                                 cx3={window.innerWidth > 1200 ? "52%" : "54%"}
