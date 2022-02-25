@@ -17,7 +17,7 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                 onClick={onCloseButtonClick}
                                 className="close-button"
                                 width="38"
-                                src={`${window.cdn}buttons/button_close_01.png`}
+                                src={`${window.cdn}buttons/button_close.png`}
                                 alt="close-btn"
                             />
                             {/* CONTENT */}

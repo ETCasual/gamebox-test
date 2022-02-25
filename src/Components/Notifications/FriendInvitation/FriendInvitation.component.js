@@ -45,7 +45,7 @@ const NotificationFriendInvitation = ({
                             }
                             className="close-button"
                             width="38"
-                            src={`${window.cdn}buttons/button_close_01.png`}
+                            src={`${window.cdn}buttons/button_close.png`}
                             alt="close-btn"
                         />
                         {/* INVITATION MODAL */}
