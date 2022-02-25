@@ -110,10 +110,10 @@ const FeaturedCompleted = ({ data, handleWinnerModal }) => {
                                 )}
                             </div>
                         </div>
-                        <div className="card-wrapper d-md-flex">
-                            <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3">
-                                {/* PRIZE TYPE */}
-                                <div className="prize-type">Featured NFT</div>
+                        <div className="card-wrapper d-flex flex-column flex-md-row">
+                            {/* PRIZE TYPE */}
+                            <div className="prize-type">Featured NFT</div>
+                            <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3 order-2 order-md-1">
                                 {/* PRIZE TITLE, DESCRIPTION & ID */}
                                 <div className="prize-text mb-2 w-100">
                                     <div className="prize-id">
@@ -147,7 +147,7 @@ const FeaturedCompleted = ({ data, handleWinnerModal }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-12 col-md-6 d-flex align-items-center justify-content-end px-0">
+                            <div className="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end px-0 order-1 order-md-2">
                                 <picture className="d-flex align-items-center justify-content-end w-100 h-100">
                                     <source
                                         media="(max-width:768px)"

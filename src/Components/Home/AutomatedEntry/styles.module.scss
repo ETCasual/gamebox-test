@@ -9,14 +9,34 @@
     .card-wrapper {
         position: relative;
         cursor: pointer;
-        background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
+        background: linear-gradient(143deg, #302f2f 0%, #0b0b0b 100%);
+        @include media-min($md) {
+            background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
+        }
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         min-height: 10rem;
+        .prize-id {
+            position: absolute;
+            top: 0.6rem;
+            left: 0.6rem;
+            font-size: $fnt-sz-8;
+            @include media-min($md) {
+                top: 1rem;
+                left: 1rem;
+                font-size: $fnt-sz-10;
+            }
+        }
         .prize-title {
-            font-size: $fnt-sz-18;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
+        }
+        .prize-subtitle {
+            font-size: $fnt-sz-12;
         }
         picture {
             img {
@@ -45,12 +65,15 @@
         box-shadow: inset 0px 3px 6px #0000000f;
         border-radius: 0px 0px 10px 10px;
         min-height: 2.5rem;
-        @media only screen and (min-width: 768px) {
+        @include media-min($md) {
             min-height: 3.5rem;
         }
         .countdown {
             color: #00c1b9;
-            font-size: $fnt-sz-14;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
             font-weight: $fnt-wgt-700;
         }
     }

@@ -325,10 +325,10 @@ const Index = () => {
 
                     {/* AUTOMATED */}
                     {!noDataLoaded.automated && (
-                        <div className="container-fluid mt-4 mb-3 mt-md-5 mb-md-5 automatedEntry">
+                        <div className="container-fluid mb-5 automatedEntry">
                             <div className="row justify-content-center">
-                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-flex">
-                                    <div className="col-12 col-md-6 px-0">
+                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
+                                    <div className="col-12 col-xl-6 px-0">
                                         <div className="description w-100">
                                             <h2 className="mb-3">
                                                 Bonus Rewards
@@ -349,7 +349,7 @@ const Index = () => {
                                             )
                                         )}
                                     </div>
-                                    <div className="col-12 col-md-6 px-0" />
+                                    <div className="col-12 col-xl-6 px-0" />
                                 </div>
                             </div>
                         </div>

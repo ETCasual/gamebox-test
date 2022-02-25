@@ -68,7 +68,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                 >
                     <div
                         className={`container-fluid featured ${
-                            length > 1 ? "mb-3" : "mb-4"
+                            length > 1 ? "mb-3" : "mb-5"
                         }`}
                     >
                         <div className="row justify-content-center">
@@ -83,18 +83,18 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                         },
                                     }}
                                 >
-                                    <div className="card-wrapper d-md-flex">
-                                        <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3">
-                                            {/* PRIZE TYPE */}
-                                            <div className="prize-type">
-                                                Featured NFT
-                                            </div>
+                                    <div className="card-wrapper d-flex flex-column flex-md-row">
+                                        {/* PRIZE TYPE */}
+                                        <div className="prize-type">
+                                            Featured NFT
+                                        </div>
+                                        <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3 order-2 order-md-1">
                                             {/* PRIZE TITLE, DESCRIPTION & ID */}
                                             <div className="prize-text mb-2 w-100">
                                                 <div className="prize-id">
                                                     ID: {data?.prizeContent}
                                                 </div>
-                                                <div className="prize-title mt-2 mb-3">
+                                                <div className="prize-title mt-2 mb-2 mb-md-3">
                                                     {data?.prizeTitle}
                                                 </div>
                                                 <div className="prize-subtitle">
@@ -105,7 +105,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                 <hr className="separator" />
 
                                                 {/* TICKETS INFO */}
-                                                <p className="ticket-label">
+                                                <p className="ticket-label mb-2">
                                                     Your tickets
                                                 </p>
                                                 <div className="col-12 d-flex align-items-center justify-content-between pl-0">
@@ -151,8 +151,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-end px-0">
-                                            <picture className="d-flex align-items-center justify-content-end w-100 h-100">
+                                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end px-0 order-1 order-md-2">
+                                            <picture className="d-flex align-items-center justify-content-center justify-content-md-end w-100 h-100">
                                                 <source
                                                     media="(max-width:768px)"
                                                     srcSet={data.prizeBG2}

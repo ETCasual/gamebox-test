@@ -175,13 +175,18 @@ const AutomatedEntry = ({ data }) => {
                     },
                 }}
             >
-                <div className="card-wrapper p-3">
+                <div className="card-wrapper p-2 p-md-3">
                     <div className="row">
+                        <p className="prize-id mb-0">{data.prizeContent}</p>
                         {/* PRIZE INFO */}
-                        <div className="col-6 col-md-8 d-flex flex-column align-items-start justify-content-end position-relative">
+                        <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start justify-content-end position-relative">
                             {/* PRIZE NAME */}
                             <div className="prize-title mt-2">
                                 {data.prizeTitle}
+                            </div>
+                            {/* PRIZE SUBTITLE */}
+                            <div className="prize-subtitle mt-1">
+                                {data.prizeSubtitle}
                             </div>
                             {/* TICKETS */}
                             <div className="ticket-info d-flex flex-column align-items-start mt-2 p-2">
@@ -194,7 +199,7 @@ const AutomatedEntry = ({ data }) => {
                             </div>
                         </div>
                         {/* PRIZE PICTURE */}
-                        <div className="col-6 col-md-4 d-flex align-items-center justify-content-end position-relative">
+                        <div className="col-6 col-md-4 col-lg-5 d-flex align-items-center justify-content-end position-relative">
                             <picture>
                                 <source
                                     media="(max-width:768px)"

@@ -98,14 +98,20 @@
                         }
                         .title {
                             text-align: center;
-                            font-size: $fnt-sz-18;
+                            font-size: $fnt-sz-14;
+                            @include media-min($md) {
+                                font-size: $fnt-sz-18;
+                            }
                             max-width: 40ch;
                         }
                         .description {
                             text-align: center;
                             max-width: 50ch;
                             color: #868686;
-                            font-size: $fnt-sz-14;
+                            font-size: $fnt-sz-10;
+                            @include media-min($md) {
+                                font-size: $fnt-sz-14;
+                            }
                         }
                         .continue {
                             background-color: #cc0767;

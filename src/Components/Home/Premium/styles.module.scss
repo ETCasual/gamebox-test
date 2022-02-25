@@ -1,13 +1,23 @@
 // PREMIUM COMPONENT
 .premium {
     .card-wrapper {
+        position: relative;
         background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
         border-radius: 17px;
         min-height: clamp(10rem, 30vh, 20rem);
+        .prize-id {
+            position: absolute;
+            top: 0.6rem;
+            left: 0.6rem;
+            font-size: $fnt-sz-8;
+            @include media-min($md) {
+                font-size: $fnt-sz-10;
+            }
+        }
         picture {
             img {
                 width: 100%;
-                @media only screen and (min-width: 768px) {
+                @include media-min($md) {
                     min-height: 18.125rem;
                 }
                 object-fit: cover;
@@ -20,13 +30,20 @@
                 font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-600;
                 width: 18ch;
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
             }
             .prize-subtitle {
                 font-size: $fnt-sz-12;
             }
             .token-label {
                 color: #00c1b9;
-                font-size: $fnt-sz-10;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-10;
+                }
             }
             .token-value {
                 font-size: $fnt-sz-12;

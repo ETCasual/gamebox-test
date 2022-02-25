@@ -66,7 +66,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                         dispatchPoolTickets(isVisible, data.prizeId)
                     }
                 >
-                    <div className="col-12 col-md-6 col-lg-6 col-xl-4 d-flex align-items-center justify-content-center mb-4">
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-4 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
                         <div className="card-wrapper">
                             <Link
                                 onClick={scrollToTop}
@@ -77,6 +77,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     },
                                 }}
                             >
+                                <p className="prize-id mb-0">{data.prizeContent}</p>
                                 <picture>
                                     <source
                                         media="(max-width:768px)"
@@ -89,9 +90,9 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                 </picture>
                                 <div className="prize-info py-3">
                                     <div className="col-12 d-flex align-items-center justify-content-between mb-2">
-                                        <div className="prize-title">
+                                        <p className="prize-title mb-0">
                                             {data.prizeTitle}
-                                        </div>
+                                        </p>
                                         <p className="mb-1 token-label d-flex align-items-center">
                                             Your tickets
                                         </p>
