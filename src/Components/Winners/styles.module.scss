@@ -1,34 +1,46 @@
 // WINNERS COMPONENT
 #winners {
-    padding: 8rem 0;
+    padding: 6rem 0;
     .main-title {
-        font-size: $fnt-sz-18;
+        font-size: $fnt-sz-14;
+        @include media-min($md) {
+            font-size: $fnt-sz-18;
+        }
         font-weight: $fnt-wgt-700;
     }
     .winner-card-wrapper {
         position: relative;
         width: 100%;
-        @media only screen and (min-width: 1200px) {
+        @include media-min($xl) {
             width: 100%;
         }
         .month-year {
-            font-size: $fnt-sz-14;
+            font-size: $fnt-sz-10;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
         }
         .winner-card {
             position: relative;
-            min-height: 55px;
-            @media only screen and (min-width: 768px) {
-                border-radius: 1.25rem;
+            min-height: 75px;
+            @include media-min($md) {
                 min-height: 85px;
+                border-radius: 1.25rem;
             }
             cursor: pointer;
             .date {
                 color: #868686;
-                font-size: $fnt-sz-10;
+                font-size: $fnt-sz-8;
+                @include media-min($md) {
+                    font-size: $fnt-sz-10;
+                }
             }
             .player-name {
                 width: 20ch;
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
                 font-weight: $fnt-wgt-600;
                 white-space: nowrap;
                 overflow: hidden;
@@ -37,7 +49,10 @@
             }
             .player-reward {
                 margin-top: 0.5em;
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
                 font-weight: $fnt-wgt-700;
                 width: 14ch;
                 white-space: nowrap;
@@ -48,10 +63,10 @@
             img {
                 background: white;
                 border-radius: 100%;
-                width: 42px;
-                height: 42px;
+                width: 44px;
+                height: 44px;
                 object-fit: contain;
-                @media only screen and (min-width: 768px) {
+                @include media-min($md) {
                     width: 48px;
                     height: 48px;
                 }
@@ -72,16 +87,13 @@
                 border-radius: 10px 0px 0px 10px;
             }
         }
-        .winner-card.active {
-            cursor: pointer;
-            background: #131313;
-            border-radius: 10px 0px 0px 10px;
-        }
     }
     .winner-card-prize-info {
         opacity: 0;
         visibility: hidden;
         margin-top: 5rem;
+        position: fixed;
+        width: 40%;
         .prize-img {
             min-height: 11.063rem;
             max-width: 11.063rem;
@@ -93,9 +105,7 @@
             cursor: pointer;
         }
         .info {
-            background: transparent
-                linear-gradient(124deg, #1c1c1c 0%, #101010 100%) 0% 0%
-                no-repeat padding-box;
+            background: linear-gradient(124deg, #1c1c1c 0%, #101010 100%);
             border-radius: 0 17px 17px 0;
             .prize-info {
                 .prize-title {

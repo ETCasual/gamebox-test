@@ -43,7 +43,7 @@ const OrientationModal = () => {
             </p>
             <img
                 width={100}
-                src={`${window.cdn}illustrations/rotatescreen.png`}
+                src={`${window.cdn}assets/rotate_screen_01.png`}
                 alt="rotate"
             />
         </div>

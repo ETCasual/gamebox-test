@@ -55,7 +55,7 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                         <img
                             className="mb-3 reward-icon"
                             width="122"
-                            src={`${window.cdn}illustrations/rewards_close.png`}
+                            src={`${window.cdn}assets/bonusreward_02.png`}
                             alt="discover rewards"
                         />
                         {loading && (

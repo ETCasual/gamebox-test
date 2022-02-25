@@ -24,34 +24,34 @@ const OnBoarding = ({ handleOnBoardingClose }) => {
 
     const onBoardingData = [
         {
-            img1: `${window.cdn}model_friend_04.png`,
+            img1: `${window.cdn}assets/model_friend_04.png`,
             title: "Hello and welcome!",
             description:
                 "We’re glad you decided to join us. Please take a few minutes to read through our short introduction on what GameBox is all about.",
         },
         {
-            img1: `${window.cdn}howto_frame1_01.png`,
-            img2: `${window.cdn}howto_frame1_02.png`,
+            img1: `${window.cdn}assets/howto_frame1_01.png`,
+            img2: `${window.cdn}assets/howto_frame1_02.png`,
             title: "A platform that offers premium NFT’s for FREE",
             description:
                 "With just a few simple steps, you can stand a chance to win NFT’s from us. Simply just choose a NFT, participate in the running tournament to win tickets and wait for the prize draw to start.",
         },
         {
-            img1: `${window.cdn}howto_frame2_01.png`,
-            img2: `${window.cdn}howto_frame2_02.png`,
-            img3: `${window.cdn}howto_frame2_03.png`,
+            img1: `${window.cdn}assets/howto_frame2_01.png`,
+            img2: `${window.cdn}assets/howto_frame2_02.png`,
+            img3: `${window.cdn}assets/howto_frame2_03.png`,
             title: "Play off with other players",
             description:
                 "Compete with players from around the world to get the highest score points to win more tickets in the running tournament. The tickets will automatically be entered into the prize draw pool.",
         },
         {
-            img1: `${window.cdn}howto_frame3_01.png`,
+            img1: `${window.cdn}assets/howto_frame3_01.png`,
             title: "Cross your fingers, the winner might be you",
             description:
                 "The prize draw pool will start once the total number of tickets reaches the pool limit. A winner will be drawn from the pool of tickets.",
         },
         {
-            img1: `${window.cdn}bonusreward_02.png`,
+            img1: `${window.cdn}assets/bonusreward_02.png`,
             title: "But wait! Thats not all.",
             description:
                 "You also stand a chance to win our Bonus NFT Reward. How? Tickets won in any tournaments throughout the platform for the week will automatically be cloned and entered into the Weekly Bonus Prize.",

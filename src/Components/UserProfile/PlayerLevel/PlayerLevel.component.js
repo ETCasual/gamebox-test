@@ -104,7 +104,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                             <img
                                                 width={20}
                                                 className="img-fluid"
-                                                src={`${window.cdn}icons/arrow_down.png`}
+                                                src={`${window.cdn}icons/icon_arrow_down.png`}
                                                 alt="next"
                                             />
                                         </div>
@@ -184,7 +184,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             <img
                                                                 width={20}
                                                                 className="img-fluid"
-                                                                src={`${window.cdn}icons/arrow_down.png`}
+                                                                src={`${window.cdn}icons/icon_arrow_down.png`}
                                                                 alt="next"
                                                             />
                                                         </div>
@@ -201,7 +201,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                 >
                                     <img
                                         width="32"
-                                        src={`${window.cdn}icon_close.png`}
+                                        src={`${window.cdn}buttons/button_close.png`}
                                         alt="close-btn"
                                     />
                                 </div>

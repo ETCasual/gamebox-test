@@ -82,7 +82,7 @@ const Index = () => {
                     <div className="container-fluid">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
                             <div className="row">
-                                <div className="col-12 col-lg-6 pl-2">
+                                <div className="col-12 col-xl-6 pl-2">
                                     <h1 className="main-title mb-2">
                                         Latest Winners
                                     </h1>
@@ -119,11 +119,7 @@ const Index = () => {
                                                 {winner.list.map((item, i) => (
                                                     <div
                                                         key={`winner-card-${i}`}
-                                                        className={`col-12 px-2 px-md-3 d-flex flex-row align-items-center justify-content-between ${
-                                                            isCurrentUser(item)
-                                                                ? "winner-card active"
-                                                                : "winner-card"
-                                                        }`}
+                                                        className={`col-12 px-2 px-md-3 d-flex flex-row align-items-center justify-content-between winner-card`}
                                                         onClick={() =>
                                                             handleWinnerDetails(
                                                                 item.userId
@@ -189,7 +185,7 @@ const Index = () => {
                                             </div>
                                         ))}
                                 </div>
-                                <div className="col-6 d-none d-lg-block">
+                                <div className="col-6 d-none d-lg-block positive-relative">
                                     <div
                                         className="winner-card-prize-info d-flex"
                                         ref={winnerCardPrizeInfoRef}
