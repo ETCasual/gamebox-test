@@ -110,7 +110,7 @@ const Header = ({
                         </div>
                     </div>
                     {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
-                    <div className="right-items w-100 d-flex align-items-center justify-content-lg-end justify-content-around">
+                    <div className="right-items w-100 d-flex align-items-center justify-content-md-end justify-content-around">
                         <div className="wallet-wrapper">
                             <img
                                 className="icon"
