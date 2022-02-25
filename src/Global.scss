@@ -71,7 +71,7 @@ button {
         -webkit-backdrop-filter: blur(4px);
     }
     font-size: 8px;
-    @media only screen and (min-width: 768px) {
+    @include media-min($md) {
         font-size: 10px;
     }
 }
@@ -117,7 +117,7 @@ button {
         @media only screen and (min-width: 480px) {
             width: 96%;
         }
-        @media only screen and (min-width: 768px) {
+        @include media-min($md) {
             width: 100%;
         }
         height: 101%;
@@ -168,92 +168,94 @@ button {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     width: 100vw;
-    .navbar-row {
-        display: flex;
+    .logo {
+        width: 60px;
+        @include media-min($lg) {
+            width: 90px;
+        }
+    }
+    .nav-items {
         height: inherit;
-        .navbar-flex-container {
+        font-size: $fnt-sz-14;
+        font-weight: $fnt-wgt-700;
+        a {
+            color: #696969 !important;
             height: inherit;
-            .nav-items {
-                height: inherit;
-                font-size: $fnt-sz-14;
-                font-weight: $fnt-wgt-700;
-                a {
-                    color: #696969 !important;
-                    height: inherit;
-                }
-                a.active {
-                    color: #ff007c !important;
+        }
+        a.active {
+            color: #ff007c !important;
 
-                    div {
-                        border-bottom: 4px solid;
-                        height: inherit;
-                    }
-                }
+            div {
+                border-bottom: 4px solid;
+                height: inherit;
             }
         }
     }
     .profile {
-        background: #ffffff 0% 0% no-repeat padding-box;
-        border-radius: 100%;
-        width: 35px;
-        height: 35px;
-        @media only screen and (min-width: 768px) {
-            width: 40px;
-            height: 40px;
-        }
-        img {
-            border-radius: 100%;
-            width: 35px;
-            height: 35px;
-            @media only screen and (min-width: 768px) {
+        a {
+            width: 36px;
+            height: 36px;
+            @include media-min($lg) {
                 width: 40px;
                 height: 40px;
             }
-            object-fit: contain;
+            img {
+                border-radius: 100%;
+                width: 36px;
+                height: 36px;
+                @include media-min($lg) {
+                    width: 40px;
+                    height: 40px;
+                }
+                object-fit: contain;
+            }
         }
         &:hover {
             cursor: pointer;
         }
     }
-    .gems {
+    .gem-wrapper,
+    .wallet-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 40px;
+        min-width: 95px;
+        padding: 0 0.8rem;
+        background: #555555;
         border-radius: 20px;
-        .gem-wrapper {
-            display: flex;
-            align-items: center;
-            min-width: 6em;
-            padding: 0 0.8em;
-            // padding: 0 3.3em;
-            background: #555555;
-            border-radius: 20px;
-            position: relative;
-            min-height: 40px;
-            position: relative;
-            @media only screen and (min-width: 768px) {
-                // width: 7em;
-                // padding: 0 4em;
-            }
-            span {
-                margin: 0 0.5em;
-                font-size: 0.9rem;
-                @media only screen and (min-width: 768px) {
-                    font-size: 1rem;
+        position: relative;
+        .info-wrapper {
+            p {
+                &:nth-child(1) {
+                    word-break: break-all;
+                    font-size: $fnt-sz-12;
+                    font-weight: $fnt-wgt-700;
+                    @include media-min($lg) {
+                        font-size: $fnt-sz-14;
+                    }
                 }
             }
-            .gem-icon {
-                // position: absolute;
-                // left: 10px;
-                width: 18px;
-                @media only screen and (min-width: 768px) {
-                    width: 24px;
-                }
+        }
+        span {
+            word-break: break-all;
+            margin: 0 0.5em;
+            font-size: $fnt-sz-12;
+            font-weight: $fnt-wgt-700;
+            @include media-min($lg) {
+                font-size: $fnt-sz-14;
             }
-            .add-gems-icon {
-                // position: absolute;
-                // right: 10px;
-                width: 18px;
-                @media only screen and (min-width: 768px) {
-                    width: 22px;
-                }
+        }
+        .icon {
+            width: 18px;
+            @include media-min($lg) {
+                width: 24px;
+            }
+        }
+        .add-icon {
+            width: 18px;
+            @include media-min($lg) {
+                width: 22px;
             }
         }
     }
@@ -261,15 +263,15 @@ button {
         background: #555555;
         border-radius: 100%;
         position: relative;
-        width: 35px;
-        height: 35px;
-        @media only screen and (min-width: 768px) {
+        width: 36px;
+        height: 36px;
+        @include media-min($lg) {
             width: 40px;
             height: 40px;
         }
         .icon {
             width: 20px;
-            @media only screen and (min-width: 768px) {
+            @include media-min($lg) {
                 width: 24px;
             }
         }
@@ -304,7 +306,7 @@ button {
     }
     p {
         font-size: 0.5rem;
-        @media only screen and (min-width: 768px) {
+        @include media-min($md) {
             font-size: 0.75rem;
         }
         display: flex;
@@ -312,7 +314,7 @@ button {
         color: white;
         span {
             font-size: 1.125rem;
-            @media only screen and (min-width: 768px) {
+            @include media-min($md) {
                 font-size: 1.5rem;
             }
             color: white;
@@ -393,7 +395,7 @@ button {
     border-radius: 10px;
 
     // RIGHT
-    @media only screen and (min-width: 768px) {
+    @include media-min($md) {
         right: 9.7%;
     }
     @media only screen and (min-width: 992px) {
@@ -409,7 +411,7 @@ button {
     @media only screen and (min-width: 375px) {
         width: 22rem;
     }
-    @media only screen and (min-width: 768px) {
+    @include media-min($md) {
         width: 25rem;
     }
     .ui-wrapper {
@@ -891,7 +893,7 @@ button {
     @media only screen and (min-width: 375px) {
         min-height: 65vh;
     }
-    @media only screen and (min-width: 768px) {
+    @include media-min($md) {
         min-height: 60vh;
     }
     text-align: center;

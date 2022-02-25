@@ -57,24 +57,19 @@ const Header = ({
     return (
         <>
             <div className="navbar-top d-flex flex-column justify-content-center">
-                <div className="navbar-row justify-content-center">
-                    <div className="navbar-flex-container col-12 col-md-10 col-lg-8 col-xl-7 d-flex align-items-center">
-                        {/* LOGO */}
-                        <Link
-                            to="/"
-                            className="d-flex"
-                            onClick={handleHomeNavLink}
-                        >
+                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto d-flex align-items-center justify-content-between">
+                    {/* LOGO & NAV LINKS */}
+                    <div className="left-items d-none d-md-flex align-items-center justify-content-start">
+                        <Link to="/" className="logo" onClick={handleHomeNavLink}>
                             <img
-                                width={120}
+                                width={90}
                                 className="img-fluid"
                                 src={`${window.cdn}logo/logo_gamebox.png`}
                                 alt="GameBox"
                             />
                         </Link>
 
-                        {/* NAV LINKS */}
-                        <div className="pl-3 d-none d-md-flex nav-items">
+                        <div className="pl-3 d-flex nav-items">
                             <NavLink
                                 onClick={handleHomeNavLink}
                                 exact
@@ -113,120 +108,113 @@ const Header = ({
                                 <div className="py-4 px-2 mx-2">Winners</div>
                             </NavLink>
                         </div>
-
-                        {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
-                        <div className="d-flex align-items-center justify-content-end w-100">
-                            <div className="gems position-relative d-flex flex-nowrap align-items-center">
-                                <div className="gem-wrapper">
-                                    <img
-                                        className="gem-icon"
-                                        src={`${window.cdn}assets/wallet_01.png`}
-                                        alt="wallet"
-                                    />
-                                    <div className="info-wrapper ml-1">
-                                        <p className="mb-1">
-                                            {getWalletAmount() || 0}{" "}
-                                            froyo
-                                        </p>
-                                        <p className="mb-0">7647...9747</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="gems position-relative d-flex flex-nowrap align-items-center mx-2">
-                                <Link
-                                    onClick={scrollToTop}
-                                    to={{
-                                        pathname: "/iap",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
-                                    }}
-                                >
-                                    <div className="gem-wrapper">
-                                        <img
-                                            className="gem-icon"
-                                            src={`${window.cdn}assets/additional_gems_01.png`}
-                                            alt="gems"
-                                        />
-                                        <span>{getGems() || 0}</span>
-                                        <img
-                                            className="add-gems-icon"
-                                            src={`${window.cdn}buttons/button_plus.png`}
-                                            alt="add-gems"
-                                        />
-                                    </div>
-                                </Link>
-                            </div>
-                            <div className="mr-1">
-                                <button
-                                    className="notification p-0 semi-transparent"
-                                    onClick={handleOnClickNotificationIcon}
-                                >
-                                    <img
-                                        style={{
-                                            filter:
-                                                notificationNumber.count > 0 &&
-                                                notificationData.length > 0
-                                                    ? "none"
-                                                    : "grayscale(0.9)",
-                                        }}
-                                        className="icon"
-                                        src={`${window.cdn}icons/icon_notification.png`}
-                                        alt="bell"
-                                    />
-                                    <div
-                                        className={`notification-number ${
-                                            notificationNumber.count > 0 &&
-                                            notificationData.length > 0
-                                                ? "d-flex "
-                                                : " d-none"
-                                        } align-items-center`}
-                                    >
-                                        <span className="w-100">
-                                            {notificationNumber.count > 0 &&
-                                            notificationData.length > 0
-                                                ? notificationNumber.count
-                                                : 0}
-                                        </span>
-                                    </div>
-                                </button>
-                            </div>
-                            <div className="profile d-flex position-relative m-1 order-1 order-lg-2">
-                                <Link
-                                    onClick={scrollToTop}
-                                    to={{
-                                        pathname: "/profile",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
-                                    }}
-                                >
-                                    <img
-                                        onError={(e) => defaultUserImage(e)}
-                                        className="img-fluid"
-                                        src={
-                                            userImage ||
-                                            `${window.cdn}icons/icons/icon_profile.png`
-                                        }
-                                        alt="profile"
-                                    />
-                                </Link>
+                    </div>
+                    {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
+                    <div className="right-items w-100 d-flex align-items-center justify-content-lg-end justify-content-around">
+                        <div className="wallet-wrapper">
+                            <img
+                                className="icon"
+                                src={`${window.cdn}assets/wallet_01.png`}
+                                alt="wallet"
+                            />
+                            <div className="info-wrapper ml-1">
+                                <p className="mb-1">
+                                    {getWalletAmount() || 0}
+                                </p>
+                                <p className="mb-0">7647...9747</p>
                             </div>
                         </div>
-
-                        {/* NOTIFICATION */}
-                        {isNotificationShown && (
-                            <Notification
-                                notificationData={notificationData}
-                                handleBackButton={
-                                    handleNotificationPanelBackButton
-                                }
-                                handleNotificationLeaderboardHistory={
-                                    handleNotificationLeaderboardHistory
-                                }
-                            />
-                        )}
+                        <div className="position-relative d-flex flex-nowrap align-items-center mx-2">
+                            <Link
+                                className="gem-wrapper"
+                                onClick={scrollToTop}
+                                to={{
+                                    pathname: "/iap",
+                                    state: {
+                                        prevPath: history.location.pathname,
+                                    },
+                                }}
+                            >
+                                <img
+                                    className="icon"
+                                    src={`${window.cdn}assets/additional_gems_01.png`}
+                                    alt="gems"
+                                />
+                                <span>{getGems() || 0}</span>
+                                <img
+                                    className="add-icon"
+                                    src={`${window.cdn}buttons/button_plus.png`}
+                                    alt="add-gems"
+                                />
+                            </Link>
+                        </div>
+                        <div className="mr-1">
+                            <button
+                                className="notification p-0 semi-transparent"
+                                onClick={handleOnClickNotificationIcon}
+                            >
+                                <img
+                                    style={{
+                                        filter:
+                                            notificationNumber.count > 0 &&
+                                            notificationData.length > 0
+                                                ? "none"
+                                                : "grayscale(0.9)",
+                                    }}
+                                    className="icon"
+                                    src={`${window.cdn}icons/icon_notification.png`}
+                                    alt="bell"
+                                />
+                                <div
+                                    className={`notification-number ${
+                                        notificationNumber.count > 0 &&
+                                        notificationData.length > 0
+                                            ? "d-flex "
+                                            : " d-none"
+                                    } align-items-center`}
+                                >
+                                    <span className="w-100">
+                                        {notificationNumber.count > 0 &&
+                                        notificationData.length > 0
+                                            ? notificationNumber.count
+                                            : 0}
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <div className="profile d-flex position-relative m-1">
+                            <Link
+                                onClick={scrollToTop}
+                                to={{
+                                    pathname: "/profile",
+                                    state: {
+                                        prevPath: history.location.pathname,
+                                    },
+                                }}
+                            >
+                                <img
+                                    onError={(e) => defaultUserImage(e)}
+                                    className="img-fluid"
+                                    src={
+                                        userImage ||
+                                        `${window.cdn}icons/icons/icon_profile.png`
+                                    }
+                                    alt="profile"
+                                />
+                            </Link>
+                        </div>
                     </div>
+
+                    {/* NOTIFICATION */}
+                    {isNotificationShown && (
+                        <Notification
+                            notificationData={notificationData}
+                            handleBackButton={handleNotificationPanelBackButton}
+                            handleNotificationLeaderboardHistory={
+                                handleNotificationLeaderboardHistory
+                            }
+                        />
+                    )}
                 </div>
             </div>
         </>
