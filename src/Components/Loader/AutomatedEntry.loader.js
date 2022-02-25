@@ -10,8 +10,7 @@ const AutomatedEntryLoader = (props) => (
         opacity="0.7"
         {...props}
     >
-        <rect x="0" y="0" rx="17" ry="17" width="100%" height="80%" />
-        <rect x="0" y="82%" rx="17" ry="17" width="100%" height="17%" />
+        <rect x="0" y="0" rx="17" ry="17" width="100%" height="100%" /> 
     </ContentLoader>
 );
 
