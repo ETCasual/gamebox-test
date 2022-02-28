@@ -765,13 +765,20 @@ button {
                 line-height: 2;
             }
         }
+        .additional {
+            font-weight: $fnt-wgt-700;
+            font-size: $fnt-sz-18;
+        }
         .earn-tickets,
         .earn-exp {
-            background: linear-gradient(90deg, #fdc43d 0%, #efa500 100%);
+            padding: 1rem;
+            color: #FCC239;
+            background: #141414;
             border-radius: 6px;
-            width: 80px;
-            height: 40px;
-            font-size: 18px;
+            min-width: 13rem;
+            height: 3rem;
+            font-size: $fnt-sz-20;
+            font-weight: $fnt-wgt-600
         }
         .earn-exp {
             background: linear-gradient(90deg, #fdc33d73 0%, #efa30065 100%);
@@ -911,7 +918,7 @@ button {
         max-width: 38ch;
         line-height: 1.5;
         a {
-            color: #F20086!important;
+            color: #f20086 !important;
         }
     }
 }

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-const EarnAdditionalBenefitModalPopup = ({ handleContinueButton }) => {
+const EarnAdditionalBenefitModal = ({ handleContinueButton }) => {
     const score = localStorage.getItem("currentGameScore");
 
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
@@ -8,7 +8,7 @@ const EarnAdditionalBenefitModalPopup = ({ handleContinueButton }) => {
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
             <div className="modal-body-small text-center">
-                <p className="subtitle mb-2">
+                <p className="additional mb-2">
                     {`Additional tickets ${
                         extraEarning.experience > 0
                             ? "and experience points"
@@ -21,12 +21,7 @@ const EarnAdditionalBenefitModalPopup = ({ handleContinueButton }) => {
                 <div className="benefit d-flex align-items-center justify-content-center">
                     {extraEarning.ticket > 0 && (
                         <p className="mb-0 earn-tickets d-flex align-items-center justify-content-center">
-                            + {extraEarning.ticket}
-                            <img
-                                width="20"
-                                src={`${window.cdn}icons/tickets.png`}
-                                alt="tickets"
-                            />
+                            {extraEarning.ticket} tickets
                         </p>
                     )}
                     {extraEarning.ticket > 0 && extraEarning.experience > 0 && (
@@ -34,12 +29,7 @@ const EarnAdditionalBenefitModalPopup = ({ handleContinueButton }) => {
                     )}
                     {extraEarning.experience > 0 && (
                         <p className="mb-0 earn-exp d-flex align-items-center justify-content-center">
-                            + {extraEarning.experience}{" "}
-                            <img
-                                width="20"
-                                src={`${window.cdn}icons/exp_01.png`}
-                                alt="star"
-                            />
+                            {extraEarning.experience} exp
                         </p>
                     )}
                 </div>
@@ -56,4 +46,4 @@ const EarnAdditionalBenefitModalPopup = ({ handleContinueButton }) => {
     );
 };
 
-export default EarnAdditionalBenefitModalPopup;
+export default EarnAdditionalBenefitModal;
