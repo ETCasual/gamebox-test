@@ -2,7 +2,7 @@
 #player-level {
     position: fixed;
     top: 0;
-    z-index: 3;
+    z-index: 4;
     width: 100vw;
     height: 100vh;
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
@@ -22,83 +22,78 @@
             padding: 0 0.7rem;
             .close-button {
                 top: 0;
-                right: -8px;
+                right: 0;
+                width: 30px;
+                height: 30px;
             }
             .scrolling-wrapper-y {
                 border-radius: 6px;
                 margin: 0.7rem 0 1.5rem 0;
                 height: 80vh;
-                background: linear-gradient(160deg, #302f2f 0%, #0b0b0b 100%) 0%
-                    0% no-repeat padding-box;
+                background: linear-gradient(160deg, #302f2f 0%, #0b0b0b 100%);
                 overflow-y: scroll;
                 -ms-overflow-style: none;
                 scrollbar-width: none;
                 padding: 1rem;
                 .current-level-wrapper {
                     position: relative;
+                    margin-top: 3rem;
+                    border-radius: 20px;
+                    box-shadow: 0px 5px 10px #00000029;
                     background: linear-gradient(
+                        142deg,
+                        #2e2e2e 0%,
+                        #1f1f1f 100%
+                    );
+                    padding: 4rem 0.5rem 0.5rem 0.5rem;
+                    @include media-min($md) {
+                        padding: 4rem 1rem 1rem 1rem;
+                        background: linear-gradient(
                             180deg,
                             #1c1c1c 0%,
                             #141414 100%
-                        )
-                        0% 0% no-repeat padding-box;
-                    border-radius: 20px;
-                    margin-top: 6rem;
-                    padding: 4rem 0.5rem 0.5rem 0.5rem;
-                    @media only screen and (min-width: 768px) {
-                        padding: 4rem 1rem 1rem 1rem;
+                        );
                     }
                     .level-indicator-wrapper {
                         position: absolute;
-                        top: -20px;
+                        top: -3.3rem;
                         left: 50%;
                         transform: translate(-50%, 0);
-                        .level-indicator {
-                            background: linear-gradient(
-                                    135deg,
-                                    #393939 0%,
-                                    #171717 100%
-                                )
-                                0% 0% no-repeat padding-box;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            width: 7rem;
-                            height: 7rem;
-                            border-radius: 100%;
-                            margin: 0 auto;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: center;
-                            border: 4px solid #404040;
-                            .level {
-                                font-size: 46px;
-                                font-weight: $fnt-wgt-700;
-                                line-height: 1em;
-                            }
-                            span {
-                                font-size: $fnt-sz-14;
-                            }
+                        width: 6.75rem;
+                        height: 6.75rem;
+                        @include media-min($md) {
+                            width: 6.688rem;
+                            height: 6.688rem;
+                        }
+                        background: linear-gradient(
+                            135deg,
+                            #393939 0%,
+                            #171717 100%
+                        );
+
+                        border-radius: 100%;
+                        margin: 0 auto;
+                        border: 4px solid #404040;
+                        .level {
+                            font-size: 46px;
+                            font-weight: $fnt-wgt-700;
+                            line-height: 1em;
+                        }
+                        span {
+                            font-size: $fnt-sz-14;
                         }
                     }
                     .statement {
-                        color: white;
-                        padding: 0 3.5rem;
-                        width: 100%;
-                        text-align: center;
-                        margin-bottom: 2em;
-                        font-size: 1.2rem;
-                        @media only screen and (min-width: 768px) {
+                        width: 23ch;
+                        font-weight: $fnt-wgt-700;
+                        font-size: $fnt-sz-12;
+                        @include media-min($md) {
                             font-size: $fnt-sz-18;
-                            margin-bottom: 1em;
                         }
                     }
                     .current-level-details-wrapper {
                         width: 100%;
                         height: 100%;
-                        padding: 1.2rem;
                         border-radius: 6px;
                         .exp {
                             display: flex;
@@ -106,36 +101,29 @@
                             justify-content: center;
                             .multiplier-text {
                                 p {
-                                    color: white;
-
-                                    font-size: 0.75rem;
                                     font-weight: $fnt-wgt-600;
-                                    @media only screen and (min-width: 768px) {
+                                    font-size: $fnt-sz-12;
+                                    @include media-min($md) {
                                         font-size: $fnt-sz-16;
                                     }
                                 }
                                 .multiplier-value {
-                                    font-size: $fnt-sz-16;
-                                    font-weight: $fnt-wgt-600;
                                     color: #00c1b9;
                                 }
                             }
                             .exp-count {
-                                font-size: $fnt-sz-14;
-                                background: #313131;
+                                font-size: $fnt-sz-12;
+                                @include media-min($md) {
+                                    font-size: $fnt-sz-14;
+                                    background: #313131;
+                                }
                                 color: #868686;
                                 border-radius: 20px;
-                                align-items: center;
-                                justify-content: center;
                                 min-height: 2.2rem;
                                 min-width: 6.5rem;
-                                padding: 0 1rem;
                                 .player-exp {
+                                    color: white;
                                     font-weight: $fnt-wgt-700;
-                                    font-size: $fnt-sz-12;
-                                    @media only screen and (min-width: 768px) {
-                                        font-size: $fnt-sz-14;
-                                    }
                                 }
                             }
                         }
@@ -145,7 +133,7 @@
                             border-radius: 1rem;
                             background-color: #313131;
                             height: 1rem;
-                            @media only screen and (min-width: 768px) {
+                            @include media-min($md) {
                                 height: 1.5rem;
                             }
                             .progress-bar {
@@ -161,61 +149,77 @@
                     }
                 }
                 .gap {
-                    margin: 0.8rem auto;
+                    margin: 1.5rem auto;
+                    @include media-min($md) {
+                        margin: 1rem auto;
+                    }
                     img {
-                        margin: 0.7rem auto 0.8rem auto;
+                        width: 26px;
+                        height: 22px;
                     }
                 }
-                .level-type {
+                .level-type-wrapper {
                     background: linear-gradient(
-                            180deg,
-                            #1c1c1c 0%,
-                            #141414 100%
-                        )
-                        0% 0% no-repeat padding-box;
-                    border-radius: 12px;
-                    .level-type-wrapper {
-                        padding: 0.7rem 1.2rem;
-                    }
-                    .level-type-head {
-                        p {
-                            color: white;
+                        142deg,
+                        #2e2e2e 0%,
+                        #1f1f1f 100%
+                    );
+                    border-radius: 10px;
+                }
+                .level-type-head {
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    background: linear-gradient(
+                        160deg,
+                        #302f2f -53%,
+                        #0b0b0bfc 100%
+                    );
+                    p {
+                        color: white;
+                        font-size: $fnt-sz-12;
+                        @include media-min($md) {
                             font-size: $fnt-sz-14;
-                            font-weight: $fnt-wgt-600;
                         }
-                        .level-exp {
+                        font-weight: $fnt-wgt-600;
+                    }
+                    .level-exp {
+                        @include media-min($md) {
                             background: #313131;
-                            color: #868686;
-                            border-radius: 20px;
-                            font-size: $fnt-sz-12;
-                            min-height: 2.25rem;
-                            min-width: 4.5rem;
+                        }
+                        color: #868686;
+                        border-radius: 20px;
+                        font-size: $fnt-sz-12;
+                        min-height: 2.25rem;
+                        min-width: 4.5rem;
+                    }
+                }
+                .level-type-content {
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    background: #181818;
+                    text-align: center;
+                    .reward-text {
+                        font-size: $fnt-sz-10;
+                        color: #868686;
+                    }
+                    .ticket-text {
+                        font-weight: $fnt-wgt-600;
+                        font-size: $fnt-sz-12;
+                        @include media-min($md) {
+                            font-size: $fnt-sz-14;
+                        }
+                        .ticket-value {
+                            color: #14daa7;
                         }
                     }
-                    .level-type-content {
-                        background: #222222;
-                        border-radius: 6px;
-                        text-align: center;
-                        .reward-text {
-                            font-size: $fnt-sz-10;
-                            color: #868686;
-                        }
-                        .ticket-text {
-                            font-size: 0.75rem;
+                    .gems {
+                        p {
+                            font-size: $fnt-sz-12;
+                            @include media-min($md) {
+                                font-size: $fnt-sz-14;
+                            }
                             font-weight: $fnt-wgt-600;
-                            @media only screen and (min-width: 768px) {
-                                font-size: $fnt-sz-14;
-                            }
-                            .ticket-value {
-                                color: #14daa7;
-                            }
-                        }
-                        .gems {
-                            p {
-                                font-size: $fnt-sz-14;
-                                font-weight: $fnt-wgt-600;
-                                color: #14daa7;
-                            }
+                            color: #14daa7;
                         }
                     }
                 }

@@ -36,19 +36,15 @@ const Invitation = ({ handleBackButton }) => {
                         <div className="row">
                             <div className="col-12 team-wrapper">
                                 {/* CLOSE BUTTON */}
-                                <div
+                                <img
                                     className="close-button"
                                     onClick={handleBackButton}
-                                >
-                                    <img
-                                        width="32"
-                                        src={`${window.cdn}buttons/button_close.png`}
-                                        alt="close-btn"
-                                    />
-                                </div>
+                                    src={`${window.cdn}buttons/button_close.png`}
+                                    alt="close-btn"
+                                />
                                 {/* TITLE & SUBTITLE */}
                                 <div className="main-title">
-                                    <p className="title">
+                                    <p className="title mb-2 mb-md-3">
                                         Add Friends {"&"} Get Gems
                                     </p>
                                     <p className="subtitle mb-1">
@@ -59,35 +55,30 @@ const Invitation = ({ handleBackButton }) => {
                                     </p>
                                 </div>
                                 {/* INVITATION CODE */}
-                                <div className="text-center invite mt-4">
-                                    <div
-                                        className="invitation-block"
-                                        onClick={handleInvite}
-                                    >
-                                        {!copiedText && (
-                                            <p className="invite-label">
-                                                Tap to copy
-                                            </p>
-                                        )}
-                                        {/* COPIED TEXT */}
-                                        {copiedText && (
-                                            <p className="text-center copied">
-                                                Copied!
-                                            </p>
-                                        )}
-                                        <p className="invite-link mb-1">
-                                            {`${
-                                                window.location.origin
-                                            }/invite/${ciphertext.slice(
-                                                0,
-                                                5
-                                            )}...`}
+                                <div
+                                    className="text-center invite mt-3 mt-md-4 p-3"
+                                    onClick={handleInvite}
+                                >
+                                    {!copiedText && (
+                                        <p className="invite-label mb-1 mb-md-2">
+                                            Tap to copy
                                         </p>
-                                    </div>
+                                    )}
+                                    {/* COPIED TEXT */}
+                                    {copiedText && (
+                                        <p className="text-center copied mb-1 mb-md-2">
+                                            Copied!
+                                        </p>
+                                    )}
+                                    <p className="invite-link mb-1">
+                                        {`${
+                                            window.location.origin
+                                        }/invite/${ciphertext.slice(0, 5)}...`}
+                                    </p>
                                 </div>
                                 {/* FOOTER */}
-                                <div className="invitation-footer d-flex justify-content-between mt-3">
-                                    <p className="terms-conditions mt-3">
+                                <div className="invitation-footer d-flex justify-content-between">
+                                    <p className="terms-conditions mt-3 mt-md-4">
                                         Terms and conditions apply.
                                     </p>
                                 </div>

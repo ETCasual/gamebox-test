@@ -56,9 +56,6 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 70px;
-    // width: -webkit-fit-content;
-    // width: -moz-fit-content;
-    // width: fit-content;
     min-height: 25px;
     padding: 0 1em;
     color: white;
@@ -153,7 +150,7 @@ button {
     }
     span {
         color: #f8ba29;
-        font-size: clamp($fnt-sz-10, $fnt-sz-12, $fnt-sz-12);
+        font-size: clamp($fnt-sz-10, 0.95vw, $fnt-sz-12);
         font-weight: $fnt-wgt-700;
     }
 }
@@ -893,7 +890,7 @@ button {
 // EMPTY PAGE - ACTIVITY, WINNERS, HIGHSCORE & NOTIFICATIONS
 .no-result {
     min-height: 55vh;
-    @media only screen and (min-width: 375px) {
+    @include media-min($xs) {
         min-height: 65vh;
     }
     @include media-min($md) {
@@ -905,7 +902,8 @@ button {
     align-items: center;
     justify-content: center;
     .title {
-        font-size: 1.75rem;
+        font-weight: $fnt-wgt-600;
+        font-size: $fnt-sz-18;
     }
     .subtitle {
         font-size: 0.9rem;
@@ -913,7 +911,7 @@ button {
         max-width: 38ch;
         line-height: 1.5;
         a {
-            color: #7824f8 !important;
+            color: #F20086!important;
         }
     }
 }

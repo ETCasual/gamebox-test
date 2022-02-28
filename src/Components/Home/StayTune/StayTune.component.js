@@ -66,18 +66,18 @@ const StayTune = () => {
             )}
             <div className="container-fluid stay-tune">
                 <div className="row">
-                    <div className="col-12 col-lg-8 mx-auto d-flex flex-column align-items-center justify-content-center min-vh-100">
-                        <h1 data-title="Stay Tuned!">Stay Tuned!</h1>
-                        <p className="mb-1">
+                    <div className="col-10 col-lg-5 mx-auto d-flex flex-column align-items-center justify-content-center min-vh-100">
+                        <h1 className="title">Stay Tuned!</h1>
+                        <p className="mb-1 subtitle-1 text-center">
                             We'll be back with more rewards for you.
                         </p>
-                        <p className="mb-4">
+                        <p className="mb-4 subtitle-2 text-center">
                             Here're some games for you while you wait.
                         </p>
                         <div className="row justify-content-md-center">
                             {gamesList.map((e, idx) => (
                                 <div
-                                    className="col-4 col-md-2 col-lg-2 d-flex align-items-center justify-content-center game-icon mb-2 mb-md-0"
+                                    className="col-4 col-md-3 mb-4 px-0 d-flex align-items-center justify-content-center game-icon"
                                     key={`game-${idx}`}
                                 >
                                     <img

@@ -32,7 +32,7 @@ const Settings = () => {
                     <div className="col-12 col-md-10 col-lg-7 wrapper">
                         <div className="row">
                             {/* BACK BUTTON */}
-                            <div className="col-12 mb-4">
+                            <div className="col-12 mb-3 mb-md-4">
                                 <Link
                                     className="back-button"
                                     onClick={scrollToTop}
@@ -52,58 +52,54 @@ const Settings = () => {
                             </div>
                             {/* SETTING ITEMS */}
                             <div className="col-12 mb-4">
-                                <h1 className="main-title my-4">Settings</h1>
+                                <h1 className="main-title my-2 my-md-4">
+                                    Settings
+                                </h1>
                                 {/* ITEM 1 - USER INFO */}
                                 <div className="row py-4">
                                     <a
                                         target="_blank"
                                         rel="noreferrer"
                                         href="https://froyo.games/my-profile"
-                                        className="w-100"
+                                        className="col-12 d-flex align-items-center profile-info"
                                         onClick={scrollToTop}
                                     >
-                                        <div className="col-12 d-flex flex-row px-0">
-                                            <div className="col-12 d-flex align-items-center profile-info">
-                                                <img
-                                                    onError={(e) =>
-                                                        defaultUserImage(e)
-                                                    }
-                                                    src={
-                                                        user?.picture ||
-                                                        `${window.cdn}/icon_profile.png`
-                                                    }
-                                                    alt="avatar"
-                                                />{" "}
-                                                <div className="d-flex flex-column ml-3 w-100">
-                                                    <p className="player-name mb-2">
-                                                        {user?.username}
-                                                    </p>
-                                                    <div className="bottom-wrapper d-flex align-items-center justify-content-between">
-                                                        <p className="player-email mb-0 pb-1">
-                                                            {user?.email}
-                                                        </p>
-                                                        <button className="profile-edit">
-                                                            Edit Profile
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                        <img
+                                            onError={(e) => defaultUserImage(e)}
+                                            src={
+                                                user?.picture ||
+                                                `${window.cdn}/icon_profile.png`
+                                            }
+                                            alt="avatar"
+                                        />
+                                        <div className="d-flex flex-column ml-3 w-100">
+                                            <p className="player-name mb-1 mb-md-2">
+                                                {user?.username}
+                                            </p>
+                                            <div className="bottom-wrapper d-flex align-items-center justify-content-between">
+                                                <p className="player-email mb-0 pb-1">
+                                                    {user?.email}
+                                                </p>
+                                                <button className="profile-edit">
+                                                    Edit Profile
+                                                </button>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 {/* ITEM 2 - CONNECTED WALLET */}
-                                <div className="row py-5">
-                                    <div className="col-12">
-                                        <p className="title mb-4">
+                                <div className="row py-4 py-md-5">
+                                    <div className="col-12 connect-wallet">
+                                        <p className="main-title mb-4">
                                             Connected wallet
                                         </p>
-                                        <div className="col-12 px-0 mb-2 connect-wallet">
+                                        <div className="col-12 px-0 mb-2">
                                             <div className="row">
-                                                <div className="col-12 mb-2">
+                                                <p className="mb-2 wallet-label px-3">
                                                     Wallet address
-                                                </div>
+                                                </p>
                                                 <div className="col-12 d-flex align-items-center justify-content-between">
-                                                    <div className="wallet-address p-4">
+                                                    <div className="wallet-address p-md-4">
                                                         <span>
                                                             No wallet found
                                                         </span>
@@ -117,10 +113,12 @@ const Settings = () => {
                                     </div>
                                 </div>
                                 {/* ITEM 3 - NOTIFICATION */}
-                                <div className="row py-5">
+                                <div className="row py-4 py-md-5">
                                     <div className="col-12">
-                                        <p className="title">Notifications</p>
-                                        <div className="col-12 px-0 mb-2 toggle-wrapper">
+                                        <p className="main-title">
+                                            Notifications
+                                        </p>
+                                        <div className="col-12 px-0 mb-2 notification-toggle-wrapper">
                                             <div className="row">
                                                 <div className="col-6 d-flex align-items-center">
                                                     <p className="mb-0">
@@ -143,9 +141,11 @@ const Settings = () => {
                                     </div>
                                 </div>
                                 {/* ITEM 4 - STAY CONNECTED */}
-                                <div className="row py-5">
+                                <div className="row py-4 py-md-5">
                                     <div className="col-12 mb-3">
-                                        <p className="title">Stay connected</p>
+                                        <p className="main-title mb-0">
+                                            Stay connected
+                                        </p>
                                     </div>
                                     <div className="col-12 social-media d-flex align-items-center">
                                         {/* FACEBOOK */}
@@ -156,10 +156,7 @@ const Settings = () => {
                                                     "https://www.facebook.com/EsportsMini/",
                                             }}
                                         >
-                                            <svg
-                                                viewBox="0 0 112.196 112.196"
-                                                width="56"
-                                            >
+                                            <svg viewBox="0 0 112.196 112.196">
                                                 <circle
                                                     fill="#1877F2"
                                                     cx="56.098"
@@ -182,7 +179,7 @@ const Settings = () => {
                                                     "https://www.instagram.com/esportsmini/",
                                             }}
                                         >
-                                            <svg viewBox="0 0 24 24" width="56">
+                                            <svg viewBox="0 0 24 24">
                                                 <linearGradient
                                                     id="SVGID_1_"
                                                     gradientTransform="matrix(0 -1.982 -1.844 0 -132.522 -51.077)"
@@ -223,10 +220,7 @@ const Settings = () => {
                                                     "https://twitter.com/esports_mini/",
                                             }}
                                         >
-                                            <svg
-                                                viewBox="0 0 112.197 112.197"
-                                                width="56"
-                                            >
+                                            <svg viewBox="0 0 112.197 112.197">
                                                 <circle
                                                     fill="white"
                                                     cx="56.099"
@@ -251,7 +245,7 @@ const Settings = () => {
                                 {/* ITEM 5 - MORE INFO */}
                                 <div className="row py-4">
                                     <div className="col-12 mb-3">
-                                        <p className="title">
+                                        <p className="main-title">
                                             More information
                                         </p>
                                     </div>

@@ -2,10 +2,9 @@
 #your-team {
     position: fixed;
     top: 0;
-    z-index: 3;
+    z-index: 4;
     width: 100vw;
     height: 100vh;
-    
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         background-color: rgba(244, 244, 244, 0.9);
     }
@@ -19,10 +18,9 @@
         left: 50%;
         transform: translate(-50%, -50%);
         .team-wrapper {
-            background: linear-gradient(135deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+            background: linear-gradient(135deg, #302f2f 0%, #0b0b0b 100%);
             box-shadow: 0px 18px 26px #00000029;
             border-radius: 20px;
-            border-radius: 15px;
             padding: 0 25px;
             .close-button {
                 top: -8px;
@@ -30,59 +28,55 @@
             }
             .copied {
                 font-size: 10px;
-                color: #0CBE90;
+                color: #0cbe90;
             }
             .main-title {
                 margin-top: 4.5em;
                 .title {
-                    font-size: 1.125rem;
                     font-weight: $fnt-wgt-700;
-                    @media only screen and (min-width: 768px) {
+                    font-size: $fnt-sz-14;
+                    @include media-min($md) {
                         font-size: $fnt-sz-18;
                     }
                 }
                 .subtitle {
                     line-height: 1.5;
                     color: #868686;
-                    font-size: 0.75rem;
-                    @media only screen and (min-width: 768px) {
+                    font-size: $fnt-sz-10;
+                    @include media-min($md) {
                         font-size: $fnt-sz-14;
                     }
                 }
             }
             .invite {
-                background: #f7f7f7;
+                border: 6px solid #f7f7f7;
+                background: #ffffff;
                 border-radius: 10px;
-                padding: 0.7em;
-                .invitation-block {
-                    background: #ffffff;
-                    padding: 1em;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    box-shadow: 0px 5px 10px #00000014;
-                    .invite-label {
+                cursor: pointer;
+                box-shadow: 0px 5px 10px #00000014;
+                .invite-label {
+                    font-size: $fnt-sz-8;
+                    @include media-min($md) {
                         font-size: $fnt-sz-10;
-                        color: #868686;
                     }
-                    .invite-link {
+                    color: #868686;
+                }
+                .invite-link {
+                    font-size: $fnt-sz-12;
+                    @include media-min($md) {
                         font-size: $fnt-sz-18;
-                        font-weight: $fnt-wgt-700;
-                        overflow-wrap: anywhere;
-                        color: #D7076B;
                     }
+                    font-weight: $fnt-wgt-700;
+                    overflow-wrap: anywhere;
+                    color: #d7076b;
                 }
             }
             .invitation-footer {
-                @media only screen and (min-width: 320px) {
-                    align-items: center;
-                    flex-direction: column;
-                }
-                @media only screen and (min-width: 768px) {
-                    align-items: flex-end;
-                    flex-direction: unset;
-                }
                 .terms-conditions {
-                    font-size: $fnt-sz-10;
+                    font-size: $fnt-sz-8;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-10;
+                    }
                     color: #868686;
                 }
             }

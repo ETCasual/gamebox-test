@@ -35,7 +35,7 @@ const Profile = ({
                     <div className="col-12 col-md-10 col-lg-8 col-xl-5">
                         <div className="row">
                             {/* PROFILE INFO */}
-                            <div className="col-12 text-center">
+                            <div className="col-12 text-center mb-4 mb-md-5">
                                 <div className="profile-info">
                                     <img
                                         className="p-2"
@@ -47,7 +47,7 @@ const Profile = ({
                                         }
                                         alt="avatar"
                                     />
-                                    <h3 className="user-name">
+                                    <h3 className="user-name mt-4">
                                         {user.username}
                                     </h3>
                                     <p className="email-text">
@@ -97,13 +97,13 @@ const Profile = ({
                                         src={`${window.cdn}assets/wallet_01.png`}
                                         alt="wallet"
                                     />
-                                    <span className="gems">4.00</span>
+                                    <span className="gems">4.00 <small>froyo</small></span>
                                 </div>
                             </div>
                             {/* MULTIPLIER */}
                             <div className="col-12 multiplier-holder mt-4">
                                 <div
-                                    className="multiplier p-4 d-flex flex-column align-items-start"
+                                    className="multiplier p-3 p-md-4 d-flex flex-column align-items-start"
                                     onClick={handlePlayerLevelPanel}
                                 >
                                     <p className="multiplier-info">
@@ -187,7 +187,7 @@ const Profile = ({
                             {/* INVITE FRIENDS */}
                             <div className="col-12 invite-friends-holder mt-4">
                                 <div
-                                    className="team d-flex align-items-center justify-content-between"
+                                    className="team d-flex align-items-center justify-content-between p-3 p-md-4"
                                     onClick={handleTeamPanel}
                                 >
                                     <div className="col-7 col-md-6 p-0 pb-4">
@@ -230,7 +230,7 @@ const Profile = ({
                                         onClick={handleHighScorePanel}
                                     >
                                         <div className="highscore d-flex align-items-center justify-content-center">
-                                            <p className="mb-0 pl-1">
+                                            <p className="mb-0">
                                                 Highscores
                                             </p>
                                         </div>
@@ -248,7 +248,7 @@ const Profile = ({
                                             }}
                                         >
                                             <div className="rewards d-flex align-items-center justify-content-center">
-                                                <p className="d-flex align-items-center justify-content-around mb-0">
+                                                <p className="mb-0">
                                                     Rewards
                                                 </p>
                                             </div>
@@ -273,7 +273,7 @@ const Profile = ({
                                 </Link>
                             </div>
                             {/* LOGOUT */}
-                            <div className="col-12 text-center">
+                            <div className="col-12 text-center mb-3">
                                 <button
                                     className="logout"
                                     onClick={() => handleSignOut(dispatch)}

@@ -10,39 +10,39 @@ iframe#demo-game {
     z-index: 4;
 }
 .stay-tune {
-    h1 {
+    .title {
         text-align: center;
         width: 100%;
         position: relative;
         z-index: 0;
-        color: #7824f8;
-        
-        &::before {
-            content: attr(data-title);
-            position: absolute;
-            z-index: -1;
-            top: 0;
-            -webkit-transform: translate(0.1em, 0.05em);
-            transform: translate(0.1em, 0.05em);
-            color: transparent;
-            -webkit-text-stroke-color: #868686;
-            -webkit-text-stroke-width: 1px;
+        color: #f20086;
+        font-weight: $fnt-wgt-700;
+        font-size: $fnt-sz-40;
+        @include media-min($md) {
+            font-size: $fnt-sz-50;
         }
     }
-    p {
-        color: #868686;
+    .subtitle-1 {
+        font-weight: $fnt-wgt-700;
+        font-size: $fnt-sz-18;
+        @include media-min($md) {
+            font-size: $fnt-sz-20;
+        }
+    }
+    .subtitle-2 {
+        font-size: $fnt-sz-12;
+        @include media-min($md) {
+            font-size: $fnt-sz-14;
+        }
     }
     .game-icon {
         img {
-            width: 100px;
-            @media only screen and (min-width: 992px) {
-                width: 120px;
+            width: 60px;
+            @include media-min($md) {
+                width: 100px;
+                border: 2px solid white;
             }
-            border: 3px solid white;
             border-radius: 12px;
-            &:not(:last-child) {
-                margin-right: 1em;
-            }
             &:hover {
                 cursor: pointer;
             }

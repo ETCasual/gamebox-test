@@ -33,7 +33,7 @@ const HighScore = ({ handleBackButton }) => {
                         <div className="col-12 col-md-10 col-lg-7 wrapper">
                             {/* BACK BUTTON */}
                             <div
-                                className="back-button mb-5"
+                                className="back-button mb-4 mb-md-5"
                                 onClick={handleBackButton}
                             >
                                 <img
@@ -44,19 +44,14 @@ const HighScore = ({ handleBackButton }) => {
                             </div>
                             {/* IF LIST NOT AVAILABLE */}
                             <div className="col-12 mb-4">
-                                <h1 className="main-title my-4">Highscores</h1>
+                                <h1 className="main-title my-3 my-md-4">Highscores</h1>
                                 {noDataLoaded && (
                                     <div className="no-result">
                                         <p className="title mb-1">
-                                            No highscores found yet!
-                                        </p>
-                                        <p className="subtitle mt-1 mb-0">
-                                            Looks like you've not played for any
-                                            prizes yet.{" "}
+                                            No highscores yet...
                                         </p>
                                         <p className="subtitle">
-                                            <Link to="/">Click here</Link> to
-                                            look for one you like.
+                                            <Link to="/">Tap here</Link> to check out available NFT’s.
                                         </p>
                                     </div>
                                 )}
@@ -66,7 +61,7 @@ const HighScore = ({ handleBackButton }) => {
                                 highScore?.map((card, i) => (
                                     <div
                                         key={`highscore-${i}`}
-                                        className="col-12 col-md-6"
+                                        className="col-12 col-md-9 col-xl-8"
                                     >
                                         <div className="row mb-3 px-3 align-items-center justify-content-between highscore-card position-relative">
                                             <div className="col-auto px-0 game-icon">
@@ -87,7 +82,7 @@ const HighScore = ({ handleBackButton }) => {
                                                                 1000
                                                         )}
                                                     </p>
-                                                    <p className="px-0 score mb-0">
+                                                    <p className="px-0 score mb-0 d-flex align-items-start justify-content-end">
                                                         {`${card.gameScore?.toLocaleString()} pts`}
                                                     </p>
                                                 </div>

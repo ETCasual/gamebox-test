@@ -2,32 +2,35 @@
 #settings {
     padding-top: 6rem;
     .main-title {
-        font-size: 1.5rem;
         font-weight: $fnt-wgt-700;
-        @media only screen and(min-width: 768px) {
+        font-size: $fnt-sz-14;
+        @include media-min($md) {
             font-size: $fnt-sz-18;
         }
     }
     .profile-info {
         img {
-            width: 76px;
-            height: 76px;
+            width: 50px;
+            height: 50px;
+            @include media-min($md) {
+                width: 76px;
+                height: 76px;
+            }
             object-fit: contain;
             border-radius: 100%;
         }
         .player-name {
             white-space: nowrap;
-            width: 20ch;
             overflow: hidden;
             text-overflow: ellipsis;
             display: inline-block;
-            font-size: 1rem;
             font-weight: $fnt-wgt-600;
-            @media only screen and(min-width: 768px) {
+            font-size: $fnt-sz-12;
+            width: 20ch;
+            @include media-min($md) {
                 font-size: $fnt-sz-18;
                 width: 30ch;
             }
-            color: white;
             text-transform: capitalize;
         }
         .player-email {
@@ -36,56 +39,55 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: inline-block;
-            font-size: 0.75rem;
-            width: 17ch;
-            @media only screen and(min-width: 768px) {
+            font-size: $fnt-sz-10;
+            width: 20ch;
+            @include media-min($md) {
                 font-size: $fnt-sz-14;
                 width: 30ch;
             }
         }
         .profile-edit {
-            font-size: 0.625rem;
             color: #14daa7;
-            padding-bottom: 0.3em;
+            padding-bottom: 0.3rem;
             font-weight: $fnt-wgt-600;
-            @media only screen and(min-width: 768px) {
+            font-size: $fnt-sz-10;
+            @include media-min($md) {
                 font-size: $fnt-sz-14;
             }
         }
     }
-    .social-account-icons {
-        .svg-wrapper {
-            padding: 8px;
-            border-radius: 14px;
-            svg {
-                width: 42px;
-            }
-        }
-        .fb-icon {
-            background: #1877f2;
-        }
-        .google-icon {
-            background: white;
-            @media only screen and (max-width: 767px) {
-                width: 44px;
-                height: 44px;
-            }
-            svg {
-                transform: scale(1);
-                @media only screen and (max-width: 767px) {
-                    transform: scale(0.75) translateX(-9px) translateY(-9px);
-                }
-            }
-        }
-    }
-    .toggle-wrapper {
-        font-size: 16px;
-        p {
-            white-space: pre;
-            font-size: 0.75rem;
-            @media only screen and (min-width: 768px) {
+    .connect-wallet {
+        .wallet-label,
+        .wallet-address,
+        button {
+            font-size: $fnt-sz-10;
+            @include media-min($md) {
                 font-size: $fnt-sz-14;
             }
+        }
+
+        .wallet-label {
+            color: #868686;
+            @include media-min($md) {
+                color: white;
+            }
+        }
+        .wallet-address {
+            font-weight: $fnt-wgt-600;
+            @include media-min($md) {
+                background-color: #1d1d1d;
+                border-radius: 10px;
+            }
+        }
+        button {
+            color: #14daa7;
+            font-weight: $fnt-wgt-600;
+        }
+    }
+    .notification-toggle-wrapper {
+        font-size: $fnt-sz-10;
+        @include media-min($md) {
+            font-size: $fnt-sz-14;
         }
         .react-toggle {
             .react-toggle-track {
@@ -100,8 +102,6 @@
             }
             .react-toggle-thumb {
                 background: #ededed !important;
-                box-shadow: 2px 2px 4px #b4b4b491, -2px -2px 4px #ffffff,
-                    inset 2px 2px 4px #c9c9c9, inset -2px -2px 4px #ffffff !important;
                 border: 2px solid #ededed !important;
                 width: 24px;
                 height: 24px;
@@ -124,6 +124,10 @@
     }
     .social-media {
         svg {
+            width: 46px;
+            @include media-min($md) {
+                width: 56px;
+            }
             border-radius: 100%;
             &:not(:last-child) {
                 margin-right: 0.7em;
@@ -134,24 +138,12 @@
         ul {
             list-style-type: none;
             li {
-                font-size: 0.75rem;
-                @media only screen and (min-width: 768px) {
+                font-size: $fnt-sz-10;
+                @include media-min($md) {
                     font-size: $fnt-sz-14;
                 }
                 margin-bottom: 1.5em;
             }
-        }
-    }
-    .connect-wallet {
-        font-size: $fnt-sz-14;
-        button {
-            color: #14daa7;
-            font-weight: $fnt-wgt-600;
-        }
-        .wallet-address {
-            font-weight: $fnt-wgt-600;
-            background-color: #1d1d1d;
-            border-radius: 10px;
         }
     }
 }

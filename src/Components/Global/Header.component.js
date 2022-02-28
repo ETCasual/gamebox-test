@@ -117,9 +117,9 @@ const Header = ({
                                 src={`${window.cdn}assets/wallet_01.png`}
                                 alt="wallet"
                             />
-                            <div className="info-wrapper ml-1">
-                                <p className="mb-1">
-                                    {getWalletAmount() || 0}
+                            <div className="info-wrapper ml-1 w-100">
+                                <p className="mb-1 d-flex">
+                                    {getWalletAmount() || 0} <small className="d-flex align-self-center ml-1">froyo</small>
                                 </p>
                                 <p className="mb-0">7647...9747</p>
                             </div>

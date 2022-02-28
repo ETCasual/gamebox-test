@@ -69,9 +69,8 @@ const Rewards = () => {
                                     <span className="ml-2">Back</span>
                                 </Link>
                             </div>
-                            {/* TABS */}
-                            <div className="col-12 mb-4">
-                                <h1 className="main-title my-4">Rewards</h1>
+                            <div className="col-12">
+                                <h1 className={`main-title ${claimedPrizes.length === 0 ? "mt-4" : "mt-4"}`}>Rewards</h1>
                             </div>
                             {/* CLAIMED */}
                             {claimedPrizes.length > 0 &&
