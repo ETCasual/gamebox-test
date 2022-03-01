@@ -169,9 +169,9 @@ const Header = ({
                                     className={`notification-number ${
                                         notificationNumber.count > 0 &&
                                         notificationData.length > 0
-                                            ? "d-flex "
-                                            : " d-none"
-                                    } align-items-center`}
+                                            ? "d-flex"
+                                            : "d-none"
+                                    } align-items-center justify-content-center`}
                                 >
                                     <span className="w-100">
                                         {notificationNumber.count > 0 &&

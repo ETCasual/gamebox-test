@@ -274,8 +274,8 @@ button {
         }
         .notification-number {
             position: absolute;
-            top: -0.5em;
-            right: -1em;
+            top: -0.3rem;
+            right: -0.5rem;
             background: #ff2c44;
             color: white;
             border-radius: 100%;
@@ -283,11 +283,6 @@ button {
             height: 20px;
             padding: 0.25em 0;
             font-size: 0.625rem;
-
-            span {
-                position: relative;
-                top: -1px;
-            }
         }
     }
 }
