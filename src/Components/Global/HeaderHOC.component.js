@@ -22,7 +22,9 @@ const HeaderHOC = () => {
     );
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
 
-    const [userImage, setUserImage] = useState(`${window.cdn}icons/icon_profile.png`);
+    const [userImage, setUserImage] = useState(
+        `${window.cdn}icons/icon_profile.png`
+    );
     const [userGems, setUserGems] = useState(user.gems);
     const [isNotificationShown, setIsNotificationShown] = useState(false);
     const [notificationData, setNotificationData] = useState([]);
@@ -56,9 +58,12 @@ const HeaderHOC = () => {
 
     useEffect(() => {
         let _notificationData = [];
-        notificationList?.[0]?.list?.forEach((n) => {
-            if (n.type === "tour" || n.type === "invite")
-                _notificationData.push(n);
+
+        notificationList?.forEach((n) => {
+            const filteredData = n.list.filter(
+                (l) => l.type === "tour" || l.type === "invite"
+            );
+            _notificationData = [...filteredData];
         });
         setNotificationData(
             _notificationData?.slice(
@@ -82,9 +87,11 @@ const HeaderHOC = () => {
     // ON CLICK NOTIFICATION ICON
     const handleOnClickNotificationIcon = () => {
         let _notificationData = [];
-        notificationList?.[0]?.list?.forEach((n) => {
-            if (n.type === "tour" || n.type === "invite")
-                _notificationData.push(n);
+        notificationList?.forEach((n) => {
+            const filteredData = n.list.filter(
+                (l) => l.type === "tour" || l.type === "invite"
+            );
+            _notificationData = [...filteredData];
         });
         setNotificationData(_notificationData?.slice(0, 5));
         setIsNotificationShown(true);

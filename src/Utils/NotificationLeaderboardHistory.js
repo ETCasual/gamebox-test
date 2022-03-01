@@ -84,20 +84,21 @@ export function getLeaderboardList(
     );
     for (let x = 0; x < rankLength; x++) {
         _data.push(
-            <div key={`leaderboard-${x}`} className="mb-2">
-                <div
-                    className={`px-2 d-flex align-items-center leader-player-card ${
-                        _leaderboardHistory[x]?.userId === userId
-                            ? "current-user"
-                            : ""
-                    }`}
-                >
-                    <div className="text-center px-0 user-avatar">
-                        <div className="rank-star">
-                            <LeaderRankIndicator index={x} type="lb" />
-                        </div>
+            <div
+                key={`leaderboard-${x}`}
+                className={`col-12 px-2 leaderboard-player-card mb-2 d-flex align-items-center justify-content-between ${
+                    _leaderboardHistory[x]?.userId === userId
+                        ? "current-user"
+                        : ""
+                }`}
+            >
+                {/* USER INFO */}
+                <div className="user-info d-flex align-items-center">
+                    {/* RANK INDICATOR & AVATAR */}
+                    <div className="rank-and-avatar d-flex align-items-center">
+                        <LeaderRankIndicator index={x} type="lb" />
                         <img
-                            className="avatar"
+                            className="avatar ml-3"
                             onError={(e) => defaultUserImage(e)}
                             src={
                                 _leaderboardHistory[x]?.avatarUrl ||
@@ -106,27 +107,25 @@ export function getLeaderboardList(
                             alt="player"
                         />
                     </div>
-                    <div className="px-2 ml-1 ml-md-3">
-                        <p className="player-name">
-                            {_leaderboardHistory[x]?.nickName?.split(" ")[0] ||
-                                "-"}
+                    {/* PLAYER NAME & POINTS */}
+                    <div className="details ml-1 ml-md-3">
+                        <p className="player-name mb-0">
+                            {_leaderboardHistory[x]?.nickName?.split(" ")[0]  ||
+                                "-"} {_leaderboardHistory[x]?.userId === userId ? '(You)': ''}
                         </p>
-                        <p className="points">
-                            {_leaderboardHistory[x]?.gameScore || "-"} pts
+                        <p className="points mb-0">
+                            {`${_leaderboardHistory[x]?.gameScore || "-"} points`}
                         </p>
                     </div>
-                    <div className="tickets ml-auto d-flex align-items-center justify-content-center py-2 px-3">
-                        <span>
-                            {_leaderboardHistory[x]?.tickets ||
-                                getRankTickets(x, leaderRuleRanks)}
-                        </span>
-                        <img
-                            className="ml-1"
-                            width="24"
-                            src={`${window.cdn}icons/tickets.png`}
-                            alt="tickets"
-                        />
-                    </div>
+                </div>
+
+                {/* TICKETS */}
+                <div className="tickets d-flex align-items-center justify-content-center">
+                    <span>
+                        {_leaderboardHistory[x]?.tickets ||
+                            getRankTickets(x, leaderRuleRanks)}{" "}
+                        tickets
+                    </span>
                 </div>
             </div>
         );

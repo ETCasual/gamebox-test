@@ -4,22 +4,22 @@
             right: -10px;
         }
         .invitaiton {
-            background-color: white;
-            padding: 1em;
+            background: linear-gradient(90deg, #302f2f -6%, #0b0b0b 100%);
             border-radius: 10px;
-            margin: 0;
             .title {
-                
-                font-size: 1rem;
-                @media only screen and (min-width: 768px) {
-                    font-size: 1.75rem;
+                font-weight: $fnt-wgt-600;
+                font-size: $fnt-sz-14;
+                @include media-min($md) {
+                    font-size: $fnt-sz-18;
                 }
+                width: 24ch;
             }
             .subtitle {
                 color: #868686;
-                font-size: 0.625rem;
-                @media only screen and (min-width: 768px) {
-                    font-size: 0.875rem;
+                width: 26ch;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
                 }
                 .friend-username {
                     color: #14daa7;
@@ -27,18 +27,24 @@
             }
             .reward {
                 border-radius: 15px;
-                background-color: #f4f4f4;
+                background: linear-gradient(90deg, #302f2f 44%, #1d1d1d 100%);
+                width: fit-content;
                 .title {
-                    font-size: 0.875rem;
+                    font-size: $fnt-sz-12;
                 }
-                .gem {
-                    span {
-                        font-size: 1.3rem;
-                        
-                        color: #14daa7;
-                    }
+                .gems {
+                    font-weight: $fnt-wgt-600;
+                    font-size: $fnt-sz-20;
+                    color: #14daa7;
                 }
             }
+        }
+
+        .img {
+            width: 500px;
+            height: 200px;
+            object-fit: cover;
+            object-position: top;
         }
     }
 }

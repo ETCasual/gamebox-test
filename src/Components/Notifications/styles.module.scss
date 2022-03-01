@@ -75,13 +75,12 @@
         transform: translate(-50%, -50%);
         .close-button {
             position: absolute;
-            top: -15px;
-            right: 0px;
+            top: -10px;
+            right: 7px;
             z-index: 2;
-            width: 40px;
-            height: 40px;
+            width: 28px;
+            height: 28px;
             border-radius: 100%;
-            background-color: white;
             box-shadow: 0px 18px 26px #00000029;
             svg {
                 border-radius: 100%;

@@ -47,8 +47,9 @@ const client = new EsmApiPromiseClient(
     null
 );
 //
-//      ADD NEW USER
+//      ADD NEW USER - FIRE THIS ONE IF USER INFO IS NOT AVAILABLE - GET ACCOUNT FROYO API
 //
+// TODO: ADD WALLET FIELD
 export async function addUser(authUser) {
     const token = sessionStorage.getItem("token");
     const currentUser = authUser?.providerData?.[0];
@@ -74,7 +75,7 @@ export async function addUser(authUser) {
 }
 
 //
-//      USER SIGN IN
+//      USER SIGN IN - FIRE THIS ONE TO GET INFO FROM GAMEBOX BACKEND
 //
 export async function userSignIn(authUser) {
     const token = sessionStorage.getItem("token");
