@@ -34,14 +34,14 @@ import {
     SignInRequest,
     UpdateUserSettingsRequest,
     UpdateMsgTokenRequest,
-} from "../proto/esmapi_pb";
+} from "../proto/gameboxapi_pb";
 import axios from "axios";
 import _ from "lodash";
 import { monthYearDict, PRIZE_CATEGORY_NAME } from "Utils/Enums";
 import { saveCookie, getCookie } from "Utils/ManageCookies";
 
-const { EsmApiPromiseClient } = require("../proto/esmapi_grpc_web_pb.js");
-const client = new EsmApiPromiseClient(
+const { GameboxApiPromiseClient } = require("../proto/gameboxapi_grpc_web_pb.js");
+const client = new GameboxApiPromiseClient(
     process.env.REACT_APP_API_ENDPOINT,
     null,
     null
