@@ -3,48 +3,72 @@
         .close-button {
             right: -10px;
         }
-        .invitaiton {
-            background: linear-gradient(90deg, #302f2f -6%, #0b0b0b 100%);
+        .invitaiton-wrapper {
             border-radius: 10px;
-            .title {
-                font-weight: $fnt-wgt-600;
-                font-size: $fnt-sz-14;
+            background: linear-gradient(90deg, #302f2f -6%, #0b0b0b 100%);
+            .invitation {
+                background-size: 270px;
+                background-position-x: 200%;
+                background-position-y: -10%;
                 @include media-min($md) {
-                    font-size: $fnt-sz-18;
+                    background-size: 320px;
+                    background-position-x: 100%;
+                    background-position-y: 0%;
                 }
-                width: 24ch;
-            }
-            .subtitle {
-                color: #868686;
-                width: 26ch;
-                font-size: $fnt-sz-12;
-                @include media-min($md) {
-                    font-size: $fnt-sz-14;
-                }
-                .friend-username {
-                    color: #14daa7;
-                }
-            }
-            .reward {
-                border-radius: 15px;
-                background: linear-gradient(90deg, #302f2f 44%, #1d1d1d 100%);
-                width: fit-content;
+                background-repeat: no-repeat;
                 .title {
-                    font-size: $fnt-sz-12;
-                }
-                .gems {
                     font-weight: $fnt-wgt-600;
-                    font-size: $fnt-sz-20;
-                    color: #14daa7;
+                    font-size: $fnt-sz-14;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-18;
+                    }
+                    width: 24ch;
+                }
+                .subtitle {
+                    color: #868686;
+                    width: 26ch;
+                    font-size: $fnt-sz-12;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-14;
+                    }
+                    .friend-username {
+                        color: #14daa7;
+                    }
+                }
+                .reward {
+                    border-radius: 15px;
+                    width: fit-content;
+                    @supports not (
+                        (-webkit-backdrop-filter: none) or
+                            (backdrop-filter: none)
+                    ) {
+                        background-color: rgba(138, 138, 138, 0.3);
+                    }
+                    @supports (
+                        (-webkit-backdrop-filter: none) or
+                            (backdrop-filter: none)
+                    ) {
+                        background: linear-gradient(
+                            90deg,
+                            #302f2f86 44%,
+                            #1d1d1d91 100%
+                        );
+                        backdrop-filter: blur(2px);
+                        -webkit-backdrop-filter: blur(2px);
+                    }
+                    .title {
+                        font-size: $fnt-sz-12;
+                    }
+                    .gems {
+                        font-weight: $fnt-wgt-600;
+                        font-size: $fnt-sz-16;
+                        @include media-min($md) {
+                            font-size: $fnt-sz-20;
+                        }
+                        color: #14daa7;
+                    }
                 }
             }
-        }
-
-        .img {
-            width: 500px;
-            height: 200px;
-            object-fit: cover;
-            object-position: top;
         }
     }
 }

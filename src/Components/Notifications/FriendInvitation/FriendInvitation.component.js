@@ -34,7 +34,7 @@ const NotificationFriendInvitation = ({
         <div id="friend-invitation">
             <div className="col-12 wrapper">
                 <div className="row align-items-center justify-content-center">
-                    <div className="col-11 col-md-8 col-lg-8 col-xl-3 p-4 invitaiton d-flex flex-column">
+                    <div className="col-10 col-md-8 col-lg-7 col-xl-4 pt-3 pt-lg-4 px-3 px-lg-4 invitaiton-wrapper d-flex flex-column">
                         {/* BACK BUTTON */}
                         <img
                             onClick={() =>
@@ -48,36 +48,33 @@ const NotificationFriendInvitation = ({
                             src={`${window.cdn}buttons/button_close.png`}
                             alt="close-btn"
                         />
-                        <div className="row">
-                            {/* INVITATION MODAL */}
-                            <div className="col-6 invitation">
-                                <p className="title">
-                                    A friend has reached level 3 with your
-                                    invite code.
+                        {/* INVITATION MODAL */}
+                        <div
+                            className="invitation w-100"
+                            style={{
+                                backgroundImage: `url(
+                                    ${window.cdn}assets/model_friend_05.png
+                                )`,
+                            }}
+                        >
+                            <p className="title">
+                                A friend has reached level 3 with your invite
+                                code.
+                            </p>
+                            <p className="subtitle">
+                                Your friend{" "}
+                                <span className="friend-username">
+                                    {getInvitationInfo("inviteeId") || "-"}
+                                </span>{" "}
+                                has used your invite code.
+                            </p>
+                            <div className="reward p-3 p-md-4 mb-3 mb-md-4 d-flex flex-column align-items-start justify-content-around">
+                                <p className="mb-3 title">Reward</p>
+                                <p className="gems mb-0">
+                                    {`+ ${
+                                        getInvitationInfo("gem") || "0"
+                                    } gems`}
                                 </p>
-                                <p className="subtitle">
-                                    Your friend{" "}
-                                    <span className="friend-username">
-                                        {getInvitationInfo("inviteeId") || "-"}
-                                    </span>{" "}
-                                    has used your invite code.
-                                </p>
-                                <div className="reward p-4 d-flex flex-column align-items-start justify-content-around">
-                                    <p className="mb-3 title">Reward</p>
-                                    <p className="gems mb-0">
-                                        {`+ ${
-                                            getInvitationInfo("gem") || "0"
-                                        } gems`}
-                                    </p>
-                                </div>
-                            </div>
-                            {/* IMAGES */}
-                            <div className="col-6 px-0">
-                                <img
-                                    className="img-fluid img"
-                                    src={`${window.cdn}assets/model_friend_05.png`}
-                                    alt="invite"
-                                />
                             </div>
                         </div>
                     </div>

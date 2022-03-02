@@ -254,7 +254,8 @@ const Index = () => {
                             )}
 
                         {/* FRIEND INVITATION */}
-                        {true && (
+                        {isSelectedNotificationShown.status &&
+                            isSelectedNotificationShown.type === "invite" && (
                                 <NotificationFriendInvitation
                                     id={isSelectedNotificationShown.typeId}
                                     createdOn={
