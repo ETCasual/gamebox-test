@@ -17,7 +17,6 @@ $hero-left-off-Y: 180px;
                 linear-gradient(137deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
                 no-repeat padding-box;
             // border-radius: 17px;
-            color: white;
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -455,20 +454,17 @@ section.landing-container {
             }
         }
         .hero-image-container {
-            // width: calc(2 / 3 * 100%);
             width: 66.666667%;
             .hero-image {
-                width: clamp(126px, 35%, 290px);
-                height: clamp(126px, 35%, 290px);
+                margin-top: 20px;
+                width: clamp(284px, 88.17vw, 350px);
+                height: clamp(284px, 88.17vw, 350px);
                 border-radius: 10px;
                 img {
-                    margin-top: 20px;
-                    width: clamp(284px, 88.17vw, 350px);
-                    // height: 350px;
-                    height: clamp(284px, 88.17vw, 350px);
+                    width: inherit;
+                    height: inherit;
                 }
             }
-            // TODO: card anim
             .first-image {
                 z-index: 3;
                 @media only screen and (max-width: 425px) and (min-width: 320px) {

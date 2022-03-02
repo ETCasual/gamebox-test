@@ -22,7 +22,6 @@ const Index = () => {
     let workCardRef = useRef([]);
     let dailyRewardRef = useRef(null);
     let dailyRewardCardRef = useRef(null);
-    let iconsRef = useRef([]);
 
     // const [betaModal, setModal] = useState(false);
     const [blockedArchivedModal, setBlockedArchivedModal] = useState(
@@ -46,55 +45,20 @@ const Index = () => {
                         ease: "power4.out",
                     },
                     0
-                )
-                    .to(
-                        iconsRef.current,
-                        {
-                            duration: 1,
-                            autoAlpha: 1,
-                            y: 0,
-                            ease: "power4.out",
-                            onComplete: () => {
-                                const min = 1;
-                                const max = 20;
-                                gsap.utils
-                                    .toArray(iconsRef.current.splice(2, 6))
-                                    .forEach((item, idx) => {
-                                        gsap.fromTo(
-                                            item,
-                                            { y: 0 },
-                                            {
-                                                delay: 0.2 + idx / 1.5,
-                                                duration: 3,
-                                                y: `-=${
-                                                    Math.random() *
-                                                        (max - min) +
-                                                    min
-                                                }px`,
-                                                repeat: -1,
-                                                yoyo: true,
-                                                ease: "power2.easeInOut",
-                                            }
-                                        );
-                                    });
-                            },
-                        },
-                        0
-                    )
-                    .to(
-                        [
-                            workRef.current.childNodes[0],
-                            workRef.current.childNodes[1],
-                        ],
-                        {
-                            duration: 0.6,
-                            autoAlpha: 1,
-                            y: 0,
-                            ease: "power4.out",
-                            stagger: 0.2,
-                        },
-                        0
-                    );
+                ).to(
+                    [
+                        workRef.current.childNodes[0],
+                        workRef.current.childNodes[1],
+                    ],
+                    {
+                        duration: 0.6,
+                        autoAlpha: 1,
+                        y: 0,
+                        ease: "power4.out",
+                        stagger: 0.2,
+                    },
+                    0
+                );
             },
         });
 
@@ -180,7 +144,6 @@ const Index = () => {
             <Content
                 handleSignUp={handleOnClickSignUp}
                 heroRef={heroRef}
-                iconsRef={iconsRef}
                 workRef={workRef}
                 workCardRef={workCardRef}
                 dailyRewardRef={dailyRewardRef}
