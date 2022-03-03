@@ -155,19 +155,20 @@ const Index = () => {
                                         </li>
                                         <li>
                                             In the event of a dispute over the
-                                            identity of an entrant, each entry
-                                            will be considered to have been
-                                            submitted by the Registered Owner of
-                                            the email address associated with
-                                            the entry. "Registered Owner" is
-                                            defined as the natural person who is
-                                            assigned an email address by an
-                                            Internet access provider, on-line
-                                            service provider or other
-                                            organisation/individual that is
-                                            responsible for assigning email
-                                            addresses for the domain associated
-                                            with the submitted email address.
+                                            identity of a participant, each
+                                            entry will be considered to have
+                                            been submitted by the Registered
+                                            Owner of the email address
+                                            associated with the entry.
+                                            "Registered Owner" is defined as the
+                                            natural person who is assigned an
+                                            email address by an Internet access
+                                            provider, on-line service provider
+                                            or other organisation/individual
+                                            that is responsible for assigning
+                                            email addresses for the domain
+                                            associated with the submitted email
+                                            address.
                                         </li>
                                     </ul>
                                 </div>
@@ -205,7 +206,7 @@ const Index = () => {
                                             At the end of each Prize Period, a
                                             draw will be held from among all
                                             eligible entries received during the
-                                            Prize Period to select an entrant
+                                            Prize Period to select a participant
                                             eligible to win the Prize.
                                         </li>
                                         <li>
@@ -229,7 +230,7 @@ const Index = () => {
                                     <p className="title">Bonus Prize</p>
                                     <ul className="description pb-3 px-3 m-0">
                                         <li>
-                                            Bonus Prize participation is offered
+                                            Bonus participation prize is offered
                                             as long as participants enter and
                                             win tickets from any tournament or
                                             via the spinner or via the
@@ -237,8 +238,8 @@ const Index = () => {
                                             in the GameBox platform.
                                         </li>
                                         <li>
-                                            Bonus prizes offer prizes in the
-                                            form of NFT’s or Tokens.
+                                            Bonus prizes are offered in the form
+                                            of NFT’s or Tokens.
                                         </li>
                                         <li>
                                             Winner of the bonus prize / reward
@@ -265,7 +266,8 @@ const Index = () => {
                                         </li>
                                         <li>
                                             Prizes must be claimed by the Prize
-                                            Winner for Prize to be transferred.
+                                            Winner for the Prize to be
+                                            transferred.
                                         </li>
                                         <li>
                                             The Transaction Fee (Gas Fee) when
@@ -287,13 +289,13 @@ const Index = () => {
                                             promotional campaign ends.
                                         </li>
                                         <li>
-                                            Prize Sponsor will not be
+                                            The Prize Sponsor will not be
                                             responsible for the transfer
                                             duration of the Prize to the Prize
                                             Winner’s cryptocurrency wallet.
                                         </li>
                                         <li>
-                                            Prize Sponsor will not be held
+                                            The Prize Sponsor will not be held
                                             liable for any loss of Prize.
                                         </li>
                                         <li>
@@ -302,12 +304,12 @@ const Index = () => {
                                             Prize Sponsor.
                                         </li>
                                         <li>
-                                            Prize Sponsor reserves the right to
+                                            The Prize Sponsor reserves the right to
                                             change the days to claim Prize.
                                         </li>
                                         <li>
-                                            To claim Prize, Prize Winners are
-                                            required to connect to a
+                                            To claim any Prize, Prize Winners
+                                            are required to connect to a
                                             cryptocurrency wallet.
                                         </li>
                                         <li>
@@ -341,12 +343,12 @@ const Index = () => {
                                             in the prize becoming invalid.
                                         </li>
                                         <li>
-                                            Prize Sponsor may interfere with
+                                            The Prize Sponsor may interfere with the
                                             claim in the case of any doubt or
                                             failing to comply with the rules. In
-                                            case Prize Sponsor decides to cancel
-                                            the claim, the prize will be deemed
-                                            invalid.
+                                            case the Prize Sponsor decides to
+                                            cancel the claim, the prize will be
+                                            deemed invalid.
                                         </li>
                                         <li>
                                             Expiration period - all prizes
@@ -354,32 +356,33 @@ const Index = () => {
                                             prize announcement.
                                         </li>
                                         <li>
-                                            Users who are no longer eligible for
-                                            the prize, the prize will be
-                                            cancelled and removed.
+                                            Prizes will be cancelled and removed
+                                            for users who are no longer
+                                            eligible.
                                         </li>
                                     </ul>
 
                                     <p className="title">Referral reward (i)</p>
                                     <p className="description">
-                                        Prize Sponsor rewards existing users for
-                                        inviting other users to the service.
+                                        The Prize Sponsor rewards existing users
+                                        for inviting other users to the service.
                                         Users will receive 5 gems added to their
                                         GameBox account when the other users
                                         register using the user’s invite link
                                         reaches level 5. The invited user will
                                         also receive 5 gems upon reaching level
                                         5 when they register with GameBox using
-                                        an invite link. Prize Sponsor reserves
-                                        the right to evaluate and reject such
-                                        reward in suspected cases of fraud.
+                                        an invite link. The Prize Sponsor
+                                        reserves the right to evaluate and
+                                        reject such reward in suspected cases of
+                                        fraud.
                                     </p>
                                     <p className="description">
                                         There is no limit as to how many users
                                         that may be added using the same link.
                                     </p>
                                     <p className="description">
-                                        Prize Sponsor reserves the right to
+                                        The Prize Sponsor reserves the right to
                                         change the referral reward at any time
                                         at its own discretion.
                                     </p>
@@ -540,7 +543,7 @@ const Index = () => {
                                     <p className="description">
                                         No liability or responsibility is
                                         assumed by the Prize and/or Tournament
-                                        Parties resulting from entrant's
+                                        Parties resulting from participant's
                                         participation in or attempt to
                                         participate in the Prize and/or
                                         Tournament, ability or inability to
@@ -605,22 +608,22 @@ const Index = () => {
                                         Prize and/or Tournament Parties, and
                                         Froyo.Games from any and all claims,
                                         damages or liabilities arising from or
-                                        relating to such entrant's participation
-                                        in the Prize and/or Tournaments; (ii)
-                                        all causes of action arising out of or
-                                        connected with this Prize and/or
-                                        Tournament, or any Prize awarded, shall
-                                        be resolved individually, without resort
-                                        to any form of class action; and (iii)
-                                        any and all claims, judgments, and
-                                        awards shall be limited to actual
-                                        out-of-pocket costs incurred, excluding
-                                        legal fees and court costs. By accepting
-                                        a Prize, winner agrees that the Prize
-                                        and/or Tournament Sponsor, its parent,
-                                        subsidiaries, related or affiliated
-                                        companies or, if applicable, any of
-                                        their respective advertising or
+                                        relating to such participant's
+                                        participation in the Prize and/or
+                                        Tournaments; (ii) all causes of action
+                                        arising out of or connected with this
+                                        Prize and/or Tournament, or any Prize
+                                        awarded, shall be resolved individually,
+                                        without resort to any form of class
+                                        action; and (iii) any and all claims,
+                                        judgments, and awards shall be limited
+                                        to actual out-of-pocket costs incurred,
+                                        excluding legal fees and court costs. By
+                                        accepting a Prize, winner agrees that
+                                        the Prize and/or Tournament Sponsor, its
+                                        parent, subsidiaries, related or
+                                        affiliated companies or, if applicable,
+                                        any of their respective advertising or
                                         promotion agencies, or any other company
                                         or individual engaged in the provision
                                         of goods or services related to this
@@ -637,16 +640,17 @@ const Index = () => {
                                         Tournament or from the acceptance,
                                         possession, misuse or use of any Prize.
                                         ANY ATTEMPT BY AN INDIVIDUAL, WHETHER OR
-                                        NOT AN ENTRANT, TO DELIBERATELY DAMAGE,
-                                        DESTROY, TAMPER OR VANDALISE THE PRIZE
-                                        AND/OR TOURNAMENT PLATFORM OR INTERFERE
-                                        WITH THE OPERATION OF THE PRIZE AND / OR
-                                        TOURNAMENT IS A VIOLATION OF CRIMINAL
-                                        AND CIVIL LAWS, AND THE PRIZE AND/OR
-                                        TOURNAMENT SPONSOR RESERVES THE RIGHT TO
-                                        SEEK DAMAGES AND DILIGENTLY PURSUE ALL
-                                        REMEDIES AGAINST ANY SUCH INDIVIDUAL TO
-                                        THE FULLEST EXTENT PERMITTED BY LAW.
+                                        NOT A PARTICIPANT, TO DELIBERATELY
+                                        DAMAGE, DESTROY, TAMPER OR VANDALISE THE
+                                        PRIZE AND/OR TOURNAMENT PLATFORM OR
+                                        INTERFERE WITH THE OPERATION OF THE
+                                        PRIZE AND / OR TOURNAMENT IS A VIOLATION
+                                        OF CRIMINAL AND CIVIL LAWS, AND THE
+                                        PRIZE AND/OR TOURNAMENT SPONSOR RESERVES
+                                        THE RIGHT TO SEEK DAMAGES AND DILIGENTLY
+                                        PURSUE ALL REMEDIES AGAINST ANY SUCH
+                                        INDIVIDUAL TO THE FULLEST EXTENT
+                                        PERMITTED BY LAW.
                                     </p>
                                 </div>
                                 {/* PRIVACY & PUBLIC RELEASE */}
