@@ -165,7 +165,7 @@ const App = () => {
     else if (!regionAllow) return <LaunchingSoon />;
     else {
         return (
-            <Router>
+            <Router basename={process.env.REACT_APP_PUBLIC_URL}>
                 <Toasty />
                 <OrientationModal />
                 <HeaderHOC />
