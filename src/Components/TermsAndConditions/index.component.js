@@ -102,7 +102,7 @@ const Index = () => {
                                     <p className="description">
                                         Don’t impersonate or claim to be others,
                                         whether its users, celebrities,
-                                        officials, streamers, NextGamer staff or
+                                        officials, streamers, GameBox staff or
                                         anyone else. Don’t post the work of
                                         others and pose it as your own! This
                                         would be considered stealing and could
@@ -174,7 +174,7 @@ const Index = () => {
                                     </p>
                                 </div>
                                 {/* AUTO-RENEWABLE SUBSCRIPTION */}
-                                <div className="col-12 mb-4">
+                                {/* <div className="col-12 mb-4">
                                     <p className="title">
                                         Auto-Renewable Subscription
                                     </p>
@@ -201,7 +201,7 @@ const Index = () => {
                                             for the remaining duration.
                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
                                 {/* DATA DELETION REQUEST */}
                                 <div className="col-12 mb-4">
                                     <p className="title">
@@ -215,12 +215,12 @@ const Index = () => {
                                             className="email"
                                             to={{
                                                 pathname:
-                                                    "mailto:hello@esportsmini.com",
+                                                    "mailto:hello@gamebox.games",
                                             }}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            hello@esportsmini.com
+                                            hello@gamebox.games
                                         </Link>
                                         . Please note that some or all of the
                                         User-Provided Data may be required in

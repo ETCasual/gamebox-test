@@ -128,7 +128,7 @@ const Index = () => {
                                         <li>Android ID</li>
                                         <li>General Location</li>
                                         <li>
-                                            Data Data regarding your use of the
+                                            Data regarding your use of the
                                             Service, such as gameplay data and
                                             your interactions with other players
                                             within the Service
@@ -146,7 +146,7 @@ const Index = () => {
                                             third-party tool provided by a
                                             service (such as but not limited to
                                             Facebook, Google Play Game Service
-                                            or Game Center)
+                                            or Game Centre)
                                         </li>
                                         <li>
                                             Demographic data (such as to
@@ -180,7 +180,7 @@ const Index = () => {
                                             applications
                                         </li>
                                         <li>Operate the service </li>
-                                        <li>Verify and confirm payments</li>
+                                        <li>Verify and confirm payments </li>
                                         <li>
                                             Provide and deliver products and
                                             services you request
@@ -192,7 +192,7 @@ const Index = () => {
 
                                     <p className="description">
                                         To improve our service for our players
-                                        such as:
+                                        such as :
                                     </p>
                                     <ul className="description pb-3 px-3 m-0">
                                         <li>Updates and improvements</li>
@@ -200,7 +200,7 @@ const Index = () => {
                                             Provide social services within our
                                             service
                                         </li>
-                                        <li>Customize our game experience</li>
+                                        <li>Customise our game experience</li>
                                         <li>
                                             Better respond to issues and provide
                                             better support
@@ -220,9 +220,9 @@ const Index = () => {
                                     </ul>
 
                                     <p className="description">
-                                        To display personalized advertisements
+                                        To display personalised advertisements
                                         within the game along with other
-                                        websites and services by:
+                                        websites and services by :
                                     </p>
                                     <ul className="description pb-3 px-3 m-0">
                                         <li>
@@ -250,7 +250,7 @@ const Index = () => {
                                     </p>
                                     <ul className="description pb-3 px-3 m-0">
                                         <li>
-                                            Analyze and monitor the use of our
+                                            Analyse and monitor the use of our
                                             service and social interactions{" "}
                                         </li>
                                         <li>
@@ -283,12 +283,12 @@ const Index = () => {
                                             className="email"
                                             to={{
                                                 pathname:
-                                                    "mailto:hello@esportsmini.com",
+                                                    "mailto:hello@gamebox.games",
                                             }}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            hello@esportsmini.com
+                                            hello@gamebox.games
                                         </Link>
                                         . Please note that some or all of the
                                         User-Provided Data may be required in
@@ -300,7 +300,7 @@ const Index = () => {
                                 <div className="col-12 mb-4">
                                     <p className="title">Children</p>
                                     <p className="description">
-                                        We do not knowingly collect, market or
+                                        WWe do not knowingly collect, market or
                                         solicit personal data about or direct or
                                         target interest-based advertising to
                                         anyone under the age of 13 or knowingly
@@ -318,12 +318,12 @@ const Index = () => {
                                             className="email"
                                             to={{
                                                 pathname:
-                                                    "mailto:hello@esportsmini.com",
+                                                    "mailto:hello@gamebox.games",
                                             }}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            hello@esportsmini.com
+                                            hello@gamebox.games
                                         </Link>
                                         . We will remove such information within
                                         a reasonable time.
@@ -339,11 +339,11 @@ const Index = () => {
                                         procedural safeguards to protect the
                                         information we process and maintain. For
                                         example, we limit access to this
-                                        information to authorized employees and
+                                        information to authorised employees and
                                         contractors who need to know that
                                         information in order to operate, develop
                                         or improve our Service. Please be aware
-                                        that, although we endeavor to provide
+                                        that, although we endeavour to provide
                                         reasonable security for information we
                                         process and maintain, no security system
                                         can prevent all potential security
@@ -377,12 +377,12 @@ const Index = () => {
                                             className="email"
                                             to={{
                                                 pathname:
-                                                    "mailto:hello@esportsmini.com",
+                                                    "mailto:hello@gamebox.games",
                                             }}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            hello@esportsmini.com
+                                            hello@gamebox.games
                                         </Link>
                                         .
                                     </p>
