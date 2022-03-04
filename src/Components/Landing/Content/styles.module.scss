@@ -1,4 +1,7 @@
 #landing {
+    @include media-min($md) {
+        padding-top: 60px;
+    }
     #hero {
         min-height: 80vh;
         @include media-min($md) {
@@ -313,134 +316,6 @@
             height: 46px;
             font-weight: $fnt-wgt-400;
             margin: 0 auto;
-        }
-    }
-}
-
-section {
-    @include media-min($md) {
-        padding-top: 60px;
-    }
-    .thats-not-all-container {
-        flex-direction: column;
-        max-width: 904px;
-        inset: 0;
-        margin-bottom: 111px;
-        @media only screen and (max-width: 425px) and (min-width: 320px) {
-            width: Max(88.33%, 278px);
-            margin-top: 80px;
-        }
-        @media only screen and (min-width: 425px) {
-            margin-top: 54px;
-            width: 66.18%;
-        }
-        .title-text {
-            font-size: $fnt-sz-18;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-        .subtitle-text {
-            font-size: $fnt-sz-14;
-        }
-        .get-nft-container {
-            width: 100%;
-            height: 276px;
-            .background-img-container {
-                height: 100%;
-                width: 100%;
-                align-items: center;
-                @media only screen and (max-width: 425px) and (min-width: 320px) {
-                    overflow: visible;
-                }
-                @media only screen and (min-width: 425px) {
-                    overflow: hidden;
-                }
-                .left-img {
-                    position: absolute;
-                    @media only screen and (max-width: 425px) and (min-width: 320px) {
-                        z-index: 2;
-                        width: 124px;
-                        top: 0px;
-                        left: -55px;
-                    }
-                    @media only screen and (min-width: 425px) {
-                        width: 373px;
-                        left: -45px;
-                    }
-                }
-                .right-img {
-                    position: absolute;
-                    transform: matrix(0.99, 0.14, -0.14, 0.99, 0, 0);
-                    @media only screen and (max-width: 425px) and (min-width: 320px) {
-                        z-index: 2;
-                        width: 80px;
-                        height: 80px;
-                        right: 0px;
-                        bottom: -65px;
-                    }
-                    @media only screen and (min-width: 425px) {
-                        width: 213px;
-                        height: 213px;
-                        right: 43.41px;
-                    }
-                }
-            }
-            .info-container {
-                @media only screen and (max-width: 425px) and (min-width: 320px) {
-                    width: 100%;
-                    background: transparent
-                        linear-gradient(131deg, #333333 0%, #0f0f0f 100%) 0% 0%
-                        no-repeat padding-box;
-                    box-shadow: 0px 5px 10px #00000073;
-                    border-radius: 10px;
-                }
-                @media only screen and (min-width: 425px) {
-                }
-                .title-text {
-                    margin-bottom: 16px;
-                    font-size: $fnt-sz-18;
-                    font-weight: bold;
-                    text-align: center;
-                    @media only screen and (max-width: 425px) and (min-width: 320px) {
-                        width: 210px;
-                        margin-top: 20px;
-                    }
-                    @media only screen and (min-width: 425px) {
-                        margin-top: 32px;
-                    }
-                }
-                .subtitle-text {
-                    width: 278px;
-                    height: 37px;
-                    font-size: $fnt-sz-12;
-                    text-align: center;
-                    margin-bottom: 26px;
-                }
-                .count-down-text {
-                    width: 300px;
-                    height: 42px;
-                    background: #1d1d1d 0% 0% no-repeat padding-box;
-                    box-shadow: inset 0px 3px 6px #0000000f;
-                    border-radius: 10px;
-                    backdrop-filter: blur(10px);
-                    -webkit-backdrop-filter: blur(10px);
-                    margin-bottom: 29px;
-                    font-size: $fnt-sz-12;
-                    font-weight: bold;
-                    color: #00c1b9;
-                    text-align: center;
-                }
-                .register-now-button {
-                    width: 247px;
-                    height: 46px;
-                    background: #cc0767 0% 0% no-repeat padding-box;
-                    box-shadow: inset 0px 3px 6px #0000000f;
-                    border-radius: 10px;
-                    font-size: $fnt-sz-14;
-                    font-weight: bold;
-                    color: #ffffff;
-                }
-            }
         }
     }
 }
