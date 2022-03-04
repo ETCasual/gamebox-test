@@ -1951,8 +1951,7 @@ proto.api.gamebox.AddUserRequest.toObject = function(includeInstance, msg) {
     socialLinkFb: jspb.Message.getFieldWithDefault(msg, 7, ""),
     socialLinkGoogle: jspb.Message.getFieldWithDefault(msg, 8, ""),
     avatarUrl: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    idToken: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    walletAddress: jspb.Message.getFieldWithDefault(msg, 11, "")
+    idToken: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -2028,10 +2027,6 @@ proto.api.gamebox.AddUserRequest.deserializeBinaryFromReader = function(msg, rea
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setIdToken(value);
-      break;
-    case 11:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setWalletAddress(value);
       break;
     default:
       reader.skipField();
@@ -2129,13 +2124,6 @@ proto.api.gamebox.AddUserRequest.serializeBinaryToWriter = function(message, wri
   if (f.length > 0) {
     writer.writeString(
       10,
-      f
-    );
-  }
-  f = message.getWalletAddress();
-  if (f.length > 0) {
-    writer.writeString(
-      11,
       f
     );
   }
@@ -2289,21 +2277,6 @@ proto.api.gamebox.AddUserRequest.prototype.getIdToken = function() {
 /** @param {string} value */
 proto.api.gamebox.AddUserRequest.prototype.setIdToken = function(value) {
   jspb.Message.setProto3StringField(this, 10, value);
-};
-
-
-/**
- * optional string wallet_address = 11;
- * @return {string}
- */
-proto.api.gamebox.AddUserRequest.prototype.getWalletAddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setWalletAddress = function(value) {
-  jspb.Message.setProto3StringField(this, 11, value);
 };
 
 
