@@ -60,7 +60,12 @@ const Settings = () => {
                                     <a
                                         target="_blank"
                                         rel="noreferrer"
-                                        href="https://froyo.games/my-profile"
+                                        href={
+                                            process.env.REACT_APP_NODE_ENV ===
+                                            "development"
+                                                ? "https://staging.froyo.games/my-profile"
+                                                : "https://froyo.games/my-profile"
+                                        }
                                         className="col-12 d-flex align-items-center profile-info"
                                         onClick={scrollToTop}
                                     >
