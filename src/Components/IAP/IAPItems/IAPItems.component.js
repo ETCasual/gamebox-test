@@ -19,7 +19,7 @@ const IAP = ({ handleGemsPaymentPanel }) => {
             performance.getEntriesByType("navigation")[0] &&
             performance.getEntriesByType("navigation")[0].type === "reload"
         ) {
-            if (user.id > 0) dispatch(loadGemsList());
+            if (user.id ) dispatch(loadGemsList());
         }
     }, [dispatch, user.id]);
 

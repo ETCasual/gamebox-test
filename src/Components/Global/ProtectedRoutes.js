@@ -15,13 +15,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
     useEffect(() => {
         let timeOut = null;
-        const token = sessionStorage.getItem("token") || null;
+        const token = localStorage.getItem("froyo-authenticationtoken") || null;
         const items =
             JSON.parse(localStorage.getItem("prizeDetailList")) || null;
 
-        if (token !== null && user.id <= 0)
+        if (token !== null && user.id < 0)
             setSigningInUser((prev) => ({ ...prev, loading: true }));
-        else if (token !== null && user.id > 0)
+        else if (token !== null && user.id )
             setSigningInUser((prev) => ({ ...prev, ready: true }));
         else {
             clearTimeout(timeOut);

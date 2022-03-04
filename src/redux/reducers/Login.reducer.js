@@ -1,4 +1,3 @@
-import { handleSignOut } from "../../Utils/SignOut";
 import {
     LOGIN_SUCCESS,
     LOGIN_ERROR,
@@ -10,7 +9,7 @@ import {
 
 const INITIAL_STATE = {
     user: {
-        id: 0,
+        id: null,
         exp: 0,
         gems: 0,
         picture: "",
@@ -33,7 +32,6 @@ const loginReducer = (esmData = INITIAL_STATE, { type, payload }) => {
 
         case LOGIN_ERROR:
             sessionStorage.setItem("errorType", payload.errorType);
-            handleSignOut(payload.dispatch);
             return { ...esmData, user: esmData.user };
 
         case UPDATE_USER_SETTINGS:

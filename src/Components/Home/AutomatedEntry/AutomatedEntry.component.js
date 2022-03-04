@@ -27,7 +27,7 @@ const AutomatedEntry = ({ data }) => {
     let watcherRef = useRef(null);
 
     useEffect(() => {
-        if (user.id > 0)
+        if (user.id )
             dispatch(loadAutomatedEntryTickets(data.scheduledOn, data.prizeId));
     }, [dispatch, data.scheduledOn, data.prizeId, user.id]);
 

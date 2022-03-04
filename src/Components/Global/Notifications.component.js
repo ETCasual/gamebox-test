@@ -37,9 +37,9 @@ const Notification = ({
                     </div>
                 )}
 
-                <div className="notification-card-wrapper py-3 position-relative">
-                    {notificationData.length > 0 &&
-                        notificationData?.map((n, i) => (
+                {notificationData.length > 0 && (
+                    <div className="notification-card-wrapper py-3 position-relative">
+                        {notificationData?.map((n, i) => (
                             <div
                                 key={`notification-${i}`}
                                 className={`col-12 notification-card px-0 ${
@@ -139,7 +139,8 @@ const Notification = ({
                                 </div>
                             </div>
                         ))}
-                </div>
+                    </div>
+                )}
             </div>
         </>
     );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { auth, messaging, onMessageListener } from "./firebase";
+import { messaging, onMessageListener } from "./firebase";
 import AES from "crypto-js/aes";
 import Utf8 from "crypto-js/enc-utf8";
 
@@ -29,18 +29,17 @@ import PrivacyPolicy from "Pages/PrivacyPolicy.page";
 import TournamentRules from "Pages/TournamentRules.page";
 import LaunchingSoon from "Pages/LaunchingSoon.page";
 
-import loadLoginUser from "redux/thunks/Login.thunk";
 import loadPrizes from "redux/thunks/Prizes.thunk";
 import loadExchangeRate from "redux/thunks/ExchangeRate.thunk";
 import loadRanks from "redux/thunks/Ranks.thunk";
 import loadConfig from "redux/thunks/Config.thunk";
 import loadGemsList from "redux/thunks/GemsList.thunk";
 import loadSpinnerRules from "redux/thunks/SpinnerRules.thunk";
+import loadGamesList from "redux/thunks/GamesList.thunk";
 import loadNotificationToken from "redux/thunks/UpdateNotificationToken.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import loadNotifications from "redux/thunks/Notifcations.thunk";
 import loadFriendInvitation from "redux/thunks/FriendInvitation.thunk";
-import loadGamesList from "redux/thunks/GamesList.thunk";
 import loadUnClaimedPrizes from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
 
@@ -65,78 +64,66 @@ const App = () => {
 
     // ONAUTH CHANGED & API CALLS
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-            if (authUser) {
-                sessionStorage.setItem("sessionTimeStamp", Date.now());
-                const jwtToken = await authUser.getIdToken(true);
-                if (jwtToken) {
-                    sessionStorage.setItem("token", jwtToken);
-                    let isNewUser = false;
-                    isNewUser =
-                        localStorage.getItem("isNewUser") !== null
-                            ? Boolean(localStorage.getItem("isNewUser"))
-                            : false;
-                    dispatch(loadLoginUser(authUser, isNewUser));
-                    dispatch(loadPrizes());
-                    dispatch(loadExchangeRate());
-                    dispatch(loadRanks());
-                    dispatch(loadConfig());
-                    dispatch(loadGemsList());
-                    dispatch(loadSpinnerRules());
-                    dispatch(loadGamesList());
+        if (user.id) {
+            // dispatch(loadLoginUser(authUser, isNewUser));
+            dispatch(loadPrizes());
+            dispatch(loadExchangeRate());
+            dispatch(loadRanks());
+            dispatch(loadConfig());
+            dispatch(loadGemsList());
+            dispatch(loadSpinnerRules());
+            dispatch(loadGamesList());
 
-                    // FOR FUTURE PURPOSE
-                    // dispatch({ type: "LIST_PURCHASE_HISTORY" });
-                }
-            } else sessionStorage.removeItem("token");
-        });
-        return () => unsubscribe();
-    }, [dispatch]);
+            // FOR FUTURE PURPOSE
+            // dispatch({ type: "LIST_PURCHASE_HISTORY" });
+        }
+        // else sessionStorage.removeItem("token");
+    }, [dispatch, user.id]);
 
     useEffect(() => {
-        if (user.id > 0) sessionStorage.removeItem("errorType");
+        if (user.id) sessionStorage.removeItem("errorType");
     }, [user.id]);
 
     // UPDATE NOTIFICATION TOKEN & LOAD NOTIFICATION
-    useEffect(() => {
-        if (user.id > 0) {
-            // NOTIFICATION TOKEN UPDATE
-            if (messaging) {
-                messaging
-                    .getToken({
-                        vapidKey: process.env.REACT_APP_VAPID_KEY,
-                    })
-                    .then((currentToken) => {
-                        if (currentToken) {
-                            dispatch(loadNotificationToken(currentToken));
-                        } else {
-                            // TODO: Show permission request UI
-                            console.log(
-                                "No registration token available. Request permission to generate one."
-                            );
-                            Notification.requestPermission();
-                        }
-                    })
-                    .catch((err) => {
-                        console.log("Error: messaging.getToken: ", err);
-                        // TODO: handle the error here, maybe bcos of different browser problem
-                        // Brave browser will need to enable it manually
-                        // Brave settings > Privacy and Security > Use Google Services for Push Messaging
-                        // Chrome is OK by default
-                        // Other haven't check.
-                    });
-            }
-            // NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
-            dispatch(loadNotificationNumber());
-            dispatch(loadNotifications());
-            dispatch(loadUnClaimedPrizes());
-        }
-    }, [user.id, dispatch]);
+    // useEffect(() => {
+    //     if (user.id) {
+    //         // NOTIFICATION TOKEN UPDATE
+    //         if (messaging) {
+    //             messaging
+    //                 .getToken({
+    //                     vapidKey: process.env.REACT_APP_VAPID_KEY,
+    //                 })
+    //                 .then((currentToken) => {
+    //                     if (currentToken) {
+    //                         dispatch(loadNotificationToken(currentToken));
+    //                     } else {
+    //                         // TODO: Show permission request UI
+    //                         console.log(
+    //                             "No registration token available. Request permission to generate one."
+    //                         );
+    //                         Notification.requestPermission();
+    //                     }
+    //                 })
+    //                 .catch((err) => {
+    //                     console.log("Error: messaging.getToken: ", err);
+    //                     // TODO: handle the error here, maybe bcos of different browser problem
+    //                     // Brave browser will need to enable it manually
+    //                     // Brave settings > Privacy and Security > Use Google Services for Push Messaging
+    //                     // Chrome is OK by default
+    //                     // Other haven't check.
+    //                 });
+    //         }
+    //         // NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
+    //         dispatch(loadNotificationNumber());
+    //         dispatch(loadNotifications());
+    //         dispatch(loadUnClaimedPrizes());
+    //     }
+    // }, [user.id, dispatch]);
 
     // INVITATION
     useEffect(() => {
         const isNewUser = Boolean(localStorage.getItem("isNewUser"));
-        if (user.id > 0 && isNewUser) {
+        if (user.id && isNewUser) {
             const inviteCode = localStorage.getItem("inviteCode");
             if (inviteCode !== null) {
                 const originalText = decodeURIComponent(inviteCode);

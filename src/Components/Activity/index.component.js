@@ -43,7 +43,7 @@ const Index = () => {
     // GET ACTIVITIES DATA
     useEffect(() => {
         if (
-            (user.id > 0 &&
+            (user.id  &&
                 prizes.featuredData.length > 0 &&
                 prizes.premiumData.length > 0) ||
             prizes.automatedEntryData.length > 0

@@ -75,7 +75,7 @@ const rootReducer = (state, action) => {
     if (action.type === "LOG_OUT") {
         window.scrollTo(0, 0);
         localStorage.clear();
-        sessionStorage.removeItem("token");
+        // sessionStorage.removeItem("token");
         sessionStorage.removeItem("isAuthValid");
         state = undefined;
     }

@@ -7,7 +7,6 @@ import SwiperCore, {
     Autoplay,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const RevealCardModal = ({

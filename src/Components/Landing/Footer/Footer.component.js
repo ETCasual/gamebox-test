@@ -130,7 +130,7 @@ const Footer = () => {
                     <Link to="/" onClick={scrollToTop}>
                         <img
                             className="footer-img"
-                            src={`https://esportsmini-assets.s3.ap-southeast-1.amazonaws.com/app/art_assets/logo/logo_esportsmini.png`}
+                            src={`${window.cdn}logo/logo_gamebox.png`}
                             alt="game-box-logo"
                         />
                     </Link>

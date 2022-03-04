@@ -37,7 +37,7 @@ const HeaderHOC = () => {
             createdOn: 0,
         });
 
-    let token = sessionStorage.getItem("token");
+    let token = localStorage.getItem("froyo-authenticationtoken");
 
     useEffect(() => {
         if (user.picture) setUserImage(user.picture);
@@ -131,7 +131,7 @@ const HeaderHOC = () => {
 
     return (
         <>
-            {token !== null && user.id > 0 && (
+            {token !== null && user.id  && (
                 <Header
                     userImage={userImage}
                     userGems={userGems}

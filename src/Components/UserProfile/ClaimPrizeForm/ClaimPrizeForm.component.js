@@ -38,7 +38,7 @@ const ClaimPrizeForm = () => {
         if (
             performance.getEntriesByType("navigation")[0] &&
             performance.getEntriesByType("navigation")[0].type === "reload" &&
-            user.id > 0
+            user.id 
         )
             dispatch(loadUnClaimedPrizes());
     }, [dispatch, user.id]);
@@ -48,7 +48,7 @@ const ClaimPrizeForm = () => {
             const idx = unClaimedPrizes.findIndex((e) => e.id === parseInt(id));
             if (idx > -1) setSelectedPrize(unClaimedPrizes[idx]);
         } else {
-            user.id > 0 && dispatch(loadUnClaimedPrizes());
+            user.id  && dispatch(loadUnClaimedPrizes());
         }
     }, [unClaimedPrizes, id, dispatch, user.id]);
 

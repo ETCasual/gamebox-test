@@ -41,7 +41,7 @@ const Index = () => {
     }, [winnerData]);
 
     useEffect(() => {
-        if (user.id > 0) dispatch(loadWinners());
+        if (user.id ) dispatch(loadWinners());
     }, [dispatch, user.id]);
 
     useEffect(() => {

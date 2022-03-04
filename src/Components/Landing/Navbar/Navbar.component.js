@@ -1,22 +1,24 @@
 import React from "react";
 
-const Navbar = ({ handleSignUp }) => {
+const Navbar = () => {
     return (
-        <div className="nav-bar position-fixed">
-            <div className="position-relative w-100 h-100">
-                <div className="blur-background position-absolute w-100 h-100"></div>
-                <div className="items position-absolute d-flex flex-row align-items-center justify-content-between h-100 mx-auto">
-                    <div className="logo-img-wrapper">
+        <div className="nav-bar position-fixed d-flex align-items-center">
+            <div className="blur-background position-absolute w-100 h-100" />
+            <div className="container-fluid">
+                <div className="row justify-content-center">
+                    <div className="col-12 col-md-10 col-xl-7 d-flex align-items-center justify-content-between">
                         <img
                             className="logo"
                             src={`${window.cdn}logo/logo_gamebox.png`}
                             alt="GameBox"
                         />
-                    </div>
-                    <div className="login-button-wrapper">
-                        <button className="nav-login" onClick={handleSignUp}>
-                            Login
-                        </button>
+                        <a
+                            target="_blank"
+                            rel="noreferrer"
+                            href={process.env.REACT_APP_NODE_ENV === 'development' ? 'https://staging.froyo.games/home' :  "https://froyo.games/home"}
+                        >
+                            <button className="nav-login">Login</button>
+                        </a>
                     </div>
                 </div>
             </div>

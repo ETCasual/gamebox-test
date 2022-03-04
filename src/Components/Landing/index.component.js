@@ -1,29 +1,28 @@
 import "./styles.module.scss";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import Navbar from "Components/Landing/Navbar/Navbar.component";
-import Login from "Components/Landing/LoginModal/LoginModal.component";
-import Content from "Components/Landing/Content/Content.component";
-
+import Content from "Components/Landing/Content/index.component";
 import BlockedUserModal from "Components/Landing/BlockedUserModal/BlockedUserModal.component";
-// import BetaModal from "Components/Landing/BetaModal/BetaModal.component";
+
+import loadLoginUser from "redux/thunks/Login.thunk";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
-    let loginRef = useRef(null);
-    let loginWrapperRef = useRef(null);
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     let heroRef = useRef(null);
     let workRef = useRef(null);
     let workCardRef = useRef([]);
     let dailyRewardRef = useRef(null);
-    let dailyRewardCardRef = useRef(null);
 
-    // const [betaModal, setModal] = useState(false);
     const [blockedArchivedModal, setBlockedArchivedModal] = useState(
         sessionStorage.getItem("errorType") !== null ? true : false
     );
@@ -87,6 +86,7 @@ const Index = () => {
                     [
                         dailyRewardRef.current.childNodes[0],
                         dailyRewardRef.current.childNodes[1],
+                        dailyRewardRef.current.childNodes[2],
                     ],
                     {
                         duration: 0.6,
@@ -96,16 +96,6 @@ const Index = () => {
                         stagger: 0.2,
                     },
                     0
-                ).to(
-                    dailyRewardCardRef.current,
-                    {
-                        duration: 0.6,
-                        autoAlpha: 1,
-                        y: 0,
-                        ease: "power4.out",
-                        stagger: 0.2,
-                    },
-                    0.7
                 );
             },
         });
@@ -117,44 +107,23 @@ const Index = () => {
         };
     }, []);
 
-    // REVEAL LOGIN MODAL ANIMATION
-    const handleOnClickSignUp = () => {
-        gsap.to(loginRef.current, {
-            duration: 1,
-            display: "block",
-            autoAlpha: 1,
-            ease: "power2.out",
-            onStart: () => {
-                gsap.to(loginWrapperRef.current, {
-                    delay: 0.5,
-                    duration: 1,
-                    bottom: 0,
-                    ease: "power4.out",
-                });
-            },
-        });
-    };
+    useEffect(() => {
+        const token = localStorage.getItem("froyo-authenticationtoken");
+        if (token) dispatch(loadLoginUser(history));
+    }, [dispatch, history]);
 
     return (
         <>
             {/* TOP NAVIGATION BAR */}
-            <Navbar handleSignUp={handleOnClickSignUp} />
+            <Navbar />
 
             {/* MIDDLE CONTENT */}
             <Content
-                handleSignUp={handleOnClickSignUp}
                 heroRef={heroRef}
                 workRef={workRef}
                 workCardRef={workCardRef}
                 dailyRewardRef={dailyRewardRef}
-                dailyRewardCardRef={dailyRewardCardRef}
             />
-
-            {/* BOTTOM LOGIN MODAL */}
-            <Login loginRef={loginRef} loginWrapperRef={loginWrapperRef} />
-
-            {/* BETA POPUP MODAL */}
-            {/* {betaModal && <BetaModal setModal={setModal} />} */}
 
             {/* BLOCKED USER MODAL */}
             {blockedArchivedModal && (

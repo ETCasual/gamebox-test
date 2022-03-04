@@ -84,7 +84,7 @@ const Index = ({ match }) => {
 
     // LOAD AVAILABLE SPINS
     useEffect(() => {
-        if (user.id > 0 && spinner.freeSpins <= 0)
+        if (user.id  && spinner.freeSpins <= 0)
             dispatch(loadAvailableSpins());
     }, [dispatch, user.id, spinner.freeSpins]);
 

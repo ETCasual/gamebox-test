@@ -40,102 +40,102 @@ import _ from "lodash";
 import { monthYearDict, PRIZE_CATEGORY_NAME } from "Utils/Enums";
 import { saveCookie, getCookie } from "Utils/ManageCookies";
 
-const { GameboxApiPromiseClient } = require("../proto/gameboxapi_grpc_web_pb.js");
+const {
+    GameboxApiPromiseClient,
+} = require("../proto/gameboxapi_grpc_web_pb.js");
 const client = new GameboxApiPromiseClient(
     process.env.REACT_APP_API_ENDPOINT,
     null,
     null
 );
 //
-//      ADD NEW USER - FIRE THIS ONE IF USER INFO IS NOT AVAILABLE - GET ACCOUNT FROYO API
+//      ADD NEW USER 
 //
-// TODO: ADD WALLET FIELD
-export async function addUser(authUser) {
-    const token = sessionStorage.getItem("token");
-    const currentUser = authUser?.providerData?.[0];
+export async function addUser(user) {
+    const token = localStorage.getItem("froyo-authenticationtoken");
 
     const request = new AddUserRequest();
     request.setIdToken(token);
-    request.setUsername(authUser?.uid);
-    request.setEmail(currentUser?.email);
-    request.setFirstname(currentUser?.displayName.split(" ")[0]);
-    request.setLastname(currentUser?.displayName.split(" ")[1]);
-    request.setAvatarUrl(currentUser?.photoURL);
+    request.setUsername(user?.email);
+    request.setEmail(user?.email);
+    request.setFirstname(user?.firstName);
+    request.setLastname(user?.lastName);
+    request.setAvatarUrl(user?.imageUrl);
     request.setPassword("abcxyz123");
-    request.setPhone("");
-    request.setSocialLinkFb("");
-    request.setSocialLinkGoogle("");
+    // request.setPhone("");
+    // request.setSocialLinkFb("");
+    // request.setSocialLinkGoogle("");
 
     const response = await client.addUser(request, {
-        authorization: token,
-        uid: authUser?.uid,
+        authorization: `Bearer ${token}`,
     });
     const id = response.getResult();
     return id;
 }
 
 //
-//      USER SIGN IN - FIRE THIS ONE TO GET INFO FROM GAMEBOX BACKEND
+//      USER SIGN IN 
 //
-export async function userSignIn(authUser) {
-    const token = sessionStorage.getItem("token");
-    const currentUser = authUser?.providerData?.[0];
+export async function userSignIn(email = "rohail@esportsmini.com") {
+    const token = localStorage.getItem("froyo-authenticationtoken");
 
     const request = new SignInRequest();
     request.setIdToken(token);
-    request.setUsername(authUser?.uid);
+    request.setUsername(email);
     const response = await client.signIn(request, {
-        authorization: token,
-        uid: authUser?.uid,
+        authorization: `Bearer ${token}`,
     });
     const signInResult = response.getResult();
-    const provider =
-        sessionStorage.getItem("provider") === "google" ? "google" : "facebook";
-
     let user = {
-        id: 0,
+        id: null,
         phone: "",
         email: "",
         username: "",
         picture: "",
         isNotifyAllowed: true,
-        providerUID: "",
-        providerId: "",
         gems: 0,
         exp: 0,
-        subId: "",
-        subExpiryDate: "",
-        isLoggedIn: true,
     };
-    Object.assign(user, {
-        id: signInResult.getId(),
-        phone: signInResult.getPhone(),
-        email: signInResult.getEmail(),
-        username: signInResult.getNickName() || signInResult.getFirstname(),
-        picture: signInResult.getAvatarUrl(),
-        isNotifyAllowed: signInResult.getIsNotifyAllowed(),
-        providerUID: signInResult.getUsername(),
-        providerId: provider || currentUser,
-        gems: signInResult.getGemBalance(),
-        exp: signInResult.getExp(),
-        subId: signInResult.getStripeSubId(),
-        subExpiryDate: signInResult.getStripeExpiryDate(),
-        isLoggedIn: true,
-    });
+    if (signInResult) {
+        Object.assign(user, {
+            id: signInResult.getId(),
+            phone: signInResult.getPhone(),
+            email: signInResult.getEmail(),
+            username: signInResult.getNickName() || signInResult.getFirstname(),
+            picture: signInResult.getAvatarUrl(),
+            isNotifyAllowed: signInResult.getIsNotifyAllowed(),
+            gems: signInResult.getGemBalance(),
+            exp: signInResult.getExp(),
+            isLoggedIn: true,
+        });
+    }
     return user;
+}
+
+//
+//      FROYO API - TO GET USER INFO
+//
+export async function getUserAccountInfoFroyo() {
+    const token = localStorage.getItem("froyo-authenticationtoken");
+
+    const { data } = await axios.get(process.env.REACT_APP_FROYO_API_ENDPOINT, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    return data;
 }
 
 //
 //      NEW USER INVITATION
 //
 export async function newUserInvitation(user, inviteCode) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new AddInviteRequest();
     request.setUserId(user.id);
     request.setInvitedBy(inviteCode);
     const response = await client.addInvite(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     if (response.getResult() > 0) {
         console.log("Invitation Response:", response.getResult());
@@ -147,14 +147,13 @@ export async function newUserInvitation(user, inviteCode) {
 //      USER DETAILS - GEMS & EXP
 //
 export async function getUserDetails(user) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new SignInRequest();
     request.setIdToken(token);
     request.setUsername(user.providerUID);
 
     const response = await client.signIn(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const userInfo = response.getResult();
     const subId = userInfo.getStripeSubId();
@@ -180,10 +179,10 @@ export async function getUserDetails(user) {
 //     GET RANKS
 //
 export async function getRanks() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListRankRequest();
     const response = await client.listRank(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const rankResultList = response.getResultList();
     const ranks = [];
@@ -202,13 +201,13 @@ export async function getRanks() {
 //  GET GAMES BASIC DETAILS FOR STAY TUNED COMPONENT
 //
 export async function getGamesList() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListGameRequest();
     request.setLimit(100);
     request.setOffset(0);
     request.setStatus(2);
     const response = await client.listGame(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const data = response.getResultList();
     let gamesList = [];
@@ -226,10 +225,10 @@ export async function getGamesList() {
 //     GET PRIZES
 //
 export async function getPrizes() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListPrizeRequest();
     const response = await client.listPrize(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const prizeList = response.getResultList();
 
@@ -646,7 +645,7 @@ export async function getPrizeLatestTicketsCollected(
     ignoreChecking,
     prizeTicketCollection
 ) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
 
     if (!ignoreChecking) {
         const existingIndex = prizeTicketCollection.findIndex(
@@ -679,7 +678,7 @@ export async function getPrizeLatestTicketsCollected(
     const request = new GetPrizeTicketsCollectedRequest();
     request.setPrizeId(prizeId);
     const response = await client.getPrizeTicketsCollected(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const tickets = response.getTickets();
     return { prizeId, tickets, lastChecked: Date.now() };
@@ -694,7 +693,7 @@ export async function getPoolTickets(
     user,
     poolTickets
 ) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
 
     if (!ignoreChecking) {
         const existingIndex = poolTickets.findIndex(
@@ -723,8 +722,7 @@ export async function getPoolTickets(
     request.setPrizeId(prizeId);
 
     const response = await client.getPrizeTicketPool(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const tickets = response.getTickets();
     return { prizeId, tickets, lastChecked: Date.now() };
@@ -734,14 +732,14 @@ export async function getPoolTickets(
 // GET AUTOMATED ENTRY TICKETS
 //
 export async function getTotalTickets(scheduledOn, prizeId, user) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
 
     const request = new GetTotalTicketsSinceRequest();
     request.setUserId(user?.id);
     request.setScheduledOn(scheduledOn);
 
     const response = await client.getTotalTicketsSince(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
         uid: user?.providerUID,
     });
     const automatedEntryTicket = [];
@@ -756,13 +754,12 @@ export async function getTotalTickets(scheduledOn, prizeId, user) {
 //     GET LOG GLIST
 //
 export async function getLogGList(user, prizes) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListLogPrizePoolRequest();
     request.setUserId(user.id);
 
     const response = await client.listLogPrizePool(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
 
     const activity = [];
@@ -798,7 +795,7 @@ export async function logEnter(
     isAdWatched,
     isGemUsed
 ) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new LogGEnterRequest();
     request.setSecret("");
     request.setUserId(user.id);
@@ -808,8 +805,7 @@ export async function logEnter(
     request.setIsUsedGem(isGemUsed);
 
     const response = await client.logGEnter(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
 
     const result = response.getResult();
@@ -822,7 +818,7 @@ export async function logEnter(
 //     LOG LEAVE
 //
 export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const enterId = currentGameInfo.playerEnterGameId;
     const request = new LogGLeaveRequest();
     request.setSecret("");
@@ -831,8 +827,7 @@ export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
     request.setGameScore(gameScore);
 
     const response = await client.logGLeave(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
 
     extraEarning = {
@@ -848,7 +843,7 @@ export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
 //      GET LEADERBOARD
 //
 export async function getLeaderboardResult(prizeId, gameId) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListLeaderboardRequest();
 
     request.setGameId(gameId);
@@ -857,7 +852,7 @@ export async function getLeaderboardResult(prizeId, gameId) {
     request.setOffset(0);
 
     const response = await client.listLeaderboard(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const resultList = response.getResultList();
     let leaderboard = [];
@@ -884,15 +879,14 @@ export async function getCurrentUserRank(
     prizeId,
     currentUserRank
 ) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new GetCurrentPlayerRankRequest();
     request.setGameId(gameId);
     request.setPrizeId(prizeId);
     request.setUserId(user.id);
 
     const response = await client.getCurrentPlayerRank(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const result = response.getResult();
     currentUserRank = { ...currentUserRank, rank: result ? result : "-" };
@@ -903,13 +897,13 @@ export async function getCurrentUserRank(
 //  GET WINNERS LIST
 //
 export async function getWinnersList() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListWinnerRequest();
     request.setLimit(20);
     request.setOffset(0);
 
     const response = await client.listWinner(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const winnerResultList = response.getResultList();
 
@@ -986,14 +980,14 @@ export async function getWinnersList() {
 //     GET HIGHSCORE
 //
 export async function getHighScore(user) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListLogGRequest();
     request.setUserId(user.id);
     request.setLimit(20);
     request.setOffset(0);
 
     const response = await client.listLogG(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const logGResultList = response.getResultList();
     const highScore = [];
@@ -1012,13 +1006,13 @@ export async function getHighScore(user) {
 //     GET GEMS LIST
 //
 export async function getGemsList() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListItemRequest();
     request.setLimit(20);
     request.setOffset(0);
 
     const response = await client.listItem(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const itemResultList = response.getResultList();
     const gemsList = [];
@@ -1099,18 +1093,14 @@ export async function getExchangeRate() {
     return { exchangeRate, ipInfo };
 }
 
-
-
-
-
 //
 //     GET SPINNER RULES
 //
 export async function getSpinnerRules() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListSpinnerRuleRequest();
     const response = await client.listSpinnerRule(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const spinnerRuleResultList = response.getResultList();
     const spinnerRules = [];
@@ -1127,12 +1117,12 @@ export async function getSpinnerRules() {
 //     GET LEADERBOARD RANK
 //
 export async function getLeaderboardRank(gameId, leaderRuleRanks) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListGameLeaderRuleRequest();
     request.setGameId(gameId);
 
     const response = await client.listGameLeaderRule(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const leaderRuleResultList = response.getResultList();
     leaderRuleResultList.forEach((rank) => {
@@ -1166,7 +1156,7 @@ export async function updateUserSettings(
     picture,
     isNotifyAllowed
 ) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new UpdateUserSettingsRequest();
     request.setId(user.id);
     request.setIsNotifyAllowed(isNotifyAllowed);
@@ -1177,8 +1167,7 @@ export async function updateUserSettings(
     request.setNickName(username);
 
     await client.updateUserSettings(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     return {
         ...user,
@@ -1192,13 +1181,12 @@ export async function updateUserSettings(
 //     GET UNCLAIMED PRIZES LIST
 //
 export async function getUnclaimedPrizesList(user) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListWinnerUnclaimedRequest();
     request.setUserId(user.id);
 
     const response = await client.listWinnerUnclaimed(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const unclaimedWinnerResultList = response.getResultList();
     const unClaimedPrizes = [];
@@ -1223,13 +1211,12 @@ export async function getUnclaimedPrizesList(user) {
 //     GET CLAIMED PRIZES LIST
 //
 export async function getClaimedPrizesList(user) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListWinnerClaimedRequest();
     request.setUserId(user.id);
 
     const response = await client.listWinnerClaimed(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const claimedWinnerResultList = response.getResultList();
     const claimedPrizes = [];
@@ -1267,7 +1254,7 @@ export async function getClaimedPrizesList(user) {
 //     PROCESS CLAIM
 //
 export async function processClaim(user, id, claim) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ClaimWinnerRequest();
     request.setId(id);
     request.setUserId(user.id);
@@ -1282,8 +1269,7 @@ export async function processClaim(user, id, claim) {
     request.setCountry(claim.country);
 
     const res = await client.claimWinner(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     return res.getResult();
 }
@@ -1292,10 +1278,10 @@ export async function processClaim(user, id, claim) {
 //     GET CONFIG
 //
 export async function getConfig() {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new GetConfigRequest();
     const response = await client.getConfig(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const configResult = response.getResult();
     const config = {};
@@ -1324,7 +1310,7 @@ export async function purchaseProcess(
     price,
     subId
 ) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new BuyRequest();
     request.setSecret(secret);
     request.setUserId(user.id);
@@ -1335,8 +1321,7 @@ export async function purchaseProcess(
     request.setSubId(subId);
 
     const response = await client.buy(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const result = response.getResult();
     return result;
@@ -1346,13 +1331,12 @@ export async function purchaseProcess(
 //     GET SPIN AVAILABLE
 //
 export async function getSpinAvailable(user, spinner) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new GetSpinAvailableRequest();
     request.setUserId(user.id);
 
     const response = await client.getSpinAvailable(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const spinAvailableResult = response.getResult();
     if (spinAvailableResult)
@@ -1364,14 +1348,13 @@ export async function getSpinAvailable(user, spinner) {
 //     PLAYER LOG SPINNER ENTER
 //
 export async function logSEnter(user, prizeId, spinner) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new LogSEnterRequest();
     request.setUserId(user.id);
     request.setPrizeId(prizeId);
 
     const response = await client.logSEnter(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const result = response.getResult();
     if (result) {
@@ -1393,14 +1376,13 @@ export async function logSEnter(user, prizeId, spinner) {
 //     PLAYER LOG SPINNER LEAVE
 //
 export async function logSLeave(user, enterId, spinner) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new LogSLeaveRequest();
     request.setId(enterId);
     request.setUserId(user.id);
 
     const response = await client.logSLeave(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     if (response.getWinAmount() > 0) {
         spinner = {
@@ -1423,13 +1405,12 @@ export async function logSLeave(user, enterId, spinner) {
 //     PLAYER LOG SPINNER EXTRA
 //
 export async function logSExtra(user, spinner, isTypeGems) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new LogSExtraRequest();
     request.setUserId(user.id);
     request.setIsGemOrAd(isTypeGems);
     const response = await client.logSExtra(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const result = response.getResult();
     if (result > 0) {
@@ -1446,14 +1427,14 @@ export async function logSExtra(user, spinner, isTypeGems) {
 //     UPDATE PUSH NOTIFICATION
 //
 export async function updatePushNotification(user, fcmToken) {
-    const token = sessionStorage.getItem("token");
+    console.log(user, fcmToken);
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new UpdateMsgTokenRequest();
     request.setId(user.id);
     request.setToken(fcmToken);
 
     const response = await client.updateMsgToken(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     console.log(`UPDATE_PUSH_NOTIFICATION Success=${response.getResult()}`);
     return response.getResult();
@@ -1463,12 +1444,12 @@ export async function updatePushNotification(user, fcmToken) {
 // OTHER PLAYERS DETAIL
 //
 export async function getPlayerDetails(playerId) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new GetPlayerRequest();
     request.setId(playerId);
 
     const response = await client.getPlayer(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const playerDetails = {};
     if (!response.getResult()) {
@@ -1489,12 +1470,12 @@ export async function getPlayerDetails(playerId) {
 // OTHER PLAYERS HIGHSCORE
 //
 export async function getPlayerHighScore(playerId) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListPlayerHighscoreRequest();
     request.setPlayerId(playerId);
 
     const response = await client.listPlayerHighscore(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const playersHighScore = [];
     if (!response.getResultList()) {
@@ -1515,14 +1496,14 @@ export async function getPlayerHighScore(playerId) {
 
 // GET LEADERBOARD HISTORY
 export async function getLeaderboardHistory(cgId) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListLeaderboardHistoryRequest();
     request.setCgId(cgId);
     request.setLimit(100);
     request.setOffset(0);
 
     const response = await client.listLeaderboardHistory(request, {
-        authorization: token,
+        authorization: `Bearer ${token}`,
     });
     const userNotifications = [];
     if (!response.getResultList()) {
@@ -1555,13 +1536,12 @@ export async function getLeaderboardHistory(cgId) {
 
 // GET NOTIFICATION NUMBER
 export async function getNotificationNumber(user, notificationNumber) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new GetNotificationNoRequest();
     request.setUserId(user?.id);
 
     const response = await client.getNotificationNo(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     if (!response.getResult()) {
         console.log("No new notification count available!");
@@ -1575,15 +1555,14 @@ export async function getNotificationNumber(user, notificationNumber) {
 
 // LIST NOTIFICATION
 export async function getNotifications(user) {
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("froyo-authenticationtoken");
     const request = new ListNotificationRequest();
     request.setUserId(user?.id);
     request.setLimit(20);
     request.setOffset(0);
 
     const response = await client.listNotification(request, {
-        authorization: token,
-        uid: user.providerUID,
+        authorization: `Bearer ${token}`,
     });
     const data = response.getResultList();
     const notificationList = [];
@@ -1708,7 +1687,7 @@ export async function getNotifications(user) {
 //     GET BUY LIST
 //
 // export async function getBuyList(esmData, purchasedList) {
-//     const token = sessionStorage.getItem("token");
+//     const token = localStorage.getItem("froyo-authenticationtoken");
 //     let request = esmData.listBuyRequest;
 //     request.setUserId(esmData.user.id);
 //     request.setLimit(20);
@@ -1716,7 +1695,7 @@ export async function getNotifications(user) {
 
 //     try {
 //         let response = await esmData.esmApiClient.listBuy(request, {
-//             authorization: token,
+//             authorization: `Bearer ${token}`,
 //             uid: esmData.user.providerUID,
 //         });
 //         let buyResultList = response.getResultList();

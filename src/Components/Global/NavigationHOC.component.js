@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import Navigation from "Components/Global/Navigation.component";
 
 const NavigationHOC = withRouter(({ location }) => {
-    let token = sessionStorage.getItem("token");
+    let token = localStorage.getItem("froyo-authenticationtoken");
     return (
         <>
             {token !== null &&
