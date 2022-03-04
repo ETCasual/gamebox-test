@@ -52,7 +52,7 @@ const client = new GameboxApiPromiseClient(
 //      ADD NEW USER
 //
 export async function addUser(user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     const request = new AddUserRequest();
     request.setIdToken(token);
@@ -77,7 +77,7 @@ export async function addUser(user) {
 //      USER SIGN IN
 //
 export async function userSignIn(email = "rohail@esportsmini.com") {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     const request = new SignInRequest();
     request.setIdToken(token);
@@ -117,7 +117,7 @@ export async function userSignIn(email = "rohail@esportsmini.com") {
 //      FROYO API - TO GET USER INFO
 //
 export async function getUserAccountInfoFroyo() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     const { data } = await axios.get(process.env.REACT_APP_FROYO_API_ENDPOINT, {
         headers: {
@@ -131,7 +131,7 @@ export async function getUserAccountInfoFroyo() {
 //      NEW USER INVITATION
 //
 export async function newUserInvitation(user, inviteCode) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new AddInviteRequest();
     request.setUserId(user.id);
     request.setInvitedBy(inviteCode);
@@ -148,7 +148,7 @@ export async function newUserInvitation(user, inviteCode) {
 //      USER DETAILS - GEMS & EXP
 //
 export async function getUserDetails(user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new SignInRequest();
     request.setIdToken(token);
     request.setUsername(user.providerUID);
@@ -180,7 +180,7 @@ export async function getUserDetails(user) {
 //     GET RANKS
 //
 export async function getRanks() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListRankRequest();
     const response = await client.listRank(request, {
         authorization: `Bearer ${token}`,
@@ -202,7 +202,7 @@ export async function getRanks() {
 //  GET GAMES BASIC DETAILS FOR STAY TUNED COMPONENT
 //
 export async function getGamesList() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListGameRequest();
     request.setLimit(100);
     request.setOffset(0);
@@ -226,7 +226,7 @@ export async function getGamesList() {
 //     GET PRIZES
 //
 export async function getPrizes() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListPrizeRequest();
     const response = await client.listPrize(request, {
         authorization: `Bearer ${token}`,
@@ -646,7 +646,7 @@ export async function getPrizeLatestTicketsCollected(
     ignoreChecking,
     prizeTicketCollection
 ) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     if (!ignoreChecking) {
         const existingIndex = prizeTicketCollection.findIndex(
@@ -694,7 +694,7 @@ export async function getPoolTickets(
     user,
     poolTickets
 ) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     if (!ignoreChecking) {
         const existingIndex = poolTickets.findIndex(
@@ -733,7 +733,7 @@ export async function getPoolTickets(
 // GET AUTOMATED ENTRY TICKETS
 //
 export async function getTotalTickets(scheduledOn, prizeId, user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     const request = new GetTotalTicketsSinceRequest();
     request.setUserId(user?.id);
@@ -755,7 +755,7 @@ export async function getTotalTickets(scheduledOn, prizeId, user) {
 //     GET LOG GLIST
 //
 export async function getLogGList(user, prizes) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListLogPrizePoolRequest();
     request.setUserId(user.id);
 
@@ -796,7 +796,7 @@ export async function logEnter(
     isAdWatched,
     isGemUsed
 ) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new LogGEnterRequest();
     request.setSecret("");
     request.setUserId(user.id);
@@ -819,7 +819,7 @@ export async function logEnter(
 //     LOG LEAVE
 //
 export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const enterId = currentGameInfo.playerEnterGameId;
     const request = new LogGLeaveRequest();
     request.setSecret("");
@@ -844,7 +844,7 @@ export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
 //      GET LEADERBOARD
 //
 export async function getLeaderboardResult(prizeId, gameId) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListLeaderboardRequest();
 
     request.setGameId(gameId);
@@ -880,7 +880,7 @@ export async function getCurrentUserRank(
     prizeId,
     currentUserRank
 ) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new GetCurrentPlayerRankRequest();
     request.setGameId(gameId);
     request.setPrizeId(prizeId);
@@ -898,7 +898,7 @@ export async function getCurrentUserRank(
 //  GET WINNERS LIST
 //
 export async function getWinnersList() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListWinnerRequest();
     request.setLimit(20);
     request.setOffset(0);
@@ -981,7 +981,7 @@ export async function getWinnersList() {
 //     GET HIGHSCORE
 //
 export async function getHighScore(user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListLogGRequest();
     request.setUserId(user.id);
     request.setLimit(20);
@@ -1007,7 +1007,7 @@ export async function getHighScore(user) {
 //     GET GEMS LIST
 //
 export async function getGemsList() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListItemRequest();
     request.setLimit(20);
     request.setOffset(0);
@@ -1098,7 +1098,7 @@ export async function getExchangeRate() {
 //     GET SPINNER RULES
 //
 export async function getSpinnerRules() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListSpinnerRuleRequest();
     const response = await client.listSpinnerRule(request, {
         authorization: `Bearer ${token}`,
@@ -1118,7 +1118,7 @@ export async function getSpinnerRules() {
 //     GET LEADERBOARD RANK
 //
 export async function getLeaderboardRank(gameId, leaderRuleRanks) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListGameLeaderRuleRequest();
     request.setGameId(gameId);
 
@@ -1157,7 +1157,7 @@ export async function updateUserSettings(
     picture,
     isNotifyAllowed
 ) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new UpdateUserSettingsRequest();
     request.setId(user.id);
     request.setIsNotifyAllowed(isNotifyAllowed);
@@ -1182,7 +1182,7 @@ export async function updateUserSettings(
 //     GET UNCLAIMED PRIZES LIST
 //
 export async function getUnclaimedPrizesList(user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListWinnerUnclaimedRequest();
     request.setUserId(user.id);
 
@@ -1212,7 +1212,7 @@ export async function getUnclaimedPrizesList(user) {
 //     GET CLAIMED PRIZES LIST
 //
 export async function getClaimedPrizesList(user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListWinnerClaimedRequest();
     request.setUserId(user.id);
 
@@ -1255,7 +1255,7 @@ export async function getClaimedPrizesList(user) {
 //     PROCESS CLAIM
 //
 export async function processClaim(user, id, claim) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ClaimWinnerRequest();
     request.setId(id);
     request.setUserId(user.id);
@@ -1279,7 +1279,7 @@ export async function processClaim(user, id, claim) {
 //     GET CONFIG
 //
 export async function getConfig() {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new GetConfigRequest();
     const response = await client.getConfig(request, {
         authorization: `Bearer ${token}`,
@@ -1311,7 +1311,7 @@ export async function purchaseProcess(
     price,
     subId
 ) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new BuyRequest();
     request.setSecret(secret);
     request.setUserId(user.id);
@@ -1332,7 +1332,7 @@ export async function purchaseProcess(
 //     GET SPIN AVAILABLE
 //
 export async function getSpinAvailable(user, spinner) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new GetSpinAvailableRequest();
     request.setUserId(user.id);
 
@@ -1349,7 +1349,7 @@ export async function getSpinAvailable(user, spinner) {
 //     PLAYER LOG SPINNER ENTER
 //
 export async function logSEnter(user, prizeId, spinner) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new LogSEnterRequest();
     request.setUserId(user.id);
     request.setPrizeId(prizeId);
@@ -1377,7 +1377,7 @@ export async function logSEnter(user, prizeId, spinner) {
 //     PLAYER LOG SPINNER LEAVE
 //
 export async function logSLeave(user, enterId, spinner) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new LogSLeaveRequest();
     request.setId(enterId);
     request.setUserId(user.id);
@@ -1406,7 +1406,7 @@ export async function logSLeave(user, enterId, spinner) {
 //     PLAYER LOG SPINNER EXTRA
 //
 export async function logSExtra(user, spinner, isTypeGems) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new LogSExtraRequest();
     request.setUserId(user.id);
     request.setIsGemOrAd(isTypeGems);
@@ -1429,7 +1429,7 @@ export async function logSExtra(user, spinner, isTypeGems) {
 //
 export async function updatePushNotification(user, fcmToken) {
     console.log(user, fcmToken);
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new UpdateMsgTokenRequest();
     request.setId(user.id);
     request.setToken(fcmToken);
@@ -1445,7 +1445,7 @@ export async function updatePushNotification(user, fcmToken) {
 // OTHER PLAYERS DETAIL
 //
 export async function getPlayerDetails(playerId) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new GetPlayerRequest();
     request.setId(playerId);
 
@@ -1471,7 +1471,7 @@ export async function getPlayerDetails(playerId) {
 // OTHER PLAYERS HIGHSCORE
 //
 export async function getPlayerHighScore(playerId) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListPlayerHighscoreRequest();
     request.setPlayerId(playerId);
 
@@ -1497,7 +1497,7 @@ export async function getPlayerHighScore(playerId) {
 
 // GET LEADERBOARD HISTORY
 export async function getLeaderboardHistory(cgId) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListLeaderboardHistoryRequest();
     request.setCgId(cgId);
     request.setLimit(100);
@@ -1537,7 +1537,7 @@ export async function getLeaderboardHistory(cgId) {
 
 // GET NOTIFICATION NUMBER
 export async function getNotificationNumber(user, notificationNumber) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new GetNotificationNoRequest();
     request.setUserId(user?.id);
 
@@ -1556,7 +1556,7 @@ export async function getNotificationNumber(user, notificationNumber) {
 
 // LIST NOTIFICATION
 export async function getNotifications(user) {
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new ListNotificationRequest();
     request.setUserId(user?.id);
     request.setLimit(20);
@@ -1688,7 +1688,7 @@ export async function getNotifications(user) {
 //     GET BUY LIST
 //
 // export async function getBuyList(esmData, purchasedList) {
-//     const token = localStorage.getItem("froyo-authenticationtoken");
+//     const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 //     let request = esmData.listBuyRequest;
 //     request.setUserId(esmData.user.id);
 //     request.setLimit(20);

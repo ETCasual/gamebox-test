@@ -5,7 +5,7 @@ import { _firebase } from "../firebase";
 export default async function refreshToken() {
     if (_firebase.apps.length <= 0) window.location.href = "/";
 
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const decoded = jwt_decode(token);
     if (Date.now() >= decoded?.exp * 1000) {
         console.log("Token expired!");

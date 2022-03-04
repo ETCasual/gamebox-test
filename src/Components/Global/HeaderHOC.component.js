@@ -37,7 +37,7 @@ const HeaderHOC = () => {
             createdOn: 0,
         });
 
-    let token = localStorage.getItem("froyo-authenticationtoken");
+    let token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     useEffect(() => {
         if (user.picture) setUserImage(user.picture);

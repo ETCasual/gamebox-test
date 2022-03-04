@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const NavigationHOC = withRouter(({ location }) => {
     const { user } = useSelector((state) => state.userData);
 
-    const token = localStorage.getItem("froyo-authenticationtoken");
+    const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     return (
         <>
             {token !== null &&

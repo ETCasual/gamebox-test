@@ -85,40 +85,40 @@ const App = () => {
     }, [user.id]);
 
     // UPDATE NOTIFICATION TOKEN & LOAD NOTIFICATION
-    // useEffect(() => {
-    //     if (user.id) {
-    //         // NOTIFICATION TOKEN UPDATE
-    //         if (messaging) {
-    //             messaging
-    //                 .getToken({
-    //                     vapidKey: process.env.REACT_APP_VAPID_KEY,
-    //                 })
-    //                 .then((currentToken) => {
-    //                     if (currentToken) {
-    //                         dispatch(loadNotificationToken(currentToken));
-    //                     } else {
-    //                         // TODO: Show permission request UI
-    //                         console.log(
-    //                             "No registration token available. Request permission to generate one."
-    //                         );
-    //                         Notification.requestPermission();
-    //                     }
-    //                 })
-    //                 .catch((err) => {
-    //                     console.log("Error: messaging.getToken: ", err);
-    //                     // TODO: handle the error here, maybe bcos of different browser problem
-    //                     // Brave browser will need to enable it manually
-    //                     // Brave settings > Privacy and Security > Use Google Services for Push Messaging
-    //                     // Chrome is OK by default
-    //                     // Other haven't check.
-    //                 });
-    //         }
-    //         // NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
-    //         dispatch(loadNotificationNumber());
-    //         dispatch(loadNotifications());
-    //         dispatch(loadUnClaimedPrizes());
-    //     }
-    // }, [user.id, dispatch]);
+    useEffect(() => {
+        if (user.id) {
+            // NOTIFICATION TOKEN UPDATE
+            if (messaging) {
+                messaging
+                    .getToken({
+                        vapidKey: process.env.REACT_APP_VAPID_KEY,
+                    })
+                    .then((currentToken) => {
+                        if (currentToken) {
+                            dispatch(loadNotificationToken(currentToken));
+                        } else {
+                            // TODO: Show permission request UI
+                            console.log(
+                                "No registration token available. Request permission to generate one."
+                            );
+                            Notification.requestPermission();
+                        }
+                    })
+                    .catch((err) => {
+                        console.log("Error: messaging.getToken: ", err);
+                        // TODO: handle the error here, maybe bcos of different browser problem
+                        // Brave browser will need to enable it manually
+                        // Brave settings > Privacy and Security > Use Google Services for Push Messaging
+                        // Chrome is OK by default
+                        // Other haven't check.
+                    });
+            }
+            // NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
+            dispatch(loadNotificationNumber());
+            dispatch(loadNotifications());
+            dispatch(loadUnClaimedPrizes());
+        }
+    }, [user.id, dispatch]);
 
     // INVITATION
     useEffect(() => {

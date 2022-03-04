@@ -112,7 +112,7 @@ const Index = () => {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem("froyo-authenticationtoken");
+        const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
         if (token) dispatch(loadLoginUser(history));
     }, [dispatch, history]);
 

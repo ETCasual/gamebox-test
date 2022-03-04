@@ -15,7 +15,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
     useEffect(() => {
         let timeOut = null;
-        const token = localStorage.getItem("froyo-authenticationtoken") || null;
+        const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '') || null;
         const items =
             JSON.parse(localStorage.getItem("prizeDetailList")) || null;
 
