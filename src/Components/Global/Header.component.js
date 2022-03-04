@@ -62,7 +62,6 @@ const Header = ({
                     <div className="left-items d-none d-md-flex align-items-center justify-content-start">
                         <Link to="/" className="logo" onClick={handleHomeNavLink}>
                             <img
-                                width={90}
                                 className="img-fluid"
                                 src={`${window.cdn}logo/logo_gamebox.png`}
                                 alt="GameBox"

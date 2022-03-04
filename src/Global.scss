@@ -166,10 +166,7 @@ button {
     -webkit-backdrop-filter: blur(12px);
     width: 100vw;
     .logo {
-        width: 60px;
-        @include media-min($lg) {
-            width: 90px;
-        }
+        width: 10rem;
     }
     .nav-items {
         height: inherit;
