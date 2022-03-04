@@ -15,13 +15,8 @@ const INITIAL_STATE = {
         picture: "",
         username: "",
         email: "",
-        phone: "",
-        providerUID: "",
-        providerId: "",
-        subId: "",
-        subExpiryDate: "",
         isNotifyAllowed: true,
-        isLoggedIn: false,
+        status: null,
     },
 };
 
@@ -32,7 +27,10 @@ const loginReducer = (esmData = INITIAL_STATE, { type, payload }) => {
 
         case LOGIN_ERROR:
             sessionStorage.setItem("errorType", payload.errorType);
-            return { ...esmData, user: esmData.user };
+            return {
+                ...esmData,
+                user: { ...esmData.user, status: payload.errorType },
+            };
 
         case UPDATE_USER_SETTINGS:
             return { ...esmData, user: payload };

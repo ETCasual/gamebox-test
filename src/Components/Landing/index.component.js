@@ -1,8 +1,6 @@
-import "./styles.module.scss";
-
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,6 +14,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
     const history = useHistory();
+
+    const { user } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
 
     let heroRef = useRef(null);
@@ -23,9 +23,13 @@ const Index = () => {
     let workCardRef = useRef([]);
     let dailyRewardRef = useRef(null);
 
-    const [blockedArchivedModal, setBlockedArchivedModal] = useState(
-        sessionStorage.getItem("errorType") !== null ? true : false
-    );
+    const [blockedArchivedModal, setBlockedArchivedModal] = useState(false);
+
+    useEffect(() => {
+        setBlockedArchivedModal(
+            sessionStorage.getItem("errorType") !== null ? true : false
+        );
+    }, [user?.status]);
 
     // SCROLL TRIGGER ANIMATIONS
     useEffect(() => {

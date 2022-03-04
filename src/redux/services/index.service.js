@@ -49,7 +49,7 @@ const client = new GameboxApiPromiseClient(
     null
 );
 //
-//      ADD NEW USER 
+//      ADD NEW USER
 //
 export async function addUser(user) {
     const token = localStorage.getItem("froyo-authenticationtoken");
@@ -74,7 +74,7 @@ export async function addUser(user) {
 }
 
 //
-//      USER SIGN IN 
+//      USER SIGN IN
 //
 export async function userSignIn(email = "rohail@esportsmini.com") {
     const token = localStorage.getItem("froyo-authenticationtoken");
@@ -95,6 +95,7 @@ export async function userSignIn(email = "rohail@esportsmini.com") {
         isNotifyAllowed: true,
         gems: 0,
         exp: 0,
+        status: null,
     };
     if (signInResult) {
         Object.assign(user, {
@@ -106,7 +107,7 @@ export async function userSignIn(email = "rohail@esportsmini.com") {
             isNotifyAllowed: signInResult.getIsNotifyAllowed(),
             gems: signInResult.getGemBalance(),
             exp: signInResult.getExp(),
-            isLoggedIn: true,
+            status: "active",
         });
     }
     return user;

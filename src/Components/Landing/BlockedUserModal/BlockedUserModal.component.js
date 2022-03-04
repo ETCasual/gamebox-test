@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const BlockedUserModal = ({ setBlockedArchivedModal }) => {
     const getAccountErrorType = () => {
@@ -8,9 +8,15 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
         else return false;
     };
 
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
+
     return (
         <div className="blocked-modal">
-            <div className="wrapper p-4 d-flex flex-column align-items-center justify-content-center">
+            <div className="wrapper p-4 d-flex flex-column align-items-start justify-content-start">
                 {getAccountErrorType() === "Blocked" && (
                     <>
                         <h3>Your account has been Blocked.</h3>
@@ -29,11 +35,12 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
                         </p>
                     </>
                 )}
+
                 <p className="mb-3">
-                    For more information, please contact support at
-                    hello@esportsmini.com
+                    For more information, please contact support at {" "}
+                    <span><a href="mailto:support@froyo.com">support@froyo.com</a></span>
                 </p>
-                <button onClick={() => setBlockedArchivedModal(false)}>
+                <button className="p-3" onClick={() => setBlockedArchivedModal(false)}>
                     Close
                 </button>
             </div>

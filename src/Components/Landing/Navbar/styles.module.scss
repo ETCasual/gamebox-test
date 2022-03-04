@@ -8,9 +8,9 @@
         -webkit-backdrop-filter: blur(12px);
     }
     .logo {
-        width: 60px;
+        width: 10rem;
         @include media-min($lg) {
-            width: 90px;
+            width: 13rem;
         }
     }
     button.nav-login {
