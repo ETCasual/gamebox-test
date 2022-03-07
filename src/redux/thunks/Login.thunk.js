@@ -4,11 +4,10 @@ import {
     userSignIn,
 } from "redux/services/index.service";
 
-export default function loadLoginUser(history) {
+export function loadLoginUser(history) {
     return async (dispatch) => {
         try {
             const user = await userSignIn();
-            console.log("GameBox UserInfo:", user);
             if (user.id) {
                 dispatch({
                     type: "LOGIN_SUCCESS",
@@ -17,13 +16,11 @@ export default function loadLoginUser(history) {
                 history.push("/");
             } else {
                 const _user = await getUserAccountInfoFroyo();
-                console.log("Froyo UserInfo:", _user);
                 if (_user.id) {
                     const id = await addUser(_user);
-                    console.log("Add User Status:", id);
                     if (id !== "-1") {
+                        localStorage.setItem("isNewUser", true);
                         const user = await userSignIn();
-                        console.log("GameBox UserInfo:", user);
                         if (user.id) history.push("/");
                     }
                 }
@@ -48,5 +45,11 @@ export default function loadLoginUser(history) {
                 );
             else console.log(error.message);
         }
+    };
+}
+
+export function loadLoginStatus(status) {
+    return async (dispatch) => {
+        dispatch({ type: "LOGIN_STATUS", payload: status });
     };
 }

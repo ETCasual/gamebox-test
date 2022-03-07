@@ -50,7 +50,7 @@ const FeaturedCompleted = ({ data, handleWinnerModal }) => {
                     <div className="w-100 position-relative ">
                         <div
                             className="complete-overlay"
-                            onClick={() => handleWinnerModal(data?.type)}
+                            onClick={() => handleWinnerModal?.(data?.type)}
                         >
                             <div className="wrapper d-flex flex-column align-items-center justify-content-end w-100">
                                 <img

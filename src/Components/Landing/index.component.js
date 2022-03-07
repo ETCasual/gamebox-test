@@ -7,15 +7,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "Components/Landing/Navbar/Navbar.component";
 import Content from "Components/Landing/Content/index.component";
 import BlockedUserModal from "Components/Landing/BlockedUserModal/BlockedUserModal.component";
+import Loading from "Components/Landing/Loading/Loading.component";
 
-import loadLoginUser from "redux/thunks/Login.thunk";
+import { loadLoginUser } from "redux/thunks/Login.thunk";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
     const history = useHistory();
 
-    const { user } = useSelector((state) => state.userData);
+    const { user, loginStatus } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
 
     let heroRef = useRef(null);
@@ -70,13 +71,14 @@ const Index = () => {
             trigger: workCardRef.current,
             start: "10% bottom",
             onEnter: () => {
-                gsap.to(workCardRef.current, {
-                    duration: 1,
-                    autoAlpha: 1,
-                    y: 0,
-                    ease: "power2.out",
-                    stagger: 0.2,
-                });
+                if (workCardRef.current)
+                    gsap.to(workCardRef.current, {
+                        duration: 1,
+                        autoAlpha: 1,
+                        y: 0,
+                        ease: "power2.out",
+                        stagger: 0.2,
+                    });
             },
         });
 
@@ -112,7 +114,9 @@ const Index = () => {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
+        const token = localStorage
+            .getItem("froyo-authenticationtoken")
+            ?.replaceAll('"', "");
         if (token) dispatch(loadLoginUser(history));
     }, [dispatch, history]);
 
@@ -128,6 +132,9 @@ const Index = () => {
                 workCardRef={workCardRef}
                 dailyRewardRef={dailyRewardRef}
             />
+
+            {/* LOADING */}
+            {(loginStatus.loading || loginStatus.ready) && <Loading />}
 
             {/* BLOCKED USER MODAL */}
             {blockedArchivedModal && (

@@ -238,6 +238,8 @@ const Index = () => {
             setRevealCardModalData(_arr);
             setIsRevealCardModalShown(true);
         }
+        // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE
+        return;
     }
     // REVEAL CARD MODAL CONTINUE TO HOMEPAGE BUTTON
     const handleRevealBackButton = (prizeId) => {

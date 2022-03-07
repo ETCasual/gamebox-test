@@ -1,4 +1,5 @@
 import {
+    LOGIN_STATUS,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
     UPDATE_USER_SETTINGS,
@@ -18,10 +19,18 @@ const INITIAL_STATE = {
         isNotifyAllowed: true,
         status: null,
     },
+    loginStatus: {
+        loading: false,
+        ready: false,
+        noAuth: false,
+    },
 };
 
 const loginReducer = (esmData = INITIAL_STATE, { type, payload }) => {
     switch (type) {
+        case LOGIN_STATUS:
+            return { ...esmData, loginStatus: payload };
+
         case LOGIN_SUCCESS:
             return { ...esmData, user: payload };
 

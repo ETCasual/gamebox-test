@@ -58,10 +58,10 @@ export async function addUser(user) {
     request.setIdToken(token);
     request.setUsername(user?.email);
     request.setEmail(user?.email);
+    request.setNickname(user?.displayName)
     request.setFirstname(user?.firstName);
     request.setLastname(user?.lastName);
     request.setAvatarUrl(user?.imageUrl);
-    request.setPassword("abcxyz123");
     // request.setPhone("");
     // request.setSocialLinkFb("");
     // request.setSocialLinkGoogle("");
@@ -81,6 +81,7 @@ export async function userSignIn() {
 
     const request = new SignInRequest();
     request.setIdToken(token);
+
     const response = await client.signIn(request, {
         authorization: `Bearer ${token}`,
     });
@@ -138,7 +139,6 @@ export async function newUserInvitation(user, inviteCode) {
         authorization: `Bearer ${token}`,
     });
     if (response.getResult() > 0) {
-        console.log("Invitation Response:", response.getResult());
         localStorage.removeItem("inviteCode");
     }
 }
@@ -1427,7 +1427,6 @@ export async function logSExtra(user, spinner, isTypeGems) {
 //     UPDATE PUSH NOTIFICATION
 //
 export async function updatePushNotification(user, fcmToken) {
-    console.log(user, fcmToken);
     const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
     const request = new UpdateMsgTokenRequest();
     request.setId(user.id);

@@ -1,56 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Landing from "Pages/Landing.page";
 import Password from "Pages/Password.page";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-    const { user } = useSelector((state) => state.userData);
+import { loadLoginStatus } from "redux/thunks/Login.thunk";
 
-    const [signingInUserStatus, setSigningInUserStatus] = useState({
-        loading: false,
-        ready: false,
-        noAuth: false,
-    });
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+    const { user, loginStatus } = useSelector((state) => state.userData);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        let timeOut = null;
         const token =
             localStorage
                 .getItem("froyo-authenticationtoken")
                 ?.replaceAll('"', "") || null;
-        const items =
-            JSON.parse(localStorage.getItem("prizeDetailList")) || null;
 
-        if (token !== null && user.id < 0)
-            setSigningInUserStatus((prev) => ({ ...prev, loading: true }));
-        else if (token !== null && user.id)
-            setSigningInUserStatus((prev) => ({ ...prev, ready: true }));
-        else {
-            clearTimeout(timeOut);
-            timeOut = setTimeout(
-                () => {
-                    setSigningInUserStatus((prev) => ({
-                        ...prev,
-                        loading: false,
-                        ready: false,
-                        noAuth: true,
-                    }));
-                },
-                items !== null ? 3000 : 100
-            );
-        }
-
-        return () => clearTimeout(timeOut);
-    }, [user.id]);
+        dispatch(
+            loadLoginStatus({
+                noAuth: token === null && user.id === null ? true : false,
+                loading: token !== null && user.id === null ? true : false,
+                ready: token !== null && user.id > 0 ? true : false,
+            })
+        );
+    }, [user.id, dispatch]);
 
     return (
         <Route
             {...rest}
             render={(props) => {
-                if (signingInUserStatus.ready) {
+                if (loginStatus.ready) {
                     return <Component {...props} {...rest} />;
-                } else if (signingInUserStatus.noAuth) {
+                } else if (loginStatus.noAuth || loginStatus.loading) {
                     if (process.env.REACT_APP_NODE_ENV === "production")
                         return <Landing />;
                     else return <Password />;

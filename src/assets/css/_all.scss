@@ -2,6 +2,7 @@
 @import "./assets/css/fonts.scss";
 
 // LANDING PAGE COMPONENTS
+@import "./Components/Landing/Loading/styles.module.scss";
 @import "./Components/Landing/BlockedUserModal/styles.module.scss";
 @import "./Components/Landing/Navbar/styles.module.scss";
 @import "./Components/Landing/Content/styles.module.scss";
