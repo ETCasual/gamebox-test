@@ -1943,16 +1943,15 @@ proto.api.gamebox.AddUserRequest.prototype.toObject = function(opt_includeInstan
 proto.api.gamebox.AddUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    email: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    phone: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    firstname: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    lastname: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    socialLinkFb: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    socialLinkGoogle: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    avatarUrl: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    idToken: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    nickname: jspb.Message.getFieldWithDefault(msg, 11, "")
+    email: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    phone: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    firstname: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    lastname: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    socialLinkFb: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    socialLinkGoogle: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    avatarUrl: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    idToken: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    nickname: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -1995,41 +1994,37 @@ proto.api.gamebox.AddUserRequest.deserializeBinaryFromReader = function(msg, rea
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPassword(value);
+      msg.setEmail(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setEmail(value);
+      msg.setPhone(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPhone(value);
+      msg.setFirstname(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setFirstname(value);
+      msg.setLastname(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setLastname(value);
+      msg.setSocialLinkFb(value);
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSocialLinkFb(value);
+      msg.setSocialLinkGoogle(value);
       break;
     case 8:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSocialLinkGoogle(value);
+      msg.setAvatarUrl(value);
       break;
     case 9:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAvatarUrl(value);
-      break;
-    case 10:
-      var value = /** @type {string} */ (reader.readString());
       msg.setIdToken(value);
       break;
-    case 11:
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setNickname(value);
       break;
@@ -2069,73 +2064,66 @@ proto.api.gamebox.AddUserRequest.serializeBinaryToWriter = function(message, wri
       f
     );
   }
-  f = message.getPassword();
+  f = message.getEmail();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getEmail();
+  f = message.getPhone();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getPhone();
+  f = message.getFirstname();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getFirstname();
+  f = message.getLastname();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = message.getLastname();
+  f = message.getSocialLinkFb();
   if (f.length > 0) {
     writer.writeString(
       6,
       f
     );
   }
-  f = message.getSocialLinkFb();
+  f = message.getSocialLinkGoogle();
   if (f.length > 0) {
     writer.writeString(
       7,
       f
     );
   }
-  f = message.getSocialLinkGoogle();
+  f = message.getAvatarUrl();
   if (f.length > 0) {
     writer.writeString(
       8,
       f
     );
   }
-  f = message.getAvatarUrl();
+  f = message.getIdToken();
   if (f.length > 0) {
     writer.writeString(
       9,
       f
     );
   }
-  f = message.getIdToken();
-  if (f.length > 0) {
-    writer.writeString(
-      10,
-      f
-    );
-  }
   f = message.getNickname();
   if (f.length > 0) {
     writer.writeString(
-      11,
+      10,
       f
     );
   }
@@ -2158,152 +2146,137 @@ proto.api.gamebox.AddUserRequest.prototype.setUsername = function(value) {
 
 
 /**
- * optional string password = 2;
+ * optional string email = 2;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getPassword = function() {
+proto.api.gamebox.AddUserRequest.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setPassword = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setEmail = function(value) {
   jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string email = 3;
+ * optional string phone = 3;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getEmail = function() {
+proto.api.gamebox.AddUserRequest.prototype.getPhone = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setEmail = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setPhone = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string phone = 4;
+ * optional string firstname = 4;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getPhone = function() {
+proto.api.gamebox.AddUserRequest.prototype.getFirstname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setPhone = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setFirstname = function(value) {
   jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string firstname = 5;
+ * optional string lastname = 5;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getFirstname = function() {
+proto.api.gamebox.AddUserRequest.prototype.getLastname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setFirstname = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setLastname = function(value) {
   jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional string lastname = 6;
+ * optional string social_link_fb = 6;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getLastname = function() {
+proto.api.gamebox.AddUserRequest.prototype.getSocialLinkFb = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setLastname = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setSocialLinkFb = function(value) {
   jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string social_link_fb = 7;
+ * optional string social_link_google = 7;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getSocialLinkFb = function() {
+proto.api.gamebox.AddUserRequest.prototype.getSocialLinkGoogle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setSocialLinkFb = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setSocialLinkGoogle = function(value) {
   jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional string social_link_google = 8;
+ * optional string avatar_url = 8;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getSocialLinkGoogle = function() {
+proto.api.gamebox.AddUserRequest.prototype.getAvatarUrl = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setSocialLinkGoogle = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setAvatarUrl = function(value) {
   jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * optional string avatar_url = 9;
+ * optional string id_token = 9;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getAvatarUrl = function() {
+proto.api.gamebox.AddUserRequest.prototype.getIdToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setAvatarUrl = function(value) {
+proto.api.gamebox.AddUserRequest.prototype.setIdToken = function(value) {
   jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
 /**
- * optional string id_token = 10;
+ * optional string nickname = 10;
  * @return {string}
  */
-proto.api.gamebox.AddUserRequest.prototype.getIdToken = function() {
+proto.api.gamebox.AddUserRequest.prototype.getNickname = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.AddUserRequest.prototype.setIdToken = function(value) {
-  jspb.Message.setProto3StringField(this, 10, value);
-};
-
-
-/**
- * optional string nickname = 11;
- * @return {string}
- */
-proto.api.gamebox.AddUserRequest.prototype.getNickname = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
-};
-
-
-/** @param {string} value */
 proto.api.gamebox.AddUserRequest.prototype.setNickname = function(value) {
-  jspb.Message.setProto3StringField(this, 11, value);
+  jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
