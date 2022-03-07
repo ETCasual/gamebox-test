@@ -213,7 +213,7 @@ const Leaderboard = ({
                             "Access-Control-Allow-Origin": "*",
                             "Access-Control-Allow-Methods":
                                 "POST, GET, OPTIONS",
-                            Authorization: token,
+                            Authorization: `Bearer ${token}`,
                         },
                     };
                     let response = await axios.get(url, options);
