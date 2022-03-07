@@ -8,6 +8,7 @@ export default function loadLoginUser(history) {
     return async (dispatch) => {
         try {
             const user = await userSignIn();
+            console.log("GameBox UserInfo:", user);
             if (user.id) {
                 dispatch({
                     type: "LOGIN_SUCCESS",
@@ -16,12 +17,14 @@ export default function loadLoginUser(history) {
                 history.push("/");
             } else {
                 const _user = await getUserAccountInfoFroyo();
+                console.log("Froyo UserInfo:", _user);
                 if (_user.id) {
                     const id = await addUser(_user);
+                    console.log("Add User Status:", id);
                     if (id !== "-1") {
                         const user = await userSignIn();
+                        console.log("GameBox UserInfo:", user);
                         if (user.id) history.push("/");
-                        return;
                     }
                 }
                 return;
@@ -39,8 +42,11 @@ export default function loadLoginUser(history) {
                     },
                 });
             } else if (error.code === 13)
-                console.log("LOGIN USER THUNK: No Result found!");
-            else console.log(error);
+                console.log(
+                    "LOGIN USER THUNK: No Result found!",
+                    error.message
+                );
+            else console.log(error.message);
         }
     };
 }
