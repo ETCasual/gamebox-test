@@ -7,7 +7,7 @@ import Password from "Pages/Password.page";
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const { user } = useSelector((state) => state.userData);
 
-    const [signingInUser, setSigningInUser] = useState({
+    const [signingInUserStatus, setSigningInUserStatus] = useState({
         loading: false,
         ready: false,
         noAuth: false,
@@ -15,19 +15,22 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
     useEffect(() => {
         let timeOut = null;
-        const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '') || null;
+        const token =
+            localStorage
+                .getItem("froyo-authenticationtoken")
+                ?.replaceAll('"', "") || null;
         const items =
             JSON.parse(localStorage.getItem("prizeDetailList")) || null;
 
         if (token !== null && user.id < 0)
-            setSigningInUser((prev) => ({ ...prev, loading: true }));
-        else if (token !== null && user.id )
-            setSigningInUser((prev) => ({ ...prev, ready: true }));
+            setSigningInUserStatus((prev) => ({ ...prev, loading: true }));
+        else if (token !== null && user.id)
+            setSigningInUserStatus((prev) => ({ ...prev, ready: true }));
         else {
             clearTimeout(timeOut);
             timeOut = setTimeout(
                 () => {
-                    setSigningInUser((prev) => ({
+                    setSigningInUserStatus((prev) => ({
                         ...prev,
                         loading: false,
                         ready: false,
@@ -45,9 +48,9 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={(props) => {
-                if (signingInUser.ready) {
+                if (signingInUserStatus.ready) {
                     return <Component {...props} {...rest} />;
-                } else if (signingInUser.noAuth) {
+                } else if (signingInUserStatus.noAuth) {
                     if (process.env.REACT_APP_NODE_ENV === "production")
                         return <Landing />;
                     else return <Password />;

@@ -76,12 +76,11 @@ export async function addUser(user) {
 //
 //      USER SIGN IN
 //
-export async function userSignIn(email = "rohail@esportsmini.com") {
+export async function userSignIn() {
     const token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
 
     const request = new SignInRequest();
     request.setIdToken(token);
-    request.setUsername(email);
     const response = await client.signIn(request, {
         authorization: `Bearer ${token}`,
     });
