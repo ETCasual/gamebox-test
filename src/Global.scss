@@ -801,8 +801,11 @@ button {
         }
         .btn-results,
         .btn-continue {
-            width: 90%;
+            width: 100%;
             margin: auto;
+        }
+        .btn-continue {
+            color: white;
         }
         .continue {
             color: black;
