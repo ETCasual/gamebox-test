@@ -13,8 +13,8 @@ const HeroContent = () => {
                 rel="noreferrer"
                 href={
                     process.env.REACT_APP_NODE_ENV === "development"
-                        ? "https://staging.froyo.games/home"
-                        : "https://froyo.games/home"
+                        ? "https://staging.froyo.games/registration"
+                        : "https://froyo.games/registration"
                 }
                 className="button-wrapper mb-3"
             >
@@ -25,8 +25,8 @@ const HeroContent = () => {
                 rel="noreferrer"
                 href={
                     process.env.REACT_APP_NODE_ENV === "development"
-                        ? "https://staging.froyo.games/home"
-                        : "https://froyo.games/home"
+                        ? "https://staging.froyo.games/login"
+                        : "https://froyo.games/login"
                 }
                 className="button-wrapper"
             >

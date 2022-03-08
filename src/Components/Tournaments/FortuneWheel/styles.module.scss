@@ -2,7 +2,10 @@
 .fortune-wheel {
     position: fixed;
     width: 100vw;
-    top: 90px;
+    top: 80px;
+    @include media-min($md) {
+        top: 90px;
+    }
     @include media-min($lg) {
         top: 80px;
     }
@@ -243,7 +246,7 @@
                 width: clamp(1rem, 2vw, 1.7rem);
             }
         }
-        
+
         .buy-more-spins,
         .buy-more-gems {
             background: linear-gradient(180deg, #04e4aa 0%, #01b789 100%);

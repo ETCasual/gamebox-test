@@ -98,6 +98,8 @@ const Leaderboard = ({
                 data?.gameInfo[0]?.endTimeStamp
             );
             setTimer(finalTimeRef);
+            
+            // TODO:: 0d 0h 0m 3s => AT THIS POINT RUN COUNT DOWN TIMER ENDED FUNCTION
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
 
@@ -110,9 +112,13 @@ const Leaderboard = ({
                 document.getElementById("destination")?.contentWindow;
             let score = -1;
             if (destination) {
+                // GET SCORES
                 score = destination?.getScore?.();
                 if (score > -1 && currentGameInfo.playerEnterGameId) {
                     localStorage.setItem("currentGameScore", score);
+
+                    // TODO:: END THE TOURNAMENT 3 SECONDS EARLY AND SEND THE SCORE TO BACKEND
+                    // END BY TIMER
                     destination?.endGameByTimer?.();
                     dispatch(loadPlayerLeaveTournamentId(score));
                 }
@@ -155,7 +161,7 @@ const Leaderboard = ({
             ) {
                 leaderBoardBackgroundRef.current.style.height =
                     window.innerWidth > 1200
-                        ? `${window.innerHeight - 60 * 2.8}px`
+                        ? `${window.innerHeight - 60 * 3.1}px`
                         : window.innerWidth >= 768 && window.innerWidth <= 1024
                         ? "60vh"
                         : "75vh";

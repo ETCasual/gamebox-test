@@ -159,6 +159,7 @@
                 transform: translateY(30px);
             }
             .title {
+                font-weight: $fnt-wgt-700;
                 font-size: $fnt-sz-18;
             }
             .subtitle {
@@ -238,8 +239,8 @@
             transform: translateY(30px);
         }
         .title {
+            font-weight: $fnt-wgt-700;
             font-size: $fnt-sz-18;
-            font-weight: $fnt-wgt-600;
             text-transform: uppercase;
         }
         .subtitle {

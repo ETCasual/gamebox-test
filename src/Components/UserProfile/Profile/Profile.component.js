@@ -38,7 +38,6 @@ const Profile = ({
                             <div className="col-12 text-center mb-4 mb-md-5">
                                 <div className="profile-info">
                                     <img
-                                        className="p-2"
                                         onError={(e) => defaultUserImage(e)}
                                         src={
                                             user
@@ -48,7 +47,7 @@ const Profile = ({
                                         alt="avatar"
                                     />
                                     <h3 className="user-name mt-4">
-                                        {user.username}
+                                        {user.username || `Player ${user.id}`}
                                     </h3>
                                     <p className="email-text">
                                         {user ? user.email : "..."}

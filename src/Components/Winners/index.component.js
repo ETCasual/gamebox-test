@@ -169,7 +169,7 @@ const Index = () => {
                                                                           "Player"
                                                                       } (You)`
                                                                     : item.userNickName ||
-                                                                      "Player"}
+                                                                      `Player ${item.userId}`}
                                                             </p>
                                                         </div>
                                                         {/* REWARD NAME */}

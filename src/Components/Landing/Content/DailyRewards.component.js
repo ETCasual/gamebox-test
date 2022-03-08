@@ -34,8 +34,8 @@ const DailyBonus = ({ dailyRewardRef }) => {
                         rel="noreferrer"
                         href={
                             process.env.REACT_APP_NODE_ENV === "development"
-                                ? "https://staging.froyo.games/home"
-                                : "https://froyo.games/home"
+                                ? "https://staging.froyo.games/register"
+                                : "https://froyo.games/register"
                         }
                     >
                         <button className="register-now-button">

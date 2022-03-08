@@ -15,7 +15,7 @@ const Navbar = () => {
                         <a
                             target="_blank"
                             rel="noreferrer"
-                            href={process.env.REACT_APP_NODE_ENV === 'development' ? 'https://staging.froyo.games/home' :  "https://froyo.games/home"}
+                            href={process.env.REACT_APP_NODE_ENV === 'development' ? 'https://staging.froyo.games/login' :  "https://froyo.games/login"}
                         >
                             <button className="nav-login">Login</button>
                         </a>

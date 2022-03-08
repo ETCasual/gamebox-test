@@ -57,16 +57,12 @@ const FortuneWheel = ({
         window.addEventListener("resize", handleResize);
 
         function handleResize() {
-            const minus = window.innerWidth < 1200 ? 100 : 85;
             const mainElemHeight =
-                window.innerWidth < 1200
-                    ? document.querySelector(".full-wrapper")?.offsetHeight
-                    : window.innerHeight - minus;
-            const height = mainElemHeight;
+                document.querySelector(".full-wrapper")?.offsetHeight;
             setModalHeight({
                 windowWidth: window.innerWidth,
-                wrapper: height,
-                cols: window.innerWidth < 1200 ? "auto" : height,
+                wrapper: mainElemHeight + 50,
+                cols: window.innerWidth < 1200 ? "auto" : mainElemHeight + 50,
             });
             const col2 = document.querySelector(".wrapper-col:nth-child(2)");
             const col3 = document.querySelector(".wrapper-col:nth-child(3)");

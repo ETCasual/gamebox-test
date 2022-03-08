@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import NotificationLeaderboardHistory from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
@@ -36,8 +37,12 @@ const Index = () => {
     useEffect(() => {
         clearTimeout(timeOutRef.current);
         timeOutRef.current = setTimeout(() => {
-            if (notificationData.length <= 0) setNoDataLoaded(true);
+            notificationData.forEach((n) => {
+                const status = getListExists(n.list);
+                setNoDataLoaded(!status);
+            });
         }, 7000);
+
         return () => {
             clearTimeout(timeOutRef.current);
             timeOutRef.current = null;
@@ -59,13 +64,13 @@ const Index = () => {
         setNotificationData(notificationList);
     }, [notificationList]);
 
-    const getListExists = (list) => {
+    function getListExists(list) {
         const data = list.filter(
             (e) => e?.type === "tour" || e?.type === "invite"
         );
         if (data.length > 0) return true;
         return false;
-    };
+    }
 
     const handleOnClickSelectedNotification = (
         cgId,
@@ -101,20 +106,25 @@ const Index = () => {
                         {noDataLoaded && (
                             <div className="no-result">
                                 <p className="title mb-2">
-                                    You're All Caught Up!
+                                    No notifications found yet!
                                 </p>
                                 <p className="subtitle mt-1 mb-0">
-                                    You've seen all notifications
+                                    Looks like you've not played for any prizes
+                                    yet.
+                                </p>
+                                <p className="subtitle">
+                                    <Link to="/">Click here</Link> to look for
+                                    one you like.
                                 </p>
                             </div>
                         )}
                         {!noDataLoaded && (
                             <>
-                                {notificationData.length <= 0 && (
-                                    <WinnerLoader />
-                                )}
                                 {notificationData?.map((notice, i) => (
                                     <React.Fragment key={`notification-${i}`}>
+                                        {!getListExists(notice?.list) && (
+                                            <WinnerLoader />
+                                        )}
                                         {getListExists(notice?.list) && (
                                             <p
                                                 className={`${
