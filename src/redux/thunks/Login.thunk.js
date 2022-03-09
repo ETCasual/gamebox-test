@@ -3,6 +3,7 @@ import {
     getUserAccountInfoFroyo,
     userSignIn,
 } from "redux/services/index.service";
+import { UPDATE_USER_WALLET_ADDRESS } from "redux/types";
 
 export function loadLoginUser(history) {
     return async (dispatch) => {
@@ -51,5 +52,15 @@ export function loadLoginUser(history) {
 export function loadLoginStatus(status) {
     return async (dispatch) => {
         dispatch({ type: "LOGIN_STATUS", payload: status });
+    };
+}
+
+export function loadLoginUserWallet(walletAddress) {
+    return async (dispatch, getState) => {
+        const { user } = getState()?.userData;
+
+        const _user = { ...user };
+        _user.walletAddress = walletAddress;
+        dispatch({ type: UPDATE_USER_WALLET_ADDRESS, payload: _user });
     };
 }

@@ -71,7 +71,7 @@ const Index = () => {
             trigger: workCardRef.current,
             start: "10% bottom",
             onEnter: () => {
-                if (workCardRef.current)
+                if (workCardRef.current !== null && gsap)
                     gsap.to(workCardRef.current, {
                         duration: 1,
                         autoAlpha: 1,

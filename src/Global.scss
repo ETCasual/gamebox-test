@@ -219,6 +219,7 @@ button {
         background: #555555;
         border-radius: 20px;
         position: relative;
+        cursor: pointer;
         .info-wrapper {
             p {
                 &:nth-child(1) {

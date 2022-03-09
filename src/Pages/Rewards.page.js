@@ -13,7 +13,7 @@ const RewardsPage = () => {
     const [isRewardsShown, setIsRewardsShown] = useState(true);
 
     useEffect(() => {
-        if (user.id ) {
+        if (user.id) {
             setIsRewardsShown(true);
             dispatch(loadClaimedPrizes());
             dispatch(loadUnClaimedPrizes());

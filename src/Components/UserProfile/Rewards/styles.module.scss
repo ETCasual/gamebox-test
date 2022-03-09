@@ -5,6 +5,14 @@
         font-weight: $fnt-wgt-700;
         font-size: $fnt-sz-18;
     }
+    .claimed-title,
+    .unclaimed-title {
+        font-weight: $fnt-wgt-600;
+        font-size: $fnt-sz-12;
+        @include media-min($md) {
+            font-size: $fnt-sz-14;
+        }
+    }
     .card-wrapper {
         border-radius: 10px;
         background: linear-gradient(116deg, #302f2f 0%, #101010 100%);

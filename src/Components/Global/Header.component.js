@@ -7,6 +7,9 @@ import Notification from "Components/Global/Notifications.component";
 import loadPrizes from "redux/thunks/Prizes.thunk";
 import { defaultUserImage } from "Utils/DefaultImage";
 import { scrollToTop } from "Utils/ScrollToTop";
+// import networks from "../../Utils/Networks";
+import { loadLoginUserWallet } from "../../redux/thunks/Login.thunk";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 
 const Header = ({
     userImage,
@@ -23,6 +26,8 @@ const Header = ({
     const { earnAdditionalBenefitStatus } = useSelector(
         (state) => state.earnAdditional
     );
+    const { user } = useSelector((state) => state.userData);
+
     const dispatch = useDispatch();
 
     const history = useHistory();
@@ -54,13 +59,24 @@ const Header = ({
         dispatch(loadPrizes());
     };
 
+    const handleWallet = async () => {
+        if (user.walletAddress) return;
+
+        const account = await handleConnectWallet();
+        if (account) dispatch(loadLoginUserWallet(account));
+    };
+
     return (
         <>
             <div className="navbar-top d-flex flex-column justify-content-center">
                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto d-flex align-items-center justify-content-between">
                     {/* LOGO & NAV LINKS */}
                     <div className="left-items d-none d-md-flex align-items-center justify-content-start">
-                        <Link to="/" className="logo" onClick={handleHomeNavLink}>
+                        <Link
+                            to="/"
+                            className="logo"
+                            onClick={handleHomeNavLink}
+                        >
                             <img
                                 className="img-fluid"
                                 src={`${window.cdn}logo/logo_gamebox.png`}
@@ -111,16 +127,41 @@ const Header = ({
                     {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
                     <div className="right-items w-100 d-flex align-items-center justify-content-md-end justify-content-around">
                         <div className="wallet-wrapper">
-                            <img
-                                className="icon"
-                                src={`${window.cdn}assets/wallet_01.png`}
-                                alt="wallet"
-                            />
-                            <div className="info-wrapper ml-1 w-100">
-                                <p className="mb-1 d-flex">
-                                    {getWalletAmount() || 0} <small className="d-flex align-self-center ml-1">froyo</small>
-                                </p>
-                                <p className="mb-0">7647...9747</p>
+                            {user.walletAddress && (
+                                <img
+                                    className="icon"
+                                    src={`${window.cdn}assets/wallet_01.png`}
+                                    alt="wallet"
+                                />
+                            )}
+                            <div
+                                className="info-wrapper ml-1 w-100"
+                                onClick={handleWallet}
+                            >
+                                {user.walletAddress && (
+                                    <>
+                                        <p className="mb-1 d-flex">
+                                            {getWalletAmount() || 0}{" "}
+                                            <small className="d-flex align-self-center ml-1">
+                                                froyo
+                                            </small>
+                                        </p>
+                                        <p className="mb-0">
+                                            {user.walletAddress?.substring(
+                                                0,
+                                                4
+                                            )}
+                                            ....
+                                            {user.walletAddress?.substring(
+                                                user.walletAddress.length - 5,
+                                                user.walletAddress.length - 1
+                                            )}
+                                        </p>
+                                    </>
+                                )}
+                                {!user.walletAddress && (
+                                    <p className="mb-0">Connect Wallet</p>
+                                )}
                             </div>
                         </div>
                         <div className="position-relative d-flex flex-nowrap align-items-center mx-2">

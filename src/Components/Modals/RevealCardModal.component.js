@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -18,7 +18,11 @@ const RevealCardModal = ({
 }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null);
+
     const [prizeData, setPrizeData] = useState([]);
+    const [activeSlide, setActiveSlide] = useState(-1);
 
     useEffect(() => {
         if (data.length > 0)
@@ -40,13 +44,24 @@ const RevealCardModal = ({
                     <Swiper
                         className="swiper"
                         preloadImages={true}
-                        spaceBetween={0}
+                        initialSlide={1}
                         slidesPerView={1}
-                        loop={true}
-                        pagination={{ clickable: true }}
-                        navigation={prizeData.length > 1 ? true : false}
+                        pagination={{
+                            el: ".custom-pagination",
+                            clickable: true,
+                            dynamicBullets: true,
+                            renderBullet: (index, className) => {
+                                return `<div class="${className} d-flex align-items-center justify-content-center">
+                                    <img src="${prizeData[index]?.picture}" alt="prize"/>
+                                </div>`;
+                            },
+                        }}
+                        navigation={{
+                            prevEl: navigationPrevRef.current,
+                            nextEl: navigationNextRef.current,
+                        }}
                         onActiveIndexChange={(active) => {
-                            console.log(active.realIndex);
+                            setActiveSlide(active.realIndex);
                             updateLocalPrizeList(
                                 prizeData[active.realIndex]?.prizeId
                             );
@@ -62,73 +77,94 @@ const RevealCardModal = ({
                                             alt="prize"
                                         />
                                         <img
+                                            width={28}
+                                            className="close-btn"
+                                            onClick={() =>
+                                                handleRevealBackButton(
+                                                    e?.prizeId
+                                                )
+                                            }
+                                            src={`${window.cdn}buttons/button_close.png`}
+                                            alt="close-btn"
+                                        />
+                                    </div>
+                                    <div className="w-100 p-3 text-center winner-wrapper">
+                                        <img
                                             className="winner-pic"
                                             src={e?.winnerAvatarUrl}
                                             onError={(e) => defaultUserImage(e)}
-                                            alt={e?.winner}
+                                            alt={e.winner}
                                         />
-                                    </div>
-                                    <div className="w-100 p-3 text-center">
-                                        {user?.username.toLowerCase() ===
-                                            e?.winner.toLowerCase() && (
+                                        {user.username.toLowerCase() !==
+                                            e.winner.toLowerCase() && (
                                             <>
-                                                <p
-                                                    data-text="Congratulations!"
-                                                    className="title"
-                                                >
-                                                    Congratulations!
+                                                <p className="winner-name p-3">
+                                                    {e.winner} (You)
                                                 </p>
-                                                <p className="description mb-5">
-                                                    You have won the{" "}
-                                                    <span>{e?.title}</span>
+                                                <p className="won-text mb-0">
+                                                    Won the
                                                 </p>
-                                                <button
-                                                    className="claim-btn"
-                                                    onClick={() =>
-                                                        handleRevealClaimRewardBtn(
-                                                            e?.prizeId
-                                                        )
-                                                    }
-                                                >
-                                                    Claim Reward
-                                                </button>
-                                                <button
-                                                    className="later-btn"
-                                                    onClick={() =>
-                                                        handleRevealBackButton(
-                                                            e?.prizeId
-                                                        )
-                                                    }
-                                                >
-                                                    Continue to homepage
+                                                <p className="prize-name my-3">
+                                                    {e.title}
+                                                </p>
+                                                <p className="transfer-nft-text mx-auto mb-2">
+                                                    Your NFT is automatically
+                                                    sent to your wallet ending
+                                                    with …<span>04O4</span>
+                                                </p>
+                                                {/* TODO:: CONNECT WALLET */}
+                                                <button className="connect-wallet-btn p-3">
+                                                    Connect your wallet to
+                                                    receive NFT
                                                 </button>
                                             </>
                                         )}
-                                        {user?.username.toLowerCase() !==
-                                            e?.winner.toLowerCase() && (
+                                        {user.username.toLowerCase() ===
+                                            e.winner.toLowerCase() && (
                                             <>
-                                                <p className="description mb-5">
-                                                    <span>{e?.winner}</span>{" "}
-                                                    has won the{" "}
-                                                    <span>{e?.title}</span>
+                                                <p className="winner-name mt-5 p-3">
+                                                    {e.winner}
                                                 </p>
-                                                <div className="separator"></div>
-                                                <button
-                                                    className="continue-btn mt-2"
-                                                    onClick={() =>
-                                                        handleRevealBackButton(
-                                                            e?.prizeId
-                                                        )
-                                                    }
-                                                >
-                                                    Continue to homepage
-                                                </button>
+                                                <p className="won-text mb-2">
+                                                    won the
+                                                </p>
+                                                <p className="prize-name my-2">
+                                                    {e.title}
+                                                </p>
                                             </>
                                         )}
                                     </div>
                                 </div>
                             </SwiperSlide>
                         ))}
+
+                        <div
+                            className={`pagination p-3 mx-auto ${
+                                prizeData.length > 1 ? "d-flex" : "d-none"
+                            } align-items-center justify-content-between`}
+                        >
+                            <img
+                                width={32}
+                                className={`prev ${
+                                    activeSlide > 0 ? "" : "opacity-0-5"
+                                }`}
+                                ref={navigationPrevRef}
+                                src={`${window.cdn}buttons/button_back.png`}
+                                alt="prev-btn"
+                            />
+                            <div className="custom-pagination d-flex"></div>
+                            <img
+                                width={32}
+                                className={`next ${
+                                    activeSlide === prizeData.length - 1
+                                        ? "opacity-0-5"
+                                        : ""
+                                }`}
+                                ref={navigationNextRef}
+                                src={`${window.cdn}buttons/button_back.png`}
+                                alt="next-btn"
+                            />
+                        </div>
                     </Swiper>
                 </div>
             )}
