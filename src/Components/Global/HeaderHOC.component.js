@@ -61,7 +61,7 @@ const HeaderHOC = () => {
 
         notificationList?.forEach((n) => {
             const filteredData = n.list.filter(
-                (l) => l.type === "tour" || l.type === "invite"
+                (l) => l.type !== "winner"
             );
             _notificationData = [...filteredData];
         });
@@ -89,7 +89,7 @@ const HeaderHOC = () => {
         let _notificationData = [];
         notificationList?.forEach((n) => {
             const filteredData = n.list.filter(
-                (l) => l.type === "tour" || l.type === "invite"
+                (l) => l.type !== "winner" 
             );
             _notificationData = [...filteredData];
         });
