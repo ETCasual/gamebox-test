@@ -39,7 +39,8 @@ const Index = () => {
             heroRef.current &&
             workRef.current &&
             workCardRef.current &&
-            dailyRewardRef.current
+            dailyRewardRef.current &&
+            gsap
         ) {
             // HERO
             g1 = ScrollTrigger.create({
@@ -115,9 +116,9 @@ const Index = () => {
         }
 
         return () => {
-            g1.kill();
-            g2.kill();
-            g3.kill();
+            g1?.kill?.();
+            g2?.kill?.();
+            g3?.kill?.();
         };
     }, []);
 

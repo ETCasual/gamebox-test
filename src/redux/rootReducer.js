@@ -73,11 +73,11 @@ const appReducer = combineReducers({
 const rootReducer = (state, action) => {
     // when a logout action is dispatched it will reset redux state
     if (action.type === "LOG_OUT") {
+        state = undefined;
+        window.location.href = "/";
         window.scrollTo(0, 0);
         localStorage.clear();
-        // sessionStorage.removeItem("token");
         sessionStorage.removeItem("isAuthValid");
-        state = undefined;
     }
     return appReducer(state, action);
 };
