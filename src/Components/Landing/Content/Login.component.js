@@ -68,7 +68,13 @@ const Login = ({ setLoginModal }) => {
                     <button type="submit" className="submit mb-4">
                         Login
                     </button>
-                    <p className="forgot-password">Forgot your password?</p>
+                    <a
+                        href="https://staging.froyo.games/forgot-pass"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <p className="forgot-password">Forgot your password?</p>
+                    </a>
                 </form>
             </div>
         </div>
