@@ -2,6 +2,75 @@
     @include media-min($md) {
         padding-top: 60px;
     }
+    #login {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                #00000000 37%,
+                #00000073 60%,
+                #000000 100%
+            );
+        }
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            min-height: 4rem;
+            background: linear-gradient(121deg, #302f2f 0%, #0b0b0b 100%);
+            .welcome-text {
+                font-size: $fnt-sz-20;
+                font-weight: $fnt-wgt-700;
+                text-transform: uppercase;
+            }
+            .subtitle {
+                color: #868686;
+                font-size: $fnt-sz-14;
+            }
+            form {
+                width: clamp(22rem, 25vw, 25rem);
+                margin: 0 auto;
+                .email,
+                .password {
+                    background: #1f1e1e;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border: 1px solid #242424;
+                    border-radius: 5px;
+                    height: 3.25rem;
+                    color: #868686;
+                    font-size: $fnt-sz-14;
+                }
+                .error {
+                    font-weight: $fnt-wgt-600;
+                    font-size: $fnt-sz-12;
+                }
+                .submit {
+                    background: #ff3399;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border-radius: 5px;
+                    font-size: $fnt-sz-14;
+                    font-weight: $fnt-wgt-600;
+                    color: white;
+                    height: 3.25rem;
+                    width: clamp(19rem, 21vw, 21rem);
+                    margin: 0 auto;
+                }
+                .forgot-password {
+                    color: #868686;
+                    font-size: $fnt-sz-12;
+                }
+            }
+        }
+    }
     #hero {
         min-height: 80vh;
         @include media-min($md) {
@@ -61,19 +130,23 @@
                     @include media-min($md) {
                         width: 75%;
                     }
-                    button {
-                        border-radius: 10px;
-                        font-size: $fnt-sz-14;
-                        font-weight: $fnt-wgt-700;
-                    }
                     .register-now-button {
                         background: #f20086 0% 0% no-repeat padding-box;
                         color: #ffffff;
                     }
-                    .login-button {
-                        border: 1px solid #f20086;
-                        color: #ff027d;
+                }
+                button {
+                    border-radius: 10px;
+                    font-size: $fnt-sz-14;
+                    font-weight: $fnt-wgt-700;
+                }
+                .login-button {
+                    width: 100%;
+                    @include media-min($md) {
+                        width: 75%;
                     }
+                    border: 1px solid #f20086;
+                    color: #ff027d;
                 }
             }
             .carousel-wrapper {

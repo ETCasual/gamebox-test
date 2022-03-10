@@ -122,16 +122,33 @@ export async function userSignIn() {
 //
 //      FROYO API - TO GET USER INFO
 //
+export async function loginUser(payload) {
+    const { data } = await axios.post(
+        `${process.env.REACT_APP_FROYO_API_ENDPOINT}authenticate`,
+        {
+            username: payload.username,
+            password: payload.password,
+        }
+    );
+    return data;
+}
+
+//
+//      FROYO API - TO GET USER INFO
+//
 export async function getUserAccountInfoFroyo() {
     const token = localStorage
         .getItem("froyo-authenticationtoken")
         ?.replaceAll('"', "");
 
-    const { data } = await axios.get(process.env.REACT_APP_FROYO_API_ENDPOINT, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    const { data } = await axios.get(
+        `${process.env.REACT_APP_FROYO_API_ENDPOINT}account`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
     return data;
 }
 

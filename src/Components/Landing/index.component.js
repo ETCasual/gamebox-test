@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,13 +8,11 @@ import Content from "Components/Landing/Content/index.component";
 import BlockedUserModal from "Components/Landing/BlockedUserModal/BlockedUserModal.component";
 import Loading from "Components/Landing/Loading/Loading.component";
 
-import { loadLoginUser } from "redux/thunks/Login.thunk";
+import { loadLoginUserWithToken } from "redux/thunks/Login.thunk";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
-    const history = useHistory();
-
     const { user, loginStatus } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
 
@@ -24,6 +21,7 @@ const Index = () => {
     let workCardRef = useRef([]);
     let dailyRewardRef = useRef(null);
 
+    const [loginModal, setLoginModal] = useState(false);
     const [blockedArchivedModal, setBlockedArchivedModal] = useState(false);
 
     useEffect(() => {
@@ -126,13 +124,13 @@ const Index = () => {
         const token = localStorage
             .getItem("froyo-authenticationtoken")
             ?.replaceAll('"', "");
-        if (token) dispatch(loadLoginUser(history));
-    }, [dispatch, history]);
+        if (token) dispatch(loadLoginUserWithToken());
+    }, [dispatch]);
 
     return (
         <>
             {/* TOP NAVIGATION BAR */}
-            <Navbar />
+            <Navbar setLoginModal={setLoginModal} />
 
             {/* MIDDLE CONTENT */}
             <Content
@@ -140,6 +138,8 @@ const Index = () => {
                 workRef={workRef}
                 workCardRef={workCardRef}
                 dailyRewardRef={dailyRewardRef}
+                loginModal={loginModal}
+                setLoginModal={setLoginModal}
             />
 
             {/* LOADING */}

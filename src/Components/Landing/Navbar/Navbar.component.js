@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ setLoginModal }) => {
     return (
         <div className="nav-bar position-fixed d-flex align-items-center">
             <div className="blur-background position-absolute w-100 h-100" />
@@ -12,13 +12,13 @@ const Navbar = () => {
                             src={`${window.cdn}logo/logo_gamebox.png`}
                             alt="GameBox"
                         />
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={process.env.REACT_APP_NODE_ENV === 'development' ? 'https://staging.froyo.games/login' :  "https://froyo.games/login"}
+
+                        <button
+                            className="nav-login"
+                            onClick={() => setLoginModal(true)}
                         >
-                            <button className="nav-login">Login</button>
-                        </a>
+                            Login
+                        </button>
                     </div>
                 </div>
             </div>

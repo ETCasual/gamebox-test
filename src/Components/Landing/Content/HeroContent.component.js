@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroContent = () => {
+const HeroContent = ({ setLoginModal }) => {
     return (
         <>
             <p className="intro-text mb-2">Introducing</p>
@@ -18,20 +18,17 @@ const HeroContent = () => {
                 }
                 className="button-wrapper mb-3"
             >
-                <button className="register-now-button w-100 p-3">Register now!</button>
+                <button className="register-now-button w-100 p-3">
+                    Register now!
+                </button>
             </a>
-            <a
-                target="_blank"
-                rel="noreferrer"
-                href={
-                    process.env.REACT_APP_NODE_ENV === "development"
-                        ? "https://staging.froyo.games/login"
-                        : "https://froyo.games/login"
-                }
-                className="button-wrapper"
+
+            <button
+                className="login-button p-3"
+                onClick={() => setLoginModal(true)}
             >
-                <button className="login-button w-100 p-3">Login</button>
-            </a>
+                Login
+            </button>
         </>
     );
 };

@@ -1,11 +1,12 @@
 import {
     addUser,
     getUserAccountInfoFroyo,
+    loginUser,
     userSignIn,
 } from "redux/services/index.service";
 import { UPDATE_USER_WALLET_ADDRESS } from "redux/types";
 
-export function loadLoginUser(history) {
+export function loadLoginUserWithToken() {
     return async (dispatch) => {
         try {
             const user = await userSignIn();
@@ -14,15 +15,13 @@ export function loadLoginUser(history) {
                     type: "LOGIN_SUCCESS",
                     payload: user,
                 });
-                history.push("/");
             } else {
                 const _user = await getUserAccountInfoFroyo();
                 if (_user.id) {
                     const id = await addUser(_user);
                     if (id !== "-1") {
                         localStorage.setItem("isNewUser", true);
-                        const user = await userSignIn();
-                        if (user.id) history.push("/");
+                        await userSignIn();
                     }
                 }
                 return;
@@ -45,6 +44,35 @@ export function loadLoginUser(history) {
                     error.message
                 );
             else console.log(error.message);
+        }
+    };
+}
+
+export function loadLogin(payload, setLoginError) {
+    return async (dispatch) => {
+        try {
+            const { id_token } = await loginUser(payload);
+            if (id_token) {
+                setLoginError("");
+                localStorage.setItem(
+                    "froyo-authenticationtoken",
+                    `"${id_token}"`
+                );
+                const user = await userSignIn();
+                if (user.id) {
+                    dispatch({
+                        type: "LOGIN_SUCCESS",
+                        payload: user,
+                    });
+                }
+            }
+        } catch (error) {
+            console.log(error.message);
+            setLoginError(
+                error.code >= 400 && error.code < 500
+                    ? "Invalid Username/Password!"
+                    : "Oops! Something went wrong. Please try again."
+            );
         }
     };
 }
