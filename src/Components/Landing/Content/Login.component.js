@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadLogin } from "redux/thunks/Login.thunk";
@@ -11,6 +11,12 @@ const Login = ({ setLoginModal }) => {
         password: "",
     });
     const [loginError, setLoginError] = useState("");
+
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
