@@ -1,6 +1,6 @@
 import React from "react";
 
-const DailyBonus = ({ dailyRewardRef }) => {
+const DailyBonus = ({ dailyRewardRef, setRegistrationInstructionModal }) => {
     return (
         <div className="container-fluid" id="daily-reward">
             <div
@@ -29,19 +29,12 @@ const DailyBonus = ({ dailyRewardRef }) => {
                         Collect tickets automatically for weekly NFT reward when
                         you win in any tournaments!
                     </p>
-                    <a
-                        target="_blank"
-                        rel="noreferrer"
-                        href={
-                            process.env.REACT_APP_NODE_ENV === "development"
-                                ? "https://staging.froyo.games/register"
-                                : "https://froyo.games/register"
-                        }
+                    <button
+                        className="register-now-button"
+                        onClick={() => setRegistrationInstructionModal(true)}
                     >
-                        <button className="register-now-button">
-                            Register now!
-                        </button>
-                    </a>
+                        Register now!
+                    </button>
                 </div>
             </div>
         </div>

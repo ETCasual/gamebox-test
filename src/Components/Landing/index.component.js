@@ -21,8 +21,10 @@ const Index = () => {
     let workCardRef = useRef([]);
     let dailyRewardRef = useRef(null);
 
-    const [loginModal, setLoginModal] = useState(false);
     const [blockedArchivedModal, setBlockedArchivedModal] = useState(false);
+    const [loginModal, setLoginModal] = useState(false);
+    const [registrationInstructionModal, setRegistrationInstructionModal] =
+        useState(false);
 
     useEffect(() => {
         setBlockedArchivedModal(
@@ -140,6 +142,10 @@ const Index = () => {
                 dailyRewardRef={dailyRewardRef}
                 loginModal={loginModal}
                 setLoginModal={setLoginModal}
+                registrationInstructionModal={registrationInstructionModal}
+                setRegistrationInstructionModal={
+                    setRegistrationInstructionModal
+                }
             />
 
             {/* LOADING */}

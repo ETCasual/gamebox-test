@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroContent = ({ setLoginModal }) => {
+const HeroContent = ({ setLoginModal, setRegistrationInstructionModal }) => {
     return (
         <>
             <p className="intro-text mb-2">Introducing</p>
@@ -8,27 +8,20 @@ const HeroContent = ({ setLoginModal }) => {
             <p className="subtitle-text mt-2 mb-5">
                 Discover rewards and win them for free!
             </p>
-            <a
-                target="_blank"
-                rel="noreferrer"
-                href={
-                    process.env.REACT_APP_NODE_ENV === "development"
-                        ? "https://staging.froyo.games/registration"
-                        : "https://froyo.games/registration"
-                }
-                className="button-wrapper mb-3"
-            >
-                <button className="register-now-button w-100 p-3">
+            <div className="button-wrapper mb-3">
+                <button
+                    className="register-now-button w-100 p-3 mb-2"
+                    onClick={() => setRegistrationInstructionModal(true)}
+                >
                     Register now!
                 </button>
-            </a>
-
-            <button
-                className="login-button p-3"
-                onClick={() => setLoginModal(true)}
-            >
-                Login
-            </button>
+                <button
+                    className="login-button w-100 p-3"
+                    onClick={() => setLoginModal(true)}
+                >
+                    Login
+                </button>
+            </div>
         </>
     );
 };
