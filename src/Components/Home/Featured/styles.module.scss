@@ -1,14 +1,35 @@
 // FEATURED COMPONENT
 .featured {
-    .card-wrapper {
-        position: relative;
-        cursor: pointer;
-        background: linear-gradient(140deg, #302f2f 0%, #0b0b0b 100%);
-        @include media-min($md) {
-            background: linear-gradient(137deg, #302f2f -1%, #0b0b0b 55%);
+    position: relative;
+    background-size: 140%;
+    background-repeat: no-repeat;
+    background-position: center right;
+    .overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 105%;
+        z-index: 1;
+        @supports not (
+            (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+        ) {
+            background-color: rgba(13, 13, 13, 0.3);
         }
+        @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: linear-gradient(180deg, #02020200 0%, #0b0b0b 100%);
+        }
+    }
+    .card-wrapper {
+        margin-top: 6rem;
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
         border-radius: 10px;
-        min-height: clamp(20rem, 70vh, 31rem);
+        min-height: clamp(20rem, 70vw, 31rem);
         .prize-type {
             font-size: $fnt-sz-16;
             text-transform: uppercase;
@@ -18,35 +39,80 @@
             left: 1rem;
             z-index: 1;
         }
-        .prize-text {
+        .prize-info {
+            margin-bottom: 2rem;
             .prize-id {
+                position: absolute;
+                top: 1.3rem;
+                left: 20%;
+                transform: translate(-50%, -50%);
                 font-size: $fnt-sz-8;
                 @include media-min($md) {
                     font-size: $fnt-sz-10;
                 }
             }
-            .prize-title {
-                // font-size: clamp($fnt-sz-18, 5vw, $fnt-sz-30);
-                font-size: $fnt-sz-18;
-                width: 27ch;
-                @include media-min($md) {
-                    font-size: $fnt-sz-30;
-                    width: 20ch;
+            picture {
+                img {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                    @include media-min($md) {
+                        border-radius: 17px;
+                        width: 80%;
+                        height: 80%;
+                    }
+                    object-fit: cover;
                 }
-                font-weight: $fnt-wgt-600;
-                text-transform: capitalize;
-            }
-            .prize-subtitle {
-                font-size: $fnt-sz-12;
-            }
-            .separator {
-                background-color: #343434;
-                width: 3rem;
-                margin: 25px 0 25px 0;
-                @include media-min($md) {
-                    margin: 30px 0 30px 0;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 100%;
+                    border-radius: 10px;
+                    @include media-min($md) {
+                        border-radius: 17px;
+                        width: 80%;
+                    }
+                    height: 100%;
+                    z-index: 0;
+                    background: linear-gradient(
+                        180deg,
+                        #02020200 60%,
+                        #0b0b0b80 100%
+                    );
                 }
             }
+            .info-wrapper {
+                position: absolute;
+                bottom: -1rem;
+                left: 0;
+                width: 100%;
+                .prize-title {
+                    font-size: $fnt-sz-18;
+                    width: 27ch;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-30;
+                        width: 20ch;
+                    }
+                    font-weight: $fnt-wgt-600;
+                    text-transform: capitalize;
+                }
+                .prize-subtitle {
+                    font-size: $fnt-sz-12;
+                    line-height: 1.3;
+                    @include media-min($md) {
+                        width: 70ch;
+                    }
+                }
+            }
+        }
+        .tickets-info {
+            padding: 0.7rem;
+            background: linear-gradient(121deg, #302f2f 0%, #0b0b0b 100%);
+            border-radius: 10px;
             .ticket-label {
                 color: #00c1b9;
                 font-size: $fnt-sz-12;
@@ -61,19 +127,13 @@
             .remaining-tickets {
                 color: #9d9d9d;
             }
-        }
-        picture {
-            img {
-                width: 100%;
-                height: 100%;
-                border-top-left-radius: 17px;
-                border-top-right-radius: 17px;
-                @include media-min($md) {
-                    width: 95%;
-                    height: 95%;
-                    border-radius: 17px;
-                }
-                object-fit: cover;
+            .btn-participate {
+                background-color: #ff3399;
+                color: white;
+                font-size: $fnt-sz-14;
+                font-weight: $fnt-wgt-600;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                border-radius: 5px;
             }
         }
     }

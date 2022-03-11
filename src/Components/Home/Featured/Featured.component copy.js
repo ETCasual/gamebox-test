@@ -70,14 +70,9 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                         className={`container-fluid featured ${
                             length > 1 ? "mb-3" : "mb-5"
                         }`}
-                        // style={{ backgroundImage: `url(${data.prizeBG})` }}
-                        style={{
-                            backgroundImage: `url(https://lh3.googleusercontent.com/Z9GqL7f0-Lk_B-tXFOk3Sp0r9Dd1h9-rval-KHIK9B6EMwtGRycFAVVX_sxKoWRGZTgxJrcwqLE5jbQxjxZM30qwglBn_oda34qw0g=s0)`,
-                        }}
                     >
-                        <div className="overlay" />
                         <div className="row justify-content-center">
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-4 d-flex">
+                            <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-flex">
                                 <Link
                                     className="w-100"
                                     onClick={scrollToTop}
@@ -90,37 +85,26 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                 >
                                     <div className="card-wrapper d-flex flex-column flex-md-row">
                                         {/* PRIZE TYPE */}
-                                        {/* <div className="prize-type">
+                                        <div className="prize-type">
                                             Featured NFT
-                                        </div> */}
-                                        <div className="col-12 pl-0 d-flex flex-column align-items-center justify-content-center position-relative p-3">
+                                        </div>
+                                        <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3 order-2 order-md-1">
                                             {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                            <div className="prize-info position-relative">
+                                            <div className="prize-text mb-2 w-100">
                                                 <div className="prize-id">
                                                     ID: {data?.prizeContent}
                                                 </div>
-                                                <picture className="d-flex align-items-end justify-content-center">
-                                                    <source
-                                                        media="(max-width:768px)"
-                                                        srcSet={data.prizeBG2}
-                                                    />
-                                                    <img
-                                                        src={data.prizeBG}
-                                                        alt={data.prizeTitle}
-                                                    />
-                                                </picture>
-                                                <div className="info-wrapper">
-                                                    <div className="prize-title mt-2 mb-2 mb-md-3">
-                                                        {data?.prizeTitle}
-                                                    </div>
-                                                    <div className="prize-subtitle">
-                                                        {data?.prizeSubtitle}
-                                                    </div>
+                                                <div className="prize-title mt-2 mb-2 mb-md-3">
+                                                    {data?.prizeTitle}
                                                 </div>
-                                            </div>
-                                            {/* TICKETS INFO */}
-                                            <div className="tickets-info mb-2 w-100">
-                                                {/* LABEL */}
+                                                <div className="prize-subtitle">
+                                                    {data?.prizeSubtitle}
+                                                </div>
+
+                                                {/* HR SEPARATOR */}
+                                                <hr className="separator" />
+
+                                                {/* TICKETS INFO */}
                                                 <p className="ticket-label mb-2">
                                                     Your tickets
                                                 </p>
@@ -165,10 +149,19 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <button className="btn-participate w-100 p-3 mt-4">
-                                                    Participate tournament now
-                                                </button>
                                             </div>
+                                        </div>
+                                        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end px-0 order-1 order-md-2">
+                                            <picture className="d-flex align-items-center justify-content-center justify-content-md-end w-100 h-100">
+                                                <source
+                                                    media="(max-width:768px)"
+                                                    srcSet={data.prizeBG2}
+                                                />
+                                                <img
+                                                    src={data.prizeBG}
+                                                    alt={data.prizeTitle}
+                                                />
+                                            </picture>
                                         </div>
                                     </div>
                                 </Link>

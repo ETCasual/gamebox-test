@@ -161,9 +161,14 @@ button {
     z-index: 3;
     top: 0;
     height: 60px;
-    background: #2a2a2a8a;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background-color: rgba(138, 138, 138, 0.3);
+    }
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background: #2A2A2A;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
     width: 100vw;
     .logo {
         width: 10rem;
