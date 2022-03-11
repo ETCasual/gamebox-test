@@ -200,14 +200,28 @@
                     text-transform: capitalize;
                     font-weight: $fnt-wgt-700;
                     font-size: $fnt-sz-24;
+                    line-height: 1.5;
                     width: 16ch;
                     @include media-min($md) {
                         font-size: $fnt-sz-30;
                     }
+                    background: linear-gradient(
+                        -45deg,
+                        #ee7752,
+                        #e73c7e,
+                        #23a6d5,
+                        #23d5ab
+                    );
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-size: 400% 400%;
+                    animation: gradient 15s ease infinite;
                 }
                 .subtitle-text {
                     width: 50ch;
                     font-size: $fnt-sz-12;
+                    line-height: 1.7;
                 }
                 .button-wrapper {
                     width: 100%;
@@ -217,7 +231,7 @@
                     button {
                         border-radius: 10px;
                         font-size: $fnt-sz-14;
-                        font-weight: $fnt-wgt-700;
+                        font-weight: $fnt-wgt-600;
                     }
                     .register-now-button {
                         background: #f20086;

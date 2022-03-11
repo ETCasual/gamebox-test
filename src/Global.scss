@@ -765,13 +765,13 @@ button {
         .earn-tickets,
         .earn-exp {
             padding: 1rem;
-            color: #FCC239;
+            color: #fcc239;
             background: #141414;
             border-radius: 6px;
             min-width: 13rem;
             height: 3rem;
             font-size: $fnt-sz-20;
-            font-weight: $fnt-wgt-600
+            font-weight: $fnt-wgt-600;
         }
         .earn-exp {
             background: linear-gradient(90deg, #fdc33d73 0%, #efa30065 100%);
@@ -877,17 +877,21 @@ button {
 // TOAST COMPONENT
 .toasty {
     position: fixed;
-    top: 5rem;
+    top: 6.5rem;
     right: 1rem;
-    background: white;
+    background: linear-gradient(109deg, #3c3c3c 0%, #0b0b0b 100%);
+    box-shadow: 0px 10px 10px #00000040;
+    border-radius: 10px;
     z-index: 3;
     border-radius: 12px;
     min-width: 20rem;
-    min-height: 5rem;
+    min-height: 3.688;
     padding: 1rem;
     transform: translateX(120%);
     opacity: 0;
     visibility: hidden;
+    font-size: $fnt-sz-14;
+    font-weight: $fnt-wgt-700;
 }
 
 // EMPTY PAGE - ACTIVITY, WINNERS, HIGHSCORE & NOTIFICATIONS

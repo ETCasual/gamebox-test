@@ -1,9 +1,19 @@
+import { loadLoginUserWallet, loadWalletError } from "redux/thunks/Login.thunk";
 import networks from "Utils/Networks";
 
-export async function handleConnectWallet() {
+export async function handleConnectWallet(dispatch) {
     if (!window.ethereum) {
         alert("Install Metamask!");
         return;
+    }
+    window.ethereum.on("accountsChanged", handleAccountChanged);
+    function handleAccountChanged(accounts) {
+        dispatch(loadLoginUserWallet(accounts[0]));
+    }
+
+    window.ethereum.on("disconnect", handleWalletDisconnected);
+    function handleWalletDisconnected() {
+        dispatch(loadLoginUserWallet(null));
     }
 
     try {
@@ -15,13 +25,10 @@ export async function handleConnectWallet() {
                 },
             ],
         });
-        return accounts[0];
+        dispatch(loadLoginUserWallet(accounts[0]));
     } catch (error) {
-        console.log(error.code);
-        // 4001 = User rejected the connection request
-        // -32002 = User needs to login into metamask plugin
-        if (error.code === -32002) {
-            alert("Please Login into MetaMask");
-        }
+        console.log(error);
+        if (error.code === -32002 || error.code === 4001)
+            dispatch(loadWalletError(error));
     }
 }

@@ -16,7 +16,7 @@ const Toasty = () => {
             gsap.to(toastyRef.current, {
                 duration: 0.5,
                 autoAlpha: 1,
-                x: 0,
+                x: -40,
                 ease: "circ.out",
                 onComplete: () => {
                     gsap.to(toastyRef.current, {

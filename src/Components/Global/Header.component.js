@@ -5,10 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Notification from "Components/Global/Notifications.component";
 
 import loadPrizes from "redux/thunks/Prizes.thunk";
+
 import { defaultUserImage } from "Utils/DefaultImage";
 import { scrollToTop } from "Utils/ScrollToTop";
-// import networks from "../../Utils/Networks";
-import { loadLoginUserWallet } from "../../redux/thunks/Login.thunk";
 import { handleConnectWallet } from "Utils/ConnectWallet";
 
 const Header = ({
@@ -62,8 +61,7 @@ const Header = ({
     const handleWallet = async () => {
         if (user.walletAddress) return;
 
-        const account = await handleConnectWallet();
-        if (account) dispatch(loadLoginUserWallet(account));
+        await handleConnectWallet(dispatch);
     };
 
     return (

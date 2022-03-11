@@ -90,5 +90,28 @@ export function loadLoginUserWallet(walletAddress) {
         const _user = { ...user };
         _user.walletAddress = walletAddress;
         dispatch({ type: UPDATE_USER_WALLET_ADDRESS, payload: _user });
+        dispatch({
+            type: "SHOW_TOAST",
+            payload: {
+                message:
+                    walletAddress !== null
+                        ? "Wallet Connect."
+                        : "Wallet Disconnected.",
+            },
+        });
+    };
+}
+
+export function loadWalletError({ code, message }) {
+    return async (dispatch) => {
+        dispatch({
+            type: "SHOW_TOAST",
+            payload: {
+                message:
+                    code === -32002
+                        ? "Connect to your MetaMask account!"
+                        : message,
+            },
+        });
     };
 }
