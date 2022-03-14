@@ -9,6 +9,8 @@ import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 import loadResetNotificationNumber from "redux/thunks/RestNotificationNumber.thunk";
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 
+import getToken from "Utils/GetToken";
+
 const HeaderHOC = () => {
     const dispatch = useDispatch();
 
@@ -37,7 +39,7 @@ const HeaderHOC = () => {
             createdOn: 0,
         });
 
-    let token = localStorage.getItem("froyo-authenticationtoken")?.replaceAll('"', '');
+    let token = getToken()
 
     useEffect(() => {
         if (user.picture) setUserImage(user.picture);

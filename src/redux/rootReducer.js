@@ -1,4 +1,5 @@
 import { combineReducers } from "redux/";
+
 import loginReducer from "redux/reducers/Login.reducer";
 import prizesReducer from "redux/reducers/Prizes.reducer";
 import ranksReducer from "redux/reducers/Ranks.reducer";
@@ -74,7 +75,6 @@ const rootReducer = (state, action) => {
     // when a logout action is dispatched it will reset redux state
     if (action.type === "LOG_OUT") {
         state = undefined;
-        window.location.href = "/";
         window.scrollTo(0, 0);
         localStorage.clear();
         sessionStorage.removeItem("isAuthValid");

@@ -12,7 +12,6 @@ import { scrollToTop } from "Utils/ScrollToTop";
 const Rewards = () => {
     const { claimedPrizes } = useSelector((state) => state.claimedPrizes);
     const { unClaimedPrizes } = useSelector((state) => state.unClaimedPrizes);
-    const { config } = useSelector((state) => state.config);
 
     const history = useHistory();
 
@@ -34,19 +33,21 @@ const Rewards = () => {
         return new Date(claimedOn * 1000).toDateString();
     };
 
-    const getRemainingDaysToClaim = (createdOn) => {
-        let todayDate = new Date().getDate();
-        let createdOnDate = new Date(createdOn * 1000).getDate();
-        let remaining = 0;
-        if (todayDate >= createdOnDate) {
-            remaining = config?.daysToClaimPrize - (todayDate - createdOnDate);
-            if (remaining <= 0) return "Expired";
-            return `${remaining} Days Left to Claim`;
-        } else {
-            remaining = createdOnDate - todayDate;
-            if (remaining <= 0) return "Expired";
-            return `${remaining} Days Left to Claim`;
-        }
+    const getRemainingDaysToClaim = (claimDate) => {
+        let date = new Date(claimDate * 1000);
+        const formattedDate = date.toLocaleString("default", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        });
+        return formattedDate;
+    };
+
+    const validClaimDate = (claimDate) => {
+        const today = new Date().toLocaleDateString();
+        const _claimDated = new Date(claimDate * 1000).toLocaleDateString();
+        if (today < _claimDated) return true;
+        return false;
     };
 
     // const claimed = [
@@ -138,9 +139,20 @@ const Rewards = () => {
                                             Unclaimed rewards
                                         </p>
                                         <div className="row">
+                                            {/* TODO:: ONCLICK FUNCTION FOR WHEN ITS AVAILABLE */}
+                                            {/* POPUP METAMASK TO CLAIM NFT */}
                                             {unClaimedPrizes?.map((data, i) => (
                                                 <div
-                                                    className={`col-12 col-md-6 mb-3 prize pl-2 pr-1`}
+                                                    className={`col-12 col-md-6 mb-3 prize unclaimed pl-2 pr-1`}
+                                                    style={{
+                                                        cursor: `${
+                                                            !validClaimDate(
+                                                                data.prizeCanClaimDate
+                                                            )
+                                                                ? "pointer"
+                                                                : "default"
+                                                        }`,
+                                                    }}
                                                     key={`prizes-${i}`}
                                                 >
                                                     <div className="card-wrapper d-flex">
@@ -150,9 +162,9 @@ const Rewards = () => {
                                                                 style={{
                                                                     backgroundImage: `url("${data.prizeImageUrl}")`,
                                                                 }}
-                                                            ></div>
+                                                            />
                                                         </div>
-                                                        <div className="col py-2 px-0 mt-1">
+                                                        <div className="col py-2 px-1 mt-1">
                                                             <div className="prize-text">
                                                                 <div className="card-title">
                                                                     {
@@ -166,11 +178,23 @@ const Rewards = () => {
                                                                 </div>
                                                             </div>
 
-                                                            <div className="prize-claimed text-red py-2">
-                                                                {`Claim your NFT - ${getRemainingDaysToClaim(
-                                                                    data.createdOn
-                                                                )}`}
-                                                            </div>
+                                                            {validClaimDate(
+                                                                data.prizeCanClaimDate
+                                                            ) && (
+                                                                <div className="prize-claimed text-wait py-2">
+                                                                    {`Claim your NFT - ${getRemainingDaysToClaim(
+                                                                        data.prizeCanClaimDate
+                                                                    )}`}
+                                                                </div>
+                                                            )}
+                                                            {!validClaimDate(
+                                                                data.prizeCanClaimDate
+                                                            ) && (
+                                                                <div className="prize-claimed text-red py-2">
+                                                                    Claim your
+                                                                    NFT
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,7 +213,7 @@ const Rewards = () => {
                                         <div className="row">
                                             {claimedPrizes?.map((data, i) => (
                                                 <div
-                                                    className={`col-12 col-md-6 mb-3 prize pl-2 pr-1`}
+                                                    className={`col-12 col-md-6 mb-3 prize claimed pl-2 pr-1`}
                                                     key={`prizes-${i}`}
                                                 >
                                                     <div

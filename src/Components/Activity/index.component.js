@@ -14,6 +14,7 @@ import { scrollToTop } from "Utils/ScrollToTop";
 
 const Index = () => {
     const dispatch = useDispatch();
+
     const { user } = useSelector((state) => state.userData);
     const { prizes } = useSelector((state) => state.prizes);
     const { activity } = useSelector((state) => state.activity);

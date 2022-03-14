@@ -29,6 +29,20 @@ export function loadLoginUserWithToken() {
         } catch (error) {
             if (error.code === 7) {
                 console.log(error.message);
+                dispatch({
+                    type: "LOGIN_STATUS",
+                    payload: {
+                        loading: false,
+                        ready: false,
+                        noAuth: true,
+                    },
+                });
+                dispatch({
+                    type: "SHOW_TOAST",
+                    payload: {
+                        message: "Session Expired! Please login again.",
+                    },
+                });
             } else if (error.code === 3) {
                 console.log(error.code, error.message);
                 dispatch({

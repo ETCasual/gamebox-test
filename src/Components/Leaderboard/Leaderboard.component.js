@@ -30,7 +30,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import showAdsBeforeGame from "Utils/showAdsBeforeGame";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
-import refreshToken from "Utils/RefreshToken";
+import getToken from "Utils/GetToken";
 
 const Leaderboard = ({
     gameInfo,
@@ -98,7 +98,7 @@ const Leaderboard = ({
                 data?.gameInfo[0]?.endTimeStamp
             );
             setTimer(finalTimeRef);
-            
+
             // TODO:: 0d 0h 0m 3s => AT THIS POINT RUN COUNT DOWN TIMER ENDED FUNCTION
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
@@ -204,65 +204,63 @@ const Leaderboard = ({
 
         setModalStatus((prev) => ({ ...prev, isGameReady: true }));
 
-        const token = await refreshToken();
-        if (token) {
-            setModalStatus((prev) => ({
-                ...prev,
-                isEarnAdditionalInfoShown: false,
-            }));
+        const token = getToken()
 
-            if (gameInfo.gameId > 0) {
-                try {
-                    let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${gameInfo.gameId}&user_id=${user.id}`;
-                    let options = {
-                        headers: {
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Methods":
-                                "POST, GET, OPTIONS",
-                            Authorization: `Bearer ${token}`,
-                        },
-                    };
-                    let response = await axios.get(url, options);
-                    if (response.data) {
-                        setGameData(response.data);
-                        let gameCount =
-                            parseInt(localStorage.getItem("gameCount")) || 0;
-                        if (gameCount <= config.adsPerGame) {
-                            gameCount = gameCount + 1;
-                            localStorage.setItem("gameCount", gameCount);
-                        }
+        setModalStatus((prev) => ({
+            ...prev,
+            isEarnAdditionalInfoShown: false,
+        }));
 
-                        showAdsBeforeGame(config);
+        if (gameInfo.gameId > 0) {
+            try {
+                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${gameInfo.gameId}&user_id=${user.id}`;
+                let options = {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+                let response = await axios.get(url, options);
+                if (response.data) {
+                    setGameData(response.data);
+                    let gameCount =
+                        parseInt(localStorage.getItem("gameCount")) || 0;
+                    if (gameCount <= config.adsPerGame) {
+                        gameCount = gameCount + 1;
+                        localStorage.setItem("gameCount", gameCount);
                     }
-                } catch (error) {
-                    console.log(error.message);
+
+                    showAdsBeforeGame(config);
                 }
+            } catch (error) {
+                console.log(error.message);
             }
-
-            setEarnAdditionalDisabledStatus({
-                gems: false,
-                ads: false,
-            });
-
-            // TODO
-            let _earnAdditional = [...earnAdditionalBenefitStatus];
-            let index = _earnAdditional.findIndex(
-                (e) => e.prizeId === data?.prizeId
-            );
-            let isAdWatched =
-                index > -1 ? _earnAdditional[index]?.isAdsSelected : false;
-            let isGemUsed =
-                index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
-
-            dispatch(
-                loadPlayerEnterTournamentId(
-                    data?.prizeId,
-                    gameInfo?.gameId,
-                    isAdWatched,
-                    isGemUsed
-                )
-            );
         }
+
+        setEarnAdditionalDisabledStatus({
+            gems: false,
+            ads: false,
+        });
+
+        // TODO
+        let _earnAdditional = [...earnAdditionalBenefitStatus];
+        let index = _earnAdditional.findIndex(
+            (e) => e.prizeId === data?.prizeId
+        );
+        let isAdWatched =
+            index > -1 ? _earnAdditional[index]?.isAdsSelected : false;
+        let isGemUsed =
+            index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
+
+        dispatch(
+            loadPlayerEnterTournamentId(
+                data?.prizeId,
+                gameInfo?.gameId,
+                isAdWatched,
+                isGemUsed
+            )
+        );
     };
 
     const handleQuitGame = () => {
@@ -440,7 +438,7 @@ const Leaderboard = ({
                                     ? isCurrentUser(leaderboardList[i]?.userId)
                                         ? `${
                                               leaderboardList[i]?.nickName ||
-                                              user.username
+                                              user.username || 'Player'
                                           } (You)`
                                         : leaderboardList[i]?.nickName ||
                                           `Player ${leaderboardList[i]?.userId}`

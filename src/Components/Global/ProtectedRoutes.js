@@ -6,16 +6,14 @@ import Password from "Pages/Password.page";
 
 import { loadLoginStatus } from "redux/thunks/Login.thunk";
 
+import getToken from "Utils/GetToken";
+
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const { user, loginStatus } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const token =
-            localStorage
-                .getItem("froyo-authenticationtoken")
-                ?.replaceAll('"', "") || null;
-
+        const token = getToken();
         dispatch(
             loadLoginStatus({
                 noAuth: token === null && user.id === null ? true : false,

@@ -41,7 +41,7 @@ const Index = () => {
     }, [winnerData]);
 
     useEffect(() => {
-        if (user.id ) dispatch(loadWinners());
+        if (user.id) dispatch(loadWinners());
     }, [dispatch, user.id]);
 
     useEffect(() => {
@@ -64,7 +64,9 @@ const Index = () => {
             winnerCardPrizeInfoRef.current.style.visibility = "visible";
             setWinnerHoverCardData({
                 title: item.prizeTitle,
+                subtitle: item.prizeSubtitle,
                 imageUrl: item.prizeImageUrl,
+                totalPlayers: item.totalPlayers,
             });
             return;
         }
@@ -204,8 +206,9 @@ const Index = () => {
                                                     {winnerHoverCardData?.title}
                                                 </div>
                                                 <div className="prize-subtitle mt-1">
-                                                    {winnerHoverCardData?.subtitle ||
-                                                        "Subtitle"}
+                                                    {
+                                                        winnerHoverCardData?.subtitle
+                                                    }
                                                 </div>
                                             </div>
 
@@ -214,7 +217,7 @@ const Index = () => {
                                                     Total participated players
                                                 </p>
                                                 <p className="mb-0 total-player">
-                                                    800,001
+                                                    {winnerHoverCardData?.totalPlayers?.toLocaleString()}
                                                 </p>
                                             </div>
                                         </div>

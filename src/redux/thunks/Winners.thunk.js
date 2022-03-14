@@ -1,25 +1,28 @@
-import refreshToken from "Utils/RefreshToken";
+import { GET_WINNERS, LOG_OUT, SHOW_TOAST } from "redux/types";
 import { getWinnersList } from "redux/services/index.service";
-import { GET_WINNERS } from 'redux/types';
 
 export default function loadWinners() {
     return async (dispatch) => {
-        const token = await refreshToken();
-        if (token) {
-            return getWinnersList()
-                .then((data) =>
+        return getWinnersList()
+            .then((data) =>
+                dispatch({
+                    type: GET_WINNERS,
+                    payload: data,
+                })
+            )
+            .catch((error) => {
+                if (error.code === 7) {
+                    console.log(error.message);
+                    dispatch({ type: LOG_OUT });
                     dispatch({
-                        type: GET_WINNERS,
-                        payload: data,
-                    })
-                )
-                .catch((error) => {
-                    if (error.code === 7) {
-                        console.log(error.message);
-                    } else if (error.code === 13)
-                        console.log("WINNERS THUNK: No Result found!");
-                    else console.log(error);
-                });
-        }
+                        type: SHOW_TOAST,
+                        payload: {
+                            message: "Session Expired! Please login again.",
+                        },
+                    });
+                } else if (error.code === 13)
+                    console.log("WINNERS THUNK: No Result found!");
+                else console.log(error);
+            });
     };
 }

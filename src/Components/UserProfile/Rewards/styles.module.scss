@@ -5,6 +5,9 @@
         font-weight: $fnt-wgt-700;
         font-size: $fnt-sz-18;
     }
+    .claimed {
+        cursor: pointer;
+    }
     .claimed-title,
     .unclaimed-title {
         font-weight: $fnt-wgt-600;
@@ -17,7 +20,6 @@
         border-radius: 10px;
         background: linear-gradient(116deg, #302f2f 0%, #101010 100%);
         position: relative;
-        cursor: pointer;
         .prize-image {
             height: 6.5rem;
             width: 6.5rem;
@@ -27,7 +29,6 @@
             background-size: cover;
             background-position-x: center;
         }
-
         .prize-text {
             .card-title {
                 font-size: $fnt-sz-14;
@@ -48,10 +49,13 @@
             position: absolute;
             bottom: 0;
             font-size: $fnt-sz-12;
+            font-weight: $fnt-wgt-700;
         }
         .text-red {
-            font-weight: $fnt-wgt-700;
             color: #bf0000;
+        }
+        .text-wait {
+            color: #bf9a00;
         }
     }
     .prize {

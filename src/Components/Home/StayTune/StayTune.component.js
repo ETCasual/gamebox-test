@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import refreshToken from "Utils/RefreshToken";
+import getToken from "Utils/GetToken";
 
 const StayTune = () => {
     const { user } = useSelector((state) => state.userData);
@@ -17,26 +17,23 @@ const StayTune = () => {
     }, []);
 
     const handlePlayDemoGame = async (id) => {
-        const token = await refreshToken();
-        if (token) {
-            if (id > 0) {
-                try {
-                    let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${id}&user_id=${user.id}`;
-                    let options = {
-                        headers: {
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Methods":
-                                "POST, GET, OPTIONS",
-                            Authorization: token,
-                        },
-                    };
-                    let response = await axios.get(url, options);
-                    if (response.data) {
-                        setGameData(response.data);
-                    }
-                } catch (error) {
-                    console.log(error.message);
+        const token = getToken();
+        if (id > 0) {
+            try {
+                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${id}&user_id=${user.id}`;
+                let options = {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+                        Authorization: token,
+                    },
+                };
+                let response = await axios.get(url, options);
+                if (response.data) {
+                    setGameData(response.data);
                 }
+            } catch (error) {
+                console.log(error.message);
             }
         }
     };

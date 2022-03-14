@@ -1,5 +1,5 @@
-import updateEarnAdditionalTicketsList from "Utils/UpdateEarnAdditionalTicketsList";
 import { UPDATE_EARN_ADDITION_BENEFIT_STATUS } from "redux/types";
+import updateEarnAdditionalTicketsList from "Utils/UpdateEarnAdditionalTicketsList";
 
 export function loadEarnAdditionalBenefitStatus(data) {
     return async (dispatch) => {

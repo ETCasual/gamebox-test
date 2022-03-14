@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const NotificationFriendInvitation = ({
     id,
@@ -6,6 +7,7 @@ const NotificationFriendInvitation = ({
     notificationList,
     setIsSelectedNotificationShown,
 }) => {
+    const { config } = useSelector((state) => state.config);
     const getInvitationInfo = (nType) => {
         if (notificationList.length > 0) {
             const date = new Date(createdOn * 1000)?.toLocaleString("default", {
@@ -58,7 +60,8 @@ const NotificationFriendInvitation = ({
                             }}
                         >
                             <p className="title">
-                                A friend has reached level 3 with your invite
+                                A friend has reached level{" "}
+                                {config.rewardInvitesRank} with your invite
                                 code.
                             </p>
                             <p className="subtitle">

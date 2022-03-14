@@ -1,6 +1,5 @@
-import refreshToken from "Utils/RefreshToken";
+import { LOG_OUT, PLAYER_LOG_ENTER, SHOW_TOAST } from "redux/types";
 import { logEnter } from "redux/services/index.service";
-import { PLAYER_LOG_ENTER } from 'redux/types';
 
 export default function loadPlayerEnterTournamentId(
     prizeId,
@@ -12,29 +11,33 @@ export default function loadPlayerEnterTournamentId(
         const { user } = getState()?.userData;
         const { currentGameInfo } = getState()?.playerTournamentInfo;
 
-        const token = await refreshToken();
-        if (token) {
-            return logEnter(
-                user,
-                currentGameInfo,
-                prizeId,
-                gameId,
-                isAdWatched,
-                isGemUsed
-            )
-                .then((data) => {
-                    dispatch({
-                        type: PLAYER_LOG_ENTER,
-                        payload: data,
-                    });
-                })
-                .catch((error) => {
-                    if (error.code === 7) {
-                        console.log(error.message);
-                    } else if (error.code === 13)
-                        console.log("PLAYER LOG ENTER THUNK: No Result found!");
-                    else console.log(error);
+        return logEnter(
+            user,
+            currentGameInfo,
+            prizeId,
+            gameId,
+            isAdWatched,
+            isGemUsed
+        )
+            .then((data) => {
+                dispatch({
+                    type: PLAYER_LOG_ENTER,
+                    payload: data,
                 });
-        }
+            })
+            .catch((error) => {
+                if (error.code === 7) {
+                    console.log(error.message);
+                    dispatch({ type: LOG_OUT });
+                    dispatch({
+                        type: SHOW_TOAST,
+                        payload: {
+                            message: "Session Expired! Please login again.",
+                        },
+                    });
+                } else if (error.code === 13)
+                    console.log("PLAYER LOG ENTER THUNK: No Result found!");
+                else console.log(error);
+            });
     };
 }

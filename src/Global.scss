@@ -160,7 +160,8 @@ button {
     position: fixed;
     z-index: 3;
     top: 0;
-    height: 60px;
+    height: auto;
+    max-height: 70px;
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         background-color: rgba(138, 138, 138, 0.3);
     }
@@ -176,14 +177,13 @@ button {
     .nav-items {
         height: inherit;
         font-size: $fnt-sz-14;
-        font-weight: $fnt-wgt-700;
         a {
             color: #696969 !important;
             height: inherit;
         }
         a.active {
+            font-weight: $fnt-wgt-700;
             color: #ff007c !important;
-
             div {
                 border-bottom: 4px solid;
                 height: inherit;
