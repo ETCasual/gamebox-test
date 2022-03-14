@@ -8049,7 +8049,8 @@ proto.api.gamebox.ConfigDetail.toObject = function(includeInstance, msg) {
     gemsPerSpins1: jspb.Message.getFieldWithDefault(msg, 5, 0),
     adsPerSpins1: jspb.Message.getFieldWithDefault(msg, 6, 0),
     gemsPerSpins2: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    adsPerSpins2: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    adsPerSpins2: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    rewardInvitesRank: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -8117,6 +8118,10 @@ proto.api.gamebox.ConfigDetail.deserializeBinaryFromReader = function(msg, reade
     case 8:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setAdsPerSpins2(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setRewardInvitesRank(value);
       break;
     default:
       reader.skipField();
@@ -8200,6 +8205,13 @@ proto.api.gamebox.ConfigDetail.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt32(
       8,
+      f
+    );
+  }
+  f = message.getRewardInvitesRank();
+  if (f !== 0) {
+    writer.writeInt32(
+      9,
       f
     );
   }
@@ -8323,6 +8335,21 @@ proto.api.gamebox.ConfigDetail.prototype.getAdsPerSpins2 = function() {
 /** @param {number} value */
 proto.api.gamebox.ConfigDetail.prototype.setAdsPerSpins2 = function(value) {
   jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional int32 reward_invites_rank = 9;
+ * @return {number}
+ */
+proto.api.gamebox.ConfigDetail.prototype.getRewardInvitesRank = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ConfigDetail.prototype.setRewardInvitesRank = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
@@ -27643,21 +27670,23 @@ proto.api.gamebox.WinnerDetail.toObject = function(includeInstance, msg) {
     prizeImgUrl: jspb.Message.getFieldWithDefault(msg, 5, ""),
     prizeTypeId: jspb.Message.getFieldWithDefault(msg, 6, 0),
     prizeContent: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    userId: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    userNickName: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    userAvatarUrl: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    userEmail: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    userPhone: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    userAddress: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    userCity: jspb.Message.getFieldWithDefault(msg, 14, ""),
-    userState: jspb.Message.getFieldWithDefault(msg, 15, ""),
-    userZipcode: jspb.Message.getFieldWithDefault(msg, 16, ""),
-    userCountry: jspb.Message.getFieldWithDefault(msg, 17, ""),
-    createdOn: jspb.Message.getFieldWithDefault(msg, 18, 0),
-    claimedOn: jspb.Message.getFieldWithDefault(msg, 19, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 20, 0),
-    shipTracking: jspb.Message.getFieldWithDefault(msg, 21, ""),
-    deliveryCompany: jspb.Message.getFieldWithDefault(msg, 22, "")
+    prizeCanClaimDate: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    userId: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    userNickName: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    userAvatarUrl: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    userEmail: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    userPhone: jspb.Message.getFieldWithDefault(msg, 13, ""),
+    userAddress: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    userCity: jspb.Message.getFieldWithDefault(msg, 15, ""),
+    userState: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    userZipcode: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    userCountry: jspb.Message.getFieldWithDefault(msg, 18, ""),
+    createdOn: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    claimedOn: jspb.Message.getFieldWithDefault(msg, 20, 0),
+    status: jspb.Message.getFieldWithDefault(msg, 21, 0),
+    shipTracking: jspb.Message.getFieldWithDefault(msg, 22, ""),
+    deliveryCompany: jspb.Message.getFieldWithDefault(msg, 23, ""),
+    totalPlayer: jspb.Message.getFieldWithDefault(msg, 24, 0)
   };
 
   if (includeInstance) {
@@ -27724,63 +27753,71 @@ proto.api.gamebox.WinnerDetail.deserializeBinaryFromReader = function(msg, reade
       break;
     case 8:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setUserId(value);
+      msg.setPrizeCanClaimDate(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setUserNickName(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUserId(value);
       break;
     case 10:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserAvatarUrl(value);
+      msg.setUserNickName(value);
       break;
     case 11:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserEmail(value);
+      msg.setUserAvatarUrl(value);
       break;
     case 12:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserPhone(value);
+      msg.setUserEmail(value);
       break;
     case 13:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserAddress(value);
+      msg.setUserPhone(value);
       break;
     case 14:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserCity(value);
+      msg.setUserAddress(value);
       break;
     case 15:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserState(value);
+      msg.setUserCity(value);
       break;
     case 16:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserZipcode(value);
+      msg.setUserState(value);
       break;
     case 17:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUserCountry(value);
+      msg.setUserZipcode(value);
       break;
     case 18:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setCreatedOn(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUserCountry(value);
       break;
     case 19:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setClaimedOn(value);
+      msg.setCreatedOn(value);
       break;
     case 20:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setClaimedOn(value);
+      break;
+    case 21:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setStatus(value);
       break;
-    case 21:
+    case 22:
       var value = /** @type {string} */ (reader.readString());
       msg.setShipTracking(value);
       break;
-    case 22:
+    case 23:
       var value = /** @type {string} */ (reader.readString());
       msg.setDeliveryCompany(value);
+      break;
+    case 24:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTotalPlayer(value);
       break;
     default:
       reader.skipField();
@@ -27860,108 +27897,122 @@ proto.api.gamebox.WinnerDetail.serializeBinaryToWriter = function(message, write
       f
     );
   }
-  f = message.getUserId();
+  f = message.getPrizeCanClaimDate();
   if (f !== 0) {
     writer.writeInt64(
       8,
       f
     );
   }
-  f = message.getUserNickName();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getUserId();
+  if (f !== 0) {
+    writer.writeInt64(
       9,
       f
     );
   }
-  f = message.getUserAvatarUrl();
+  f = message.getUserNickName();
   if (f.length > 0) {
     writer.writeString(
       10,
       f
     );
   }
-  f = message.getUserEmail();
+  f = message.getUserAvatarUrl();
   if (f.length > 0) {
     writer.writeString(
       11,
       f
     );
   }
-  f = message.getUserPhone();
+  f = message.getUserEmail();
   if (f.length > 0) {
     writer.writeString(
       12,
       f
     );
   }
-  f = message.getUserAddress();
+  f = message.getUserPhone();
   if (f.length > 0) {
     writer.writeString(
       13,
       f
     );
   }
-  f = message.getUserCity();
+  f = message.getUserAddress();
   if (f.length > 0) {
     writer.writeString(
       14,
       f
     );
   }
-  f = message.getUserState();
+  f = message.getUserCity();
   if (f.length > 0) {
     writer.writeString(
       15,
       f
     );
   }
-  f = message.getUserZipcode();
+  f = message.getUserState();
   if (f.length > 0) {
     writer.writeString(
       16,
       f
     );
   }
-  f = message.getUserCountry();
+  f = message.getUserZipcode();
   if (f.length > 0) {
     writer.writeString(
       17,
       f
     );
   }
-  f = message.getCreatedOn();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getUserCountry();
+  if (f.length > 0) {
+    writer.writeString(
       18,
       f
     );
   }
-  f = message.getClaimedOn();
+  f = message.getCreatedOn();
   if (f !== 0) {
     writer.writeInt64(
       19,
       f
     );
   }
+  f = message.getClaimedOn();
+  if (f !== 0) {
+    writer.writeInt64(
+      20,
+      f
+    );
+  }
   f = message.getStatus();
   if (f !== 0) {
     writer.writeInt32(
-      20,
+      21,
       f
     );
   }
   f = message.getShipTracking();
   if (f.length > 0) {
     writer.writeString(
-      21,
+      22,
       f
     );
   }
   f = message.getDeliveryCompany();
   if (f.length > 0) {
     writer.writeString(
-      22,
+      23,
+      f
+    );
+  }
+  f = message.getTotalPlayer();
+  if (f !== 0) {
+    writer.writeInt64(
+      24,
       f
     );
   }
@@ -28074,227 +28125,257 @@ proto.api.gamebox.WinnerDetail.prototype.setPrizeContent = function(value) {
 
 
 /**
- * optional int64 user_id = 8;
+ * optional int64 prize_can_claim_date = 8;
  * @return {number}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserId = function() {
+proto.api.gamebox.WinnerDetail.prototype.getPrizeCanClaimDate = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserId = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setPrizeCanClaimDate = function(value) {
   jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
 /**
- * optional string user_nick_name = 9;
- * @return {string}
+ * optional int64 user_id = 9;
+ * @return {number}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserNickName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+proto.api.gamebox.WinnerDetail.prototype.getUserId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
-/** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserNickName = function(value) {
-  jspb.Message.setProto3StringField(this, 9, value);
+/** @param {number} value */
+proto.api.gamebox.WinnerDetail.prototype.setUserId = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
 /**
- * optional string user_avatar_url = 10;
+ * optional string user_nick_name = 10;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserAvatarUrl = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserNickName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserAvatarUrl = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserNickName = function(value) {
   jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
 /**
- * optional string user_email = 11;
+ * optional string user_avatar_url = 11;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserEmail = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserAvatarUrl = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserEmail = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserAvatarUrl = function(value) {
   jspb.Message.setProto3StringField(this, 11, value);
 };
 
 
 /**
- * optional string user_phone = 12;
+ * optional string user_email = 12;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserPhone = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserPhone = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserEmail = function(value) {
   jspb.Message.setProto3StringField(this, 12, value);
 };
 
 
 /**
- * optional string user_address = 13;
+ * optional string user_phone = 13;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserAddress = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserPhone = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserAddress = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserPhone = function(value) {
   jspb.Message.setProto3StringField(this, 13, value);
 };
 
 
 /**
- * optional string user_city = 14;
+ * optional string user_address = 14;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserCity = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserAddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserCity = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserAddress = function(value) {
   jspb.Message.setProto3StringField(this, 14, value);
 };
 
 
 /**
- * optional string user_state = 15;
+ * optional string user_city = 15;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserState = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserCity = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserState = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserCity = function(value) {
   jspb.Message.setProto3StringField(this, 15, value);
 };
 
 
 /**
- * optional string user_zipcode = 16;
+ * optional string user_state = 16;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserZipcode = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserState = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserZipcode = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserState = function(value) {
   jspb.Message.setProto3StringField(this, 16, value);
 };
 
 
 /**
- * optional string user_country = 17;
+ * optional string user_zipcode = 17;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getUserCountry = function() {
+proto.api.gamebox.WinnerDetail.prototype.getUserZipcode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setUserCountry = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setUserZipcode = function(value) {
   jspb.Message.setProto3StringField(this, 17, value);
 };
 
 
 /**
- * optional int64 created_on = 18;
- * @return {number}
+ * optional string user_country = 18;
+ * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getCreatedOn = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+proto.api.gamebox.WinnerDetail.prototype.getUserCountry = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
 };
 
 
-/** @param {number} value */
-proto.api.gamebox.WinnerDetail.prototype.setCreatedOn = function(value) {
-  jspb.Message.setProto3IntField(this, 18, value);
+/** @param {string} value */
+proto.api.gamebox.WinnerDetail.prototype.setUserCountry = function(value) {
+  jspb.Message.setProto3StringField(this, 18, value);
 };
 
 
 /**
- * optional int64 claimed_on = 19;
+ * optional int64 created_on = 19;
  * @return {number}
  */
-proto.api.gamebox.WinnerDetail.prototype.getClaimedOn = function() {
+proto.api.gamebox.WinnerDetail.prototype.getCreatedOn = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.WinnerDetail.prototype.setClaimedOn = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setCreatedOn = function(value) {
   jspb.Message.setProto3IntField(this, 19, value);
 };
 
 
 /**
- * optional int32 status = 20;
+ * optional int64 claimed_on = 20;
  * @return {number}
  */
-proto.api.gamebox.WinnerDetail.prototype.getStatus = function() {
+proto.api.gamebox.WinnerDetail.prototype.getClaimedOn = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 20, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.WinnerDetail.prototype.setStatus = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setClaimedOn = function(value) {
   jspb.Message.setProto3IntField(this, 20, value);
 };
 
 
 /**
- * optional string ship_tracking = 21;
- * @return {string}
+ * optional int32 status = 21;
+ * @return {number}
  */
-proto.api.gamebox.WinnerDetail.prototype.getShipTracking = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 21, ""));
+proto.api.gamebox.WinnerDetail.prototype.getStatus = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
 };
 
 
-/** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setShipTracking = function(value) {
-  jspb.Message.setProto3StringField(this, 21, value);
+/** @param {number} value */
+proto.api.gamebox.WinnerDetail.prototype.setStatus = function(value) {
+  jspb.Message.setProto3IntField(this, 21, value);
 };
 
 
 /**
- * optional string delivery_company = 22;
+ * optional string ship_tracking = 22;
  * @return {string}
  */
-proto.api.gamebox.WinnerDetail.prototype.getDeliveryCompany = function() {
+proto.api.gamebox.WinnerDetail.prototype.getShipTracking = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.WinnerDetail.prototype.setDeliveryCompany = function(value) {
+proto.api.gamebox.WinnerDetail.prototype.setShipTracking = function(value) {
   jspb.Message.setProto3StringField(this, 22, value);
+};
+
+
+/**
+ * optional string delivery_company = 23;
+ * @return {string}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getDeliveryCompany = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 23, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.WinnerDetail.prototype.setDeliveryCompany = function(value) {
+  jspb.Message.setProto3StringField(this, 23, value);
+};
+
+
+/**
+ * optional int64 total_player = 24;
+ * @return {number}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getTotalPlayer = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 24, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.WinnerDetail.prototype.setTotalPlayer = function(value) {
+  jspb.Message.setProto3IntField(this, 24, value);
 };
 
 
