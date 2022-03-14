@@ -76,21 +76,15 @@ const Notification = ({
                                     <img
                                         width={50}
                                         className="prize-img"
-                                        onError={defaultGameImage}
-                                        src={
-                                            n?.type === "tour"
-                                                ? n?.picture
-                                                : `${window.cdn}illustrations/friends_03.jpg`
-                                        }
+                                        onError={(e) => defaultGameImage(e)}
+                                        src={n?.picture}
                                         alt="icon"
                                     />
                                     <div className="w-100">
                                         {/* PRIZE INFO */}
                                         <div className="col-12 px-2 d-flex align-items-center justify-content-between prize-info mb-2">
                                             <p className="mb-0 d-flex align-items-center">
-                                                {n?.type === "tour"
-                                                    ? n?.title
-                                                    : "Friend Invite"}
+                                                {n?.title}
                                             </p>
                                             <p className="mb-0 d-flex align-items-center">
                                                 {new Date(
@@ -118,9 +112,7 @@ const Notification = ({
                                             }`}
                                         >
                                             <p className="mb-0 d-flex align-items-center">
-                                                {n?.type === "tour"
-                                                    ? n?.description
-                                                    : "Invite Redemption"}
+                                                {n?.description}
                                             </p>
                                             <p
                                                 className={`mb-0 d-flex align-items-center ${
