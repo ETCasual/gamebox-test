@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const NotificationFriendInvitation = ({
@@ -8,6 +8,14 @@ const NotificationFriendInvitation = ({
     setIsSelectedNotificationShown,
 }) => {
     const { config } = useSelector((state) => state.config);
+    const { user } = useSelector((state) => state.userData);
+
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
+
     const getInvitationInfo = (nType) => {
         if (notificationList.length > 0) {
             const date = new Date(createdOn * 1000)?.toLocaleString("default", {
@@ -22,11 +30,12 @@ const NotificationFriendInvitation = ({
                 if (idx > -1) {
                     if (nType === "gem")
                         return notificationList[nIdx]?.list[idx]?.gem;
+                    else if (nType === "userId")
+                        return notificationList[nIdx]?.list[idx]?.userId;
                     else if (nType === "inviteeId")
-                        return (
-                            notificationList[nIdx]?.list[idx]?.inviteeName ||
-                            `Player ${notificationList[nIdx]?.list[idx]?.inviteeId}`
-                        );
+                        return notificationList[nIdx]?.list[idx]?.inviteeId;
+                    else if (nType === "inviteeName")
+                        return notificationList[nIdx]?.list[idx]?.inviteeName;
                 }
             }
         }
@@ -59,18 +68,34 @@ const NotificationFriendInvitation = ({
                                 )`,
                             }}
                         >
-                            <p className="title">
-                                A friend has reached level{" "}
-                                {config.rewardInvitesRank} with your invite
-                                code.
-                            </p>
-                            <p className="subtitle">
-                                Your friend{" "}
-                                <span className="friend-username">
-                                    {getInvitationInfo("inviteeId") || "-"}
-                                </span>{" "}
-                                has used your invite code.
-                            </p>
+                            {user.id === getInvitationInfo("inviteeId") && (
+                                <>
+                                    <p className="title">
+                                        You have reached level{" "}
+                                        {config.rewardInvitesRank}.
+                                    </p>
+                                    <p className="subtitle">
+                                        Here's a rewards specially for you for
+                                        using your friends code.
+                                    </p>
+                                </>
+                            )}
+                            {user.id === getInvitationInfo("userId") && (
+                                <>
+                                    <p className="title">
+                                        A friend has reached level{" "}
+                                        {config.rewardInvitesRank} with your
+                                        invite code.
+                                    </p>
+                                    <p className="subtitle">
+                                        Your friend{" "}
+                                        <span className="friend-username">
+                                            {getInvitationInfo("inviteeName")}
+                                        </span>{" "}
+                                        has used your invite code.
+                                    </p>
+                                </>
+                            )}
                             <div className="reward p-3 p-md-4 mb-3 mb-md-4 d-flex flex-column align-items-start justify-content-around">
                                 <p className="mb-3 title">Reward</p>
                                 <p className="gems mb-0">

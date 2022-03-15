@@ -827,24 +827,25 @@ button {
 .tnc,
 .privacy-policy,
 .tournament-rules {
-    padding: 12em 0 3em 0;
+    padding-top:  6rem;
     .main-desc {
         .title {
-            font-size: 1.25rem;
+            font-size: $fnt-sz-20;
+            font-weight: $fnt-wgt-700;
         }
         .subtitle {
             font-size: 1.1rem;
         }
     }
     .title {
-        color: #000000;
+        font-size: $fnt-sz-14;
+        font-weight: $fnt-wgt-700;
     }
     .description {
-        font-size: 0.75rem;
-        color: #868686;
+        font-size: $fnt-sz-14;
         line-height: 1.5;
         .email {
-            color: #7824f8 !important;
+            color: #49E79C !important;
         }
     }
     ul.description {

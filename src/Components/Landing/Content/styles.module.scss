@@ -197,11 +197,11 @@
                     font-size: $fnt-sz-10;
                 }
                 .title-text {
-                    text-transform: capitalize;
+                    text-transform: uppercase;
                     font-weight: $fnt-wgt-700;
                     font-size: $fnt-sz-24;
                     line-height: 1.5;
-                    width: 17ch;
+                    width: 20ch;
                     @include media-min($md) {
                         font-size: $fnt-sz-30;
                     }
