@@ -48,11 +48,6 @@ const Header = ({
         return userGems;
     };
 
-    const getWalletAmount = () => {
-        const amount = 4;
-        return amount.toFixed(2).toLocaleString();
-    };
-
     const handleHomeNavLink = () => {
         scrollToTop();
         dispatch(loadPrizes());
@@ -139,7 +134,7 @@ const Header = ({
                                 {user.walletAddress && (
                                     <>
                                         <p className="mb-1 d-flex">
-                                            {getWalletAmount() || 0}{" "}
+                                            {user.walletAmount?.toLocaleString()}{" "}
                                             <small className="d-flex align-self-center ml-1">
                                                 froyo
                                             </small>

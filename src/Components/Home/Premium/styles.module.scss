@@ -5,6 +5,7 @@
         background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
         border-radius: 17px;
         min-height: clamp(10rem, 30vh, 20rem);
+        width: inherit;
         .prize-id {
             position: absolute;
             top: 0.6rem;

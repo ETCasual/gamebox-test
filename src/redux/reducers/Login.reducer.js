@@ -6,7 +6,7 @@ import {
     USER_DETAILS,
     CONSUME_USER_GEMS,
     USE_GEMS_FOR_TICKETS,
-    UPDATE_USER_WALLET_ADDRESS
+    UPDATE_USER_WALLET,
 } from "redux/types";
 
 const INITIAL_STATE = {
@@ -20,6 +20,7 @@ const INITIAL_STATE = {
         isNotifyAllowed: true,
         status: null,
         walletAddress: null,
+        walletAmount: null,
     },
     loginStatus: {
         loading: false,
@@ -55,7 +56,7 @@ const loginReducer = (esmData = INITIAL_STATE, { type, payload }) => {
         case USE_GEMS_FOR_TICKETS:
             return { ...esmData, user: payload };
 
-        case UPDATE_USER_WALLET_ADDRESS:
+        case UPDATE_USER_WALLET:
             return { ...esmData, user: payload };
 
         default:

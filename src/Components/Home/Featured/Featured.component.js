@@ -55,6 +55,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
         };
     }, [data?.gameInfo]);
 
+
     return (
         <>
             {!data?.completed && (
@@ -70,10 +71,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                         className={`container-fluid featured ${
                             length > 1 ? "mb-3" : "mb-5"
                         }`}
-                        // style={{ backgroundImage: `url(${data.prizeBG})` }}
-                        style={{
-                            backgroundImage: `url(https://lh3.googleusercontent.com/Z9GqL7f0-Lk_B-tXFOk3Sp0r9Dd1h9-rval-KHIK9B6EMwtGRycFAVVX_sxKoWRGZTgxJrcwqLE5jbQxjxZM30qwglBn_oda34qw0g=s0)`,
-                        }}
+                        style={{ backgroundImage: `url(${data.prizeBG})` }}
                     >
                         <div className="overlay" />
                         <div className="row justify-content-center">
@@ -89,28 +87,24 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                     }}
                                 >
                                     <div className="card-wrapper d-flex flex-column flex-md-row">
-                                        {/* PRIZE TYPE */}
-                                        {/* <div className="prize-type">
-                                            Featured NFT
-                                        </div> */}
                                         <div className="col-12 pl-0 d-flex flex-column align-items-center justify-content-center position-relative p-3">
                                             {/* PRIZE TITLE, DESCRIPTION & ID */}
                                             <div className="prize-info position-relative">
-                                                <div className="prize-id">
-                                                    ID: {data?.prizeContent}
+                                                {/* PRIZE TYPE */}
+                                                <div className="type-id-wrapper">
+                                                    <div className="prize-type mb-2">
+                                                        Featured NFT
+                                                    </div>
+                                                    <div className="prize-id">
+                                                        ID: {data?.prizeContent}
+                                                    </div>
                                                 </div>
-                                                <picture className="d-flex align-items-end justify-content-center">
-                                                    <source
-                                                        media="(max-width:768px)"
-                                                        srcSet={data.prizeBG2}
-                                                    />
-                                                    <img
-                                                        src={data.prizeBG}
-                                                        alt={data.prizeTitle}
-                                                    />
-                                                </picture>
+                                                <img
+                                                    src={data.prizeBG}
+                                                    alt={data.prizeTitle}
+                                                />
                                                 <div className="info-wrapper">
-                                                    <div className="prize-title mt-2 mb-2 mb-md-3">
+                                                    <div className="prize-title mt-2 mb-2">
                                                         {data?.prizeTitle}
                                                     </div>
                                                     <div className="prize-subtitle">

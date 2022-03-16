@@ -1,7 +1,7 @@
 export const LOGIN_STATUS = "LOGIN_STATUS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
-export const UPDATE_USER_WALLET_ADDRESS = "UPDATE_USER_WALLET_ADDRESS";
+export const UPDATE_USER_WALLET = "UPDATE_USER_WALLET";
 export const INVITE = "INVITE";
 export const USER_DETAILS = "USER_DETAILS";
 export const GET_CONFIG = "GET_CONFIG";

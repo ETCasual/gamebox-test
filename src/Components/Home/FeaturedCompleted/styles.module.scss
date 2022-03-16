@@ -1,43 +1,117 @@
 .featured {
-    .complete-overlay {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        width: 100%;
-        .wrapper {
-            position: relative;
-            .reward-icon {
-                width: clamp(5rem, 30vw, 12rem);
+    .card-wrapper {
+        min-height: auto;
+        @include media-min($md) {
+            min-height: clamp(20rem, 70vw, 31rem);
+        }
+        .completed-prize-info {
+            width: 100%;
+            @include media-min($md) {
+                width: 80%;
             }
-            .loader,
-            .content {
-                border-radius: 10px;
-                background: linear-gradient(137deg, #302f2f -1%, #0b0b0b 55%);
-                min-height: 10rem;
+            height: 100%;
+            .complete-overlay {
+                @supports not (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: rgba(108, 108, 108, 0.2);
+                }
+                @supports (
+                    (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+                ) {
+                    background-color: rgba(108, 108, 108, 0.2);
+                    backdrop-filter: blur(17px);
+                    -webkit-backdrop-filter: blur(17px);
+                }
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 2;
+                transform: translate(-50%, -50%);
                 width: 100%;
-            }
-            .loader {
-                p {
-                    color: #868686;
-                    font-size: $fnt-sz-12;
+                height: 100%;
+                border-radius: 12px;
+                background: linear-gradient(
+                    180deg,
+                    #ffffff00 0%,
+                    #00000029 100%
+                );
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                &:hover {
+                    cursor: pointer;
+                }
+                .reward-icon {
+                    width: 10rem;
+                }
+                .type-id-wrapper {
+                    text-align: left;
+                    width: 100%;
+                    .type {
+                        font-size: $fnt-sz-16;
+                        text-transform: uppercase;
+                        font-weight: $fnt-wgt-700;
+                    }
+                    .id {
+                        font-size: $fnt-sz-8;
+                        @include media-min($lg) {
+                            font-size: $fnt-sz-10;
+                        }
+                    }
                 }
             }
-            .content {
-                .title {
+            .prize-img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                @include media-min($md) {
+                    border-radius: 17px;
+                }
+                object-fit: cover;
+            }
+            .text-wrapper {
+                position: relative;
+                inset: unset;
+                width: 90%;
+                background: linear-gradient(136deg, #302f2f 0%, #0b0b0b 100%);
+                border-radius: 10px;
+                margin-bottom: 1.5rem;
+                padding-top: 0.8rem;
+                .prize-title {
+                    font-size: $fnt-sz-18;
+                    font-weight: $fnt-wgt-600;
+                    text-transform: capitalize;
+                }
+                .prize-subtitle {
+                    font-size: $fnt-sz-12;
+                    line-height: 1.3;
+                }
+                .tap-btn {
+                    background: #ff3399;
+                    color: white;
+                    box-shadow: inset 0px 3px 6px #0000000f;
+                    border-radius: 0px 0px 10px 10px;
+                    width: 100%;
+                    height: 3rem;
                     font-size: $fnt-sz-14;
                     font-weight: $fnt-wgt-700;
                 }
-                .subtitle {
-                    font-size: $fnt-sz-14;
-                }
-                .tap-btn {
-                    font-size: $fnt-sz-14;
-                    width: 100%;
-                    border-radius: 5px;
-                    padding: 1.3rem 1rem;
-                    text-align: center;
-                    background: #cc0767;
+            }
+            .drawing-winner {
+                position: relative;
+                inset: unset;
+                width: 90%;
+                background: linear-gradient(136deg, #302f2f 0%, #0b0b0b 100%);
+                border-radius: 10px;
+                margin-bottom: 1.5rem;
+                padding: 1rem;
+                min-height: 9rem;
+                p {
+                    color: #868686;
+                    font-size: $fnt-sz-12;
                 }
             }
         }

@@ -9,9 +9,6 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(true);
-    const [windowSize, setWindowSize] = useState({
-        width: 0,
-    });
 
     useEffect(() => {
         let finishedPrizeList =
@@ -29,20 +26,6 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
 
         return () => clearTimeout(timer);
     }, [data.prizeId, dispatch]);
-
-    // RESIZE LISTENER
-    useEffect(() => {
-        window.addEventListener("resize", handleResize, false);
-
-        function handleResize() {
-            setWindowSize((prev) => ({
-                width: window.innerWidth || prev.width,
-            }));
-        }
-        handleResize();
-
-        return () => window.removeEventListener("resize", handleResize, false);
-    }, []);
 
     return (
         <div className="col-12 col-md-6 col-lg-6 col-xl-4 d-flex align-items-center justify-content-center mb-4">
@@ -62,10 +45,10 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                             <div className="loader d-flex flex-column align-items-center justify-content-center">
                                 <p className="mb-0">Drawing winner</p>
                                 <RevealWinnerLoader
-                                    cx1={windowSize.width < 480 ? "37%" : "40%"}
-                                    cx2={windowSize.width < 480 ? "46%" : "47%"}
-                                    cx3={windowSize.width < 480 ? "55%" : "54%"}
-                                    cx4={windowSize.width < 480 ? "64%" : "61%"}
+                                    cx1={"43%"}
+                                    cx2={"48%"}
+                                    cx3={"53%"}
+                                    cx4={"58%"}
                                 />
                             </div>
                         )}

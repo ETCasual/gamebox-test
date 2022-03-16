@@ -222,6 +222,7 @@ const Index = () => {
 
     // REVEAL CARD ONCLICK
     function handleWinnerRevealCard(prizeType) {
+        console.log('object');
         let _arr = [];
         let data =
             prizeType === 1 ? FeaturedData : prizeType === 2 ? PremiumData : [];
@@ -232,7 +233,10 @@ const Index = () => {
                     let idx = data.findIndex(
                         (d) => d.prizeId === e.prizeId && d.type === prizeType
                     );
-                    if (idx > -1 && e.type === "winner") _arr.push(e);
+                    console.log(idx);
+                    if (idx > -1 && e.type === "winner") {
+                        _arr.push(e);
+                    }
                 });
             });
             setRevealCardModalData(_arr);
@@ -327,7 +331,14 @@ const Index = () => {
 
                     {/* AUTOMATED */}
                     {!noDataLoaded.automated && (
-                        <div className="container-fluid mb-5 automatedEntry">
+                        <div
+                            className="container-fluid mb-5 automatedEntry"
+                            style={{
+                                paddingTop: `${
+                                    noDataLoaded?.feature ? "6rem" : 0
+                                }`,
+                            }}
+                        >
                             <div className="row justify-content-center">
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
                                     <div className="col-12 col-xl-6 px-0">
@@ -359,7 +370,17 @@ const Index = () => {
 
                     {/* PREMIUM & PREMIUM COMPLETED*/}
                     {!noDataLoaded.premium && (
-                        <div className="container-fluid premium">
+                        <div
+                            className="container-fluid premium"
+                            style={{
+                                paddingTop: `${
+                                    noDataLoaded?.feature ||
+                                    noDataLoaded?.automated
+                                        ? "6rem"
+                                        : 0
+                                }`,
+                            }}
+                        >
                             <div className="row justify-content-center">
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">

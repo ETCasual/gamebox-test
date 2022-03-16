@@ -3,9 +3,9 @@ import ContentLoader from "react-content-loader";
 
 const RevealWinnerLoader = ({ cx1, cx2, cx3, cx4 }) => (
     <ContentLoader
-        style={{ width: "100%", height: "5vh" }}
+        style={{ height: "3.5vh" }}
+        width={350}
         speed={1.5}
-        backgroundColor="transparent"
         foregroundColor="#8E21EC"
     >
         <circle cx={cx1} cy={20} r="5" />

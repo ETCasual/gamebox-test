@@ -5,13 +5,10 @@ import RevealWinnerLoader from "Components/Loader/RevealWinner.loader";
 
 import loadNotifications from "redux/thunks/Notifcations.thunk";
 
-const FeaturedCompleted = ({ data, handleWinnerModal }) => {
+const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(true);
-    const [windowSize, setWindowSize] = useState({
-        width: 0,
-    });
 
     useEffect(() => {
         let finishedPrizeList =
@@ -21,6 +18,7 @@ const FeaturedCompleted = ({ data, handleWinnerModal }) => {
         );
         let diff = Date.now() - finishedPrizeList[idx]?.timeStamp;
         if (diff > 16000) setLoading(false);
+
         let timer = setTimeout(() => {
             dispatch(loadNotifications());
             setLoading(false);
@@ -29,135 +27,69 @@ const FeaturedCompleted = ({ data, handleWinnerModal }) => {
         return () => clearTimeout(timer);
     }, [data.prizeId, dispatch]);
 
-    // RESIZE LISTENER
-    useEffect(() => {
-        window.addEventListener("resize", handleResize, false);
-
-        function handleResize() {
-            setWindowSize((prev) => ({
-                width: window.innerWidth || prev.width,
-            }));
-        }
-        handleResize();
-
-        return () => window.removeEventListener("resize", handleResize, false);
-    }, []);
-
     return (
-        <div className={`container-fluid position-relative featured mb-3`}>
+        <div
+            className={`container-fluid featured`}
+            style={{ backgroundImage: `url(${data.prizeBG})` }}
+        >
+            <div className="overlay" />
             <div className="row justify-content-center">
-                <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                    <div className="w-100 position-relative ">
-                        <div
-                            className="complete-overlay"
-                            onClick={() => handleWinnerModal?.(data?.type)}
-                        >
-                            <div className="wrapper d-flex flex-column align-items-center justify-content-end w-100">
+                <div className="col-12 col-md-10 col-lg-8 col-xl-4 d-flex">
+                    <div className="card-wrapper d-flex flex-column flex-md-row">
+                        <div className="col-12 pl-0 d-flex flex-column align-items-center justify-content-center position-relative p-3">
+                            {/* PRIZE TITLE, DESCRIPTION & ID */}
+                            <div
+                                className="completed-prize-info position-relative"
+                                onClick={() => handleWinnerRevealCard(data?.type)}
+                            >
                                 <img
-                                    className="mt-4 mb-3 mb-md-4 reward-icon"
-                                    src={`${window.cdn}assets/bonusreward_02.png`}
-                                    alt="discover rewards"
+                                    className="prize-img"
+                                    src={data.prizeBG}
+                                    alt={data.prizeTitle}
                                 />
-                                {loading && (
-                                    <div className="loader d-flex flex-column align-items-center justify-content-center">
-                                        <p className="mb-0 text-center">
-                                            Drawing winner
-                                        </p>
-                                        <RevealWinnerLoader
-                                            cx1={
-                                                windowSize.width < 480
-                                                    ? "40%"
-                                                    : windowSize.width > 1200
-                                                    ? "47%"
-                                                    : "46%"
-                                            }
-                                            cx2={
-                                                windowSize.width < 480
-                                                    ? "47%"
-                                                    : windowSize.width > 1200
-                                                    ? "49%"
-                                                    : "49%"
-                                            }
-                                            cx3={
-                                                windowSize.width < 480
-                                                    ? "54%"
-                                                    : windowSize.width > 1200
-                                                    ? "51%"
-                                                    : "52%"
-                                            }
-                                            cx4={
-                                                windowSize.width < 480
-                                                    ? "61%"
-                                                    : windowSize.width > 1200
-                                                    ? "53%"
-                                                    : "55%"
-                                            }
-                                        />
-                                    </div>
-                                )}
-                                {!loading && (
-                                    <div className="content text-center w-100 p-3">
-                                        <p className="title mb-2">
-                                            {data.prizeTitle}
-                                        </p>
-                                        <p className="subtitle mb-4">
-                                            {data.prizeSubtitle}
-                                        </p>
-                                        <p className="tap-btn mb-0">
-                                            Tap to reveal the winner
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        <div className="card-wrapper d-flex flex-column flex-md-row">
-                            {/* PRIZE TYPE */}
-                            <div className="prize-type">Featured NFT</div>
-                            <div className="col-12 col-md-6 pl-0 d-flex flex-column align-items-start justify-content-end position-relative p-3 order-2 order-md-1">
-                                {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                <div className="prize-text mb-2 w-100">
-                                    <div className="prize-id">
-                                        ID: {data?.prizeContent}
-                                    </div>
-                                    <div className="prize-title mt-2 mb-3">
-                                        {data?.prizeTitle}
-                                    </div>
-                                    <div className="prize-subtitle">
-                                        {data?.prizeSubtitle}
-                                    </div>
-
-                                    {/* HR SEPARATOR */}
-                                    <hr className="separator" />
-
-                                    {/* TICKETS INFO */}
-                                    <p className="ticket-label">Your tickets</p>
-                                    <div className="col-12 d-flex align-items-center justify-content-between pl-0">
-                                        {/* YOUR TICKETS */}
-                                        <p className="mb-0 your-tickets d-flex align-items-end">
-                                            {data?.ticketsRequired?.toLocaleString()}
-                                        </p>
-                                        <div className="d-flex">
-                                            {/* TOTAL POOL TICKETS COLLECTED */}
-                                            <p
-                                                className={`mb-0 d-flex align-items-center remaining-tickets`}
-                                            >
-                                                {data?.ticketsRequired?.toLocaleString()}
-                                            </p>
+                                <div className="complete-overlay p-3">
+                                    {/* PRIZE TYPE */}
+                                    <div className="type-id-wrapper text-left w-100">
+                                        <div className="type mb-1">
+                                            Featured NFT
+                                        </div>
+                                        <div className="id">
+                                            ID: {data?.prizeContent}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-end px-0 order-1 order-md-2">
-                                <picture className="d-flex align-items-center justify-content-end w-100 h-100">
-                                    <source
-                                        media="(max-width:768px)"
-                                        srcSet={data.prizeBG2}
-                                    />
                                     <img
-                                        src={data.prizeBG}
-                                        alt={data.prizeTitle}
+                                        className="mt-4 mb-3 mb-md-4 reward-icon"
+                                        src={`${window.cdn}assets/bonusreward_02.png`}
+                                        alt="discover rewards"
                                     />
-                                </picture>
+                                    {/* TICKETS INFO */}
+                                    {loading && (
+                                        <div className="drawing-winner d-flex flex-column align-items-center justify-content-center">
+                                            <p className="mb-0">
+                                                Drawing winner
+                                            </p>
+                                            <RevealWinnerLoader
+                                                cx1={"43%"}
+                                                cx2={"48%"}
+                                                cx3={"53%"}
+                                                cx4={"58%"}
+                                            />
+                                        </div>
+                                    )}
+                                    {!loading && (
+                                        <div className="text-wrapper text-center">
+                                            <div className="prize-title px-3 mt-2 mb-2 mb-md-3">
+                                                {data?.prizeTitle}
+                                            </div>
+                                            <div className="prize-subtitle px-3 mb-4">
+                                                {data?.prizeSubtitle}
+                                            </div>
+                                            <button className="tap-btn mb-0">
+                                                Tap to reveal the winner
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>

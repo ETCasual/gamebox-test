@@ -90,7 +90,6 @@ button {
 // *********************
 
 // PRIZES MIX COMPONENTS
-.featured,
 .premium,
 .daily,
 .automatedEntry {
@@ -160,13 +159,16 @@ button {
     position: fixed;
     z-index: 3;
     top: 0;
-    height: auto;
+    height: 70px;
+    @include media-min($md) {
+        height: auto;
+    }
     max-height: 70px;
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         background-color: rgba(138, 138, 138, 0.3);
     }
     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-        background: #2A2A2A;
+        background: #2a2a2abf;
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
     }
@@ -178,7 +180,7 @@ button {
         height: inherit;
         font-size: $fnt-sz-14;
         a {
-            color: #696969 !important;
+            color: #959494 !important;
             height: inherit;
         }
         a.active {
@@ -827,7 +829,7 @@ button {
 .tnc,
 .privacy-policy,
 .tournament-rules {
-    padding-top:  6rem;
+    padding-top: 6rem;
     .main-desc {
         .title {
             font-size: $fnt-sz-20;
@@ -845,7 +847,7 @@ button {
         font-size: $fnt-sz-14;
         line-height: 1.5;
         .email {
-            color: #49E79C !important;
+            color: #49e79c !important;
         }
     }
     ul.description {

@@ -4,7 +4,7 @@ import {
     loginUser,
     userSignIn,
 } from "redux/services/index.service";
-import { UPDATE_USER_WALLET_ADDRESS } from "redux/types";
+import { UPDATE_USER_WALLET } from "redux/types";
 
 export function loadLoginUserWithToken() {
     return async (dispatch) => {
@@ -97,19 +97,20 @@ export function loadLoginStatus(status) {
     };
 }
 
-export function loadLoginUserWallet(walletAddress) {
+export function loadLoginUserWallet(walletAddress, walletAmount) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
         const _user = { ...user };
         _user.walletAddress = walletAddress;
-        dispatch({ type: UPDATE_USER_WALLET_ADDRESS, payload: _user });
+        _user.walletAmount = walletAmount;
+        dispatch({ type: UPDATE_USER_WALLET, payload: _user });
         dispatch({
             type: "SHOW_TOAST",
             payload: {
                 message:
                     walletAddress !== null
-                        ? "Wallet Connect."
+                        ? "Wallet Connected."
                         : "Wallet Disconnected.",
             },
         });

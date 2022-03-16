@@ -29,67 +29,69 @@
         z-index: 2;
         cursor: pointer;
         border-radius: 10px;
-        min-height: clamp(20rem, 70vw, 31rem);
-        .prize-type {
-            font-size: $fnt-sz-16;
-            text-transform: uppercase;
-            font-weight: bold;
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            z-index: 1;
+        min-height: auto;
+        @include media-min($md) {
+            min-height: clamp(20rem, 70vw, 31rem);
         }
         .prize-info {
+            width: 90%;
+            @include media-min($md) {
+                width: 80%;
+            }
             margin-bottom: 2rem;
-            .prize-id {
+            &::after {
+                content: "";
                 position: absolute;
-                top: 1.3rem;
-                left: 20%;
+                top: 50%;
+                left: 50%;
                 transform: translate(-50%, -50%);
-                font-size: $fnt-sz-8;
+                width: 100%;
+                border-radius: 10px;
                 @include media-min($md) {
-                    font-size: $fnt-sz-10;
+                    border-radius: 17px;
+                }
+                height: 100%;
+                z-index: 0;
+                background: linear-gradient(
+                    180deg,
+                    #02020200 60%,
+                    #0b0b0b80 100%
+                );
+            }
+            .type-id-wrapper {
+                width: 100%;
+                position: absolute;
+                z-index: 1;
+                top: 1rem;
+                left: 1rem;
+                .prize-type {
+                    font-size: $fnt-sz-16;
+                    text-transform: uppercase;
+                    font-weight: $fnt-wgt-700;
+                }
+                .prize-id {
+                    font-size: $fnt-sz-8;
+                    @include media-min($lg) {
+                        font-size: $fnt-sz-10;
+                    }
                 }
             }
-            picture {
-                img {
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 10px;
-                    @include media-min($md) {
-                        border-radius: 17px;
-                        width: 80%;
-                        height: 80%;
-                    }
-                    object-fit: cover;
+            img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                @include media-min($md) {
+                    border-radius: 17px;
                 }
-                &::after {
-                    content: "";
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 100%;
-                    border-radius: 10px;
-                    @include media-min($md) {
-                        border-radius: 17px;
-                        width: 80%;
-                    }
-                    height: 100%;
-                    z-index: 0;
-                    background: linear-gradient(
-                        180deg,
-                        #02020200 60%,
-                        #0b0b0b80 100%
-                    );
-                }
+                object-fit: cover;
             }
             .info-wrapper {
                 position: absolute;
                 bottom: -1rem;
-                left: 0;
+                left: -1rem;
                 width: 100%;
+                z-index: 2;
                 .prize-title {
                     font-size: $fnt-sz-18;
                     width: 27ch;
