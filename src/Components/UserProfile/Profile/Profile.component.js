@@ -36,7 +36,7 @@ const Profile = ({
                         <div className="row">
                             {/* PROFILE INFO */}
                             <div className="col-12 text-center mb-4 mb-md-5">
-                                <div className="profile-info">
+                                <div className={`profile-info`}>
                                     <img
                                         onError={(e) => defaultUserImage(e)}
                                         src={
@@ -96,7 +96,9 @@ const Profile = ({
                                         src={`${window.cdn}assets/wallet_01.png`}
                                         alt="wallet"
                                     />
-                                    <span className="gems">4.00 <small>froyo</small></span>
+                                    <span className="gems">
+                                        4.00 <small>froyo</small>
+                                    </span>
                                 </div>
                             </div>
                             {/* MULTIPLIER */}
@@ -229,9 +231,7 @@ const Profile = ({
                                         onClick={handleHighScorePanel}
                                     >
                                         <div className="highscore d-flex align-items-center justify-content-center">
-                                            <p className="mb-0">
-                                                Highscores
-                                            </p>
+                                            <p className="mb-0">Highscores</p>
                                         </div>
                                     </div>
                                     <div className="col-6 col-md-6 pl-1 pl-md-3 mb-4 mb-md-0">
@@ -247,9 +247,7 @@ const Profile = ({
                                             }}
                                         >
                                             <div className="rewards d-flex align-items-center justify-content-center">
-                                                <p className="mb-0">
-                                                    Rewards
-                                                </p>
+                                                <p className="mb-0">Rewards</p>
                                             </div>
                                         </Link>
                                     </div>

@@ -14,6 +14,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
+import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -29,9 +30,27 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
-    const dispatchPoolTickets = (isVisible, id) => {
+    useEffect(() => {
+        dispatch(loadPlayerTickets(data?.prizeId, true));
+        dispatch(
+            loadPrizePoolTicketsWithOvertime(
+                parseInt(data?.prizeId),
+                true,
+                data?.ticketsRequired
+            )
+        );
+    }, [dispatch, data?.prizeId, data?.ticketsRequired]);
+
+    const dispatchPoolTickets = (isVisible) => {
         if (isVisible) {
-            dispatch(loadPlayerTickets(id, false));
+            dispatch(loadPlayerTickets(data?.prizeId, false));
+            dispatch(
+                loadPrizePoolTicketsWithOvertime(
+                    parseInt(data?.prizeId),
+                    false,
+                    data?.ticketsRequired
+                )
+            );
         }
     };
 
@@ -61,10 +80,11 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                 <VisibilitySensor
                     resizeCheck={true}
                     scrollCheck={true}
+                    offset={{ top: 10 }}
                     partialVisibility="top"
-                    onChange={(isVisible) =>
-                        dispatchPoolTickets(isVisible, data.prizeId)
-                    }
+                    onChange={(isVisible) => {
+                        dispatchPoolTickets(isVisible);
+                    }}
                 >
                     <div className="col-12 col-md-6 col-lg-6 col-xl-4 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
                         <div className="card-wrapper">
@@ -77,7 +97,9 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     },
                                 }}
                             >
-                                <p className="prize-id mb-0">{data.prizeContent}</p>
+                                <p className="prize-id mb-0">
+                                    {data.prizeContent}
+                                </p>
                                 <picture>
                                     <source
                                         media="(max-width:768px)"

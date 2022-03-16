@@ -14,6 +14,7 @@ import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import { scrollToTop } from "Utils/ScrollToTop";
+import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
 
 const Featured = ({ data, length, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -29,9 +30,27 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
-    const dispatchPoolTickets = (isVisible, id) => {
+    useEffect(() => {
+        dispatch(loadPlayerTickets(data?.prizeId, true));
+        dispatch(
+            loadPrizePoolTicketsWithOvertime(
+                parseInt(data?.prizeId),
+                true,
+                data?.ticketsRequired
+            )
+        );
+    }, [dispatch, data?.prizeId, data?.ticketsRequired]);
+
+    const dispatchPoolTickets = (isVisible) => {
         if (isVisible) {
-            dispatch(loadPlayerTickets(id, false));
+            dispatch(loadPlayerTickets(data?.prizeId, false));
+            dispatch(
+                loadPrizePoolTicketsWithOvertime(
+                    parseInt(data?.prizeId),
+                    false,
+                    data?.ticketsRequired
+                )
+            );
         }
     };
 
@@ -55,7 +74,6 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
         };
     }, [data?.gameInfo]);
 
-
     return (
         <>
             {!data?.completed && (
@@ -63,9 +81,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                     resizeCheck={true}
                     scrollCheck={true}
                     partialVisibility="top"
-                    onChange={(isVisible) =>
-                        dispatchPoolTickets(isVisible, data?.prizeId)
-                    }
+                    onChange={(isVisible) => dispatchPoolTickets(isVisible)}
                 >
                     <div
                         className={`container-fluid featured ${
