@@ -19,7 +19,7 @@ const IAP = ({ handleGemsPaymentPanel }) => {
             performance.getEntriesByType("navigation")[0] &&
             performance.getEntriesByType("navigation")[0].type === "reload"
         ) {
-            if (user.id ) dispatch(loadGemsList());
+            if (user.id) dispatch(loadGemsList());
         }
     }, [dispatch, user.id]);
 
@@ -70,7 +70,7 @@ const IAP = ({ handleGemsPaymentPanel }) => {
                                                 </div>
                                                 <div className="price mb-0 d-flex flex-column text-center">
                                                     {`${gem?.price?.toFixed(
-                                                        0
+                                                        2
                                                     )} Froyo Tokens`}
                                                 </div>
                                             </div>

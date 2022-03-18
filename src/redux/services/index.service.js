@@ -1329,22 +1329,20 @@ export async function getConfig() {
 //
 export async function purchaseProcess(
     user,
-    secret,
     itemTypeId,
     itemId,
     paymentId,
     price,
-    subId
 ) {
     const token = getToken();
     const request = new BuyRequest();
-    request.setSecret(secret);
+    // request.setSecret(secret);
     request.setUserId(user.id);
     request.setItemTypeId(itemTypeId);
     request.setItemId(itemId);
     request.setPaymentId(paymentId);
     request.setPrice(price);
-    request.setSubId(subId);
+    // request.setSubId(subId);
 
     const response = await client.buy(request, {
         authorization: `Bearer ${token}`,

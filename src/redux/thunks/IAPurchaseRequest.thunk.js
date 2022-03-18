@@ -2,25 +2,15 @@ import { IA_PURCHASE_REQUEST, LOG_OUT, SHOW_TOAST } from "redux/types";
 import { purchaseProcess } from "redux/services/index.service";
 
 export default function loadIAPurchaseRequest(
-    secret,
     paymentId,
     itemTypeId,
     itemId,
-    price,
-    subId = ""
+    price
 ) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
-        return purchaseProcess(
-            user,
-            secret,
-            itemTypeId,
-            itemId,
-            paymentId,
-            price,
-            subId
-        )
+        return purchaseProcess(user, itemTypeId, itemId, paymentId, price)
             .then(() => {
                 dispatch({
                     type: IA_PURCHASE_REQUEST,

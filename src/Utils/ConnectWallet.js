@@ -37,7 +37,7 @@ export async function handleConnectWallet(dispatch) {
             );
 
             if (tokenBalance !== null)
-                dispatch(loadLoginUserWallet(accounts[0], tokenBalance));
+                dispatch(loadLoginUserWallet(accounts[0], parseFloat(tokenBalance)));
         }
     } catch (error) {
         console.log(error);
@@ -59,7 +59,7 @@ export async function handleConnectWallet(dispatch) {
                 await tokenContract.methods.balanceOf(accounts[0]).call()
             );
             if (tokenBalance !== null)
-                dispatch(loadLoginUserWallet(accounts[0], tokenBalance));
+                dispatch(loadLoginUserWallet(accounts[0], parseFloat(tokenBalance)));
         }
     }
 
