@@ -72,7 +72,7 @@ const GlobalTimer = ({ data }) => {
 
                 clearTimeout(timeOutRef.current);
                 timeOutRef.current = null;
-            }, 4000);
+            }, 5000);
 
             // CALLING PRIZE API
             if (Date.now() > data?.gameInfo[0]?.endTimeStamp) {

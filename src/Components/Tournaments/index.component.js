@@ -84,8 +84,7 @@ const Index = ({ match }) => {
 
     // LOAD AVAILABLE SPINS
     useEffect(() => {
-        if (user.id  && spinner.freeSpins <= 0)
-            dispatch(loadAvailableSpins());
+        if (user.id && spinner.freeSpins <= 0) dispatch(loadAvailableSpins());
     }, [dispatch, user.id, spinner.freeSpins]);
 
     // SET CURRENT PRIZE
@@ -229,14 +228,24 @@ const Index = ({ match }) => {
                                         />
                                         <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
                                             <div className="prize-id mb-lg-1">
-                                                {currentPrize?.prizeContent}
+                                                {currentPrize?.prizeContent?.substring(
+                                                    0,
+                                                    4
+                                                )}
+                                                ....
+                                                {currentPrize?.prizeContent?.substring(
+                                                    currentPrize?.prizeContent
+                                                        .length - 5,
+                                                    currentPrize?.prizeContent
+                                                        .length - 1
+                                                )}
                                             </div>
                                             <div className="prize-title mb-lg-3">
                                                 {currentPrize?.prizeTitle ||
                                                     "-"}
                                             </div>
                                             <div className="prize-description">
-                                                {currentPrize?.prizeTitle ||
+                                                {currentPrize?.prizeSubtitle ||
                                                     "-"}
                                             </div>
                                             {/* DESKTOP - TICKETS, TIMER & OVERTIME */}

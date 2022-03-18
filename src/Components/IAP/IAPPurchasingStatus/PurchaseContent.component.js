@@ -29,6 +29,7 @@ const PurchaseContent = ({
             title: "Insufficient Froyo Tokens.",
             subTitle: "Please purchase Froyo Tokens to continue.",
             button: "Purchase Froyo Tokens",
+            color: "red",
         },
         beforePurchaseConfirmation: {
             title: `Purchase ${productInfo?.quantity} gems with ${productInfo?.price} froyo tokens`,
@@ -53,6 +54,7 @@ const PurchaseContent = ({
             title: "Purchase unsuccessful.",
             subTitle: "Something went wrong. Please try again later.",
             button: "Close",
+            color: "red",
         },
     };
 
@@ -92,6 +94,13 @@ const PurchaseContent = ({
                                 Cancel
                             </button>
                             <button
+                                style={{
+                                    backgroundColor:
+                                        purchasingStatus?.isFail ||
+                                        purchasingStatus?.insufficentToken
+                                            ? "#c40000"
+                                            : "#d3076a",
+                                }}
                                 className="confirm-button"
                                 onClick={handleConfirmAction}
                             >

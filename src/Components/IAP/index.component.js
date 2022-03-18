@@ -21,7 +21,7 @@ const Index = () => {
     const [modalStatus, setModalStatus] = useState(false);
 
     const [purchasingStatus, setPurchasingStatus] = useState({
-        noWallet: user.walletAddress ? true : false,
+        noWallet: user.walletAddress ? false : true,
         beforePurchaseConfirmation: false,
         insufficentToken: false,
         processing: false,
@@ -58,6 +58,14 @@ const Index = () => {
     };
     const handleModalCloseButton = () => {
         setModalStatus(false);
+        setPurchasingStatus({
+            noWallet: false,
+            beforePurchaseConfirmation: false,
+            insufficentToken: false,
+            processing: false,
+            isSuccess: false,
+            isFail: false,
+        });
     };
 
     // OPEN METAMASK
@@ -67,14 +75,16 @@ const Index = () => {
         // Smart contract address for USDT in BSC testnet
         const tokenContract = new web3.eth.Contract(
             tokenABI,
-            "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd"
+            process.env.REACT_APP_FROYO_CONTRACT_ADDRESS
         );
 
         // Send tranfer function to receiver address
         tokenContract.methods
             .transfer(
-                "0x08D333634918B0EEB388ff62FDdec98f6CAA73b0",
-                web3.utils.toBN(web3.utils.toWei(productInfo?.price?.toString()))
+                process.env.REACT_APP_PRIZE_DISTRIBUTOR_ADDRESS,
+                web3.utils.toBN(
+                    web3.utils.toWei(productInfo?.price?.toString())
+                )
             )
             .send({ from: user.walletAddress })
             .on("sending", function (payload) {
