@@ -20,7 +20,7 @@ const INITIAL_STATE = {
         isNotifyAllowed: true,
         status: null,
         walletAddress: null,
-        walletAmount: null,
+        tokenBalance: null,
     },
     loginStatus: {
         loading: false,

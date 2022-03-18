@@ -5,6 +5,8 @@ import {
     userSignIn,
 } from "redux/services/index.service";
 import { UPDATE_USER_WALLET } from "redux/types";
+import tokenABI from "Utils/TokenABI";
+import Web3 from "web3";
 
 export function loadLoginUserWithToken() {
     return async (dispatch) => {
@@ -103,7 +105,7 @@ export function loadLoginUserWallet(walletAddress, walletAmount) {
 
         const _user = { ...user };
         _user.walletAddress = walletAddress;
-        _user.walletAmount = walletAmount;
+        _user.tokenBalance = walletAmount;
         dispatch({ type: UPDATE_USER_WALLET, payload: _user });
         dispatch({
             type: "SHOW_TOAST",
@@ -114,6 +116,39 @@ export function loadLoginUserWallet(walletAddress, walletAmount) {
                         : "Wallet Disconnected.",
             },
         });
+    };
+}
+
+export function loadWallet() {
+    return async (dispatch, getState) => {
+        const web3 = new Web3(window.ethereum);
+
+        const walletAddress = (await web3.eth.getAccounts())[0];
+        if (walletAddress) {
+            const tokenContract = new web3.eth.Contract(
+                tokenABI,
+                process.env.REACT_APP_CONTRACT_ADDRESS
+            );
+            const tokenBalance = web3.utils.fromWei(
+                await tokenContract.methods.balanceOf(walletAddress).call()
+            );
+
+            const { user } = getState()?.userData;
+            const _user = { ...user };
+            _user.walletAddress = walletAddress;
+            _user.tokenBalance = tokenBalance;
+
+            dispatch({ type: UPDATE_USER_WALLET, payload: _user });
+            dispatch({
+                type: "SHOW_TOAST",
+                payload: {
+                    message:
+                        walletAddress !== null
+                            ? "Wallet Connected."
+                            : "Wallet Disconnected.",
+                },
+            });
+        }
     };
 }
 

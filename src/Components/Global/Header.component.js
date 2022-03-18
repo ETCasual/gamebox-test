@@ -134,7 +134,9 @@ const Header = ({
                                 {user.walletAddress && (
                                     <>
                                         <p className="mb-1 d-flex">
-                                            {user.walletAmount?.toLocaleString()}{" "}
+                                            {parseFloat(user.tokenBalance)
+                                                ?.toFixed(2)
+                                                ?.toLocaleString()}{" "}
                                             <small className="d-flex align-self-center ml-1">
                                                 froyo
                                             </small>

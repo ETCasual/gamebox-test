@@ -98,7 +98,7 @@ export async function userSignIn() {
         exp: 0,
         status: null,
         walletAddress: null,
-        walletAmount: null
+        tokenBalance: null
     };
     if (signInResult) {
         Object.assign(user, {

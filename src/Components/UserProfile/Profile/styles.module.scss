@@ -32,7 +32,8 @@
             }
         }
     }
-    .gem-balance {
+    .gem-balance,
+    .token-balance {
         cursor: default;
         .gem-balance-text {
             color: #868686;
@@ -78,6 +79,22 @@
                     margin-bottom: 0.15em;
                 }
             }
+        }
+        .token-balance-text {
+            margin: 0 0.5em;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+            font-weight: $fnt-wgt-700;
+            small {
+                margin-top: 0.2rem;
+                font-weight: $fnt-wgt-600;
+            }
+        }
+        .connect-text {
+            font-size: $fnt-sz-14;
+            font-weight: $fnt-wgt-600;
         }
     }
     .multiplier-holder {

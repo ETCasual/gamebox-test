@@ -42,6 +42,7 @@ import loadNotifications from "redux/thunks/Notifcations.thunk";
 import loadFriendInvitation from "redux/thunks/FriendInvitation.thunk";
 import loadUnClaimedPrizes from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
+import { loadWallet } from "redux/thunks/Login.thunk";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
@@ -73,6 +74,9 @@ const App = () => {
             dispatch(loadGemsList());
             dispatch(loadSpinnerRules());
             dispatch(loadGamesList());
+
+            // FOR LOADING WALLET IF ALREADY CONNECTED
+            dispatch(loadWallet());
 
             // FOR FUTURE PURPOSE
             // dispatch({ type: "LIST_PURCHASE_HISTORY" });

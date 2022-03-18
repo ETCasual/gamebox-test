@@ -13,6 +13,7 @@ import {
     getCurrentMultiplierX,
     getLevelProgress,
 } from "Utils/CurrentLevel";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 
 const Profile = ({
     handlePlayerLevelPanel,
@@ -26,6 +27,12 @@ const Profile = ({
     const dispatch = useDispatch();
 
     const history = useHistory();
+
+    const handleWallet = async () => {
+        if (user.walletAddress) return;
+
+        await handleConnectWallet(dispatch);
+    };
 
     return (
         <section id="profile">
@@ -86,19 +93,34 @@ const Profile = ({
                                 </Link>
                             </div>
                             {/* TOKEN BALANCE */}
-                            <div className="col-12 mt-3 gem-balance d-flex align-items-center justify-content-between">
+                            <div className="col-12 mt-3 token-balance d-flex align-items-center justify-content-between">
                                 <p className="gem-balance-text mb-0 mb-md-2">
                                     Froyo Tokens available
                                 </p>
-                                <div className="gem-wrapper">
+                                <div
+                                    className="gem-wrapper"
+                                    onClick={handleWallet}
+                                >
                                     <img
                                         width="24"
                                         src={`${window.cdn}assets/wallet_01.png`}
                                         alt="wallet"
                                     />
-                                    <span className="gems">
-                                        4.00 <small>froyo</small>
-                                    </span>
+                                    {user.walletAddress && (
+                                        <p className=" d-flex token-balance-text">
+                                            {parseFloat(user.tokenBalance)
+                                                ?.toFixed(2)
+                                                ?.toLocaleString()}{" "}
+                                            <small className="d-flex align-self-center ml-1">
+                                                froyo
+                                            </small>
+                                        </p>
+                                    )}
+                                    {!user.walletAddress && (
+                                        <p className="mb-0 ml-1 connect-text">
+                                            Connect Wallet
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                             {/* MULTIPLIER */}
