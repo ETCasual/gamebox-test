@@ -21,6 +21,7 @@ const INITIAL_STATE = {
         status: null,
         walletAddress: null,
         tokenBalance: null,
+        network: null,
     },
     loginStatus: {
         loading: false,

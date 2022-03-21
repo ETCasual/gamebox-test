@@ -79,14 +79,18 @@ const Index = () => {
                 trigger: workCardRef.current,
                 start: "10% bottom",
                 onEnter: () => {
-                    if (workCardRef.current !== null && gsap)
-                        gsap.to(workCardRef.current, {
+                    const tl = gsap.timeline();
+                    tl.to(
+                        workCardRef.current,
+                        {
                             duration: 1,
                             autoAlpha: 1,
                             y: 0,
                             ease: "power2.out",
                             stagger: 0.2,
-                        });
+                        },
+                        0
+                    );
                 },
             });
 

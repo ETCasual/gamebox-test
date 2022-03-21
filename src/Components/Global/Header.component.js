@@ -154,9 +154,13 @@ const Header = ({
                                         </p>
                                     </>
                                 )}
-                                {!user.walletAddress && (
+                                {!user.walletAddress && !user.network && (
                                     <p className="mb-0">Connect Wallet</p>
                                 )}
+                                {!user.walletAddress &&
+                                    user.network === "Wrong Network!" && (
+                                        <p className="mb-0">Wrong Network</p>
+                                    )}
                             </div>
                         </div>
                         <div className="position-relative d-flex flex-nowrap align-items-center mx-2">

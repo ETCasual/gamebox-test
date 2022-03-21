@@ -1,13 +1,13 @@
+import { UPDATE_USER_WALLET } from "redux/types";
 import {
     addUser,
     getUserAccountInfoFroyo,
     loginUser,
     userSignIn,
 } from "redux/services/index.service";
-import { UPDATE_USER_WALLET } from "redux/types";
-import tokenABI from "Utils/TokenABI";
-import Web3 from "web3";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 
+// LOGIN WITH EXISTING TOKEN
 export function loadLoginUserWithToken() {
     return async (dispatch) => {
         try {
@@ -64,6 +64,7 @@ export function loadLoginUserWithToken() {
     };
 }
 
+// LOGIN WITH EMAIL & PASSWORD
 export function loadLogin(payload, setLoginError) {
     return async (dispatch) => {
         try {
@@ -93,66 +94,51 @@ export function loadLogin(payload, setLoginError) {
     };
 }
 
+// LOGIN STATUS - AUTH, LOADING, READY
 export function loadLoginStatus(status) {
     return async (dispatch) => {
         dispatch({ type: "LOGIN_STATUS", payload: status });
     };
 }
 
-export function loadLoginUserWallet(walletAddress, walletAmount) {
+// REQUEST TO CONNECT TO WALLET
+export function loadConnectUserWallet(walletAddress, walletAmount, networkId) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
         const _user = { ...user };
         _user.walletAddress = walletAddress;
         _user.tokenBalance = walletAmount;
+        _user.network = networkId;
+
         dispatch({ type: UPDATE_USER_WALLET, payload: _user });
+
         dispatch({
             type: "SHOW_TOAST",
             payload: {
                 message:
-                    walletAddress !== null
+                    walletAddress !== null &&
+                    walletAmount !== null &&
+                    networkId !== null
                         ? "Wallet Connected."
+                        : walletAddress === null &&
+                          walletAmount === null &&
+                          networkId === "Wrong Network!"
+                        ? "Wrong Network!"
                         : "Wallet Disconnected.",
             },
         });
     };
 }
 
-export function loadWallet() {
-    return async (dispatch, getState) => {
-        const web3 = new Web3(window.ethereum);
-
-        const walletAddress = (await web3.eth.getAccounts())[0];
-        if (walletAddress) {
-            const tokenContract = new web3.eth.Contract(
-                tokenABI,
-                process.env.REACT_APP_CONTRACT_ADDRESS
-            );
-            const tokenBalance = web3.utils.fromWei(
-                await tokenContract.methods.balanceOf(walletAddress).call()
-            );
-
-            const { user } = getState()?.userData;
-            const _user = { ...user };
-            _user.walletAddress = walletAddress;
-            _user.tokenBalance = tokenBalance;
-
-            dispatch({ type: UPDATE_USER_WALLET, payload: _user });
-            dispatch({
-                type: "SHOW_TOAST",
-                payload: {
-                    message:
-                        walletAddress !== null
-                            ? "Wallet Connected."
-                            : "Wallet Disconnected.",
-                },
-            });
-        }
+// AUTO CONNET WALLET ON LOAD
+export function loadConnectWalletAuto() {
+    return async (dispatch) => {
+        await handleConnectWallet(dispatch);
     };
 }
 
-export function loadWalletError({ code, message }) {
+export function loadConnectWalletAutoError({ code, message }) {
     return async (dispatch) => {
         dispatch({
             type: "SHOW_TOAST",

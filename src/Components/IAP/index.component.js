@@ -10,7 +10,7 @@ import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 
 import tokenABI from "Utils/TokenABI";
-import { loadLoginUserWallet } from "redux/thunks/Login.thunk";
+import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
 
 const Index = () => {
     const { user } = useSelector((state) => state.userData);
@@ -70,7 +70,8 @@ const Index = () => {
 
     // OPEN METAMASK
     const openMetaMaskForPurchase = () => {
-        const web3 = new Web3(window.ethereum);
+        const eth = { ...window.ethereum };
+        const web3 = new Web3(eth);
 
         // Smart contract address for USDT in BSC testnet
         const tokenContract = new web3.eth.Contract(
@@ -118,11 +119,15 @@ const Index = () => {
                             .balanceOf(user.walletAddress)
                             .call()
                     );
-                    if (tokenBalance !== null)
+                    const chainId = await window.ethereum.request({
+                        method: "eth_chainId",
+                    });
+                    if (tokenBalance && chainId)
                         dispatch(
-                            loadLoginUserWallet(
+                            loadConnectUserWallet(
                                 user.walletAddress,
-                                parseFloat(tokenBalance)
+                                parseFloat(tokenBalance),
+                                chainId
                             )
                         );
                 }, 1000);
@@ -139,20 +144,6 @@ const Index = () => {
                     isFail: true,
                 }));
             });
-
-        // setTimeout(function () {
-        //     if (tokenPaymentProcess.haveGems) {
-        //         handleModalCloseButton();
-        //         setTokenPaymentProcess((prev) => ({
-        //             ...prev,
-        //             isSuccess: false,
-        //             // isSuccess: false,
-        //             panel2: true,
-        //         }));
-        //     } else if (tokenPaymentProcess.insufficent) {
-        //         handleModalCloseButton();
-        //     }
-        // }, 5000);
     };
 
     // PROCESS CONFIRM ACTION

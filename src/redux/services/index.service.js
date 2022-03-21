@@ -98,7 +98,8 @@ export async function userSignIn() {
         exp: 0,
         status: null,
         walletAddress: null,
-        tokenBalance: null
+        tokenBalance: null,
+        network: null,
     };
     if (signInResult) {
         Object.assign(user, {
@@ -1332,7 +1333,7 @@ export async function purchaseProcess(
     itemTypeId,
     itemId,
     paymentId,
-    price,
+    price
 ) {
     const token = getToken();
     const request = new BuyRequest();
