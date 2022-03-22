@@ -7,6 +7,7 @@ import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
 
 import { scrollToTop } from "Utils/ScrollToTop";
 import { defaultUserImage } from "Utils/DefaultImage";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 
 const Settings = () => {
     const { user } = useSelector((state) => state.userData);
@@ -23,6 +24,12 @@ const Settings = () => {
                 isNotificationAllowed
             )
         );
+    };
+
+    const handleWallet = async () => {
+        if (user.walletAddress) return;
+
+        await handleConnectWallet(dispatch);
     };
 
     return (
@@ -106,11 +113,34 @@ const Settings = () => {
                                                 <div className="col-12 d-flex align-items-center justify-content-between">
                                                     <div className="wallet-address p-md-4">
                                                         <span>
-                                                            No wallet found
+                                                            {user.walletAddress
+                                                                ? user.walletAddress
+                                                                : "No wallet found"}
                                                         </span>
                                                     </div>
-                                                    <button>
-                                                        Connect wallet
+                                                    <button
+                                                        onClick={handleWallet}
+                                                    >
+                                                        {user.walletAddress && (
+                                                            <p className="mb-0">
+                                                                Wallet Connected
+                                                            </p>
+                                                        )}
+                                                        {!user.walletAddress &&
+                                                            !user.network && (
+                                                                <p className="mb-0">
+                                                                    Connect
+                                                                    Wallet
+                                                                </p>
+                                                            )}
+                                                        {!user.walletAddress &&
+                                                            user.network ===
+                                                                "Wrong Network!" && (
+                                                                <p className="mb-0">
+                                                                    Wrong
+                                                                    Network
+                                                                </p>
+                                                            )}
                                                     </button>
                                                 </div>
                                             </div>
