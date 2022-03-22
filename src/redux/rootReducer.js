@@ -34,6 +34,8 @@ import overTimeReducer from "redux/reducers/OverTime.reducer";
 import listGamesReducer from "redux/reducers/ListGames.reducer";
 import ToastyReducer from "redux/reducers/Toasty.reducer";
 
+import { LOG_OUT } from "redux/types";
+
 // COMBINING MULTIPLE REDUX REDUCERS
 const appReducer = combineReducers({
     toasty: ToastyReducer,
@@ -73,7 +75,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
     // when a logout action is dispatched it will reset redux state
-    if (action.type === "LOG_OUT") {
+    if (action.type === LOG_OUT) {
         state = undefined;
         window.scrollTo(0, 0);
         localStorage.clear();

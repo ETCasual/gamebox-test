@@ -1,4 +1,10 @@
-import { UPDATE_USER_WALLET } from "redux/types";
+import {
+    UPDATE_USER_WALLET,
+    LOGIN_SUCCESS,
+    SHOW_TOAST,
+    LOGIN_ERROR,
+    LOGIN_STATUS,
+} from "redux/types";
 import {
     addUser,
     getUserAccountInfoFroyo,
@@ -14,7 +20,7 @@ export function loadLoginUserWithToken() {
             const user = await userSignIn();
             if (user.id) {
                 dispatch({
-                    type: "LOGIN_SUCCESS",
+                    type: LOGIN_SUCCESS,
                     payload: user,
                 });
             } else {
@@ -32,7 +38,7 @@ export function loadLoginUserWithToken() {
             if (error.code === 7) {
                 console.log(error.message);
                 dispatch({
-                    type: "LOGIN_STATUS",
+                    type: LOGIN_STATUS,
                     payload: {
                         loading: false,
                         ready: false,
@@ -40,7 +46,7 @@ export function loadLoginUserWithToken() {
                     },
                 });
                 dispatch({
-                    type: "SHOW_TOAST",
+                    type: SHOW_TOAST,
                     payload: {
                         message: "Session Expired! Please login again.",
                     },
@@ -48,7 +54,7 @@ export function loadLoginUserWithToken() {
             } else if (error.code === 3) {
                 console.log(error.code, error.message);
                 dispatch({
-                    type: "LOGIN_ERROR",
+                    type: LOGIN_ERROR,
                     payload: {
                         dispatch,
                         errorType: error.message,
@@ -78,7 +84,7 @@ export function loadLogin(payload, setLoginError) {
                 const user = await userSignIn();
                 if (user.id) {
                     dispatch({
-                        type: "LOGIN_SUCCESS",
+                        type: LOGIN_SUCCESS,
                         payload: user,
                     });
                 }
@@ -97,7 +103,7 @@ export function loadLogin(payload, setLoginError) {
 // LOGIN STATUS - AUTH, LOADING, READY
 export function loadLoginStatus(status) {
     return async (dispatch) => {
-        dispatch({ type: "LOGIN_STATUS", payload: status });
+        dispatch({ type: LOGIN_STATUS, payload: status });
     };
 }
 
@@ -114,7 +120,7 @@ export function loadConnectUserWallet(walletAddress, walletAmount, networkId) {
         dispatch({ type: UPDATE_USER_WALLET, payload: _user });
 
         dispatch({
-            type: "SHOW_TOAST",
+            type: SHOW_TOAST,
             payload: {
                 message:
                     walletAddress !== null &&
@@ -141,7 +147,7 @@ export function loadConnectWalletAuto() {
 export function loadConnectWalletAutoError({ code, message }) {
     return async (dispatch) => {
         dispatch({
-            type: "SHOW_TOAST",
+            type: SHOW_TOAST,
             payload: {
                 message:
                     code === -32002
