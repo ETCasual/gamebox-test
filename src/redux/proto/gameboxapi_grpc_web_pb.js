@@ -3368,6 +3368,67 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.claimWinner =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.ClaimPrizeRequest,
+ *   !proto.api.gamebox.ClaimPrizeResponse>}
+ */
+const methodDescriptor_GameboxApi_ClaimPrize = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/ClaimPrize',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.ClaimPrizeRequest,
+  proto.api.gamebox.ClaimPrizeResponse,
+  /**
+   * @param {!proto.api.gamebox.ClaimPrizeRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.ClaimPrizeResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.ClaimPrizeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.ClaimPrizeResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.ClaimPrizeResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.claimPrize =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/ClaimPrize',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_ClaimPrize,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.ClaimPrizeRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.ClaimPrizeResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.claimPrize =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/ClaimPrize',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_ClaimPrize);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.api.gamebox.ListNotificationRequest,
  *   !proto.api.gamebox.ListNotificationResponse>}
  */
