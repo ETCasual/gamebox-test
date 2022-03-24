@@ -25880,7 +25880,8 @@ proto.api.gamebox.ClaimWinnerRequest.toObject = function(includeInstance, msg) {
     city: jspb.Message.getFieldWithDefault(msg, 8, ""),
     state: jspb.Message.getFieldWithDefault(msg, 9, ""),
     zipCode: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    country: jspb.Message.getFieldWithDefault(msg, 11, "")
+    country: jspb.Message.getFieldWithDefault(msg, 11, ""),
+    transactionHash: jspb.Message.getFieldWithDefault(msg, 12, "")
   };
 
   if (includeInstance) {
@@ -25960,6 +25961,10 @@ proto.api.gamebox.ClaimWinnerRequest.deserializeBinaryFromReader = function(msg,
     case 11:
       var value = /** @type {string} */ (reader.readString());
       msg.setCountry(value);
+      break;
+    case 12:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTransactionHash(value);
       break;
     default:
       reader.skipField();
@@ -26064,6 +26069,13 @@ proto.api.gamebox.ClaimWinnerRequest.serializeBinaryToWriter = function(message,
   if (f.length > 0) {
     writer.writeString(
       11,
+      f
+    );
+  }
+  f = message.getTransactionHash();
+  if (f.length > 0) {
+    writer.writeString(
+      12,
       f
     );
   }
@@ -26232,6 +26244,21 @@ proto.api.gamebox.ClaimWinnerRequest.prototype.getCountry = function() {
 /** @param {string} value */
 proto.api.gamebox.ClaimWinnerRequest.prototype.setCountry = function(value) {
   jspb.Message.setProto3StringField(this, 11, value);
+};
+
+
+/**
+ * optional string transaction_hash = 12;
+ * @return {string}
+ */
+proto.api.gamebox.ClaimWinnerRequest.prototype.getTransactionHash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.ClaimWinnerRequest.prototype.setTransactionHash = function(value) {
+  jspb.Message.setProto3StringField(this, 12, value);
 };
 
 
