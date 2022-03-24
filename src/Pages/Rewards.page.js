@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Rewards from "Components/UserProfile/Rewards/Rewards.component";
 
 import loadClaimedPrizes from "redux/thunks/ClaimedPrizes.thunk";
-import loadUnClaimedPrizes from "redux/thunks/UnClaimedPrizes.thunk";
+import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 
 const RewardsPage = () => {
     const { user } = useSelector((state) => state.userData);

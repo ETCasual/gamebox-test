@@ -1,10 +1,12 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import ClaimedPrizeDetailModal from "Components/Modals/ClaimedPrizeDetail.modal";
+
+import { loadNFTClaim } from "redux/thunks/UnClaimedPrizes.thunk";
 
 // HELPER FUNCTIONS
 import { scrollToTop } from "Utils/ScrollToTop";
@@ -12,6 +14,8 @@ import { scrollToTop } from "Utils/ScrollToTop";
 const Rewards = () => {
     const { claimedPrizes } = useSelector((state) => state.claimedPrizes);
     const { unClaimedPrizes } = useSelector((state) => state.unClaimedPrizes);
+
+    const dispatch = useDispatch();
 
     const history = useHistory();
 
@@ -50,46 +54,9 @@ const Rewards = () => {
         return false;
     };
 
-    // const claimed = [
-    //     {
-    //         prizeImageUrl: "",
-    //         prizeTitle: "title",
-    //         prizeSubtitle: "subtitle",
-    //         claimedOn: Date.now(),
-    //     },
-    //     {
-    //         prizeImageUrl: "",
-    //         prizeTitle: "title",
-    //         prizeSubtitle: "subtitle",
-    //         claimedOn: Date.now(),
-    //     },
-    //     {
-    //         prizeImageUrl: "",
-    //         prizeTitle: "title",
-    //         prizeSubtitle: "subtitle",
-    //         claimedOn: Date.now(),
-    //     },
-    // ];
-    // const unclaimed = [
-    //     {
-    //         prizeImageUrl: "",
-    //         prizeTitle: "title",
-    //         prizeSubtitle: "subtitle",
-    //         createdOn: Date.now(),
-    //     },
-    //     {
-    //         prizeImageUrl: "",
-    //         prizeTitle: "title",
-    //         prizeSubtitle: "subtitle",
-    //         createdOn: Date.now(),
-    //     },
-    //     {
-    //         prizeImageUrl: "",
-    //         prizeTitle: "title",
-    //         prizeSubtitle: "subtitle",
-    //         createdOn: Date.now(),
-    //     },
-    // ];
+    const handleNFTClaim = (winnerId) => {
+        dispatch(loadNFTClaim(winnerId));
+    };
 
     return (
         <>
@@ -154,6 +121,11 @@ const Rewards = () => {
                                                         }`,
                                                     }}
                                                     key={`prizes-${i}`}
+                                                    onClick={() =>
+                                                        handleNFTClaim(
+                                                            data.id
+                                                        )
+                                                    }
                                                 >
                                                     <div className="card-wrapper d-flex">
                                                         <div className="col-auto p-2">

@@ -6,7 +6,7 @@ import _ from "lodash";
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadGemsList from "redux/thunks/GemsList.thunk";
 
-const IAP = ({ handleGemsPaymentPanel }) => {
+const IAP = ({ handleSelectedGemPackPayment }) => {
     const { user } = useSelector((state) => state.userData);
     const { gemsList } = useSelector((state) => state.gemsList);
     const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const IAP = ({ handleGemsPaymentPanel }) => {
                                                 key={`gems-${i}`}
                                                 className={`col-6 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack`}
                                                 onClick={() =>
-                                                    handleGemsPaymentPanel(
+                                                    handleSelectedGemPackPayment(
                                                         gem.id,
                                                         gem.price,
                                                         gem.quantity

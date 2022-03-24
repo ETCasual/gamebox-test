@@ -1,22 +1,15 @@
-import { CLAIM_PRIZE, LOG_OUT, SHOW_TOAST } from "redux/types";
+import { LOG_OUT, SHOW_TOAST } from "redux/types";
 import { processClaim } from "redux/services/index.service";
+import loadClaimedPrizes from "redux/thunks/ClaimedPrizes.thunk";
+import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 
-export default function loadClaimPrize(
-    winnerId,
-    claimData,
-    successSubmissionCallback
-) {
-    return async (dispatch, getState) => {
-        const { user } = getState()?.userData;
-
-        return processClaim(user, winnerId, claimData)
+export default function loadClaimPrize(winnerId, userId, hash) {
+    return async (dispatch) => {
+        return processClaim(winnerId, userId, hash)
             .then((data) => {
-                const fnCallbackSubmission = successSubmissionCallback();
                 if (data === 1) {
-                    fnCallbackSubmission();
-                    dispatch({
-                        type: CLAIM_PRIZE,
-                    });
+                    dispatch(loadClaimedPrizes());
+                    dispatch(loadUnClaimedPrizes());
                 }
             })
             .catch((error) => {

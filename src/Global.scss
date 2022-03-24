@@ -180,8 +180,12 @@ button {
         height: inherit;
         font-size: $fnt-sz-14;
         a {
+            min-width: 6rem;
             color: #959494 !important;
             height: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         a.active {
             font-weight: $fnt-wgt-700;

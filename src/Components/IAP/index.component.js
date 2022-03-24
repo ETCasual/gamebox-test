@@ -1,25 +1,38 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 import IAPItems from "Components/IAP/IAPItems/IAPItems.component";
 import PurchaseWrapper from "Components/IAP/IAPPurchasingStatus/PurchaseWrapper.component";
 import PurchaseContent from "Components/IAP/IAPPurchasingStatus/PurchaseContent.component";
+import IAPPaymentTypeModal from "Components/IAP/IAPPaymentTypeModal/IAPPaymentTypeModal.component";
+import CardPayment from "Components/IAP/CardMethod/CardPayment.component";
 
 import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
-
-import tokenABI from "Utils/TokenABI";
 import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
 
+import tokenABI from "Utils/TokenABI";
+
 const Index = () => {
+    const [stripePromise] = useState(
+        loadStripe(process.env.REACT_APP_STRIPE_KEY)
+    );
+
     const { user } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
 
-    const [productInfo, setProductInfo] = useState(null);
+    const [productInfo, setProductInfo] = useState({
+        id: null,
+        price: null,
+        quantity: null,
+    });
 
-    const [modalStatus, setModalStatus] = useState(false);
-
+    const [paymentTypeModal, setPaymentTypeModal] = useState(false);
+    const [cardPaymentModal, setCardPaymentModal] = useState(false);
+    const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
         noWallet: user.walletAddress ? false : true,
         beforePurchaseConfirmation: false,
@@ -29,35 +42,48 @@ const Index = () => {
         isFail: false,
     });
 
-    // PAYMENT
-    const handleGemsPaymentPanel = (id, price, quantity) => {
-        // OPEN MODAL
-        setModalStatus(true);
-
-        // SETTING PRODUCT STATE
+    // OPEN PAYMENT TYPE MODA AND SET SELECTED PRODUCT INFO INTO STATE
+    const handleSelectedGemPackPayment = (id, price, quantity) => {
+        setPaymentTypeModal(true);
         setProductInfo({
             id,
             price,
             quantity,
         });
+    };
 
+    const handleFroyoPurchasingStatus = () => {
+        setPaymentTypeModal(false);
+        setPurchasingStatusModal(true);
         if (!user.walletAddress) {
             setPurchasingStatus((prev) => ({ ...prev, noWallet: true }));
             return;
-        } else if (user.walletAddress && user.tokenBalance < price) {
+        } else if (
+            user.walletAddress &&
+            user.tokenBalance < productInfo.price
+        ) {
             setPurchasingStatus((prev) => ({
                 ...prev,
                 insufficentToken: true,
             }));
-        } else if (user.walletAddress && user.tokenBalance >= price) {
+        } else if (
+            user.walletAddress &&
+            user.tokenBalance >= productInfo.price
+        ) {
             setPurchasingStatus((prev) => ({
                 ...prev,
                 beforePurchaseConfirmation: true,
             }));
         }
     };
+
+    const handleCardPaymentModal = () => {
+        setPaymentTypeModal(false);
+        setCardPaymentModal(true);
+    };
+
     const handleModalCloseButton = () => {
-        setModalStatus(false);
+        setPurchasingStatusModal(false);
         setPurchasingStatus({
             noWallet: false,
             beforePurchaseConfirmation: false,
@@ -90,7 +116,7 @@ const Index = () => {
             .send({ from: user.walletAddress })
             .on("sending", function (payload) {
                 console.log("sending", payload);
-                setModalStatus(true);
+                setPurchasingStatusModal(true);
                 setPurchasingStatus((prev) => ({ ...prev, processing: true }));
             })
             .on("sent", function (payload) {
@@ -98,7 +124,7 @@ const Index = () => {
             })
             .on("transactionHash", function (hash) {
                 console.log("hash", hash);
-                setModalStatus(true);
+                setPurchasingStatusModal(true);
                 setPurchasingStatus((prev) => ({
                     ...prev,
                     processing: false,
@@ -137,7 +163,7 @@ const Index = () => {
             })
             .on("error", function (error) {
                 console.log("error", error);
-                setModalStatus(true);
+                setPurchasingStatusModal(true);
                 setPurchasingStatus((prev) => ({
                     ...prev,
                     processing: false,
@@ -176,10 +202,29 @@ const Index = () => {
     return (
         <>
             {/* SUBSCRIPTION & GEMS */}
-            <IAPItems handleGemsPaymentPanel={handleGemsPaymentPanel} />
+            <IAPItems
+                handleSelectedGemPackPayment={handleSelectedGemPackPayment}
+            />
+
+            {/* PAYMENT METHOD SELECTION MODAL */}
+            {paymentTypeModal && (
+                <IAPPaymentTypeModal
+                    handleFroyoPurchasingStatus={handleFroyoPurchasingStatus}
+                    handleCardPaymentModal={handleCardPaymentModal}
+                />
+            )}
+
+            {cardPaymentModal && (
+                <Elements stripe={stripePromise}>
+                    <CardPayment
+                        productInfo={productInfo}
+                        // handleBackButton={handlePaymentBackButton}
+                    />
+                </Elements>
+            )}
 
             {/* PURCHASING STATUS MODAL */}
-            {modalStatus && (
+            {purchasingStatusModal && (
                 <PurchaseWrapper>
                     <PurchaseContent
                         productInfo={productInfo}

@@ -1,3 +1,4 @@
+import { addListener, launch } from "devtools-detector";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,7 +22,6 @@ import Profile from "Pages/Profile.page";
 import Invite from "Pages/Invite.page";
 import Settings from "Pages/Settings.page";
 import Rewards from "Pages/Rewards.page";
-import ClaimPrize from "Pages/ClaimPrize.page";
 import Notifications from "Pages/Notifications.page";
 import IAP from "Pages/IAP.page";
 import TermsAndConditions from "Pages/TermsAndConditions.page";
@@ -40,9 +40,10 @@ import loadNotificationToken from "redux/thunks/UpdateNotificationToken.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import loadNotifications from "redux/thunks/Notifcations.thunk";
 import loadFriendInvitation from "redux/thunks/FriendInvitation.thunk";
-import loadUnClaimedPrizes from "redux/thunks/UnClaimedPrizes.thunk";
+import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
+import { LOG_OUT } from "redux/types";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
@@ -51,6 +52,11 @@ const App = () => {
 
     const [pendingRegion, setPendingRegion] = useState(true);
     const [regionAllow, setRegionAllow] = useState(false);
+
+    addListener((isOpen) => {
+        if (isOpen) dispatch({ type: LOG_OUT });
+    });
+    launch();
 
     // FIREBASE ONMESSAGE
     onMessageListener()
@@ -179,7 +185,6 @@ const App = () => {
                         path="/profile/rewards"
                         component={Rewards}
                     />
-                    <ProtectedRoute path="/claim/:id" component={ClaimPrize} />
                     <ProtectedRoute
                         path="/profile/settings"
                         component={Settings}

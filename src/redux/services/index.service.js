@@ -34,6 +34,7 @@ import {
     SignInRequest,
     UpdateUserSettingsRequest,
     UpdateMsgTokenRequest,
+    ClaimPrizeRequest,
 } from "../proto/gameboxapi_pb";
 import axios from "axios";
 import _ from "lodash";
@@ -1203,6 +1204,28 @@ export async function updateUserSettings(
 }
 
 //
+//  GET NFT INFO FOR CLAIMING
+//
+export async function getNFTClaim(winnerId, userId, claimerAddress) {
+    const token = getToken();
+    const request = new ClaimPrizeRequest();
+    request.setWinnerId(winnerId);
+    request.setUserId(userId);
+    request.setClaimerAddress(claimerAddress);
+
+    const response = await client.claimPrize(request, {
+        authorization: `Bearer ${token}`,
+    });
+    const nftInfo = {
+        nftAddress: response.getAddress(),
+        tokenId: response.getTokenId(),
+        nonce: response.getNonce(),
+        signature: response.getSignature(),
+    };
+    return nftInfo;
+}
+
+//
 //     GET UNCLAIMED PRIZES LIST
 //
 export async function getUnclaimedPrizesList(user) {
@@ -1279,20 +1302,24 @@ export async function getClaimedPrizesList(user) {
 //
 //     PROCESS CLAIM
 //
-export async function processClaim(user, id, claim) {
+export async function processClaim(winnerId, userId, hash) {
     const token = getToken();
     const request = new ClaimWinnerRequest();
-    request.setId(id);
-    request.setUserId(user.id);
-    request.setEmail(claim.email);
-    request.setFullName(claim.fullName);
-    request.setCountryCode(claim.countryCode);
-    request.setPhone(claim.phone);
-    request.setAddress(claim.address);
-    request.setCity(claim.city);
-    request.setState(claim.region);
-    request.setZipCode(claim.zipcode);
-    request.setCountry(claim.country);
+    request.setId(winnerId);
+    request.setUserId(userId);
+    request.setTransactionHash(hash);
+
+    // request.setId(id);
+    // request.setUserId(user.id);
+    // request.setEmail(claim.email);
+    // request.setFullName(claim.fullName);
+    // request.setCountryCode(claim.countryCode);
+    // request.setPhone(claim.phone);
+    // request.setAddress(claim.address);
+    // request.setCity(claim.city);
+    // request.setState(claim.region);
+    // request.setZipCode(claim.zipcode);
+    // request.setCountry(claim.country);
 
     const res = await client.claimWinner(request, {
         authorization: `Bearer ${token}`,

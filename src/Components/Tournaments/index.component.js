@@ -216,8 +216,8 @@ const Index = ({ match }) => {
                                                 src={`${window.cdn}buttons/button_back.png`}
                                                 alt="back-btn"
                                             />
+                                            <span className="ml-2">Back</span>
                                         </Link>
-                                        <span className="ml-2">Back</span>
                                     </div>
                                     {/* TICKETS AND POOL INFO */}
                                     <div className="col-12 px-3 d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">

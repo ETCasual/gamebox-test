@@ -6,7 +6,6 @@ import ranksReducer from "redux/reducers/Ranks.reducer";
 import activityReducer from "redux/reducers/Activity.reducer";
 import automatedEntryTicketsReducer from "redux/reducers/AutomatedEntryTickets.reducer";
 import claimedPrizesReducer from "redux/reducers/ClaimedPrizes.reducer";
-import claimPrizeReducer from "redux/reducers/ClaimPrize.reducer";
 import configReducer from "redux/reducers/Config.reducer";
 import currentUserRankReducer from "redux/reducers/CurrentUserRank.reducer";
 import exchangeRateReducer from "redux/reducers/ExchangeRate.reducer";
@@ -42,7 +41,6 @@ const appReducer = combineReducers({
     activity: activityReducer,
     automatedEntryTickets: automatedEntryTicketsReducer,
     claimedPrizes: claimedPrizesReducer,
-    claimPrize: claimPrizeReducer,
     config: configReducer,
     currentUserRank: currentUserRankReducer,
     exchangeRate: exchangeRateReducer,
