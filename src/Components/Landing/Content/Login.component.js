@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadLogin } from "redux/thunks/Login.thunk";
+import { useHistory } from "react-router-dom";
 
 const Login = ({ setLoginModal }) => {
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const [loginData, setLoginData] = useState({
@@ -19,7 +21,7 @@ const Login = ({ setLoginModal }) => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        dispatch(loadLogin(loginData, setLoginError));
+        dispatch(loadLogin(loginData, setLoginError, history));
     };
 
     const handleOnChangeData = (e) => {

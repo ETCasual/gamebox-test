@@ -74,7 +74,7 @@ export function loadLoginUserWithToken() {
 }
 
 // LOGIN WITH EMAIL & PASSWORD
-export function loadLogin(payload, setLoginError) {
+export function loadLogin(payload, setLoginError, history) {
     return async (dispatch) => {
         try {
             const { id_token } = await loginUser(payload);
@@ -90,6 +90,7 @@ export function loadLogin(payload, setLoginError) {
                         type: LOGIN_SUCCESS,
                         payload: user,
                     });
+                    history.push("/");
                 } else {
                     const _user = await getUserAccountInfoFroyo();
                     if (_user.id) {
@@ -97,11 +98,13 @@ export function loadLogin(payload, setLoginError) {
                         if (id !== "-1")
                             localStorage.setItem("isNewUser", true);
                         const user = await userSignIn();
-                        if (user.id)
+                        if (user.id) {
                             dispatch({
                                 type: LOGIN_SUCCESS,
                                 payload: user,
                             });
+                            history.push("/");
+                        }
                     }
                 }
             }
