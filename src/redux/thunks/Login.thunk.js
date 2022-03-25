@@ -29,10 +29,13 @@ export function loadLoginUserWithToken() {
                     const id = await addUser(_user);
                     if (id !== "-1") {
                         localStorage.setItem("isNewUser", true);
-                        await userSignIn();
+                        const user = await userSignIn();
+                        dispatch({
+                            type: LOGIN_SUCCESS,
+                            payload: user,
+                        });
                     }
                 }
-                return;
             }
         } catch (error) {
             if (error.code === 7) {
@@ -71,7 +74,7 @@ export function loadLoginUserWithToken() {
 }
 
 // LOGIN WITH EMAIL & PASSWORD
-export function loadLogin(payload, setLoginError) {
+export function loadLogin(payload, setLoginError, history) {
     return async (dispatch) => {
         try {
             const { id_token } = await loginUser(payload);
@@ -87,6 +90,7 @@ export function loadLogin(payload, setLoginError) {
                         type: LOGIN_SUCCESS,
                         payload: user,
                     });
+                    history.push("/");
                 }
             }
         } catch (error) {
