@@ -38,6 +38,11 @@
             }
             .prize-subtitle {
                 font-size: $fnt-sz-12;
+                white-space: nowrap;
+                width: 20ch;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: inline-block;
             }
             .token-label {
                 color: #00c1b9;
