@@ -1,11 +1,10 @@
 import Web3 from "web3";
-import { GET_UNCLAIMED_PRIZES_LIST, LOG_OUT, SHOW_TOAST } from "redux/types";
-import {
-    getNFTClaim,
-    getUnclaimedPrizesList,
-} from "redux/services/index.service";
-import loadClaimPrize from "redux/thunks/ClaimPrize.thunk";
 import prizeDistTokenABI from "Utils/PrizeDistributorABI";
+
+import { GET_UNCLAIMED_PRIZES_LIST, LOG_OUT, SHOW_TOAST } from "redux/types";
+import loadClaimPrize from "redux/thunks/ClaimPrize.thunk";
+import loadClaimedPrizes from "redux/thunks/ClaimedPrizes.thunk";
+import { getNFTClaim, getUnclaimedPrizesList } from "redux/services/index.service";
 
 export function loadUnClaimedPrizes() {
     return async (dispatch, getState) => {
@@ -40,7 +39,7 @@ export function loadNFTClaim(winnerId) {
         const { user } = getState()?.userData;
 
         return getNFTClaim(winnerId, user.id, user.walletAddress)
-            .then(({ nftAddress, tokenId, nonce, signature }) => {
+            .then(({ nftAddress, tokenId, nonce, signature,  }) => {
                 const eth = { ...window.ethereum };
                 const web3 = new Web3(eth);
 
@@ -66,6 +65,9 @@ export function loadNFTClaim(winnerId) {
                     })
                     .on("receipt", function (receipt) {
                         console.log("receipt", receipt);
+                        // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
+                        dispatch(loadClaimedPrizes());
+                        dispatch(loadUnClaimedPrizes());
                     })
                     .on("error", function (error) {
                         console.log("error", error);

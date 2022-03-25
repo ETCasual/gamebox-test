@@ -12,6 +12,7 @@ import { defaultUserImage } from "Utils/DefaultImage";
 
 const PrizeModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
+    console.log(user);
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
@@ -29,6 +30,12 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
 
         return () => (document.body.style.overflow = "visible");
     }, [data]);
+
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
 
     return (
         <div className="winner-announcement">
@@ -92,14 +99,30 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                         <p className="prize-name my-3">
                                             {e.title}
                                         </p>
+
                                         <p className="transfer-nft-text mx-auto mb-2">
                                             Your NFT is automatically sent to
-                                            your wallet ending with …
-                                            <span>04O4</span>
+                                            your wallet ending with{" "}
+                                            <span>
+                                                {user.walletAddress.substring(
+                                                    0,
+                                                    4
+                                                )}
+                                                ....
+                                                {user.walletAddress.substring(
+                                                    user.walletAddress.length -
+                                                        1,
+                                                    user.walletAddress.length -
+                                                        5
+                                                )}
+                                            </span>
                                         </p>
-                                        <button className="connect-wallet-btn p-3">
-                                            Connect your wallet to receive NFT
-                                        </button>
+                                        {!user.walletAddress && (
+                                            <button className="connect-wallet-btn p-3">
+                                                Connect your wallet to receive
+                                                NFT
+                                            </button>
+                                        )}
                                     </>
                                 )}
                                 {user.username.toLowerCase() !==

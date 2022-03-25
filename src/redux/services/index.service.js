@@ -1259,10 +1259,10 @@ export async function getUnclaimedPrizesList(user) {
 //
 //     GET CLAIMED PRIZES LIST
 //
-export async function getClaimedPrizesList(user) {
+export async function getClaimedPrizesList(userId) {
     const token = getToken();
     const request = new ListWinnerClaimedRequest();
-    request.setUserId(user.id);
+    request.setUserId(userId);
 
     const response = await client.listWinnerClaimed(request, {
         authorization: `Bearer ${token}`,
@@ -1353,7 +1353,7 @@ export async function getConfig() {
 }
 
 //
-//     PURCHASE PROCESS
+//     PURCHASE GEMS PROCESS
 //
 export async function purchaseProcess(
     user,
@@ -1365,12 +1365,12 @@ export async function purchaseProcess(
     const token = getToken();
     const request = new BuyRequest();
     // request.setSecret(secret);
+    // request.setSubId(subId);
     request.setUserId(user.id);
     request.setItemTypeId(itemTypeId);
     request.setItemId(itemId);
     request.setPaymentId(paymentId);
     request.setPrice(price);
-    // request.setSubId(subId);
 
     const response = await client.buy(request, {
         authorization: `Bearer ${token}`,

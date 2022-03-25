@@ -37,6 +37,12 @@ const RevealCardModal = ({
             }, 500);
     }, [data]);
 
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
+
     return (
         <>
             {prizeData.length > 0 && (

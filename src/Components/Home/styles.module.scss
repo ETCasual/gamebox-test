@@ -50,6 +50,7 @@
                     top: 0;
                     right: 0;
                     z-index: 99;
+                    cursor: pointer;
                 }
             }
             .winner-wrapper {
@@ -123,6 +124,10 @@
                 max-width: 50%;
                 width: 23.375rem;
             }
+            .prev,
+            .next {
+                cursor: pointer;
+            }
             .next {
                 transform: rotate(-180deg);
             }
@@ -141,11 +146,6 @@
                     }
                 }
             }
-            // .swiper-pagination-bullet.d-flex.align-items-center.justify-content-center.swiper-pagination-bullet-active {
-            //     img {
-            //         transform: scale(1.2);
-            //     }
-            // }
         }
         .swiper-button-prev {
             color: white;

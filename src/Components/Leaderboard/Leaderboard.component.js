@@ -1,3 +1,4 @@
+import { launch } from "devtools-detector";
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -98,9 +99,9 @@ const Leaderboard = ({
             let finalTimeRef = convertSecondsToHours(
                 data?.gameInfo[0]?.endTimeStamp
             );
+
             setTimer(finalTimeRef);
 
-            // TODO:: 0d 0h 0m 3s => AT THIS POINT RUN COUNT DOWN TIMER ENDED FUNCTION
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
 
@@ -205,7 +206,7 @@ const Leaderboard = ({
 
         setModalStatus((prev) => ({ ...prev, isGameReady: true }));
 
-        const token = getToken()
+        const token = getToken();
 
         setModalStatus((prev) => ({
             ...prev,
@@ -224,6 +225,7 @@ const Leaderboard = ({
                 };
                 let response = await axios.get(url, options);
                 if (response.data) {
+                    launch();
                     setGameData(response.data);
                     let gameCount =
                         parseInt(localStorage.getItem("gameCount")) || 0;
@@ -439,7 +441,8 @@ const Leaderboard = ({
                                     ? isCurrentUser(leaderboardList[i]?.userId)
                                         ? `${
                                               leaderboardList[i]?.nickName ||
-                                              user.username || 'Player'
+                                              user.username ||
+                                              "Player"
                                           } (You)`
                                         : leaderboardList[i]?.nickName ||
                                           `Player ${leaderboardList[i]?.userId}`

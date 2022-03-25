@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import NotificationLeaderboardHistory from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
 import NotificationFriendInvitation from "Components/Notifications/FriendInvitation/FriendInvitation.component";
+import NotificationRankUp from "Components/Notifications/RankUp/RankUp.component";
 import WinnerLoader from "Components/Loader/Winner.loader";
 
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
@@ -23,13 +24,7 @@ const Index = () => {
     const [noDataLoaded, setNoDataLoaded] = useState(false);
     const [notificationData, setNotificationData] = useState([]);
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
-        useState({
-            status: false,
-            cgId: 0,
-            typeId: 0,
-            type: "",
-            createdOn: 0,
-        });
+        useState(null);
 
     let timeOutRef = useRef(null);
 
@@ -50,14 +45,14 @@ const Index = () => {
     }, [notificationData]);
 
     useEffect(() => {
-        if (isSelectedNotificationShown.typeId > 0)
-            dispatch(loadLeaderboardRanks(isSelectedNotificationShown.typeId));
-        if (isSelectedNotificationShown.cgId > 0)
-            dispatch(loadLeaderboardHistory(isSelectedNotificationShown.cgId));
+        if (isSelectedNotificationShown?.gameId > 0)
+            dispatch(loadLeaderboardRanks(isSelectedNotificationShown?.gameId));
+        if (isSelectedNotificationShown?.cgId > 0)
+            dispatch(loadLeaderboardHistory(isSelectedNotificationShown?.cgId));
     }, [
         dispatch,
-        isSelectedNotificationShown.cgId,
-        isSelectedNotificationShown.typeId,
+        isSelectedNotificationShown?.cgId,
+        isSelectedNotificationShown?.gameId,
     ]);
 
     useEffect(() => {
@@ -65,31 +60,16 @@ const Index = () => {
     }, [notificationList]);
 
     function getListExists(list) {
-        const data = list.filter(
-            (e) => e?.type !== "winner"
-        );
+        const data = list.filter((e) => e?.type !== "winner");
         if (data.length > 0) return true;
         return false;
     }
 
-    const handleOnClickSelectedNotification = (
-        cgId,
-        typeId,
-        type,
-        createdOn
-    ) => {
-        setIsSelectedNotificationShown((prev) => ({
-            ...prev,
-            status:
-                (cgId > 0 && typeId > 0 && type === "tour") ||
-                (cgId === 0 && typeId > 0 && type === "invite")
-                    ? true
-                    : false,
-            cgId,
-            typeId,
-            type,
-            createdOn,
-        }));
+    const handleOnClickSelectedNotification = (data) => {
+        setIsSelectedNotificationShown({
+            ...data,
+            status: true,
+        });
     };
 
     const handleCloseLeaderboardHistory = () => {
@@ -140,33 +120,24 @@ const Index = () => {
                                             return n.type !== "winner" ? (
                                                 <div
                                                     key={`n-${idx}`}
-                                                    className={`col-12 d-flex align-items-center notification-card px-0 mb-4`}
+                                                    className={`col-12 d-flex align-items-center notification-card px-0`}
                                                     onClick={() =>
-                                                        n?.type === "tour"
-                                                            ? handleOnClickSelectedNotification(
-                                                                  n?.cgId,
-                                                                  n?.gameId,
-                                                                  n?.type,
-                                                                  n?.createdOn,
-                                                                  idx
-                                                              )
-                                                            : n?.type ===
-                                                              "invite"
-                                                            ? handleOnClickSelectedNotification(
-                                                                  n?.cgId,
-                                                                  n?.id,
-                                                                  n?.type,
-                                                                  n?.createdOn,
-                                                                  idx
-                                                              )
-                                                            : null
+                                                        handleOnClickSelectedNotification(
+                                                            n
+                                                        )
                                                     }
                                                 >
                                                     <img
                                                         width={50}
                                                         className="prize-img"
-                                                        onError={(e) => defaultGameImage(e)}
-                                                        src={n?.picture}
+                                                        onError={(e) =>
+                                                            defaultGameImage(e)
+                                                        }
+                                                        src={
+                                                            n.type === "rankup"
+                                                                ? `${window.cdn}assets/notification_level_01.jpg`
+                                                                : n?.picture
+                                                        }
                                                         alt="icon"
                                                     />
                                                     <div className="w-100">
@@ -237,10 +208,10 @@ const Index = () => {
                             </>
                         )}
                         {/* LEADERBOARD HISTORY */}
-                        {isSelectedNotificationShown.status &&
-                            isSelectedNotificationShown.type === "tour" && (
+                        {isSelectedNotificationShown?.status &&
+                            isSelectedNotificationShown?.type === "tour" && (
                                 <NotificationLeaderboardHistory
-                                    id={isSelectedNotificationShown.cgId}
+                                    id={isSelectedNotificationShown?.cgId}
                                     notificationList={notificationList}
                                     leaderboardHistory={leaderboardHistory}
                                     leaderRuleRanks={leaderRuleRanks}
@@ -251,14 +222,27 @@ const Index = () => {
                             )}
 
                         {/* FRIEND INVITATION */}
-                        {isSelectedNotificationShown.status &&
-                            isSelectedNotificationShown.type === "invite" && (
+                        {isSelectedNotificationShown?.status &&
+                            isSelectedNotificationShown?.type === "invite" && (
                                 <NotificationFriendInvitation
-                                    id={isSelectedNotificationShown.typeId}
+                                    id={isSelectedNotificationShown?.id}
                                     createdOn={
-                                        isSelectedNotificationShown.createdOn
+                                        isSelectedNotificationShown?.createdOn
                                     }
                                     notificationList={notificationList}
+                                    setIsSelectedNotificationShown={
+                                        setIsSelectedNotificationShown
+                                    }
+                                />
+                            )}
+
+                        {/* RANK UP NOTIFICATION */}
+                        {isSelectedNotificationShown?.status &&
+                            isSelectedNotificationShown?.type === "rankup" && (
+                                <NotificationRankUp
+                                    isSelectedNotificationShown={
+                                        isSelectedNotificationShown
+                                    }
                                     setIsSelectedNotificationShown={
                                         setIsSelectedNotificationShown
                                     }

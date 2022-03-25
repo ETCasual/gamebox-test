@@ -5,7 +5,7 @@ export default function loadClaimedPrizes() {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
-        return getClaimedPrizesList(user)
+        return getClaimedPrizesList(user.id)
             .then((data) => {
                 dispatch({
                     type: GET_CLAIMED_PRIZES_LIST,
@@ -23,7 +23,7 @@ export default function loadClaimedPrizes() {
                         },
                     });
                 } else if (error.code === 13)
-                    console.log("CLAIMED PRIZES THUNK: No Result found!");
+                    console.log("CLAIMED PRIZES THUNK: No Result found!", error);
                 else console.log(error);
             });
     };

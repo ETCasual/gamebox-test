@@ -44,13 +44,25 @@ const IAP = ({ handleSelectedGemPackPayment }) => {
                                         {gemList.map((gem, i) => (
                                             <div
                                                 key={`gems-${i}`}
-                                                className={`col-6 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack`}
+                                                className={`col-6 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack ${
+                                                    gem?.status === 0
+                                                        ? "opacity-0-5"
+                                                        : ""
+                                                }`}
+                                                style={{
+                                                    cursor:
+                                                        gem?.status === 1
+                                                            ? "pointer"
+                                                            : "default",
+                                                }}
                                                 onClick={() =>
-                                                    handleSelectedGemPackPayment(
-                                                        gem.id,
-                                                        gem.price,
-                                                        gem.quantity
-                                                    )
+                                                    gem?.status === 1
+                                                        ? handleSelectedGemPackPayment(
+                                                              gem.id,
+                                                              gem.price,
+                                                              gem.quantity
+                                                          )
+                                                        : null
                                                 }
                                             >
                                                 <div className="gem-info text-center p-2">

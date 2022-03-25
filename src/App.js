@@ -1,4 +1,4 @@
-import { addListener, launch } from "devtools-detector";
+import { addListener } from "devtools-detector";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -56,7 +56,6 @@ const App = () => {
     addListener((isOpen) => {
         if (isOpen) dispatch({ type: LOG_OUT });
     });
-    launch();
 
     // FIREBASE ONMESSAGE
     onMessageListener()

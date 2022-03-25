@@ -10,6 +10,7 @@ import loadResetNotificationNumber from "redux/thunks/RestNotificationNumber.thu
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 
 import getToken from "Utils/GetToken";
+import NotificationRankUp from "Components/Notifications/RankUp/RankUp.component";
 
 const HeaderHOC = () => {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const HeaderHOC = () => {
             createdOn: 0,
         });
 
-    let token = getToken()
+    let token = getToken();
 
     useEffect(() => {
         if (user.picture) setUserImage(user.picture);
@@ -62,9 +63,7 @@ const HeaderHOC = () => {
         let _notificationData = [];
 
         notificationList?.forEach((n) => {
-            const filteredData = n.list.filter(
-                (l) => l.type !== "winner"
-            );
+            const filteredData = n.list.filter((l) => l.type !== "winner");
             _notificationData = [...filteredData];
         });
         setNotificationData(
@@ -76,47 +75,33 @@ const HeaderHOC = () => {
     }, [notificationList, notificationNumber.count]);
 
     useEffect(() => {
-        if (isSelectedNotificationShown.typeId > 0)
-            dispatch(loadLeaderboardRanks(isSelectedNotificationShown.typeId));
-        if (isSelectedNotificationShown.cgId > 0)
-            dispatch(loadLeaderboardHistory(isSelectedNotificationShown.cgId));
+        if (isSelectedNotificationShown?.gameId > 0)
+            dispatch(loadLeaderboardRanks(isSelectedNotificationShown?.gameId));
+        if (isSelectedNotificationShown?.cgId > 0)
+            dispatch(loadLeaderboardHistory(isSelectedNotificationShown?.cgId));
     }, [
         dispatch,
-        isSelectedNotificationShown.cgId,
-        isSelectedNotificationShown.typeId,
+        isSelectedNotificationShown?.cgId,
+        isSelectedNotificationShown?.gameId,
     ]);
 
     // ON CLICK NOTIFICATION ICON
     const handleOnClickNotificationIcon = () => {
         let _notificationData = [];
         notificationList?.forEach((n) => {
-            const filteredData = n.list.filter(
-                (l) => l.type !== "winner" 
-            );
+            const filteredData = n.list.filter((l) => l.type !== "winner");
             _notificationData = [...filteredData];
         });
         setNotificationData(_notificationData?.slice(0, 5));
         setIsNotificationShown(true);
     };
 
-    const handleNotificationLeaderboardHistory = (
-        cgId,
-        typeId,
-        type,
-        createdOn
-    ) => {
+    const handleNotificationLeaderboardHistory = (data) => {
         handleNotificationPanelBackButton();
         setIsSelectedNotificationShown((prev) => ({
             ...prev,
-            status:
-                (cgId > 0 && typeId > 0 && type === "tour") ||
-                (cgId === 0 && typeId > 0 && type === "invite")
-                    ? true
-                    : false,
-            cgId,
-            typeId,
-            type,
-            createdOn,
+            ...data,
+            status: true,
         }));
     };
 
@@ -133,7 +118,7 @@ const HeaderHOC = () => {
 
     return (
         <>
-            {token !== null && user.id  && (
+            {token !== null && user.id && (
                 <Header
                     userImage={userImage}
                     userGems={userGems}
@@ -151,10 +136,10 @@ const HeaderHOC = () => {
                 />
             )}
             {/* LEADERBOARD HISTORY */}
-            {isSelectedNotificationShown.status &&
-                isSelectedNotificationShown.type === "tour" && (
+            {isSelectedNotificationShown?.status &&
+                isSelectedNotificationShown?.type === "tour" && (
                     <NotificationLeaderboardHistory
-                        id={isSelectedNotificationShown.cgId}
+                        id={isSelectedNotificationShown?.cgId}
                         notificationList={notificationList}
                         leaderboardHistory={leaderboardHistory}
                         leaderRuleRanks={leaderRuleRanks}
@@ -163,12 +148,25 @@ const HeaderHOC = () => {
                         }
                     />
                 )}
-            {isSelectedNotificationShown.status &&
-                isSelectedNotificationShown.type === "invite" && (
+            {isSelectedNotificationShown?.status &&
+                isSelectedNotificationShown?.type === "invite" && (
                     <NotificationFriendInvitation
-                        id={isSelectedNotificationShown.typeId}
-                        createdOn={isSelectedNotificationShown.createdOn}
+                        id={isSelectedNotificationShown?.id}
+                        createdOn={isSelectedNotificationShown?.createdOn}
                         notificationList={notificationList}
+                        setIsSelectedNotificationShown={
+                            setIsSelectedNotificationShown
+                        }
+                    />
+                )}
+
+            {/* RANK UP NOTIFICATION */}
+            {isSelectedNotificationShown?.status &&
+                isSelectedNotificationShown?.type === "rankup" && (
+                    <NotificationRankUp
+                        isSelectedNotificationShown={
+                            isSelectedNotificationShown
+                        }
                         setIsSelectedNotificationShown={
                             setIsSelectedNotificationShown
                         }

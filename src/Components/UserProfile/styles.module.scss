@@ -2,9 +2,14 @@
 .close-button {
     position: absolute;
     top: -15px;
-    right: -15px;
-    width: 36px;
-    height: 36px;
+    right: -7px;
+    width: 30px;
+    height: 30px;
+    @include media-min($md) {
+        right: 5rem;
+        width: 36px;
+        height: 36px;
+    }
     border-radius: 100%;
     box-shadow: 0px 10px 18px #00000029;
 }
@@ -26,24 +31,24 @@
     align-items: center;
     justify-content: center;
     .wrapper {
-        // background-color: white;
         border-radius: 20px;
         color: #868686;
         font-size: 0.875rem;
         min-height: 65vh;
         .close-button {
-            right: 0;
             z-index: 3;
         }
         .prize-img {
-            width: 85%;
-            background: #0b0b0b;
-            img {                
+            width: 90%;
+            @include media-min($md) {
+                width: 60%;
+            }
+            img {
                 border-top-right-radius: 10px;
                 border-top-left-radius: 10px;
-                min-height: 13em;
-                @media only screen and (min-width: 360px) {
-                    min-height: 16.438em;
+                min-height: 10em;
+                @include media-min($xs) {
+                    min-height: 13em;
                 }
                 width: 100%;
                 object-fit: cover;
@@ -51,10 +56,9 @@
         }
         .prize-info {
             position: relative;
-            background: #1D1D1D 0% 0% no-repeat padding-box;
-            box-shadow: inset 0px 3px 6px #0000000F;
+            background: #1d1d1d 0% 0% no-repeat padding-box;
+            box-shadow: inset 0px 3px 6px #0000000f;
             border-radius: 5px;
-
             .overlay {
                 width: 100%;
                 height: 100%;
@@ -97,17 +101,17 @@
                     -webkit-backdrop-filter: blur(4px);
                 }
                 font-size: 0.5rem;
-                @media only screen and (min-width: 360px) {
+                @include media-min($xs) {
                     font-size: 0.625rem;
                 }
             }
             .prize-text {
                 width: 100%;
-                color: #F8BA29;
+                color: #f8ba29;
                 .title {
                     font-size: $fnt-sz-14;
                     font-weight: $fnt-wgt-700;
-                    // @media only screen and (min-width: 360px) {
+                    // @include media-min($sm){
                     //     font-size: 0.875rem;
                     // }
                     // @media only screen and (min-width: 768px) {
@@ -135,9 +139,14 @@
             }
         }
         .claim-info {
-            background: linear-gradient(141deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+            background: linear-gradient(141deg, #302f2f 0%, #0b0b0b 100%);
             box-shadow: 0px 3px 6px #00000029;
             border-radius: 10px;
+            width: 100%;
+            @include media-min($md) {
+                width: 80%;
+            }
+            margin: 0 auto;
             .claimed-date {
                 .date {
                     font-size: $fnt-sz-12;

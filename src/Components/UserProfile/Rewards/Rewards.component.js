@@ -23,18 +23,26 @@ const Rewards = () => {
         useState(false);
     const [claimedPrizeDetails, setClaimedPrizeDetails] = useState("");
 
-    const getClaimedDate = (claimedOn) => {
+    const getClaimedDate = (createdOn) => {
         let playerTimeZone = (new Date().getTimezoneOffset() / 60) * -1;
         let claimedTimeZone =
-            (new Date(claimedOn * 1000).getTimezoneOffset() / 60) * -1;
+            (new Date(createdOn * 1000).getTimezoneOffset() / 60) * -1;
 
         if (playerTimeZone !== claimedTimeZone) {
             let correctDateTime = new Date(
-                (claimedOn + playerTimeZone * 60 * 60) * 1000
+                (createdOn + playerTimeZone * 60 * 60) * 1000
             );
-            return correctDateTime.toDateString();
+            return correctDateTime.toLocaleString("default", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+            });
         }
-        return new Date(claimedOn * 1000).toDateString();
+        return new Date(createdOn * 1000).toLocaleString("default", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+        });
     };
 
     const getRemainingDaysToClaim = (claimDate) => {
@@ -56,6 +64,11 @@ const Rewards = () => {
 
     const handleNFTClaim = (winnerId) => {
         dispatch(loadNFTClaim(winnerId));
+    };
+
+    const handleClaimedInfo = (data) => {
+        setClaimedPrizeDetails(data);
+        setIsClaimedDetailPopupOpen(true);
     };
 
     return (
@@ -122,9 +135,7 @@ const Rewards = () => {
                                                     }}
                                                     key={`prizes-${i}`}
                                                     onClick={() =>
-                                                        handleNFTClaim(
-                                                            data.id
-                                                        )
+                                                        handleNFTClaim(data.id)
                                                     }
                                                 >
                                                     <div className="card-wrapper d-flex">
@@ -136,7 +147,7 @@ const Rewards = () => {
                                                                 }}
                                                             />
                                                         </div>
-                                                        <div className="col py-2 px-1 mt-1">
+                                                        <div className="col py-2 pl-2 pr-1 mt-1">
                                                             <div className="prize-text">
                                                                 <div className="card-title">
                                                                     {
@@ -185,19 +196,22 @@ const Rewards = () => {
                                         <div className="row">
                                             {claimedPrizes?.map((data, i) => (
                                                 <div
-                                                    className={`col-12 col-md-6 mb-3 prize claimed pl-2 pr-1`}
+                                                    className={`col-12 col-md-6 mb-3 pl-2 pr-1 prize ${
+                                                        data.status === 2
+                                                            ? "claimed"
+                                                            : ""
+                                                    }`}
                                                     key={`prizes-${i}`}
                                                 >
                                                     <div
                                                         className="card-wrapper d-flex"
-                                                        onClick={() => {
-                                                            setClaimedPrizeDetails(
-                                                                data
-                                                            );
-                                                            setIsClaimedDetailPopupOpen(
-                                                                true
-                                                            );
-                                                        }}
+                                                        onClick={() =>
+                                                            data.status === 2
+                                                                ? handleClaimedInfo(
+                                                                      data
+                                                                  )
+                                                                : null
+                                                        }
                                                     >
                                                         <div className="col-auto p-2">
                                                             <div
@@ -207,7 +221,7 @@ const Rewards = () => {
                                                                 }}
                                                             ></div>
                                                         </div>
-                                                        <div className="col py-2 px-0 mt-1">
+                                                        <div className="col py-2 pl-2 pr-1 mt-1">
                                                             <div className="prize-text">
                                                                 <div className="card-title">
                                                                     {
@@ -222,9 +236,12 @@ const Rewards = () => {
                                                             </div>
 
                                                             <div className="prize-claimed py-2">
-                                                                {getClaimedDate(
-                                                                    data.claimedOn
-                                                                )}
+                                                                {data.status ===
+                                                                2
+                                                                    ? getClaimedDate(
+                                                                          data.createdOn
+                                                                      )
+                                                                    : "Pending"}
                                                             </div>
                                                         </div>
                                                     </div>

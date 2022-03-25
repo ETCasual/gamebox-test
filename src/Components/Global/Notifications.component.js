@@ -39,98 +39,91 @@ const Notification = ({
 
                 {notificationData.length > 0 && (
                     <div className="notification-card-wrapper py-3 position-relative">
-                        {notificationData?.map((n, i) => (
-                            <div
-                                key={`notification-${i}`}
-                                className={`col-12 notification-card px-0 ${
-                                    notificationData.length - 1 !== i
-                                        ? "mb-4"
-                                        : ""
-                                }`}
-                                style={{
-                                    cursor:
-                                        n?.type === "tour" ||
-                                        n?.type === "invite"
-                                            ? "pointer"
-                                            : "default",
-                                }}
-                                onClick={() =>
-                                    n?.type === "tour"
-                                        ? handleNotificationLeaderboardHistory(
-                                              n?.cgId,
-                                              n?.gameId,
-                                              n?.type,
-                                              n?.createdOn
-                                          )
-                                        : n?.type === "invite"
-                                        ? handleNotificationLeaderboardHistory(
-                                              n?.cgId,
-                                              n?.id,
-                                              n?.type,
-                                              n?.createdOn
-                                          )
-                                        : null
-                                }
-                            >
-                                <div className="col-12 d-flex align-items-center justify-content-between">
-                                    <img
-                                        width={50}
-                                        className="prize-img"
-                                        onError={(e) => defaultGameImage(e)}
-                                        src={n?.picture}
-                                        alt="icon"
-                                    />
-                                    <div className="w-100">
-                                        {/* PRIZE INFO */}
-                                        <div className="col-12 px-2 d-flex align-items-center justify-content-between prize-info mb-2">
-                                            <p className="mb-0 d-flex align-items-center">
-                                                {n?.title}
-                                            </p>
-                                            <p className="mb-0 d-flex align-items-center">
-                                                {new Date(
-                                                    n?.createdOn * 1000
-                                                )?.toDateString()}{" "}
-                                                |{" "}
-                                                {new Date(n?.createdOn * 1000)
-                                                    ?.toLocaleTimeString(
-                                                        "en-us",
-                                                        {
-                                                            hour: "2-digit",
-                                                            minute: "2-digit",
-                                                        }
-                                                    )
-                                                    ?.replace("AM", "")
-                                                    ?.replace("PM", "")}
-                                            </p>
-                                        </div>
-                                        {/* TOURNAMENT OR INVITE INFO */}
-                                        <div
-                                            className={`col-12 px-2 d-flex align-items-center justify-content-between ${
-                                                n?.type === "tour"
-                                                    ? "game-info"
-                                                    : "invite-info"
-                                            }`}
-                                        >
-                                            <p className="mb-0 d-flex align-items-center">
-                                                {n?.description}
-                                            </p>
-                                            <p
-                                                className={`mb-0 d-flex align-items-center ${
-                                                    n?.type === "tour"
-                                                        ? "tickets"
-                                                        : "gems"
-                                                }`}
-                                            >
-                                                +
-                                                {n?.type === "tour"
-                                                    ? `${n?.tickets} tickets`
-                                                    : `${n?.gem} gems`}
-                                            </p>
+                        {notificationData?.map((n, i) => {
+                            return (
+                                n.type !== "winner" && (
+                                    <div
+                                        key={`notification-${i}`}
+                                        className={`col-12 notification-card px-0 ${
+                                            notificationData.length - 1 !== i
+                                                ? "mb-4"
+                                                : ""
+                                        }`}
+                                        onClick={() =>
+                                            handleNotificationLeaderboardHistory(
+                                                n
+                                            )
+                                        }
+                                    >
+                                        <div className="col-12 d-flex align-items-center justify-content-between">
+                                            <img
+                                                width={50}
+                                                className="prize-img"
+                                                onError={(e) =>
+                                                    defaultGameImage(e)
+                                                }
+                                                src={
+                                                    n.type === "rankup"
+                                                        ? `${window.cdn}assets/notification_level_01.jpg`
+                                                        : n?.picture
+                                                }
+                                                alt="icon"
+                                            />
+                                            <div className="w-100">
+                                                {/* PRIZE INFO */}
+                                                <div className="col-12 px-2 d-flex align-items-center justify-content-between prize-info mb-2">
+                                                    <p className="mb-0 d-flex align-items-center">
+                                                        {n?.title}
+                                                    </p>
+                                                    <p className="mb-0 d-flex align-items-center">
+                                                        {new Date(
+                                                            n?.createdOn * 1000
+                                                        )?.toDateString()}{" "}
+                                                        |{" "}
+                                                        {new Date(
+                                                            n?.createdOn * 1000
+                                                        )
+                                                            ?.toLocaleTimeString(
+                                                                "en-us",
+                                                                {
+                                                                    hour: "2-digit",
+                                                                    minute: "2-digit",
+                                                                }
+                                                            )
+                                                            ?.replace("AM", "")
+                                                            ?.replace("PM", "")}
+                                                    </p>
+                                                </div>
+                                                {/* TOURNAMENT OR INVITE INFO */}
+                                                <div
+                                                    className={`col-12 px-2 d-flex align-items-center justify-content-between ${
+                                                        n?.type === "tour"
+                                                            ? "game-info"
+                                                            : "invite-info"
+                                                    }`}
+                                                >
+                                                    <p className="mb-0 d-flex align-items-center">
+                                                        {n?.description}
+                                                    </p>
+                                                    <p
+                                                        className={`mb-0 d-flex align-items-center ${
+                                                            n?.type === "tour"
+                                                                ? "tickets"
+                                                                : "gems"
+                                                        }`}
+                                                    >
+                                                        +
+                                                        {n?.type === "tour"
+                                                            ? `${n?.tickets} tickets`
+                                                            : `${n?.gem} gems`}
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
+                                )
+                            );
+                        })}
                     </div>
                 )}
             </div>

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
 
 import IAPItems from "Components/IAP/IAPItems/IAPItems.component";
 import PurchaseWrapper from "Components/IAP/IAPPurchasingStatus/PurchaseWrapper.component";
 import PurchaseContent from "Components/IAP/IAPPurchasingStatus/PurchaseContent.component";
-import IAPPaymentTypeModal from "Components/IAP/IAPPaymentTypeModal/IAPPaymentTypeModal.component";
-import CardPayment from "Components/IAP/CardMethod/CardPayment.component";
+// import IAPPaymentTypeModal from "Components/IAP/IAPPaymentTypeModal/IAPPaymentTypeModal.component";
+// import CardPayment from "Components/IAP/CardMethod/CardPayment.component";
 
 import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
@@ -17,9 +17,9 @@ import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
 import tokenABI from "Utils/TokenABI";
 
 const Index = () => {
-    const [stripePromise] = useState(
-        loadStripe(process.env.REACT_APP_STRIPE_KEY)
-    );
+    // const [stripePromise] = useState(
+    //     loadStripe(process.env.REACT_APP_STRIPE_KEY)
+    // );
 
     const { user } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
@@ -30,8 +30,8 @@ const Index = () => {
         quantity: null,
     });
 
-    const [paymentTypeModal, setPaymentTypeModal] = useState(false);
-    const [cardPaymentModal, setCardPaymentModal] = useState(false);
+    // const [paymentTypeModal, setPaymentTypeModal] = useState(false);
+    // const [cardPaymentModal, setCardPaymentModal] = useState(false);
     const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
         noWallet: user.walletAddress ? false : true,
@@ -42,20 +42,11 @@ const Index = () => {
         isFail: false,
     });
 
-    // OPEN PAYMENT TYPE MODA AND SET SELECTED PRODUCT INFO INTO STATE
-    const handleSelectedGemPackPayment = (id, price, quantity) => {
-        setPaymentTypeModal(true);
-        setProductInfo({
-            id,
-            price,
-            quantity,
-        });
-    };
-
     const handleFroyoPurchasingStatus = () => {
-        setPaymentTypeModal(false);
+        // setPaymentTypeModal(false);
         setPurchasingStatusModal(true);
-        if (!user.walletAddress) {
+        console.log(user.walletAddress)
+        if (user.walletAddress.length <= 0) {
             setPurchasingStatus((prev) => ({ ...prev, noWallet: true }));
             return;
         } else if (
@@ -77,9 +68,20 @@ const Index = () => {
         }
     };
 
-    const handleCardPaymentModal = () => {
-        setPaymentTypeModal(false);
-        setCardPaymentModal(true);
+    // const handleCardPaymentModal = () => {
+    //     setPaymentTypeModal(false);
+    //     setCardPaymentModal(true);
+    // };
+
+    // OPEN PAYMENT TYPE MODA AND SET SELECTED PRODUCT INFO INTO STATE
+    const handleSelectedGemPackPayment = (id, price, quantity) => {
+        // setPaymentTypeModal(true);
+        setProductInfo({
+            id,
+            price,
+            quantity,
+        });
+        handleFroyoPurchasingStatus();
     };
 
     const handleModalCloseButton = () => {
@@ -207,21 +209,21 @@ const Index = () => {
             />
 
             {/* PAYMENT METHOD SELECTION MODAL */}
-            {paymentTypeModal && (
+            {/* {paymentTypeModal && (
                 <IAPPaymentTypeModal
                     handleFroyoPurchasingStatus={handleFroyoPurchasingStatus}
                     handleCardPaymentModal={handleCardPaymentModal}
                 />
-            )}
+            )} */}
 
-            {cardPaymentModal && (
+            {/* {cardPaymentModal && (
                 <Elements stripe={stripePromise}>
                     <CardPayment
                         productInfo={productInfo}
                         // handleBackButton={handlePaymentBackButton}
                     />
                 </Elements>
-            )}
+            )} */}
 
             {/* PURCHASING STATUS MODAL */}
             {purchasingStatusModal && (

@@ -1,5 +1,9 @@
+import { useSelector } from "react-redux";
+
 const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
-    const date = new Date(data.claimedOn * 1000);
+    const { user } = useSelector((state) => state.userData);
+
+    const date = new Date(data.createdOn * 1000);
     const dateMonthYear = date.toLocaleString("default", {
         day: "2-digit",
         month: "long",
@@ -31,24 +35,30 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                             <div className="claim-info p-3 text-center">
                                 <div className="prize-info">
                                     <div className="prize-text m-2 p-3">
-                                        <p className="title mb-1">
+                                        <div className="content">
+                                            Token ID: {data?.prizeSubtitle}
+                                        </div>
+                                        <p className="title my-2">
                                             {data.prizeTitle}
                                         </p>
-                                        {/* <p className="subtitle mb-0">
-                                            {data.prizeSubtitle}
-                                        </p> */}
                                         <div className="content">
-                                            PrizeID: {data?.prizeContent}
+                                            {data?.prizeSubtitle}
                                         </div>
                                     </div>
                                 </div>
 
-
                                 {/*  RECEIVER INFO */}
                                 <div className="delivery-address mt-4">
-                                    <p className="title mb-2">NFT delivered to wallet address</p>
+                                    <p className="title mb-2">
+                                        NFT delivered to wallet address
+                                    </p>
                                     <p className="wallet-address">
-                                        {data.userNickName}
+                                        {user.walletAddress.substring(0, 4)}{" "}
+                                        ....{" "}
+                                        {user.walletAddress.substring(
+                                            user.walletAddress.length - 5,
+                                            user.walletAddress.length - 1
+                                        )}
                                     </p>
                                 </div>
 
@@ -62,7 +72,6 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                         </span>
                                     </p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
