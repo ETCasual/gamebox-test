@@ -28134,7 +28134,8 @@ proto.api.gamebox.WinnerDetail.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 21, 0),
     shipTracking: jspb.Message.getFieldWithDefault(msg, 22, ""),
     deliveryCompany: jspb.Message.getFieldWithDefault(msg, 23, ""),
-    totalPlayer: jspb.Message.getFieldWithDefault(msg, 24, 0)
+    transactionHash: jspb.Message.getFieldWithDefault(msg, 24, ""),
+    totalPlayer: jspb.Message.getFieldWithDefault(msg, 25, 0)
   };
 
   if (includeInstance) {
@@ -28264,6 +28265,10 @@ proto.api.gamebox.WinnerDetail.deserializeBinaryFromReader = function(msg, reade
       msg.setDeliveryCompany(value);
       break;
     case 24:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTransactionHash(value);
+      break;
+    case 25:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setTotalPlayer(value);
       break;
@@ -28457,10 +28462,17 @@ proto.api.gamebox.WinnerDetail.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = message.getTransactionHash();
+  if (f.length > 0) {
+    writer.writeString(
+      24,
+      f
+    );
+  }
   f = message.getTotalPlayer();
   if (f !== 0) {
     writer.writeInt64(
-      24,
+      25,
       f
     );
   }
@@ -28813,17 +28825,32 @@ proto.api.gamebox.WinnerDetail.prototype.setDeliveryCompany = function(value) {
 
 
 /**
- * optional int64 total_player = 24;
+ * optional string transaction_hash = 24;
+ * @return {string}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getTransactionHash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 24, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.WinnerDetail.prototype.setTransactionHash = function(value) {
+  jspb.Message.setProto3StringField(this, 24, value);
+};
+
+
+/**
+ * optional int64 total_player = 25;
  * @return {number}
  */
 proto.api.gamebox.WinnerDetail.prototype.getTotalPlayer = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 24, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 25, 0));
 };
 
 
 /** @param {number} value */
 proto.api.gamebox.WinnerDetail.prototype.setTotalPlayer = function(value) {
-  jspb.Message.setProto3IntField(this, 24, value);
+  jspb.Message.setProto3IntField(this, 25, value);
 };
 
 
