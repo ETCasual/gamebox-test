@@ -62,7 +62,7 @@ const Header = ({
     return (
         <>
             <div className="navbar-top d-flex flex-column justify-content-center">
-                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto d-flex align-items-center justify-content-between">
+                <div className="col-12 px-1 px-lg-3 d-flex align-items-center justify-content-between">
                     {/* LOGO & NAV LINKS */}
                     <div className="left-items d-none d-md-flex align-items-center justify-content-start">
                         <Link
@@ -77,7 +77,7 @@ const Header = ({
                             />
                         </Link>
 
-                        <div className="pl-3 d-flex nav-items">
+                        <div className="d-flex nav-items">
                             <NavLink
                                 onClick={handleHomeNavLink}
                                 exact

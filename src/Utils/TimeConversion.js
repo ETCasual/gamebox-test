@@ -13,7 +13,7 @@ const convertSecondsToHours = (timestamp) => {
 
     if (days < -3 || hours < -3 || minutes < -3 || seconds < -3)
         window.location.reload(true);
-    else if (days === 0 && hours === 0 && minutes === 0 && seconds === 3)
+    else if (days === 0 && hours === 0 && minutes === 0 && seconds === 0)
         return "Ended";
     else if (days < 0 || hours < 0 || minutes < 0 || seconds < 0)
         return "0d 0h 0m 0s";
