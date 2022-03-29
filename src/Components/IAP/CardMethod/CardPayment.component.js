@@ -293,6 +293,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
             {paymentProcessModal && (
                 <PurchaseWrapper>
                     <PurchaseContent
+                        type="credit"
                         productInfo={productInfo}
                         purchasingStatus={purchasingStatus}
                         handleModalCloseButton={handleModalCloseButton}

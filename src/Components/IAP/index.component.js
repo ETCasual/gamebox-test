@@ -277,6 +277,7 @@ const Index = () => {
             {purchasingStatusModal && (
                 <PurchaseWrapper>
                     <PurchaseContent
+                        type="froyo"
                         productInfo={productInfo}
                         purchasingStatus={purchasingStatus}
                         handleModalCloseButton={handleModalCloseButton}

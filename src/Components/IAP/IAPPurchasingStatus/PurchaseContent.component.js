@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import GenericLoader from "Components/Loader/Generic.loader";
 
 const PurchaseContent = ({
+    type,
     productInfo,
     purchasingStatus,
     handleModalCloseButton,
@@ -87,9 +88,10 @@ const PurchaseContent = ({
                     )}
                     {!purchasingStatus.processing && (
                         <div className="btn-wrapper w-100 d-flex align-items-center justify-content-between mt-3">
-                            {purchasingStatus.beforePurchaseConfirmation &&
-                                purchasingStatus.insufficentToken &&
-                                purchasingStatus.noWallet && (
+                            {type === "froyo" &&
+                                (purchasingStatus.beforePurchaseConfirmation ||
+                                    purchasingStatus.insufficentToken ||
+                                    purchasingStatus.noWallet) && (
                                     <button
                                         className="cancel-button"
                                         onClick={handleModalCloseButton}
