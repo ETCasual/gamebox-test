@@ -2,31 +2,37 @@
 #payment-panel {
     position: fixed;
     top: 0;
-    z-index: 3;
+    z-index: 4;
+    overflow-x: hidden;
+    overflow-y: scroll;
     height: 100vh;
     width: 100vw;
-    background: radial-gradient(
-        closest-side at 50% 70%,
-        #fcfcfc 0%,
-        #ededed 100%
-    );
-    h4 {
-        font-family: Ilisarniq-Bold;
-    }
+    background: linear-gradient(180deg, #121212 0%, #000000 100%);
     .total-title {
-        font-size: 14px;
+        font-size: $fnt-sz-14;
         color: #808080;
     }
+    h4 {
+        font-size: $fnt-sz-20;
+    }
     .product {
-        background: #e5e5e5;
-        border-radius: 10px;
+        background: #1f1e1e;
+        border: 1px solid #242424;
+        border-radius: 5px;
         .product-title {
-            font-size: 14px;
+            font-size: $fnt-sz-14;
             color: #808080;
         }
         .product-price {
-            font-size: 20px;
-            font-family: Ilisarniq-Bold;
+            font-size: $fnt-sz-20;
+        }
+    }
+    .estimation {
+        font-size: $fnt-sz-14;
+        color: #868686;
+        span {
+            color: white;
+            font-weight: $fnt-wgt-600;
         }
     }
     .line {
@@ -36,8 +42,11 @@
     }
     .payment-wrapper {
         width: 100%;
+        h4 {
+            font-size: $fnt-sz-20;
+        }
         label {
-            font-size: 14px;
+            font-size: $fnt-sz-14;
             color: #868686;
         }
         input,
@@ -45,12 +54,12 @@
             display: block;
             max-width: 100%;
             width: 100%;
-            font-size: 1em;
+            font-size: $fnt-sz-14;
             outline: 0;
             padding: 24px 14px;
             border-radius: 10px;
-            border: 1px solid #bfbfbf;
-            background: #f7f5f5;
+            border: 1px solid #242424;
+            background: white;
         }
         .card-number {
             .StripeElement {
@@ -97,19 +106,18 @@
             line-height: 40px;
             letter-spacing: 0.025em;
             padding: 0 14px;
-            width: 100%;
-            min-height: 3em;
-            margin: 3em 0 3em 0;
-            @media only screen and (min-width: 768px) {
-                margin: 3em 0 0 0;
-            }
-            font-size: 20px;
-            font-family: Ilisarniq-Bold;
-            background: linear-gradient(262deg, #fdc43d 0%, #efa500 100%);
-            border-radius: 20px;
-            .price {
-                font-family: Ilisarniq-Bold;
-            }
+            width: 18rem;
+            min-height: 4rem;
+            margin: 3rem 0 0 0;
+            font-size: $fnt-sz-14;
+            color: white;
+            background: #ff3399;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 5px;
+        }
+        .agreement {
+            color: #868686;
+            width: 55ch;
         }
     }
 }

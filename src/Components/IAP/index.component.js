@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
-// import { loadStripe } from "@stripe/stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
-import IAPItems from "Components/IAP/IAPItems/IAPItems.component";
+import IAPFroyoGemPacks from "Components/IAP/IAPItems/IAPFroyoGemPacks.component";
+import IAPCardGemPacks from "Components/IAP/IAPItems/IAPCardGemPacks.component";
 import PurchaseWrapper from "Components/IAP/IAPPurchasingStatus/PurchaseWrapper.component";
 import PurchaseContent from "Components/IAP/IAPPurchasingStatus/PurchaseContent.component";
-// import IAPPaymentTypeModal from "Components/IAP/IAPPaymentTypeModal/IAPPaymentTypeModal.component";
-// import CardPayment from "Components/IAP/CardMethod/CardPayment.component";
+import CardPayment from "Components/IAP/CardMethod/CardPayment.component";
 
 import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
@@ -17,9 +17,9 @@ import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
 import tokenABI from "Utils/TokenABI";
 
 const Index = () => {
-    // const [stripePromise] = useState(
-    //     loadStripe(process.env.REACT_APP_STRIPE_KEY)
-    // );
+    const [stripePromise] = useState(
+        loadStripe(process.env.REACT_APP_STRIPE_KEY)
+    );
 
     const { user } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const Index = () => {
         id: null,
         price: null,
         quantity: null,
+        tab: "froyo",
     });
 
-    // const [paymentTypeModal, setPaymentTypeModal] = useState(false);
-    // const [cardPaymentModal, setCardPaymentModal] = useState(false);
+    const [cardPaymentModal, setCardPaymentModal] = useState(false);
     const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
         noWallet: user.walletAddress ? false : true,
@@ -42,46 +42,55 @@ const Index = () => {
         isFail: false,
     });
 
-    const handleFroyoPurchasingStatus = () => {
-        // setPaymentTypeModal(false);
-        setPurchasingStatusModal(true);
-        console.log(user.walletAddress)
-        if (user.walletAddress.length <= 0) {
-            setPurchasingStatus((prev) => ({ ...prev, noWallet: true }));
-            return;
-        } else if (
-            user.walletAddress &&
-            user.tokenBalance < productInfo.price
-        ) {
-            setPurchasingStatus((prev) => ({
-                ...prev,
-                insufficentToken: true,
-            }));
-        } else if (
-            user.walletAddress &&
-            user.tokenBalance >= productInfo.price
-        ) {
-            setPurchasingStatus((prev) => ({
-                ...prev,
-                beforePurchaseConfirmation: true,
-            }));
+    // SET SELECTED TAB
+    const handleSelectedTab = (tab) => {
+        setProductInfo((prev) => ({ ...prev, tab }));
+    };
+
+    // SET SELECTED PRODUCT INFO &
+    const handleSelectedGemPackPayment = (id, price, quantity) => {
+        setProductInfo((prev) => ({ ...prev, id, price, quantity }));
+
+        if (productInfo.tab === "froyo") {
+            if (
+                user?.walletAddress === null ||
+                user?.walletAddress?.length <= 0
+            ) {
+                setPurchasingStatus({
+                    beforePurchaseConfirmation: false,
+                    insufficentToken: false,
+                    processing: false,
+                    isSuccess: false,
+                    isFail: false,
+                    noWallet: true,
+                });
+            } else if (user.walletAddress && user.tokenBalance < price) {
+                setPurchasingStatus({
+                    noWallet: false,
+                    beforePurchaseConfirmation: false,
+                    processing: false,
+                    isSuccess: false,
+                    isFail: false,
+                    insufficentToken: true,
+                });
+            } else if (user.walletAddress && user.tokenBalance >= price) {
+                setPurchasingStatus({
+                    noWallet: false,
+                    insufficentToken: false,
+                    processing: false,
+                    isSuccess: false,
+                    isFail: false,
+                    beforePurchaseConfirmation: true,
+                });
+            }
+            setPurchasingStatusModal(true);
+        } else if (productInfo.tab === "card") {
+            setCardPaymentModal(true);
         }
     };
 
-    // const handleCardPaymentModal = () => {
-    //     setPaymentTypeModal(false);
-    //     setCardPaymentModal(true);
-    // };
-
-    // OPEN PAYMENT TYPE MODA AND SET SELECTED PRODUCT INFO INTO STATE
-    const handleSelectedGemPackPayment = (id, price, quantity) => {
-        // setPaymentTypeModal(true);
-        setProductInfo({
-            id,
-            price,
-            quantity,
-        });
-        handleFroyoPurchasingStatus();
+    const handleCardPaymentBackButton = () => {
+        setCardPaymentModal(false);
     };
 
     const handleModalCloseButton = () => {
@@ -203,27 +212,67 @@ const Index = () => {
 
     return (
         <>
-            {/* SUBSCRIPTION & GEMS */}
-            <IAPItems
-                handleSelectedGemPackPayment={handleSelectedGemPackPayment}
-            />
+            <section id="iap-items">
+                <div className="container-fluid">
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                            <p className="title mb-4 ml-2 d-flex align-items-end">
+                                Purchase Gems
+                            </p>
+                            {/* TABS */}
+                            <ul className="list-unstyled mb-0 d-flex align-items-center justify-content-start tabs">
+                                <li
+                                    className={`${
+                                        productInfo.tab === "froyo"
+                                            ? "active"
+                                            : ""
+                                    } p-3 froyo`}
+                                    onClick={() => handleSelectedTab("froyo")}
+                                >
+                                    Pay using Froyo Tokens
+                                </li>
+                                <li
+                                    className={`${
+                                        productInfo.tab === "card"
+                                            ? "active"
+                                            : ""
+                                    } p-3 credit`}
+                                    onClick={() => handleSelectedTab("card")}
+                                >
+                                    Pay using Credit Card
+                                </li>
+                            </ul>
+                            <div className="gems-wrapper px-3 pt-3">
+                                {/* FROYO TOKEN PAYMENT GEMS */}
+                                {productInfo.tab === "froyo" && (
+                                    <IAPFroyoGemPacks
+                                        handleSelectedGemPackPayment={
+                                            handleSelectedGemPackPayment
+                                        }
+                                    />
+                                )}
+                                {/* CREDIT/DEBIT CARD PAYMENT GEMS */}
+                                {productInfo.tab === "card" && (
+                                    <IAPCardGemPacks
+                                        handleSelectedGemPackPayment={
+                                            handleSelectedGemPackPayment
+                                        }
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            {/* PAYMENT METHOD SELECTION MODAL */}
-            {/* {paymentTypeModal && (
-                <IAPPaymentTypeModal
-                    handleFroyoPurchasingStatus={handleFroyoPurchasingStatus}
-                    handleCardPaymentModal={handleCardPaymentModal}
-                />
-            )} */}
-
-            {/* {cardPaymentModal && (
+            {cardPaymentModal && (
                 <Elements stripe={stripePromise}>
                     <CardPayment
                         productInfo={productInfo}
-                        // handleBackButton={handlePaymentBackButton}
+                        handleBackButton={handleCardPaymentBackButton}
                     />
                 </Elements>
-            )} */}
+            )}
 
             {/* PURCHASING STATUS MODAL */}
             {purchasingStatusModal && (

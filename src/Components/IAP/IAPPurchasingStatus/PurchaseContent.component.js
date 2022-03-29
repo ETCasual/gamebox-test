@@ -87,12 +87,16 @@ const PurchaseContent = ({
                     )}
                     {!purchasingStatus.processing && (
                         <div className="btn-wrapper w-100 d-flex align-items-center justify-content-between mt-3">
-                            <button
-                                className="cancel-button"
-                                onClick={handleModalCloseButton}
-                            >
-                                Cancel
-                            </button>
+                            {purchasingStatus.beforePurchaseConfirmation &&
+                                purchasingStatus.insufficentToken &&
+                                purchasingStatus.noWallet && (
+                                    <button
+                                        className="cancel-button"
+                                        onClick={handleModalCloseButton}
+                                    >
+                                        Cancel
+                                    </button>
+                                )}
                             <button
                                 style={{
                                     backgroundColor:

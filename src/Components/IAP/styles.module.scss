@@ -1,0 +1,74 @@
+// SUBSCRIPTION COMPONENT
+#iap-items {
+    padding: 6rem 0;
+    @include media-min($md) {
+        padding: 6rem 0 0 0;
+    }
+    .title {
+        font-size: $fnt-sz-18;
+        font-weight: $fnt-wgt-600;
+    }
+    .tabs {
+        li {
+            background: linear-gradient(111deg, #1a1a1a 0%, #191919 100%);
+            font-weight: $fnt-wgt-400;
+            color: #696969;
+            min-width: auto;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+                min-width: 13rem;
+            }
+            text-align: center;
+        }
+        li.active {
+            background: linear-gradient(90deg, #3d3d3d 0%, #383838 100%);
+            font-weight: $fnt-wgt-600;
+            color: #ff3399;
+        }
+        .froyo {
+            border-radius: 10px 0px 0px 0px;
+        }
+        .credit {
+            border-radius: 0px 10px 0px 0px;
+        }
+    }
+    .gems-wrapper {
+        background: linear-gradient(146deg, #3d3d3d 0%, #212121 100%);
+        border-radius: 0 0px 10px 10px;
+        @include media-min($md) {
+            border-radius: 0 10px 10px 10px;
+        }
+        .pack {
+            .gem-info {
+                background: linear-gradient(160deg, #302f2f 0%, #0b0b0b 100%);
+                box-shadow: 0px 3px 6px #00000029;
+                border-radius: 10px 10px 0px 0px;
+                height: 238px;
+                .gem-title {
+                    font-size: $fnt-sz-12;
+                    font-weight: $fnt-wgt-300;
+                }
+                .quantity {
+                    font-size: $fnt-sz-16;
+                    font-weight: $fnt-wgt-600;
+                }
+            }
+            .price-wrapper {
+                border-radius: 0px 0px 10px 10px;
+                height: 52px;
+                background: linear-gradient(0deg, #d3076a 0%, #d3076a 100%);
+                .price {
+                    font-weight: $fnt-wgt-600;
+                    font-size: $fnt-sz-14;
+                }
+                .estimation {
+                    font-size: $fnt-sz-10;
+                    .estimation-value {
+                        font-weight: $fnt-wgt-600;
+                    }
+                }
+            }
+        }
+    }
+}
