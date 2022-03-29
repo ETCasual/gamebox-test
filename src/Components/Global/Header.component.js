@@ -138,7 +138,7 @@ const Header = ({
                                                 ?.toFixed(2)
                                                 ?.toLocaleString()}{" "}
                                             <small className="d-flex align-self-center ml-1">
-                                                {user.tokenSymbol?.toUpperCase()}
+                                                {user.tokenSymbol}
                                             </small>
                                         </p>
                                         <p className="mb-0">
