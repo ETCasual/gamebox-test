@@ -16,8 +16,11 @@ const Invitation = ({ handleBackButton }) => {
         process.env.REACT_APP_SECRET_PHRASE
     ).toString();
     const ciphertext = encodeURIComponent(encryption);
+    const baseUrl = `${window.location.origin}/${
+        window.location.pathname?.split("/")?.[1]
+    }`;
 
-    shareUrl = `Hey! Use my link to sign up for GameBox and get ${config.gemsPerInvite} gems immediately after you register. \n\nSign up at: ${window.location.origin}/invite/${ciphertext}`;
+    shareUrl = `Hey! Use my link to sign up for GameBox and get ${config.gemsPerInvite} gems immediately after you register. \n\nSign up at: ${baseUrl}/invite/${ciphertext}`;
 
     const handleInvite = () => {
         navigator.clipboard.writeText(shareUrl);

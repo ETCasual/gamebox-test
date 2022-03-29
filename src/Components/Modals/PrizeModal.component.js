@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -8,11 +9,13 @@ import SwiperCore, {
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const PrizeModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
-    console.log(user);
+
+    const dispatch = useDispatch();
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
@@ -36,6 +39,12 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
+
+    const handleWallet = async () => {
+        if (user.walletAddress) return;
+
+        await handleConnectWallet(dispatch);
+    };
 
     return (
         <div className="winner-announcement">
@@ -102,13 +111,8 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
 
                                         <p className="transfer-nft-text mx-auto mb-2">
                                             Your NFT is automatically sent to
-                                            your wallet ending with{" "}
+                                            your wallet ending with ....
                                             <span>
-                                                {user.walletAddress?.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
                                                 {user.walletAddress?.substring(
                                                     user.walletAddress.length -
                                                         4
@@ -116,7 +120,10 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                             </span>
                                         </p>
                                         {!user.walletAddress && (
-                                            <button className="connect-wallet-btn p-3">
+                                            <button
+                                                className="connect-wallet-btn p-3"
+                                                onClick={handleWallet}
+                                            >
                                                 Connect your wallet to receive
                                                 NFT
                                             </button>

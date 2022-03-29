@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -7,6 +8,7 @@ import SwiperCore, {
     Autoplay,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const RevealCardModal = ({
@@ -17,6 +19,8 @@ const RevealCardModal = ({
     handleRevealClaimRewardBtn,
 }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
+
+    const dispatch = useDispatch();
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
@@ -42,6 +46,12 @@ const RevealCardModal = ({
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
+
+    const handleWallet = async () => {
+        if (user.walletAddress) return;
+
+        await handleConnectWallet(dispatch);
+    };
 
     return (
         <>
@@ -101,7 +111,7 @@ const RevealCardModal = ({
                                             onError={(e) => defaultUserImage(e)}
                                             alt={e.winner}
                                         />
-                                        {user.username.toLowerCase() !==
+                                        {user.username.toLowerCase() ===
                                             e.winner.toLowerCase() && (
                                             <>
                                                 <p className="winner-name p-3">
@@ -116,16 +126,27 @@ const RevealCardModal = ({
                                                 <p className="transfer-nft-text mx-auto mb-2">
                                                     Your NFT is automatically
                                                     sent to your wallet ending
-                                                    with …<span>04O4</span>
+                                                    with ....
+                                                    <span>
+                                                        {user.walletAddress?.substring(
+                                                            user.walletAddress
+                                                                .length - 4
+                                                        )}
+                                                    </span>
                                                 </p>
                                                 {/* TODO:: CONNECT WALLET */}
-                                                <button className="connect-wallet-btn p-3">
-                                                    Connect your wallet to
-                                                    receive NFT
-                                                </button>
+                                                {!user.walletAddress && (
+                                                    <button
+                                                        className="connect-wallet-btn p-3"
+                                                        onClick={handleWallet}
+                                                    >
+                                                        Connect your wallet to
+                                                        receive NFT
+                                                    </button>
+                                                )}
                                             </>
                                         )}
-                                        {user.username.toLowerCase() ===
+                                        {user.username.toLowerCase() !==
                                             e.winner.toLowerCase() && (
                                             <>
                                                 <p className="winner-name mt-5 p-3">
