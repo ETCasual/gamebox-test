@@ -13,6 +13,7 @@ import CardPayment from "Components/IAP/CardMethod/CardPayment.component";
 import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
+import loadGemsList from "redux/thunks/GemsList.thunk";
 
 import tokenABI from "Utils/TokenABI";
 
@@ -170,6 +171,8 @@ const Index = () => {
             })
             .on("receipt", function (receipt) {
                 console.log("receipt", receipt);
+                // TODO:: CALL LIST ITEMS
+                dispatch(loadGemsList());   
             })
             .on("error", function (error) {
                 console.log("error", error);

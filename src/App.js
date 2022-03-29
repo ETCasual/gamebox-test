@@ -73,7 +73,7 @@ const App = () => {
             dispatch(loadExchangeRate());
             dispatch(loadRanks());
             dispatch(loadConfig());
-            dispatch(loadGemsList());
+            dispatch(loadGemsList());   
             dispatch(loadSpinnerRules());
             dispatch(loadGamesList());
 
