@@ -132,12 +132,13 @@ export function loadLoginStatus(status) {
 }
 
 // REQUEST TO CONNECT TO WALLET
-export function loadConnectUserWallet(walletAddress, walletAmount, networkId) {
+export function loadConnectUserWallet(walletAddress, walletAmount, networkId, symbol) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
         const _user = { ...user };
         _user.walletAddress = walletAddress;
+        _user.tokenSymbol = symbol;
         _user.tokenBalance = walletAmount;
         _user.network = networkId;
 

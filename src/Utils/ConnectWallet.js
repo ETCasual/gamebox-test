@@ -35,14 +35,17 @@ export async function handleConnectWallet(dispatch) {
             // IF WALLET ADDRESS IS AVAILABLE
             if (accounts.length > 0) {
                 // GET TOKEN BALANCE
-                const tokenBalance = await getTokenBalance(accounts[0]);
+                const { tokenBalance, symbol } = await getTokenBalance(
+                    accounts[0]
+                );
                 // UDPATE TO STORE
                 if (tokenBalance)
                     dispatch(
                         loadConnectUserWallet(
                             accounts[0],
                             parseFloat(tokenBalance),
-                            parseInt(chainId)
+                            parseInt(chainId),
+                            symbol
                         )
                     );
             }
@@ -69,11 +72,10 @@ export async function handleConnectWallet(dispatch) {
     // EVENT LISTNER ON ACCOUNT CHANGED
     window.ethereum.on("accountsChanged", handleAccountChanged);
     async function handleAccountChanged(accounts) {
-        console.log(accounts.length);
         if (accounts.length <= 0)
             dispatch(loadConnectUserWallet(null, null, null));
         else {
-            const tokenBalance = await getTokenBalance(accounts[0]);
+            const { tokenBalance, symbol } = await getTokenBalance(accounts[0]);
             const chainId = await window.ethereum.request({
                 method: "eth_chainId",
             });
@@ -83,7 +85,8 @@ export async function handleConnectWallet(dispatch) {
                     loadConnectUserWallet(
                         accounts[0],
                         parseFloat(tokenBalance),
-                        chainId
+                        parseInt(chainId),
+                        symbol
                     )
                 );
         }
@@ -108,5 +111,6 @@ async function getTokenBalance(address) {
     const tokenBalance = web3.utils.fromWei(
         await tokenContract.methods.balanceOf(address).call()
     );
-    return tokenBalance;
+    const symbol = await tokenContract.methods.symbol().call();
+    return { tokenBalance, symbol };
 }

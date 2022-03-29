@@ -100,6 +100,7 @@ export async function userSignIn() {
         status: null,
         walletAddress: null,
         tokenBalance: null,
+        tokenSymbol: null,
         network: null,
     };
     if (signInResult) {

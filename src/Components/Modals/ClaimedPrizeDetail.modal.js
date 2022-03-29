@@ -53,11 +53,10 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                         NFT delivered to wallet address
                                     </p>
                                     <p className="wallet-address">
-                                        {user.walletAddress.substring(0, 4)}{" "}
-                                        ....{" "}
-                                        {user.walletAddress.substring(
-                                            user.walletAddress.length - 5,
-                                            user.walletAddress.length - 1
+                                        {user.walletAddress?.substring(0, 5)}
+                                        ....
+                                        {user.walletAddress?.substring(
+                                            user.walletAddress.length - 4
                                         )}
                                     </p>
                                 </div>

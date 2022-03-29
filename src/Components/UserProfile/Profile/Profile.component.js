@@ -112,7 +112,7 @@ const Profile = ({
                                                 ?.toFixed(2)
                                                 ?.toLocaleString()}{" "}
                                             <small className="d-flex align-self-center ml-1">
-                                                froyo
+                                                {user.tokenSymbol?.toUpperCase()}
                                             </small>
                                         </p>
                                     )}

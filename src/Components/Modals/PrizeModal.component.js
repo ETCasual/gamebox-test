@@ -104,16 +104,14 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                             Your NFT is automatically sent to
                                             your wallet ending with{" "}
                                             <span>
-                                                {user.walletAddress.substring(
+                                                {user.walletAddress?.substring(
                                                     0,
-                                                    4
+                                                    5
                                                 )}
                                                 ....
-                                                {user.walletAddress.substring(
+                                                {user.walletAddress?.substring(
                                                     user.walletAddress.length -
-                                                        1,
-                                                    user.walletAddress.length -
-                                                        5
+                                                        4
                                                 )}
                                             </span>
                                         </p>

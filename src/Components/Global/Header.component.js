@@ -138,18 +138,17 @@ const Header = ({
                                                 ?.toFixed(2)
                                                 ?.toLocaleString()}{" "}
                                             <small className="d-flex align-self-center ml-1">
-                                                froyo
+                                                {user.tokenSymbol?.toUpperCase()}
                                             </small>
                                         </p>
                                         <p className="mb-0">
                                             {user.walletAddress?.substring(
                                                 0,
-                                                4
+                                                5
                                             )}
                                             ....
                                             {user.walletAddress?.substring(
-                                                user.walletAddress.length - 5,
-                                                user.walletAddress.length - 1
+                                                user.walletAddress.length - 4
                                             )}
                                         </p>
                                     </>
