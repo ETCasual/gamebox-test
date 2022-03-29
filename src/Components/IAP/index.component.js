@@ -30,7 +30,6 @@ const Index = () => {
         quantity: null,
         tab: "froyo",
     });
-
     const [cardPaymentModal, setCardPaymentModal] = useState(false);
     const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({

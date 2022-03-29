@@ -25,6 +25,7 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
 
     // GEMS
     useEffect(() => {
+        // TODO: FILTER FROYO GEMS
         setGemList(_.orderBy(gemsList, ["id"], ["asc"]));
     }, [gemsList]);
 
