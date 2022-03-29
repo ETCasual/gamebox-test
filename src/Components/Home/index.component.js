@@ -159,7 +159,7 @@ const Index = () => {
                 let _arr = [];
                 notificationList.forEach((n) => {
                     n?.list?.forEach((e) => {
-                        if (e.type === "winner" && e.seen) {
+                        if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
@@ -222,18 +222,15 @@ const Index = () => {
 
     // REVEAL CARD ONCLICK
     function handleWinnerRevealCard(prizeType) {
-        console.log('object');
         let _arr = [];
         let data =
             prizeType === 1 ? FeaturedData : prizeType === 2 ? PremiumData : [];
-
         if (data.length > 0) {
             notificationList.forEach((n) => {
                 n?.list?.forEach((e) => {
                     let idx = data.findIndex(
                         (d) => d.prizeId === e.prizeId && d.type === prizeType
                     );
-                    console.log(idx);
                     if (idx > -1 && e.type === "winner") {
                         _arr.push(e);
                     }
