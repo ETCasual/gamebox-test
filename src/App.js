@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { messaging, onMessageListener } from "./firebase";
-import AES from "crypto-js/aes";
-import Utf8 from "crypto-js/enc-utf8";
 
 import ProtectedRoute from "Components/Global/ProtectedRoutes";
 import Toasty from "Components/Global/Toasty.component";
@@ -39,7 +37,6 @@ import loadGamesList from "redux/thunks/GamesList.thunk";
 import loadNotificationToken from "redux/thunks/UpdateNotificationToken.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import loadNotifications from "redux/thunks/Notifcations.thunk";
-import loadFriendInvitation from "redux/thunks/FriendInvitation.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
@@ -127,24 +124,6 @@ const App = () => {
             dispatch(loadNotifications());
             dispatch(loadUnClaimedPrizes());
         }
-    }, [user.id, dispatch]);
-
-    // INVITATION
-    useEffect(() => {
-        const isNewUser = Boolean(localStorage.getItem("isNewUser"));
-        if (user.id && isNewUser) {
-            const inviteCode = localStorage.getItem("inviteCode");
-            if (inviteCode !== null) {
-                const originalText = decodeURIComponent(inviteCode);
-                const decryption = AES.decrypt(
-                    originalText,
-                    process.env.REACT_APP_SECRET_PHRASE
-                ).toString(Utf8);
-                setTimeout(() => {
-                    dispatch(loadFriendInvitation(parseInt(decryption)));
-                }, 1000);
-            }
-        } else localStorage.removeItem("isNewUser");
     }, [user.id, dispatch]);
 
     // REGIONAL CHECK

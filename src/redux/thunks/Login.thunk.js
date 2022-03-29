@@ -12,6 +12,7 @@ import {
     userSignIn,
 } from "redux/services/index.service";
 import { handleConnectWallet } from "Utils/ConnectWallet";
+import inviteFriendsReward from "Utils/InviteFriends";
 
 // LOGIN WITH EXISTING TOKEN
 export function loadLoginUserWithToken() {
@@ -30,10 +31,13 @@ export function loadLoginUserWithToken() {
                     if (id !== "-1") {
                         localStorage.setItem("isNewUser", true);
                         const user = await userSignIn();
-                        dispatch({
-                            type: LOGIN_SUCCESS,
-                            payload: user,
-                        });
+                        if (user.id) {
+                            inviteFriendsReward(user, dispatch);
+                            dispatch({
+                                type: LOGIN_SUCCESS,
+                                payload: user,
+                            });
+                        }
                     }
                 }
             }
@@ -99,6 +103,7 @@ export function loadLogin(payload, setLoginError, history) {
                             localStorage.setItem("isNewUser", true);
                         const user = await userSignIn();
                         if (user.id) {
+                            inviteFriendsReward(user, dispatch);
                             dispatch({
                                 type: LOGIN_SUCCESS,
                                 payload: user,
