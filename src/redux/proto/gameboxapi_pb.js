@@ -18116,7 +18116,8 @@ proto.api.gamebox.ItemDetail.toObject = function(includeInstance, msg) {
     typeId: jspb.Message.getFieldWithDefault(msg, 6, 0),
     price: +jspb.Message.getFieldWithDefault(msg, 7, 0.0),
     quantity: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    paymentTypeId: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    status: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -18186,6 +18187,10 @@ proto.api.gamebox.ItemDetail.deserializeBinaryFromReader = function(msg, reader)
       msg.setQuantity(value);
       break;
     case 9:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPaymentTypeId(value);
+      break;
+    case 10:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setStatus(value);
       break;
@@ -18274,10 +18279,17 @@ proto.api.gamebox.ItemDetail.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getStatus();
+  f = message.getPaymentTypeId();
   if (f !== 0) {
     writer.writeInt32(
       9,
+      f
+    );
+  }
+  f = message.getStatus();
+  if (f !== 0) {
+    writer.writeInt32(
+      10,
       f
     );
   }
@@ -18405,17 +18417,32 @@ proto.api.gamebox.ItemDetail.prototype.setQuantity = function(value) {
 
 
 /**
- * optional int32 status = 9;
+ * optional int32 payment_type_id = 9;
  * @return {number}
  */
-proto.api.gamebox.ItemDetail.prototype.getStatus = function() {
+proto.api.gamebox.ItemDetail.prototype.getPaymentTypeId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.ItemDetail.prototype.setStatus = function(value) {
+proto.api.gamebox.ItemDetail.prototype.setPaymentTypeId = function(value) {
   jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int32 status = 10;
+ * @return {number}
+ */
+proto.api.gamebox.ItemDetail.prototype.getStatus = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ItemDetail.prototype.setStatus = function(value) {
+  jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
@@ -29280,9 +29307,12 @@ proto.api.gamebox.Notification.toObject = function(includeInstance, msg) {
     winnerNickname: jspb.Message.getFieldWithDefault(msg, 13, ""),
     winnerAvatarUrl: jspb.Message.getFieldWithDefault(msg, 14, ""),
     prizeId: jspb.Message.getFieldWithDefault(msg, 15, 0),
-    gameId: jspb.Message.getFieldWithDefault(msg, 16, 0),
-    seen: jspb.Message.getFieldWithDefault(msg, 17, false),
-    createdOn: jspb.Message.getFieldWithDefault(msg, 18, 0)
+    nftContractAddress: jspb.Message.getFieldWithDefault(msg, 16, ""),
+    nftTokenId: jspb.Message.getFieldWithDefault(msg, 17, ""),
+    canClaimDate: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    gameId: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    seen: jspb.Message.getFieldWithDefault(msg, 20, false),
+    createdOn: jspb.Message.getFieldWithDefault(msg, 21, 0)
   };
 
   if (includeInstance) {
@@ -29380,14 +29410,26 @@ proto.api.gamebox.Notification.deserializeBinaryFromReader = function(msg, reade
       msg.setPrizeId(value);
       break;
     case 16:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNftContractAddress(value);
+      break;
+    case 17:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNftTokenId(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCanClaimDate(value);
+      break;
+    case 19:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setGameId(value);
       break;
-    case 17:
+    case 20:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setSeen(value);
       break;
-    case 18:
+    case 21:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCreatedOn(value);
       break;
@@ -29525,24 +29567,45 @@ proto.api.gamebox.Notification.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = message.getNftContractAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      16,
+      f
+    );
+  }
+  f = message.getNftTokenId();
+  if (f.length > 0) {
+    writer.writeString(
+      17,
+      f
+    );
+  }
+  f = message.getCanClaimDate();
+  if (f !== 0) {
+    writer.writeInt64(
+      18,
+      f
+    );
+  }
   f = message.getGameId();
   if (f !== 0) {
     writer.writeInt64(
-      16,
+      19,
       f
     );
   }
   f = message.getSeen();
   if (f) {
     writer.writeBool(
-      17,
+      20,
       f
     );
   }
   f = message.getCreatedOn();
   if (f !== 0) {
     writer.writeInt64(
-      18,
+      21,
       f
     );
   }
@@ -29775,49 +29838,94 @@ proto.api.gamebox.Notification.prototype.setPrizeId = function(value) {
 
 
 /**
- * optional int64 game_id = 16;
- * @return {number}
+ * optional string nft_contract_address = 16;
+ * @return {string}
  */
-proto.api.gamebox.Notification.prototype.getGameId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
+proto.api.gamebox.Notification.prototype.getNftContractAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 16, ""));
 };
 
 
-/** @param {number} value */
-proto.api.gamebox.Notification.prototype.setGameId = function(value) {
-  jspb.Message.setProto3IntField(this, 16, value);
+/** @param {string} value */
+proto.api.gamebox.Notification.prototype.setNftContractAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 16, value);
 };
 
 
 /**
- * optional bool seen = 17;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
- * @return {boolean}
+ * optional string nft_token_id = 17;
+ * @return {string}
  */
-proto.api.gamebox.Notification.prototype.getSeen = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 17, false));
+proto.api.gamebox.Notification.prototype.getNftTokenId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 17, ""));
 };
 
 
-/** @param {boolean} value */
-proto.api.gamebox.Notification.prototype.setSeen = function(value) {
-  jspb.Message.setProto3BooleanField(this, 17, value);
+/** @param {string} value */
+proto.api.gamebox.Notification.prototype.setNftTokenId = function(value) {
+  jspb.Message.setProto3StringField(this, 17, value);
 };
 
 
 /**
- * optional int64 created_on = 18;
+ * optional int64 can_claim_date = 18;
  * @return {number}
  */
-proto.api.gamebox.Notification.prototype.getCreatedOn = function() {
+proto.api.gamebox.Notification.prototype.getCanClaimDate = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.Notification.prototype.setCreatedOn = function(value) {
+proto.api.gamebox.Notification.prototype.setCanClaimDate = function(value) {
   jspb.Message.setProto3IntField(this, 18, value);
+};
+
+
+/**
+ * optional int64 game_id = 19;
+ * @return {number}
+ */
+proto.api.gamebox.Notification.prototype.getGameId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.Notification.prototype.setGameId = function(value) {
+  jspb.Message.setProto3IntField(this, 19, value);
+};
+
+
+/**
+ * optional bool seen = 20;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.api.gamebox.Notification.prototype.getSeen = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 20, false));
+};
+
+
+/** @param {boolean} value */
+proto.api.gamebox.Notification.prototype.setSeen = function(value) {
+  jspb.Message.setProto3BooleanField(this, 20, value);
+};
+
+
+/**
+ * optional int64 created_on = 21;
+ * @return {number}
+ */
+proto.api.gamebox.Notification.prototype.getCreatedOn = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.Notification.prototype.setCreatedOn = function(value) {
+  jspb.Message.setProto3IntField(this, 21, value);
 };
 
 
