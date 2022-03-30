@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SwiperCore, {
     Navigation,
@@ -9,10 +10,11 @@ import SwiperCore, {
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+
 import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
-const PrizeModal = ({ data, user, handleBackButton }) => {
+const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
     const dispatch = useDispatch();
@@ -105,20 +107,11 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                             {e.winner} (You)
                                         </p>
                                         <p className="won-text mb-0">Won the</p>
-                                        <p className="prize-name my-3">
+                                        <p className="prize-name my-2">
                                             {e.title}
                                         </p>
+                                        <p className="nft-token">TokenID: </p>
 
-                                        <p className="transfer-nft-text mx-auto mb-2">
-                                            Your NFT is automatically sent to
-                                            your wallet ending with ....
-                                            <span>
-                                                {user.walletAddress?.substring(
-                                                    user.walletAddress.length -
-                                                        4
-                                                )}
-                                            </span>
-                                        </p>
                                         {!user.walletAddress && (
                                             <button
                                                 className="connect-wallet-btn p-3"
@@ -128,6 +121,24 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                                 NFT
                                             </button>
                                         )}
+                                        {user.walletAddress && (
+                                            <Link to="/profile/rewards">
+                                                <button className="connect-wallet-btn p-3">
+                                                    Claim your NFT
+                                                </button>
+                                            </Link>
+                                        )}
+
+                                        {/* <p className="transfer-nft-text mx-auto mb-2">
+                                            Your NFT is automatically sent to
+                                            your wallet ending with ....
+                                            <span>
+                                                {user.walletAddress?.substring(
+                                                    user.walletAddress.length -
+                                                        4
+                                                )}
+                                            </span>
+                                        </p> */}
                                     </>
                                 )}
                                 {user.username.toLowerCase() !==
@@ -136,10 +147,11 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
                                         <p className="winner-name mt-5 p-3">
                                             {e.winner}
                                         </p>
-                                        <p className="won-text mb-2">won the</p>
+                                        <p className="won-text mb-0">won the</p>
                                         <p className="prize-name my-2">
                                             {e.title}
                                         </p>
+                                        <p className="nft-token">TokenID: </p>
                                     </>
                                 )}
                             </div>
@@ -179,4 +191,4 @@ const PrizeModal = ({ data, user, handleBackButton }) => {
     );
 };
 
-export default PrizeModal;
+export default WinnerAnnouncementModal;

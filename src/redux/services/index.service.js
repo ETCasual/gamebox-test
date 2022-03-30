@@ -689,7 +689,7 @@ export async function getPrizeLatestTicketsCollected(
                 return prizeTicketCollection[existingIndex];
             }
         } else {
-            // setting this tempData immediately so that a very fast scrooling doesn't spam at the very first time visitng the page
+            // setting this tempData immediately so that a very fast scrolling doesn't spam at the very first time visitng the page
             return {
                 prizeId,
                 tickets: 0,

@@ -29,6 +29,7 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
         setGemList(_.orderBy(gemsList, ["id"], ["asc"]));
     }, [gemsList]);
 
+    // TODO:: DISBALED PACKS ON PURCHASE
     return (
         <div className="col-12">
             <div className="row">

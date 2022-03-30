@@ -8,7 +8,7 @@ import OnBoarding from "Components/Home/OnBoarding/OnBoarding.component";
 import Featured from "Components/Home/Featured/Featured.component";
 import AutomatedEntry from "Components/Home/AutomatedEntry/AutomatedEntry.component";
 import Premium from "Components/Home/Premium/Premium.component";
-import PrizeModal from "Components/Modals/PrizeModal.component";
+import WinnerAnnouncementModal from "Components/Modals/WinnerAnnouncementModal.component";
 import FeaturedLoader from "Components/Loader/Featured.loader";
 import AutomatedEntryLoader from "Components/Loader/AutomatedEntry.loader";
 import PremiumLoader from "Components/Loader/Premium.loader";
@@ -415,7 +415,7 @@ const Index = () => {
 
             {/* WINNER ANNOUNCEMENTS */}
             {isWinnerAnnouncementShown && (
-                <PrizeModal
+                <WinnerAnnouncementModal
                     data={winnerAnnouncementData}
                     user={user}
                     handleClaimRewardBtn={handleClaimRewardBtn}
