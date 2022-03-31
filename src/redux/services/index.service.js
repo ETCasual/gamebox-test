@@ -288,6 +288,7 @@ export async function getPrizes() {
         // ADDING PRIZE LIST TO SESSION STORAGE
         if (p.getTypeId() === 1 || p.getTypeId() === 2 || p.getTypeId() === 3) {
             // PRIZE DETAILS LIST
+
             let index = prizeDetailList.findIndex(
                 (e) => e.prizeId === p.getPrizeId()
             );
@@ -1037,6 +1038,7 @@ export async function getGemsList() {
             price: e.getPrice(),
             quantity: e.getQuantity(),
             status: e.getStatus(),
+            paymentTypeId: e.getPaymentTypeId(),
         });
     });
     return gemsList;

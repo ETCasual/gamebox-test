@@ -134,12 +134,21 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-center remaining-tickets">
-                                    {data.overTime && (
+                                    {getPoolTickets(
+                                        poolTickets,
+                                        data?.prizeId
+                                    ) >= data?.ticketsRequired && (
                                         <p className="mb-0 draw-timer d-flex align-items-center justify-content-center">
-                                            Draw starts in <span className="text-danger ml-1">{timer}</span>
+                                            Draw starts in{" "}
+                                            <span className="text-danger ml-1">
+                                                {timer}
+                                            </span>
                                         </p>
                                     )}
-                                    {!data.overTime && (
+                                    {getPoolTickets(
+                                        poolTickets,
+                                        data?.prizeId
+                                    ) < data?.ticketsRequired && (
                                         <p className="mb-0">{`${
                                             (
                                                 data?.ticketsRequired -

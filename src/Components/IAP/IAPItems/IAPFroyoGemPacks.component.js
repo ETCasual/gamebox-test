@@ -25,8 +25,8 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
 
     // GEMS
     useEffect(() => {
-        // TODO: FILTER FROYO GEMS
-        setGemList(_.orderBy(gemsList, ["id"], ["asc"]));
+        const froyoGemPacks = gemsList.filter(g => g.paymentTypeId === 2)
+        setGemList(_.orderBy(froyoGemPacks, ["id"], ["asc"]));
     }, [gemsList]);
 
     // TODO:: DISBALED PACKS ON PURCHASE

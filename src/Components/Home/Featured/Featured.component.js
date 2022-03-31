@@ -145,12 +145,20 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                     <div className="d-flex">
                                                         <p
                                                             className={`mb-0 d-flex align-items-center ${
-                                                                data.overTime
+                                                                getPoolTickets(
+                                                                    poolTickets,
+                                                                    data?.prizeId
+                                                                ) >=
+                                                                data?.ticketsRequired
                                                                     ? "text-danger timer"
                                                                     : "remaining-tickets"
                                                             }`}
                                                         >
-                                                            {data.overTime
+                                                            {getPoolTickets(
+                                                                poolTickets,
+                                                                data?.prizeId
+                                                            ) >=
+                                                            data?.ticketsRequired
                                                                 ? timer
                                                                 : `${
                                                                       (

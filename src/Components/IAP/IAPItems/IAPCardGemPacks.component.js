@@ -26,8 +26,8 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
 
     // GEMS
     useEffect(() => {
-        // TODO: FILTER CREDIT CARD GEMS
-        setGemList(_.orderBy(gemsList, ["id"], ["asc"]));
+        const creditCardGemPacks = gemsList.filter(g => g.paymentTypeId === 1)
+        setGemList(_.orderBy(creditCardGemPacks, ["id"], ["asc"]));
     }, [gemsList]);
 
     return (

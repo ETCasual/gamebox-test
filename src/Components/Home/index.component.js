@@ -1,6 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
@@ -24,14 +23,11 @@ const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
     const { user } = useSelector((state) => state.userData);
     const { notificationList } = useSelector((state) => state.notifications);
-    const { unClaimedPrizes } = useSelector((state) => state.unClaimedPrizes);
 
     const dispatch = useDispatch();
 
     let timeOutRef1 = useRef(null);
     let timeOutRef2 = useRef(null);
-
-    const history = useHistory();
 
     const [noDataLoaded, setNoDataLoaded] = useState({
         feature: false,
@@ -197,19 +193,6 @@ const Index = () => {
         helperFunctionWinnerAnnoucement(prizeId);
         setIsWinnerAnnouncementShown(false);
     };
-    // WINNER ANNOUNCEMENT CLAIM REWARD BUTTON
-    // const handleClaimRewardBtn = (prizeId) => {
-    //     helperFunctionWinnerAnnoucement(prizeId);
-    //     const idx = unClaimedPrizes.findIndex((e) => e.prizeId === prizeId);
-    //     if (idx > -1) {
-    //         history.push(`/claim/${unClaimedPrizes[idx]?.id}`);
-    //     } else {
-    //         console.log(
-    //             "Possible prize matching failure point prize Id: ",
-    //             prizeId
-    //         );
-    //     }
-    // };
     function helperFunctionWinnerAnnoucement(prizeId) {
         if (user.isNotifyAllowed) dispatch(loadNotifications());
         sessionStorage.setItem("isAuthValid", false);

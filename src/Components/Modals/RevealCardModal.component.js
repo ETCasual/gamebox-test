@@ -197,6 +197,15 @@ const RevealCardModal = ({
                                                 </p>
                                                 <p className="nft-token">
                                                     TokenID:{" "}
+                                                    {e.nftContractAddress.substring(
+                                                        0,
+                                                        5
+                                                    )} 
+                                                    ....
+                                                    {e.nftContractAddress.substring(
+                                                        e.nftContractAddress
+                                                            .length - 4
+                                                    )}
                                                 </p>
                                             </>
                                         )}
