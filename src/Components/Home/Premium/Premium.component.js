@@ -13,8 +13,8 @@ import { scrollToTop } from "Utils/ScrollToTop";
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
-import OverTimeModeChecker from "Utils/OverTimeModeChecker";
-import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
+// import OverTimeModeChecker from "Utils/OverTimeModeChecker";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
         dispatch(
-            loadPrizePoolTicketsWithOvertime(
+            loadPrizePoolTickets(
                 parseInt(data?.prizeId),
                 true,
                 data?.ticketsRequired
@@ -45,7 +45,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
         if (isVisible) {
             dispatch(loadPlayerTickets(data?.prizeId, false));
             dispatch(
-                loadPrizePoolTicketsWithOvertime(
+                loadPrizePoolTickets(
                     parseInt(data?.prizeId),
                     false,
                     data?.ticketsRequired
@@ -115,7 +115,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         <p className="prize-title mb-0">
                                             {data.prizeTitle}
                                         </p>
-                                        <p className="mb-1 token-label d-flex align-items-center">
+                                        <p className="mb-1 ticket-label d-flex align-items-center">
                                             Your tickets
                                         </p>
                                     </div>
@@ -123,7 +123,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         <div className="prize-subtitle">
                                             {data.prizeSubtitle}
                                         </div>
-                                        <p className="mb-0 token-value d-flex align-items-center">
+                                        <p className="mb-0 ticket-value d-flex align-items-center">
                                             {`\u00A0${
                                                 getPoolTickets(
                                                     poolTickets,
@@ -133,34 +133,23 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div
-                                    className={`d-flex align-items-center justify-content-center ${
-                                        OverTimeModeChecker(
-                                            data?.prizeId,
-                                            data?.ticketsRequired,
-                                            prizeTicketCollection
-                                        )
-                                            ? "text-danger timer"
-                                            : "remaining-tokens"
-                                    }`}
-                                >
-                                    {`\u00A0${
-                                        OverTimeModeChecker(
-                                            data?.prizeId,
-                                            data?.ticketsRequired,
-                                            prizeTicketCollection
-                                        )
-                                            ? timer
-                                            : `${
-                                                  (
-                                                      data?.ticketsRequired -
-                                                      getPrizeTicketCollected(
-                                                          prizeTicketCollection,
-                                                          data?.prizeId
-                                                      )
-                                                  )?.toLocaleString() || "-"
-                                              } tickets remaining`
-                                    }`}
+                                <div className="d-flex align-items-center justify-content-center remaining-tickets">
+                                    {data.overTime && (
+                                        <p className="mb-0 draw-timer d-flex align-items-center justify-content-center">
+                                            Draw starts in <span className="text-danger ml-1">{timer}</span>
+                                        </p>
+                                    )}
+                                    {!data.overTime && (
+                                        <p className="mb-0">{`${
+                                            (
+                                                data?.ticketsRequired -
+                                                getPrizeTicketCollected(
+                                                    prizeTicketCollection,
+                                                    data?.prizeId
+                                                )
+                                            )?.toLocaleString() || "-"
+                                        } tickets remaining`}</p>
+                                    )}
                                 </div>
                             </Link>
                         </div>

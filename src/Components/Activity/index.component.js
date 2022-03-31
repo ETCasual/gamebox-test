@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import ActivityLoader from "Components/Loader/Activity.loader";
 
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
-import loadPrizePoolTickets from "redux/thunks/PrizePoolTickets.thunk";
+import {loadPrizePoolTickets} from "redux/thunks/PrizePoolTickets.thunk";
 import loadActivity from "redux/thunks/Activity.thunk";
 
 import getPoolTickets from "Utils/PoolTickets";

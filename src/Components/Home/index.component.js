@@ -17,7 +17,7 @@ import RevealCardModal from "Components/Modals/RevealCardModal.component";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
-import loadPrizePoolTickets from "redux/thunks/PrizePoolTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import loadNotifications from "redux/thunks/Notifcations.thunk";
 
 const Index = () => {
@@ -96,7 +96,7 @@ const Index = () => {
                 let _fData = [];
                 let _pData = [];
                 const prizeList =
-                    JSON.parse(localStorage.getItem("prizeDetailList")) || [];
+                    JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
                 for (let i = 0; i < prizeList.length; i++) {
                     const element = prizeList[i];
@@ -159,14 +159,14 @@ const Index = () => {
                 let _arr = [];
                 notificationList.forEach((n) => {
                     n?.list?.forEach((e) => {
-                        if (e.type === "winner" && !e.seen) {
+                        if (e.type === "winner" && e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
                         } else if (e.type === "winner" && e.seen) {
                             const _localPrizes =
                                 JSON.parse(
-                                    localStorage.getItem("prizeDetailList")
+                                    sessionStorage.getItem("prizeDetailList")
                                 ) || [];
                             let idx = _localPrizes.findIndex(
                                 (local) => local.prizeId === e.prizeId
@@ -186,32 +186,38 @@ const Index = () => {
         }, 1000);
     }, [notificationList]);
 
-    // WINNER ANNOUNCEMENT CONTINUE TO HOMEPAGE BUTTON
+    // ON CLICK FINISH BUTTON ONBOARDING
+    const handleOnBoardingClose = () => {
+        setIsOnBoardingShown(false);
+        localStorage.removeItem("isNewUser");
+    };
+
+    // WINNER ANNOUNCEMENT CLOSE BUTTON
     const handleBackButton = (prizeId) => {
         helperFunctionWinnerAnnoucement(prizeId);
         setIsWinnerAnnouncementShown(false);
     };
     // WINNER ANNOUNCEMENT CLAIM REWARD BUTTON
-    const handleClaimRewardBtn = (prizeId) => {
-        helperFunctionWinnerAnnoucement(prizeId);
-        const idx = unClaimedPrizes.findIndex((e) => e.prizeId === prizeId);
-        if (idx > -1) {
-            history.push(`/claim/${unClaimedPrizes[idx]?.id}`);
-        } else {
-            console.log(
-                "Possible prize matching failure point prize Id: ",
-                prizeId
-            );
-        }
-    };
+    // const handleClaimRewardBtn = (prizeId) => {
+    //     helperFunctionWinnerAnnoucement(prizeId);
+    //     const idx = unClaimedPrizes.findIndex((e) => e.prizeId === prizeId);
+    //     if (idx > -1) {
+    //         history.push(`/claim/${unClaimedPrizes[idx]?.id}`);
+    //     } else {
+    //         console.log(
+    //             "Possible prize matching failure point prize Id: ",
+    //             prizeId
+    //         );
+    //     }
+    // };
     function helperFunctionWinnerAnnoucement(prizeId) {
         if (user.isNotifyAllowed) dispatch(loadNotifications());
         sessionStorage.setItem("isAuthValid", false);
-        const pl = JSON.parse(localStorage.getItem("prizeDetailList")) || [];
+        const pl = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
         let idx = pl.findIndex((p) => p.prizeId === prizeId);
         if (idx > -1) {
             pl.splice(idx, 1);
-            localStorage.setItem("prizeDetailList", JSON.stringify(pl));
+            sessionStorage.setItem("prizeDetailList", JSON.stringify(pl));
         } else {
             console.log(
                 "Possible prize detail list matching failure point prizeId: ",
@@ -247,29 +253,23 @@ const Index = () => {
         updateLocalPrizeList(prizeId);
         setIsRevealCardModalShown(false);
     };
-    // REVEAL CARD MODAL CLAIM REWARD BUTTON
-    const handleRevealClaimRewardBtn = (prizeId) => {
-        updateLocalPrizeList(prizeId);
-        const idx = unClaimedPrizes.findIndex((e) => e.prizeId === prizeId);
-        if (idx > -1) history.push(`/claim/${unClaimedPrizes[idx]?.id}`);
-    };
     function updateLocalPrizeList(prizeId) {
         // UPDATE LOCALSTORAGE
         const localPrizes =
-            JSON.parse(localStorage.getItem("prizeDetailList")) || [];
+            JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
         let idx = localPrizes.findIndex((e) => e.prizeId === prizeId);
         if (idx > -1) {
             localPrizes[idx].seen = true;
             localPrizes[idx].completed = true;
-            localStorage.setItem(
+            sessionStorage.setItem(
                 "prizeDetailList",
                 JSON.stringify(localPrizes)
             );
 
             // UPDATE STATE
             const updateLocalPrizes =
-                JSON.parse(localStorage.getItem("prizeDetailList")) || [];
+                JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
             let featureArr = [];
             let premiumArr = [];
             updateLocalPrizes.forEach((e) => {
@@ -286,12 +286,6 @@ const Index = () => {
             setPremiumData(premiumArr);
         }
     }
-
-    // ON CLICK FINISH BUTTON ONBOARDING
-    const handleOnBoardingClose = () => {
-        setIsOnBoardingShown(false);
-        localStorage.removeItem("isNewUser");
-    };
 
     return (
         <>
@@ -418,7 +412,6 @@ const Index = () => {
                 <WinnerAnnouncementModal
                     data={winnerAnnouncementData}
                     user={user}
-                    handleClaimRewardBtn={handleClaimRewardBtn}
                     handleBackButton={handleBackButton}
                 />
             )}
@@ -430,7 +423,6 @@ const Index = () => {
                     user={user}
                     updateLocalPrizeList={updateLocalPrizeList}
                     handleRevealBackButton={handleRevealBackButton}
-                    handleRevealClaimRewardBtn={handleRevealClaimRewardBtn}
                 />
             )}
 

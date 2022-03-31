@@ -48,6 +48,14 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
         await handleConnectWallet(dispatch);
     };
 
+    const getMintDate = (date) => {
+        return new Date(date * 1000).toLocaleString("default", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        });
+    };
+
     return (
         <div className="winner-announcement">
             <Swiper
@@ -110,35 +118,52 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                         <p className="prize-name my-2">
                                             {e.title}
                                         </p>
-                                        <p className="nft-token">TokenID: </p>
+                                        <p className="nft-token">
+                                            TokenID:{" "}
+                                            {e.nftContractAddress.substring(
+                                                0,
+                                                5
+                                            )}
+                                            ....
+                                            {e.nftContractAddress.substring(
+                                                e.nftContractAddress.length - 4
+                                            )}
+                                        </p>
 
-                                        {!user.walletAddress && (
-                                            <button
-                                                className="connect-wallet-btn p-3"
-                                                onClick={handleWallet}
-                                            >
-                                                Connect your wallet to receive
-                                                NFT
-                                            </button>
+                                        {e.canClaimDate > 0 && (
+                                            <>
+                                                <p className="mb-2 mt-4 not-minted">
+                                                    This NFT is not minted yet.
+                                                    We’ll notify you once it’s
+                                                    out.
+                                                </p>
+                                                <p className="mint-date">
+                                                    NFT mint date:{" "}
+                                                    {getMintDate(
+                                                        e.canClaimDate
+                                                    )}
+                                                </p>
+                                            </>
                                         )}
-                                        {user.walletAddress && (
-                                            <Link to="/profile/rewards">
-                                                <button className="connect-wallet-btn p-3">
-                                                    Claim your NFT
+
+                                        {!user.walletAddress &&
+                                            e.canClaimDate <= 0 && (
+                                                <button
+                                                    className="connect-wallet-btn p-3"
+                                                    onClick={handleWallet}
+                                                >
+                                                    Connect your wallet to
+                                                    receive NFT
                                                 </button>
-                                            </Link>
-                                        )}
-
-                                        {/* <p className="transfer-nft-text mx-auto mb-2">
-                                            Your NFT is automatically sent to
-                                            your wallet ending with ....
-                                            <span>
-                                                {user.walletAddress?.substring(
-                                                    user.walletAddress.length -
-                                                        4
-                                                )}
-                                            </span>
-                                        </p> */}
+                                            )}
+                                        {user.walletAddress &&
+                                            e.canClaimDate <= 0 && (
+                                                <Link to="/profile/rewards">
+                                                    <button className="connect-wallet-btn p-3">
+                                                        Claim your NFT
+                                                    </button>
+                                                </Link>
+                                            )}
                                     </>
                                 )}
                                 {user.username.toLowerCase() !==
@@ -151,7 +176,17 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                         <p className="prize-name my-2">
                                             {e.title}
                                         </p>
-                                        <p className="nft-token">TokenID: </p>
+                                        <p className="nft-token">
+                                            TokenID:{" "}
+                                            {e.nftContractAddress.substring(
+                                                0,
+                                                5
+                                            )}
+                                            ....
+                                            {e.nftContractAddress.substring(
+                                                e.nftContractAddress.length - 4
+                                            )}
+                                        </p>
                                     </>
                                 )}
                             </div>

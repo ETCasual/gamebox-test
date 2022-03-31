@@ -13,7 +13,7 @@ import loadPlayerSpinnerSpin from "redux/thunks/PlayerSpinnerSpin.thunk";
 import loadPurchaseSpins from "redux/thunks/PurchaseSpins.thunk";
 import loadConsumeUserGems from "redux/thunks/ConsumeUserGems.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
-import loadPrizePoolTickets from "redux/thunks/PrizePoolTickets.thunk";
+import {loadPrizePoolTickets} from "redux/thunks/PrizePoolTickets.thunk";
 
 // HELPER FUNCTION
 import getPoolTickets from "Utils/PoolTickets";

@@ -12,9 +12,8 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
-import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import { scrollToTop } from "Utils/ScrollToTop";
-import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 const Featured = ({ data, length, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -33,7 +32,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
         dispatch(
-            loadPrizePoolTicketsWithOvertime(
+            loadPrizePoolTickets(
                 parseInt(data?.prizeId),
                 true,
                 data?.ticketsRequired
@@ -45,7 +44,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
         if (isVisible) {
             dispatch(loadPlayerTickets(data?.prizeId, false));
             dispatch(
-                loadPrizePoolTicketsWithOvertime(
+                loadPrizePoolTickets(
                     parseInt(data?.prizeId),
                     false,
                     data?.ticketsRequired
@@ -144,23 +143,14 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                             0}
                                                     </p>
                                                     <div className="d-flex">
-                                                        {/* TOTAL POOL TICKETS COLLECTED */}
                                                         <p
                                                             className={`mb-0 d-flex align-items-center ${
-                                                                OverTimeModeChecker(
-                                                                    data?.prizeId,
-                                                                    data?.ticketsRequired,
-                                                                    prizeTicketCollection
-                                                                )
+                                                                data.overTime
                                                                     ? "text-danger timer"
                                                                     : "remaining-tickets"
                                                             }`}
                                                         >
-                                                            {OverTimeModeChecker(
-                                                                data?.prizeId,
-                                                                data?.ticketsRequired,
-                                                                prizeTicketCollection
-                                                            )
+                                                            {data.overTime
                                                                 ? timer
                                                                 : `${
                                                                       (

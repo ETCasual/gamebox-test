@@ -267,18 +267,11 @@ export async function getPrizes() {
     let gameRulesList = [];
 
     let prizeDetailList =
-        JSON.parse(localStorage.getItem("prizeDetailList")) || [];
-
-    let finishedPrizeList =
-        JSON.parse(localStorage.getItem("finishedPrizeList")) || [];
+        JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
     let availablePrizeList = [];
 
     for (let i = 0; i < prizeList.length; i++) {
-        // REMOVING PRIZE FROM THE LOCAL LIST AFTER IT'S COMPLETED & SEEN
-        // let plIdx1 = prizeDetailList.findIndex((pl) => pl.completed && pl.seen);
-        // if (plIdx1 > -1) prizeDetailList.splice(plIdx1, 1);
-
         let p = prizeList[i];
 
         // GAME RULES LIST
@@ -292,6 +285,7 @@ export async function getPrizes() {
             useHowManyGems: p.getUseHowManyGems(),
         });
 
+        // ADDING PRIZE LIST TO SESSION STORAGE
         if (p.getTypeId() === 1 || p.getTypeId() === 2 || p.getTypeId() === 3) {
             // PRIZE DETAILS LIST
             let index = prizeDetailList.findIndex(
@@ -342,7 +336,7 @@ export async function getPrizes() {
                     seen: false,
                     completed: false,
                 });
-                localStorage.setItem(
+                sessionStorage.setItem(
                     "prizeDetailList",
                     JSON.stringify(prizeDetailList)
                 );
@@ -370,7 +364,7 @@ export async function getPrizes() {
                     seen: prizeDetailList[index].seen,
                     completed: prizeDetailList[index].completed,
                 };
-                localStorage.setItem(
+                sessionStorage.setItem(
                     "prizeDetailList",
                     JSON.stringify(prizeDetailList)
                 );
@@ -378,11 +372,6 @@ export async function getPrizes() {
 
             availablePrizeList.push(p.getPrizeId());
         }
-
-        // FINISHED PRIZES INDEX TO FILTER IT OUT
-        let removedPrizeIdx = finishedPrizeList.findIndex(
-            (e) => e.prizeId === p.getPrizeId()
-        );
 
         // FEATURE DATA
         if (p.getTypeId() === 1) {
@@ -394,69 +383,67 @@ export async function getPrizes() {
                             (el) => el.endTimeStamp === p.getEndTimestamp()
                         )?.endTimeStamp
             );
-            if (removedPrizeIdx === -1) {
-                if (featuredIndex === -1) {
-                    _featuredData.push({
-                        groupId: p.getGroupId(),
-                        prizeId: p.getPrizeId(),
-                        prizeTitle: p.getPrizeTitle(),
-                        prizeSubtitle: p.getPrizeSubtitle(),
-                        prizeBG: p.getPrizeImgUrl(),
-                        prizeBG2: p.getPrizeImgUrl2(),
-                        prizeContent: p.getPrizeContent(),
-                        prizeProgress: p.getStatusProgress(),
-                        ticketsRequired: p.getTicketsRequired(),
-                        type_id: p.getTypeId(),
-                        status: p.getStatus(),
-                        statusProgress: p.getStatusProgress(),
-                        timeZone: p.getTimezone(),
-                        scheduledOn: p.getScheduledOn(),
-                        scheduledOff: p.getScheduledOff(),
-                        gameInfo: [
-                            {
-                                gameTitle: p.getGameTitle(),
-                                gameSubtitle: p.getGameSubtitle(),
-                                gameIcon: p.getGameImgUrl(),
-                                gameId: p.getGameId(),
-                                days: p.getGameDurationDays(),
-                                hours: p.getGameDurationHours(),
-                                minutes: p.getGameDurationMinutes(),
-                                startTimeStamp: p.getStartTimestamp(),
-                                endTimeStamp: p.getEndTimestamp(),
-                                score: p.getScoreRule(),
-                                watchAdTickets: p.getWatchAdGetTickets(),
-                                watchAdExp: p.getWatchAdGetExp(),
-                                useGemTickets: p.getUseGemGetTickets(),
-                                useGemExp: p.getUseGemGetExp(),
-                                useHowManyGems: p.getUseHowManyGems(),
-                            },
-                        ],
-                        repeatedOn: p.getRepeatedOnList(),
-                        prizeDuration: {
-                            days: p.getPrizeDurationDays(),
-                            hours: p.getPrizeDurationHours(),
+            if (featuredIndex === -1) {
+                _featuredData.push({
+                    groupId: p.getGroupId(),
+                    prizeId: p.getPrizeId(),
+                    prizeTitle: p.getPrizeTitle(),
+                    prizeSubtitle: p.getPrizeSubtitle(),
+                    prizeBG: p.getPrizeImgUrl(),
+                    prizeBG2: p.getPrizeImgUrl2(),
+                    prizeContent: p.getPrizeContent(),
+                    prizeProgress: p.getStatusProgress(),
+                    ticketsRequired: p.getTicketsRequired(),
+                    type_id: p.getTypeId(),
+                    status: p.getStatus(),
+                    statusProgress: p.getStatusProgress(),
+                    timeZone: p.getTimezone(),
+                    scheduledOn: p.getScheduledOn(),
+                    scheduledOff: p.getScheduledOff(),
+                    gameInfo: [
+                        {
+                            gameTitle: p.getGameTitle(),
+                            gameSubtitle: p.getGameSubtitle(),
+                            gameIcon: p.getGameImgUrl(),
+                            gameId: p.getGameId(),
+                            days: p.getGameDurationDays(),
+                            hours: p.getGameDurationHours(),
+                            minutes: p.getGameDurationMinutes(),
+                            startTimeStamp: p.getStartTimestamp(),
+                            endTimeStamp: p.getEndTimestamp(),
+                            score: p.getScoreRule(),
+                            watchAdTickets: p.getWatchAdGetTickets(),
+                            watchAdExp: p.getWatchAdGetExp(),
+                            useGemTickets: p.getUseGemGetTickets(),
+                            useGemExp: p.getUseGemGetExp(),
+                            useHowManyGems: p.getUseHowManyGems(),
                         },
-                        overTime: p.getOvertime(),
-                    });
-                } else {
-                    _featuredData[featuredIndex].gameInfo.push({
-                        gameTitle: p.getGameTitle(),
-                        gameSubtitle: p.getGameSubtitle(),
-                        gameIcon: p.getGameImgUrl(),
-                        gameId: p.getGameId(),
-                        days: p.getGameDurationDays(),
-                        hours: p.getGameDurationHours(),
-                        minutes: p.getGameDurationMinutes(),
-                        startTimeStamp: p.getStartTimestamp(),
-                        endTimeStamp: p.getEndTimestamp(),
-                        score: p.getScoreRule(),
-                        watchAdTickets: p.getWatchAdGetTickets(),
-                        watchAdExp: p.getWatchAdGetExp(),
-                        useGemTickets: p.getUseGemGetTickets(),
-                        useGemExp: p.getUseGemGetExp(),
-                        useHowManyGems: p.getUseHowManyGems(),
-                    });
-                }
+                    ],
+                    repeatedOn: p.getRepeatedOnList(),
+                    prizeDuration: {
+                        days: p.getPrizeDurationDays(),
+                        hours: p.getPrizeDurationHours(),
+                    },
+                    overTime: p.getOvertime(),
+                });
+            } else {
+                _featuredData[featuredIndex].gameInfo.push({
+                    gameTitle: p.getGameTitle(),
+                    gameSubtitle: p.getGameSubtitle(),
+                    gameIcon: p.getGameImgUrl(),
+                    gameId: p.getGameId(),
+                    days: p.getGameDurationDays(),
+                    hours: p.getGameDurationHours(),
+                    minutes: p.getGameDurationMinutes(),
+                    startTimeStamp: p.getStartTimestamp(),
+                    endTimeStamp: p.getEndTimestamp(),
+                    score: p.getScoreRule(),
+                    watchAdTickets: p.getWatchAdGetTickets(),
+                    watchAdExp: p.getWatchAdGetExp(),
+                    useGemTickets: p.getUseGemGetTickets(),
+                    useGemExp: p.getUseGemGetExp(),
+                    useHowManyGems: p.getUseHowManyGems(),
+                });
             }
         }
         // PREMIUM DATA
@@ -469,69 +456,67 @@ export async function getPrizes() {
                             (el) => el.endTimeStamp === p.getEndTimestamp()
                         )?.endTimeStamp
             );
-            if (removedPrizeIdx === -1) {
-                if (premiumIndex === -1) {
-                    _premiumData.push({
-                        groupId: p.getGroupId(),
-                        prizeId: p.getPrizeId(),
-                        prizeTitle: p.getPrizeTitle(),
-                        prizeSubtitle: p.getPrizeSubtitle(),
-                        prizeBG: p.getPrizeImgUrl(),
-                        prizeBG2: p.getPrizeImgUrl2(),
-                        prizeContent: p.getPrizeContent(),
-                        prizeProgress: p.getStatusProgress(),
-                        timeZone: p.getTimezone(),
-                        scheduledOn: p.getScheduledOn(),
-                        scheduledOff: p.getScheduledOff(),
-                        ticketsRequired: p.getTicketsRequired(),
-                        type_id: p.getTypeId(),
-                        status: p.getStatus(),
-                        statusProgress: p.getStatusProgress(),
-                        gameInfo: [
-                            {
-                                gameTitle: p.getGameTitle(),
-                                gameSubtitle: p.getGameSubtitle(),
-                                gameIcon: p.getGameImgUrl(),
-                                gameId: p.getGameId(),
-                                days: p.getGameDurationDays(),
-                                hours: p.getGameDurationHours(),
-                                minutes: p.getGameDurationMinutes(),
-                                startTimeStamp: p.getStartTimestamp(),
-                                endTimeStamp: p.getEndTimestamp(),
-                                score: p.getScoreRule(),
-                                watchAdTickets: p.getWatchAdGetTickets(),
-                                watchAdExp: p.getWatchAdGetExp(),
-                                useGemTickets: p.getUseGemGetTickets(),
-                                useGemExp: p.getUseGemGetExp(),
-                                useHowManyGems: p.getUseHowManyGems(),
-                            },
-                        ],
-                        repeatedOn: p.getRepeatedOnList(),
-                        prizeDuration: {
-                            days: p.getPrizeDurationDays(),
-                            hours: p.getPrizeDurationHours(),
+            if (premiumIndex === -1) {
+                _premiumData.push({
+                    groupId: p.getGroupId(),
+                    prizeId: p.getPrizeId(),
+                    prizeTitle: p.getPrizeTitle(),
+                    prizeSubtitle: p.getPrizeSubtitle(),
+                    prizeBG: p.getPrizeImgUrl(),
+                    prizeBG2: p.getPrizeImgUrl2(),
+                    prizeContent: p.getPrizeContent(),
+                    prizeProgress: p.getStatusProgress(),
+                    timeZone: p.getTimezone(),
+                    scheduledOn: p.getScheduledOn(),
+                    scheduledOff: p.getScheduledOff(),
+                    ticketsRequired: p.getTicketsRequired(),
+                    type_id: p.getTypeId(),
+                    status: p.getStatus(),
+                    statusProgress: p.getStatusProgress(),
+                    gameInfo: [
+                        {
+                            gameTitle: p.getGameTitle(),
+                            gameSubtitle: p.getGameSubtitle(),
+                            gameIcon: p.getGameImgUrl(),
+                            gameId: p.getGameId(),
+                            days: p.getGameDurationDays(),
+                            hours: p.getGameDurationHours(),
+                            minutes: p.getGameDurationMinutes(),
+                            startTimeStamp: p.getStartTimestamp(),
+                            endTimeStamp: p.getEndTimestamp(),
+                            score: p.getScoreRule(),
+                            watchAdTickets: p.getWatchAdGetTickets(),
+                            watchAdExp: p.getWatchAdGetExp(),
+                            useGemTickets: p.getUseGemGetTickets(),
+                            useGemExp: p.getUseGemGetExp(),
+                            useHowManyGems: p.getUseHowManyGems(),
                         },
-                        overTime: p.getOvertime(),
-                    });
-                } else {
-                    _premiumData[premiumIndex].gameInfo.push({
-                        gameTitle: p.getGameTitle(),
-                        gameSubtitle: p.getGameSubtitle(),
-                        gameIcon: p.getGameImgUrl(),
-                        gameId: p.getGameId(),
-                        days: p.getGameDurationDays(),
-                        hours: p.getGameDurationHours(),
-                        minutes: p.getGameDurationMinutes(),
-                        startTimeStamp: p.getStartTimestamp(),
-                        endTimeStamp: p.getEndTimestamp(),
-                        score: p.getScoreRule(),
-                        watchAdTickets: p.getWatchAdGetTickets(),
-                        watchAdExp: p.getWatchAdGetExp(),
-                        useGemTickets: p.getUseGemGetTickets(),
-                        useGemExp: p.getUseGemGetExp(),
-                        useHowManyGems: p.getUseHowManyGems(),
-                    });
-                }
+                    ],
+                    repeatedOn: p.getRepeatedOnList(),
+                    prizeDuration: {
+                        days: p.getPrizeDurationDays(),
+                        hours: p.getPrizeDurationHours(),
+                    },
+                    overTime: p.getOvertime(),
+                });
+            } else {
+                _premiumData[premiumIndex].gameInfo.push({
+                    gameTitle: p.getGameTitle(),
+                    gameSubtitle: p.getGameSubtitle(),
+                    gameIcon: p.getGameImgUrl(),
+                    gameId: p.getGameId(),
+                    days: p.getGameDurationDays(),
+                    hours: p.getGameDurationHours(),
+                    minutes: p.getGameDurationMinutes(),
+                    startTimeStamp: p.getStartTimestamp(),
+                    endTimeStamp: p.getEndTimestamp(),
+                    score: p.getScoreRule(),
+                    watchAdTickets: p.getWatchAdGetTickets(),
+                    watchAdExp: p.getWatchAdGetExp(),
+                    useGemTickets: p.getUseGemGetTickets(),
+                    useGemExp: p.getUseGemGetExp(),
+                    useHowManyGems: p.getUseHowManyGems(),
+                });
             }
         }
         // TIME SENSITIVE DATA
@@ -544,68 +529,66 @@ export async function getPrizes() {
                             (el) => el.endTimeStamp === p.getEndTimestamp()
                         )?.endTimeStamp
             );
-            if (removedPrizeIdx === -1) {
-                if (dailyIndex === -1) {
-                    _dailyData.push({
-                        groupId: p.getGroupId(),
-                        prizeId: p.getPrizeId(),
-                        prizeTitle: p.getPrizeTitle(),
-                        prizeSubtitle: p.getPrizeSubtitle(),
-                        prizeBG: p.getPrizeImgUrl(),
-                        prizeBG2: p.getPrizeImgUrl2(),
-                        prizeContent: p.getPrizeContent(),
-                        prizeProgress: p.getStatusProgress(),
-                        timeZone: p.getTimezone(),
-                        scheduledOn: p.getScheduledOn(),
-                        scheduledOff: p.getScheduledOff(),
-                        type_id: p.getTypeId(),
-                        status: p.getStatus(),
-                        statusProgress: p.getStatusProgress(),
-                        gameInfo: [
-                            {
-                                gameTitle: p.getGameTitle(),
-                                gameSubtitle: p.getGameSubtitle(),
-                                gameIcon: p.getGameImgUrl(),
-                                gameId: p.getGameId(),
-                                days: p.getGameDurationDays(),
-                                hours: p.getGameDurationHours(),
-                                minutes: p.getGameDurationMinutes(),
-                                startTimeStamp: p.getStartTimestamp(),
-                                endTimeStamp: p.getEndTimestamp(),
-                                score: p.getScoreRule(),
-                                watchAdTickets: p.getWatchAdGetTickets(),
-                                watchAdExp: p.getWatchAdGetExp(),
-                                useGemTickets: p.getUseGemGetTickets(),
-                                useGemExp: p.getUseGemGetExp(),
-                                useHowManyGems: p.getUseHowManyGems(),
-                            },
-                        ],
-                        repeatedOn: p.getRepeatedOnList(),
-                        prizeDuration: {
-                            days: p.getPrizeDurationDays(),
-                            hours: p.getPrizeDurationHours(),
+            if (dailyIndex === -1) {
+                _dailyData.push({
+                    groupId: p.getGroupId(),
+                    prizeId: p.getPrizeId(),
+                    prizeTitle: p.getPrizeTitle(),
+                    prizeSubtitle: p.getPrizeSubtitle(),
+                    prizeBG: p.getPrizeImgUrl(),
+                    prizeBG2: p.getPrizeImgUrl2(),
+                    prizeContent: p.getPrizeContent(),
+                    prizeProgress: p.getStatusProgress(),
+                    timeZone: p.getTimezone(),
+                    scheduledOn: p.getScheduledOn(),
+                    scheduledOff: p.getScheduledOff(),
+                    type_id: p.getTypeId(),
+                    status: p.getStatus(),
+                    statusProgress: p.getStatusProgress(),
+                    gameInfo: [
+                        {
+                            gameTitle: p.getGameTitle(),
+                            gameSubtitle: p.getGameSubtitle(),
+                            gameIcon: p.getGameImgUrl(),
+                            gameId: p.getGameId(),
+                            days: p.getGameDurationDays(),
+                            hours: p.getGameDurationHours(),
+                            minutes: p.getGameDurationMinutes(),
+                            startTimeStamp: p.getStartTimestamp(),
+                            endTimeStamp: p.getEndTimestamp(),
+                            score: p.getScoreRule(),
+                            watchAdTickets: p.getWatchAdGetTickets(),
+                            watchAdExp: p.getWatchAdGetExp(),
+                            useGemTickets: p.getUseGemGetTickets(),
+                            useGemExp: p.getUseGemGetExp(),
+                            useHowManyGems: p.getUseHowManyGems(),
                         },
-                        overTime: p.getOvertime(),
-                    });
-                } else {
-                    _dailyData[dailyIndex].gameInfo.push({
-                        gameTitle: p.getGameTitle(),
-                        gameSubtitle: p.getGameSubtitle(),
-                        gameIcon: p.getGameImgUrl(),
-                        gameId: p.getGameId(),
-                        days: p.getGameDurationDays(),
-                        hours: p.getGameDurationHours(),
-                        minutes: p.getGameDurationMinutes(),
-                        startTimeStamp: p.getStartTimestamp(),
-                        endTimeStamp: p.getEndTimestamp(),
-                        score: p.getScoreRule(),
-                        watchAdTickets: p.getWatchAdGetTickets(),
-                        watchAdExp: p.getWatchAdGetExp(),
-                        useGemTickets: p.getUseGemGetTickets(),
-                        useGemExp: p.getUseGemGetExp(),
-                        useHowManyGems: p.getUseHowManyGems(),
-                    });
-                }
+                    ],
+                    repeatedOn: p.getRepeatedOnList(),
+                    prizeDuration: {
+                        days: p.getPrizeDurationDays(),
+                        hours: p.getPrizeDurationHours(),
+                    },
+                    overTime: p.getOvertime(),
+                });
+            } else {
+                _dailyData[dailyIndex].gameInfo.push({
+                    gameTitle: p.getGameTitle(),
+                    gameSubtitle: p.getGameSubtitle(),
+                    gameIcon: p.getGameImgUrl(),
+                    gameId: p.getGameId(),
+                    days: p.getGameDurationDays(),
+                    hours: p.getGameDurationHours(),
+                    minutes: p.getGameDurationMinutes(),
+                    startTimeStamp: p.getStartTimestamp(),
+                    endTimeStamp: p.getEndTimestamp(),
+                    score: p.getScoreRule(),
+                    watchAdTickets: p.getWatchAdGetTickets(),
+                    watchAdExp: p.getWatchAdGetExp(),
+                    useGemTickets: p.getUseGemGetTickets(),
+                    useGemExp: p.getUseGemGetExp(),
+                    useHowManyGems: p.getUseHowManyGems(),
+                });
             }
         }
         // AUTOMATED ENTRY DATA
@@ -634,21 +617,21 @@ export async function getPrizes() {
     }
 
     // REMOVE ANY PRIZE FROM THE LOCAL LIST WHICH IS ALREADY FINISHED
-    let plList = JSON.parse(localStorage.getItem("prizeDetailList")) || [];
-    let _tempArr = [...plList];
-    plList.forEach((p) => {
-        if (
-            !availablePrizeList.includes(p?.prizeId) &&
-            !p.completed &&
-            !p.seen
-        ) {
-            _tempArr.splice(
-                _tempArr.findIndex((t) => t === p),
-                1
-            );
-            localStorage.setItem("prizeDetailList", JSON.stringify(_tempArr));
-        }
-    });
+    // let plList = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+    // let _tempArr = [...plList];
+    // plList.forEach((p) => {
+    //     if (
+    //         !availablePrizeList.includes(p?.prizeId) &&
+    //         !p.completed &&
+    //         !p.seen
+    //     ) {
+    //         _tempArr.splice(
+    //             _tempArr.findIndex((t) => t === p),
+    //             1
+    //         );
+    //         sessionStorage.setItem("prizeDetailList", JSON.stringify(_tempArr));
+    //     }
+    // });
 
     // REMOVING ANY DUPLICATE PRIZES
     prizes.featuredData = _.uniqBy(_featuredData, "prizeId");
@@ -1647,6 +1630,9 @@ export async function getNotifications(user) {
                         createdOn: e.getCreatedOn(),
                         winner: e.getWinnerNickname(),
                         winnerAvatarUrl: e.getWinnerAvatarUrl(),
+                        nftContractAddress: e.getNftContractAddress(),
+                        nftTokenId: e.getNftTokenId(),
+                        canClaimDate: e.getCanClaimDate(),
                     },
                 ],
             });
@@ -1674,6 +1660,9 @@ export async function getNotifications(user) {
                     createdOn: e.getCreatedOn(),
                     winner: e.getWinnerNickname(),
                     winnerAvatarUrl: e.getWinnerAvatarUrl(),
+                    nftContractAddress: e.getNftContractAddress(),
+                    nftTokenId: e.getNftTokenId(),
+                    canClaimDate: e.getCanClaimDate(),
                 });
             } else {
                 notificationList.push({
@@ -1698,6 +1687,9 @@ export async function getNotifications(user) {
                             createdOn: e.getCreatedOn(),
                             winner: e.getWinnerNickname(),
                             winnerAvatarUrl: e.getWinnerAvatarUrl(),
+                            nftContractAddress: e.getNftContractAddress(),
+                            nftTokenId: e.getNftTokenId(),
+                            canClaimDate: e.getCanClaimDate(),
                         },
                     ],
                 });

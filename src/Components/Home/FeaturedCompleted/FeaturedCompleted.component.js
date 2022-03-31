@@ -11,15 +11,18 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        let finishedPrizeList =
-            JSON.parse(localStorage.getItem("finishedPrizeList")) || [];
-        let idx = finishedPrizeList.findIndex(
-            (e) => e.prizeId === data?.prizeId
-        );
-        let diff = Date.now() - finishedPrizeList[idx]?.timeStamp;
-        if (diff > 16000) setLoading(false);
+        // let finishedPrizeList =
+        //     JSON.parse(localStorage.getItem("finishedPrizeList")) || [];
+        // let idx = finishedPrizeList.findIndex(
+        //     (e) => e.prizeId === data?.prizeId
+        // );
+        // let diff = Date.now() - finishedPrizeList[idx]?.timeStamp;
+        // if (diff > 16000) setLoading(false);
 
-        let timer = setTimeout(() => {
+        let timer = null;
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
             dispatch(loadNotifications());
             setLoading(false);
         }, 10000);
@@ -40,7 +43,9 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
                             {/* PRIZE TITLE, DESCRIPTION & ID */}
                             <div
                                 className="completed-prize-info position-relative"
-                                onClick={() => handleWinnerRevealCard(data?.type)}
+                                onClick={() =>
+                                    handleWinnerRevealCard(data?.type)
+                                }
                             >
                                 <img
                                     className="prize-img"

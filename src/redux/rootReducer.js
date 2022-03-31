@@ -29,7 +29,6 @@ import unClaimedPrizesReducer from "redux/reducers/UnClaimedPrizes.reducer";
 import updateNotificationTokenReducer from "redux/reducers/UpdateNotificationToken.reducer";
 import winnersReducer from "redux/reducers/Winners.reducer";
 import earnAdditinalBenefitReducer from "redux/reducers/EarnAdditionalTickets.reducer";
-import overTimeReducer from "redux/reducers/OverTime.reducer";
 import listGamesReducer from "redux/reducers/ListGames.reducer";
 import ToastyReducer from "redux/reducers/Toasty.reducer";
 
@@ -55,7 +54,6 @@ const appReducer = combineReducers({
     gamesList: listGamesReducer,
     notificationNumber: notificationNumberReducer,
     notifications: notificationReducer,
-    overTime: overTimeReducer,
     playerDetails: playerDetailsReducer,
     playerTournamentInfo: playerTournamentInfoReducer,
     playerHighScore: playerHighScoreReducer,

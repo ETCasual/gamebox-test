@@ -73,7 +73,7 @@ const App = () => {
             dispatch(loadExchangeRate());
             dispatch(loadRanks());
             dispatch(loadConfig());
-            dispatch(loadGemsList());   
+            dispatch(loadGemsList());
             dispatch(loadSpinnerRules());
             dispatch(loadGamesList());
 
@@ -130,7 +130,12 @@ const App = () => {
     useEffect(() => {
         getExchangeRate()
             .then((data) => {
-                if (data.ipInfo && data.ipInfo.country_code === "MY")
+                if (
+                    data.ipInfo &&
+                    (data.ipInfo.country_code === "MY" ||
+                        data.ipInfo.country_code === "SG" ||
+                        data.ipInfo.country_code === "ID")
+                )
                     setRegionAllow(true);
             })
             .finally(() => setPendingRegion(false));

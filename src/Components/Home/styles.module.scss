@@ -82,9 +82,14 @@
                     margin-top: 2.4rem;
                 }
                 .won-text,
-                .nft-token {
+                .nft-token,
+                .not-minted {
                     font-size: $fnt-sz-12;
                     color: #868686;
+                }
+                .not-minted,
+                .mint-date {
+                    font-size: $fnt-sz-10;
                 }
                 .prize-name {
                     text-align: center;

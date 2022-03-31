@@ -391,24 +391,14 @@ button {
 #notification-panel {
     position: fixed;
     top: 5rem;
-    right: 3%;
+    right: 1rem;
     height: auto;
     width: 18.5rem;
     z-index: 3;
     background: linear-gradient(149deg, #3c3c3c 5%, #0b0b0bfc 50%);
     box-shadow: 0px 10px 10px #00000040;
     border-radius: 10px;
-
-    // RIGHT
-    @include media-min($md) {
-        right: 9.7%;
-    }
-    @media only screen and (min-width: 992px) {
-        right: 18%;
-    }
-    @media only screen and (min-width: 1200px) {
-        right: 21.6%;
-    }
+  
     // WIDTH
     @media only screen and (min-width: 360px) {
         width: 21rem;

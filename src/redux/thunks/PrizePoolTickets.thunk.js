@@ -1,16 +1,13 @@
 import { GET_PRIZE_POOL_TICKETS, LOG_OUT, SHOW_TOAST } from "redux/types";
 import { getPrizeLatestTicketsCollected } from "redux/services/index.service";
-import {
-    loadOverTimeCheckerNormal,
-    loadOverTimeChecker,
-} from "redux/thunks/OverTime.thunk";
+// import {
+//     loadOverTimeCheckerNormal,
+//     loadOverTimeChecker,
+// } from "redux/thunks/OverTime.thunk";
+import loadPrizes from "redux/thunks/Prizes.thunk";
 
 // GET PRIZE POOL TICKETS - CALLED IN ALL OTHER COMPONENT - TRIGGERS TO ADD OVERTIME STATUS WHEN TICKETS POOL IS FULL
-export default function loadPrizePoolTickets(
-    prizeId,
-    ignoreCheck,
-    ticketsRequired
-) {
+export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
     return async (dispatch, getState) => {
         const { prizeTicketCollection } = getState()?.prizePoolTickets;
 
@@ -21,8 +18,15 @@ export default function loadPrizePoolTickets(
         )
             .then((data) => {
                 dispatch({ type: GET_PRIZE_POOL_TICKETS, payload: data });
-                if (data.tickets >= ticketsRequired)
-                    dispatch(loadOverTimeChecker(data?.prizeId));
+                if (data.tickets >= ticketsRequired) {
+                    // CALL PRIZE API
+                    let timeOutRef = null;
+                    clearTimeout(timeOutRef);
+                    timeOutRef = setTimeout(() => {
+                        dispatch(loadPrizes());
+                    }, 2000);
+                }
+                //     dispatch(loadOverTimeChecker(data?.prizeId));
             })
             .catch((error) => {
                 if (error.code === 7) {
@@ -57,9 +61,23 @@ export function loadPrizePoolTicketsWithOvertime(
         )
             .then((data) => {
                 dispatch({ type: GET_PRIZE_POOL_TICKETS, payload: data });
-                dispatch(
-                    loadOverTimeCheckerNormal(prizeId, ticketsRequired, data)
-                );
+                const _localPrizes =
+                JSON.parse(sessionStorage.getItem("prizeDetailList")) ||
+                [];
+                if (data?.tickets >= ticketsRequired) {
+                    // UPDATING LOCAL PRIZE LIST THAT CURRENT PRIZE IS COMPLETED
+                   
+                    let idx = _localPrizes.findIndex(
+                        (e) => e.prizeId === data?.prizeId
+                    );
+                    if (idx > -1) {
+                        _localPrizes[idx].completed = true;
+                        sessionStorage.setItem(
+                            "prizeDetailList",
+                            JSON.stringify(_localPrizes)
+                        );
+                    }
+                }
             })
             .catch((error) => {
                 if (error.code === 7) {

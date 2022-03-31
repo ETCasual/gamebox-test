@@ -16,7 +16,7 @@ import EarnAdditionalBenefitModal from "Components/Modals/EarnAdditionalBenefit.
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import { GET_LEADERBOARD } from "redux/types";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
-import loadPrizePoolTickets from "redux/thunks/PrizePoolTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import loadPlayerEnterTournamentId from "redux/thunks/PlayerEnterTournament.thunk";
 import loadPlayerLeaveTournamentId from "redux/thunks/PlayerLeaveTournament.thunk";
@@ -225,7 +225,7 @@ const Leaderboard = ({
                 };
                 let response = await axios.get(url, options);
                 if (response.data) {
-                    launch();
+                    if (process.env.NODE_ENV === "production") launch();
                     setGameData(response.data);
                     let gameCount =
                         parseInt(localStorage.getItem("gameCount")) || 0;
