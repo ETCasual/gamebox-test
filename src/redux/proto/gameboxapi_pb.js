@@ -18116,7 +18116,8 @@ proto.api.gamebox.ItemDetail.toObject = function(includeInstance, msg) {
     typeId: jspb.Message.getFieldWithDefault(msg, 6, 0),
     price: +jspb.Message.getFieldWithDefault(msg, 7, 0.0),
     quantity: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    status: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    paymentTypeId: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    status: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -18186,6 +18187,10 @@ proto.api.gamebox.ItemDetail.deserializeBinaryFromReader = function(msg, reader)
       msg.setQuantity(value);
       break;
     case 9:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPaymentTypeId(value);
+      break;
+    case 10:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setStatus(value);
       break;
@@ -18274,10 +18279,17 @@ proto.api.gamebox.ItemDetail.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getStatus();
+  f = message.getPaymentTypeId();
   if (f !== 0) {
     writer.writeInt32(
       9,
+      f
+    );
+  }
+  f = message.getStatus();
+  if (f !== 0) {
+    writer.writeInt32(
+      10,
       f
     );
   }
@@ -18405,17 +18417,32 @@ proto.api.gamebox.ItemDetail.prototype.setQuantity = function(value) {
 
 
 /**
- * optional int32 status = 9;
+ * optional int32 payment_type_id = 9;
  * @return {number}
  */
-proto.api.gamebox.ItemDetail.prototype.getStatus = function() {
+proto.api.gamebox.ItemDetail.prototype.getPaymentTypeId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.ItemDetail.prototype.setStatus = function(value) {
+proto.api.gamebox.ItemDetail.prototype.setPaymentTypeId = function(value) {
   jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int32 status = 10;
+ * @return {number}
+ */
+proto.api.gamebox.ItemDetail.prototype.getStatus = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ItemDetail.prototype.setStatus = function(value) {
+  jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
