@@ -3548,5 +3548,66 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.getNotificationNo =
 };
 
 
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.ListBlockchainNetworksRequest,
+ *   !proto.api.gamebox.ListBlockchainNetworksResponse>}
+ */
+const methodDescriptor_GameboxApi_ListBlockchainNetworks = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/ListBlockchainNetworks',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.ListBlockchainNetworksRequest,
+  proto.api.gamebox.ListBlockchainNetworksResponse,
+  /**
+   * @param {!proto.api.gamebox.ListBlockchainNetworksRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.ListBlockchainNetworksResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.ListBlockchainNetworksRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.ListBlockchainNetworksResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.ListBlockchainNetworksResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.listBlockchainNetworks =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/ListBlockchainNetworks',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_ListBlockchainNetworks,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.ListBlockchainNetworksRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.ListBlockchainNetworksResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.listBlockchainNetworks =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/ListBlockchainNetworks',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_ListBlockchainNetworks);
+};
+
+
 module.exports = proto.api.gamebox;
 
