@@ -159,7 +159,7 @@ const Index = () => {
                 let _arr = [];
                 notificationList.forEach((n) => {
                     n?.list?.forEach((e) => {
-                        if (e.type === "winner" && e.seen) {
+                        if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
