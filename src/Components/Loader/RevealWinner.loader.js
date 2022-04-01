@@ -6,7 +6,7 @@ const RevealWinnerLoader = ({ cx1, cx2, cx3, cx4 }) => (
         style={{ height: "3.5vh" }}
         width={350}
         speed={1.5}
-        foregroundColor="#8E21EC"
+        foregroundColor="#FF007C"
     >
         <circle cx={cx1} cy={20} r="5" />
         <circle cx={cx2} cy={20} r="5" />
