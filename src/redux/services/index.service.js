@@ -4,6 +4,7 @@ import {
     BuyRequest,
     ClaimWinnerRequest,
     ListPrizeRequest,
+    ListBlockchainNetworksRequest,
     ListRankRequest,
     ListLogPrizePoolRequest,
     ListWinnerRequest,
@@ -334,6 +335,7 @@ export async function getPrizes() {
                         hours: p.getPrizeDurationHours(),
                     },
                     overTime: p.getOvertime(),
+                    blockchainNetwork: p.getBlockchainNetwork(),
                     seen: false,
                     completed: false,
                 });
@@ -426,6 +428,7 @@ export async function getPrizes() {
                         hours: p.getPrizeDurationHours(),
                     },
                     overTime: p.getOvertime(),
+                    blockchainNetwork: p.getBlockchainNetwork(),
                 });
             } else {
                 _featuredData[featuredIndex].gameInfo.push({
@@ -499,6 +502,7 @@ export async function getPrizes() {
                         hours: p.getPrizeDurationHours(),
                     },
                     overTime: p.getOvertime(),
+                    blockchainNetwork: p.getBlockchainNetwork(),
                 });
             } else {
                 _premiumData[premiumIndex].gameInfo.push({
@@ -571,6 +575,7 @@ export async function getPrizes() {
                         hours: p.getPrizeDurationHours(),
                     },
                     overTime: p.getOvertime(),
+                    blockchainNetwork: p.getBlockchainNetwork(),
                 });
             } else {
                 _dailyData[dailyIndex].gameInfo.push({
@@ -613,26 +618,10 @@ export async function getPrizes() {
                     days: p.getPrizeDurationDays(),
                     hours: p.getPrizeDurationHours(),
                 },
+                blockchainNetwork: p.getBlockchainNetwork(),
             });
         }
     }
-
-    // REMOVE ANY PRIZE FROM THE LOCAL LIST WHICH IS ALREADY FINISHED
-    // let plList = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
-    // let _tempArr = [...plList];
-    // plList.forEach((p) => {
-    //     if (
-    //         !availablePrizeList.includes(p?.prizeId) &&
-    //         !p.completed &&
-    //         !p.seen
-    //     ) {
-    //         _tempArr.splice(
-    //             _tempArr.findIndex((t) => t === p),
-    //             1
-    //         );
-    //         sessionStorage.setItem("prizeDetailList", JSON.stringify(_tempArr));
-    //     }
-    // });
 
     // REMOVING ANY DUPLICATE PRIZES
     prizes.featuredData = _.uniqBy(_featuredData, "prizeId");
@@ -642,6 +631,33 @@ export async function getPrizes() {
     );
     prizes.dailyData = _.uniqBy(_dailyData, "prizeId");
     return { prizes, gameRulesList };
+}
+
+//
+//  GET BLOCK CHAIN NETWORK
+//
+export async function getBlockchainNetworks() {
+    const token = getToken();
+    const request = new ListBlockchainNetworksRequest();
+
+    const response = await client.listBlockchainNetworks(request, {
+        authorization: `Bearer ${token}`,
+    });
+    const data = response.getResultList();
+    let blockchainNetworks = [];
+    data.forEach((e) => {
+        blockchainNetworks.push({
+            id: e.getId(),
+            networkName: e.getNetworkName(),
+            rpcUrl: e.getRpcUrl(),
+            chainId: e.getChainId(),
+            currencySymbol: e.getCurrencySymbol(),
+            blockExplorerUrl: e.getBlockExplorerUrl(),
+            prizeDistributorAddress: e.getPrizeDistributorAddress(),
+            systemTokenAddress: e.getSystemTokenAddress(),
+        });
+    });
+    return blockchainNetworks;
 }
 
 //

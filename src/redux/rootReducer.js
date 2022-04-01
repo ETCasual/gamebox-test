@@ -31,6 +31,7 @@ import winnersReducer from "redux/reducers/Winners.reducer";
 import earnAdditinalBenefitReducer from "redux/reducers/EarnAdditionalTickets.reducer";
 import listGamesReducer from "redux/reducers/ListGames.reducer";
 import ToastyReducer from "redux/reducers/Toasty.reducer";
+import blockchainNetworksReducer from "redux/reducers/BlockchainNetworks.reducer";
 
 import { LOG_OUT } from "redux/types";
 
@@ -61,6 +62,7 @@ const appReducer = combineReducers({
     playerTickets: playerTicketsReducer,
     prizePoolTickets: prizePoolTicketsReducer,
     prizes: prizesReducer,
+    blockchainNetworks: blockchainNetworksReducer,
     ranks: ranksReducer,
     userData: loginReducer,
     unClaimedPrizes: unClaimedPrizesReducer,

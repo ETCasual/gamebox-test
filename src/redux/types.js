@@ -48,3 +48,4 @@ export const LIST_GAMES = "LIST_GAMES";
 export const LOG_OUT = "LOG_OUT";
 export const SHOW_TOAST = "SHOW_TOAST";
 export const RESET_TOAST = "RESET_TOAST";
+export const GET_BLOCK_CHAIN_NETWORKS = "GET_BLOCK_CHAIN_NETWORKS";

@@ -40,6 +40,7 @@ import loadNotifications from "redux/thunks/Notifcations.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
+import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import { LOG_OUT } from "redux/types";
 
 const App = () => {
@@ -70,6 +71,7 @@ const App = () => {
         if (user.id) {
             // dispatch(loadLoginUser(authUser, isNewUser));
             dispatch(loadPrizes());
+            dispatch(loadBlockChainNetworks())
             dispatch(loadExchangeRate());
             dispatch(loadRanks());
             dispatch(loadConfig());
