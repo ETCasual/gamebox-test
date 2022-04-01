@@ -6,15 +6,17 @@ import VisibilitySensor from "react-visibility-sensor";
 
 // COMPONENTS
 import PremiumCompleted from "Components/Home/PremiumCompleted/PremiumCompleted.component";
+import GenericLoader from "Components/Loader/Generic.loader";
+
+// REDUX
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 // HELPER FUNCTIONS
 import { scrollToTop } from "Utils/ScrollToTop";
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
-// import OverTimeModeChecker from "Utils/OverTimeModeChecker";
-import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -149,15 +151,33 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         poolTickets,
                                         data?.prizeId
                                     ) < data?.ticketsRequired && (
-                                        <p className="mb-0">{`${
-                                            (
-                                                data?.ticketsRequired -
+                                        <p className="mb-0">
+                                            {data?.ticketsRequired -
                                                 getPrizeTicketCollected(
                                                     prizeTicketCollection,
                                                     data?.prizeId
-                                                )
-                                            )?.toLocaleString() || "-"
-                                        } tickets remaining`}</p>
+                                                ) <=
+                                            0 ? (
+                                                <GenericLoader
+                                                    height="30"
+                                                    bg="#FF007C"
+                                                    cx1="43%"
+                                                    cx2="50%"
+                                                    cx3="58%"
+                                                    cy="15"
+                                                />
+                                            ) : (
+                                                `${
+                                                    (
+                                                        data?.ticketsRequired -
+                                                        getPrizeTicketCollected(
+                                                            prizeTicketCollection,
+                                                            data?.prizeId
+                                                        )
+                                                    )?.toLocaleString() || "-"
+                                                } tickets remaining`
+                                            )}
+                                        </p>
                                     )}
                                 </div>
                             </Link>

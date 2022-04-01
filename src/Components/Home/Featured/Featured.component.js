@@ -6,14 +6,17 @@ import VisibilitySensor from "react-visibility-sensor";
 
 // COMPONENTS
 import FeaturedCompleted from "Components/Home/FeaturedCompleted/FeaturedCompleted.component";
+import GenericLoader from "Components/Loader/Generic.loader";
+
+// REDUX
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 // HELPER FUNCTIONS
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
 import { scrollToTop } from "Utils/ScrollToTop";
-import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 const Featured = ({ data, length, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -142,35 +145,53 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                         )?.toLocaleString() ||
                                                             0}
                                                     </p>
-                                                    <div className="d-flex">
-                                                        <p
-                                                            className={`mb-0 d-flex align-items-center ${
-                                                                getPoolTickets(
-                                                                    poolTickets,
-                                                                    data?.prizeId
-                                                                ) >=
-                                                                data?.ticketsRequired
-                                                                    ? "text-danger timer"
-                                                                    : "remaining-tickets"
-                                                            }`}
-                                                        >
-                                                            {getPoolTickets(
-                                                                poolTickets,
-                                                                data?.prizeId
-                                                            ) >=
-                                                            data?.ticketsRequired
-                                                                ? timer
-                                                                : `${
-                                                                      (
-                                                                          data?.ticketsRequired -
-                                                                          getPrizeTicketCollected(
-                                                                              prizeTicketCollection,
-                                                                              data?.prizeId
-                                                                          )
-                                                                      )?.toLocaleString() ||
-                                                                      "-"
-                                                                  } tickets remaining`}
-                                                        </p>
+                                                    <div className="d-flex remaining-tickets">
+                                                        {getPoolTickets(
+                                                            poolTickets,
+                                                            data?.prizeId
+                                                        ) >=
+                                                            data?.ticketsRequired && (
+                                                            <p className="mb-0 draw-timer d-flex align-items-center">
+                                                                Draw starts in{" "}
+                                                                <span className="text-danger ml-1">
+                                                                    {timer}
+                                                                </span>
+                                                            </p>
+                                                        )}
+                                                        {getPoolTickets(
+                                                            poolTickets,
+                                                            data?.prizeId
+                                                        ) <
+                                                            data?.ticketsRequired && (
+                                                            <p className="mb-0 d-flex align-items-center">
+                                                                {data?.ticketsRequired -
+                                                                    getPrizeTicketCollected(
+                                                                        prizeTicketCollection,
+                                                                        data?.prizeId
+                                                                    ) <=
+                                                                0 ? (
+                                                                    <GenericLoader
+                                                                        height="30"
+                                                                        bg="#FF007C"
+                                                                        cx1="80%"
+                                                                        cx2="88%"
+                                                                        cx3="96%"
+                                                                        cy="15"
+                                                                    />
+                                                                ) : (
+                                                                    `${
+                                                                        (
+                                                                            data?.ticketsRequired -
+                                                                            getPrizeTicketCollected(
+                                                                                prizeTicketCollection,
+                                                                                data?.prizeId
+                                                                            )
+                                                                        )?.toLocaleString() ||
+                                                                        "-"
+                                                                    } tickets remaining`
+                                                                )}
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <button className="btn-participate w-100 p-3 mt-4">
