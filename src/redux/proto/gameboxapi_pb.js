@@ -28220,7 +28220,8 @@ proto.api.gamebox.WinnerDetail.toObject = function(includeInstance, msg) {
     deliveryCompany: jspb.Message.getFieldWithDefault(msg, 23, ""),
     transactionHash: jspb.Message.getFieldWithDefault(msg, 24, ""),
     totalPlayer: jspb.Message.getFieldWithDefault(msg, 25, 0),
-    prizeBlockchainNetwork: jspb.Message.getFieldWithDefault(msg, 26, 0)
+    prizeBlockchainNetwork: jspb.Message.getFieldWithDefault(msg, 26, 0),
+    prizeContractType: jspb.Message.getFieldWithDefault(msg, 27, 0)
   };
 
   if (includeInstance) {
@@ -28360,6 +28361,10 @@ proto.api.gamebox.WinnerDetail.deserializeBinaryFromReader = function(msg, reade
     case 26:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setPrizeBlockchainNetwork(value);
+      break;
+    case 27:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPrizeContractType(value);
       break;
     default:
       reader.skipField();
@@ -28569,6 +28574,13 @@ proto.api.gamebox.WinnerDetail.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt32(
       26,
+      f
+    );
+  }
+  f = message.getPrizeContractType();
+  if (f !== 0) {
+    writer.writeInt32(
+      27,
       f
     );
   }
@@ -28962,6 +28974,21 @@ proto.api.gamebox.WinnerDetail.prototype.getPrizeBlockchainNetwork = function() 
 /** @param {number} value */
 proto.api.gamebox.WinnerDetail.prototype.setPrizeBlockchainNetwork = function(value) {
   jspb.Message.setProto3IntField(this, 26, value);
+};
+
+
+/**
+ * optional int32 prize_contract_type = 27;
+ * @return {number}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getPrizeContractType = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 27, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.WinnerDetail.prototype.setPrizeContractType = function(value) {
+  jspb.Message.setProto3IntField(this, 27, value);
 };
 
 
