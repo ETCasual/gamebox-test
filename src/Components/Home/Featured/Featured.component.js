@@ -146,8 +146,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                             0}
                                                     </p>
                                                     <div className="d-flex remaining-tickets">
-                                                        {getPoolTickets(
-                                                            poolTickets,
+                                                        {getPrizeTicketCollected(
+                                                            prizeTicketCollection,
                                                             data?.prizeId
                                                         ) >=
                                                             data?.ticketsRequired && (
@@ -158,8 +158,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                                 </span>
                                                             </p>
                                                         )}
-                                                        {getPoolTickets(
-                                                            poolTickets,
+                                                        {getPrizeTicketCollected(
+                                                            prizeTicketCollection,
                                                             data?.prizeId
                                                         ) <
                                                             data?.ticketsRequired && (
