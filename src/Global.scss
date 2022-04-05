@@ -160,9 +160,6 @@ button {
     z-index: 3;
     top: 0;
     height: 70px;
-    @include media-min($md) {
-        height: auto;
-    }
     max-height: 70px;
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         background-color: rgba(138, 138, 138, 0.3);
