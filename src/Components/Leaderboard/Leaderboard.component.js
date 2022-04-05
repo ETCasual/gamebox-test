@@ -151,41 +151,41 @@ const Leaderboard = ({
     ]);
 
     // RESIZE EVENT FOR LEADERBOARD HEIGHT
-    useEffect(() => {
-        window.addEventListener("resize", handleResize, false);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize, false);
 
-        function handleResize() {
-            if (
-                leaderboardRef.current &&
-                leaderBoardBackgroundRef.current &&
-                leaderBoardGameInfoRef.current &&
-                readyTournamentButtonRef.current
-            ) {
-                leaderBoardBackgroundRef.current.style.height =
-                    window.innerWidth > 1200
-                        ? `${window.innerHeight - 60 * 3.1}px`
-                        : window.innerWidth >= 768 && window.innerWidth <= 1024
-                        ? "60vh"
-                        : "75vh";
-                leaderboardRef.current.style.height = `${
-                    leaderBoardBackgroundRef.current.clientHeight -
-                    leaderBoardGameInfoRef.current.clientHeight -
-                    readyTournamentButtonRef.current.clientHeight +
-                    1
-                }px`;
-            }
-        }
-        let timeoutRef;
-        clearTimeout(timeoutRef);
-        timeoutRef = setTimeout(() => {
-            leaderboardRef.current && handleResize();
-        }, 300);
+    //     function handleResize() {
+    //         if (
+    //             leaderboardRef.current &&
+    //             leaderBoardBackgroundRef.current &&
+    //             leaderBoardGameInfoRef.current &&
+    //             readyTournamentButtonRef.current
+    //         ) {
+    //             leaderBoardBackgroundRef.current.style.height =
+    //                 window.innerWidth > 1200
+    //                     ? `${window.innerHeight - 60 * 3.1}px`
+    //                     : window.innerWidth >= 768 && window.innerWidth <= 1024
+    //                     ? "60vh"
+    //                     : "75vh";
+    //             leaderboardRef.current.style.height = `${
+    //                 leaderBoardBackgroundRef.current.clientHeight -
+    //                 leaderBoardGameInfoRef.current.clientHeight -
+    //                 readyTournamentButtonRef.current.clientHeight +
+    //                 1
+    //             }px`;
+    //         }
+    //     }
+    //     let timeoutRef;
+    //     clearTimeout(timeoutRef);
+    //     timeoutRef = setTimeout(() => {
+    //         leaderboardRef.current && handleResize();
+    //     }, 300);
 
-        return () => {
-            window.removeEventListener("resize", handleResize, false);
-            clearTimeout(timeoutRef);
-        };
-    }, [modalStatus.isGameReady]);
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize, false);
+    //         clearTimeout(timeoutRef);
+    //     };
+    // }, [modalStatus.isGameReady]);
 
     const isCurrentUser = (id) => {
         if (id > 0 && user.id === id) return true;
