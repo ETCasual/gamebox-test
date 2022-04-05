@@ -32,10 +32,10 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
 
     return (
         <div className="col-12 col-md-6 col-lg-6 col-xl-4 d-flex align-items-center justify-content-center mb-4">
-            <div className="w-100 position-relative">
+            <div className="w-100 h-100 position-relative">
                 <div
                     className="complete-overlay"
-                    onClick={() => handleWinnerRevealCard(data?.type)}
+                    onClick={() => handleWinnerRevealCard(data?.prizeId)}
                 >
                     <div className="wrapper d-flex flex-column align-items-center justify-content-end w-100">
                         <img
@@ -73,6 +73,7 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                     </div>
                 </div>
                 <div className="card-wrapper">
+                    <p className="prize-id mb-0">{data.prizeContent}</p>
                     <picture>
                         <source
                             media="(max-width:768px)"
@@ -82,8 +83,10 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                     </picture>
                     <div className="prize-info py-3">
                         <div className="col-12 d-flex align-items-center justify-content-between mb-2">
-                            <div className="prize-title">{data.prizeTitle}</div>
-                            <p className="mb-1 token-label d-flex align-items-center">
+                            <p className="prize-title mb-0">
+                                {data.prizeTitle}
+                            </p>
+                            <p className="mb-1 ticket-label d-flex align-items-center">
                                 Your tickets
                             </p>
                         </div>
@@ -91,15 +94,14 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                             <div className="prize-subtitle">
                                 {data.prizeSubtitle}
                             </div>
-                            <p className="mb-0 token-value d-flex align-items-center">
+                            <p className="mb-0 ticket-value d-flex align-items-center">
                                 {data?.ticketsRequired?.toLocaleString()}
                             </p>
                         </div>
                     </div>
-                    <div
-                        className={`d-flex align-items-center justify-content-center remaining-tokens`}
-                    >
-                        {data?.ticketsRequired?.toLocaleString()}
+                    <div className="d-flex align-items-center justify-content-center remaining-tickets">
+                        {data?.ticketsRequired?.toLocaleString()} tickets
+                        remaining
                     </div>
                 </div>
             </div>

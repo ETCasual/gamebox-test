@@ -209,66 +209,50 @@ const Index = () => {
         }
     }
 
-    // REVEAL CARD ONCLICK
-    function handleWinnerRevealCard(prizeType) {
+    // REVEAL CARD ONCLICK SHOW MODAL
+    function handleWinnerRevealCard(prizeId) {
         let _arr = [];
-        let data =
-            prizeType === 1 ? FeaturedData : prizeType === 2 ? PremiumData : [];
-        if (data.length > 0) {
-            notificationList.forEach((n) => {
-                n?.list?.forEach((e) => {
-                    let idx = data.findIndex(
-                        (d) => d.prizeId === e.prizeId && d.type === prizeType
+        notificationList.forEach((n) => {
+            _arr = n?.list?.filter(
+                (l) => l.prizeId === prizeId && l.type === "winner"
+            );
+            if (_arr.length > 0) {
+                setRevealCardModalData(_arr);
+
+                // UPDATE LOCALSTORAGE
+                const _prizeList =
+                    JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+
+                let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
+                if (idx > -1) {
+                    _prizeList[idx].seen = true;
+                    _prizeList[idx].completed = true;
+                    sessionStorage.setItem(
+                        "prizeDetailList",
+                        JSON.stringify(_prizeList)
                     );
-                    if (idx > -1 && e.type === "winner") {
-                        _arr.push(e);
-                    }
-                });
-            });
-            setRevealCardModalData(_arr);
-            setIsRevealCardModalShown(true);
-        }
+                }
+            }
+        });
+        setIsRevealCardModalShown(true);
         // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE
         return;
     }
     // REVEAL CARD MODAL CONTINUE TO HOMEPAGE BUTTON
-    const handleRevealBackButton = (prizeId) => {
-        updateLocalPrizeList(prizeId);
+    const handleRevealBackButton = () => {
+        const updateLocalPrizes =
+            JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+        let featureArr = updateLocalPrizes.filter(
+            (p) => p.type === 1 && !p.seen
+        );
+        let premiumArr = updateLocalPrizes.filter(
+            (p) => p.type === 2 && !p.seen
+        );
+        setFeaturedData(featureArr);
+        setPremiumData(premiumArr);
+
         setIsRevealCardModalShown(false);
     };
-    function updateLocalPrizeList(prizeId) {
-        // UPDATE LOCALSTORAGE
-        const localPrizes =
-            JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
-
-        let idx = localPrizes.findIndex((e) => e.prizeId === prizeId);
-        if (idx > -1) {
-            localPrizes[idx].seen = true;
-            localPrizes[idx].completed = true;
-            sessionStorage.setItem(
-                "prizeDetailList",
-                JSON.stringify(localPrizes)
-            );
-
-            // UPDATE STATE
-            const updateLocalPrizes =
-                JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
-            let featureArr = [];
-            let premiumArr = [];
-            updateLocalPrizes.forEach((e) => {
-                if (e.type === 1 && (e.completed || !e.completed) && !e.seen)
-                    featureArr.push(e);
-                else if (
-                    e.type === 2 &&
-                    (e.completed || !e.completed) &&
-                    !e.seen
-                )
-                    premiumArr.push(e);
-            });
-            setFeaturedData(featureArr);
-            setPremiumData(premiumArr);
-        }
-    }
 
     return (
         <>
@@ -404,7 +388,6 @@ const Index = () => {
                 <RevealCardModal
                     data={revealCardModalData}
                     user={user}
-                    updateLocalPrizeList={updateLocalPrizeList}
                     handleRevealBackButton={handleRevealBackButton}
                 />
             )}

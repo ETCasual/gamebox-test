@@ -36,6 +36,7 @@ import {
     UpdateUserSettingsRequest,
     UpdateMsgTokenRequest,
     ClaimPrizeRequest,
+    CreateIntentRequest,
 } from "../proto/gameboxapi_pb";
 import axios from "axios";
 import _ from "lodash";
@@ -1054,6 +1055,20 @@ export async function getGemsList() {
         });
     });
     return gemsList;
+}
+
+//
+//  GET STRIPE CLIENT SECRET - CREATE PAYMENT INTENT
+//
+export async function getPaymentIntent(price) {
+    const token = getToken();
+    const request = new CreateIntentRequest();
+    request.setTotal(price);
+
+    const response = await client.createIntent(request, {
+        authorization: `Bearer ${token}`,
+    });
+    return response.getClientSecret();
 }
 
 //

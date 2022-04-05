@@ -8,8 +8,6 @@ import {
     CardCvcElement,
     CardExpiryElement,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
-import getToken from "Utils/GetToken";
 
 // COMPONENTS
 import PurchaseContent from "Components/IAP/IAPPurchasingStatus/PurchaseContent.component";
@@ -18,6 +16,8 @@ import PurchaseWrapper from "Components/IAP/IAPPurchasingStatus/PurchaseWrapper.
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
+import { getPaymentIntent } from "redux/services/index.service";
+import { SHOW_TOAST } from "redux/types";
 
 const CardPayment = ({ productInfo, handleBackButton }) => {
     const { ipInfo, exchangeRate } = useSelector((state) => state.exchangeRate);
@@ -39,27 +39,10 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
 
     // GET CLIENT SECRET
     useEffect(() => {
-        const getClientSecret = async () => {
-            try {
-                const { data } = await axios.post(
-                    `${
-                        process.env.REACT_APP_STRIPE_ENDPOINT
-                    }/payments/create?total=${Math.ceil(
-                        productInfo?.price * 100
-                    )}`,
-                    {},
-                    {
-                        headers: {
-                            "x-auth-token": getToken(),
-                        },
-                    }
-                );
-                setClientSecret(data.clientSecret);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getClientSecret();
+        const totalPrice = Math.ceil(productInfo?.price * 100);
+        getPaymentIntent(totalPrice)
+            .then((data) => setClientSecret(data))
+            .catch((err) => console.log(err));
     }, [productInfo?.price]);
 
     // PAY BUTTON
@@ -111,6 +94,12 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
         );
         setTimeout(() => {
             dispatch(loadUserDetails());
+            dispatch({
+                type: SHOW_TOAST,
+                payload: {
+                    message: "Gems purchased!",
+                },
+            });
         }, 1000);
     };
 

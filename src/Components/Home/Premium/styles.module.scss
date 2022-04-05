@@ -19,11 +19,10 @@
             img {
                 width: 100%;
                 @include media-min($md) {
-                    min-height: 18.125rem;
+                    min-height: 22.5rem;
                 }
                 object-fit: cover;
-                border-top-right-radius: 17px;
-                border-top-left-radius: 17px;
+                border-radius: 17px;
             }
         }
         .prize-info {

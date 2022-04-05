@@ -44,7 +44,7 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
                             <div
                                 className="completed-prize-info position-relative"
                                 onClick={() =>
-                                    handleWinnerRevealCard(data?.type)
+                                    handleWinnerRevealCard(data?.prizeId)
                                 }
                             >
                                 <img
