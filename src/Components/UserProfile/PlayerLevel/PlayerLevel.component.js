@@ -6,7 +6,7 @@ import {
     getCurrentLevelNo,
     getLevelProgress,
     getCurrentLevelExp,
-    getCurrentMultiplierX,
+    getCurrentMultiplier,
 } from "Utils/CurrentLevel";
 
 const PlayerLevel = ({ user, ranks, handleBackButton }) => {
@@ -44,11 +44,11 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             Multiplier
                                                         </p>
                                                         <p className="mb-0 multiplier-value">
-                                                            {getCurrentMultiplierX(
+                                                            {getCurrentMultiplier(
                                                                 user,
                                                                 ranks
                                                             )}
-                                                            x
+                                                            %
                                                         </p>
                                                     </div>
                                                     {/* EXP COUNT */}
@@ -146,12 +146,8 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                                         Multiplier
                                                                     </p>
                                                                     <p className="mb-0 ticket-value">
-                                                                        {Math.round(
-                                                                            (rank.multiplier +
-                                                                                1) *
-                                                                                100
-                                                                        ) / 100}
-                                                                        x
+                                                                        {Math.round(rank.multiplier * 100)}
+                                                                        %
                                                                     </p>
                                                                 </div>
                                                                 <div className="pb-3 d-flex align-items-center justify-content-center gems">
