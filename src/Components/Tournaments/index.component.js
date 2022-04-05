@@ -174,8 +174,6 @@ const Index = ({ match }) => {
         loadPrizes(dispatch);
     };
 
-    console.log(history.location);
-
     if (isGameLeaderboardShown) {
         return (
             <Leaderboard
