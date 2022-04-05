@@ -132,7 +132,13 @@ export function loadLoginStatus(status) {
 }
 
 // REQUEST TO CONNECT TO WALLET
-export function loadConnectUserWallet(walletAddress, walletAmount, networkId, symbol) {
+export function loadConnectUserWallet(
+    toastType,
+    walletAddress,
+    walletAmount,
+    networkId,
+    symbol
+) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
@@ -144,28 +150,34 @@ export function loadConnectUserWallet(walletAddress, walletAmount, networkId, sy
 
         dispatch({ type: UPDATE_USER_WALLET, payload: _user });
 
-        dispatch({
-            type: SHOW_TOAST,
-            payload: {
-                message:
-                    walletAddress !== null &&
-                    walletAmount !== null &&
-                    networkId !== null
-                        ? "Wallet Connected."
-                        : walletAddress === null &&
-                          walletAmount === null &&
-                          networkId === "Wrong Network!"
-                        ? "Wrong Network!"
-                        : "Wallet Disconnected.",
-            },
-        });
+        if (toastType === "wallet_connected") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Wallet Connected!" },
+            });
+        } else if (toastType === "wallet_disconnected") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Wallet Disconnected!" },
+            });
+        } else if (toastType === "wrong_network") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Wrong network!" },
+            });
+        } else if (toastType === "purchase_gems") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Gems Purchased!" },
+            });
+        }
     };
 }
 
 // AUTO CONNET WALLET ON LOAD
-export function loadConnectWalletAuto() {
+export function loadConnectWalletAuto(blockchainNetworks) {
     return async (dispatch) => {
-        await handleConnectWallet(dispatch);
+        await handleConnectWallet(dispatch, blockchainNetworks);
     };
 }
 

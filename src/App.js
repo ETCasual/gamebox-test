@@ -46,6 +46,10 @@ import { LOG_OUT } from "redux/types";
 const App = () => {
     const { user } = useSelector((state) => state.userData);
     const { prizes } = useSelector((state) => state.prizes);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
+
     const dispatch = useDispatch();
 
     const [pendingRegion, setPendingRegion] = useState(true);
@@ -71,7 +75,7 @@ const App = () => {
         if (user.id) {
             // dispatch(loadLoginUser(authUser, isNewUser));
             dispatch(loadPrizes());
-            dispatch(loadBlockChainNetworks())
+            dispatch(loadBlockChainNetworks());
             dispatch(loadExchangeRate());
             dispatch(loadRanks());
             dispatch(loadConfig());
@@ -79,14 +83,16 @@ const App = () => {
             dispatch(loadSpinnerRules());
             dispatch(loadGamesList());
 
-            // FOR LOADING WALLET IF ALREADY CONNECTED
-            dispatch(loadConnectWalletAuto());
-
             // FOR FUTURE PURPOSE
             // dispatch({ type: "LIST_PURCHASE_HISTORY" });
         }
         // else sessionStorage.removeItem("token");
     }, [dispatch, user.id]);
+
+    useEffect(() => {
+        // FOR LOADING WALLET IF ALREADY CONNECTED
+        dispatch(loadConnectWalletAuto(blockchainNetworks));
+    }, [dispatch, blockchainNetworks]);
 
     useEffect(() => {
         if (user.id) sessionStorage.removeItem("errorType");

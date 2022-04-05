@@ -23,6 +23,7 @@ const Profile = ({
     const { user } = useSelector((state) => state.userData);
     const { ranks } = useSelector((state) => state.ranks);
     const { config } = useSelector((state) => state.config);
+    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
 
     const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const Profile = ({
     const handleWallet = async () => {
         if (user.walletAddress) return;
 
-        await handleConnectWallet(dispatch);
+        await handleConnectWallet(dispatch, blockchainNetworks);
     };
 
     return (

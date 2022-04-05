@@ -23,6 +23,9 @@ const Index = () => {
     );
 
     const { user } = useSelector((state) => state.userData);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
     const dispatch = useDispatch();
 
     const [productInfo, setProductInfo] = useState({
@@ -110,79 +113,105 @@ const Index = () => {
         const eth = { ...window.ethereum };
         const web3 = new Web3(eth);
 
-        // Smart contract address for USDT in BSC testnet
-        const tokenContract = new web3.eth.Contract(
-            tokenABI,
-            process.env.REACT_APP_FROYO_CONTRACT_ADDRESS
-        );
-
-        // Send tranfer function to receiver address
-        tokenContract.methods
-            .transfer(
-                process.env.REACT_APP_PRIZE_DISTRIBUTOR_ADDRESS,
-                web3.utils.toBN(
-                    web3.utils.toWei(productInfo?.price?.toString())
-                )
-            )
-            .send({ from: user.walletAddress })
-            .on("sending", function (payload) {
-                console.log("sending", payload);
-                setPurchasingStatusModal(true);
-                setPurchasingStatus((prev) => ({ ...prev, processing: true }));
+        window.ethereum
+            .request({
+                method: "eth_chainId",
             })
-            .on("sent", function (payload) {
-                console.log("payload", payload);
-            })
-            .on("transactionHash", function (hash) {
-                console.log("hash", hash);
-                setPurchasingStatusModal(true);
-                setPurchasingStatus((prev) => ({
-                    ...prev,
-                    processing: false,
-                    isSuccess: true,
-                }));
-                dispatch(
-                    loadIAPurchaseRequest(
-                        hash,
-                        201,
-                        productInfo?.id,
-                        productInfo?.details?.price
-                    )
-                );
-                setTimeout(async () => {
-                    dispatch(loadUserDetails());
-                    const tokenBalance = web3.utils.fromWei(
-                        await tokenContract.methods
-                            .balanceOf(user.walletAddress)
-                            .call()
+            .then((chainId) => {
+                if (parseInt(chainId)) {
+                    const selectedNetwork = blockchainNetworks.filter(
+                        (n) => n.chainId === parseInt(chainId)
                     );
-                    const chainId = await window.ethereum.request({
-                        method: "eth_chainId",
-                    });
-                    if (tokenBalance && chainId)
-                        dispatch(
-                            loadConnectUserWallet(
-                                user.walletAddress,
-                                parseFloat(tokenBalance),
-                                chainId
-                            )
+                    if (selectedNetwork.length > 0) {
+                        // Smart contract address for USDT in BSC testnet
+                        const tokenContract = new web3.eth.Contract(
+                            tokenABI,
+                            selectedNetwork[0]?.systemTokenAddress
                         );
-                }, 1000);
+
+                        // Send tranfer function to receiver address
+                        tokenContract.methods
+                            .transfer(
+                                selectedNetwork[0]?.prizeDistributorAddress,
+                                web3.utils.toBN(
+                                    web3.utils.toWei(
+                                        productInfo?.price?.toString()
+                                    )
+                                )
+                            )
+                            .send({ from: user.walletAddress })
+                            .on("sending", function (payload) {
+                                console.log("sending", payload);
+                                setPurchasingStatusModal(true);
+                                setPurchasingStatus((prev) => ({
+                                    ...prev,
+                                    processing: true,
+                                }));
+                            })
+                            .on("sent", function (payload) {
+                                console.log("payload", payload);
+                            })
+                            .on("transactionHash", function (hash) {
+                                console.log("hash", hash);
+                                setPurchasingStatusModal(true);
+                                setPurchasingStatus((prev) => ({
+                                    ...prev,
+                                    processing: false,
+                                    isSuccess: true,
+                                }));
+
+                                dispatch(
+                                    loadIAPurchaseRequest(
+                                        hash,
+                                        201,
+                                        productInfo?.id,
+                                        productInfo?.details?.price,
+                                        selectedNetwork[0]?.id
+                                    )
+                                );
+                            })
+                            .on("receipt", function (receipt) {
+                                console.log("receipt", receipt);
+                                dispatch(loadGemsList());
+
+                                let timeOutRef = null;
+                                clearTimeout(timeOutRef);
+                                timeOutRef = setTimeout(async () => {
+                                    dispatch(loadUserDetails());
+
+                                    const tokenBalance = web3.utils.fromWei(
+                                        await tokenContract.methods
+                                            .balanceOf(user.walletAddress)
+                                            .call()
+                                    );
+                                    const chainId =
+                                        await window.ethereum.request({
+                                            method: "eth_chainId",
+                                        });
+                                    if (tokenBalance && chainId)
+                                        dispatch(
+                                            loadConnectUserWallet(
+                                                "purchase_gems",
+                                                user.walletAddress,
+                                                parseFloat(tokenBalance),
+                                                chainId
+                                            )
+                                        );
+                                }, 1000);
+                            })
+                            .on("error", function (error) {
+                                console.log("error", error);
+                                setPurchasingStatusModal(true);
+                                setPurchasingStatus((prev) => ({
+                                    ...prev,
+                                    processing: false,
+                                    isFail: true,
+                                }));
+                            });
+                    }
+                }
             })
-            .on("receipt", function (receipt) {
-                console.log("receipt", receipt);
-                // TODO:: CALL LIST ITEMS
-                dispatch(loadGemsList());   
-            })
-            .on("error", function (error) {
-                console.log("error", error);
-                setPurchasingStatusModal(true);
-                setPurchasingStatus((prev) => ({
-                    ...prev,
-                    processing: false,
-                    isFail: true,
-                }));
-            });
+            .catch((error) => console.log(error));
     };
 
     // PROCESS CONFIRM ACTION

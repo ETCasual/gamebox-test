@@ -14,7 +14,7 @@ import GameInstructionsModal from "Components/Modals/GameInstructions.modal";
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPrizes from "redux/thunks/Prizes.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
-import {loadPrizePoolTickets} from "redux/thunks/PrizePoolTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import loadLeaderboard from "redux/thunks/Leaderboard.thunk";
 import loadCurrentUserRank from "redux/thunks/CurrentUserRank.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
@@ -24,7 +24,6 @@ import { scrollToTop } from "Utils/ScrollToTop";
 import { PRIZE_TYPE } from "Utils/Enums";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
-// import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 
 const Index = ({ match }) => {
     const {
@@ -265,18 +264,11 @@ const Index = ({ match }) => {
 
                                                 <div className="overtime-and-total-tickets-wrapper">
                                                     {/* OVERTIME TEXT */}
-                                                    {
-                                                        // OverTimeModeChecker(
-                                                        //     currentPrize?.prizeId,
-                                                        //     currentPrize?.ticketsRequired,
-                                                        //     prizeTicketCollection
-                                                        // )
-                                                        currentPrize.overTime && (
-                                                            <p className="overtime-text mb-1 text-right text-danger">
-                                                                Overtime!
-                                                            </p>
-                                                        )
-                                                    }
+                                                    {currentPrize.overTime && (
+                                                        <p className="overtime-text mb-1 text-right text-danger">
+                                                            Overtime!
+                                                        </p>
+                                                    )}
                                                     {/* TICKETS & OVERTIME TIMER */}
                                                     <div className="draw-start-holder d-flex align-items-end ms-auto">
                                                         <div className="draw-text mr-0 mr-md-2">
@@ -286,48 +278,29 @@ const Index = ({ match }) => {
                                                         {/* COUNT DOWN TIME */}
                                                         <span
                                                             className={`${
-                                                                // OverTimeModeChecker(
-                                                                //     currentPrize?.prizeId,
-                                                                //     currentPrize?.ticketsRequired,
-                                                                //     prizeTicketCollection
-                                                                // )
                                                                 currentPrize.overTime
                                                                     ? "text-danger tickets-text-end"
                                                                     : "tickets-text"
                                                             }`}
                                                         >
-                                                            {
-                                                                // OverTimeModeChecker(
-                                                                //     currentPrize?.prizeId,
-                                                                //     currentPrize?.ticketsRequired,
-                                                                //     prizeTicketCollection
-                                                                // )
-                                                                currentPrize.overTime
-                                                                    ? timer
-                                                                    : getPrizeTicketCollected(
-                                                                          prizeTicketCollection,
-                                                                          id
-                                                                      )?.toLocaleString() ||
-                                                                      0
-                                                            }
+                                                            {currentPrize.overTime
+                                                                ? timer
+                                                                : getPrizeTicketCollected(
+                                                                      prizeTicketCollection,
+                                                                      id
+                                                                  )?.toLocaleString() ||
+                                                                  0}
                                                         </span>
 
                                                         {/* TICKETS REQUIRED NUMBER */}
-                                                        {
-                                                            // !OverTimeModeChecker(
-                                                            //     currentPrize?.prizeId,
-                                                            //     currentPrize?.ticketsRequired,
-                                                            //     prizeTicketCollection
-                                                            // )
-                                                            !currentPrize.overTime && (
-                                                                <span className="total-tickets-text">
-                                                                    {`\u00A0 / ${
-                                                                        currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                        0
-                                                                    }`}
-                                                                </span>
-                                                            )
-                                                        }
+                                                        {!currentPrize.overTime && (
+                                                            <span className="total-tickets-text">
+                                                                {`\u00A0 / ${
+                                                                    currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                    0
+                                                                }`}
+                                                            </span>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
@@ -440,7 +413,7 @@ const Index = ({ match }) => {
                                                     </div>
                                                     <p className="statement-subtitle mb-0">
                                                         Compete with other
-                                                        players, collect tokens
+                                                        players, collect tickets
                                                         and stand a chance to
                                                         own this NFT!
                                                     </p>

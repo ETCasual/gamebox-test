@@ -5,6 +5,7 @@ export default function loadBlockchainNetworks() {
     return async (dispatch) => {
         return getBlockchainNetworks()
             .then((data) => {
+                sessionStorage.setItem("networks", JSON.stringify(data));
                 dispatch({
                     type: GET_BLOCK_CHAIN_NETWORKS,
                     payload: data,

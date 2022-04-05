@@ -2,7 +2,6 @@ import {
     loadConnectUserWallet,
     loadConnectWalletAutoError,
 } from "redux/thunks/Login.thunk";
-import { mainNetwork, testNetwork } from "Utils/Networks";
 import Web3 from "web3";
 import tokenABI from "./TokenABI";
 
@@ -21,14 +20,22 @@ export async function handleConnectWallet(dispatch) {
         const chainId = await window.ethereum.request({
             method: "eth_chainId",
         });
+
         if (
             (process.env.REACT_APP_NODE_ENV === "development" &&
-                parseInt(chainId) !== testNetwork.networkId) ||
+                parseInt(chainId) !== 97) ||
             (process.env.REACT_APP_NODE_ENV === "production" &&
-                parseInt(chainId) !== mainNetwork.networkId)
+                parseInt(chainId) !== 56)
         ) {
             // UPDATE STORE
-            dispatch(loadConnectUserWallet(null, null, "Wrong Network!"));
+            dispatch(
+                loadConnectUserWallet(
+                    "wrong_network",
+                    null,
+                    null,
+                    "Wrong Network!"
+                )
+            );
             const error = { code: 4902, message: "Wrong Network" };
             throw error;
         } else {
@@ -42,6 +49,7 @@ export async function handleConnectWallet(dispatch) {
                 if (tokenBalance)
                     dispatch(
                         loadConnectUserWallet(
+                            "wallet_connected",
                             accounts[0],
                             parseFloat(tokenBalance),
                             parseInt(chainId),
@@ -58,14 +66,42 @@ export async function handleConnectWallet(dispatch) {
             const eth = { ...window.ethereum };
             const web3 = new Web3(eth);
             // SWITCH NETWORK REQUEST
-            await window.ethereum.request({
-                method: "wallet_switchEthereumChain",
-                params: [
-                    {
-                        chainId: web3.utils.toHex(testNetwork.chainId),
-                    },
-                ],
+
+            const chainId = await window.ethereum.request({
+                method: "eth_chainId",
             });
+
+            if (
+                (process.env.REACT_APP_NODE_ENV === "development" &&
+                    parseInt(chainId) !== 97) ||
+                (process.env.REACT_APP_NODE_ENV === "production" &&
+                    parseInt(chainId) !== 56)
+            ) {
+                const networks =
+                    JSON.parse(sessionStorage.getItem("networks")) || [];
+                const idx = networks.findIndex((n) =>
+                    process.env.REACT_APP_NODE_ENV === "development"
+                        ? n.chainId === 97
+                        : n.chainId === 56
+                );
+                if (idx > -1) {
+                    await window.ethereum.request({
+                        method: "wallet_addEthereumChain",
+                        params: [
+                            {
+                                chainId: web3.utils.toHex(
+                                    networks[idx].chainId
+                                ),
+                                chainName: networks[idx].networkName,
+                                rpcUrls: [networks[idx].rpcUrl],
+                                blockExplorerUrls: [
+                                    networks[idx].blockExplorerUrl,
+                                ],
+                            },
+                        ],
+                    });
+                }
+            }
         }
     }
 
@@ -73,7 +109,9 @@ export async function handleConnectWallet(dispatch) {
     window.ethereum.on("accountsChanged", handleAccountChanged);
     async function handleAccountChanged(accounts) {
         if (accounts.length <= 0)
-            dispatch(loadConnectUserWallet(null, null, null));
+            dispatch(
+                loadConnectUserWallet("wallet_disconnected", null, null, null)
+            );
         else {
             const { tokenBalance, symbol } = await getTokenBalance(accounts[0]);
             const chainId = await window.ethereum.request({
@@ -83,6 +121,7 @@ export async function handleConnectWallet(dispatch) {
             if (tokenBalance && chainId)
                 dispatch(
                     loadConnectUserWallet(
+                        "wallet_connected",
                         accounts[0],
                         parseFloat(tokenBalance),
                         parseInt(chainId),
@@ -102,10 +141,17 @@ async function getTokenBalance(address) {
     const eth = { ...window.ethereum };
     const web3 = new Web3(eth);
 
+    const chainId = await window.ethereum.request({
+        method: "eth_chainId",
+    });
+
+    const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
+    const idx = networks.findIndex((n) => n.chainId === parseInt(chainId));
+
     // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
     const tokenContract = new web3.eth.Contract(
         tokenABI,
-        process.env.REACT_APP_FROYO_CONTRACT_ADDRESS
+        networks[idx]?.systemTokenAddress
     );
     // GET TOKEN BALANCE
     const tokenBalance = web3.utils.fromWei(

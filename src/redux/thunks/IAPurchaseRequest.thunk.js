@@ -5,12 +5,13 @@ export default function loadIAPurchaseRequest(
     paymentId,
     itemTypeId,
     itemId,
-    price
+    price,
+    networkId
 ) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
-        return purchaseProcess(user, itemTypeId, itemId, paymentId, price)
+        return purchaseProcess(user, itemTypeId, itemId, paymentId, price, networkId)
             .then(() => {
                 dispatch({
                     type: IA_PURCHASE_REQUEST,

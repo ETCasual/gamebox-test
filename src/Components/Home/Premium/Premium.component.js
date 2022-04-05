@@ -76,8 +76,6 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
         };
     }, [data?.gameInfo]);
 
-    console.log(getPrizeTicketCollected(prizeTicketCollection, data?.prizeId));
-
     return (
         <>
             {!data?.completed && (

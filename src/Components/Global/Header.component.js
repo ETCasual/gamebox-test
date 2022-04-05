@@ -26,6 +26,7 @@ const Header = ({
         (state) => state.earnAdditional
     );
     const { user } = useSelector((state) => state.userData);
+    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
 
     const dispatch = useDispatch();
 
@@ -56,7 +57,7 @@ const Header = ({
     const handleWallet = async () => {
         if (user.walletAddress) return;
 
-        await handleConnectWallet(dispatch);
+        await handleConnectWallet(dispatch, blockchainNetworks);
     };
 
     return (

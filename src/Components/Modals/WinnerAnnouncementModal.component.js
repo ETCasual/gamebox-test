@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -16,6 +16,8 @@ import { defaultUserImage } from "Utils/DefaultImage";
 
 const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
+
+    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
 
     const dispatch = useDispatch();
 
@@ -45,7 +47,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     const handleWallet = async () => {
         if (user.walletAddress) return;
 
-        await handleConnectWallet(dispatch);
+        await handleConnectWallet(dispatch, blockchainNetworks);
     };
 
     const getMintDate = (date) => {

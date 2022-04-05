@@ -270,8 +270,6 @@ export async function getPrizes() {
     let prizeDetailList =
         JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
-    let availablePrizeList = [];
-
     for (let i = 0; i < prizeList.length; i++) {
         let p = prizeList[i];
 
@@ -372,8 +370,6 @@ export async function getPrizes() {
                     JSON.stringify(prizeDetailList)
                 );
             }
-
-            availablePrizeList.push(p.getPrizeId());
         }
 
         // FEATURE DATA
@@ -1220,7 +1216,7 @@ export async function getNFTClaim(winnerId, userId, claimerAddress) {
     });
     const nftInfo = {
         nftAddress: response.getAddress(),
-        tokenId: response.getTokenId(),
+        tokenId: response.getPrizeIdAmt(),
         nonce: response.getNonce(),
         signature: response.getSignature(),
     };
@@ -1253,6 +1249,7 @@ export async function getUnclaimedPrizesList(user) {
             createdOn: e.getCreatedOn(),
             status: e.getStatus(),
             prizeCanClaimDate: e.getPrizeCanClaimDate(),
+            prizeBlockchainNetwork: e.getPrizeBlockchainNetwork(),
         });
     });
     return unClaimedPrizes;
@@ -1362,7 +1359,8 @@ export async function purchaseProcess(
     itemTypeId,
     itemId,
     paymentId,
-    price
+    price,
+    networkId
 ) {
     const token = getToken();
     const request = new BuyRequest();
@@ -1373,6 +1371,7 @@ export async function purchaseProcess(
     request.setItemId(itemId);
     request.setPaymentId(paymentId);
     request.setPrice(price);
+    request.setBlockchainNetwork(networkId);
 
     const response = await client.buy(request, {
         authorization: `Bearer ${token}`,
@@ -1611,7 +1610,7 @@ export async function getNotifications(user) {
     const token = getToken();
     const request = new ListNotificationRequest();
     request.setUserId(user?.id);
-    request.setLimit(20);
+    request.setLimit(100);
     request.setOffset(0);
 
     const response = await client.listNotification(request, {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SwiperCore, {
     Navigation,
@@ -19,6 +19,8 @@ const RevealCardModal = ({
     handleRevealBackButton,
 }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
+
+    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
 
     const dispatch = useDispatch();
 
@@ -50,7 +52,7 @@ const RevealCardModal = ({
     const handleWallet = async () => {
         if (user.walletAddress) return;
 
-        await handleConnectWallet(dispatch);
+        await handleConnectWallet(dispatch, blockchainNetworks);
     };
 
     const getMintDate = (date) => {

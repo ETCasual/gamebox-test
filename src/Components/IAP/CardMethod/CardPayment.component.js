@@ -105,7 +105,8 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                 paymentIntent.id,
                 201,
                 productInfo?.id,
-                productInfo?.price
+                productInfo?.price,
+                ""
             )
         );
         setTimeout(() => {

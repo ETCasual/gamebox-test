@@ -113,6 +113,34 @@ let prizeDistTokenABI = [
         type: "function",
     },
     {
+        inputs: [
+            {
+                internalType: "address",
+                name: "token",
+                type: "address",
+            },
+            {
+                internalType: "uint256",
+                name: "value",
+                type: "uint256",
+            },
+            {
+                internalType: "uint256",
+                name: "nonce",
+                type: "uint256",
+            },
+            {
+                internalType: "bytes",
+                name: "signature",
+                type: "bytes",
+            },
+        ],
+        name: "claimToken",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
         inputs: [],
         name: "fundHolder",
         outputs: [

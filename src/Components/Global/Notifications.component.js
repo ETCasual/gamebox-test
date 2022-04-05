@@ -65,7 +65,9 @@ const Notification = ({
                                                 src={
                                                     n.type === "rankup"
                                                         ? `${window.cdn}assets/notification_level_01.jpg`
-                                                        : n?.picture
+                                                        : n.type === "tour"
+                                                        ? n?.picture
+                                                        : `${window.cdn}assets/notification_friends_01.jpg`
                                                 }
                                                 alt="icon"
                                             />

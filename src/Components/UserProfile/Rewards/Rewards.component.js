@@ -62,8 +62,8 @@ const Rewards = () => {
         return false;
     };
 
-    const handleNFTClaim = (winnerId) => {
-        dispatch(loadNFTClaim(winnerId));
+    const handleNFTClaim = (winnerId, prizeBlockchainNetwork) => {
+        dispatch(loadNFTClaim(winnerId, prizeBlockchainNetwork));
     };
 
     const handleClaimedInfo = (data) => {
@@ -135,7 +135,7 @@ const Rewards = () => {
                                                     }}
                                                     key={`prizes-${i}`}
                                                     onClick={() =>
-                                                        handleNFTClaim(data.id)
+                                                        handleNFTClaim(data.id, data.prizeBlockchainNetwork)
                                                     }
                                                 >
                                                     <div className="card-wrapper d-flex">
