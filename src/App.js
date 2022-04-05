@@ -137,12 +137,12 @@ const App = () => {
     // REGIONAL CHECK
     useEffect(() => {
         getExchangeRate()
-            .then((data) => {
+            .then(({ ipInfo }) => {
                 if (
-                    data.ipInfo &&
-                    (data.ipInfo.country_code === "MY" ||
-                        data.ipInfo.country_code === "SG" ||
-                        data.ipInfo.country_code === "ID")
+                    ipInfo &&
+                    (ipInfo.country_code === "MY" ||
+                        ipInfo.country_code === "SG" ||
+                        ipInfo.country_code === "ID")
                 )
                     setRegionAllow(true);
             })

@@ -1075,7 +1075,7 @@ export async function getExchangeRate() {
         ?.split(":")?.[0];
 
     // IP INFO API
-    if (date.toString().includes(ipDetails?.country_name)) {
+    if (ipDetails?.country_name) {
         Object.assign(ipInfo, ipDetails);
     } else {
         const { data: ipAddress } = await axios.get(
@@ -1095,6 +1095,7 @@ export async function getExchangeRate() {
             )}`
         );
     }
+    
     // FX API
     if (
         !fx ||
