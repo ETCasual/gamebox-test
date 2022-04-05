@@ -82,7 +82,7 @@ const PurchaseContent = ({
                             bg="#FF007C"
                             cx1="43%"
                             cx2="50%"
-                            cx3="58%"
+                            cx3="57%"
                             cy="15"
                         />
                     )}
