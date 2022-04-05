@@ -86,7 +86,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                 </div>
                             </div>
                             <div className="row mt-4">
-                                <div className="bottom">
+                                <div className="bottom text-center">
                                     <a
                                         target="_blank"
                                         rel="noreferrer"
