@@ -14,8 +14,8 @@ const NotificationRankUp = ({
     }, []);
 
     const getTicketMultiplier = () => {
-        const idx = ranks.findIndex((r) =>
-            isSelectedNotificationShown?.description.includes(r.title)
+        const idx = ranks.findIndex((r) => 
+            isSelectedNotificationShown?.description.substring(12) == r.title
         );
         if (idx > -1) return ranks[idx]?.multiplier * 100;
         return false;
