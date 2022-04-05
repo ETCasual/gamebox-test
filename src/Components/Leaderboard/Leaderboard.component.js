@@ -396,7 +396,7 @@ const Leaderboard = ({
                             <p className="player-name">-</p>
                             <p className="points">0 pts</p>
                         </div>
-                        <div className="tokens ml-auto d-flex align-items-center justify-content-center">
+                        <div className="tickets ml-auto d-flex align-items-center justify-content-center">
                             <span>{getRankTickets(x)} tickets</span>
                         </div>
                     </div>
@@ -408,16 +408,16 @@ const Leaderboard = ({
 
     function getLeaderboardList() {
         let _leaderboardList = [];
-        // let length =
-        //     _leaderboardList.length < rankLength
-        //         ? rankLength
-        //         : _leaderboardList.length;
 
         for (let i = 0; i < rankLength; i++) {
             _leaderboardList.push(
                 <div key={`leaderboard-${i}`} className="individual-rank">
                     <div
-                        className={`leader-player-card d-flex align-items-center`}
+                        className={`leader-player-card d-flex align-items-center ${
+                            isCurrentUser(leaderboardList[i]?.userId)
+                                ? "you"
+                                : ""
+                        }`}
                     >
                         <div className="number-holder">
                             <LeaderRankIndicator index={i} type="lb" />
@@ -456,7 +456,7 @@ const Leaderboard = ({
                             </p>
                         </div>
 
-                        <div className="tokens ml-auto d-flex align-items-center justify-content-center">
+                        <div className="tickets ml-auto d-flex align-items-center justify-content-center">
                             <span>{getRankTickets(i)} tickets</span>
                         </div>
                     </div>
@@ -628,7 +628,7 @@ const Leaderboard = ({
                                                 currentUserRank.rank >
                                                 rankLength
                                                     ? "0.25rem 0.25rem 5rem 0.25rem"
-                                                    : "0.25rem"
+                                                    : ""
                                             }`,
                                         }}
                                     >
@@ -677,7 +677,7 @@ const Leaderboard = ({
                                                         pts
                                                     </p>
                                                 </div>
-                                                <div className="tokens ml-auto d-flex align-items-center justify-content-center">
+                                                <div className="tickets ml-auto d-flex align-items-center justify-content-center">
                                                     <span>
                                                         {getRankTickets(
                                                             currentUserRank.rank -

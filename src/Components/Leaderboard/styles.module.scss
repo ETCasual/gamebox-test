@@ -28,6 +28,7 @@
             top: 0;
             left: 50%;
             transform: translate(-50%, 0%);
+            height: calc(100% - 86px);
             width: 100%;
             @include media-min($md) {
                 width: 28rem;
@@ -62,6 +63,7 @@
                 }
             }
             .leaderboard {
+                height: inherit;
                 overflow-y: scroll;
                 -ms-overflow-style: none; /* Internet Explorer 10+ */
                 scrollbar-width: none; /* Firefox */
@@ -240,7 +242,7 @@
         background-color: #0e0e0e;
         min-height: 3.5em;
         height: inherit;
-        padding: 10px;
+        padding: 1.25rem;
         .user-avatar {
             position: relative;
             margin-left: 24px;
@@ -274,7 +276,7 @@
             flex-wrap: nowrap;
             white-space: nowrap;
         }
-        .tokens {
+        .tickets {
             height: 100%;
             span {
                 font-size: $fnt-sz-14;
@@ -292,7 +294,8 @@
             }
         }
     }
-    .leader-curr-player-card {
+    .leader-curr-player-card,
+    .you {
         background: #fdc43d;
         &::after {
             content: "";
@@ -306,7 +309,7 @@
         .player-name,
         .points,
         .number-holder,
-        .tokens {
+        .tickets {
             color: #000000;
             .rank-number {
                 color: #000000;
