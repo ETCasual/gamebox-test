@@ -382,11 +382,10 @@ button {
 .notification-overlay {
     position: fixed;
     width: 100vw;
-    height: 200vh;
+    height: 100vh;
     z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
 }
 #notification-panel {
     position: fixed;
