@@ -2575,6 +2575,67 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.listRank =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.CreateIntentRequest,
+ *   !proto.api.gamebox.CreateIntentResponse>}
+ */
+const methodDescriptor_GameboxApi_CreateIntent = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/CreateIntent',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.CreateIntentRequest,
+  proto.api.gamebox.CreateIntentResponse,
+  /**
+   * @param {!proto.api.gamebox.CreateIntentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.CreateIntentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.CreateIntentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.CreateIntentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.CreateIntentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.createIntent =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/CreateIntent',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_CreateIntent,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.CreateIntentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.CreateIntentResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.createIntent =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/CreateIntent',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_CreateIntent);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.api.gamebox.BuyRequest,
  *   !proto.api.gamebox.BuyResponse>}
  */

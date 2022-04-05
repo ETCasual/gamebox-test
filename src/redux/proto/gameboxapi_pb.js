@@ -30,6 +30,8 @@ goog.exportSymbol('proto.api.gamebox.ClaimPrizeResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.ClaimWinnerRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.ClaimWinnerResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.ConfigDetail', null, global);
+goog.exportSymbol('proto.api.gamebox.CreateIntentRequest', null, global);
+goog.exportSymbol('proto.api.gamebox.CreateIntentResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.GameBasicDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.GameDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.GameLeaderRuleDetail', null, global);
@@ -22098,6 +22100,290 @@ proto.api.gamebox.RankDetail.prototype.setMultiplier = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.gamebox.CreateIntentRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.CreateIntentRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.CreateIntentRequest.displayName = 'proto.api.gamebox.CreateIntentRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.CreateIntentRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.CreateIntentRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.CreateIntentRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.CreateIntentRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    total: jspb.Message.getFieldWithDefault(msg, 1, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.CreateIntentRequest}
+ */
+proto.api.gamebox.CreateIntentRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.CreateIntentRequest;
+  return proto.api.gamebox.CreateIntentRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.CreateIntentRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.CreateIntentRequest}
+ */
+proto.api.gamebox.CreateIntentRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTotal(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.CreateIntentRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.CreateIntentRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.CreateIntentRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.CreateIntentRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTotal();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int64 total = 1;
+ * @return {number}
+ */
+proto.api.gamebox.CreateIntentRequest.prototype.getTotal = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.CreateIntentRequest.prototype.setTotal = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.gamebox.CreateIntentResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.CreateIntentResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.CreateIntentResponse.displayName = 'proto.api.gamebox.CreateIntentResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.CreateIntentResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.CreateIntentResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.CreateIntentResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.CreateIntentResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    clientSecret: jspb.Message.getFieldWithDefault(msg, 1, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.CreateIntentResponse}
+ */
+proto.api.gamebox.CreateIntentResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.CreateIntentResponse;
+  return proto.api.gamebox.CreateIntentResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.CreateIntentResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.CreateIntentResponse}
+ */
+proto.api.gamebox.CreateIntentResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setClientSecret(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.CreateIntentResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.CreateIntentResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.CreateIntentResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.CreateIntentResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getClientSecret();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string client_secret = 1;
+ * @return {string}
+ */
+proto.api.gamebox.CreateIntentResponse.prototype.getClientSecret = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.CreateIntentResponse.prototype.setClientSecret = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.gamebox.BuyRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -28220,7 +28506,8 @@ proto.api.gamebox.WinnerDetail.toObject = function(includeInstance, msg) {
     deliveryCompany: jspb.Message.getFieldWithDefault(msg, 23, ""),
     transactionHash: jspb.Message.getFieldWithDefault(msg, 24, ""),
     totalPlayer: jspb.Message.getFieldWithDefault(msg, 25, 0),
-    prizeBlockchainNetwork: jspb.Message.getFieldWithDefault(msg, 26, 0)
+    prizeBlockchainNetwork: jspb.Message.getFieldWithDefault(msg, 26, 0),
+    prizeContractType: jspb.Message.getFieldWithDefault(msg, 27, 0)
   };
 
   if (includeInstance) {
@@ -28360,6 +28647,10 @@ proto.api.gamebox.WinnerDetail.deserializeBinaryFromReader = function(msg, reade
     case 26:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setPrizeBlockchainNetwork(value);
+      break;
+    case 27:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPrizeContractType(value);
       break;
     default:
       reader.skipField();
@@ -28569,6 +28860,13 @@ proto.api.gamebox.WinnerDetail.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt32(
       26,
+      f
+    );
+  }
+  f = message.getPrizeContractType();
+  if (f !== 0) {
+    writer.writeInt32(
+      27,
       f
     );
   }
@@ -28962,6 +29260,21 @@ proto.api.gamebox.WinnerDetail.prototype.getPrizeBlockchainNetwork = function() 
 /** @param {number} value */
 proto.api.gamebox.WinnerDetail.prototype.setPrizeBlockchainNetwork = function(value) {
   jspb.Message.setProto3IntField(this, 26, value);
+};
+
+
+/**
+ * optional int32 prize_contract_type = 27;
+ * @return {number}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getPrizeContractType = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 27, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.WinnerDetail.prototype.setPrizeContractType = function(value) {
+  jspb.Message.setProto3IntField(this, 27, value);
 };
 
 
