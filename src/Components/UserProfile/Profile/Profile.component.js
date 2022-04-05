@@ -10,7 +10,7 @@ import { defaultUserImage } from "Utils/DefaultImage";
 import {
     getCurrentLevelExp,
     getCurrentLevel,
-    getCurrentMultiplierX,
+    getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
 import { handleConnectWallet } from "Utils/ConnectWallet";
@@ -133,11 +133,11 @@ const Profile = ({
                                     <p className="multiplier-info">
                                         Multiplier{" "}
                                         <span>
-                                            {getCurrentMultiplierX(
+                                            {getCurrentMultiplier(
                                                 user,
                                                 ranks
                                             ) || 0}
-                                            x
+                                            %
                                         </span>
                                     </p>
                                     {/* LEVEL */}
