@@ -89,7 +89,13 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                         className={`container-fluid featured ${
                             length > 1 ? "mb-3" : "mb-5"
                         }`}
-                        style={{ backgroundImage: `url(${data.prizeBG})` }}
+                        style={{
+                            backgroundImage: `url(${
+                                navigator.userAgent.indexOf("Firefox") > -1
+                                    ? ""
+                                    : data.prizeBG
+                            })`,
+                        }}
                     >
                         <div className="overlay" />
                         <div className="row justify-content-center">
