@@ -185,12 +185,10 @@ const Settings = () => {
                                     </div>
                                     <div className="col-12 social-media d-flex align-items-center">
                                         {/* FACEBOOK */}
-                                        <Link
+                                        <a
                                             target="_blank"
-                                            to={{
-                                                pathname:
-                                                    "https://www.facebook.com/EsportsMini/",
-                                            }}
+                                            rel="noreferrer"
+                                            href="https://www.facebook.com/GameBox_Froyo-105972522069601"
                                         >
                                             <svg viewBox="0 0 112.196 112.196">
                                                 <circle
@@ -205,15 +203,13 @@ const Settings = () => {
                 c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z"
                                                 />
                                             </svg>
-                                        </Link>
+                                        </a>
                                         {/* INSTAGRAM */}
-                                        <Link
+                                        <a
                                             className="mx-3"
                                             target="_blank"
-                                            to={{
-                                                pathname:
-                                                    "https://www.instagram.com/esportsmini/",
-                                            }}
+                                            rel="noreferrer"
+                                            href="https://www.instagram.com/gamebox_froyo/"
                                         >
                                             <svg viewBox="0 0 24 24">
                                                 <linearGradient
@@ -247,14 +243,12 @@ const Settings = () => {
                                                     fill="#fff"
                                                 />
                                             </svg>
-                                        </Link>
+                                        </a>
                                         {/* TWITTER */}
-                                        <Link
+                                        <a
                                             target="_blank"
-                                            to={{
-                                                pathname:
-                                                    "https://twitter.com/esports_mini/",
-                                            }}
+                                            rel="noreferrer"
+                                            href="https://twitter.com/Gamebox_Froyo"
                                         >
                                             <svg viewBox="0 0 112.197 112.197">
                                                 <circle
@@ -275,7 +269,7 @@ const Settings = () => {
                     C86.391,45.366,88.664,43.005,90.461,40.316L90.461,40.316z"
                                                 />
                                             </svg>
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 {/* ITEM 5 - MORE INFO */}
@@ -312,28 +306,22 @@ const Settings = () => {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link
-                                                    to={{
-                                                        pathname:
-                                                            "mailto:hello@esportsmini.com",
-                                                    }}
+                                                <a
+                                                    href="mailto:hello@esportsmini.com"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
                                                     Contact us
-                                                </Link>
+                                                </a>
                                             </li>
                                             <li className="d-flex align-items-center justify-content-between">
-                                                <Link
-                                                    to={{
-                                                        pathname:
-                                                            "mailto:hello@esportsmini.com",
-                                                    }}
+                                                <a
+                                                    href="mailto:hello@esportsmini.com"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
                                                     Bug report
-                                                </Link>
+                                                </a>
                                                 {/* <span className="app-version">
                                                         Version: 1.0.5
                                                     </span> */}
