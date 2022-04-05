@@ -174,6 +174,8 @@ const Index = ({ match }) => {
         loadPrizes(dispatch);
     };
 
+    console.log(history.location);
+
     if (isGameLeaderboardShown) {
         return (
             <Leaderboard
@@ -203,7 +205,9 @@ const Index = ({ match }) => {
                                             className="d-flex align-items-center"
                                             onClick={handleHomeNavLink}
                                             to={{
-                                                pathname: "/",
+                                                pathname:
+                                                    history.location?.state
+                                                        ?.prevPath || "/",
                                                 state: {
                                                     prevPath:
                                                         history.location

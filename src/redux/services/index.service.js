@@ -1095,7 +1095,7 @@ export async function getExchangeRate() {
             )}`
         );
     }
-    
+
     // FX API
     if (
         !fx ||
