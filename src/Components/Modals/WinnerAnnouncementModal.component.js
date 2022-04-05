@@ -17,7 +17,9 @@ import { defaultUserImage } from "Utils/DefaultImage";
 const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
-    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
 
     const dispatch = useDispatch();
 
@@ -28,14 +30,15 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     const [activeSlide, setActiveSlide] = useState(-1);
 
     useEffect(() => {
+        let timeOutRef = null;
         if (data.length > 0) {
-            document.body.style.overflow = "hidden";
-            setTimeout(() => {
+            clearTimeout(timeOutRef);
+            timeOutRef = setTimeout(() => {
                 setPrizeData(data);
             }, 500);
         }
 
-        return () => (document.body.style.overflow = "visible");
+        return () => clearTimeout(timeOutRef);
     }, [data]);
 
     useEffect(() => {

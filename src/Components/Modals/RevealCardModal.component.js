@@ -20,7 +20,9 @@ const RevealCardModal = ({
 }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
-    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
 
     const dispatch = useDispatch();
 
@@ -31,8 +33,10 @@ const RevealCardModal = ({
     const [activeSlide, setActiveSlide] = useState(-1);
 
     useEffect(() => {
-        if (data.length > 0)
-            setTimeout(() => {
+        let timeOutRef = null;
+        if (data.length > 0) {
+            clearTimeout(timeOutRef);
+            timeOutRef = setTimeout(() => {
                 if (data?.constructor?.name === "Array") {
                     setPrizeData(data);
                 } else if (data?.constructor?.name === "Object") {
@@ -41,6 +45,9 @@ const RevealCardModal = ({
                     setPrizeData(_arr);
                 }
             }, 500);
+        }
+
+        return () => clearTimeout(timeOutRef);
     }, [data]);
 
     useEffect(() => {
@@ -202,7 +209,7 @@ const RevealCardModal = ({
                                                     {e.nftContractAddress.substring(
                                                         0,
                                                         5
-                                                    )} 
+                                                    )}
                                                     ....
                                                     {e.nftContractAddress.substring(
                                                         e.nftContractAddress
