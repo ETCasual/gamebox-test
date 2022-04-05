@@ -83,26 +83,26 @@ const Index = () => {
                 <section id="winners">
                     <div className="container-fluid">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
+                            <h1 className="main-title mb-2">
+                                Latest Winners
+                            </h1>
+                            {noDataLoaded && (
+                                <div className="no-result">
+                                    <p className="title mb-2">
+                                        No Winners found yet!
+                                    </p>
+                                    <p className="subtitle mt-1 mb-0">
+                                        Looks like you've not played for
+                                        any prizes yet.{" "}
+                                    </p>
+                                    <p className="subtitle">
+                                        <Link to="/">Click here</Link>{" "}
+                                        to look for one you like.
+                                    </p>
+                                </div>
+                            )}
                             <div className="row">
                                 <div className="col-12 col-xl-6 pl-2">
-                                    <h1 className="main-title mb-2">
-                                        Latest Winners
-                                    </h1>
-                                    {noDataLoaded && (
-                                        <div className="no-result">
-                                            <p className="title mb-2">
-                                                No Winners found yet!
-                                            </p>
-                                            <p className="subtitle mt-1 mb-0">
-                                                Looks like you've not played for
-                                                any prizes yet.{" "}
-                                            </p>
-                                            <p className="subtitle">
-                                                <Link to="/">Click here</Link>{" "}
-                                                to look for one you like.
-                                            </p>
-                                        </div>
-                                    )}
                                     {!noDataLoaded &&
                                         winnerData.length <= 0 && (
                                             <WinnerLoader />
