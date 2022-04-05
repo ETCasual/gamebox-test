@@ -104,7 +104,11 @@ const EarnAdditionalTickets = ({
                 Increase your ticket earnings
             </div>
 
-            <div className="select-one-option-text">Select only one option</div>
+            <div className="select-one-option-text">
+                { earnAdditionalDisabledStatus.ads ? "You have chosen to watch ads to boost your ticket earnings" : "" }
+                { earnAdditionalDisabledStatus.gems ? "You have chosen to use gems to boost your ticket earnings" : "" }
+                { !earnAdditionalDisabledStatus.ads && !earnAdditionalDisabledStatus.gems ? "Select only one option" : "" }
+            </div>
 
             {/* BOTH OPTIONS*/}
             <div className="option-buttons-container d-flex">
