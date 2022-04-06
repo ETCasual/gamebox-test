@@ -124,7 +124,7 @@ const Header = ({
                             {user.walletAddress && (
                                 <img
                                     className="icon"
-                                    src={`${window.cdn}assets/wallet_01.png`}
+                                    src={`${window.cdn}icons/icon_froyo.png`}
                                     alt="wallet"
                                 />
                             )}

@@ -104,7 +104,7 @@ const Profile = ({
                                 >
                                     <img
                                         width="24"
-                                        src={`${window.cdn}assets/wallet_01.png`}
+                                        src={`${window.cdn}icons/icon_froyo.png`}
                                         alt="wallet"
                                     />
                                     {user.walletAddress && (
