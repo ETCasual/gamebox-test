@@ -365,35 +365,39 @@ const FortuneWheel = ({
                                 className="col-12 col-xl-7 py-0 py-lg-3 wrapper-col flex-column align-items-center justify-content-center"
                                 style={{ height: modalHeight.cols }}
                             >
-                                <div className="fortune-wheel-svg-wrapper position-relative">
-                                    <FortuneWheelSVG
-                                        spinnerRules={spinnerRules}
-                                    />
+                                {modalHeight.wrapper && (
+                                    <div className="fortune-wheel-svg-wrapper position-relative">
+                                        <FortuneWheelSVG
+                                            spinnerRules={spinnerRules}
+                                        />
 
-                                    {/* SPIN BUTTON*/}
-                                    <div
-                                        className={`spin-button ${
-                                            isClickedSpin ? "opacity-0-5" : ""
-                                        }`}
-                                    >
-                                        <button
-                                            disabled={
-                                                isClickedSpin ? true : false
-                                            }
-                                            onClick={onClickSpinButton}
-                                            className="spin-button-inner-orange d-flex align-items-center justify-content-center"
+                                        {/* SPIN BUTTON*/}
+                                        <div
+                                            className={`spin-button ${
+                                                isClickedSpin
+                                                    ? "opacity-0-5"
+                                                    : ""
+                                            }`}
                                         >
-                                            SPIN
-                                        </button>
-                                    </div>
+                                            <button
+                                                disabled={
+                                                    isClickedSpin ? true : false
+                                                }
+                                                onClick={onClickSpinButton}
+                                                className="spin-button-inner-orange d-flex align-items-center justify-content-center"
+                                            >
+                                                SPIN
+                                            </button>
+                                        </div>
 
-                                    {/* TRIANGLE POINTER */}
-                                    <img
-                                        className="img-fluid pointer-img"
-                                        src={`${window.cdn}spinner/spinner_arrow_01.png`}
-                                        alt="fortune-wheel"
-                                    />
-                                </div>
+                                        {/* TRIANGLE POINTER */}
+                                        <img
+                                            className="img-fluid pointer-img"
+                                            src={`${window.cdn}spinner/spinner_arrow_01.png`}
+                                            alt="fortune-wheel"
+                                        />
+                                    </div>
+                                )}
                                 <p className="spin-amount-left-wrapper mb-3 d-block d-xl-none">
                                     <span className="you-have-text">
                                         You have
