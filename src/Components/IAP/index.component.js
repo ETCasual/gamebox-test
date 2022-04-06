@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3 from "web3";
 import { loadStripe } from "@stripe/stripe-js";
@@ -34,6 +34,7 @@ const Index = () => {
         quantity: null,
         tab: "froyo",
     });
+    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [cardPaymentModal, setCardPaymentModal] = useState(false);
     const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
@@ -44,6 +45,21 @@ const Index = () => {
         isSuccess: false,
         isFail: false,
     });
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+
+        function handleResize() {
+            setHideGemsOnMobile(
+                window.innerWidth > 767 && window.ethereum ? false : true
+            );
+        }
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     // SET SELECTED TAB
     const handleSelectedTab = (tab) => {
@@ -247,50 +263,71 @@ const Index = () => {
                 <div className="container-fluid">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                            <p className="title mb-4 ml-2 d-flex align-items-end">
+                            <p className="title mb-4 d-flex align-items-end">
                                 Purchase Gems
                             </p>
                             {/* TABS */}
-                            <ul className="list-unstyled mb-0 d-flex align-items-center justify-content-start tabs">
-                                <li
-                                    className={`${
-                                        productInfo.tab === "froyo"
-                                            ? "active"
-                                            : ""
-                                    } p-3 froyo`}
-                                    onClick={() => handleSelectedTab("froyo")}
-                                >
-                                    Pay using Froyo Tokens
-                                </li>
-                                <li
-                                    className={`${
-                                        productInfo.tab === "card"
-                                            ? "active"
-                                            : ""
-                                    } p-3 credit`}
-                                    onClick={() => handleSelectedTab("card")}
-                                >
-                                    Pay using Credit Card
-                                </li>
-                            </ul>
-                            <div className="gems-wrapper px-3 pt-3">
-                                {/* FROYO TOKEN PAYMENT GEMS */}
-                                {productInfo.tab === "froyo" && (
-                                    <IAPFroyoGemPacks
-                                        handleSelectedGemPackPayment={
-                                            handleSelectedGemPackPayment
-                                        }
-                                    />
-                                )}
-                                {/* CREDIT/DEBIT CARD PAYMENT GEMS */}
-                                {productInfo.tab === "card" && (
-                                    <IAPCardGemPacks
-                                        handleSelectedGemPackPayment={
-                                            handleSelectedGemPackPayment
-                                        }
-                                    />
-                                )}
-                            </div>
+                            {!hideGemsOnMobile && (
+                                <>
+                                    <ul className="list-unstyled mb-0 d-flex align-items-center justify-content-start tabs">
+                                        <li
+                                            className={`${
+                                                productInfo.tab === "froyo"
+                                                    ? "active"
+                                                    : ""
+                                            } p-3 froyo`}
+                                            onClick={() =>
+                                                handleSelectedTab("froyo")
+                                            }
+                                        >
+                                            Pay using Froyo Tokens
+                                        </li>
+                                        <li
+                                            className={`${
+                                                productInfo.tab === "card"
+                                                    ? "active"
+                                                    : ""
+                                            } p-3 credit`}
+                                            onClick={() =>
+                                                handleSelectedTab("card")
+                                            }
+                                        >
+                                            Pay using Credit Card
+                                        </li>
+                                    </ul>
+                                    <div className="gems-wrapper px-3 pt-3">
+                                        {/* FROYO TOKEN PAYMENT GEMS */}
+                                        {productInfo.tab === "froyo" && (
+                                            <IAPFroyoGemPacks
+                                                handleSelectedGemPackPayment={
+                                                    handleSelectedGemPackPayment
+                                                }
+                                            />
+                                        )}
+                                        {/* CREDIT/DEBIT CARD PAYMENT GEMS */}
+                                        {productInfo.tab === "card" && (
+                                            <IAPCardGemPacks
+                                                handleSelectedGemPackPayment={
+                                                    handleSelectedGemPackPayment
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                </>
+                            )}
+
+                            {hideGemsOnMobile && (
+                                <div className="mobile-note-gems d-flex flex-column align-items-center justify-content-center text-center">
+                                    <p className="mb-2 note-title">
+                                        Purchases are not available for mobile
+                                        browsers currently.
+                                    </p>
+                                    <p className="note-subtitle">
+                                        Login to your wallet or computer browser
+                                        to purchase more gems.
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

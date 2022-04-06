@@ -83,6 +83,16 @@
             color: #14daa7;
             font-weight: $fnt-wgt-600;
         }
+        .mobile-note-wallet {
+            font-size: $fnt-sz-12;
+            .note-title {
+                color: #ff2c44;
+                font-weight: $fnt-wgt-600;
+            }
+            .note-subtitle {
+                color: #868686;
+            }
+        }
     }
     .notification-toggle-wrapper {
         font-size: $fnt-sz-10;

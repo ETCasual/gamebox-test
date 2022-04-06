@@ -71,4 +71,20 @@
             }
         }
     }
+    .mobile-note-gems {
+        position: relative;
+        height: 55vh;
+        font-size: $fnt-sz-14;
+        .note-title {
+            color: #ff2c44;
+            font-weight: $fnt-wgt-600;
+            width: 30ch;
+            margin: 0 auto;
+        }
+        .note-subtitle {
+            color: #868686;
+            width: 35ch;
+            margin: 0 auto;
+        }
+    }
 }

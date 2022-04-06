@@ -1,5 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,6 +27,22 @@ const Rewards = () => {
         id: null,
         status: false,
     });
+    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+
+        function handleResize() {
+            setHideGemsOnMobile(
+                window.innerWidth > 767 && window.ethereum ? false : true
+            );
+        }
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     const getClaimedDate = (createdOn) => {
         let playerTimeZone = (new Date().getTimezoneOffset() / 60) * -1;
@@ -153,13 +169,15 @@ const Rewards = () => {
                                                     key={`prizes-${i}`}
                                                     onClick={() =>
                                                         data.prizeContractType ===
-                                                        1
+                                                            1 &&
+                                                        !hideGemsOnMobile
                                                             ? handleNFTClaim(
                                                                   data.id,
                                                                   data.prizeBlockchainNetwork
                                                               )
                                                             : data.prizeContractType ===
-                                                              2
+                                                                  2 &&
+                                                              !hideGemsOnMobile
                                                             ? handleTokenClaim(
                                                                   data.id,
                                                                   data.prizeBlockchainNetwork
@@ -196,9 +214,11 @@ const Rewards = () => {
                                                                     data.prizeCanClaimDate
                                                                 ) && (
                                                                     <div className="prize-claimed text-wait py-2">
-                                                                        {`Claim your NFT - ${getRemainingDaysToClaim(
-                                                                            data.prizeCanClaimDate
-                                                                        )}`}
+                                                                        {!hideGemsOnMobile
+                                                                            ? `Claim your NFT - ${getRemainingDaysToClaim(
+                                                                                  data.prizeCanClaimDate
+                                                                              )}`
+                                                                            : "Connect your wallet through your computer browser."}
                                                                     </div>
                                                                 )}
                                                             {data.prizeContractType ===
@@ -207,16 +227,18 @@ const Rewards = () => {
                                                                     data.prizeCanClaimDate
                                                                 ) && (
                                                                     <div className="prize-claimed text-red py-2">
-                                                                        Claim
-                                                                        your NFT
+                                                                        {!hideGemsOnMobile
+                                                                            ? "Claim your NFT"
+                                                                            : "Connect your wallet through your computer browser."}
                                                                     </div>
                                                                 )}
 
                                                             {data.prizeContractType ===
                                                                 2 && (
                                                                 <div className="prize-claimed text-red py-2">
-                                                                    Claim your
-                                                                    Token
+                                                                    {!hideGemsOnMobile
+                                                                        ? "Claim your Token"
+                                                                        : "Connect your wallet through your computer browser."}
                                                                 </div>
                                                             )}
                                                         </div>

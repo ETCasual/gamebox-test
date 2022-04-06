@@ -1,5 +1,5 @@
 // REACT & REDUX
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -29,6 +29,23 @@ const Profile = ({
     const dispatch = useDispatch();
 
     const history = useHistory();
+
+    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+
+        function handleResize() {
+            setHideGemsOnMobile(
+                window.innerWidth > 767 && window.ethereum ? false : true
+            );
+        }
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     const handleWallet = async () => {
         if (user.walletAddress) return;
@@ -94,36 +111,38 @@ const Profile = ({
                                 </Link>
                             </div>
                             {/* TOKEN BALANCE */}
-                            <div className="col-12 mt-3 token-balance d-flex align-items-center justify-content-between">
-                                <p className="gem-balance-text mb-0 mb-md-2">
-                                    Froyo Tokens available
-                                </p>
-                                <div
-                                    className="gem-wrapper"
-                                    onClick={handleWallet}
-                                >
-                                    <img
-                                        width="24"
-                                        src={`${window.cdn}icons/icon_froyo.png`}
-                                        alt="wallet"
-                                    />
-                                    {user.walletAddress && (
-                                        <p className=" d-flex token-balance-text">
-                                            {parseFloat(user.tokenBalance)
-                                                ?.toFixed(2)
-                                                ?.toLocaleString()}{" "}
-                                            <small className="d-flex align-self-center ml-1">
-                                                {user.tokenSymbol}
-                                            </small>
-                                        </p>
-                                    )}
-                                    {!user.walletAddress && (
-                                        <p className="mb-0 ml-1 connect-text">
-                                            Connect Wallet
-                                        </p>
-                                    )}
+                            {!hideGemsOnMobile && (
+                                <div className="col-12 mt-3 token-balance d-flex align-items-center justify-content-between">
+                                    <p className="gem-balance-text mb-0 mb-md-2">
+                                        Froyo Tokens available
+                                    </p>
+                                    <div
+                                        className="gem-wrapper"
+                                        onClick={handleWallet}
+                                    >
+                                        <img
+                                            width="24"
+                                            src={`${window.cdn}icons/icon_froyo.png`}
+                                            alt="wallet"
+                                        />
+                                        {user.walletAddress && (
+                                            <p className=" d-flex token-balance-text">
+                                                {parseFloat(user.tokenBalance)
+                                                    ?.toFixed(2)
+                                                    ?.toLocaleString()}{" "}
+                                                <small className="d-flex align-self-center ml-1">
+                                                    {user.tokenSymbol}
+                                                </small>
+                                            </p>
+                                        )}
+                                        {!user.walletAddress && (
+                                            <p className="mb-0 ml-1 connect-text">
+                                                Connect Wallet
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             {/* MULTIPLIER */}
                             <div className="col-12 multiplier-holder mt-4">
                                 <div

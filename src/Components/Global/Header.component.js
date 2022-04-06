@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,9 +29,26 @@ const Header = ({
         (state) => state.blockchainNetworks
     );
 
+    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+
     const dispatch = useDispatch();
 
     const history = useHistory();
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+
+        function handleResize() {
+            setHideGemsOnMobile(
+                window.innerWidth > 767 && window.ethereum ? false : true
+            );
+        }
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     // GETTING GEMS
     const getGems = () => {
@@ -65,7 +82,7 @@ const Header = ({
             <div className="navbar-top d-flex flex-column justify-content-center">
                 <div className="col-12 px-1 px-lg-3 d-flex align-items-center justify-content-between">
                     {/* LOGO & NAV LINKS */}
-                    <div className="left-items d-none d-md-flex align-items-center justify-content-start">
+                    <div className="left-items d-flex align-items-center justify-content-start">
                         <Link
                             to="/"
                             className="logo"
@@ -78,7 +95,7 @@ const Header = ({
                             />
                         </Link>
 
-                        <div className="d-flex nav-items">
+                        <div className="nav-items d-none d-md-flex">
                             <NavLink
                                 onClick={handleHomeNavLink}
                                 exact
@@ -117,50 +134,56 @@ const Header = ({
                         </div>
                     </div>
                     {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
-                    <div className="right-items w-100 d-flex align-items-center justify-content-md-end justify-content-around">
-                        <div className="wallet-wrapper">
-                            {user.walletAddress && (
-                                <img
-                                    className="icon"
-                                    src={`${window.cdn}icons/icon_froyo.png`}
-                                    alt="wallet"
-                                />
-                            )}
-                            <div
-                                className="info-wrapper ml-1 w-100"
-                                onClick={handleWallet}
-                            >
+                    <div className="right-items w-100 d-flex align-items-center justify-content-end">
+                        {!hideGemsOnMobile && (
+                            <div className="wallet-wrapper">
                                 {user.walletAddress && (
-                                    <>
-                                        <p className="mb-1 d-flex">
-                                            {parseFloat(user.tokenBalance)
-                                                ?.toFixed(2)
-                                                ?.toLocaleString()}{" "}
-                                            <small className="d-flex align-self-center ml-1">
-                                                {user.tokenSymbol}
-                                            </small>
-                                        </p>
-                                        <p className="mb-0">
-                                            {user.walletAddress?.substring(
-                                                0,
-                                                5
-                                            )}
-                                            ....
-                                            {user.walletAddress?.substring(
-                                                user.walletAddress.length - 4
-                                            )}
-                                        </p>
-                                    </>
+                                    <img
+                                        className="icon"
+                                        src={`${window.cdn}icons/icon_froyo.png`}
+                                        alt="wallet"
+                                    />
                                 )}
-                                {!user.walletAddress && !user.network && (
-                                    <p className="mb-0">Connect Wallet</p>
-                                )}
-                                {!user.walletAddress &&
-                                    user.network === "Wrong Network!" && (
-                                        <p className="mb-0">Wrong Network</p>
+
+                                <div
+                                    className="info-wrapper ml-1 w-100"
+                                    onClick={handleWallet}
+                                >
+                                    {user.walletAddress && (
+                                        <>
+                                            <p className="mb-1 d-flex">
+                                                {parseFloat(user.tokenBalance)
+                                                    ?.toFixed(2)
+                                                    ?.toLocaleString()}{" "}
+                                                <small className="d-flex align-self-center ml-1">
+                                                    {user.tokenSymbol}
+                                                </small>
+                                            </p>
+                                            <p className="mb-0">
+                                                {user.walletAddress?.substring(
+                                                    0,
+                                                    5
+                                                )}
+                                                ....
+                                                {user.walletAddress?.substring(
+                                                    user.walletAddress.length -
+                                                        4
+                                                )}
+                                            </p>
+                                        </>
                                     )}
+                                    {!user.walletAddress && !user.network && (
+                                        <p className="mb-0">Connect Wallet</p>
+                                    )}
+                                    {!user.walletAddress &&
+                                        user.network === "Wrong Network!" && (
+                                            <p className="mb-0">
+                                                Wrong Network
+                                            </p>
+                                        )}
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className="position-relative d-flex flex-nowrap align-items-center mx-2">
                             <Link
                                 className="gem-wrapper"
