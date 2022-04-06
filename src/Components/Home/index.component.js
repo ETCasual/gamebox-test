@@ -27,12 +27,11 @@ const Index = () => {
     const dispatch = useDispatch();
 
     let timeOutRef1 = useRef(null);
-    let timeOutRef2 = useRef(null);
 
     const [noDataLoaded, setNoDataLoaded] = useState({
-        feature: false,
-        premium: false,
-        automated: false,
+        feature: true,
+        premium: true,
+        automated: true,
         all: false,
     });
     const [FeaturedData, setFeaturedData] = useState([]);
@@ -53,26 +52,24 @@ const Index = () => {
 
     // STAY TUNED
     useEffect(() => {
-        clearTimeout(timeOutRef2.current);
-        timeOutRef2.current = setTimeout(() => {
+        let timeOutRef = null;
+        clearTimeout(timeOutRef);
+        timeOutRef = setTimeout(() => {
             if (
                 prizes.featuredData.length <= 0 &&
                 prizes.premiumData.length <= 0 &&
                 prizes.automatedEntryData.length <= 0
             )
                 setNoDataLoaded((prev) => ({ ...prev, all: true }));
-
             setNoDataLoaded((prev) => ({
                 ...prev,
                 feature: prizes.featuredData.length <= 0 ? true : false,
                 premium: prizes.premiumData.length <= 0 ? true : false,
                 automated: prizes.automatedEntryData.length <= 0 ? true : false,
             }));
-        }, 7000);
-        return () => {
-            clearTimeout(timeOutRef2.current);
-            timeOutRef2.current = null;
-        };
+        }, 200);
+
+        return () => clearTimeout(timeOutRef);
     }, [prizes.featuredData, prizes.premiumData, prizes.automatedEntryData]);
 
     // SETTING PRIZES (FEATURE & PREMIUM) TO STATE
@@ -265,7 +262,9 @@ const Index = () => {
                     {/* FEATURED CONTENT LOADER */}
                     {!noDataLoaded.feature && (
                         <>
+                            {/* LOADER */}
                             {FeaturedData?.length <= 0 && <FeaturedLoader />}
+
                             {/* FEATURED CARD */}
                             {FeaturedData?.map((prize, index) => {
                                 return (
@@ -305,9 +304,12 @@ const Index = () => {
                                                 Bonus Rewards
                                             </h2>
                                         </div>
+                                        {/* LOADER */}
                                         {automatedEntryData.length <= 0 && (
                                             <AutomatedEntryLoader />
                                         )}
+
+                                        {/* AUTOMATED CARD */}
                                         {automatedEntryData?.map(
                                             (prize, index) => (
                                                 <React.Fragment
@@ -347,9 +349,11 @@ const Index = () => {
                                                 Premium NFT Rewards
                                             </h2>
                                         </div>
+                                        {/* LOADER */}
                                         {PremiumData.length <= 0 && (
                                             <PremiumLoader />
                                         )}
+                                        {/* PREMIUM CARD */}
                                         {PremiumData?.map((prize, index) => {
                                             return (
                                                 !prize.seen && (
