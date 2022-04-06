@@ -80,7 +80,7 @@ const Settings = () => {
                                             onError={(e) => defaultUserImage(e)}
                                             src={
                                                 user?.picture ||
-                                                `${window.cdn}/icon_profile.png`
+                                                `${window.cdn}icons/icon_profile.png`
                                             }
                                             alt="avatar"
                                         />

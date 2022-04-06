@@ -1231,7 +1231,7 @@ export async function getNFTClaim(winnerId, userId, claimerAddress) {
         authorization: `Bearer ${token}`,
     });
     const nftInfo = {
-        nftAddress: response.getAddress(),
+        address: response.getAddress(),
         tokenId: response.getPrizeIdAmt(),
         nonce: response.getNonce(),
         signature: response.getSignature(),
@@ -1266,6 +1266,7 @@ export async function getUnclaimedPrizesList(user) {
             status: e.getStatus(),
             prizeCanClaimDate: e.getPrizeCanClaimDate(),
             prizeBlockchainNetwork: e.getPrizeBlockchainNetwork(),
+            prizeContractType: e.getPrizeContractType()
         });
     });
     return unClaimedPrizes;
