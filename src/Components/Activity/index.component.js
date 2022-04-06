@@ -10,7 +10,6 @@ import loadActivity from "redux/thunks/Activity.thunk";
 
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
-import { scrollToTop } from "Utils/ScrollToTop";
 
 const Index = () => {
     const dispatch = useDispatch();
@@ -100,7 +99,6 @@ const Index = () => {
                                     {/* CARD WRAPPER */}
                                     <Link
                                         className="d-flex"
-                                        onClick={scrollToTop}
                                         to={{
                                             pathname: `/prize/${getPrizeType(
                                                 card?.prizeType

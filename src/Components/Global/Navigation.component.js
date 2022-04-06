@@ -1,7 +1,6 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { gsap } from "gsap";
-import { scrollToTop } from "Utils/ScrollToTop";
 
 const Navigation = () => {
     const history = useHistory();
@@ -45,7 +44,7 @@ const Navigation = () => {
                 {
                     duration: 0.5,
                     width: routes ? 60 : "100%",
-                    borderRadius: '12px',
+                    borderRadius: "12px",
                     ease: "power2.out",
                 },
                 0
@@ -141,7 +140,6 @@ const Navigation = () => {
         <div className="container-fluid navbar-bottom px-0 d-block d-md-none">
             <div className="navigation-wrapper" ref={navWrapperRef}>
                 <NavLink
-                    onClick={scrollToTop}
                     exact
                     to={{
                         pathname: "/",
@@ -156,7 +154,6 @@ const Navigation = () => {
                     </p>
                 </NavLink>
                 <NavLink
-                    onClick={scrollToTop}
                     to={{
                         pathname: "/activity",
                         state: {
@@ -170,7 +167,6 @@ const Navigation = () => {
                     </p>
                 </NavLink>
                 <NavLink
-                    onClick={scrollToTop}
                     to={{
                         pathname: "/winners",
                         state: {

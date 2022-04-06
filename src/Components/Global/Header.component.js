@@ -7,7 +7,6 @@ import Notification from "Components/Global/Notifications.component";
 import loadPrizes from "redux/thunks/Prizes.thunk";
 
 import { defaultUserImage } from "Utils/DefaultImage";
-import { scrollToTop } from "Utils/ScrollToTop";
 import { handleConnectWallet } from "Utils/ConnectWallet";
 
 const Header = ({
@@ -26,7 +25,9 @@ const Header = ({
         (state) => state.earnAdditional
     );
     const { user } = useSelector((state) => state.userData);
-    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
 
     const dispatch = useDispatch();
 
@@ -50,7 +51,6 @@ const Header = ({
     };
 
     const handleHomeNavLink = () => {
-        scrollToTop();
         dispatch(loadPrizes());
     };
 
@@ -93,7 +93,6 @@ const Header = ({
                                 <div className="py-4 px-2 mx-2">Home</div>
                             </NavLink>
                             <NavLink
-                                onClick={scrollToTop}
                                 to={{
                                     pathname: "/activity",
                                     state: {
@@ -105,7 +104,6 @@ const Header = ({
                                 <div className="py-4 px-2 mx-2">Activities</div>
                             </NavLink>
                             <NavLink
-                                onClick={scrollToTop}
                                 to={{
                                     pathname: "/winners",
                                     state: {
@@ -166,7 +164,6 @@ const Header = ({
                         <div className="position-relative d-flex flex-nowrap align-items-center mx-2">
                             <Link
                                 className="gem-wrapper"
-                                onClick={scrollToTop}
                                 to={{
                                     pathname: "/iap",
                                     state: {
@@ -223,7 +220,6 @@ const Header = ({
                         </div>
                         <div className="profile d-flex position-relative m-1">
                             <Link
-                                onClick={scrollToTop}
                                 to={{
                                     pathname: "/profile",
                                     state: {

@@ -16,7 +16,6 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
-import { scrollToTop } from "Utils/ScrollToTop";
 
 const Featured = ({ data, length, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -102,7 +101,6 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                             <div className="col-12 col-md-10 col-lg-8 col-xl-4 d-flex">
                                 <Link
                                     className="w-100"
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname: `${`/prize/featured/${data?.prizeId}`}`,
                                         state: {

@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // HELPER FUNCTIONS
-import { scrollToTop } from "Utils/ScrollToTop";
 import { handleSignOut } from "Utils/SignOut";
 import { defaultUserImage } from "Utils/DefaultImage";
 import {
@@ -23,7 +22,9 @@ const Profile = ({
     const { user } = useSelector((state) => state.userData);
     const { ranks } = useSelector((state) => state.ranks);
     const { config } = useSelector((state) => state.config);
-    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
 
     const dispatch = useDispatch();
 
@@ -68,7 +69,6 @@ const Profile = ({
                                     Gems balance
                                 </p>
                                 <Link
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname: "/iap",
                                         state: {
@@ -259,7 +259,6 @@ const Profile = ({
                                     </div>
                                     <div className="col-6 col-md-6 pl-1 pl-md-3 mb-4 mb-md-0">
                                         <Link
-                                            onClick={scrollToTop}
                                             to={{
                                                 pathname: "/profile/rewards",
                                                 state: {
@@ -279,7 +278,6 @@ const Profile = ({
                             {/* SETTINGS */}
                             <div className="col-12 mt-0 mt-md-4 mb-5">
                                 <Link
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname: "/profile/settings",
                                         state: {

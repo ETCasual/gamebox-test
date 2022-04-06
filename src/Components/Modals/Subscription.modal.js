@@ -1,5 +1,4 @@
 import { Link, useHistory } from "react-router-dom";
-import { scrollToTop } from "../../Utils/ScrollToTop";
 
 const SubscriptionModalPopup = ({ handleGetGemsLaterBtn }) => {
     const history = useHistory();
@@ -22,7 +21,6 @@ const SubscriptionModalPopup = ({ handleGetGemsLaterBtn }) => {
                     </button>
                     <div className="col p-0">
                         <Link
-                            onClick={scrollToTop}
                             to={{
                                 pathname: "/iap",
                                 state: {
@@ -30,7 +28,9 @@ const SubscriptionModalPopup = ({ handleGetGemsLaterBtn }) => {
                                 },
                             }}
                         >
-                            <button className="btn-yes w-100">Get Gems now!</button>
+                            <button className="btn-yes w-100">
+                                Get Gems now!
+                            </button>
                         </Link>
                     </div>
                 </div>

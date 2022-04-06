@@ -54,7 +54,6 @@ const FortuneWheel = ({
 
     // DISABLE HTML SCROLL
     useEffect(() => {
-        window.scrollTo(0, 0);
         document.documentElement.style.overflowY = "hidden";
 
         return () => (document.documentElement.style.overflowY = "visible");

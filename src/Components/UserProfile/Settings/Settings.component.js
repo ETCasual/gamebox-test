@@ -5,13 +5,14 @@ import Toggle from "react-toggle";
 
 import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
 
-import { scrollToTop } from "Utils/ScrollToTop";
 import { defaultUserImage } from "Utils/DefaultImage";
 import { handleConnectWallet } from "Utils/ConnectWallet";
 
 const Settings = () => {
     const { user } = useSelector((state) => state.userData);
-    const { blockchainNetworks } = useSelector((state) => state.blockchainNetworks);
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
     const dispatch = useDispatch();
 
     // TOOGLE NOTIFICATION
@@ -43,7 +44,6 @@ const Settings = () => {
                             <div className="col-12 mb-3 mb-md-4">
                                 <Link
                                     className="back-button"
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname: "/profile",
                                         state: {
@@ -75,7 +75,6 @@ const Settings = () => {
                                                 : "https://froyo.games/my-profile"
                                         }
                                         className="col-12 d-flex align-items-center profile-info"
-                                        onClick={scrollToTop}
                                     >
                                         <img
                                             onError={(e) => defaultUserImage(e)}
@@ -282,26 +281,17 @@ const Settings = () => {
                                     <div className="col-12 d-flex info-links">
                                         <ul className="p-0 w-100">
                                             <li>
-                                                <Link
-                                                    to="/privacy-policy"
-                                                    onClick={scrollToTop}
-                                                >
+                                                <Link to="/privacy-policy">
                                                     Privacy Policy
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link
-                                                    to="/terms-and-conditions"
-                                                    onClick={scrollToTop}
-                                                >
+                                                <Link to="/terms-and-conditions">
                                                     Terms of use
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link
-                                                    to="/tournament-rules"
-                                                    onClick={scrollToTop}
-                                                >
+                                                <Link to="/tournament-rules">
                                                     Tournament rules
                                                 </Link>
                                             </li>

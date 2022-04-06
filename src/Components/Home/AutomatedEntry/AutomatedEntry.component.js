@@ -9,7 +9,6 @@ import loadAutomatedEntryTickets from "redux/thunks/AutomatedEntryTickets.thunk"
 
 // HELPER FUNCTIONS
 import convertSecondsToHours from "Utils/TimeConversion";
-import { scrollToTop } from "Utils/ScrollToTop";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntry = ({ data }) => {
@@ -27,7 +26,7 @@ const AutomatedEntry = ({ data }) => {
     let watcherRef = useRef(null);
 
     useEffect(() => {
-        if (user.id )
+        if (user.id)
             dispatch(loadAutomatedEntryTickets(data.scheduledOn, data.prizeId));
     }, [dispatch, data.scheduledOn, data.prizeId, user.id]);
 
@@ -115,7 +114,6 @@ const AutomatedEntry = ({ data }) => {
     else
         return (
             <Link
-                onClick={scrollToTop}
                 to={{
                     pathname: `/prize/automated/${data.prizeId}`,
                     state: {

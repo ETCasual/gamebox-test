@@ -20,7 +20,6 @@ import loadCurrentUserRank from "redux/thunks/CurrentUserRank.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 
 // HELPER FUNCTION
-import { scrollToTop } from "Utils/ScrollToTop";
 import { PRIZE_TYPE } from "Utils/Enums";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
@@ -162,7 +161,6 @@ const Index = ({ match }) => {
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);
     const onClickGameLeaderBackButton = () => {
-        scrollToTop();
         setIsGameLeaderboardShown(false);
     };
 
@@ -170,7 +168,6 @@ const Index = ({ match }) => {
     const onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
 
     const handleHomeNavLink = () => {
-        scrollToTop();
         loadPrizes(dispatch);
     };
 

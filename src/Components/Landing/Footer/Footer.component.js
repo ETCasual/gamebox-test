@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { scrollToTop } from "Utils/ScrollToTop";
 
 const Footer = () => {
     return (
@@ -113,21 +112,17 @@ const Footer = () => {
                         <span>&bull;</span>
                     </div>
                     <div className="clickable-container">
-                        <Link to="/terms-and-conditions" onClick={scrollToTop}>
+                        <Link to="/terms-and-conditions">
                             Terms and Conditions
                         </Link>
                         <span>&bull;</span>
-                        <Link to="/privacy-policy" onClick={scrollToTop}>
-                            Privacy Policy
-                        </Link>
+                        <Link to="/privacy-policy">Privacy Policy</Link>
                         <span>&bull;</span>
-                        <Link to="/tournament-rules" onClick={scrollToTop}>
-                            Tournament Rules
-                        </Link>
+                        <Link to="/tournament-rules">Tournament Rules</Link>
                     </div>
                 </div>
                 <div className="logo-image-container d-flex position-absolute">
-                    <Link to="/" onClick={scrollToTop}>
+                    <Link to="/">
                         <img
                             className="footer-img"
                             src={`${window.cdn}logo/logo_gamebox.png`}

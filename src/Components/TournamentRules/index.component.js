@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { scrollToTop } from "Utils/ScrollToTop";
-
 const Index = () => {
     const history = useHistory();
 
@@ -16,7 +14,6 @@ const Index = () => {
                             <div className="col-12 mb-3 mb-md-4">
                                 <Link
                                     className="back-button"
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname: "/profile/settings",
                                         state: {

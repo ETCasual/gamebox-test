@@ -13,7 +13,6 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 // HELPER FUNCTIONS
-import { scrollToTop } from "Utils/ScrollToTop";
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
@@ -91,7 +90,6 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                     <div className="col-12 col-md-6 col-lg-6 col-xl-4 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
                         <div className="card-wrapper">
                             <Link
-                                onClick={scrollToTop}
                                 to={{
                                     pathname: `/prize/premium/${data.prizeId}`,
                                     state: {

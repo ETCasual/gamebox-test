@@ -8,9 +8,6 @@ import ClaimedPrizeDetailModal from "Components/Modals/ClaimedPrizeDetail.modal"
 
 import { loadNFTClaim } from "redux/thunks/UnClaimedPrizes.thunk";
 
-// HELPER FUNCTIONS
-import { scrollToTop } from "Utils/ScrollToTop";
-
 const Rewards = () => {
     const { claimedPrizes } = useSelector((state) => state.claimedPrizes);
     const { unClaimedPrizes } = useSelector((state) => state.unClaimedPrizes);
@@ -91,7 +88,6 @@ const Rewards = () => {
                             <div className="col-12 mb-5 px-1">
                                 <Link
                                     className="back-button"
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname:
                                             history?.location?.state
@@ -135,7 +131,10 @@ const Rewards = () => {
                                                     }}
                                                     key={`prizes-${i}`}
                                                     onClick={() =>
-                                                        handleNFTClaim(data.id, data.prizeBlockchainNetwork)
+                                                        handleNFTClaim(
+                                                            data.id,
+                                                            data.prizeBlockchainNetwork
+                                                        )
                                                     }
                                                 >
                                                     <div className="card-wrapper d-flex">

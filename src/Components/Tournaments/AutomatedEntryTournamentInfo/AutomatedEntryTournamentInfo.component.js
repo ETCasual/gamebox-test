@@ -8,7 +8,6 @@ import _ from "lodash";
 import loadPrizes from "redux/thunks/Prizes.thunk";
 
 // HELPER FUNCTIONS
-import { scrollToTop } from "Utils/ScrollToTop";
 import convertSecondsToHours from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
@@ -88,7 +87,6 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                             <div className="d-flex align-items-center back-button mb-4 px-3">
                                 <Link
                                     className="d-flex align-items-center"
-                                    onClick={scrollToTop}
                                     to={{
                                         pathname: "/",
                                         state: {
