@@ -63,6 +63,14 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
 
     return (
         <div className="winner-announcement">
+            <img
+                width={28}
+                className="close-btn"
+                onClick={() => handleBackButton()}
+                src={`${window.cdn}buttons/button_close.png`}
+                alt="close-btn"
+            />
+
             <Swiper
                 className="swiper"
                 spaceBetween={0}
@@ -96,13 +104,6 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                     className="picture"
                                     src={e.picture}
                                     alt="prize"
-                                />
-                                <img
-                                    width={28}
-                                    className="close-btn"
-                                    onClick={() => handleBackButton(e?.prizeId)}
-                                    src={`${window.cdn}buttons/button_close.png`}
-                                    alt="close-btn"
                                 />
                             </div>
                             {/* WINNER INFO */}
