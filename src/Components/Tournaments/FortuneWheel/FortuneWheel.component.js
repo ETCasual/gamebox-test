@@ -1,5 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { gsap } from "gsap";
 
@@ -13,7 +13,7 @@ import loadPlayerSpinnerSpin from "redux/thunks/PlayerSpinnerSpin.thunk";
 import loadPurchaseSpins from "redux/thunks/PurchaseSpins.thunk";
 import loadConsumeUserGems from "redux/thunks/ConsumeUserGems.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
-import {loadPrizePoolTickets} from "redux/thunks/PrizePoolTickets.thunk";
+import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 // HELPER FUNCTION
 import getPoolTickets from "Utils/PoolTickets";
@@ -32,17 +32,25 @@ const FortuneWheel = ({
     const { poolTickets } = useSelector((state) => state.playerTickets);
 
     const [spinnerDict, setSpinnerDict] = useState({});
+    const [outOfSpins, setOutOfSpins] = useState(false);
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
-    const [wheelRotation, setWheelRotation] = useState(0);
     const [, setIsBuySpinConfirmModalShown] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
+    const [wheelRotation, setWheelRotation] = useState(0);
     const [modalHeight, setModalHeight] = useState({
         windowWidth: 0,
         wrapper: 0,
         cols: 0,
     });
     const spinDuration = 3;
+
+    const spinnerRef = useRef(spinner);
+
+    // CHECK SPINS AVAILABILITY
+    useEffect(() => {
+        setOutOfSpins(spinnerRef.current.freeSpins > 0 ? false : true);
+    }, []);
 
     // DISABLE HTML SCROLL
     useEffect(() => {
@@ -93,11 +101,18 @@ const FortuneWheel = ({
     }, [spinnerRules, config]);
 
     function onClickSpinButton() {
+        // PREVENT SPAMMING
         if (isClickedSpin) return;
+
+        if (spinner?.freeSpins <= 0) {
+            setOutOfSpins(true);
+            return;
+        }
 
         setIsClickedSpin(true);
         dispatch(loadPlayerSpinnerSpin(prizeId, spinWheel));
     }
+
     function spinWheel(_spinner) {
         if (_spinner.enterId === 0) return;
 
@@ -124,16 +139,22 @@ const FortuneWheel = ({
                     ease: "power2.easeOut",
                     onComplete: () => {
                         setIsClickedSpin(false);
+
+                        // TICKETS API
                         dispatch(loadPlayerTickets(prizeId, true));
                         dispatch(
                             loadPrizePoolTickets(prizeId, true, ticketsRequired)
                         );
+
+                        // UPDATE FINISHED ROTATION TO STATE
                         let finishedSpinningRotation = parseInt(
                             elem.style.transform
                                 .match(/rotate\((.+)\)/)[1]
                                 .split("deg")[0]
                         );
                         setWheelRotation(finishedSpinningRotation);
+
+                        // ALLOWS COMPONENT RENDER TO REFLECT LATEST TICKETS
                         setIsTicketsUpdated(true);
                         setTimeout(() => setIsTicketsUpdated(false), 1000);
                     },
@@ -166,6 +187,7 @@ const FortuneWheel = ({
         dispatch(loadPurchaseSpins(true));
 
         setIsBuySpinConfirmModalShown(false);
+        setOutOfSpins(false);
         setIsClickedSpin(false);
     };
     const handleProbabilityInfo = () => {
@@ -352,18 +374,12 @@ const FortuneWheel = ({
                                     {/* SPIN BUTTON*/}
                                     <div
                                         className={`spin-button ${
-                                            spinner.freeSpins <= 0 ||
-                                            isClickedSpin
-                                                ? "opacity-0-5"
-                                                : ""
+                                            isClickedSpin ? "opacity-0-5" : ""
                                         }`}
                                     >
                                         <button
                                             disabled={
-                                                spinner.freeSpins <= 0 ||
-                                                isClickedSpin
-                                                    ? true
-                                                    : false
+                                                isClickedSpin ? true : false
                                             }
                                             onClick={onClickSpinButton}
                                             className="spin-button-inner-orange d-flex align-items-center justify-content-center"
@@ -399,18 +415,16 @@ const FortuneWheel = ({
             </div>
 
             {/* USE GEMS BUTTON */}
-            {spinner?.freeSpins <= 0 &&
-                user?.gems >= config.useGems &&
-                !isClickedSpin && (
-                    <BuySpinConfirmModal
-                        handleYes={handleBuySpinModalYesButton}
-                        handleNo={() => {
-                            setFortuneWheelShown(false);
-                        }}
-                        gemAmount={config.useGems}
-                        spinAmount={config.useGemsSpin}
-                    />
-                )}
+            {outOfSpins && (
+                <BuySpinConfirmModal
+                    handleYes={handleBuySpinModalYesButton}
+                    handleNo={() => {
+                        setOutOfSpins(false);
+                    }}
+                    gemAmount={config.useGems}
+                    spinAmount={config.useGemsSpin}
+                />
+            )}
 
             {/* PURCHASE GEMS BUTTON */}
             {spinner?.freeSpins <= 0 &&

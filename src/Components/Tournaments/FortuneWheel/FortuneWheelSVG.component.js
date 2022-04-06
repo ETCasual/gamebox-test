@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import loadSpinnerRules from "redux/thunks/SpinnerRules.thunk";
 
 const FortuneWheelSVG = ({ spinnerRules }) => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (spinnerRules.length <= 0) dispatch(loadSpinnerRules());
+    }, [spinnerRules, dispatch]);
+
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
             <defs>
@@ -148,7 +156,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-18.836" y="0">
-                        {spinnerRules[0].tickets}
+                        {spinnerRules[0]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -175,7 +183,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[1].tickets}
+                        {spinnerRules[1]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -202,7 +210,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[9].tickets}
+                        {spinnerRules[9]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -229,7 +237,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[2].tickets}
+                        {spinnerRules[2]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -256,7 +264,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
-                        {spinnerRules[8].tickets}
+                        {spinnerRules[8]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -283,7 +291,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-18.836" y="0">
-                        {spinnerRules[5].tickets}
+                        {spinnerRules[5]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -310,7 +318,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[6].tickets}
+                        {spinnerRules[6]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -337,7 +345,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-12.843" y="0">
-                        {spinnerRules[4].tickets}
+                        {spinnerRules[4]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -364,7 +372,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
-                        {spinnerRules[7].tickets}
+                        {spinnerRules[7]?.tickets}
                     </tspan>
                 </text>
                 <path
@@ -391,7 +399,7 @@ const FortuneWheelSVG = ({ spinnerRules }) => {
                     fontWeight="700"
                 >
                     <tspan x="-9.133" y="0">
-                        {spinnerRules[3].tickets}
+                        {spinnerRules[3]?.tickets}
                     </tspan>
                 </text>
             </g>

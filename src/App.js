@@ -41,6 +41,7 @@ import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
 import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
+import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 import { LOG_OUT } from "redux/types";
 
 const App = () => {
@@ -74,13 +75,14 @@ const App = () => {
     useEffect(() => {
         if (user.id) {
             // dispatch(loadLoginUser(authUser, isNewUser));
+            dispatch(loadAvailableSpins());
+            dispatch(loadSpinnerRules());
             dispatch(loadPrizes());
             dispatch(loadBlockChainNetworks());
             dispatch(loadExchangeRate());
             dispatch(loadRanks());
             dispatch(loadConfig());
             dispatch(loadGemsList());
-            dispatch(loadSpinnerRules());
             dispatch(loadGamesList());
 
             // FOR FUTURE PURPOSE

@@ -67,7 +67,7 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                             />
                         </div>
                         <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
-                            <p className="price mb-0">
+                            <p className="price mb-0 d-flex align-items-center">
                                 <img
                                     width="24"
                                     src={`${window.cdn}icons/icon_froyo.png`}
