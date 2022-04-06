@@ -28,6 +28,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
 
     const [prizeData, setPrizeData] = useState([]);
     const [activeSlide, setActiveSlide] = useState(-1);
+    const [activePrizeId, setActivePrizeId] = useState(null);
 
     useEffect(() => {
         let timeOutRef = null;
@@ -66,7 +67,9 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
             <img
                 width={28}
                 className="close-btn"
-                onClick={() => handleBackButton()}
+                onClick={() =>
+                    handleBackButton(activePrizeId || prizeData[0]?.prizeId)
+                }
                 src={`${window.cdn}buttons/button_close.png`}
                 alt="close-btn"
             />
@@ -92,6 +95,9 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                 initialSlide={1}
                 slidesPerView={1}
                 onActiveIndexChange={(active) => {
+                    setActivePrizeId(
+                        prizeData[active.realIndex]?.prizeId || data[0]?.prizeId
+                    );
                     setActiveSlide(active.realIndex);
                 }}
             >
