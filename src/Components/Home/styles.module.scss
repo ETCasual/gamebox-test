@@ -175,7 +175,7 @@
         left: 50%;
         transform: translate(39vw, calc(-9.5rem - 45vw));
         @include media-min($sm) {
-            transform: translate(10rem, -20rem);
+            transform: translate(10rem, -22rem);
         }
     }
 }

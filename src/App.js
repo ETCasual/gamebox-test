@@ -75,9 +75,9 @@ const App = () => {
     useEffect(() => {
         if (user.id) {
             // dispatch(loadLoginUser(authUser, isNewUser));
+            dispatch(loadPrizes());
             dispatch(loadAvailableSpins());
             dispatch(loadSpinnerRules());
-            dispatch(loadPrizes());
             dispatch(loadBlockChainNetworks());
             dispatch(loadExchangeRate());
             dispatch(loadRanks());
