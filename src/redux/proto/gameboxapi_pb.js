@@ -20328,29 +20328,32 @@ proto.api.gamebox.PrizeDetail.toObject = function(includeInstance, msg) {
     statusProgress: jspb.Message.getFieldWithDefault(msg, 18, 0),
     ticketsCollected: jspb.Message.getFieldWithDefault(msg, 19, 0),
     blockchainNetwork: jspb.Message.getFieldWithDefault(msg, 20, 0),
-    tourId: jspb.Message.getFieldWithDefault(msg, 21, 0),
-    tourTitle: jspb.Message.getFieldWithDefault(msg, 22, ""),
-    setId: jspb.Message.getFieldWithDefault(msg, 23, 0),
-    setTitle: jspb.Message.getFieldWithDefault(msg, 24, ""),
-    gameId: jspb.Message.getFieldWithDefault(msg, 25, 0),
-    gameTitle: jspb.Message.getFieldWithDefault(msg, 26, ""),
-    gameSubtitle: jspb.Message.getFieldWithDefault(msg, 27, ""),
-    gameImgUrl: jspb.Message.getFieldWithDefault(msg, 28, ""),
-    gameContent: jspb.Message.getFieldWithDefault(msg, 29, ""),
-    scoreRule: jspb.Message.getFieldWithDefault(msg, 30, 0),
-    watchAdGetTickets: jspb.Message.getFieldWithDefault(msg, 31, 0),
-    watchAdGetExp: jspb.Message.getFieldWithDefault(msg, 32, 0),
-    useGemGetTickets: jspb.Message.getFieldWithDefault(msg, 33, 0),
-    useGemGetExp: jspb.Message.getFieldWithDefault(msg, 34, 0),
-    useHowManyGems: jspb.Message.getFieldWithDefault(msg, 35, 0),
-    tsgId: jspb.Message.getFieldWithDefault(msg, 36, 0),
-    gameDurationDays: jspb.Message.getFieldWithDefault(msg, 37, 0),
-    gameDurationHours: jspb.Message.getFieldWithDefault(msg, 38, 0),
-    gameDurationMinutes: jspb.Message.getFieldWithDefault(msg, 39, 0),
-    groupId: jspb.Message.getFieldWithDefault(msg, 40, 0),
-    startTimestamp: jspb.Message.getFieldWithDefault(msg, 41, 0),
-    endTimestamp: jspb.Message.getFieldWithDefault(msg, 42, 0),
-    overtime: jspb.Message.getFieldWithDefault(msg, 43, false)
+    nftContractAddress: jspb.Message.getFieldWithDefault(msg, 21, ""),
+    nftTokenId: jspb.Message.getFieldWithDefault(msg, 22, ""),
+    infoUrl: jspb.Message.getFieldWithDefault(msg, 23, ""),
+    tourId: jspb.Message.getFieldWithDefault(msg, 24, 0),
+    tourTitle: jspb.Message.getFieldWithDefault(msg, 25, ""),
+    setId: jspb.Message.getFieldWithDefault(msg, 26, 0),
+    setTitle: jspb.Message.getFieldWithDefault(msg, 27, ""),
+    gameId: jspb.Message.getFieldWithDefault(msg, 28, 0),
+    gameTitle: jspb.Message.getFieldWithDefault(msg, 29, ""),
+    gameSubtitle: jspb.Message.getFieldWithDefault(msg, 30, ""),
+    gameImgUrl: jspb.Message.getFieldWithDefault(msg, 31, ""),
+    gameContent: jspb.Message.getFieldWithDefault(msg, 32, ""),
+    scoreRule: jspb.Message.getFieldWithDefault(msg, 33, 0),
+    watchAdGetTickets: jspb.Message.getFieldWithDefault(msg, 34, 0),
+    watchAdGetExp: jspb.Message.getFieldWithDefault(msg, 35, 0),
+    useGemGetTickets: jspb.Message.getFieldWithDefault(msg, 36, 0),
+    useGemGetExp: jspb.Message.getFieldWithDefault(msg, 37, 0),
+    useHowManyGems: jspb.Message.getFieldWithDefault(msg, 38, 0),
+    tsgId: jspb.Message.getFieldWithDefault(msg, 39, 0),
+    gameDurationDays: jspb.Message.getFieldWithDefault(msg, 40, 0),
+    gameDurationHours: jspb.Message.getFieldWithDefault(msg, 41, 0),
+    gameDurationMinutes: jspb.Message.getFieldWithDefault(msg, 42, 0),
+    groupId: jspb.Message.getFieldWithDefault(msg, 43, 0),
+    startTimestamp: jspb.Message.getFieldWithDefault(msg, 44, 0),
+    endTimestamp: jspb.Message.getFieldWithDefault(msg, 45, 0),
+    overtime: jspb.Message.getFieldWithDefault(msg, 46, false)
   };
 
   if (includeInstance) {
@@ -20468,94 +20471,106 @@ proto.api.gamebox.PrizeDetail.deserializeBinaryFromReader = function(msg, reader
       msg.setBlockchainNetwork(value);
       break;
     case 21:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setTourId(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNftContractAddress(value);
       break;
     case 22:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTourTitle(value);
+      msg.setNftTokenId(value);
       break;
     case 23:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setInfoUrl(value);
+      break;
+    case 24:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTourId(value);
+      break;
+    case 25:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTourTitle(value);
+      break;
+    case 26:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setSetId(value);
       break;
-    case 24:
+    case 27:
       var value = /** @type {string} */ (reader.readString());
       msg.setSetTitle(value);
       break;
-    case 25:
+    case 28:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setGameId(value);
       break;
-    case 26:
+    case 29:
       var value = /** @type {string} */ (reader.readString());
       msg.setGameTitle(value);
       break;
-    case 27:
+    case 30:
       var value = /** @type {string} */ (reader.readString());
       msg.setGameSubtitle(value);
       break;
-    case 28:
+    case 31:
       var value = /** @type {string} */ (reader.readString());
       msg.setGameImgUrl(value);
       break;
-    case 29:
+    case 32:
       var value = /** @type {string} */ (reader.readString());
       msg.setGameContent(value);
       break;
-    case 30:
+    case 33:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setScoreRule(value);
       break;
-    case 31:
+    case 34:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setWatchAdGetTickets(value);
       break;
-    case 32:
+    case 35:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setWatchAdGetExp(value);
       break;
-    case 33:
+    case 36:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setUseGemGetTickets(value);
       break;
-    case 34:
+    case 37:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setUseGemGetExp(value);
       break;
-    case 35:
+    case 38:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setUseHowManyGems(value);
       break;
-    case 36:
+    case 39:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setTsgId(value);
       break;
-    case 37:
+    case 40:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setGameDurationDays(value);
       break;
-    case 38:
+    case 41:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setGameDurationHours(value);
       break;
-    case 39:
+    case 42:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setGameDurationMinutes(value);
       break;
-    case 40:
+    case 43:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setGroupId(value);
       break;
-    case 41:
+    case 44:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setStartTimestamp(value);
       break;
-    case 42:
+    case 45:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setEndTimestamp(value);
       break;
-    case 43:
+    case 46:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setOvertime(value);
       break;
@@ -20728,164 +20743,185 @@ proto.api.gamebox.PrizeDetail.serializeBinaryToWriter = function(message, writer
       f
     );
   }
-  f = message.getTourId();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getNftContractAddress();
+  if (f.length > 0) {
+    writer.writeString(
       21,
       f
     );
   }
-  f = message.getTourTitle();
+  f = message.getNftTokenId();
   if (f.length > 0) {
     writer.writeString(
       22,
       f
     );
   }
+  f = message.getInfoUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      23,
+      f
+    );
+  }
+  f = message.getTourId();
+  if (f !== 0) {
+    writer.writeInt64(
+      24,
+      f
+    );
+  }
+  f = message.getTourTitle();
+  if (f.length > 0) {
+    writer.writeString(
+      25,
+      f
+    );
+  }
   f = message.getSetId();
   if (f !== 0) {
     writer.writeInt64(
-      23,
+      26,
       f
     );
   }
   f = message.getSetTitle();
   if (f.length > 0) {
     writer.writeString(
-      24,
+      27,
       f
     );
   }
   f = message.getGameId();
   if (f !== 0) {
     writer.writeInt64(
-      25,
+      28,
       f
     );
   }
   f = message.getGameTitle();
   if (f.length > 0) {
     writer.writeString(
-      26,
+      29,
       f
     );
   }
   f = message.getGameSubtitle();
   if (f.length > 0) {
     writer.writeString(
-      27,
+      30,
       f
     );
   }
   f = message.getGameImgUrl();
   if (f.length > 0) {
     writer.writeString(
-      28,
+      31,
       f
     );
   }
   f = message.getGameContent();
   if (f.length > 0) {
     writer.writeString(
-      29,
+      32,
       f
     );
   }
   f = message.getScoreRule();
   if (f !== 0) {
     writer.writeInt32(
-      30,
+      33,
       f
     );
   }
   f = message.getWatchAdGetTickets();
   if (f !== 0) {
     writer.writeInt32(
-      31,
+      34,
       f
     );
   }
   f = message.getWatchAdGetExp();
   if (f !== 0) {
     writer.writeInt32(
-      32,
+      35,
       f
     );
   }
   f = message.getUseGemGetTickets();
   if (f !== 0) {
     writer.writeInt32(
-      33,
+      36,
       f
     );
   }
   f = message.getUseGemGetExp();
   if (f !== 0) {
     writer.writeInt32(
-      34,
+      37,
       f
     );
   }
   f = message.getUseHowManyGems();
   if (f !== 0) {
     writer.writeInt32(
-      35,
+      38,
       f
     );
   }
   f = message.getTsgId();
   if (f !== 0) {
     writer.writeInt64(
-      36,
+      39,
       f
     );
   }
   f = message.getGameDurationDays();
   if (f !== 0) {
     writer.writeInt32(
-      37,
+      40,
       f
     );
   }
   f = message.getGameDurationHours();
   if (f !== 0) {
     writer.writeInt32(
-      38,
+      41,
       f
     );
   }
   f = message.getGameDurationMinutes();
   if (f !== 0) {
     writer.writeInt32(
-      39,
+      42,
       f
     );
   }
   f = message.getGroupId();
   if (f !== 0) {
     writer.writeInt32(
-      40,
+      43,
       f
     );
   }
   f = message.getStartTimestamp();
   if (f !== 0) {
     writer.writeInt64(
-      41,
+      44,
       f
     );
   }
   f = message.getEndTimestamp();
   if (f !== 0) {
     writer.writeInt64(
-      42,
+      45,
       f
     );
   }
   f = message.getOvertime();
   if (f) {
     writer.writeBool(
-      43,
+      46,
       f
     );
   }
@@ -21209,349 +21245,394 @@ proto.api.gamebox.PrizeDetail.prototype.setBlockchainNetwork = function(value) {
 
 
 /**
- * optional int64 tour_id = 21;
- * @return {number}
+ * optional string nft_contract_address = 21;
+ * @return {string}
  */
-proto.api.gamebox.PrizeDetail.prototype.getTourId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
+proto.api.gamebox.PrizeDetail.prototype.getNftContractAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 21, ""));
 };
 
 
-/** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setTourId = function(value) {
-  jspb.Message.setProto3IntField(this, 21, value);
+/** @param {string} value */
+proto.api.gamebox.PrizeDetail.prototype.setNftContractAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 21, value);
 };
 
 
 /**
- * optional string tour_title = 22;
+ * optional string nft_token_id = 22;
  * @return {string}
  */
-proto.api.gamebox.PrizeDetail.prototype.getTourTitle = function() {
+proto.api.gamebox.PrizeDetail.prototype.getNftTokenId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 22, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.PrizeDetail.prototype.setTourTitle = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setNftTokenId = function(value) {
   jspb.Message.setProto3StringField(this, 22, value);
 };
 
 
 /**
- * optional int64 set_id = 23;
+ * optional string info_url = 23;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getInfoUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 23, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeDetail.prototype.setInfoUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 23, value);
+};
+
+
+/**
+ * optional int64 tour_id = 24;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getTourId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 24, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeDetail.prototype.setTourId = function(value) {
+  jspb.Message.setProto3IntField(this, 24, value);
+};
+
+
+/**
+ * optional string tour_title = 25;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getTourTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 25, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeDetail.prototype.setTourTitle = function(value) {
+  jspb.Message.setProto3StringField(this, 25, value);
+};
+
+
+/**
+ * optional int64 set_id = 26;
  * @return {number}
  */
 proto.api.gamebox.PrizeDetail.prototype.getSetId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 23, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 26, 0));
 };
 
 
 /** @param {number} value */
 proto.api.gamebox.PrizeDetail.prototype.setSetId = function(value) {
-  jspb.Message.setProto3IntField(this, 23, value);
+  jspb.Message.setProto3IntField(this, 26, value);
 };
 
 
 /**
- * optional string set_title = 24;
+ * optional string set_title = 27;
  * @return {string}
  */
 proto.api.gamebox.PrizeDetail.prototype.getSetTitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 24, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.PrizeDetail.prototype.setSetTitle = function(value) {
-  jspb.Message.setProto3StringField(this, 24, value);
-};
-
-
-/**
- * optional int64 game_id = 25;
- * @return {number}
- */
-proto.api.gamebox.PrizeDetail.prototype.getGameId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 25, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameId = function(value) {
-  jspb.Message.setProto3IntField(this, 25, value);
-};
-
-
-/**
- * optional string game_title = 26;
- * @return {string}
- */
-proto.api.gamebox.PrizeDetail.prototype.getGameTitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 26, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameTitle = function(value) {
-  jspb.Message.setProto3StringField(this, 26, value);
-};
-
-
-/**
- * optional string game_subtitle = 27;
- * @return {string}
- */
-proto.api.gamebox.PrizeDetail.prototype.getGameSubtitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 27, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameSubtitle = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setSetTitle = function(value) {
   jspb.Message.setProto3StringField(this, 27, value);
 };
 
 
 /**
- * optional string game_img_url = 28;
- * @return {string}
+ * optional int64 game_id = 28;
+ * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getGameImgUrl = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 28, ""));
+proto.api.gamebox.PrizeDetail.prototype.getGameId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 28, 0));
 };
 
 
-/** @param {string} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameImgUrl = function(value) {
-  jspb.Message.setProto3StringField(this, 28, value);
+/** @param {number} value */
+proto.api.gamebox.PrizeDetail.prototype.setGameId = function(value) {
+  jspb.Message.setProto3IntField(this, 28, value);
 };
 
 
 /**
- * optional string game_content = 29;
+ * optional string game_title = 29;
  * @return {string}
  */
-proto.api.gamebox.PrizeDetail.prototype.getGameContent = function() {
+proto.api.gamebox.PrizeDetail.prototype.getGameTitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 29, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameContent = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setGameTitle = function(value) {
   jspb.Message.setProto3StringField(this, 29, value);
 };
 
 
 /**
- * optional int32 score_rule = 30;
+ * optional string game_subtitle = 30;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getGameSubtitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 30, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeDetail.prototype.setGameSubtitle = function(value) {
+  jspb.Message.setProto3StringField(this, 30, value);
+};
+
+
+/**
+ * optional string game_img_url = 31;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getGameImgUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 31, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeDetail.prototype.setGameImgUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 31, value);
+};
+
+
+/**
+ * optional string game_content = 32;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getGameContent = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 32, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeDetail.prototype.setGameContent = function(value) {
+  jspb.Message.setProto3StringField(this, 32, value);
+};
+
+
+/**
+ * optional int32 score_rule = 33;
  * @return {number}
  */
 proto.api.gamebox.PrizeDetail.prototype.getScoreRule = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 30, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setScoreRule = function(value) {
-  jspb.Message.setProto3IntField(this, 30, value);
-};
-
-
-/**
- * optional int32 watch_ad_get_tickets = 31;
- * @return {number}
- */
-proto.api.gamebox.PrizeDetail.prototype.getWatchAdGetTickets = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 31, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setWatchAdGetTickets = function(value) {
-  jspb.Message.setProto3IntField(this, 31, value);
-};
-
-
-/**
- * optional int32 watch_ad_get_exp = 32;
- * @return {number}
- */
-proto.api.gamebox.PrizeDetail.prototype.getWatchAdGetExp = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 32, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setWatchAdGetExp = function(value) {
-  jspb.Message.setProto3IntField(this, 32, value);
-};
-
-
-/**
- * optional int32 use_gem_get_tickets = 33;
- * @return {number}
- */
-proto.api.gamebox.PrizeDetail.prototype.getUseGemGetTickets = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 33, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setUseGemGetTickets = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setScoreRule = function(value) {
   jspb.Message.setProto3IntField(this, 33, value);
 };
 
 
 /**
- * optional int32 use_gem_get_exp = 34;
+ * optional int32 watch_ad_get_tickets = 34;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getUseGemGetExp = function() {
+proto.api.gamebox.PrizeDetail.prototype.getWatchAdGetTickets = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 34, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setUseGemGetExp = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setWatchAdGetTickets = function(value) {
   jspb.Message.setProto3IntField(this, 34, value);
 };
 
 
 /**
- * optional int32 use_how_many_gems = 35;
+ * optional int32 watch_ad_get_exp = 35;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getUseHowManyGems = function() {
+proto.api.gamebox.PrizeDetail.prototype.getWatchAdGetExp = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 35, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setUseHowManyGems = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setWatchAdGetExp = function(value) {
   jspb.Message.setProto3IntField(this, 35, value);
 };
 
 
 /**
- * optional int64 tsg_id = 36;
+ * optional int32 use_gem_get_tickets = 36;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getTsgId = function() {
+proto.api.gamebox.PrizeDetail.prototype.getUseGemGetTickets = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 36, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setTsgId = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setUseGemGetTickets = function(value) {
   jspb.Message.setProto3IntField(this, 36, value);
 };
 
 
 /**
- * optional int32 game_duration_days = 37;
+ * optional int32 use_gem_get_exp = 37;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getGameDurationDays = function() {
+proto.api.gamebox.PrizeDetail.prototype.getUseGemGetExp = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 37, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameDurationDays = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setUseGemGetExp = function(value) {
   jspb.Message.setProto3IntField(this, 37, value);
 };
 
 
 /**
- * optional int32 game_duration_hours = 38;
+ * optional int32 use_how_many_gems = 38;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getGameDurationHours = function() {
+proto.api.gamebox.PrizeDetail.prototype.getUseHowManyGems = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 38, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameDurationHours = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setUseHowManyGems = function(value) {
   jspb.Message.setProto3IntField(this, 38, value);
 };
 
 
 /**
- * optional int32 game_duration_minutes = 39;
+ * optional int64 tsg_id = 39;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getGameDurationMinutes = function() {
+proto.api.gamebox.PrizeDetail.prototype.getTsgId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 39, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setGameDurationMinutes = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setTsgId = function(value) {
   jspb.Message.setProto3IntField(this, 39, value);
 };
 
 
 /**
- * optional int32 group_id = 40;
+ * optional int32 game_duration_days = 40;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getGroupId = function() {
+proto.api.gamebox.PrizeDetail.prototype.getGameDurationDays = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 40, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setGroupId = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setGameDurationDays = function(value) {
   jspb.Message.setProto3IntField(this, 40, value);
 };
 
 
 /**
- * optional int64 start_timestamp = 41;
+ * optional int32 game_duration_hours = 41;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getStartTimestamp = function() {
+proto.api.gamebox.PrizeDetail.prototype.getGameDurationHours = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 41, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setStartTimestamp = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setGameDurationHours = function(value) {
   jspb.Message.setProto3IntField(this, 41, value);
 };
 
 
 /**
- * optional int64 end_timestamp = 42;
+ * optional int32 game_duration_minutes = 42;
  * @return {number}
  */
-proto.api.gamebox.PrizeDetail.prototype.getEndTimestamp = function() {
+proto.api.gamebox.PrizeDetail.prototype.getGameDurationMinutes = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 42, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.PrizeDetail.prototype.setEndTimestamp = function(value) {
+proto.api.gamebox.PrizeDetail.prototype.setGameDurationMinutes = function(value) {
   jspb.Message.setProto3IntField(this, 42, value);
 };
 
 
 /**
- * optional bool overtime = 43;
+ * optional int32 group_id = 43;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getGroupId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 43, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeDetail.prototype.setGroupId = function(value) {
+  jspb.Message.setProto3IntField(this, 43, value);
+};
+
+
+/**
+ * optional int64 start_timestamp = 44;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getStartTimestamp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 44, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeDetail.prototype.setStartTimestamp = function(value) {
+  jspb.Message.setProto3IntField(this, 44, value);
+};
+
+
+/**
+ * optional int64 end_timestamp = 45;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getEndTimestamp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 45, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeDetail.prototype.setEndTimestamp = function(value) {
+  jspb.Message.setProto3IntField(this, 45, value);
+};
+
+
+/**
+ * optional bool overtime = 46;
  * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
  * You should avoid comparisons like {@code val === true/false} in those cases.
  * @return {boolean}
  */
 proto.api.gamebox.PrizeDetail.prototype.getOvertime = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 43, false));
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 46, false));
 };
 
 
 /** @param {boolean} value */
 proto.api.gamebox.PrizeDetail.prototype.setOvertime = function(value) {
-  jspb.Message.setProto3BooleanField(this, 43, value);
+  jspb.Message.setProto3BooleanField(this, 46, value);
 };
 
 
