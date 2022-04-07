@@ -28,7 +28,6 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
 
     const [prizeData, setPrizeData] = useState([]);
     const [activeSlide, setActiveSlide] = useState(-1);
-    const [activePrizeId, setActivePrizeId] = useState(null);
 
     useEffect(() => {
         let timeOutRef = null;
@@ -64,16 +63,6 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
 
     return (
         <div className="winner-announcement">
-            <img
-                width={28}
-                className="close-btn"
-                onClick={() =>
-                    handleBackButton(activePrizeId || prizeData[0]?.prizeId)
-                }
-                src={`${window.cdn}buttons/button_close.png`}
-                alt="close-btn"
-            />
-
             <Swiper
                 className="swiper"
                 spaceBetween={0}
@@ -95,9 +84,6 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                 initialSlide={1}
                 slidesPerView={1}
                 onActiveIndexChange={(active) => {
-                    setActivePrizeId(
-                        prizeData[active.realIndex]?.prizeId || data[0]?.prizeId
-                    );
                     setActiveSlide(active.realIndex);
                 }}
             >
@@ -110,6 +96,13 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                     className="picture"
                                     src={e.picture}
                                     alt="prize"
+                                />
+                                <img
+                                    width={28}
+                                    className="close-btn"
+                                    onClick={() => handleBackButton(e?.prizeId)}
+                                    src={`${window.cdn}buttons/button_close.png`}
+                                    alt="close-btn"
                                 />
                             </div>
                             {/* WINNER INFO */}
@@ -220,9 +213,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                         src={`${window.cdn}buttons/button_back.png`}
                         alt="prev-btn"
                     />
-                    <div className="custom-pagination d-flex">
-                        
-                    </div>
+                    <div className="custom-pagination d-flex"></div>
                     <img
                         width={32}
                         className={`next ${

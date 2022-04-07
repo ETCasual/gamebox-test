@@ -169,13 +169,9 @@
     }
     .close-btn {
         position: absolute;
+        top: 0;
+        right: 0;
         z-index: 99;
         cursor: pointer;
-        top: 50%;
-        left: 50%;
-        transform: translate(39vw, calc(-9.5rem - 45vw));
-        @include media-min($sm) {
-            transform: translate(10rem, -22rem);
-        }
     }
 }
