@@ -332,7 +332,7 @@ export async function getPrizes() {
                     overTime: p.getOvertime(),
                     blockchainNetwork: p.getBlockchainNetwork(),
                     seen: false,
-                    completed: false,
+                    completed: p.getOvertime() ? true : false,
                     nftContractAddress: p.getNftContractAddress(),
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
