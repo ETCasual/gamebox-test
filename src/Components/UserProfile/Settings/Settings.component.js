@@ -7,6 +7,7 @@ import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
 
 import { defaultUserImage } from "Utils/DefaultImage";
 import { handleConnectWallet } from "Utils/ConnectWallet";
+import { UPDATE_USER_WALLET } from "redux/types";
 
 const Settings = () => {
     const { user } = useSelector((state) => state.userData);
@@ -49,6 +50,19 @@ const Settings = () => {
         if (user.walletAddress) return;
 
         await handleConnectWallet(dispatch, blockchainNetworks);
+    };
+
+    const handleDisconnectWallet = () => {
+        dispatch({
+            type: UPDATE_USER_WALLET,
+            payload: {
+                ...user,
+                walletAddress: null,
+                tokenBalance: null,
+                tokenSymbol: null,
+                network: null,
+            },
+        });
     };
 
     return (
@@ -138,13 +152,21 @@ const Settings = () => {
                                                         </div>
                                                         <button
                                                             onClick={
-                                                                handleWallet
+                                                                user.walletAddress
+                                                                    ? handleDisconnectWallet
+                                                                    : handleWallet
                                                             }
                                                         >
                                                             {user.walletAddress && (
-                                                                <p className="mb-0">
+                                                                <p
+                                                                    className={`mb-0 ${
+                                                                        user.walletAddress
+                                                                            ? "text-danger"
+                                                                            : ""
+                                                                    }`}
+                                                                >
+                                                                    Disconnect
                                                                     Wallet
-                                                                    Connected
                                                                 </p>
                                                             )}
                                                             {!user.walletAddress &&
