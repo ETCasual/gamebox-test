@@ -77,7 +77,7 @@ const rootReducer = (state, action) => {
         state = undefined;
         window.scrollTo(0, 0);
         localStorage.clear();
-        sessionStorage.removeItem("isAuthValid");
+        sessionStorage.clear();
     }
     return appReducer(state, action);
 };
