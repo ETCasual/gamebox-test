@@ -333,6 +333,9 @@ export async function getPrizes() {
                     blockchainNetwork: p.getBlockchainNetwork(),
                     seen: false,
                     completed: false,
+                    nftContractAddress: p.getNftContractAddress(),
+                    nftTokenId: p.getNftTokenId(),
+                    infoUrl: p.getInfoUrl(),
                 });
                 sessionStorage.setItem(
                     "prizeDetailList",
@@ -422,6 +425,9 @@ export async function getPrizes() {
                     },
                     overTime: p.getOvertime(),
                     blockchainNetwork: p.getBlockchainNetwork(),
+                    nftContractAddress: p.getNftContractAddress(),
+                    nftTokenId: p.getNftTokenId(),
+                    infoUrl: p.getInfoUrl(),
                 });
             } else {
                 _featuredData[featuredIndex].gameInfo.push({
@@ -496,6 +502,9 @@ export async function getPrizes() {
                     },
                     overTime: p.getOvertime(),
                     blockchainNetwork: p.getBlockchainNetwork(),
+                    nftContractAddress: p.getNftContractAddress(),
+                    nftTokenId: p.getNftTokenId(),
+                    infoUrl: p.getInfoUrl(),
                 });
             } else {
                 _premiumData[premiumIndex].gameInfo.push({
@@ -569,6 +578,9 @@ export async function getPrizes() {
                     },
                     overTime: p.getOvertime(),
                     blockchainNetwork: p.getBlockchainNetwork(),
+                    nftContractAddress: p.getNftContractAddress(),
+                    nftTokenId: p.getNftTokenId(),
+                    infoUrl: p.getInfoUrl(),
                 });
             } else {
                 _dailyData[dailyIndex].gameInfo.push({
@@ -612,6 +624,9 @@ export async function getPrizes() {
                     hours: p.getPrizeDurationHours(),
                 },
                 blockchainNetwork: p.getBlockchainNetwork(),
+                nftContractAddress: p.getNftContractAddress(),
+                nftTokenId: p.getNftTokenId(),
+                infoUrl: p.getInfoUrl(),
             });
         }
     }
@@ -1262,7 +1277,7 @@ export async function getUnclaimedPrizesList(user) {
             status: e.getStatus(),
             prizeCanClaimDate: e.getPrizeCanClaimDate(),
             prizeBlockchainNetwork: e.getPrizeBlockchainNetwork(),
-            prizeContractType: e.getPrizeContractType()
+            prizeContractType: e.getPrizeContractType(),
         });
     });
     return unClaimedPrizes;

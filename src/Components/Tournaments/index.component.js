@@ -224,9 +224,24 @@ const Index = ({ match }) => {
                                             src={currentPrize?.prizeBG}
                                             alt="prize"
                                         />
-                                        <p className="contract-address">
-                                            Contract Address
-                                        </p>
+                                        <a
+                                            className="contract-address"
+                                            href={currentPrize?.infoUrl || "#"}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            {currentPrize?.nftContractAddress?.substring(
+                                                0,
+                                                4
+                                            )}
+                                            ....
+                                            {currentPrize?.nftContractAddress?.substring(
+                                                currentPrize?.nftContractAddress
+                                                    .length - 5,
+                                                currentPrize?.nftContractAddress
+                                                    .length - 1
+                                            )}
+                                        </a>
                                         <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
                                             <div className="prize-id mb-lg-1 mt-2">
                                                 {currentPrize?.prizeSubtitle?.substring(
