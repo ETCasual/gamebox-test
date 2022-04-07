@@ -47,12 +47,16 @@
                 }
             }
             .text-icon-wrapper {
+                cursor: pointer;
                 img {
                     width: 1.5rem;
                     @include media-min($xl) {
                         width: 2rem;
                     }
                 }
+            }
+            .probability-btn {
+                cursor: pointer;
             }
             table.probability-table {
                 width: 14.063rem;
@@ -85,10 +89,6 @@
                         border: 1px solid #383838;
                         line-height: 30px;
                     }
-                }
-
-                td:hover {
-                    background-color: #4573f1;
                 }
             }
             &:nth-child(1),

@@ -93,7 +93,8 @@ const App = () => {
 
     useEffect(() => {
         // FOR LOADING WALLET IF ALREADY CONNECTED
-        dispatch(loadConnectWalletAuto(blockchainNetworks));
+        if (blockchainNetworks.length > 0)
+            dispatch(loadConnectWalletAuto(blockchainNetworks));
     }, [dispatch, blockchainNetworks]);
 
     useEffect(() => {

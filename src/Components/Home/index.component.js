@@ -346,7 +346,7 @@ const Index = () => {
                                     <div className="row">
                                         <div className="col-12 description">
                                             <h2 className="mb-3">
-                                                Premium NFT Rewards
+                                                Premium Rewards
                                             </h2>
                                         </div>
                                         {/* LOADER */}

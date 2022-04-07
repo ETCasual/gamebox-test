@@ -246,7 +246,7 @@ const FortuneWheel = ({
                                     </div>
 
                                     {/* PROBABILITY DISPLAY BUTTON */}
-                                    <img
+                                    <img className="probability-btn"
                                         width={20}
                                         height={20}
                                         onClick={handleProbabilityInfo}

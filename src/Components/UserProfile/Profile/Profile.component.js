@@ -120,11 +120,13 @@ const Profile = ({
                                         className="gem-wrapper"
                                         onClick={handleWallet}
                                     >
-                                        <img
-                                            width="24"
-                                            src={`${window.cdn}icons/icon_froyo.png`}
-                                            alt="wallet"
-                                        />
+                                        {user.walletAddress && (
+                                            <img
+                                                width="24"
+                                                src={`${window.cdn}icons/icon_froyo.png`}
+                                                alt="wallet"
+                                            />
+                                        )}
                                         {user.walletAddress && (
                                             <p className=" d-flex token-balance-text">
                                                 {parseFloat(user.tokenBalance)

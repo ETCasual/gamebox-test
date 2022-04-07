@@ -23,6 +23,15 @@
             background: linear-gradient(180deg, #02020200 0%, #0b0b0b 100%);
         }
     }
+    .prize-type {
+        left: 0;
+        @include media-min($md) {
+            left: 3rem;
+        }
+        position: relative;
+        font-size: 1rem;
+        font-weight: 700;
+    }
     .card-wrapper {
         margin-top: 6rem;
         position: relative;
@@ -57,24 +66,6 @@
                     #02020200 60%,
                     #0b0b0b80 100%
                 );
-            }
-            .type-id-wrapper {
-                width: 100%;
-                position: absolute;
-                z-index: 1;
-                top: 1rem;
-                left: 1rem;
-                .prize-type {
-                    font-size: $fnt-sz-16;
-                    text-transform: uppercase;
-                    font-weight: $fnt-wgt-700;
-                }
-                .prize-id {
-                    font-size: $fnt-sz-8;
-                    @include media-min($lg) {
-                        font-size: $fnt-sz-10;
-                    }
-                }
             }
             img {
                 position: relative;

@@ -16,17 +16,16 @@ export async function handleConnectWallet(dispatch) {
         const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
         });
-
         const chainId = await window.ethereum.request({
             method: "eth_chainId",
         });
 
-        if (
-            (process.env.REACT_APP_NODE_ENV === "development" &&
-                parseInt(chainId) !== 97) ||
-            (process.env.REACT_APP_NODE_ENV === "production" &&
-                parseInt(chainId) !== 56)
-        ) {
+        const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
+        const isIncluded = networks.findIndex(
+            (n) => n.chainId === parseInt(chainId)
+        );
+
+        if (isIncluded === -1) {
             // UPDATE STORE
             dispatch(
                 loadConnectUserWallet(

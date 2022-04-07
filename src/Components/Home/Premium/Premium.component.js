@@ -97,9 +97,6 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     },
                                 }}
                             >
-                                <p className="prize-id mb-0">
-                                    {data.prizeContent}
-                                </p>
                                 <picture>
                                     <source
                                         media="(max-width:768px)"

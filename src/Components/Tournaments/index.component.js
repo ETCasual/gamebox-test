@@ -218,23 +218,26 @@ const Index = ({ match }) => {
                                         </Link>
                                     </div>
                                     {/* TICKETS AND POOL INFO */}
-                                    <div className="col-12 px-3 d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
+                                    <div className="col-12 px-3 position-relative d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
                                         <img
                                             className="prize-img mr-3"
                                             src={currentPrize?.prizeBG}
                                             alt="prize"
                                         />
+                                        <p className="contract-address">
+                                            Contract Address
+                                        </p>
                                         <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
-                                            <div className="prize-id mb-lg-1">
-                                                {currentPrize?.prizeContent?.substring(
+                                            <div className="prize-id mb-lg-1 mt-2">
+                                                {currentPrize?.prizeSubtitle?.substring(
                                                     0,
                                                     4
                                                 )}
                                                 ....
-                                                {currentPrize?.prizeContent?.substring(
-                                                    currentPrize?.prizeContent
+                                                {currentPrize?.prizeSubtitle?.substring(
+                                                    currentPrize?.prizeSubtitle
                                                         .length - 5,
-                                                    currentPrize?.prizeContent
+                                                    currentPrize?.prizeSubtitle
                                                         .length - 1
                                                 )}
                                             </div>
@@ -243,7 +246,7 @@ const Index = ({ match }) => {
                                                     "-"}
                                             </div>
                                             <div className="prize-description">
-                                                {currentPrize?.prizeSubtitle ||
+                                                {currentPrize?.prizeContent ||
                                                     "-"}
                                             </div>
                                             {/* DESKTOP - TICKETS, TIMER & OVERTIME */}
@@ -414,7 +417,7 @@ const Index = ({ match }) => {
                                                         Compete with other
                                                         players, collect tickets
                                                         and stand a chance to
-                                                        own this NFT!
+                                                        own this Prize!
                                                     </p>
                                                 </div>
                                             </div>

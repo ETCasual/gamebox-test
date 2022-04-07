@@ -181,8 +181,6 @@ export async function getUserDetails(user) {
         authorization: `Bearer ${token}`,
     });
     const userInfo = response.getResult();
-    const subId = userInfo.getStripeSubId();
-    const subExpiryDate = userInfo.getStripeExpiryDate();
     const gems = userInfo.getGemBalance();
     const exp = userInfo.getExp();
     const username = userInfo.getNickName();
@@ -190,8 +188,6 @@ export async function getUserDetails(user) {
     const isNotifyAllowed = userInfo.getIsNotifyAllowed();
     return {
         ...user,
-        subId,
-        subExpiryDate,
         gems,
         exp,
         username,

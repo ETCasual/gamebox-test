@@ -98,7 +98,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                     >
                         <div className="overlay" />
                         <div className="row justify-content-center">
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-4 d-flex">
+                            <div className="col-12 col-md-10 col-lg-8 col-xl-4">
                                 <Link
                                     className="w-100"
                                     to={{
@@ -109,28 +109,25 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                     }}
                                 >
                                     <div className="card-wrapper d-flex flex-column flex-md-row">
-                                        <div className="col-12 pl-0 d-flex flex-column align-items-center justify-content-center position-relative p-3">
+                                        <div className="col-12 pl-0 d-flex flex-column align-items-start justify-content-center position-relative p-3">
+                                            <p className="prize-type">
+                                                Featured Reward
+                                            </p>
                                             {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                            <div className="prize-info position-relative">
-                                                {/* PRIZE TYPE */}
-                                                <div className="type-id-wrapper">
-                                                    <div className="prize-type mb-2">
-                                                        Featured NFT
-                                                    </div>
-                                                    <div className="prize-id">
-                                                        ID: {data?.prizeContent}
-                                                    </div>
-                                                </div>
+                                            <div className="prize-info position-relative d-flex align-self-center">
                                                 <img
                                                     src={data.prizeBG}
                                                     alt={data.prizeTitle}
                                                 />
                                                 <div className="info-wrapper">
+                                                    <div className="prize-id">
+                                                        {data?.prizeSubtitle}
+                                                    </div>
                                                     <div className="prize-title mt-2 mb-2">
                                                         {data?.prizeTitle}
                                                     </div>
                                                     <div className="prize-subtitle">
-                                                        {data?.prizeSubtitle}
+                                                        {data?.prizeContent}
                                                     </div>
                                                 </div>
                                             </div>
