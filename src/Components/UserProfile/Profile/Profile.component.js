@@ -13,6 +13,7 @@ import {
     getLevelProgress,
 } from "Utils/CurrentLevel";
 import { handleConnectWallet } from "Utils/ConnectWallet";
+import { UPDATE_USER_WALLET } from "redux/types";
 
 const Profile = ({
     handlePlayerLevelPanel,
@@ -51,6 +52,19 @@ const Profile = ({
         if (user.walletAddress) return;
 
         await handleConnectWallet(dispatch, blockchainNetworks);
+    };
+
+    const handleDisconnectWallet = () => {
+        dispatch({
+            type: UPDATE_USER_WALLET,
+            payload: {
+                ...user,
+                walletAddress: null,
+                tokenBalance: null,
+                tokenSymbol: null,
+                network: null,
+            },
+        });
     };
 
     return (
@@ -118,7 +132,11 @@ const Profile = ({
                                     </p>
                                     <div
                                         className="gem-wrapper"
-                                        onClick={handleWallet}
+                                        onClick={
+                                            user.walletAddress
+                                                ? handleDisconnectWallet
+                                                : handleWallet
+                                        }
                                     >
                                         {user.walletAddress && (
                                             <img
