@@ -5,6 +5,7 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
         const type = sessionStorage.getItem("errorType") || null;
         if (type !== null && type === "Blocked") return "Blocked";
         else if (type !== null && type === "Archived") return "Archived";
+        else if (type !== null && type === "Unusual") return "Unusual";
         else return false;
     };
 
@@ -35,12 +36,26 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
                         </p>
                     </>
                 )}
+                {getAccountErrorType() === "Unusual" && (
+                    <>
+                        <h3>Unusal Activity!</h3>
+                        <p className="mb-3">
+                            We noticed unusual activity in your GameBox account
+                            and have logged you out.
+                        </p>
+                    </>
+                )}
 
                 <p className="mb-3">
-                    For more information, please contact support at {" "}
-                    <span><a href="mailto:support@froyo.com">support@froyo.com</a></span>
+                    For more information, please contact support at{" "}
+                    <span>
+                        <a href="mailto:support@froyo.com">support@froyo.com</a>
+                    </span>
                 </p>
-                <button className="p-3" onClick={() => setBlockedArchivedModal(false)}>
+                <button
+                    className="p-3"
+                    onClick={() => setBlockedArchivedModal(false)}
+                >
                     Close
                 </button>
             </div>

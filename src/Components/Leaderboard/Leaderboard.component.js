@@ -225,7 +225,10 @@ const Leaderboard = ({
                 };
                 let response = await axios.get(url, options);
                 if (response.data) {
-                    if (process.env.NODE_ENV === "production") launch();
+                    if (process.env.NODE_ENV === "production") {
+                        sessionStorage.setItem("errorType", "Unusual");
+                        launch();
+                    }
                     setGameData(response.data);
                     let gameCount =
                         parseInt(localStorage.getItem("gameCount")) || 0;
