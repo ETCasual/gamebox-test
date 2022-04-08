@@ -336,6 +336,7 @@ export async function getPrizes() {
                     nftContractAddress: p.getNftContractAddress(),
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
+                    cgId: p.getTsgId(),
                 });
                 sessionStorage.setItem(
                     "prizeDetailList",
@@ -428,6 +429,7 @@ export async function getPrizes() {
                     nftContractAddress: p.getNftContractAddress(),
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
+                    cgId: p.getTsgId(),
                 });
             } else {
                 _featuredData[featuredIndex].gameInfo.push({
@@ -505,6 +507,7 @@ export async function getPrizes() {
                     nftContractAddress: p.getNftContractAddress(),
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
+                    cgId: p.getTsgId(),
                 });
             } else {
                 _premiumData[premiumIndex].gameInfo.push({
@@ -581,6 +584,7 @@ export async function getPrizes() {
                     nftContractAddress: p.getNftContractAddress(),
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
+                    cgId: p.getTsgId(),
                 });
             } else {
                 _dailyData[dailyIndex].gameInfo.push({

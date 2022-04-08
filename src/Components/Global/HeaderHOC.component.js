@@ -88,10 +88,10 @@ const HeaderHOC = () => {
     // ON CLICK NOTIFICATION ICON
     const handleOnClickNotificationIcon = () => {
         let _notificationData = [];
-        notificationList?.forEach((n) => {
-            const filteredData = n.list.filter((l) => l.type !== "winner");
-            _notificationData = [...filteredData];
-        });
+        const filteredData = notificationList[0].list.filter(
+            (l) => l.type !== "winner"
+        );
+        _notificationData = [...filteredData];
         setNotificationData(_notificationData?.slice(0, 5));
         setIsNotificationShown(true);
     };
