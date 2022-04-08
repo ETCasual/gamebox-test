@@ -33,7 +33,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                     if (process.env.REACT_APP_NODE_ENV === "production")
                         return <Landing />;
                     else return <Password />;
-                }
+                } else return <Landing />;
             }}
         />
     );
