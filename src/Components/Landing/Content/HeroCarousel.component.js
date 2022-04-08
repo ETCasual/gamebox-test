@@ -33,7 +33,7 @@ const Carousel = () => {
                 <SwiperSlide>
                     <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
                         <img
-                            src={`${window.cdn}temp_img/sample_nft_1.png`}
+                            src={`${window.cdn}landing_samples/hg_nft_001_SPECIAL-SPACESUIT.jpg`}
                             alt="Sample NFT"
                         />
                     </div>
@@ -41,7 +41,7 @@ const Carousel = () => {
                 <SwiperSlide>
                     <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
                         <img
-                            src={`${window.cdn}temp_img/sample_nft_2.png`}
+                            src={`${window.cdn}landing_samples/hg_nft_002_UNIQUE-SPACESUIT.jpg`}
                             alt="Sample NFT"
                         />
                     </div>
@@ -49,7 +49,7 @@ const Carousel = () => {
                 <SwiperSlide>
                     <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
                         <img
-                            src={`${window.cdn}temp_img/sample_nft_3.png`}
+                            src={`${window.cdn}landing_samples/hg_nft_003_DISTINCT-SPACESUIT.jpg`}
                             alt="Sample NFT"
                         />
                     </div>
@@ -57,7 +57,7 @@ const Carousel = () => {
                 <SwiperSlide>
                     <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
                         <img
-                            src={`${window.cdn}temp_img/sample_nft_3.png`}
+                            src={`${window.cdn}landing_samples/hg_nft_004_BIZARRE-SPACESUIT.jpg`}
                             alt="Sample NFT"
                         />
                     </div>
@@ -65,7 +65,51 @@ const Carousel = () => {
                 <SwiperSlide>
                     <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
                         <img
-                            src={`${window.cdn}temp_img/sample_nft_3.png`}
+                            src={`${window.cdn}landing_samples/hg_nft_005_SUPREME-SPACESUIT.jpg`}
+                            alt="Sample NFT"
+                        />
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                        <img
+                            src={`${window.cdn}landing_samples/ufo_nft_001_SPECIAL-SPACESHIP.jpg`}
+                            alt="Sample NFT"
+                        />
+                    </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                        <img
+                            src={`${window.cdn}landing_samples/ufo_nft_002_UNIQUE-SPACESHIP.jpg`}
+                            alt="Sample NFT"
+                        />
+                    </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                        <img
+                            src={`${window.cdn}landing_samples/ufo_nft_003_DISTINCT-SPACESHIP.jpg`}
+                            alt="Sample NFT"
+                        />
+                    </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                        <img
+                            src={`${window.cdn}landing_samples/ufo_nft_004_BIZARRE-SPACESHIP.jpg`}
+                            alt="Sample NFT"
+                        />
+                    </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                        <img
+                            src={`${window.cdn}landing_samples/ufo_nft_005_SUPREME-SPACESHIP.jpg`}
                             alt="Sample NFT"
                         />
                     </div>

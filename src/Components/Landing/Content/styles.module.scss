@@ -287,19 +287,11 @@
                                 position: relative;
                                 left: 2rem;
                             }
-                            width: 300px;
-                            @include media-min($sm) {
-                                width: 400px;
-                            }
+                            width: 340px;
                             @include media-min($md) {
-                                width: 350px;
+                                width: 360px;
                             }
-                            @include media-min($xl) {
-                                width: 300px;
-                            }
-                            @include media-min($xxl) {
-                                width: 400px;
-                            }
+                            border-radius: 17px;
                         }
                     }
                 }
