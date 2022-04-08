@@ -23,6 +23,7 @@ import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 import { PRIZE_TYPE } from "Utils/Enums";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
+import { CURRENT_GAME_DETAILS } from "redux/types";
 
 const Index = ({ match }) => {
     const {
@@ -49,13 +50,6 @@ const Index = ({ match }) => {
 
     // PRIZES STATES
     const [currentPrize, setCurrentPrize] = useState({});
-    // GAME STATES
-    const [gameInfo, setGameInfo] = useState({
-        gameId: 0,
-        gameIndex: 0,
-        gameTitle: "",
-        endTimeStamp: 0,
-    });
     // DIFFERENT COMPONENT UI STATES
     const [isIntructionShown, setIsInstructionShown] = useState(false);
     const [isGameLeaderboardShown, setIsGameLeaderboardShown] = useState(false);
@@ -96,7 +90,44 @@ const Index = ({ match }) => {
 
         if (prizeType.length > 0 && Date.now() < (gameEndTime || 0)) {
             // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
-            if (idx > -1) setCurrentPrize(prizeType[idx]);
+            if (idx > -1) {
+                setCurrentPrize(prizeType[idx]);
+
+                const currentGameInfo =
+                    JSON.parse(sessionStorage.getItem("currentGameInfo")) ||
+                    null;
+                if (currentGameInfo !== null) {
+                    const gameIdx = prizeType[idx].gameInfo.findIndex(
+                        (g) => g.gameId === currentGameInfo.gameId
+                    );
+                    if (gameIdx === -1) {
+                        const _gameInfo = {
+                            gameId: prizeType[idx].gameInfo[0].gameId,
+                            gameIndex:
+                                prizeType[idx].gameInfo[0].gameIndex,
+                            gameTitle:
+                                prizeType[idx].gameInfo[0].gameTitle,
+                            gameIcon: prizeType[idx].gameInfo[0].gameIcon,
+                            endTimeStamp:
+                                prizeType[idx].gameInfo[0].endTimeStamp,
+                        };
+                        sessionStorage.setItem(
+                            "currentGameInfo",
+                            JSON.stringify(_gameInfo)
+                        );
+                        dispatch({
+                            type: CURRENT_GAME_DETAILS,
+                            payload: _gameInfo,
+                        });
+                        dispatch(
+                            loadLeaderboard(
+                                parseInt(id),
+                                prizeType[idx].gameInfo[0].gameId
+                            )
+                        );
+                    }
+                }
+            }
         } else dispatch(loadPrizes());
     }, [prizes, id, type, dispatch]);
 
@@ -147,14 +178,24 @@ const Index = ({ match }) => {
         endTimeStamp
     ) => {
         dispatch(loadLeaderboard(parseInt(id), gameId));
-        // TODO
+        // TODO:: ADD PROPER DISPATCH TO IT
         Object.assign(currentGameInfo, {
             prizeId: id,
             gameId: gameId,
         });
+        const _gameInfo = {
+            gameId,
+            gameIndex,
+            gameTitle,
+            gameIcon,
+            endTimeStamp,
+        };
+        sessionStorage.setItem("currentGameInfo", JSON.stringify(_gameInfo));
+        dispatch({
+            type: CURRENT_GAME_DETAILS,
+            payload: _gameInfo,
+        });
         loadCurrentUserRank(user, id, gameId, currentUserRank, dispatch);
-
-        setGameInfo({ gameId, gameIndex, gameTitle, gameIcon, endTimeStamp });
         setIsGameLeaderboardShown(true);
     };
 
@@ -174,7 +215,6 @@ const Index = ({ match }) => {
     if (isGameLeaderboardShown) {
         return (
             <Leaderboard
-                gameInfo={gameInfo}
                 data={currentPrize}
                 handleBackButton={onClickGameLeaderBackButton}
                 setIsGameLeaderboardShown={setIsGameLeaderboardShown}

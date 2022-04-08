@@ -9,7 +9,6 @@ import claimedPrizesReducer from "redux/reducers/ClaimedPrizes.reducer";
 import configReducer from "redux/reducers/Config.reducer";
 import currentUserRankReducer from "redux/reducers/CurrentUserRank.reducer";
 import exchangeRateReducer from "redux/reducers/ExchangeRate.reducer";
-import friendInvitationReducer from "redux/reducers/FriendInvitation.reducer";
 import gemsListReducer from "redux/reducers/GemsList.reducer";
 import highScoreReducer from "redux/reducers/HighScore.reducer";
 import IAPurchaseReducer from "redux/reducers/IAPurchaseRequest.reducer";
@@ -32,6 +31,7 @@ import earnAdditinalBenefitReducer from "redux/reducers/EarnAdditionalTickets.re
 import listGamesReducer from "redux/reducers/ListGames.reducer";
 import ToastyReducer from "redux/reducers/Toasty.reducer";
 import blockchainNetworksReducer from "redux/reducers/BlockchainNetworks.reducer";
+import currentGameDetailsReducer from "redux/reducers/CurrentGameDetails.reducer";
 
 import { LOG_OUT } from "redux/types";
 
@@ -39,13 +39,13 @@ import { LOG_OUT } from "redux/types";
 const appReducer = combineReducers({
     toasty: ToastyReducer,
     activity: activityReducer,
+    currentGameDetails: currentGameDetailsReducer,
     automatedEntryTickets: automatedEntryTicketsReducer,
     claimedPrizes: claimedPrizesReducer,
     config: configReducer,
     currentUserRank: currentUserRankReducer,
     exchangeRate: exchangeRateReducer,
     earnAdditional: earnAdditinalBenefitReducer,
-    friendInvitation: friendInvitationReducer,
     gemsList: gemsListReducer,
     highScore: highScoreReducer,
     IAPurchaseRequest: IAPurchaseReducer,

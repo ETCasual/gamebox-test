@@ -34,7 +34,6 @@ import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 
 const Leaderboard = ({
-    gameInfo,
     data,
     handleBackButton,
     setIsGameLeaderboardShown,
@@ -48,17 +47,19 @@ const Leaderboard = ({
     const { poolTickets } = useSelector((state) => state.playerTickets);
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
     const { leaderboard } = useSelector((state) => state.leaderboard);
-    const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
-    const { currentUserRank } = useSelector((state) => state.currentUserRank);
-    const { config } = useSelector((state) => state.config);
-    const { currentGameInfo } = useSelector(
+    const { extraEarning, currentGameInfo } = useSelector(
         (state) => state.playerTournamentInfo
     );
+    const { currentUserRank } = useSelector((state) => state.currentUserRank);
+    const { config } = useSelector((state) => state.config);
     const { prizeTicketCollection } = useSelector(
         (state) => state.prizePoolTickets
     );
     const { earnAdditionalBenefitStatus } = useSelector(
         (state) => state.earnAdditional
+    );
+    const { currentGameDetails } = useSelector(
+        (state) => state.currentGameDetails
     );
 
     const [gameData, setGameData] = useState(null);
@@ -87,9 +88,9 @@ const Leaderboard = ({
 
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
-        if (gameInfo.gameId > 0)
-            dispatch(loadLeaderboardRanks(gameInfo.gameId));
-    }, [gameInfo.gameId, dispatch]);
+        if (currentGameDetails?.gameId > 0)
+            dispatch(loadLeaderboardRanks(currentGameDetails.gameId));
+    }, [currentGameDetails.gameId, dispatch]);
 
     // COUNTDOWN TIMER
     useEffect(() => {
@@ -175,9 +176,9 @@ const Leaderboard = ({
             isEarnAdditionalInfoShown: false,
         }));
 
-        if (gameInfo.gameId > 0) {
+        if (currentGameDetails.gameId > 0) {
             try {
-                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${gameInfo.gameId}&user_id=${user.id}`;
+                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
                 let options = {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
@@ -195,7 +196,7 @@ const Leaderboard = ({
                         "lbId",
                         JSON.stringify({
                             cgId: data.cgId,
-                            gameId: gameInfo.gameId,
+                            gameId: currentGameDetails.gameId,
                         })
                     );
                     setGameData(response.data);
@@ -231,7 +232,7 @@ const Leaderboard = ({
         dispatch(
             loadPlayerEnterTournamentId(
                 data?.prizeId,
-                gameInfo?.gameId,
+                currentGameDetails?.gameId,
                 isAdWatched,
                 isGemUsed
             )
@@ -281,7 +282,7 @@ const Leaderboard = ({
 
             dispatch(loadPlayerLeaveTournamentId(score));
             dispatch(
-                loadCurrentUserRank(data?.prizeId.toString(), gameInfo?.gameId)
+                loadCurrentUserRank(data?.prizeId.toString(), currentGameDetails?.gameId)
             );
 
             // CALL USER & LEADERBOARD API AFTER 1 SECOND DELAY
@@ -296,7 +297,7 @@ const Leaderboard = ({
                 }
 
                 dispatch(loadUserDetails());
-                dispatch(loadLeaderboard(data?.prizeId, gameInfo?.gameId));
+                dispatch(loadLeaderboard(data?.prizeId, currentGameDetails?.gameId));
                 // CALLING TICKETS API TO GET LATEST NUMBERS
                 if (earnAdditionalBenefitStatus.length > 0) {
                     // PLAYER TICKETS
@@ -539,8 +540,8 @@ const Leaderboard = ({
                             >
                                 <img
                                     className="leaderboard-background"
-                                    src={gameInfo?.gameIcon}
-                                    alt={gameInfo?.gameTitle}
+                                    src={currentGameDetails?.gameIcon}
+                                    alt={currentGameDetails?.gameTitle}
                                 />
                                 {/* LEADERBOARD */}
                                 <div className="leaderboard-wrapper">
@@ -551,12 +552,12 @@ const Leaderboard = ({
                                     >
                                         <img
                                             className="game-icon"
-                                            src={gameInfo?.gameIcon}
-                                            alt={gameInfo?.gameIcon}
+                                            src={currentGameDetails?.gameIcon}
+                                            alt={currentGameDetails?.gameIcon}
                                         />
                                         <div className="game-details w-100 px-3">
                                             <p className="game-name w-100 mb-2">
-                                                {gameInfo?.gameTitle}
+                                                {currentGameDetails?.gameTitle}
                                             </p>
 
                                             <div className="w-100 d-flex align-items-center justify-content-between">
@@ -682,7 +683,7 @@ const Leaderboard = ({
                                 {modalStatus.isEarnAdditionalInfoShown && (
                                     <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
                                         <EarnAdditionalTickets
-                                            gameId={gameInfo.gameId}
+                                            gameId={currentGameDetails.gameId}
                                             prizeId={data?.prizeId}
                                             earnAdditionalDisabledStatus={
                                                 earnAdditionalDisabledStatus

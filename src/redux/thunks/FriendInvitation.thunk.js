@@ -1,4 +1,4 @@
-import { INVITE, LOG_OUT, SHOW_TOAST } from "redux/types";
+import { LOG_OUT, SHOW_TOAST } from "redux/types";
 import { newUserInvitation } from "redux/services/index.service";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 
@@ -8,9 +8,6 @@ export default function loadFriendInvitation(inviteCode) {
 
         return newUserInvitation(user, inviteCode)
             .then(() => {
-                dispatch({
-                    type: INVITE,
-                });
                 loadUserDetails(user, dispatch);
             })
             .catch((error) => {
