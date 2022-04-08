@@ -73,6 +73,12 @@ const App = () => {
 
     // ONAUTH CHANGED & API CALLS
     useEffect(() => {
+        document.addEventListener("visibilitychange", handleLoadPrize);
+
+        function handleLoadPrize() {
+            if (document.visibilityState === "visible") dispatch(loadPrizes());
+        }
+
         if (user.id) {
             // dispatch(loadLoginUser(authUser, isNewUser));
             dispatch(loadPrizes());
@@ -88,7 +94,9 @@ const App = () => {
             // FOR FUTURE PURPOSE
             // dispatch({ type: "LIST_PURCHASE_HISTORY" });
         }
-        // else sessionStorage.removeItem("token");
+
+        return () =>
+            document.removeEventListener("visibilitychange", handleLoadPrize);
     }, [dispatch, user.id]);
 
     useEffect(() => {

@@ -34,7 +34,6 @@ const GlobalTimer = ({ data }) => {
             let finalTimeRef = convertSecondsToHours(
                 data?.gameInfo[0]?.endTimeStamp
             );
-
             // TOURNAMENT ENDING
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
