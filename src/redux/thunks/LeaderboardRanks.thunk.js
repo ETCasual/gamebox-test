@@ -7,6 +7,7 @@ export default function loadLeaderboardRanks(typeId) {
 
         return getLeaderboardRank(typeId, leaderRuleRanks)
             .then((data) => {
+                console.log(data)
                 dispatch({
                     type: GET_LEADERBOARD_RANK,
                     payload: data,

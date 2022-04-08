@@ -1,5 +1,6 @@
 // REACT & REDUX
-import React, { useEffect, useState } from "react";
+import React from "react";
+// import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,8 +13,8 @@ import {
     getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-import { handleConnectWallet } from "Utils/ConnectWallet";
-import { UPDATE_USER_WALLET } from "redux/types";
+// import { handleConnectWallet } from "Utils/ConnectWallet";
+// import { UPDATE_USER_WALLET } from "redux/types";
 
 const Profile = ({
     handlePlayerLevelPanel,
@@ -23,49 +24,49 @@ const Profile = ({
     const { user } = useSelector((state) => state.userData);
     const { ranks } = useSelector((state) => state.ranks);
     const { config } = useSelector((state) => state.config);
-    const { blockchainNetworks } = useSelector(
-        (state) => state.blockchainNetworks
-    );
+    // const { blockchainNetworks } = useSelector(
+    //     (state) => state.blockchainNetworks
+    // );
 
     const dispatch = useDispatch();
 
     const history = useHistory();
 
-    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+    // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
 
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize);
 
-        function handleResize() {
-            setHideGemsOnMobile(
-                window.innerWidth > 767 && window.ethereum ? false : true
-            );
-        }
-        handleResize();
+    //     function handleResize() {
+    //         setHideGemsOnMobile(
+    //             window.innerWidth > 767 && window.ethereum ? false : true
+    //         );
+    //     }
+    //     handleResize();
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize);
+    //     };
+    // }, []);
 
-    const handleWallet = async () => {
-        if (user.walletAddress) return;
+    // const handleWallet = async () => {
+    //     if (user.walletAddress) return;
 
-        await handleConnectWallet(dispatch, blockchainNetworks);
-    };
+    //     await handleConnectWallet(dispatch, blockchainNetworks);
+    // };
 
-    const handleDisconnectWallet = () => {
-        dispatch({
-            type: UPDATE_USER_WALLET,
-            payload: {
-                ...user,
-                walletAddress: null,
-                tokenBalance: null,
-                tokenSymbol: null,
-                network: null,
-            },
-        });
-    };
+    // const handleDisconnectWallet = () => {
+    //     dispatch({
+    //         type: UPDATE_USER_WALLET,
+    //         payload: {
+    //             ...user,
+    //             walletAddress: null,
+    //             tokenBalance: null,
+    //             tokenSymbol: null,
+    //             network: null,
+    //         },
+    //     });
+    // };
 
     return (
         <section id="profile">
@@ -125,7 +126,7 @@ const Profile = ({
                                 </Link>
                             </div>
                             {/* TOKEN BALANCE */}
-                            {!hideGemsOnMobile && (
+                            {/* {!hideGemsOnMobile && (
                                 <div className="col-12 mt-3 token-balance d-flex align-items-center justify-content-between">
                                     <p className="gem-balance-text mb-0 mb-md-2">
                                         Froyo Tokens available
@@ -162,7 +163,7 @@ const Profile = ({
                                         )}
                                     </div>
                                 </div>
-                            )}
+                            )} */}
                             {/* MULTIPLIER */}
                             <div className="col-12 multiplier-holder mt-4">
                                 <div

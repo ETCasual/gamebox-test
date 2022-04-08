@@ -60,18 +60,21 @@ const HeaderHOC = () => {
     }, [notificationNumber.count]);
 
     useEffect(() => {
-        let data = [];
-        notificationList?.forEach((n) => {
-            data = n.list.filter((l) => l.type !== "winner");
-        });
-        setNotificationData(
-            data?.slice(
-                0,
-                notificationNumber.count > 0 && notificationNumber.count <= 5
-                    ? notificationNumber.count
-                    : 5
-            )
-        );
+        let _notificationData = [];
+
+        if (notificationList.length > 0) {
+            const filteredData = notificationList[0].list.filter(
+                (l) => l.type !== "winner"
+            );
+            _notificationData = [...filteredData];
+
+            setNotificationData(
+                _notificationData?.slice(
+                    0,
+                    notificationNumber.count <= 5 ? notificationNumber.count : 5
+                )
+            );
+        }
     }, [notificationList, notificationNumber.count]);
 
     useEffect(() => {

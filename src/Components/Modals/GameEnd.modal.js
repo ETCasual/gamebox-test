@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import _ from "lodash";
 
 import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
 
@@ -22,44 +21,42 @@ const GameEndModal = ({ handleContinueButton }) => {
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
         useState({
             status: false,
-            cgId: 0,
-            typeId: 0,
-            type: "",
-            createdOn: 0,
+            cgId: null,
+            gameId: null,
+            type: "tour",
         });
 
     useEffect(() => {
-        const historyData = _?.maxBy(
-            notificationList[0]?.list.filter((l) => l.type === "tour"),
-            "id"
-        );
-        const cgId = historyData?.cgId || 0;
-        const gameId = historyData?.gameId || 0;
-        const createdOn = historyData?.createdOn || 0;
+        let timeoutRef = null;
+        clearInterval(timeoutRef);
+        timeoutRef = setTimeout(() => {
+            const lbId = JSON.parse(sessionStorage.getItem("lbId"));
+            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0) {
+                dispatch(loadLeaderboardHistory(parseInt(lbId?.cgId)));
+                dispatch(loadLeaderboardRanks(parseInt(lbId.gameId)));
 
-        if (cgId > 0 && gameId > 0) {
-            dispatch(loadLeaderboardHistory(cgId));
-            dispatch(loadLeaderboardRanks(gameId));
-            setIsSelectedNotificationShown((prev) => ({
-                ...prev,
-                cgId,
-                typeId: gameId,
-                type: "tour",
-                createdOn,
-            }));
-        }
-    }, [notificationList, dispatch]);
+                setIsSelectedNotificationShown((prev) => ({
+                    ...prev,
+                    cgId: parseInt(lbId?.cgId),
+                    gameId: parseInt(lbId?.gameId),
+                }));
+            }
+        }, 3000);
+
+        return () => clearTimeout(timeoutRef);
+    }, [dispatch]);
 
     const handleViewResult = () => {
         if (
             isSelectedNotificationShown.cgId > 0 &&
-            isSelectedNotificationShown.typeId > 0 &&
+            isSelectedNotificationShown.gameId > 0 &&
             isSelectedNotificationShown.type === "tour"
-        )
+        ) {
             setIsSelectedNotificationShown((prev) => ({
                 ...prev,
                 status: true,
             }));
+        }
     };
 
     const handleCloseLeaderboardHistory = () => {
@@ -133,7 +130,11 @@ const GameEndModal = ({ handleContinueButton }) => {
                             )}
                             <div className="p-0 btn-wrapper d-flex flex-column mt-4">
                                 <button
-                                    className="btn-results"
+                                    className={`btn-results ${
+                                        leaderboardHistory.length > 0
+                                            ? ""
+                                            : "opacity-0-5"
+                                    }`}
                                     onClick={handleViewResult}
                                 >
                                     View results

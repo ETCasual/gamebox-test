@@ -1,4 +1,4 @@
-import { launch } from "devtools-detector";
+// import { launch } from "devtools-detector";
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -150,43 +150,6 @@ const Leaderboard = ({
         setEarnAdditionalDisabledStatus,
     ]);
 
-    // RESIZE EVENT FOR LEADERBOARD HEIGHT
-    // useEffect(() => {
-    //     window.addEventListener("resize", handleResize, false);
-
-    //     function handleResize() {
-    //         if (
-    //             leaderboardRef.current &&
-    //             leaderBoardBackgroundRef.current &&
-    //             leaderBoardGameInfoRef.current &&
-    //             readyTournamentButtonRef.current
-    //         ) {
-    //             leaderBoardBackgroundRef.current.style.height =
-    //                 window.innerWidth > 1200
-    //                     ? `${window.innerHeight - 60 * 3.1}px`
-    //                     : window.innerWidth >= 768 && window.innerWidth <= 1024
-    //                     ? "60vh"
-    //                     : "75vh";
-    //             leaderboardRef.current.style.height = `${
-    //                 leaderBoardBackgroundRef.current.clientHeight -
-    //                 leaderBoardGameInfoRef.current.clientHeight -
-    //                 readyTournamentButtonRef.current.clientHeight +
-    //                 1
-    //             }px`;
-    //         }
-    //     }
-    //     let timeoutRef;
-    //     clearTimeout(timeoutRef);
-    //     timeoutRef = setTimeout(() => {
-    //         leaderboardRef.current && handleResize();
-    //     }, 300);
-
-    //     return () => {
-    //         window.removeEventListener("resize", handleResize, false);
-    //         clearTimeout(timeoutRef);
-    //     };
-    // }, [modalStatus.isGameReady]);
-
     const isCurrentUser = (id) => {
         if (id > 0 && user.id === id) return true;
         return false;
@@ -225,10 +188,17 @@ const Leaderboard = ({
                 };
                 let response = await axios.get(url, options);
                 if (response.data) {
-                    if (process.env.NODE_ENV === "production") {
-                        sessionStorage.setItem("errorType", "Unusual");
-                        launch();
-                    }
+                    // if (process.env.NODE_ENV === "production") {
+                    //     sessionStorage.setItem("errorType", "Unusual");
+                    //     launch();
+                    // }
+                    sessionStorage.setItem(
+                        "lbId",
+                        JSON.stringify({
+                            cgId: data.cgId,
+                            gameId: gameInfo.gameId,
+                        })
+                    );
                     setGameData(response.data);
                     let gameCount =
                         parseInt(localStorage.getItem("gameCount")) || 0;

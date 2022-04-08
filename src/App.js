@@ -1,4 +1,4 @@
-import { addListener } from "devtools-detector";
+// import { addListener } from "devtools-detector";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -42,7 +42,7 @@ import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
 import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
-import { LOG_OUT } from "redux/types";
+// import { LOG_OUT } from "redux/types";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
@@ -56,9 +56,9 @@ const App = () => {
     const [pendingRegion, setPendingRegion] = useState(true);
     const [regionAllow, setRegionAllow] = useState(false);
 
-    addListener((isOpen) => {
-        if (isOpen) dispatch({ type: LOG_OUT });
-    });
+    // addListener((isOpen) => {
+    //     if (isOpen) dispatch({ type: LOG_OUT });
+    // });
 
     // FIREBASE ONMESSAGE
     onMessageListener()

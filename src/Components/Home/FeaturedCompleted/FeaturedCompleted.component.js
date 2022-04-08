@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import RevealWinnerLoader from "Components/Loader/RevealWinner.loader";
 
@@ -7,28 +7,31 @@ import loadNotifications from "redux/thunks/Notifcations.thunk";
 
 const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
+    const { notificationList } = useSelector((state) => state.notifications);
 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // let finishedPrizeList =
-        //     JSON.parse(localStorage.getItem("finishedPrizeList")) || [];
-        // let idx = finishedPrizeList.findIndex(
-        //     (e) => e.prizeId === data?.prizeId
-        // );
-        // let diff = Date.now() - finishedPrizeList[idx]?.timeStamp;
-        // if (diff > 16000) setLoading(false);
-
         let timer = null;
-        clearTimeout(timer);
 
-        timer = setTimeout(() => {
-            dispatch(loadNotifications());
-            setLoading(false);
-        }, 10000);
+        if (notificationList.length > 0) {
+            const prize = notificationList[0].list.filter(
+                (l) => l.prizeId === data.prizeId && l.type === "winner"
+            );
+            if (prize.length > 0) {
+                setLoading(false);
+                clearTimeout(timer);
+            } else {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    dispatch(loadNotifications());
+                    setLoading(false);
+                }, 10000);
+            }
+        }
 
         return () => clearTimeout(timer);
-    }, [data.prizeId, dispatch]);
+    }, [data.prizeId, notificationList, dispatch]);
 
     return (
         <div

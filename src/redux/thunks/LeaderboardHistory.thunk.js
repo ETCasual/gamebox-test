@@ -1,9 +1,9 @@
 import { GET_LEADERBOARD_HISTORY, LOG_OUT, SHOW_TOAST } from "redux/types";
 import { getLeaderboardHistory } from "redux/services/index.service";
 
-export default function loadLeaderboardHistory(cgid) {
+export default function loadLeaderboardHistory(cgId) {
     return async (dispatch) => {
-        return getLeaderboardHistory(cgid)
+        return getLeaderboardHistory(cgId)
             .then((data) => {
                 dispatch({
                     type: GET_LEADERBOARD_HISTORY,
