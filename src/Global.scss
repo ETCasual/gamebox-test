@@ -325,6 +325,14 @@ button {
         min-width: 150px;
         font-size: $fnt-sz-12;
     }
+    .overlay-disconnect-wallet {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
+    }
 }
 // TICKET VALUE PANEL - TOURNAMENT & LEADERBOARD COMPONENT
 .ticket-values {

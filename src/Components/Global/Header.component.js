@@ -292,12 +292,18 @@ const Header = ({
 
                 {/* DISCONNET */}
                 {onHoverWallet && user.walletAddress && (
-                    <div
-                        className="disconnect-wrapper d-none d-md-flex align-items-center justify-content-center"
-                        onClick={handleWalletDisconnect}
-                    >
-                        Disconnect
-                    </div>
+                    <>
+                        <div
+                            className="overlay-disconnect-wallet"
+                            onClick={() => setOnWalletHover(false)}
+                        />
+                        <div
+                            className="disconnect-wrapper d-none d-md-flex align-items-center justify-content-center"
+                            onClick={handleWalletDisconnect}
+                        >
+                            Disconnect
+                        </div>
+                    </>
                 )}
             </div>
         </div>
