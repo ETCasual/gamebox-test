@@ -17,6 +17,7 @@ import PurchaseWrapper from "Components/IAP/IAPPurchasingStatus/PurchaseWrapper.
 import loadIAPurchaseRequest from "redux/thunks/IAPurchaseRequest.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import { getPaymentIntent } from "redux/services/index.service";
+import loadGemsList from "redux/thunks/GemsList.thunk";
 import { SHOW_TOAST } from "redux/types";
 
 const CardPayment = ({ productInfo, handleBackButton }) => {
@@ -78,11 +79,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
             });
             return;
         }
-        setPurchasingStatus({
-            processing: false,
-            isSuccess: true,
-            isFail: false,
-        });
+
         dispatch(
             loadIAPurchaseRequest(
                 paymentIntent.id,
@@ -93,6 +90,14 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
             )
         );
         setTimeout(() => {
+            dispatch(loadGemsList());
+        }, 2000);
+        setTimeout(() => {
+            setPurchasingStatus({
+                processing: false,
+                isSuccess: true,
+                isFail: false,
+            });
             dispatch(loadUserDetails());
             dispatch({
                 type: SHOW_TOAST,
@@ -100,7 +105,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                     message: "Gems purchased!",
                 },
             });
-        }, 1000);
+        }, 4000);
     };
 
     const handleModalCloseButton = () => {
