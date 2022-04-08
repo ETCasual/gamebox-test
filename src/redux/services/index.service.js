@@ -267,6 +267,8 @@ export async function getPrizes() {
     let prizeDetailList =
         JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
+    let availablePrizeList = [];
+
     for (let i = 0; i < prizeList.length; i++) {
         let p = prizeList[i];
 
@@ -371,6 +373,8 @@ export async function getPrizes() {
                     JSON.stringify(prizeDetailList)
                 );
             }
+
+            availablePrizeList.push(p.getPrizeId());
         }
 
         // FEATURE DATA
@@ -634,6 +638,26 @@ export async function getPrizes() {
             });
         }
     }
+
+    // REMOVE ANY PRIZE FROM THE LOCAL LIST WHICH IS ALREADY FINISHED
+    let plList = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+    let _tempArr = [...plList];
+    plList.forEach((p) => {
+        if (
+            !availablePrizeList.includes(p?.prizeId) &&
+            !p.completed &&
+            !p.seen
+        ) {
+            const idx = _tempArr.findIndex((t) => t?.prizeId === p?.prizeId);
+            if (idx > -1) {
+                _tempArr[idx].completed = true;
+                sessionStorage.setItem(
+                    "prizeDetailList",
+                    JSON.stringify(_tempArr)
+                );
+            }
+        }
+    });
 
     // REMOVING ANY DUPLICATE PRIZES
     prizes.featuredData = _.uniqBy(_featuredData, "prizeId");
