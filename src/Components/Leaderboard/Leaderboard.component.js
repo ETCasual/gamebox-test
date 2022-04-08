@@ -14,7 +14,6 @@ import GameEndModal from "Components/Modals/GameEnd.modal";
 import EarnAdditionalBenefitModal from "Components/Modals/EarnAdditionalBenefit.modal";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
-import { GET_LEADERBOARD } from "redux/types";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
@@ -240,13 +239,6 @@ const Leaderboard = ({
     };
 
     const handleQuitGame = () => {
-        dispatch({
-            type: GET_LEADERBOARD,
-            payload: {
-                gameId: gameInfo.gameId,
-                prizeId: data?.prizeId,
-            },
-        });
         setModalStatus((prev) => ({
             ...prev,
             isQuitGameConfirm: true,
