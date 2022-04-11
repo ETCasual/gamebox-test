@@ -140,6 +140,12 @@ const GameEndModal = ({ handleContinueButton }) => {
                                             ? handleViewResult
                                             : null
                                     }
+                                    style={{
+                                        cursor:
+                                            leaderboardHistory.length > 0
+                                                ? "pointer"
+                                                : "default",
+                                    }}
                                 >
                                     View results
                                 </button>

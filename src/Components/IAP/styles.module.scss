@@ -53,8 +53,14 @@
                     font-size: $fnt-sz-16;
                     font-weight: $fnt-wgt-600;
                 }
+                img {
+                    position: relative;
+                    z-index: 0;
+                }
             }
             .price-wrapper {
+                position: relative;
+                z-index: 1;
                 border-radius: 0px 0px 10px 10px;
                 height: 52px;
                 background: linear-gradient(0deg, #d3076a 0%, #d3076a 100%);
