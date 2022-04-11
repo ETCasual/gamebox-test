@@ -135,7 +135,11 @@ const GameEndModal = ({ handleContinueButton }) => {
                                             ? ""
                                             : "opacity-0-5"
                                     }`}
-                                    onClick={handleViewResult}
+                                    onClick={
+                                        leaderboardHistory.length > 0
+                                            ? handleViewResult
+                                            : null
+                                    }
                                 >
                                     View results
                                 </button>
