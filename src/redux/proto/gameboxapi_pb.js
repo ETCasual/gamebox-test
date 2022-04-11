@@ -97,6 +97,8 @@ goog.exportSymbol('proto.api.gamebox.ListNotificationRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.ListNotificationResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.ListPlayerHighscoreRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.ListPlayerHighscoreResponse', null, global);
+goog.exportSymbol('proto.api.gamebox.ListPrizeLeaderboardRequest', null, global);
+goog.exportSymbol('proto.api.gamebox.ListPrizeLeaderboardResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.ListPrizeRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.ListPrizeResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.ListRankRequest', null, global);
@@ -137,6 +139,7 @@ goog.exportSymbol('proto.api.gamebox.Notification', null, global);
 goog.exportSymbol('proto.api.gamebox.PlayerDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.PrizeBasicDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.PrizeDetail', null, global);
+goog.exportSymbol('proto.api.gamebox.PrizeLeaderboardDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.RankDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.SignInRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.SignInResponse', null, global);
@@ -16612,6 +16615,620 @@ proto.api.gamebox.LogSLeaveResponse.prototype.setResult = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.gamebox.ListPrizeLeaderboardRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.ListPrizeLeaderboardRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.ListPrizeLeaderboardRequest.displayName = 'proto.api.gamebox.ListPrizeLeaderboardRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.ListPrizeLeaderboardRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    prizeId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    offset: jspb.Message.getFieldWithDefault(msg, 3, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.ListPrizeLeaderboardRequest}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.ListPrizeLeaderboardRequest;
+  return proto.api.gamebox.ListPrizeLeaderboardRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.ListPrizeLeaderboardRequest}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPrizeId(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLimit(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setOffset(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.ListPrizeLeaderboardRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getPrizeId();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getOffset();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int64 prize_id = 1;
+ * @return {number}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.getPrizeId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.setPrizeId = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional int64 limit = 2;
+ * @return {number}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.setLimit = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional int64 offset = 3;
+ * @return {number}
+ */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.getOffset = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ListPrizeLeaderboardRequest.prototype.setOffset = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.gamebox.ListPrizeLeaderboardResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.gamebox.ListPrizeLeaderboardResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.ListPrizeLeaderboardResponse.displayName = 'proto.api.gamebox.ListPrizeLeaderboardResponse';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.ListPrizeLeaderboardResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    resultList: jspb.Message.toObjectList(msg.getResultList(),
+    proto.api.gamebox.PrizeLeaderboardDetail.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.ListPrizeLeaderboardResponse}
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.ListPrizeLeaderboardResponse;
+  return proto.api.gamebox.ListPrizeLeaderboardResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.ListPrizeLeaderboardResponse}
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.gamebox.PrizeLeaderboardDetail;
+      reader.readMessage(value,proto.api.gamebox.PrizeLeaderboardDetail.deserializeBinaryFromReader);
+      msg.addResult(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.ListPrizeLeaderboardResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getResultList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.gamebox.PrizeLeaderboardDetail.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated PrizeLeaderboardDetail result = 1;
+ * @return {!Array<!proto.api.gamebox.PrizeLeaderboardDetail>}
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.prototype.getResultList = function() {
+  return /** @type{!Array<!proto.api.gamebox.PrizeLeaderboardDetail>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.gamebox.PrizeLeaderboardDetail, 1));
+};
+
+
+/** @param {!Array<!proto.api.gamebox.PrizeLeaderboardDetail>} value */
+proto.api.gamebox.ListPrizeLeaderboardResponse.prototype.setResultList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.PrizeLeaderboardDetail=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.gamebox.PrizeLeaderboardDetail}
+ */
+proto.api.gamebox.ListPrizeLeaderboardResponse.prototype.addResult = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.gamebox.PrizeLeaderboardDetail, opt_index);
+};
+
+
+proto.api.gamebox.ListPrizeLeaderboardResponse.prototype.clearResultList = function() {
+  this.setResultList([]);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.gamebox.PrizeLeaderboardDetail = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.PrizeLeaderboardDetail, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.PrizeLeaderboardDetail.displayName = 'proto.api.gamebox.PrizeLeaderboardDetail';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.PrizeLeaderboardDetail.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.PrizeLeaderboardDetail} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    prizeId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    nickName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    avatarUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    totalTickets: jspb.Message.getFieldWithDefault(msg, 5, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.PrizeLeaderboardDetail}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.PrizeLeaderboardDetail;
+  return proto.api.gamebox.PrizeLeaderboardDetail.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.PrizeLeaderboardDetail} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.PrizeLeaderboardDetail}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPrizeId(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUserId(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNickName(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAvatarUrl(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setTotalTickets(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.PrizeLeaderboardDetail.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.PrizeLeaderboardDetail} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getPrizeId();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+  f = message.getUserId();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getNickName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getAvatarUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getTotalTickets();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int64 prize_id = 1;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.getPrizeId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.setPrizeId = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional int64 user_id = 2;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.getUserId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.setUserId = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional string nick_name = 3;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.getNickName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.setNickName = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string avatar_url = 4;
+ * @return {string}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.getAvatarUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.setAvatarUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional int32 total_tickets = 5;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.getTotalTickets = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeLeaderboardDetail.prototype.setTotalTickets = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.gamebox.AddInviteRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -29407,8 +30024,9 @@ proto.api.gamebox.ListNotificationRequest.prototype.toObject = function(opt_incl
 proto.api.gamebox.ListNotificationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     userId: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    offset: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    notiType: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    limit: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    offset: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -29450,10 +30068,14 @@ proto.api.gamebox.ListNotificationRequest.deserializeBinaryFromReader = function
       msg.setUserId(value);
       break;
     case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setNotiType(value);
+      break;
+    case 3:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLimit(value);
       break;
-    case 3:
+    case 4:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setOffset(value);
       break;
@@ -29493,17 +30115,24 @@ proto.api.gamebox.ListNotificationRequest.serializeBinaryToWriter = function(mes
       f
     );
   }
+  f = message.getNotiType();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
   f = message.getLimit();
   if (f !== 0) {
     writer.writeInt64(
-      2,
+      3,
       f
     );
   }
   f = message.getOffset();
   if (f !== 0) {
     writer.writeInt64(
-      3,
+      4,
       f
     );
   }
@@ -29526,32 +30155,47 @@ proto.api.gamebox.ListNotificationRequest.prototype.setUserId = function(value) 
 
 
 /**
- * optional int64 limit = 2;
+ * optional int32 noti_type = 2;
  * @return {number}
  */
-proto.api.gamebox.ListNotificationRequest.prototype.getLimit = function() {
+proto.api.gamebox.ListNotificationRequest.prototype.getNotiType = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.ListNotificationRequest.prototype.setLimit = function(value) {
+proto.api.gamebox.ListNotificationRequest.prototype.setNotiType = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
 /**
- * optional int64 offset = 3;
+ * optional int64 limit = 3;
  * @return {number}
  */
-proto.api.gamebox.ListNotificationRequest.prototype.getOffset = function() {
+proto.api.gamebox.ListNotificationRequest.prototype.getLimit = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.ListNotificationRequest.prototype.setOffset = function(value) {
+proto.api.gamebox.ListNotificationRequest.prototype.setLimit = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 offset = 4;
+ * @return {number}
+ */
+proto.api.gamebox.ListNotificationRequest.prototype.getOffset = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ListNotificationRequest.prototype.setOffset = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
