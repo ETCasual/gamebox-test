@@ -12,7 +12,10 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
     useEffect(() => {
         document.documentElement.style.overflowY = "hidden";
 
-        return () => (document.documentElement.style.overflowY = "visible");
+        return () => {
+            sessionStorage.removeItem("errorType");
+            document.documentElement.style.overflowY = "visible";
+        };
     }, []);
 
     return (

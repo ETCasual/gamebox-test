@@ -20,6 +20,7 @@ export function loadLoginUserWithToken() {
         try {
             const user = await userSignIn();
             if (user.id) {
+                sessionStorage.removeItem("errorType");
                 dispatch({
                     type: LOGIN_SUCCESS,
                     payload: user,
@@ -32,6 +33,7 @@ export function loadLoginUserWithToken() {
                         localStorage.setItem("isNewUser", true);
                         const user = await userSignIn();
                         if (user.id) {
+                            sessionStorage.removeItem("errorType");
                             inviteFriendsReward(user, dispatch);
                             dispatch({
                                 type: LOGIN_SUCCESS,
@@ -90,6 +92,7 @@ export function loadLogin(payload, setLoginError, history) {
                 );
                 const user = await userSignIn();
                 if (user.id) {
+                    sessionStorage.removeItem("errorType");
                     dispatch({
                         type: LOGIN_SUCCESS,
                         payload: user,
@@ -103,6 +106,7 @@ export function loadLogin(payload, setLoginError, history) {
                             localStorage.setItem("isNewUser", true);
                         const user = await userSignIn();
                         if (user.id) {
+                            sessionStorage.removeItem("errorType");
                             inviteFriendsReward(user, dispatch);
                             dispatch({
                                 type: LOGIN_SUCCESS,

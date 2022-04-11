@@ -33,6 +33,7 @@ const FortuneWheel = ({
 
     const [spinnerDict, setSpinnerDict] = useState({});
     const [outOfSpins, setOutOfSpins] = useState(false);
+    const [outOfGems, setOutOfGems] = useState(false);
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [, setIsBuySpinConfirmModalShown] = useState(false);
@@ -46,10 +47,19 @@ const FortuneWheel = ({
     const spinDuration = 3;
 
     const spinnerRef = useRef(spinner);
+    const userGemsRef = useRef(user?.gems);
+    const ConfigGemsRef = useRef(config.useGems);
 
-    // CHECK SPINS AVAILABILITY
+    // CHECK SPINS AVAILABILITY & CHECK GEMS AVAILABILITY
     useEffect(() => {
-        setOutOfSpins(spinnerRef.current.freeSpins > 0 ? false : true);
+        if (
+            spinnerRef.current.freeSpins <= 0 &&
+            userGemsRef.current < ConfigGemsRef.current
+        ) {
+            setOutOfGems(true);
+        } else if (spinnerRef.current.freeSpins <= 0) {
+            setOutOfSpins(true);
+        }
     }, []);
 
     // DISABLE HTML SCROLL
@@ -102,6 +112,11 @@ const FortuneWheel = ({
     function onClickSpinButton() {
         // PREVENT SPAMMING
         if (isClickedSpin) return;
+
+        if (spinner?.freeSpins <= 0 && user?.gems <= config.useGems) {
+            setOutOfGems(true);
+            return;
+        }
 
         if (spinner?.freeSpins <= 0) {
             setOutOfSpins(true);
@@ -246,7 +261,8 @@ const FortuneWheel = ({
                                     </div>
 
                                     {/* PROBABILITY DISPLAY BUTTON */}
-                                    <img className="probability-btn"
+                                    <img
+                                        className="probability-btn"
                                         width={20}
                                         height={20}
                                         onClick={handleProbabilityInfo}
@@ -430,13 +446,7 @@ const FortuneWheel = ({
             )}
 
             {/* PURCHASE GEMS BUTTON */}
-            {spinner?.freeSpins <= 0 &&
-                user?.gems <= config.useGems &&
-                !isClickedSpin && (
-                    <InsufficientGemsModal
-                        setFortuneWheelShown={setFortuneWheelShown}
-                    />
-                )}
+            {outOfGems && <InsufficientGemsModal setOutOfGems={setOutOfGems} />}
         </div>
     );
 };
