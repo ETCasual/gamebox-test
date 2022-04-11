@@ -92,39 +92,38 @@ const Index = ({ match }) => {
             // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
             if (idx > -1) {
                 setCurrentPrize(prizeType[idx]);
-
-                const currentGameInfo =
-                    JSON.parse(sessionStorage.getItem("currentGameInfo")) ||
-                    null;
-                if (currentGameInfo !== null) {
-                    const gameIdx = prizeType[idx].gameInfo.findIndex(
-                        (g) => g.gameId === currentGameInfo.gameId
-                    );
-                    if (gameIdx === -1) {
-                        const _gameInfo = {
-                            gameId: prizeType[idx].gameInfo[0].gameId,
-                            gameIndex:
-                                prizeType[idx].gameInfo[0].gameIndex,
-                            gameTitle:
-                                prizeType[idx].gameInfo[0].gameTitle,
-                            gameIcon: prizeType[idx].gameInfo[0].gameIcon,
-                            endTimeStamp:
-                                prizeType[idx].gameInfo[0].endTimeStamp,
-                        };
-                        sessionStorage.setItem(
-                            "currentGameInfo",
-                            JSON.stringify(_gameInfo)
+                if (type !== "automated") {
+                    const currentGameInfo =
+                        JSON.parse(sessionStorage.getItem("currentGameInfo")) ||
+                        null;
+                    if (currentGameInfo !== null) {
+                        const gameIdx = prizeType[idx].gameInfo.findIndex(
+                            (g) => g.gameId === currentGameInfo.gameId
                         );
-                        dispatch({
-                            type: CURRENT_GAME_DETAILS,
-                            payload: _gameInfo,
-                        });
-                        dispatch(
-                            loadLeaderboard(
-                                parseInt(id),
-                                prizeType[idx].gameInfo[0].gameId
-                            )
-                        );
+                        if (gameIdx === -1) {
+                            const _gameInfo = {
+                                gameId: prizeType[idx].gameInfo[0].gameId,
+                                gameIndex: prizeType[idx].gameInfo[0].gameIndex,
+                                gameTitle: prizeType[idx].gameInfo[0].gameTitle,
+                                gameIcon: prizeType[idx].gameInfo[0].gameIcon,
+                                endTimeStamp:
+                                    prizeType[idx].gameInfo[0].endTimeStamp,
+                            };
+                            sessionStorage.setItem(
+                                "currentGameInfo",
+                                JSON.stringify(_gameInfo)
+                            );
+                            dispatch({
+                                type: CURRENT_GAME_DETAILS,
+                                payload: _gameInfo,
+                            });
+                            dispatch(
+                                loadLeaderboard(
+                                    parseInt(id),
+                                    prizeType[idx].gameInfo[0].gameId
+                                )
+                            );
+                        }
                     }
                 }
             }
