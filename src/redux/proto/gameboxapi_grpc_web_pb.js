@@ -3673,6 +3673,67 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.getNotificationNo =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.UpdateNotificationSeenRequest,
+ *   !proto.api.gamebox.UpdateNotificationSeenResponse>}
+ */
+const methodDescriptor_GameboxApi_UpdateNotificationSeen = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/UpdateNotificationSeen',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.UpdateNotificationSeenRequest,
+  proto.api.gamebox.UpdateNotificationSeenResponse,
+  /**
+   * @param {!proto.api.gamebox.UpdateNotificationSeenRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.UpdateNotificationSeenResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.UpdateNotificationSeenRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.UpdateNotificationSeenResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.UpdateNotificationSeenResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.updateNotificationSeen =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/UpdateNotificationSeen',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_UpdateNotificationSeen,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.UpdateNotificationSeenRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.UpdateNotificationSeenResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.updateNotificationSeen =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/UpdateNotificationSeen',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_UpdateNotificationSeen);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.api.gamebox.ListBlockchainNetworksRequest,
  *   !proto.api.gamebox.ListBlockchainNetworksResponse>}
  */
