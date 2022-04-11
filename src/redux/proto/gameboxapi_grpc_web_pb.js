@@ -1904,6 +1904,67 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.getCurrentPlayerRank =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.ListPrizeLeaderboardRequest,
+ *   !proto.api.gamebox.ListPrizeLeaderboardResponse>}
+ */
+const methodDescriptor_GameboxApi_ListPrizeLeaderboard = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/ListPrizeLeaderboard',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.ListPrizeLeaderboardRequest,
+  proto.api.gamebox.ListPrizeLeaderboardResponse,
+  /**
+   * @param {!proto.api.gamebox.ListPrizeLeaderboardRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.ListPrizeLeaderboardResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.ListPrizeLeaderboardResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.ListPrizeLeaderboardResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.listPrizeLeaderboard =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/ListPrizeLeaderboard',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_ListPrizeLeaderboard,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.ListPrizeLeaderboardRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.ListPrizeLeaderboardResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.listPrizeLeaderboard =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/ListPrizeLeaderboard',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_ListPrizeLeaderboard);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.api.gamebox.AddInviteRequest,
  *   !proto.api.gamebox.AddInviteResponse>}
  */
