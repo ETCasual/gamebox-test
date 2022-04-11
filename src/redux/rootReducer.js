@@ -79,7 +79,7 @@ const rootReducer = (state, action) => {
         localStorage.clear();
         sessionStorage.removeItem("prizeDetailList");
         sessionStorage.removeItem("networks");
-        sessionStorage.removeItem("isAuthValid");
+        sessionStorage.removeItem("showAnnouncement");
         sessionStorage.removeItem("currentGameInfo");
         sessionStorage.removeItem("lbId");
     }

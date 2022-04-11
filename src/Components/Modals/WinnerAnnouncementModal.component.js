@@ -30,6 +30,8 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     const [activeSlide, setActiveSlide] = useState(-1);
 
     useEffect(() => {
+        sessionStorage.setItem("showAnnouncement", 0);
+
         let timeOutRef = null;
         if (data.length > 0) {
             clearTimeout(timeOutRef);
@@ -100,7 +102,9 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                 <img
                                     width={28}
                                     className="close-btn"
-                                    onClick={() => handleBackButton(e?.prizeId)}
+                                    onClick={() =>
+                                        handleBackButton(e?.prizeId, e?.id)
+                                    }
                                     src={`${window.cdn}buttons/button_close.png`}
                                     alt="close-btn"
                                 />

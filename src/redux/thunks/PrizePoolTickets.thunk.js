@@ -1,10 +1,7 @@
 import { GET_PRIZE_POOL_TICKETS, LOG_OUT, SHOW_TOAST } from "redux/types";
 import { getPrizeLatestTicketsCollected } from "redux/services/index.service";
-// import {
-//     loadOverTimeCheckerNormal,
-//     loadOverTimeChecker,
-// } from "redux/thunks/OverTime.thunk";
 import loadPrizes from "redux/thunks/Prizes.thunk";
+import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 
 // GET PRIZE POOL TICKETS - CALLED IN ALL OTHER COMPONENT - TRIGGERS TO ADD OVERTIME STATUS WHEN TICKETS POOL IS FULL
 export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
@@ -19,6 +16,9 @@ export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
             .then((data) => {
                 dispatch({ type: GET_PRIZE_POOL_TICKETS, payload: data });
                 if (data.tickets >= ticketsRequired) {
+                    // CALL WINNER TYPE NOTIFICATIONS
+                    dispatch(loadNotifications(2));
+                    
                     // CALL PRIZE API
                     let timeOutRef = null;
                     clearTimeout(timeOutRef);
@@ -26,7 +26,6 @@ export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
                         dispatch(loadPrizes());
                     }, 2000);
                 }
-                //     dispatch(loadOverTimeChecker(data?.prizeId));
             })
             .catch((error) => {
                 if (error.code === 7) {
@@ -62,11 +61,12 @@ export function loadPrizePoolTicketsWithOvertime(
             .then((data) => {
                 dispatch({ type: GET_PRIZE_POOL_TICKETS, payload: data });
                 const _localPrizes =
-                JSON.parse(sessionStorage.getItem("prizeDetailList")) ||
-                [];
+                    JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
                 if (data?.tickets >= ticketsRequired) {
+                    // CALL WINNER TYPE NOTIFICATIONS
+                    dispatch(loadNotifications(2));
+
                     // UPDATING LOCAL PRIZE LIST THAT CURRENT PRIZE IS COMPLETED
-                   
                     let idx = _localPrizes.findIndex(
                         (e) => e.prizeId === data?.prizeId
                     );

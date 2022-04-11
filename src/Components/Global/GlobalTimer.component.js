@@ -5,7 +5,7 @@ import loadPrizes from "redux/thunks/Prizes.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
-import loadNotifications from "redux/thunks/Notifcations.thunk";
+import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
 // import loadRemovePrize from "redux/thunks/RemovePrize.thunk";
@@ -64,7 +64,7 @@ const GlobalTimer = ({ data }) => {
                     // NOTIFICATION NUMBER
                     dispatch(loadNotificationNumber());
                     // NOTIFICATION
-                    dispatch(loadNotifications());
+                    dispatch(loadNotifications(1));
                 }
 
                 // USER DETAILS

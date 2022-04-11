@@ -76,9 +76,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                             width={28}
                                             className="close-btn"
                                             onClick={() =>
-                                                handleRevealBackButton(
-                                                    e?.prizeId
-                                                )
+                                                handleRevealBackButton(e?.id)
                                             }
                                             src={`${window.cdn}buttons/button_close.png`}
                                             alt="close-btn"

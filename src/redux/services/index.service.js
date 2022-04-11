@@ -33,6 +33,7 @@ import {
     GetPlayerRequest,
     GetNotificationNoRequest,
     SignInRequest,
+    UpdateNotificationSeenRequest,
     UpdateUserSettingsRequest,
     UpdateMsgTokenRequest,
     ClaimPrizeRequest,
@@ -1662,10 +1663,11 @@ export async function getNotificationNumber(user, notificationNumber) {
 }
 
 // LIST NOTIFICATION
-export async function getNotifications(user) {
+export async function getNotifications(user, notiType) {
     const token = getToken();
     const request = new ListNotificationRequest();
     request.setUserId(user?.id);
+    request.setNotiType(notiType);
     request.setLimit(100);
     request.setOffset(0);
 
@@ -1770,6 +1772,19 @@ export async function getNotifications(user) {
         }
     });
     return notificationList;
+}
+
+export async function UpdateNotificationSeen(id, userId) {
+    const token = getToken();
+    const request = new UpdateNotificationSeenRequest();
+    request.setId(id);
+    request.setUserId(userId);
+
+    const response = await client.updateNotificationSeen(request, {
+        authorization: `Bearer ${token}`,
+    });
+    console.log(response.getResult());
+    return response.getResult();
 }
 
 // FOR FUTURE PURPOSE

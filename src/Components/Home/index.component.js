@@ -17,7 +17,7 @@ import RevealCardModal from "Components/Modals/RevealCardModal.component";
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
-import loadNotifications from "redux/thunks/Notifcations.thunk";
+import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -147,37 +147,30 @@ const Index = () => {
     // WINNER ANNOUNCEMENT WHEN RE-LOGIN
     useEffect(() => {
         setTimeout(() => {
-            let isAuthValid = JSON.parse(sessionStorage.getItem("isAuthValid"));
-            if (isAuthValid === null || isAuthValid) {
+            let showAnnouncement = JSON.parse(
+                sessionStorage.getItem("showAnnouncement") || null
+            );
+            if (showAnnouncement === null) {
                 let _arr = [];
-                notificationList.forEach((n) => {
-                    n?.list?.forEach((e) => {
+                notificationList.forEach((n, nIdx) => {
+                    n?.list?.forEach((e, idx) => {
+                        if (
+                            notificationList.length - 1 === nIdx &&
+                            n.list.length - 1 === idx
+                        ) {
+                            sessionStorage.setItem("showAnnouncement", 0);
+                        }
+                        
                         if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
-                        } else if (e.type === "winner" && e.seen) {
-                            const _localPrizes =
-                                JSON.parse(
-                                    sessionStorage.getItem("prizeDetailList")
-                                ) || [];
-                            let idx = _localPrizes.findIndex(
-                                (local) => local.prizeId === e.prizeId
-                            );
-                            if (idx > -1 && !_localPrizes[idx].seen) {
-                                _arr.push(e);
-                                setWinnerAnnouncementData(_arr);
-                                setIsWinnerAnnouncementShown(true);
-                            }
-                        } else {
-                            console.log("All notification are seen!");
                         }
-                        sessionStorage.setItem("isAuthValid", false);
                     });
                 });
             }
         }, 1000);
-    }, [notificationList]);
+    }, [notificationList, dispatch]);
 
     // ON CLICK FINISH BUTTON ONBOARDING
     const handleOnBoardingClose = () => {
@@ -186,13 +179,13 @@ const Index = () => {
     };
 
     // WINNER ANNOUNCEMENT CLOSE BUTTON
-    const handleBackButton = (prizeId) => {
+    const handleBackButton = (prizeId, id) => {
+        dispatch(loadUpdateNotificationSeen(id));
         helperFunctionWinnerAnnoucement(prizeId);
         setIsWinnerAnnouncementShown(false);
     };
     function helperFunctionWinnerAnnoucement(prizeId) {
-        if (user.isNotifyAllowed) dispatch(loadNotifications());
-        sessionStorage.setItem("isAuthValid", false);
+        sessionStorage.setItem("showAnnouncement", 0);
         const pl = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
         let idx = pl.findIndex((p) => p.prizeId === prizeId);
         if (idx > -1) {
@@ -213,6 +206,7 @@ const Index = () => {
             _arr = n?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
             );
+            console.log(_arr);
             if (_arr.length > 0) {
                 setRevealCardModalData(_arr);
 
@@ -236,7 +230,9 @@ const Index = () => {
         return;
     }
     // REVEAL CARD MODAL CONTINUE TO HOMEPAGE BUTTON
-    const handleRevealBackButton = () => {
+    const handleRevealBackButton = (id) => {
+        dispatch(loadUpdateNotificationSeen(id));
+
         const updateLocalPrizes =
             JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
         let featureArr = updateLocalPrizes.filter(

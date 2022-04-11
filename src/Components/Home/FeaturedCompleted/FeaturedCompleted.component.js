@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import RevealWinnerLoader from "Components/Loader/RevealWinner.loader";
 
-import loadNotifications from "redux/thunks/Notifcations.thunk";
-
 const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
     const { notificationList } = useSelector((state) => state.notifications);
@@ -24,7 +22,6 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
             } else {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
-                    dispatch(loadNotifications());
                     setLoading(false);
                 }, 10000);
             }
