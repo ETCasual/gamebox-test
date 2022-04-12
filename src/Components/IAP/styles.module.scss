@@ -44,18 +44,26 @@
                 background: linear-gradient(160deg, #302f2f 0%, #0b0b0b 100%);
                 box-shadow: 0px 3px 6px #00000029;
                 border-radius: 10px 10px 0px 0px;
+                overflow: hidden;
                 height: 238px;
                 .gem-title {
                     font-size: $fnt-sz-12;
                     font-weight: $fnt-wgt-300;
+                    position: relative;
+                    z-index: 1;
                 }
                 .quantity {
                     font-size: $fnt-sz-16;
                     font-weight: $fnt-wgt-600;
+                    position: relative;
+                    z-index: 1;
                 }
                 img {
-                    position: relative;
+                    position: absolute;
+                    top: 2rem;
+                    left: 0;
                     z-index: 0;
+                    width: 100%;
                 }
             }
             .price-wrapper {

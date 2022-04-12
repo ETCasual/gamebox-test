@@ -52,15 +52,14 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                                 : null
                         }
                     >
-                        <div className="gem-info text-center p-2">
-                            <p className="mb-1 gem-title text-center">
+                        <div className="gem-info text-center position-relative">
+                            <p className="mb-1 pt-2 gem-title text-center">
                                 {gem.title}
                             </p>
                             <p className="mb-1 quantity">
                                 {gem.quantity?.toLocaleString()} GEMS
                             </p>
                             <img
-                                width="200"
                                 className="img-fluid"
                                 src={gem.ImageUrl}
                                 alt={gem.title}
