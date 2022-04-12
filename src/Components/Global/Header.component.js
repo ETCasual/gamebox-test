@@ -212,7 +212,7 @@ const Header = ({
                         >
                             <img
                                 className="icon"
-                                src={`${window.cdn}assets/additional_gems_01.png`}
+                                src={`${window.cdn}assets/gem_01.png`}
                                 alt="gems"
                             />
                             <span>{getGems() || 0}</span>

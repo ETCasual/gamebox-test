@@ -371,9 +371,13 @@ const Settings = () => {
                                                 >
                                                     Bug report
                                                 </a>
-                                                {/* <span className="app-version">
-                                                        Version: 1.0.5
-                                                    </span> */}
+                                                <span className="app-version">
+                                                    Version:{" "}
+                                                    {
+                                                        process.env
+                                                            .REACT_APP_VERSION
+                                                    }
+                                                </span>
                                             </li>
                                         </ul>
                                     </div>

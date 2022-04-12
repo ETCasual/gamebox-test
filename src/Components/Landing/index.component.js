@@ -39,8 +39,7 @@ const Index = () => {
             heroRef.current &&
             workRef.current &&
             workCardRef.current &&
-            dailyRewardRef.current &&
-            gsap
+            dailyRewardRef.current
         ) {
             // HERO
             g1 = ScrollTrigger.create({
@@ -81,21 +80,18 @@ const Index = () => {
                 trigger: workCardRef.current,
                 start: "10% bottom",
                 onEnter: () => {
-                    console.log(gsap)
-                    if (gsap) {
-                        const tl = gsap.timeline();
-                        tl.to(
-                            workCardRef.current,
-                            {
-                                duration: 1,
-                                autoAlpha: 1,
-                                y: 0,
-                                ease: "power2.out",
-                                stagger: 0.2,
-                            },
-                            0
-                        );
-                    }
+                    const tl = gsap.timeline();
+                    tl.to(
+                        workCardRef.current,
+                        {
+                            duration: 1,
+                            autoAlpha: 1,
+                            y: 0,
+                            ease: "power2.out",
+                            stagger: 0.2,
+                        },
+                        0
+                    );
                 },
             });
 
