@@ -25,7 +25,10 @@ export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
                     dispatch(loadNotifications(2));
 
                     // 2ND OR #RD TIER PRIZE ENDED MODAL
-                    if (window.location.pathname.includes("/gamebox/prize/")) {
+                    if (
+                        window.location.pathname.includes("/gamebox/prize/") ||
+                        window.location.pathname.includes("/gamebox22/prize/")
+                    ) {
                         dispatch({ type: PRIZE_ENDED, payload: true });
                     }
 
@@ -86,10 +89,15 @@ export function loadPrizePoolTicketsWithOvertime(
                             "prizeDetailList",
                             JSON.stringify(_localPrizes)
                         );
-                        
+
                         // 2ND OR #RD TIER PRIZE ENDED MODAL
                         if (
-                            window.location.pathname.includes("/gamebox/prize/")
+                            window.location.pathname.includes(
+                                "/gamebox/prize/"
+                            ) ||
+                            window.location.pathname.includes(
+                                "/gamebox22/prize/"
+                            )
                         ) {
                             dispatch({ type: PRIZE_ENDED, payload: true });
                         }
