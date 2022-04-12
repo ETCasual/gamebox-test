@@ -47,33 +47,24 @@ const HeaderHOC = () => {
     }, [user.picture]);
 
     useEffect(() => {
-        setTimeout(() => {
+        let timeOutRef = null;
+        clearTimeout(timeOutRef);
+        timeOutRef = setTimeout(() => {
             setUserGems(user.gems);
         }, 1000);
+
+        return () => clearTimeout(timeOutRef);
     }, [user.gems]);
 
     useEffect(() => {
-        setTimeout(() => {
-            if (notificationNumber.count > 0) setIsNotificationShown(true);
-            else setIsNotificationShown(false);
-        }, 1000);
-    }, [notificationNumber.count]);
-
-    useEffect(() => {
-        let _notificationData = [];
-
-        if (notificationList.length > 0) {
+        if (notificationList.length > 0 && notificationNumber.count > 0) {
             const filteredData = notificationList[0].list.filter(
                 (l) => l.type !== "winner"
             );
-            _notificationData = [...filteredData];
-
             setNotificationData(
-                _notificationData?.slice(
-                    0,
-                    notificationNumber.count <= 5 ? notificationNumber.count : 5
-                )
+                filteredData?.slice(0, notificationNumber.count)
             );
+            setIsNotificationShown(true);
         }
     }, [notificationList, notificationNumber.count]);
 
@@ -90,15 +81,13 @@ const HeaderHOC = () => {
 
     // ON CLICK NOTIFICATION ICON
     const handleOnClickNotificationIcon = () => {
-        let _notificationData = [];
         if (notificationList.length > 0) {
             const filteredData = notificationList[0].list.filter(
                 (l) => l.type !== "winner"
             );
-            _notificationData = [...filteredData];
-            setNotificationData(_notificationData?.slice(0, 5));
+            setNotificationData(filteredData?.slice(0, 5));
+            setIsNotificationShown(true);
         }
-        setIsNotificationShown(true);
     };
 
     const handleNotificationLeaderboardHistory = (data) => {
