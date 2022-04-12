@@ -194,6 +194,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
                         })
                         .on("receipt", function (receipt) {
                             console.log("receipt", receipt);
+                            setLoader({ id: null, status: false });
                             // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
                             dispatch(loadClaimedPrizes());
                             dispatch(loadUnClaimedPrizes());
