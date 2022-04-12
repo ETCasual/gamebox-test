@@ -6,14 +6,13 @@ import {
 } from "Utils/NotificationLeaderboardHistory";
 import { timeOptions } from "Utils/Enums";
 
-const NotificationLeaderboard = ({
-    id,
-    notificationList,
-    leaderboardHistory,
-    leaderRuleRanks,
-    handleCloseLeaderboardHistory,
-}) => {
+const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
     const { user } = useSelector((state) => state.userData);
+    const { notificationList } = useSelector((state) => state.notifications);
+    const { leaderboardHistory } = useSelector(
+        (state) => state.leaderboardHistory
+    );
+    const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
 
     // DISABLE HTML SCROLL
     useEffect(() => {

@@ -200,7 +200,7 @@ const Index = ({ match }) => {
         });
         loadCurrentUserRank(user, id, gameId, currentUserRank, dispatch);
         setIsGameLeaderboardShown(true);
-    };
+    }
 
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);

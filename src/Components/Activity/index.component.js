@@ -33,7 +33,7 @@ const Index = () => {
         clearTimeout(timeOutRef.current);
         timeOutRef.current = setTimeout(() => {
             if (activityData.length <= 0) setNoDataLoaded(true);
-        }, 300);
+        }, 3000);
         return () => {
             clearTimeout(timeOutRef.current);
             timeOutRef.current = null;

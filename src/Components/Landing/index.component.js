@@ -35,10 +35,13 @@ const Index = () => {
     // SCROLL TRIGGER ANIMATIONS
     useEffect(() => {
         let g1, g2, g3;
+
         if (
             heroRef.current &&
             workRef.current &&
-            workCardRef.current &&
+            workCardRef.current[0] !== null &&
+            workCardRef.current[1] !== null &&
+            workCardRef.current[2] !== null &&
             dailyRewardRef.current
         ) {
             // HERO

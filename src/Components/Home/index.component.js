@@ -22,7 +22,9 @@ import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
     const { user } = useSelector((state) => state.userData);
-    const { notificationList } = useSelector((state) => state.notifications);
+    const { winnerAnnouncementNotificationList } = useSelector(
+        (state) => state.notifications
+    );
 
     const dispatch = useDispatch();
 
@@ -152,10 +154,11 @@ const Index = () => {
             );
             if (showAnnouncement === null) {
                 let _arr = [];
-                notificationList.forEach((n, nIdx) => {
+                winnerAnnouncementNotificationList.forEach((n, nIdx) => {
                     n?.list?.forEach((e, idx) => {
                         if (
-                            notificationList.length - 1 === nIdx &&
+                            winnerAnnouncementNotificationList.length - 1 ===
+                                nIdx &&
                             n.list.length - 1 === idx
                         ) {
                             sessionStorage.setItem("showAnnouncement", 0);
@@ -170,7 +173,7 @@ const Index = () => {
                 });
             }
         }, 1000);
-    }, [notificationList, dispatch]);
+    }, [winnerAnnouncementNotificationList, dispatch]);
 
     // ON CLICK FINISH BUTTON ONBOARDING
     const handleOnBoardingClose = () => {
@@ -202,7 +205,7 @@ const Index = () => {
     // REVEAL CARD ONCLICK SHOW MODAL
     function handleWinnerRevealCard(prizeId) {
         let _arr = [];
-        notificationList.forEach((n) => {
+        winnerAnnouncementNotificationList.forEach((n) => {
             _arr = n?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
             );

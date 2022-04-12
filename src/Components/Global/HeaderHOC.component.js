@@ -62,7 +62,12 @@ const HeaderHOC = () => {
                 (l) => l.type !== "winner"
             );
             setNotificationData(
-                filteredData?.slice(0, notificationNumber.count)
+                filteredData?.slice(
+                    0,
+                    notificationNumber.count === 0
+                        ? 5
+                        : notificationNumber.count
+                )
             );
             setIsNotificationShown(true);
         }

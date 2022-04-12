@@ -1,14 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
 import loadPrizes from "redux/thunks/Prizes.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
-import { loadNotifications } from "redux/thunks/Notifcations.thunk";
+import { loadNotifications, loadWinnerAnnouncementNotifications } from "redux/thunks/Notifcations.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
-// import loadRemovePrize from "redux/thunks/RemovePrize.thunk";
 import convertSecondsToHours from "Utils/TimeConversion";
 
 const GlobalTimer = ({ data }) => {
@@ -16,16 +14,12 @@ const GlobalTimer = ({ data }) => {
     const { earnAdditionalBenefitStatus } = useSelector(
         (state) => state.earnAdditional
     );
-    // const { overTimePrizes } = useSelector((state) => state.overTime);
-
     const dispatch = useDispatch();
 
     let watcherRef = useRef(null);
     let timeOutRef = useRef(null);
     let timeOutRef2 = useRef(null);
     let userRef = useRef(user);
-
-    // const history = useHistory();
 
     useEffect(() => {
         // SETTING COUNT DOWN TIMER
@@ -64,7 +58,8 @@ const GlobalTimer = ({ data }) => {
                     // NOTIFICATION NUMBER
                     dispatch(loadNotificationNumber());
                     // NOTIFICATION
-                    dispatch(loadNotifications(1));
+                    dispatch(loadNotifications());
+                    dispatch(loadWinnerAnnouncementNotifications());
                 }
 
                 // USER DETAILS

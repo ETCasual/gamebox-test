@@ -119,7 +119,6 @@ const Leaderboard = ({
                 if (score > -1 && currentGameInfo.playerEnterGameId) {
                     localStorage.setItem("currentGameScore", score);
 
-                    // TODO:: END THE TOURNAMENT 3 SECONDS EARLY AND SEND THE SCORE TO BACKEND
                     // END BY TIMER
                     destination?.endGameByTimer?.();
                     dispatch(loadPlayerLeaveTournamentId(score));

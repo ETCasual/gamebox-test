@@ -346,6 +346,7 @@ export async function getPrizes() {
                     JSON.stringify(prizeDetailList)
                 );
             } else {
+                prizeDetailList[index].overTime = p.getOvertime();
                 prizeDetailList[index].gameInfo.splice(0, 1);
                 prizeDetailList[index].gameInfo.push({
                     gameTitle: p.getGameTitle(),
@@ -1713,7 +1714,7 @@ export async function getNotifications(user, notiType) {
             });
         } else {
             let idx = notificationList.findIndex(
-                (winner) => winner.monthYear === _monthYear
+                (n) => n.monthYear === _monthYear
             );
             if (idx > -1) {
                 notificationList[idx].list.push({
@@ -1772,6 +1773,118 @@ export async function getNotifications(user, notiType) {
         }
     });
     return notificationList;
+}
+
+// LIST WINNER ANNOUNCEMENT NOTIFICATION
+export async function getWinnerAnnouncementNotifications(user, notiType) {
+    const token = getToken();
+    const request = new ListNotificationRequest();
+    request.setUserId(user?.id);
+    request.setNotiType(notiType);
+    request.setLimit(100);
+    request.setOffset(0);
+
+    const response = await client.listNotification(request, {
+        authorization: `Bearer ${token}`,
+    });
+    const data = response.getResultList();
+    const winnerAnnouncementNotificationList = [];
+    let _monthYear = "";
+    data.forEach((e) => {
+        _monthYear = `${
+            monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
+        } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
+
+        if (winnerAnnouncementNotificationList.length === 0) {
+            winnerAnnouncementNotificationList.push({
+                monthYear: _monthYear,
+                list: [
+                    {
+                        id: e.getId(),
+                        userId: e.getUserId(),
+                        type: e.getNotiType(),
+                        cgId: e.getCgId(),
+                        inviteeId: e.getInviteeId(),
+                        inviteeName: e.getInviteeName(),
+                        prizeId: e.getPrizeId(),
+                        gameId: e.getGameId(),
+                        title: e.getTitle(),
+                        description: e.getDescription(),
+                        picture: e.getImgUrl(),
+                        gem: e.getRewardGem(),
+                        exp: e.getRewardExp(),
+                        tickets: e.getRewardTickets(),
+                        seen: e.getSeen(),
+                        createdOn: e.getCreatedOn(),
+                        winner: e.getWinnerNickname(),
+                        winnerAvatarUrl: e.getWinnerAvatarUrl(),
+                        nftContractAddress: e.getNftContractAddress(),
+                        nftTokenId: e.getNftTokenId(),
+                        canClaimDate: e.getCanClaimDate(),
+                    },
+                ],
+            });
+        } else {
+            let idx = winnerAnnouncementNotificationList.findIndex(
+                (n) => n.monthYear === _monthYear
+            );
+            if (idx > -1) {
+                winnerAnnouncementNotificationList[idx].list.push({
+                    id: e.getId(),
+                    userId: e.getUserId(),
+                    type: e.getNotiType(),
+                    cgId: e.getCgId(),
+                    inviteeId: e.getInviteeId(),
+                    inviteeName: e.getInviteeName(),
+                    prizeId: e.getPrizeId(),
+                    gameId: e.getGameId(),
+                    title: e.getTitle(),
+                    description: e.getDescription(),
+                    picture: e.getImgUrl(),
+                    gem: e.getRewardGem(),
+                    exp: e.getRewardExp(),
+                    tickets: e.getRewardTickets(),
+                    seen: e.getSeen(),
+                    createdOn: e.getCreatedOn(),
+                    winner: e.getWinnerNickname(),
+                    winnerAvatarUrl: e.getWinnerAvatarUrl(),
+                    nftContractAddress: e.getNftContractAddress(),
+                    nftTokenId: e.getNftTokenId(),
+                    canClaimDate: e.getCanClaimDate(),
+                });
+            } else {
+                winnerAnnouncementNotificationList.push({
+                    monthYear: _monthYear,
+                    list: [
+                        {
+                            id: e.getId(),
+                            userId: e.getUserId(),
+                            type: e.getNotiType(),
+                            cgId: e.getCgId(),
+                            inviteeId: e.getInviteeId(),
+                            inviteeName: e.getInviteeName(),
+                            prizeId: e.getPrizeId(),
+                            gameId: e.getGameId(),
+                            title: e.getTitle(),
+                            description: e.getDescription(),
+                            picture: e.getImgUrl(),
+                            gem: e.getRewardGem(),
+                            exp: e.getRewardExp(),
+                            tickets: e.getRewardTickets(),
+                            seen: e.getSeen(),
+                            createdOn: e.getCreatedOn(),
+                            winner: e.getWinnerNickname(),
+                            winnerAvatarUrl: e.getWinnerAvatarUrl(),
+                            nftContractAddress: e.getNftContractAddress(),
+                            nftTokenId: e.getNftTokenId(),
+                            canClaimDate: e.getCanClaimDate(),
+                        },
+                    ],
+                });
+            }
+        }
+    });
+    return winnerAnnouncementNotificationList;
 }
 
 export async function UpdateNotificationSeen(id, userId) {

@@ -11,11 +11,9 @@ const GameEndModal = ({ handleContinueButton }) => {
 
     const dispatch = useDispatch();
 
-    const { notificationList } = useSelector((state) => state.notifications);
     const { leaderboardHistory } = useSelector(
         (state) => state.leaderboardHistory
     );
-    const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
 
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
@@ -41,7 +39,7 @@ const GameEndModal = ({ handleContinueButton }) => {
                     gameId: parseInt(lbId?.gameId),
                 }));
             }
-        }, 3000);
+        }, 5000);
 
         return () => clearTimeout(timeoutRef);
     }, [dispatch]);
@@ -147,7 +145,9 @@ const GameEndModal = ({ handleContinueButton }) => {
                                                 : "default",
                                     }}
                                 >
-                                    View results
+                                    {leaderboardHistory.length > 0
+                                        ? "View results"
+                                        : "Fetching Results"}
                                 </button>
                                 <button
                                     className="btn-continue"
@@ -163,9 +163,6 @@ const GameEndModal = ({ handleContinueButton }) => {
             {isSelectedNotificationShown.status && (
                 <NotificationLeaderboard
                     id={isSelectedNotificationShown.cgId}
-                    notificationList={notificationList}
-                    leaderboardHistory={leaderboardHistory}
-                    leaderRuleRanks={leaderRuleRanks}
                     handleCloseLeaderboardHistory={
                         handleCloseLeaderboardHistory
                     }

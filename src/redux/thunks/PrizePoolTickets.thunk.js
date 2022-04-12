@@ -5,7 +5,7 @@ import {
     SHOW_TOAST,
 } from "redux/types";
 import { getPrizeLatestTicketsCollected } from "redux/services/index.service";
-// import loadPrizes from "redux/thunks/Prizes.thunk";
+import loadPrizes from "redux/thunks/Prizes.thunk";
 import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 
 // GET PRIZE POOL TICKETS - CALLED IN ALL OTHER COMPONENT - TRIGGERS TO ADD OVERTIME STATUS WHEN TICKETS POOL IS FULL
@@ -22,22 +22,40 @@ export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
                 dispatch({ type: GET_PRIZE_POOL_TICKETS, payload: data });
                 if (data.tickets >= ticketsRequired) {
                     // CALL WINNER TYPE NOTIFICATIONS
-                    dispatch(loadNotifications(2));
+                    dispatch(loadNotifications());
 
-                    // 2ND OR #RD TIER PRIZE ENDED MODAL
-                    if (
-                        window.location.pathname.includes("/gamebox/prize/") ||
-                        window.location.pathname.includes("/gamebox22/prize/")
-                    ) {
-                        dispatch({ type: PRIZE_ENDED, payload: true });
-                    }
+                    // CALL PRIZE API TO UPDATE OVERTIME STATUS
+                    let timeOutRef = null;
+                    clearTimeout(timeOutRef);
+                    timeOutRef = setTimeout(() => {
+                        dispatch(loadPrizes());
+                    }, 3000);
 
-                    // // CALL PRIZE API
-                    // let timeOutRef = null;
-                    // clearTimeout(timeOutRef);
-                    // timeOutRef = setTimeout(() => {
-                    //     dispatch(loadPrizes());
-                    // }, 4000);
+                    let timeOutRef2 = null;
+                    clearTimeout(timeOutRef2);
+                    timeOutRef2 = setTimeout(() => {
+                        const _localPrizes =
+                            JSON.parse(
+                                sessionStorage.getItem("prizeDetailList")
+                            ) || [];
+                        let idx = _localPrizes.findIndex(
+                            (e) => e.prizeId === data?.prizeId
+                        );
+
+                        if (
+                            idx > -1 &&
+                            !_localPrizes[idx].overTime &&
+                            (window.location.pathname.includes(
+                                "/gamebox/prize/"
+                            ) ||
+                                window.location.pathname.includes(
+                                    "/gamebox22/prize/"
+                                ))
+                        ) {
+                            // 2ND OR #RD TIER PRIZE ENDED MODAL
+                            dispatch({ type: PRIZE_ENDED, payload: true });
+                        }
+                    }, 5000);
                 }
             })
             .catch((error) => {
@@ -77,7 +95,7 @@ export function loadPrizePoolTicketsWithOvertime(
                     JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
                 if (data?.tickets >= ticketsRequired) {
                     // CALL WINNER TYPE NOTIFICATIONS
-                    dispatch(loadNotifications(2));
+                    dispatch(loadNotifications());
 
                     // UPDATING LOCAL PRIZE LIST THAT CURRENT PRIZE IS COMPLETED
                     let idx = _localPrizes.findIndex(
@@ -90,7 +108,7 @@ export function loadPrizePoolTicketsWithOvertime(
                             JSON.stringify(_localPrizes)
                         );
 
-                        // 2ND OR #RD TIER PRIZE ENDED MODAL
+                        // 2ND OR 3RD TIER PRIZE ENDED MODAL
                         if (
                             window.location.pathname.includes(
                                 "/gamebox/prize/"
