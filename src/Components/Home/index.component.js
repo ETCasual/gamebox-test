@@ -61,13 +61,13 @@ const Index = () => {
                 prizes.automatedEntryData.length <= 0
             )
                 setNoDataLoaded((prev) => ({ ...prev, all: true }));
-            setNoDataLoaded((prev) => ({
-                ...prev,
-                feature: prizes.featuredData.length <= 0 ? true : false,
-                premium: prizes.premiumData.length <= 0 ? true : false,
-                automated: prizes.automatedEntryData.length <= 0 ? true : false,
-            }));
-        }, 200);
+        }, 3000);
+        setNoDataLoaded((prev) => ({
+            ...prev,
+            feature: prizes.featuredData.length <= 0 ? true : false,
+            premium: prizes.premiumData.length <= 0 ? true : false,
+            automated: prizes.automatedEntryData.length <= 0 ? true : false,
+        }));
 
         return () => clearTimeout(timeOutRef);
     }, [prizes.featuredData, prizes.premiumData, prizes.automatedEntryData]);
@@ -160,7 +160,7 @@ const Index = () => {
                         ) {
                             sessionStorage.setItem("showAnnouncement", 0);
                         }
-                        
+
                         if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
