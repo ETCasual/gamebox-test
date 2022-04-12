@@ -1,6 +1,11 @@
-import { GET_PRIZE_POOL_TICKETS, LOG_OUT, SHOW_TOAST } from "redux/types";
+import {
+    GET_PRIZE_POOL_TICKETS,
+    LOG_OUT,
+    PRIZE_ENDED,
+    SHOW_TOAST,
+} from "redux/types";
 import { getPrizeLatestTicketsCollected } from "redux/services/index.service";
-import loadPrizes from "redux/thunks/Prizes.thunk";
+// import loadPrizes from "redux/thunks/Prizes.thunk";
 import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 
 // GET PRIZE POOL TICKETS - CALLED IN ALL OTHER COMPONENT - TRIGGERS TO ADD OVERTIME STATUS WHEN TICKETS POOL IS FULL
@@ -18,13 +23,18 @@ export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
                 if (data.tickets >= ticketsRequired) {
                     // CALL WINNER TYPE NOTIFICATIONS
                     dispatch(loadNotifications(2));
-                    
-                    // CALL PRIZE API
-                    let timeOutRef = null;
-                    clearTimeout(timeOutRef);
-                    timeOutRef = setTimeout(() => {
-                        dispatch(loadPrizes());
-                    }, 2000);
+
+                    // 2ND OR #RD TIER PRIZE ENDED MODAL
+                    if (window.location.pathname.includes("/gamebox/prize/")) {
+                        dispatch({ type: PRIZE_ENDED, payload: true });
+                    }
+
+                    // // CALL PRIZE API
+                    // let timeOutRef = null;
+                    // clearTimeout(timeOutRef);
+                    // timeOutRef = setTimeout(() => {
+                    //     dispatch(loadPrizes());
+                    // }, 4000);
                 }
             })
             .catch((error) => {
@@ -76,6 +86,13 @@ export function loadPrizePoolTicketsWithOvertime(
                             "prizeDetailList",
                             JSON.stringify(_localPrizes)
                         );
+                        
+                        // 2ND OR #RD TIER PRIZE ENDED MODAL
+                        if (
+                            window.location.pathname.includes("/gamebox/prize/")
+                        ) {
+                            dispatch({ type: PRIZE_ENDED, payload: true });
+                        }
                     }
                 }
             })

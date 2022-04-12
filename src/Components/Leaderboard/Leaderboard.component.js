@@ -22,7 +22,7 @@ import loadPlayerLeaveTournamentId from "redux/thunks/PlayerLeaveTournament.thun
 import loadLeaderboard from "redux/thunks/Leaderboard.thunk";
 import loadCurrentUserRank from "redux/thunks/CurrentUserRank.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
-import loadPrizes from "redux/thunks/Prizes.thunk";
+// import loadPrizes from "redux/thunks/Prizes.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
 
 // HELPER FUNCTION
@@ -133,9 +133,9 @@ const Leaderboard = ({
 
             setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
 
-            setTimeout(() => {
-                if (score === -1) dispatch(loadPrizes());
-            }, 2000);
+            // setTimeout(() => {
+            //     if (score === -1) dispatch(loadPrizes());
+            // }, 2000);
         }
 
         return () => {

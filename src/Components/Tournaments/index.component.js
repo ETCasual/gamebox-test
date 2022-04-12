@@ -23,7 +23,8 @@ import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 import { PRIZE_TYPE } from "Utils/Enums";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
-import { CURRENT_GAME_DETAILS } from "redux/types";
+import { CURRENT_GAME_DETAILS, PRIZE_ENDED } from "redux/types";
+import PrizeEndedModalPopup from "Components/Modals/PrizeEnded.modal";
 
 const Index = ({ match }) => {
     const {
@@ -32,7 +33,7 @@ const Index = ({ match }) => {
 
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userData);
-    const { prizes } = useSelector((state) => state.prizes);
+    const { prizes, prizeEnded } = useSelector((state) => state.prizes);
     const { spinner } = useSelector((state) => state.playerSpinnerInfo);
     const { poolTickets } = useSelector((state) => state.playerTickets);
     const { currentUserRank } = useSelector((state) => state.currentUserRank);
@@ -65,14 +66,17 @@ const Index = ({ match }) => {
     const [, setIsTicketsUpdated] = useState(false);
     const [timer, setTimer] = useState("calculating");
 
-    // LOAD PRIZES WHEN TIMER END WITH 2S DELAY
-    useEffect(() => {
-        if (timer === "Ended" || timer === "0d 0h 0m 0s") {
-            setTimeout(() => {
-                dispatch(loadPrizes());
-            }, 2000);
-        }
-    }, [timer, dispatch]);
+    // LOAD PRIZES WHEN TIMER END WITH 2 SECOND DELAY
+    // useEffect(() => {
+    //     let timeOutRef = null;
+    //     if (timer === "Ended" || timer === "0d 0h 0m 0s") {
+    //         clearTimeout(timeOutRef);
+    //         timeOutRef = setTimeout(() => {
+    //             dispatch(loadPrizes());
+    //         }, 4000);
+    //     }
+    //     return () => clearTimeout(timeOutRef);
+    // }, [timer, dispatch]);
 
     // LOAD AVAILABLE SPINS
     useEffect(() => {
@@ -207,23 +211,35 @@ const Index = ({ match }) => {
     // PAYMENT
     const onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
 
-    const handleHomeNavLink = () => {
-        loadPrizes(dispatch);
+    const handleHomeNavLink = () => dispatch(loadPrizes());
+
+    const handlePrizeEndedModalContinueBtn = () => {
+        dispatch({ type: PRIZE_ENDED, payload: false });
+        dispatch(loadPrizes());
+        history.push("/");
     };
 
     if (isGameLeaderboardShown) {
         return (
-            <Leaderboard
-                data={currentPrize}
-                handleBackButton={onClickGameLeaderBackButton}
-                setIsGameLeaderboardShown={setIsGameLeaderboardShown}
-                timer={timer}
-                setTimer={setTimer}
-                earnAdditionalDisabledStatus={earnAdditionalDisabledStatus}
-                setEarnAdditionalDisabledStatus={
-                    setEarnAdditionalDisabledStatus
-                }
-            />
+            <>
+                <Leaderboard
+                    data={currentPrize}
+                    handleBackButton={onClickGameLeaderBackButton}
+                    setIsGameLeaderboardShown={setIsGameLeaderboardShown}
+                    timer={timer}
+                    setTimer={setTimer}
+                    earnAdditionalDisabledStatus={earnAdditionalDisabledStatus}
+                    setEarnAdditionalDisabledStatus={
+                        setEarnAdditionalDisabledStatus
+                    }
+                />
+                {/* PRIZE FINISHED */}
+                {prizeEnded && (
+                    <PrizeEndedModalPopup
+                        handleContinueBtn={handlePrizeEndedModalContinueBtn}
+                    />
+                )}
+            </>
         );
     } else {
         return (
@@ -589,6 +605,13 @@ const Index = ({ match }) => {
                         handleInstructionsCloseBtn={
                             onClickInstructionBackButton
                         }
+                    />
+                )}
+
+                {/* PRIZE FINISHED */}
+                {prizeEnded && (
+                    <PrizeEndedModalPopup
+                        handleContinueBtn={handlePrizeEndedModalContinueBtn}
                     />
                 )}
             </>

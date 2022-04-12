@@ -82,7 +82,7 @@ const GlobalTimer = ({ data }) => {
 
                     clearTimeout(timeOutRef2.current);
                     timeOutRef2.current = null;
-                }, 6000);
+                }, 5000);
             }
         }
     }, [
@@ -92,55 +92,6 @@ const GlobalTimer = ({ data }) => {
         data?.gameInfo,
         earnAdditionalBenefitStatus,
     ]);
-
-    // useEffect(() => {
-    //     let idx = overTimePrizes.findIndex(
-    //         (ot) => ot.prizeId === data?.prizeId
-    //     );
-
-    //     if (idx > -1 && overTimePrizes[idx]?.status === 1) {
-    //         console.log("ENDING");
-
-    //         // UPDATING LOCAL FINISHED PRIZE LIST
-    //         let finishedPrizeList =
-    //             JSON.parse(localStorage.getItem("finishedPrizeList")) || [];
-
-    //         let finishedIdx = finishedPrizeList.findIndex(
-    //             (id) => id === data?.prizeId
-    //         );
-    //         if (finishedIdx === -1) {
-    //             finishedPrizeList.push({
-    //                 prizeId: data?.prizeId,
-    //                 timeStamp: Date.now(),
-    //             });
-    //             localStorage.setItem(
-    //                 "finishedPrizeList",
-    //                 JSON.stringify(finishedPrizeList)
-    //             );
-    //         }
-
-    //         // REMOVE PRIZE FROM API
-    //         // dispatch(loadRemovePrize(data?.prizeId, data?.type_id));
-
-    //         // UPDATING LOCAL PRIZE LIST THAT CURRENT PRIZE IS COMPLETED
-    //         const _localPrizes =
-    //             JSON.parse(localStorage.getItem("prizeDetailList")) || [];
-    //         let idx = _localPrizes.findIndex(
-    //             (e) => e.prizeId === data?.prizeId
-    //         );
-    //         _localPrizes[idx].completed = true;
-    //         localStorage.setItem(
-    //             "prizeDetailList",
-    //             JSON.stringify(_localPrizes)
-    //         );
-
-    //         // CALLING PRIZE API
-    //         dispatch(loadPrizes());
-
-    //         // PUSH TO HOME PAGE
-    //         history.push("/");
-    //     }
-    // }, [overTimePrizes, dispatch, data?.type_id, data?.prizeId, history]);
 
     return null;
 };

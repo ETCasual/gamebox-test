@@ -1,4 +1,4 @@
-import { GET_GAME_RULES, GET_PRIZE } from "redux/types";
+import { GET_GAME_RULES, GET_PRIZE, PRIZE_ENDED } from "redux/types";
 
 const INITIAL_STATE = {
     prizes: {
@@ -16,6 +16,7 @@ const INITIAL_STATE = {
         useGemExp: 0,
         useHowManyGems: 0,
     },
+    prizeEnded: false,
 };
 
 const prizesReducer = (esmData = INITIAL_STATE, { type, payload }) => {
@@ -42,6 +43,12 @@ const prizesReducer = (esmData = INITIAL_STATE, { type, payload }) => {
             );
             if (idx > -1) currentGameRules = esmData?.gameRulesList[idx];
             return { ...esmData, currentGameRules };
+
+        case PRIZE_ENDED:
+            return {
+                ...esmData,
+                prizeEnded: payload,
+            };
 
         default:
             return esmData;
