@@ -299,17 +299,7 @@ const Index = ({ match }) => {
                                         </a>
                                         <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
                                             <div className="prize-id mb-lg-1 mt-2">
-                                                {currentPrize?.prizeSubtitle?.substring(
-                                                    0,
-                                                    4
-                                                )}
-                                                ....
-                                                {currentPrize?.prizeSubtitle?.substring(
-                                                    currentPrize?.prizeSubtitle
-                                                        .length - 5,
-                                                    currentPrize?.prizeSubtitle
-                                                        .length - 1
-                                                )}
+                                                {currentPrize?.prizeSubtitle}
                                             </div>
                                             <div className="prize-title mb-lg-3">
                                                 {currentPrize?.prizeTitle ||
