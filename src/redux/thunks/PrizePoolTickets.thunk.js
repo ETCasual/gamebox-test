@@ -30,32 +30,6 @@ export function loadPrizePoolTickets(prizeId, ignoreCheck, ticketsRequired) {
                     timeOutRef = setTimeout(() => {
                         dispatch(loadPrizes());
                     }, 3000);
-
-                    let timeOutRef2 = null;
-                    clearTimeout(timeOutRef2);
-                    timeOutRef2 = setTimeout(() => {
-                        const _localPrizes =
-                            JSON.parse(
-                                sessionStorage.getItem("prizeDetailList")
-                            ) || [];
-                        let idx = _localPrizes.findIndex(
-                            (e) => e.prizeId === data?.prizeId
-                        );
-
-                        if (
-                            idx > -1 &&
-                            !_localPrizes[idx].overTime &&
-                            (window.location.pathname.includes(
-                                "/gamebox/prize/"
-                            ) ||
-                                window.location.pathname.includes(
-                                    "/gamebox22/prize/"
-                                ))
-                        ) {
-                            // 2ND OR #RD TIER PRIZE ENDED MODAL
-                            dispatch({ type: PRIZE_ENDED, payload: true });
-                        }
-                    }, 5000);
                 }
             })
             .catch((error) => {

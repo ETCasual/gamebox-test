@@ -83,6 +83,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                     nextEl: navigationNextRef.current,
                 }}
                 preloadImages={true}
+                threshold={30}
                 initialSlide={1}
                 slidesPerView={1}
                 onActiveIndexChange={(active) => {
