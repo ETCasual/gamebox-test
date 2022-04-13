@@ -281,7 +281,10 @@ const Leaderboard = ({
 
             dispatch(loadPlayerLeaveTournamentId(score));
             dispatch(
-                loadCurrentUserRank(data?.prizeId.toString(), currentGameDetails?.gameId)
+                loadCurrentUserRank(
+                    data?.prizeId.toString(),
+                    currentGameDetails?.gameId
+                )
             );
 
             // CALL USER & LEADERBOARD API AFTER 1 SECOND DELAY
@@ -296,7 +299,9 @@ const Leaderboard = ({
                 }
 
                 dispatch(loadUserDetails());
-                dispatch(loadLeaderboard(data?.prizeId, currentGameDetails?.gameId));
+                dispatch(
+                    loadLeaderboard(data?.prizeId, currentGameDetails?.gameId)
+                );
                 // CALLING TICKETS API TO GET LATEST NUMBERS
                 if (earnAdditionalBenefitStatus.length > 0) {
                     // PLAYER TICKETS
@@ -524,9 +529,11 @@ const Leaderboard = ({
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7">
                             {/* BACK BUTTON */}
-                            <div className="d-flex align-items-center back-button mb-3 mb-md-4">
+                            <div
+                                className="d-flex align-items-center back-button mb-3 mb-md-4"
+                                onClick={handleBackButton}
+                            >
                                 <img
-                                    onClick={handleBackButton}
                                     src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
