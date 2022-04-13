@@ -323,8 +323,8 @@ const Index = () => {
                                         browsers currently.
                                     </p>
                                     <p className="note-subtitle">
-                                        Login to your wallet or computer browser
-                                        to purchase more gems.
+                                        Connect your wallet through your computer
+                                        browser to purchase.
                                     </p>
                                 </div>
                             )}

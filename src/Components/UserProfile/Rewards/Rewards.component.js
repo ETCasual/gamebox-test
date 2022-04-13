@@ -218,7 +218,7 @@ const Rewards = () => {
                                                                             ? `Claim your NFT - ${getRemainingDaysToClaim(
                                                                                   data.prizeCanClaimDate
                                                                               )}`
-                                                                            : "Connect your wallet through your computer browser."}
+                                                                            : "Connect your wallet through your computer browser to claim."}
                                                                     </div>
                                                                 )}
                                                             {data.prizeContractType ===
@@ -229,7 +229,7 @@ const Rewards = () => {
                                                                     <div className="prize-claimed text-red py-2">
                                                                         {!hideGemsOnMobile
                                                                             ? "Claim your NFT"
-                                                                            : "Connect your wallet through your computer browser."}
+                                                                            : "Connect your wallet through your computer browser to claim."}
                                                                     </div>
                                                                 )}
 
@@ -238,7 +238,7 @@ const Rewards = () => {
                                                                 <div className="prize-claimed text-red py-2">
                                                                     {!hideGemsOnMobile
                                                                         ? "Claim your Token"
-                                                                        : "Connect your wallet through your computer browser."}
+                                                                        : "Connect your wallet through your computer browser to claim."}
                                                                 </div>
                                                             )}
                                                         </div>
