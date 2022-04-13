@@ -45,7 +45,7 @@ export async function handleConnectWallet(dispatch) {
                     accounts[0]
                 );
                 // UDPATE TO STORE
-                if (tokenBalance)
+                if (accounts[0])
                     dispatch(
                         loadConnectUserWallet(
                             "wallet_connected",
@@ -147,15 +147,19 @@ async function getTokenBalance(address) {
     const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
     const idx = networks.findIndex((n) => n.chainId === parseInt(chainId));
 
-    // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
-    const tokenContract = new web3.eth.Contract(
-        tokenABI,
-        networks[idx]?.systemTokenAddress
-    );
-    // GET TOKEN BALANCE
-    const tokenBalance = web3.utils.fromWei(
-        await tokenContract.methods.balanceOf(address).call()
-    );
-    const symbol = await tokenContract.methods.symbol().call();
-    return { tokenBalance, symbol };
+    if (networks[idx]?.systemTokenAddress) {
+
+        // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
+        const tokenContract = new web3.eth.Contract(
+            tokenABI,
+            networks[idx]?.systemTokenAddress
+        );
+        // GET TOKEN BALANCE
+        const tokenBalance = web3.utils.fromWei(
+            await tokenContract.methods.balanceOf(address).call()
+        );
+        const symbol = await tokenContract.methods.symbol().call();
+        return { tokenBalance, symbol };
+    } 
+    return {};
 }

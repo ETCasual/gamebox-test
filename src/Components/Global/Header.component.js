@@ -171,9 +171,10 @@ const Header = ({
                                 {user.walletAddress && (
                                     <>
                                         <p className="mb-1 d-flex">
-                                            {parseFloat(user.tokenBalance)
-                                                ?.toFixed(2)
-                                                ?.toLocaleString()}{" "}
+                                            {user.tokenBalance ? 
+                                                parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
+                                                : "Invalid token"
+                                            }{" "} 
                                             <small className="d-flex align-self-center ml-1">
                                                 {user.tokenSymbol}
                                             </small>
