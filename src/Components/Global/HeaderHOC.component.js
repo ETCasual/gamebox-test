@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Header from "Components/Global/Header.component";
 import NotificationLeaderboardHistory from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
 import NotificationFriendInvitation from "Components/Notifications/FriendInvitation/FriendInvitation.component";
+import NotificationRankUp from "Components/Notifications/RankUp/RankUp.component";
 
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 import loadResetNotificationNumber from "redux/thunks/RestNotificationNumber.thunk";
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
+import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 
 import getToken from "Utils/GetToken";
-import NotificationRankUp from "Components/Notifications/RankUp/RankUp.component";
 
 const HeaderHOC = () => {
     const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const HeaderHOC = () => {
             setNotificationData(
                 filteredData?.slice(
                     0,
-                    notificationNumber.count === 0
+                    notificationNumber.count <= 0
                         ? 5
                         : notificationNumber.count
                 )
@@ -109,6 +110,7 @@ const HeaderHOC = () => {
         setIsNotificationShown(false);
         // RESET NOTIFICATION TO 0
         dispatch(loadResetNotificationNumber());
+        dispatch(loadNotifications());
     };
 
     const handleCloseLeaderboardHistory = () => {
