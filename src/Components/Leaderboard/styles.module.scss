@@ -28,7 +28,7 @@
             top: 0;
             left: 50%;
             transform: translate(-50%, 0%);
-            height: calc(100% - 86px);
+            height: 86%;
             width: 100%;
             @include media-min($md) {
                 width: 28rem;
