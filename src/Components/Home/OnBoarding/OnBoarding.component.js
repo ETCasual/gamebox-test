@@ -153,7 +153,7 @@ const OnBoarding = ({ handleOnBoardingClose }) => {
                                         <p className="description mb-2">
                                             {e.description}
                                         </p>
-                                        {activeElemStatus.continueBtn && (
+                                        {idx === onBoardingData.length - 1 && (
                                             <button
                                                 className="continue mt-2"
                                                 onClick={handleOnBoardingClose}
