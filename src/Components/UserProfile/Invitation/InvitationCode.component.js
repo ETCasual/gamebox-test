@@ -40,6 +40,7 @@ const Invitation = ({ handleBackButton }) => {
                             <div className="col-12 team-wrapper">
                                 {/* CLOSE BUTTON */}
                                 <img
+                                    width="36"
                                     className="close-button"
                                     onClick={handleBackButton}
                                     src={`${window.cdn}buttons/button_close.png`}

@@ -35,7 +35,7 @@ const NotificationRankUp = ({
                                 }))
                             }
                             className="close-button"
-                            width="38"
+                            width="36"
                             src={`${window.cdn}buttons/button_close.png`}
                             alt="close-btn"
                         />

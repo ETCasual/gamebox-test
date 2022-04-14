@@ -471,7 +471,7 @@ const Leaderboard = ({
                 {!modalStatus.isQuitGameBtnDisabled && (
                     <img
                         className="ml-1 mt-1 quit-btn"
-                        width="40"
+                        width="36"
                         onClick={handleQuitGame}
                         src={`${window.cdn}buttons/button_close.png`}
                         alt="Close Button"

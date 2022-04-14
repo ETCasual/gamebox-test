@@ -25,6 +25,10 @@
                 right: 0;
                 width: 30px;
                 height: 30px;
+                @include media-min($md) {
+                    width: 36px;
+                    height: 36px;
+                }
             }
             .scrolling-wrapper-y {
                 border-radius: 6px;

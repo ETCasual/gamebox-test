@@ -73,7 +73,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                             alt="prize"
                                         />
                                         <img
-                                            width={28}
+                                            width="36"
                                             className="close-btn"
                                             onClick={() =>
                                                 handleRevealBackButton(e?.id)
