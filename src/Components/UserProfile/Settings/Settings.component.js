@@ -356,7 +356,7 @@ const Settings = () => {
                                             </li>
                                             <li>
                                                 <a
-                                                    href="mailto:hello@esportsmini.com"
+                                                    href="mailto:info@froyo.games"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
@@ -365,7 +365,7 @@ const Settings = () => {
                                             </li>
                                             <li className="d-flex align-items-center justify-content-between">
                                                 <a
-                                                    href="mailto:hello@esportsmini.com"
+                                                    href="mailto:info@froyo.games"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
