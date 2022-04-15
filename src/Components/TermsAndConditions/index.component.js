@@ -189,15 +189,6 @@ const Index = () => {
                                     If you’d like us to delete User Provided
                                     Data that you have provided via the Service,
                                     please contact us at{" "}
-                                    <Link
-                                        to={{
-                                            pathname:
-                                                "mailto:hello@gamebox.games",
-                                        }}
-                                        
-                                    >
-                                        hello@gamebox.games
-                                    </Link>
                                     <a
                                         className="email"
                                         target="_blank"
