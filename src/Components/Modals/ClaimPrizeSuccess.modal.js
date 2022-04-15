@@ -35,16 +35,14 @@ const ClaimPrizeModalSuccess = ({
                         <p className="subtitle">
                             If you did not receive the email within 72 hours,
                             please contact us at{" "}
-                            <Link
+                            <a
                                 className="email"
-                                to={{
-                                    pathname: "mailto:hello@esportsmini.com",
-                                }}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                href="mailto:info@froyo.games"
                             >
-                                hello@esportsmini.com
-                            </Link>
+                                info@froyo.games
+                            </a>
                         </p>
                         <div className="p-0 btn-wrapper d-flex mt-4">
                             <Link
@@ -69,16 +67,14 @@ const ClaimPrizeModalSuccess = ({
                         <p className="subtitle">
                             If you did not receive the email within 72 hours,
                             please contact us at{" "}
-                            <Link
+                            <a
                                 className="email"
-                                to={{
-                                    pathname: "mailto:hello@esportsmini.com",
-                                }}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                href="mailto:info@froyo.games"
                             >
-                                hello@esportsmini.com
-                            </Link>
+                                info@froyo.games
+                            </a>
                         </p>
                         <div className="p-0 btn-wrapper d-flex flex-column mt-4">
                             <button

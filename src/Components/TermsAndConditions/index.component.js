@@ -190,16 +190,22 @@ const Index = () => {
                                     Data that you have provided via the Service,
                                     please contact us at{" "}
                                     <Link
-                                        className="email"
                                         to={{
                                             pathname:
                                                 "mailto:hello@gamebox.games",
                                         }}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                        
                                     >
                                         hello@gamebox.games
                                     </Link>
+                                    <a
+                                        className="email"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        href="mailto:info@froyo.games"
+                                    >
+                                        info@froyo.games
+                                    </a>
                                     . Please note that some or all of the
                                     User-Provided Data may be required in order
                                     for our Service to function properly.
