@@ -2,6 +2,12 @@
     .wrapper {
         .close-button {
             right: -10px;
+            width: 30px;
+            height: 30px;
+            @include media-min($md) {
+                width: 36px;
+                height: 36px;
+            }
         }
         .invitaiton-wrapper {
             border-radius: 10px;

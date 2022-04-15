@@ -20,6 +20,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                             onClick={() =>
                                 setRegistrationInstructionModal(false)
                             }
+                            width="36"
                             className="close-button"
                             src={`${window.cdn}buttons/button_close.png`}
                             alt="close-btn"

@@ -183,6 +183,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                 </div>
                                 {/* CLOSE BUTTON */}
                                 <img
+                                    width="36"
                                     className="close-button"
                                     onClick={handleBackButton}
                                     src={`${window.cdn}buttons/button_close.png`}

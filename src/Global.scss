@@ -600,6 +600,12 @@ button {
     .modal-body,
     .modal-body-small {
         .close-button {
+            width: 30px;
+            height: 30px;
+            @include media-min($md) {
+                width: 36px;
+                height: 36px;
+            }
             top: -12px;
             right: -12px;
             cursor: pointer;

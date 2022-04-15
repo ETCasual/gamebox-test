@@ -13,7 +13,7 @@ const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
                 <img
                     className="close-button"
                     onClick={handleInstructionsCloseBtn}
-                    width="38"
+                    width="36"
                     src={`${window.cdn}buttons/button_close.png`}
                     alt="close-btn"
                 />
