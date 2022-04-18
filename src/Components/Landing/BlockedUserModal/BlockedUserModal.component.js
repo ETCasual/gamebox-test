@@ -52,7 +52,7 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
                 <p className="mb-3">
                     For more information, please contact support at{" "}
                     <span>
-                        <a href="mailto:support@froyo.com">support@froyo.com</a>
+                        <a href="mailto:info@froyo.games">info@froyo.games</a>
                     </span>
                 </p>
                 <button
