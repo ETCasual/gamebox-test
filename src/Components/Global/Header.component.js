@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -28,7 +28,7 @@ const Header = ({
     );
     const { user } = useSelector((state) => state.userData);
 
-    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+    // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [onHoverWallet, setOnWalletHover] = useState(false);
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
 
@@ -36,20 +36,20 @@ const Header = ({
 
     const history = useHistory();
 
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize);
 
-        function handleResize() {
-            setHideGemsOnMobile(
-                window.innerWidth > 767 && window.ethereum ? false : true
-            );
-        }
-        handleResize();
+    //     function handleResize() {
+    //         setHideGemsOnMobile(
+    //             window.innerWidth > 767 
+    //         );
+    //     }
+    //     handleResize();
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize);
+    //     };
+    // }, []);
 
     // GETTING GEMS
     const getGems = () => {
@@ -136,102 +136,152 @@ const Header = ({
                 <div className="col-12 px-1 px-lg-3 d-flex align-items-center justify-content-between">
                     {/* LOGO & NAV LINKS */}
                     <div className="left-items d-flex align-items-center justify-content-start">
-                        <Link to="/" className="logo" onClick={handleHomeNavLink}>
-                            <img
-                                className="img-fluid"
-                                src={`${window.cdn}logo/logo_gamebox.png`}
-                                alt="GameBox"
-                            />
-                        </Link>
+                        <div className="d-none d-sm-flex">
+                            <Link to="/" className="logo" onClick={handleHomeNavLink}>
+                                <img
+                                    className="img-fluid"
+                                    src={`${window.cdn}logo/logo_gamebox.png`}
+                                    alt="GameBox"
+                                />
+                            </Link>
 
-                        <div className="nav-items d-none d-md-flex">
-                            <NavLink
-                                onClick={handleHomeNavLink}
-                                exact
-                                to={{
-                                    pathname: "/",
-                                    state: {
-                                        prevPath: history.location.pathname,
-                                    },
-                                }}
-                                activeClassName="active"
-                            >
-                                <div className="py-4 px-2 mx-2">Home</div>
-                            </NavLink>
-                            <NavLink
-                                to={{
-                                    pathname: "/activity",
-                                    state: {
-                                        prevPath: history.location.pathname,
-                                    },
-                                }}
-                                activeClassName="active"
-                            >
-                                <div className="py-4 px-2 mx-2">Activities</div>
-                            </NavLink>
-                            <NavLink
-                                to={{
-                                    pathname: "/winners",
-                                    state: {
-                                        prevPath: history.location.pathname,
-                                    },
-                                }}
-                                activeClassName="active"
-                            >
-                                <div className="py-4 px-2 mx-2">Winners</div>
-                            </NavLink>
+                            <div className="nav-items d-none d-md-flex">
+                                <NavLink
+                                    onClick={handleHomeNavLink}
+                                    exact
+                                    to={{
+                                        pathname: "/",
+                                        state: {
+                                            prevPath: history.location.pathname,
+                                        },
+                                    }}
+                                    activeClassName="active"
+                                >
+                                    <div className="py-4 px-2 mx-2">Home</div>
+                                </NavLink>
+                                <NavLink
+                                    to={{
+                                        pathname: "/activity",
+                                        state: {
+                                            prevPath: history.location.pathname,
+                                        },
+                                    }}
+                                    activeClassName="active"
+                                >
+                                    <div className="py-4 px-2 mx-2">Activities</div>
+                                </NavLink>
+                                <NavLink
+                                    to={{
+                                        pathname: "/winners",
+                                        state: {
+                                            prevPath: history.location.pathname,
+                                        },
+                                    }}
+                                    activeClassName="active"
+                                >
+                                    <div className="py-4 px-2 mx-2">Winners</div>
+                                </NavLink>
+                            </div>
                         </div>
+                        
+                        <div
+                            className="wallet-wrapper d-flex d-sm-none"
+                            onClick={handleWallet}
+                            >
+                            {/* TOKEN VALUE & ADDRESS */}
+                            <div className="info-wrapper w-100 d-flex align-items-center">
+                                {!user.walletAddress && !user.network && (
+                                    <p className="mb-0">Connect Wallet</p>
+                                )}
+                                {user.walletAddress &&
+                                    user.network === "Wrong Network!" && (
+                                        <p className="mb-0">Wrong Network</p>
+                                )}
+
+                                {user.walletAddress && user.network !== "Wrong Network!" && (
+                                    <>
+                                        <img
+                                            className="icon"
+                                            src={`${window.cdn}icons/icon_froyo.png`}
+                                            alt="wallet"
+                                        />
+                                        <div className="ml-1">
+                                            <p className="mb-1 d-flex">
+                                                {user.tokenBalance >= 0 ? 
+                                                    parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
+                                                    : "Invalid token"
+                                                }{" "} 
+                                                <small className="d-flex align-self-center ml-1">
+                                                    {user.tokenSymbol}
+                                                </small>
+                                            </p>
+                                            <p className="mb-0">
+                                                {user.walletAddress?.substring(
+                                                    0,
+                                                    5
+                                                )}
+                                                ....
+                                                {user.walletAddress?.substring(
+                                                    user.walletAddress.length - 4
+                                                )}
+                                            </p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+
                     </div>
                     {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
                     <div className="right-items w-100 d-flex align-items-center justify-content-end">
-                        {!hideGemsOnMobile && (
-                            <div
-                                className="wallet-wrapper"
-                                onClick={handleWallet}
-                            >
-                                {/* TOKEN VALUE & ADDRESS */}
-                                <div className="info-wrapper w-100 d-flex align-items-center">
-                                    {!user.walletAddress && !user.network && (
-                                        <p className="mb-0">Connect Wallet</p>
-                                    )}
-                                    {user.walletAddress &&
-                                        user.network === "Wrong Network!" && (
-                                            <p className="mb-0">Wrong Network</p>
-                                    )}
+                        
+                        <div
+                            className="wallet-wrapper d-none d-sm-flex"
+                            onClick={handleWallet}
+                        >
+                            {/* TOKEN VALUE & ADDRESS */}
+                            <div className="info-wrapper w-100 d-flex align-items-center">
+                                {!user.walletAddress && !user.network && (
+                                    <p className="mb-0">Connect Wallet</p>
+                                )}
+                                {user.walletAddress &&
+                                    user.network === "Wrong Network!" && (
+                                        <p className="mb-0">Wrong Network</p>
+                                )}
 
-                                    {user.walletAddress && user.network !== "Wrong Network!" && (
-                                        <>
-                                            <img
-                                                className="icon"
-                                                src={`${window.cdn}icons/icon_froyo.png`}
-                                                alt="wallet"
-                                            />
-                                            <div className="ml-1">
-                                                <p className="mb-1 d-flex">
-                                                    {user.tokenBalance >= 0 ? 
-                                                        parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
-                                                        : "Invalid token"
-                                                    }{" "} 
-                                                    <small className="d-flex align-self-center ml-1">
-                                                        {user.tokenSymbol}
-                                                    </small>
-                                                </p>
-                                                <p className="mb-0">
-                                                    {user.walletAddress?.substring(
-                                                        0,
-                                                        5
-                                                    )}
-                                                    ....
-                                                    {user.walletAddress?.substring(
-                                                        user.walletAddress.length - 4
-                                                    )}
-                                                </p>
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
+                                {user.walletAddress && user.network !== "Wrong Network!" && (
+                                    <>
+                                        <img
+                                            className="icon"
+                                            src={`${window.cdn}icons/icon_froyo.png`}
+                                            alt="wallet"
+                                        />
+                                        <div className="ml-1">
+                                            <p className="mb-1 d-flex">
+                                                {user.tokenBalance >= 0 ? 
+                                                    parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
+                                                    : "Invalid token"
+                                                }{" "} 
+                                                <small className="d-flex align-self-center ml-1">
+                                                    {user.tokenSymbol}
+                                                </small>
+                                            </p>
+                                            <p className="mb-0">
+                                                {user.walletAddress?.substring(
+                                                    0,
+                                                    5
+                                                )}
+                                                ....
+                                                {user.walletAddress?.substring(
+                                                    user.walletAddress.length - 4
+                                                )}
+                                            </p>
+                                        </div>
+                                    </>
+                                )}
                             </div>
-                        )}
+                        </div>
+
                         <div className="position-relative d-flex flex-nowrap align-items-center mx-2">
                             <Link
                                 className="gem-wrapper"
@@ -330,7 +380,7 @@ const Header = ({
                                 onClick={() => setOnWalletHover(false)}
                             />
                             <div
-                                className="disconnect-wrapper d-none d-md-flex align-items-center justify-content-center"
+                                className="disconnect-wrapper d-flex align-items-center justify-content-center"
                                 onClick={handleWalletDisconnect}
                             >
                                 Disconnect

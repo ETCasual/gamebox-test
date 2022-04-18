@@ -118,7 +118,7 @@ export async function handleConnectWallet(dispatch) {
             if (chainId) window.location.reload();
         });
         window.ethereum.on("disconnect", (err) => {
-            localStorage.removeItem('wallet');
+            // localStorage.removeItem('wallet');
             dispatch(
                 loadConnectUserWallet(
                     "wallet_disconnected",
@@ -135,7 +135,7 @@ export async function handleConnectWallet(dispatch) {
             if (chainId) window.location.reload();
         });
         provider.on('disconnect', (code, reason) => {
-            localStorage.removeItem('wallet');
+            // localStorage.removeItem('wallet');
             dispatch(
                 loadConnectUserWallet(
                     "wallet_disconnected",
@@ -155,9 +155,8 @@ export async function handleConnectWallet(dispatch) {
             );
         else {
             const { tokenBalance, symbol } = await getTokenBalance(accounts[0]);
-            const chainId = await window.ethereum.request({
-                method: "eth_chainId",
-            });
+            const chainId = await web3.eth.getChainId();
+
             // CONNECT USER WALLET
             if (tokenBalance && chainId)
                 dispatch(
@@ -207,7 +206,7 @@ export async function getWeb3() {
 }
 
 // GET TOKEN BALANCE FROM CONTRACT ADDRESS
-async function getTokenBalance(address) {
+export async function getTokenBalance(address) {
     const {web3} = await getWeb3();
 
     const chainId = await web3.eth.getChainId();

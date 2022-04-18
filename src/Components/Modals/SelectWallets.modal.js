@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { isBrowser } from "react-device-detect";
 
 const SelectWalletsModalPopup = ({ handleInstructionsCloseBtn, handleConnectMetamask, handleConnectWalletConnect }) => {
     useEffect(() => {
@@ -22,19 +23,21 @@ const SelectWalletsModalPopup = ({ handleInstructionsCloseBtn, handleConnectMeta
                 </div>
                 <div className="col-12 my-5 connect-wallet-list">
                     <div className="d-flex align-items-center">
-                        <div className="col-6 connect-wallet-item text-center"
-                            onClick={handleConnectMetamask}>
-                            <img
-                                className="icon"
-                                width="64"
-                                height="64"
-                                src={`${window.cdn}logo/logo_metamaskfox_01.png`}
-                                alt="metamask"
-                            />
-                            <p className="wallet-name">
-                                Metamask
-                            </p>
-                        </div>
+                        {isBrowser &&
+                            <div className="col-6 connect-wallet-item text-center"
+                                onClick={handleConnectMetamask}>
+                                <img
+                                    className="icon"
+                                    width="64"
+                                    height="64"
+                                    src={`${window.cdn}logo/logo_metamaskfox_01.png`}
+                                    alt="metamask"
+                                />
+                                <p className="wallet-name">
+                                    Metamask
+                                </p>
+                            </div>
+                        }
                         <div className="col-6 connect-wallet-item text-center"
                             onClick={handleConnectWalletConnect}>
                             <img

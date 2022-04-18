@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -15,7 +15,7 @@ import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
 import loadGemsList from "redux/thunks/GemsList.thunk";
 
 import tokenABI from "Utils/TokenABI";
-import { getWeb3 } from "Utils/ConnectWallet";
+import { getTokenBalance, getWeb3 } from "Utils/ConnectWallet";
 
 const Index = () => {
     const [stripePromise] = useState(
@@ -34,7 +34,7 @@ const Index = () => {
         quantity: null,
         tab: "froyo",
     });
-    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+    // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [cardPaymentModal, setCardPaymentModal] = useState(false);
     const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
@@ -46,20 +46,20 @@ const Index = () => {
         isFail: false,
     });
 
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize);
 
-        function handleResize() {
-            setHideGemsOnMobile(
-                window.innerWidth > 767 && window.ethereum ? false : true
-            );
-        }
-        handleResize();
+    //     function handleResize() {
+    //         setHideGemsOnMobile(
+    //             window.innerWidth > 767 && window.ethereum ? false : true
+    //         );
+    //     }
+    //     handleResize();
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize);
+    //     };
+    // }, []);
 
     // SET SELECTED TAB
     const handleSelectedTab = (tab) => {
@@ -191,22 +191,16 @@ const Index = () => {
                         timeOutRef = setTimeout(async () => {
                             dispatch(loadUserDetails());
 
-                            const tokenBalance = web3.utils.fromWei(
-                                await tokenContract.methods
-                                    .balanceOf(user.walletAddress)
-                                    .call()
-                            );
-                            const chainId =
-                                await window.ethereum.request({
-                                    method: "eth_chainId",
-                                });
+                            const {tokenBalance, symbol} = getTokenBalance(user.walletAddress);
+                            const chainId = await web3.eth.getChainId();
                             if (tokenBalance && chainId)
                                 dispatch(
                                     loadConnectUserWallet(
                                         "purchase_gems",
                                         user.walletAddress,
                                         parseFloat(tokenBalance),
-                                        chainId
+                                        chainId,
+                                        symbol
                                     )
                                 );
                         }, 1000);
@@ -263,56 +257,54 @@ const Index = () => {
                                 Purchase Gems
                             </p>
                             {/* TABS */}
-                            {!hideGemsOnMobile && (
-                                <>
-                                    <ul className="list-unstyled mb-0 d-flex align-items-center justify-content-start tabs">
-                                        <li
-                                            className={`${
-                                                productInfo.tab === "froyo"
-                                                    ? "active"
-                                                    : ""
-                                            } p-3 froyo`}
-                                            onClick={() =>
-                                                handleSelectedTab("froyo")
+                            <>
+                                <ul className="list-unstyled mb-0 d-flex align-items-center justify-content-start tabs">
+                                    <li
+                                        className={`${
+                                            productInfo.tab === "froyo"
+                                                ? "active"
+                                                : ""
+                                        } p-3 froyo`}
+                                        onClick={() =>
+                                            handleSelectedTab("froyo")
+                                        }
+                                    >
+                                        Pay using Froyo Tokens
+                                    </li>
+                                    <li
+                                        className={`${
+                                            productInfo.tab === "card"
+                                                ? "active"
+                                                : ""
+                                        } p-3 credit`}
+                                        onClick={() =>
+                                            handleSelectedTab("card")
+                                        }
+                                    >
+                                        Pay using Credit Card
+                                    </li>
+                                </ul>
+                                <div className="gems-wrapper px-3 pt-3">
+                                    {/* FROYO TOKEN PAYMENT GEMS */}
+                                    {productInfo.tab === "froyo" && (
+                                        <IAPFroyoGemPacks
+                                            handleSelectedGemPackPayment={
+                                                handleSelectedGemPackPayment
                                             }
-                                        >
-                                            Pay using Froyo Tokens
-                                        </li>
-                                        <li
-                                            className={`${
-                                                productInfo.tab === "card"
-                                                    ? "active"
-                                                    : ""
-                                            } p-3 credit`}
-                                            onClick={() =>
-                                                handleSelectedTab("card")
+                                        />
+                                    )}
+                                    {/* CREDIT/DEBIT CARD PAYMENT GEMS */}
+                                    {productInfo.tab === "card" && (
+                                        <IAPCardGemPacks
+                                            handleSelectedGemPackPayment={
+                                                handleSelectedGemPackPayment
                                             }
-                                        >
-                                            Pay using Credit Card
-                                        </li>
-                                    </ul>
-                                    <div className="gems-wrapper px-3 pt-3">
-                                        {/* FROYO TOKEN PAYMENT GEMS */}
-                                        {productInfo.tab === "froyo" && (
-                                            <IAPFroyoGemPacks
-                                                handleSelectedGemPackPayment={
-                                                    handleSelectedGemPackPayment
-                                                }
-                                            />
-                                        )}
-                                        {/* CREDIT/DEBIT CARD PAYMENT GEMS */}
-                                        {productInfo.tab === "card" && (
-                                            <IAPCardGemPacks
-                                                handleSelectedGemPackPayment={
-                                                    handleSelectedGemPackPayment
-                                                }
-                                            />
-                                        )}
-                                    </div>
-                                </>
-                            )}
+                                        />
+                                    )}
+                                </div>
+                            </>
 
-                            {hideGemsOnMobile && (
+                            {/* {hideGemsOnMobile && (
                                 <div className="mobile-note-gems d-flex flex-column align-items-center justify-content-center text-center">
                                     <p className="mb-2 note-title">
                                         Purchases are not available for mobile
@@ -323,7 +315,7 @@ const Index = () => {
                                         browser to purchase.
                                     </p>
                                 </div>
-                            )}
+                            )} */}
                         </div>
                     </div>
                 </div>

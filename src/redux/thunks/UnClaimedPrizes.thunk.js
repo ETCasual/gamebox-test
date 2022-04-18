@@ -55,24 +55,43 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, setLoader) {
             selectedNetwork.length > 0 &&
             parseInt(chainId) !== selectedNetwork[0].chainId
         ) {
-            window.ethereum.on("chainChanged", (chainId) => {
-                if (chainId) window.location.reload();
-            });
 
-            // ADD NETWORK REQUEST
-            await window.ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                    {
-                        chainId: web3.utils.toHex(selectedNetwork[0].chainId),
-                        blockExplorerUrls: [
-                            selectedNetwork[0].blockExplorerUrl,
-                        ],
-                        chainName: selectedNetwork[0].networkName,
-                        rpcUrls: [selectedNetwork[0].rpcUrl],
-                    },
-                ],
-            });
+            // CHANGE NETWORK TO PRIZE NETWORK
+            try {
+                // check if the chain to connect to is installed
+                await web3.currentProvider.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: web3.utils.toHex(
+                        selectedNetwork[0].chainId
+                    ) }], // chainId must be in hexadecimal numbers
+                });
+
+            } catch (error) {
+
+                if (error.code === 4902) {
+                    try {
+                        await web3.currentProvider.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [
+                                {
+                                    chainId: web3.utils.toHex(
+                                        selectedNetwork[0].chainId
+                                    ),
+                                    blockExplorerUrls: [
+                                        selectedNetwork[0].blockExplorerUrl,
+                                    ],
+                                    chainName: selectedNetwork[0].networkName,        
+                                    rpcUrl: [selectedNetwork[0].rpcUrl],
+                                },
+                            ],
+                        });
+                    } catch (addError) {
+                        console.error(addError);
+                    }
+                } else {
+                    console.error(error);
+                }
+            }
         } else {
             return getNFTClaim(winnerId, user.id, user.walletAddress)
                 .then(async ({ address, tokenId, nonce, signature }) => {
@@ -130,13 +149,8 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
         const { user } = getState()?.userData;
         const { blockchainNetworks } = getState()?.blockchainNetworks;
 
-        const eth = { ...window.ethereum };
-        const web3 = new Web3(eth);
-
-        // GET CURRENT NETWORK CHAIN ID
-        const chainId = await window.ethereum.request({
-            method: "eth_chainId",
-        });
+        const {web3} = await getWeb3();
+        const chainId = await web3.eth.getChainId();
 
         // FIND THE PRIZE NETWORK INFO FROM LIST OF NETWORKS
         const selectedNetwork = blockchainNetworks.filter(
@@ -147,24 +161,43 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
             selectedNetwork.length > 0 &&
             parseInt(chainId) !== selectedNetwork[0].chainId
         ) {
-            window.ethereum.on("chainChanged", (chainId) => {
-                if (chainId) window.location.reload();
-            });
 
-            // ADD NETWORK REQUEST
-            await window.ethereum.request({
-                method: "wallet_addEthereumChain",
-                params: [
-                    {
-                        chainId: web3.utils.toHex(selectedNetwork[0].chainId),
-                        blockExplorerUrls: [
-                            selectedNetwork[0].blockExplorerUrl,
-                        ],
-                        chainName: selectedNetwork[0].networkName,
-                        rpcUrls: [selectedNetwork[0].rpcUrl],
-                    },
-                ],
-            });
+            // CHANGE NETWORK TO PRIZE NETWORK
+            try {
+                // check if the chain to connect to is installed
+                await web3.currentProvider.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: web3.utils.toHex(
+                        selectedNetwork[0].chainId
+                    ) }], // chainId must be in hexadecimal numbers
+                });
+
+            } catch (error) {
+
+                if (error.code === 4902) {
+                    try {
+                        await web3.currentProvider.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [
+                                {
+                                    chainId: web3.utils.toHex(
+                                        selectedNetwork[0].chainId
+                                    ),
+                                    blockExplorerUrls: [
+                                        selectedNetwork[0].blockExplorerUrl,
+                                    ],
+                                    chainName: selectedNetwork[0].networkName,        
+                                    rpcUrl: [selectedNetwork[0].rpcUrl],
+                                },
+                            ],
+                        });
+                    } catch (addError) {
+                        console.error(addError);
+                    }
+                } else {
+                    console.error(error);
+                }
+            }
         } else {
             return getNFTClaim(winnerId, user.id, user.walletAddress)
                 .then(async ({ address, tokenId, nonce, signature }) => {

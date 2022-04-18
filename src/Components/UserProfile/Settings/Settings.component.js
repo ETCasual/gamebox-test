@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Toggle from "react-toggle";
@@ -14,23 +14,23 @@ const Settings = () => {
     const { user } = useSelector((state) => state.userData);
     const dispatch = useDispatch();
 
-    const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+    // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
 
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize);
 
-        function handleResize() {
-            setHideGemsOnMobile(
-                window.innerWidth > 767 && window.ethereum ? false : true
-            );
-        }
-        handleResize();
+    //     function handleResize() {
+    //         setHideGemsOnMobile(
+    //             window.innerWidth > 767 && window.ethereum ? false : true
+    //         );
+    //     }
+    //     handleResize();
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("resize", handleResize);
+    //     };
+    // }, []);
 
     // TOOGLE NOTIFICATION
     const handleNotificationToggle = () => {
@@ -167,54 +167,52 @@ const Settings = () => {
                                                 <p className="mb-3 wallet-label px-3">
                                                     Wallet address
                                                 </p>
-                                                {!hideGemsOnMobile && (
-                                                    <div className="col-12 d-flex align-items-center justify-content-between">
-                                                        <div className="wallet-address p-md-4">
-                                                            <span>
-                                                                {user.walletAddress
-                                                                    ? user.walletAddress
-                                                                    : "No wallet found"}
-                                                            </span>
-                                                        </div>
-                                                        <button
-                                                            onClick={
-                                                                user.walletAddress
-                                                                    ? handleDisconnectWallet
-                                                                    : handleWallet
-                                                            }
-                                                        >
-                                                            {user.walletAddress && (
-                                                                <p
-                                                                    className={`mb-0 ${
-                                                                        user.walletAddress
-                                                                            ? "text-danger"
-                                                                            : ""
-                                                                    }`}
-                                                                >
-                                                                    Disconnect
+                                                <div className="col-12 d-flex align-items-center justify-content-between">
+                                                    <div className="wallet-address p-md-4">
+                                                        <span>
+                                                            {user.walletAddress
+                                                                ? user.walletAddress
+                                                                : "No wallet found"}
+                                                        </span>
+                                                    </div>
+                                                    <button
+                                                        onClick={
+                                                            user.walletAddress
+                                                                ? handleDisconnectWallet
+                                                                : handleWallet
+                                                        }
+                                                    >
+                                                        {user.walletAddress && (
+                                                            <p
+                                                                className={`mb-0 ${
+                                                                    user.walletAddress
+                                                                        ? "text-danger"
+                                                                        : ""
+                                                                }`}
+                                                            >
+                                                                Disconnect
+                                                                Wallet
+                                                            </p>
+                                                        )}
+                                                        {!user.walletAddress &&
+                                                            !user.network && (
+                                                                <p className="mb-0">
+                                                                    Connect
                                                                     Wallet
                                                                 </p>
                                                             )}
-                                                            {!user.walletAddress &&
-                                                                !user.network && (
-                                                                    <p className="mb-0">
-                                                                        Connect
-                                                                        Wallet
-                                                                    </p>
-                                                                )}
-                                                            {!user.walletAddress &&
-                                                                user.network ===
-                                                                    "Wrong Network!" && (
-                                                                    <p className="mb-0">
-                                                                        Wrong
-                                                                        Network
-                                                                    </p>
-                                                                )}
-                                                        </button>
-                                                    </div>
-                                                )}
+                                                        {!user.walletAddress &&
+                                                            user.network ===
+                                                                "Wrong Network!" && (
+                                                                <p className="mb-0">
+                                                                    Wrong
+                                                                    Network
+                                                                </p>
+                                                            )}
+                                                    </button>
+                                                </div>
 
-                                                {hideGemsOnMobile && (
+                                                {/* {hideGemsOnMobile && (
                                                     <div className="mobile-note-wallet px-3">
                                                         <p className="mb-1 note-title">
                                                             Unable to connect
@@ -227,7 +225,7 @@ const Settings = () => {
                                                             computer browser.
                                                         </p>
                                                     </div>
-                                                )}
+                                                )} */}
                                             </div>
                                         </div>
                                     </div>
