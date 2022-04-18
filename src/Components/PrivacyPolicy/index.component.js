@@ -256,17 +256,14 @@ const Index = () => {
                                     us to delete User Provided Data that you
                                     have provided via the Service, please
                                     contact us at{" "}
-                                    <Link
+                                    <a
                                         className="email"
-                                        to={{
-                                            pathname:
-                                                "mailto:hello@gamebox.games",
-                                        }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        href="mailto:info@froyo.games"
                                     >
-                                        hello@gamebox.games
-                                    </Link>
+                                        info@froyo.games
+                                    </a>
                                     . Please note that some or all of the
                                     User-Provided Data may be required in order
                                     for our Service to function properly.
@@ -289,17 +286,14 @@ const Index = () => {
                                     becomes aware that his or her child has
                                     provided us with information without their
                                     consent, please contact us at{" "}
-                                    <Link
+                                    <a
                                         className="email"
-                                        to={{
-                                            pathname:
-                                                "mailto:hello@gamebox.games",
-                                        }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        href="mailto:info@froyo.games"
                                     >
-                                        hello@gamebox.games
-                                    </Link>
+                                        info@froyo.games
+                                    </a>
                                     . We will remove such information within a
                                     reasonable time.
                                 </p>
@@ -345,17 +339,14 @@ const Index = () => {
                                     If you have any questions regarding our
                                     privacy policy or our practices, please
                                     contact us via email at{" "}
-                                    <Link
+                                    <a
                                         className="email"
-                                        to={{
-                                            pathname:
-                                                "mailto:hello@gamebox.games",
-                                        }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        href="mailto:info@froyo.games"
                                     >
-                                        hello@gamebox.games
-                                    </Link>
+                                        info@froyo.games
+                                    </a>
                                     .
                                 </p>
                             </div>

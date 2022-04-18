@@ -98,8 +98,8 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
+                                    <span className="ml-2">Back</span>
                                 </Link>
-                                <span className="ml-2">Back</span>
                             </div>
                         </div>
                         {/* CARD */}

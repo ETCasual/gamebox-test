@@ -682,17 +682,14 @@ const Index = () => {
 
                                 <p className="description">
                                     The Prize Sponsor may be contacted at{" "}
-                                    <Link
+                                    <a
                                         className="email"
-                                        to={{
-                                            pathname:
-                                                "mailto:hello@gamebox.games",
-                                        }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        href="mailto:info@froyo.games"
                                     >
-                                        hello@gamebox.games
-                                    </Link>
+                                        info@froyo.games
+                                    </a>
                                 </p>
                             </div>
                             {/* CONTACT */}
@@ -702,17 +699,14 @@ const Index = () => {
                                         If you have any questions regarding our
                                         privacy policy or our practices, please
                                         contact us via email at{" "}
-                                        <Link
+                                        <a
                                             className="email"
-                                            to={{
-                                                pathname:
-                                                    "mailto:hello@esportsmini.com",
-                                            }}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            href="mailto:info@froyo.games"
                                         >
-                                            hello@esportsmini.com
-                                        </Link>
+                                            info@froyo.games
+                                        </a>
                                         .
                                     </p>
                                 </div> */}
