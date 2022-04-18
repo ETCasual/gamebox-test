@@ -191,7 +191,7 @@ const Index = () => {
                         timeOutRef = setTimeout(async () => {
                             dispatch(loadUserDetails());
 
-                            const {tokenBalance, symbol} = getTokenBalance(user.walletAddress);
+                            const {tokenBalance, symbol} = await getTokenBalance(user.walletAddress);
                             const chainId = await web3.eth.getChainId();
                             if (tokenBalance && chainId)
                                 dispatch(
