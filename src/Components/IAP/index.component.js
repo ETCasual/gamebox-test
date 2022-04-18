@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Web3 from "web3";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
@@ -16,6 +15,7 @@ import { loadConnectUserWallet } from "redux/thunks/Login.thunk";
 import loadGemsList from "redux/thunks/GemsList.thunk";
 
 import tokenABI from "Utils/TokenABI";
+import { getWeb3 } from "Utils/ConnectWallet";
 
 const Index = () => {
     const [stripePromise] = useState(
@@ -125,113 +125,109 @@ const Index = () => {
     };
 
     // OPEN METAMASK
-    const openMetaMaskForPurchase = () => {
-        const eth = { ...window.ethereum };
-        const web3 = new Web3(eth);
+    const openMetaMaskForPurchase = async () => {
+        const {web3} = await getWeb3();
 
-        window.ethereum
-            .request({
-                method: "eth_chainId",
-            })
-            .then((chainId) => {
-                if (parseInt(chainId)) {
-                    const selectedNetwork = blockchainNetworks.filter(
-                        (n) => n.chainId === parseInt(chainId)
-                    );
-                    if (selectedNetwork.length > 0) {
-                        // Smart contract address for USDT in BSC testnet
-                        const tokenContract = new web3.eth.Contract(
-                            tokenABI,
-                            selectedNetwork[0]?.systemTokenAddress
-                        );
+        const chainId = await web3.eth.getChainId();
+        if (chainId) {
 
-                        // Send tranfer function to receiver address
-                        tokenContract.methods
-                            .transfer(
-                                selectedNetwork[0]?.prizeDistributorAddress,
-                                web3.utils.toBN(
-                                    web3.utils.toWei(
-                                        productInfo?.price?.toString()
-                                    )
-                                )
+            const selectedNetwork = blockchainNetworks.filter(
+                (n) => n.chainId === parseInt(chainId)
+            );
+            if (selectedNetwork.length > 0) {
+                // Smart contract address for USDT in BSC testnet
+                const tokenContract = new web3.eth.Contract(
+                    tokenABI,
+                    selectedNetwork[0]?.systemTokenAddress
+                );
+
+                // Send tranfer function to receiver address
+                tokenContract.methods
+                    .transfer(
+                        selectedNetwork[0]?.prizeDistributorAddress,
+                        web3.utils.toBN(
+                            web3.utils.toWei(
+                                productInfo?.price?.toString()
                             )
-                            .send({ from: user.walletAddress })
-                            .on("sending", function (payload) {
-                                console.log("sending", payload);
-                                setPurchasingStatusModal(true);
-                                setPurchasingStatus((prev) => ({
-                                    ...prev,
-                                    processing: true,
-                                }));
-                            })
-                            .on("sent", function (payload) {
-                                console.log("payload", payload);
-                            })
-                            .on("transactionHash", function (hash) {
-                                console.log("hash", hash);
-                                setPurchasingStatusModal(true);
-                                setPurchasingStatus((prev) => ({
-                                    ...prev,
-                                    processing: false,
-                                    isSuccess: true,
-                                }));
+                        )
+                    )
+                    .send({ from: user.walletAddress })
+                    .on("sending", function (payload) {
+                        console.log("sending", payload);
+                        setPurchasingStatusModal(true);
+                        setPurchasingStatus((prev) => ({
+                            ...prev,
+                            processing: true,
+                        }));
+                    })
+                    .on("sent", function (payload) {
+                        console.log("payload", payload);
+                    })
+                    .on("transactionHash", function (hash) {
+                        console.log("hash", hash);
+                        setPurchasingStatusModal(true);
+                        setPurchasingStatus((prev) => ({
+                            ...prev,
+                            processing: false,
+                            isSuccess: true,
+                        }));
 
+                        dispatch(
+                            loadIAPurchaseRequest(
+                                hash,
+                                201,
+                                productInfo?.id,
+                                productInfo?.details?.price,
+                                selectedNetwork[0]?.id
+                            )
+                        );
+                    })
+                    .on("receipt", function (receipt) {
+                        console.log("receipt", receipt);
+                        dispatch(loadGemsList());
+
+                        let timeOutRef = null;
+                        clearTimeout(timeOutRef);
+                        timeOutRef = setTimeout(async () => {
+                            dispatch(loadUserDetails());
+
+                            const tokenBalance = web3.utils.fromWei(
+                                await tokenContract.methods
+                                    .balanceOf(user.walletAddress)
+                                    .call()
+                            );
+                            const chainId =
+                                await window.ethereum.request({
+                                    method: "eth_chainId",
+                                });
+                            if (tokenBalance && chainId)
                                 dispatch(
-                                    loadIAPurchaseRequest(
-                                        hash,
-                                        201,
-                                        productInfo?.id,
-                                        productInfo?.details?.price,
-                                        selectedNetwork[0]?.id
+                                    loadConnectUserWallet(
+                                        "purchase_gems",
+                                        user.walletAddress,
+                                        parseFloat(tokenBalance),
+                                        chainId
                                     )
                                 );
-                            })
-                            .on("receipt", function (receipt) {
-                                console.log("receipt", receipt);
-                                dispatch(loadGemsList());
+                        }, 1000);
+                    })
+                    .on("error", function (error) {
+                        console.log("error", error);
+                        setPurchasingStatusModal(true);
+                        setPurchasingStatus((prev) => ({
+                            ...prev,
+                            processing: false,
+                            isFail: true,
+                        }));
+                    });
 
-                                let timeOutRef = null;
-                                clearTimeout(timeOutRef);
-                                timeOutRef = setTimeout(async () => {
-                                    dispatch(loadUserDetails());
+            }
+        }
 
-                                    const tokenBalance = web3.utils.fromWei(
-                                        await tokenContract.methods
-                                            .balanceOf(user.walletAddress)
-                                            .call()
-                                    );
-                                    const chainId =
-                                        await window.ethereum.request({
-                                            method: "eth_chainId",
-                                        });
-                                    if (tokenBalance && chainId)
-                                        dispatch(
-                                            loadConnectUserWallet(
-                                                "purchase_gems",
-                                                user.walletAddress,
-                                                parseFloat(tokenBalance),
-                                                chainId
-                                            )
-                                        );
-                                }, 1000);
-                            })
-                            .on("error", function (error) {
-                                console.log("error", error);
-                                setPurchasingStatusModal(true);
-                                setPurchasingStatus((prev) => ({
-                                    ...prev,
-                                    processing: false,
-                                    isFail: true,
-                                }));
-                            });
-                    }
-                }
-            })
-            .catch((error) => console.log(error));
     };
 
     // PROCESS CONFIRM ACTION
-    const handleConfirmAction = () => {
+    const handleConfirmAction = async () => {
         handleModalCloseButton();
 
         if (purchasingStatus.noWallet) {
@@ -241,7 +237,7 @@ const Index = () => {
                 ...prev,
                 beforePurchaseConfirmation: false,
             }));
-            openMetaMaskForPurchase();
+            await openMetaMaskForPurchase();
         } else if (purchasingStatus.insufficentToken) {
             setPurchasingStatus((prev) => ({
                 ...prev,

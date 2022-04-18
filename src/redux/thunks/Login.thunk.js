@@ -174,6 +174,11 @@ export function loadConnectUserWallet(
                 type: SHOW_TOAST,
                 payload: { message: "Gems Purchased!" },
             });
+        } else if (toastType === "check_metamask") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Please check your metamask" },
+            });
         }
     };
 }

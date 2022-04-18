@@ -8,6 +8,7 @@ import {
     getNFTClaim,
     getUnclaimedPrizesList,
 } from "redux/services/index.service";
+import { getWeb3 } from "Utils/ConnectWallet";
 
 export function loadUnClaimedPrizes() {
     return async (dispatch, getState) => {
@@ -42,13 +43,8 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, setLoader) {
         const { user } = getState()?.userData;
         const { blockchainNetworks } = getState()?.blockchainNetworks;
 
-        const eth = { ...window.ethereum };
-        const web3 = new Web3(eth);
-
-        // GET CURRENT NETWORK CHAIN ID
-        const chainId = await window.ethereum.request({
-            method: "eth_chainId",
-        });
+        const {web3} = await getWeb3();
+        const chainId = await web3.eth.getChainId();
 
         // FIND THE PRIZE NETWORK INFO FROM LIST OF NETWORKS
         const selectedNetwork = blockchainNetworks.filter(

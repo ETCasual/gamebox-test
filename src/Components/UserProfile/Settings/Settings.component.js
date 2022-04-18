@@ -4,19 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import Toggle from "react-toggle";
 
 import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
+import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
 
 import { defaultUserImage } from "Utils/DefaultImage";
-import { handleConnectWallet } from "Utils/ConnectWallet";
+import { disconnectWallet, handleConnectWallet, handleMetamask, handleWalletConnect } from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
 
 const Settings = () => {
     const { user } = useSelector((state) => state.userData);
-    const { blockchainNetworks } = useSelector(
-        (state) => state.blockchainNetworks
-    );
     const dispatch = useDispatch();
 
     const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
+    const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
 
     useEffect(() => {
         window.addEventListener("resize", handleResize);
@@ -47,12 +46,13 @@ const Settings = () => {
     };
 
     const handleWallet = async () => {
-        if (user.walletAddress) return;
+        setSelectWalletModalShown(true);
 
-        await handleConnectWallet(dispatch, blockchainNetworks);
+        // await handleConnectWallet(dispatch, blockchainNetworks);
     };
 
-    const handleDisconnectWallet = () => {
+    const handleDisconnectWallet = async () => {
+        await disconnectWallet();
         dispatch({
             type: UPDATE_USER_WALLET,
             payload: {
@@ -64,6 +64,32 @@ const Settings = () => {
             },
         });
     };
+
+    const handleConnectMetamask = async () => {
+        try {
+            await handleMetamask(dispatch);
+            await handleConnectWallet(dispatch);
+
+            setSelectWalletModalShown(false);
+        } catch (err) {
+            if (err.code === 4903) {
+                setSelectWalletModalShown(false);
+            } else {
+                console.log(err);
+            }
+        }
+    }
+
+    const handleConnectWalletConnect = async () => {
+        try {
+            await handleWalletConnect(dispatch);
+            await handleConnectWallet(dispatch);
+
+            setSelectWalletModalShown(false);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <section id="settings">
@@ -387,6 +413,17 @@ const Settings = () => {
                     </div>
                 </div>
             </div>
+            {selectWalletModalShown && (
+                <SelectWalletsModal
+                    handleInstructionsCloseBtn={
+                        ()=>{setSelectWalletModalShown(false)}
+                    }
+                    handleConnectMetamask={handleConnectMetamask}
+                    handleConnectWalletConnect={handleConnectWalletConnect}
+                />
+            )}
+
+
         </section>
     );
 };

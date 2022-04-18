@@ -709,6 +709,35 @@ button {
             color: #868686;
         }
     }
+    .modal-body-connect-wallet {
+        background: linear-gradient(132deg, #302f2f 0%, #0b0b0b 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 23.375rem;
+        .close-button {
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .connect-wallet-title-wrapper {
+            background: transparent linear-gradient(158deg, #302F2F 0%, #0B0B0B 100%) 0% 0% no-repeat padding-box;
+            border-radius: 10px;
+        }
+        .connect-wallet-list {
+            .connect-wallet-item {
+                cursor: pointer;
+            }
+            img {
+                object-fit: contain;
+            }
+            .wallet-name {
+                font-size: $fnt-sz-14;
+            }
+        }
+    }
 }
 
 // INFO PAGES
