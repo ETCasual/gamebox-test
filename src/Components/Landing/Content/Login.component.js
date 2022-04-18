@@ -31,7 +31,7 @@ const Login = ({ setLoginModal }) => {
     return (
         <div
             id="login"
-            className="d-flex flex-column align-items-center justify-content-end min-vw-100 min-vh-100"
+            className="d-flex flex-column align-items-center justify-content-end min-vw-100 min-vh-100 w-100"
         >
             <div className="overlay" onClick={() => setLoginModal(false)} />
             <div className="wrapper w-100 px-4 pt-4 pb-2 text-center">

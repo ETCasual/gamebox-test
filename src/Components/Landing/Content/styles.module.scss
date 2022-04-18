@@ -37,8 +37,11 @@
                 font-size: $fnt-sz-14;
             }
             form {
-                width: clamp(22rem, 25vw, 25rem);
                 margin: 0 auto;
+                width: clamp(17rem, 25vw, 25rem);   
+                @include media-min($sm) {
+                    width: clamp(22rem, 25vw, 25rem);   
+                }    
                 .email,
                 .password {
                     background: #1f1e1e;
@@ -61,8 +64,11 @@
                     font-weight: $fnt-wgt-600;
                     color: white;
                     height: 3.25rem;
-                    width: clamp(19rem, 21vw, 21rem);
                     margin: 0 auto;
+                    width: clamp(14rem, 21vw, 21rem);
+                    @include media-min($sm) {
+                        width: clamp(19rem, 21vw, 21rem);
+                    }        
                 }
                 .forgot-password {
                     color: #868686;
