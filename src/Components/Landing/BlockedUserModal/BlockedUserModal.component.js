@@ -41,7 +41,7 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
                 )}
                 {getAccountErrorType() === "Unusual" && (
                     <>
-                        <h3>Unusal Activity!</h3>
+                        <h3>Unusual Activity!</h3>
                         <p className="mb-3">
                             We noticed unusual activity in your GameBox account
                             and have logged you out.

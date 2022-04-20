@@ -1,4 +1,4 @@
-import { addListener } from "devtools-detector";
+import { addListener, launch } from "devtools-detector";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -56,9 +56,20 @@ const App = () => {
     const [pendingRegion, setPendingRegion] = useState(true);
     const [regionAllow, setRegionAllow] = useState(false);
 
-    addListener((isOpen) => {
-        if (isOpen) dispatch({ type: LOG_OUT });
-    });
+    const [consoleOpen, setConsoleOpen] = useState(false);
+
+    if (process.env.REACT_APP_NODE_ENV === "production") {
+        addListener(isOpen => {
+            if (isOpen) {
+                setConsoleOpen(true);
+                sessionStorage.setItem("errorType", "Unusual");
+                dispatch({ type: LOG_OUT })
+            } else {
+                setConsoleOpen(false);
+            }
+        });
+        launch();
+    }
 
     // FIREBASE ONMESSAGE
     onMessageListener()
@@ -71,12 +82,18 @@ const App = () => {
         })
         .catch((error) => console.log("Notification OnMessage Error: ", error));
 
-    // ONAUTH CHANGED & API CALLS
+    // ONAUTH CHANGED & API CALLS & CONSOLE OPEN
     useEffect(() => {
         document.addEventListener("visibilitychange", handleLoadPrize);
 
         function handleLoadPrize() {
             if (document.visibilityState === "visible" && user.id) dispatch(loadPrizes());
+        }
+        
+        if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
+            sessionStorage.setItem("errorType", "Unusual");
+            dispatch({ type: LOG_OUT })
+            return;
         }
 
         if (user.id) {
@@ -97,7 +114,7 @@ const App = () => {
 
         return () =>
             document.removeEventListener("visibilitychange", handleLoadPrize);
-    }, [dispatch, user.id]);
+    }, [dispatch, user.id, consoleOpen]);
 
     useEffect(() => {
         // FOR LOADING WALLET IF ALREADY CONNECTED
@@ -111,6 +128,12 @@ const App = () => {
 
     // UPDATE NOTIFICATION TOKEN & LOAD NOTIFICATION
     useEffect(() => {
+        if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
+            sessionStorage.setItem("errorType", "Unusual");
+            dispatch({ type: LOG_OUT })
+            return;
+        }
+
         if (user.id) {
             // NOTIFICATION TOKEN UPDATE
             if (messaging) {
@@ -144,7 +167,7 @@ const App = () => {
             dispatch(loadWinnerAnnouncementNotifications());
             dispatch(loadUnClaimedPrizes());
         }
-    }, [user.id, dispatch]);
+    }, [user.id, dispatch, consoleOpen]);
 
     // REGIONAL CHECK
     useEffect(() => {

@@ -1,5 +1,4 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import { launch } from "devtools-detector";
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -187,10 +186,6 @@ const Leaderboard = ({
                 };
                 let response = await axios.get(url, options);
                 if (response.data) {
-                    if (process.env.NODE_ENV === "production") {
-                        sessionStorage.setItem("errorType", "Unusual");
-                        launch();
-                    }
                     sessionStorage.setItem(
                         "lbId",
                         JSON.stringify({
