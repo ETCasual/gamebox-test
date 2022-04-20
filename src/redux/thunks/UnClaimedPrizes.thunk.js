@@ -1,4 +1,3 @@
-import Web3 from "web3";
 import prizeDistTokenABI from "Utils/PrizeDistributorABI";
 
 import { GET_UNCLAIMED_PRIZES_LIST, LOG_OUT, SHOW_TOAST } from "redux/types";
