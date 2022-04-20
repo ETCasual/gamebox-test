@@ -3,41 +3,56 @@
     position: fixed;
     width: 100vw;
     top: 80px;
+
     @include media-min($md) {
         top: 90px;
     }
+
     @include media-min($lg) {
         top: 80px;
     }
+
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 3;
+
     .wrapper {
         background: linear-gradient(146deg, #292929 0%, #191919 100%);
+
         @include media-min($xl) {
             background: linear-gradient(145deg, #1c1c1c 10%, #0b0b0b 140%);
         }
+
         border-radius: 10px;
+
         .wrapper-col {
             .the-spinner-text {
                 font-size: $fnt-sz-10;
+
                 @include media-min($xl) {
                     font-size: $fnt-sz-12;
                 }
+
                 color: #00c1b9;
             }
+
             .earn-more-tickets-text {
                 font-size: $fnt-sz-14;
+
                 @include media-min($xl) {
                     font-size: $fnt-sz-18;
                 }
+
                 font-weight: $fnt-wgt-700;
             }
+
             .spin-amount-left-wrapper {
+
                 .spins-left-text,
                 .you-have-text {
                     font-size: $fnt-sz-12;
                 }
+
                 .spin-number {
                     font-size: $fnt-sz-18;
                     font-weight: bold;
@@ -46,29 +61,38 @@
                     margin-right: 10px;
                 }
             }
+
             .text-icon-wrapper {
                 cursor: pointer;
+
                 img {
                     width: 1.5rem;
+
                     @include media-min($xl) {
                         width: 2rem;
                     }
                 }
             }
+
             .probability-btn {
                 cursor: pointer;
             }
+
             table.probability-table {
                 width: 14.063rem;
+
                 tr:first-child td:first-child {
                     border-top-left-radius: 10px;
                 }
+
                 tr:first-child td:last-child {
                     border-top-right-radius: 10px;
                 }
+
                 tr:last-child td:first-child {
                     border-bottom-left-radius: 10px;
                 }
+
                 tr:last-child td:last-child {
                     border-bottom-right-radius: 10px;
                 }
@@ -76,6 +100,7 @@
                 tr.probability-row {
                     display: flex;
                     text-align: center;
+
                     td.probability-percentage {
                         font-size: $fnt-sz-12;
                         font-weight: $fnt-wgt-600;
@@ -83,6 +108,7 @@
                         border: 1px solid #383838;
                         line-height: 30px;
                     }
+
                     td.probability-tickets-text {
                         font-size: $fnt-sz-12;
                         width: 131.25px;
@@ -91,34 +117,39 @@
                     }
                 }
             }
+
             &:nth-child(1),
             &:nth-child(2),
             &:nth-child(3) {
                 display: flex;
             }
+
             &:nth-child(1) {
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
+
                 @include media-max($xl) {
                     background-color: #2b2b2b;
                 }
+
                 .first-row {
                     @include media-min($xl) {
                         height: 100%;
                     }
                 }
+
                 .tap-btn {
                     display: none;
                 }
             }
+
             &:nth-child(2) {
                 @include media-min($xl) {
-                    background: linear-gradient(
-                        155deg,
-                        #212121 17%,
-                        #0b0b0b 110%
-                    );
+                    background: linear-gradient(155deg,
+                            #212121 17%,
+                            #0b0b0b 110%);
                 }
+
                 .your-tickets {
                     box-shadow: 0px 15px 20px #00000029;
                     border: 1px solid #fdc43d;
@@ -126,10 +157,12 @@
                     min-width: 15.313rem;
                     max-width: 70%;
                     height: 3.75rem;
+
                     .your-tickets-text {
                         font-size: $fnt-sz-10;
                         color: #868686;
                     }
+
                     .ticket-number {
                         font-size: $fnt-sz-18;
                         font-weight: $fnt-wgt-600;
@@ -183,67 +216,128 @@
                 // }
             }
         }
+
         .fortune-wheel-svg-wrapper {
             width: 95%;
+
             @include media-min($sm) {
                 width: 75%;
             }
+
             @include media-min($md) {
                 width: 55%;
             }
+
             @include media-min($xl) {
                 width: 25rem;
                 height: 25rem;
             }
+
             @include media-min($xxl) {
                 width: 28.063rem;
                 height: 28.063rem;
             }
+
+            .fortune-wheel-rules-wrapper {
+                width: 100%;
+                padding-bottom: 100%;
+                position: relative;
+            }
+
+            .outer-circle {
+                width: 100%;
+                border-radius: 100%;
+                background-color: #ededed;
+                height: 100%;
+                position: absolute;
+            }
+
+            .inner-circle {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 100%;
+                background-color: white;
+                position: absolute;
+                width: 6rem;
+                height: 6rem;
+
+                @include media-min($xs) {
+                    width: 6rem;
+                    height: 6rem;
+                }
+
+                @include media-min($xl) {
+                    width: 9rem;
+                    height: 9rem;
+                }
+
+                @include media-min($xxl) {
+                    width: 10rem;
+                    height: 10rem;
+                }
+            }
+
             .spin-button {
                 position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                border: 4px solid white;
-                @include media-min($xs) {
-                    border: 5px solid white;
-                }
-                @include media-min($xl) {
-                    border: 7px solid white;
-                }
-                @include media-min($xxl) {
-                    border: 10px solid white;
-                }
+                width: 4rem;
+                height: 4rem;
+                border: 5px solid F4F4F4;
                 border-radius: 100%;
-                cursor: pointer;
-                .spin-button-inner-orange {
-                    font-size: $fnt-sz-12;
-                    width: 3rem;
-                    height: 3rem;
-                    @include media-min($xs) {
-                        width: 4rem;
-                        height: 4rem;
-                    }
-                    @include media-min($xxl) {
-                        width: 4.813rem;
-                        height: 4.813rem;
-                        font-size: $fnt-sz-16;
-                    }
-                    background: linear-gradient(
-                        180deg,
+                border-radius: 100%;
+                font-weight: $fnt-wgt-700;
+                color: white;
+                background: linear-gradient(180deg,
                         #fdc43d 0%,
-                        #ff9300 100%
-                    );
-                    border-radius: 100%;
-                    font-weight: $fnt-wgt-700;
-                    color: white;
+                        #ff9300 100%);
+                cursor: pointer;
+
+                @include media-min($xs) {
+                    border: 5px solid #F4F4F4;
+                    width: 4rem;
+                    height: 4rem;
                 }
+
+                @include media-min($xl) {
+                    width: 5rem;
+                    height: 5rem;
+                    border: 7px solid #F4F4F4;
+                }
+
+                @include media-min($xxl) {
+                    border: 10px solid #F4F4F4;
+                    width: 6rem;
+                    height: 6rem;
+                    font-size: $fnt-sz-16;
+                }
+
             }
+
             .pointer-img {
                 position: absolute;
-                top: 23%;
-                left: 48%;
-                width: clamp(1rem, 2vw, 1.7rem);
+                top: 27.5%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 1rem;
+                height: 1rem;
+
+                @include media-min($xs) {
+                    width: 1rem;
+                    height: 1rem;
+                }
+
+                @include media-min($xl) {
+                    width: 2rem;
+                    height: 2rem;
+                }
+
+                @include media-min($xxl) {
+                    width: 2rem;
+                    height: 2rem;
+                }
             }
         }
 
@@ -257,59 +351,75 @@
             font-size: 12px;
             color: white;
             font-size: 10px;
+
             @include media-min($xxs) {
                 font-size: 12px;
             }
+
             @include media-min($md) {
                 font-size: 20px;
             }
         }
+
         .buy-more-gems {
             background: #ff2c44;
             color: white !important;
+
             span {
                 font-size: 12px;
             }
         }
+
         .buy-more-spins {
             font-size: 0.9rem;
+
             @include media-min($xxs) {
                 font-size: 1rem;
             }
+
             @include media-min($md) {
                 font-size: 1.25rem;
             }
         }
     }
 }
+
 .spinner-rules {
     .title {
         font-size: 0.75rem;
+
         @include media-min($md) {
             font-size: 0.875rem;
         }
+
         color: white;
     }
+
     .probability {
         ul {
             font-size: 0.75rem;
+
             @include media-min($md) {
                 font-size: 0.875rem;
             }
+
             li {
                 .wrapper {
                     color: white;
                     line-height: 2;
+
                     p {
                         margin-bottom: 0.6rem;
+
                         @include media-min($md) {
                             margin-bottom: 1rem;
                         }
+
                         @include media-min($xxl) {
                             margin-bottom: 1.25rem;
                         }
-                        &:nth-child(1) {
-                        }
+
+                        &:nth-child(1) {}
                     }
                 }
             }
