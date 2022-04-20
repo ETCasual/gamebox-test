@@ -133,7 +133,7 @@ const FortuneWheel = ({
         if (spinBuyProcess) setSpinBuyProcess(false);
 
         if (_spinner.freeSpins >= 0) {
-            const elem = document.querySelector(".fortune-wheel-svg-wrapper");
+            const elem = document.querySelector(".fortune-wheel-rules-wrapper");
             const tl = gsap.timeline();
 
             tl.to(elem, {
@@ -380,7 +380,7 @@ const FortuneWheel = ({
                                 style={{ height: modalHeight.cols }}
                             >
                                 {modalHeight.wrapper && (
-                                    <div className="fortune-wheel-svg-wrapper position-relative">
+                                    <div className="fortune-wheel-wrapper position-relative">
                                         <FortuneWheelRules
                                             spinnerRules={spinnerRules}
                                         />

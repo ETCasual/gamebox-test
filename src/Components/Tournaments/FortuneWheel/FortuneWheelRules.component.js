@@ -1,34 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import loadSpinnerRules from "redux/thunks/SpinnerRules.thunk";
 import { PieChart, Pie, ResponsiveContainer } from "recharts";
+import { render } from "@testing-library/react";
+
+const spinnerData = [];
 
 const FortuneWheelRules = ({ spinnerRules }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        for (let i = 0; i < spinnerRules.length; i++) {
+            spinnerData.push({ name: spinnerRules[i].tickets, value: 10 });
+        }
+
         if (spinnerRules.length <= 0) {
             dispatch(loadSpinnerRules());
-
-            console.log("heu");
-            setTimeout(spinnerRules, 3000);
         }
     }, [spinnerRules, dispatch]);
 
     const RADIAN = Math.PI / 180;
-
-    const data = [
-        { name: "A", value: 300 },
-        { name: "B", value: 300 },
-        { name: "C", value: 300 },
-        { name: "D", value: 300 },
-        { name: "E", value: 300 },
-        { name: "F", value: 300 },
-        { name: "G", value: 300 },
-        { name: "H", value: 300 },
-        { name: "I", value: 300 },
-        { name: "J", value: 300 },
-    ];
 
     const renderCustomizedLabel = ({
         cx,
@@ -41,61 +32,63 @@ const FortuneWheelRules = ({ spinnerRules }) => {
         name,
         value,
     }) => {
-        let newAngle = midAngle - 31;
-        let angleChange1 = 3.5;
-        let angleChange2 = angleChange1 * 2;
+        let startAngle = midAngle - 29;
+        let angleOffset1 = 5;
+        let angleOffset2 = angleOffset1 * 2;
+        let angleOffset3 = angleOffset1 * 4;
 
         const radius = innerRadius + (outerRadius - innerRadius) * 0.375;
-        const x1 = cx + radius * Math.cos(-newAngle * RADIAN);
-        const y1 = cy + radius * Math.sin(-newAngle * RADIAN);
-        const x2 = cx + radius * Math.cos((-newAngle + angleChange1) * RADIAN);
-        const y2 = cy + radius * Math.sin((-newAngle + angleChange1) * RADIAN);
-        const x3 = cx + radius * Math.cos((-newAngle + angleChange2) * RADIAN);
-        const y3 = cy + radius * Math.sin((-newAngle + angleChange2) * RADIAN);
+        const x1 = cx + radius * Math.cos(-startAngle * RADIAN);
+        const y1 = cy + radius * Math.sin(-startAngle * RADIAN);
+        const x2 =
+            cx + radius * Math.cos((-startAngle + angleOffset1) * RADIAN);
+        const y2 =
+            cy + radius * Math.sin((-startAngle + angleOffset1) * RADIAN);
+        const x3 =
+            cx + radius * Math.cos((-startAngle + angleOffset2) * RADIAN);
+        const y3 =
+            cy + radius * Math.sin((-startAngle + angleOffset2) * RADIAN);
 
+        let ticket = name + "";
         return (
             <React.Fragment>
                 <text
+                    className="spinner-rules-text"
                     x={x1}
                     y={y1}
-                    rotate={-newAngle + 90}
+                    rotate={-startAngle + 90}
                     fill="white"
-                    fontFamily="OpenSans-Bold"
-                    fontSize={20}
                 >
-                    {3}
+                    {ticket.charAt(0)}
                 </text>
                 <text
+                    className="spinner-rules-text"
                     x={x2}
                     y={y2}
-                    rotate={-newAngle + 90 + angleChange1}
+                    rotate={-startAngle + 90 + angleOffset1}
                     fill="white"
-                    fontFamily="OpenSans-Bold"
-                    fontSize={20}
                 >
-                    {0}
+                    {ticket.charAt(1)}
                 </text>
                 <text
+                    className="spinner-rules-text"
                     x={x3}
                     y={y3}
-                    rotate={-newAngle + 90 + angleChange2}
+                    rotate={-startAngle + 90 + angleOffset2}
                     fill="white"
-                    fontFamily="OpenSans-Bold"
-                    fontSize={20}
                 >
-                    {0}
+                    {ticket.charAt(2)}
+                </text>
+                <text
+                    className="spinner-rules-text"
+                    x={x3}
+                    y={y3}
+                    rotate={-startAngle + 90 + angleOffset2}
+                    fill="white"
+                >
+                    {ticket.charAt(2)}
                 </text>
             </React.Fragment>
-            // <text
-            //     x={x}
-            //     y={y}
-            //     fill="white"
-            //     dominantBaseline="central"
-            //     position="inside"
-            //     fontSize={20}
-            // >
-            //     {name}
-            // </text>
         );
     };
     return (
@@ -105,14 +98,15 @@ const FortuneWheelRules = ({ spinnerRules }) => {
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                             <Pie
-                                data={data}
+                                data={spinnerData}
                                 label={renderCustomizedLabel}
                                 labelLine={false}
-                                innerRadius={"60%"}
-                                outerRadius={"90%"}
+                                innerRadius={"67.5%"}
+                                outerRadius={"97.5%"}
                                 paddingAngle={5}
                                 cornerRadius={10}
                                 isAnimationActive={false}
+                                // color="linear-gradient(rgba(250, 250, 0, 0), transparent)"
                                 fill="#F9BF38"
                                 dataKey="value"
                             />
