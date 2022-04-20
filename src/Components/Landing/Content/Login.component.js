@@ -59,7 +59,6 @@ const Login = ({ setLoginModal }) => {
                         name="password"
                         type="password"
                         placeholder="Password"
-                        value={loginData.password}
                         onChange={handleOnChangeData}
                         required
                     />
