@@ -76,7 +76,7 @@ const App = () => {
         document.addEventListener("visibilitychange", handleLoadPrize);
 
         function handleLoadPrize() {
-            if (document.visibilityState === "visible") dispatch(loadPrizes());
+            if (document.visibilityState === "visible" && user.id) dispatch(loadPrizes());
         }
 
         if (user.id) {
