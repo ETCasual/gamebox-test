@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { gsap } from "gsap";
 
 // COMPONENTS
-import FortuneWheelSVG from "Components/Tournaments/FortuneWheel/FortuneWheelSVG.component";
+import FortuneWheelRules from "Components/Tournaments/FortuneWheel/FortuneWheelRules.component";
 import BuySpinConfirmModal from "Components/Modals/BuySpinConfirm.modal";
 import InsufficientGemsModal from "Components/Modals/InsufficientGems.modal";
 
@@ -133,9 +133,7 @@ const FortuneWheel = ({
         if (spinBuyProcess) setSpinBuyProcess(false);
 
         if (_spinner.freeSpins >= 0) {
-            const elem = document.querySelector(
-                ".fortune-wheel-svg-wrapper svg"
-            );
+            const elem = document.querySelector(".fortune-wheel-svg-wrapper");
             const tl = gsap.timeline();
 
             tl.to(elem, {
@@ -383,10 +381,10 @@ const FortuneWheel = ({
                             >
                                 {modalHeight.wrapper && (
                                     <div className="fortune-wheel-svg-wrapper position-relative">
-                                        <FortuneWheelSVG
+                                        <FortuneWheelRules
                                             spinnerRules={spinnerRules}
                                         />
-
+                                        <div className="inner-circle"></div>
                                         {/* SPIN BUTTON*/}
                                         <div
                                             className={`spin-button ${
@@ -400,12 +398,11 @@ const FortuneWheel = ({
                                                     isClickedSpin ? true : false
                                                 }
                                                 onClick={onClickSpinButton}
-                                                className="spin-button-inner-orange d-flex align-items-center justify-content-center"
+                                                className="spin-button"
                                             >
                                                 SPIN
                                             </button>
                                         </div>
-
                                         {/* TRIANGLE POINTER */}
                                         <img
                                             className="img-fluid pointer-img"
