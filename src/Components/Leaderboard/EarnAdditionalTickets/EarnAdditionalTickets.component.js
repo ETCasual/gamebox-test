@@ -121,11 +121,11 @@ const EarnAdditionalTickets = ({
                     }`}
                     onClick={
                         earnAdditionalDisabledStatus.ads ||
-                        earnAdditionalDisabledStatus.gem
+                        earnAdditionalDisabledStatus.gems
                             ? null
                             : () => {
                                   setIsWatchAdConfirmationModalShown(true);
-                              }
+                            }
                     }
                 >
                     <img
