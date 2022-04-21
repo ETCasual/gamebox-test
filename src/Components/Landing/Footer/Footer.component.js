@@ -8,27 +8,46 @@ const Footer = () => {
                     <div className="about-detail-container d-flex flex-column">
                         <div className="title-text">ABOUT</div>
                         <div className="subtitle-text">GameBox</div>
-                        <div className="subtitle-text">Froyo</div>
+                        <a
+                            className="subtitle-text"
+                            target="_blank"
+                            rel="noreferrer"
+                            href="https://froyo.games/home"
+                        >
+                            Froyo
+                        </a>
                     </div>
                     <div className="help-detail-container d-flex flex-column">
                         <div className="title-text">HELP</div>
-                        <div className="subtitle-text">Contact us</div>
+                        <a
+                            className="subtitle-text"
+                            href="mailto:info@froyo.games"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Contact us
+                        </a>
                     </div>
                     <div className="froyo-coin-detail-container d-flex flex-column">
                         <div className="title-text">FROYO COIN</div>
-                        <div className="subtitle-text">Get Froyo Coin</div>
+                        <a
+                            className="subtitle-text"
+                            target="_blank"
+                            rel="noreferrer"
+                            href="https://froyo.games/token"
+                        >
+                            Get Froyo Coin
+                        </a>
                     </div>
                 </div>
                 <div className="join-community-container d-flex position-absolute flex-column">
                     <div className="title-text">JOIN OUR COMMUNITY</div>
 
                     <div className="logo-img-container">
-                        <Link
+                        <a
                             target="_blank"
-                            to={{
-                                pathname:
-                                    "https://www.facebook.com/EsportsMini/",
-                            }}
+                            rel="noopener noreferrer"
+                            href="https://www.facebook.com/EsportsMini/"
                         >
                             <svg viewBox="0 0 112.196 112.196" width="42">
                                 <circle
@@ -43,15 +62,13 @@ const Footer = () => {
         c0-5.964,2.833-15.303,15.301-15.303L71.56,21.81v12.51h-8.151c-1.337,0-3.217,0.668-3.217,3.513v7.585h11.334L70.201,58.294z"
                                 />
                             </svg>
-                        </Link>
+                        </a>
 
-                        <Link
+                        <a
                             className="mx-3"
                             target="_blank"
-                            to={{
-                                pathname:
-                                    "https://www.instagram.com/esportsmini/",
-                            }}
+                            rel="noopener noreferrer"
+                            href="https://www.instagram.com/esportsmini/"
                         >
                             <svg viewBox="0 0 24 24" width="42">
                                 <linearGradient
@@ -76,13 +93,12 @@ const Footer = () => {
                                     fill="#fff"
                                 />
                             </svg>
-                        </Link>
+                        </a>
 
-                        <Link
+                        <a
                             target="_blank"
-                            to={{
-                                pathname: "https://twitter.com/esports_mini/",
-                            }}
+                            rel="noopener noreferrer"
+                            href="https://twitter.com/esports_mini/"
                         >
                             <svg viewBox="0 0 112.197 112.197" width="42">
                                 <circle
@@ -103,7 +119,7 @@ const Footer = () => {
         C86.391,45.366,88.664,43.005,90.461,40.316L90.461,40.316z"
                                 />
                             </svg>
-                        </Link>
+                        </a>
                     </div>
                 </div>
                 <div className="terms-and-conditions-container d-flex position-absolute">
