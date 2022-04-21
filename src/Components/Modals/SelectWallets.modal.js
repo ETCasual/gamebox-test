@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { isBrowser } from "react-device-detect";
-import { SHOW_TOAST } from "redux/types";
-import { useDispatch } from "react-redux";
 const SelectWalletsModalPopup = ({
     handleInstructionsCloseBtn,
     handleConnectMetamask,
@@ -12,21 +10,6 @@ const SelectWalletsModalPopup = ({
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
-
-    const dispatch = useDispatch();
-
-    const checkMetaMaskInstalled = () => {
-        if (!window.web3) {
-            dispatch({
-                type: SHOW_TOAST,
-                payload: {
-                    message: "Please install Metamask extension !",
-                },
-            });
-        } else {
-            handleConnectMetamask();
-        }
-    };
 
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
@@ -46,7 +29,7 @@ const SelectWalletsModalPopup = ({
                         {isBrowser && (
                             <div
                                 className="col-6 connect-wallet-item text-center"
-                                onClick={checkMetaMaskInstalled}
+                                onClick={handleConnectMetamask}
                             >
                                 <img
                                     className="icon"
