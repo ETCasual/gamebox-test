@@ -17,6 +17,13 @@ import loadGemsList from "redux/thunks/GemsList.thunk";
 import tokenABI from "Utils/TokenABI";
 import { getTokenBalance, getWeb3 } from "Utils/ConnectWallet";
 
+import {
+    handleConnectWallet,
+    handleMetamask,
+    handleWalletConnect,
+} from "Utils/ConnectWallet";
+import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
+
 const Index = () => {
     const [stripePromise] = useState(
         loadStripe(process.env.REACT_APP_STRIPE_KEY)
@@ -26,6 +33,7 @@ const Index = () => {
     const { blockchainNetworks } = useSelector(
         (state) => state.blockchainNetworks
     );
+    const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
     const dispatch = useDispatch();
 
     const [productInfo, setProductInfo] = useState({
@@ -46,6 +54,36 @@ const Index = () => {
         isFail: false,
     });
 
+    const handleWallet = async () => {
+        setSelectWalletModalShown(true);
+        // await handleConnectWallet(dispatch, blockchainNetworks);
+    };
+
+    const handleConnectMetamask = async () => {
+        try {
+            await handleMetamask(dispatch);
+            await handleConnectWallet(dispatch);
+
+            setSelectWalletModalShown(false);
+        } catch (err) {
+            if (err.code === 4903) {
+                setSelectWalletModalShown(false);
+            } else {
+                console.log(err);
+            }
+        }
+    };
+
+    const handleConnectWalletConnect = async () => {
+        try {
+            await handleWalletConnect(dispatch);
+            await handleConnectWallet(dispatch);
+
+            setSelectWalletModalShown(false);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     // useEffect(() => {
     //     window.addEventListener("resize", handleResize);
 
@@ -126,11 +164,10 @@ const Index = () => {
 
     // OPEN METAMASK
     const openMetaMaskForPurchase = async () => {
-        const {web3} = await getWeb3();
+        const { web3 } = await getWeb3();
 
         const chainId = await web3.eth.getChainId();
         if (chainId) {
-
             const selectedNetwork = blockchainNetworks.filter(
                 (n) => n.chainId === parseInt(chainId)
             );
@@ -146,9 +183,7 @@ const Index = () => {
                     .transfer(
                         selectedNetwork[0]?.prizeDistributorAddress,
                         web3.utils.toBN(
-                            web3.utils.toWei(
-                                productInfo?.price?.toString()
-                            )
+                            web3.utils.toWei(productInfo?.price?.toString())
                         )
                     )
                     .send({ from: user.walletAddress })
@@ -191,7 +226,8 @@ const Index = () => {
                         timeOutRef = setTimeout(async () => {
                             dispatch(loadUserDetails());
 
-                            const {tokenBalance, symbol} = await getTokenBalance(user.walletAddress);
+                            const { tokenBalance, symbol } =
+                                await getTokenBalance(user.walletAddress);
                             const chainId = await web3.eth.getChainId();
                             if (tokenBalance && chainId)
                                 dispatch(
@@ -214,10 +250,8 @@ const Index = () => {
                             isFail: true,
                         }));
                     });
-
             }
         }
-
     };
 
     // PROCESS CONFIRM ACTION
@@ -226,6 +260,7 @@ const Index = () => {
 
         if (purchasingStatus.noWallet) {
             setPurchasingStatus((prev) => ({ ...prev, noWallet: false }));
+            await handleWallet();
         } else if (purchasingStatus.beforePurchaseConfirmation) {
             setPurchasingStatus((prev) => ({
                 ...prev,
@@ -341,6 +376,15 @@ const Index = () => {
                         handleConfirmAction={handleConfirmAction}
                     />
                 </PurchaseWrapper>
+            )}
+            {selectWalletModalShown && (
+                <SelectWalletsModal
+                    handleInstructionsCloseBtn={() => {
+                        setSelectWalletModalShown(false);
+                    }}
+                    handleConnectMetamask={handleConnectMetamask}
+                    handleConnectWalletConnect={handleConnectWalletConnect}
+                />
             )}
         </>
     );
