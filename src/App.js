@@ -11,6 +11,7 @@ import NavigationHOC from "Components/Global/NavigationHOC.component";
 import HeaderHOC from "Components/Global/HeaderHOC.component";
 import GlobalTimer from "Components/Global/GlobalTimer.component";
 import OrientationModal from "Components/Modals/Orientation.modal";
+import ScrollToTop from "Components/Global/ScrollToTop.component";
 
 import Home from "Pages/Home.page";
 import Tournament from "Pages/Tournament.page";
@@ -192,6 +193,7 @@ const App = () => {
                 <Toasty />
                 <OrientationModal />
                 <HeaderHOC />
+                <ScrollToTop />
                 <Switch>
                     <ProtectedRoute path="/" exact component={Home} />
                     <Route path="/invite/:id" component={Invite} />
