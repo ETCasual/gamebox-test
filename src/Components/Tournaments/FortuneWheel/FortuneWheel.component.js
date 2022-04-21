@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { gsap } from "gsap";
 
 // COMPONENTS
-import FortuneWheelSVG from "Components/Tournaments/FortuneWheel/FortuneWheelSVG.component";
+import FortuneWheelRules from "Components/Tournaments/FortuneWheel/FortuneWheelRules.component";
 import BuySpinConfirmModal from "Components/Modals/BuySpinConfirm.modal";
 import InsufficientGemsModal from "Components/Modals/InsufficientGems.modal";
 
@@ -133,9 +133,7 @@ const FortuneWheel = ({
         if (spinBuyProcess) setSpinBuyProcess(false);
 
         if (_spinner.freeSpins >= 0) {
-            const elem = document.querySelector(
-                ".fortune-wheel-svg-wrapper svg"
-            );
+            const elem = document.querySelector(".fortune-wheel-rules-wrapper");
             const tl = gsap.timeline();
 
             tl.to(elem, {
@@ -327,7 +325,7 @@ const FortuneWheel = ({
                                     <p className="earn-more-tickets-text my-2 d-none d-xl-block">
                                         Earn more tickets here
                                     </p>
-                                    <p className="spin-amount-left-wrapper mb-3 d-none d-xl-block">
+                                    <p className="spin-amount-left-wrapper my-3 d-none d-xl-block">
                                         <span className="you-have-text">
                                             You have
                                         </span>
@@ -382,11 +380,11 @@ const FortuneWheel = ({
                                 style={{ height: modalHeight.cols }}
                             >
                                 {modalHeight.wrapper && (
-                                    <div className="fortune-wheel-svg-wrapper position-relative">
-                                        <FortuneWheelSVG
+                                    <div className="fortune-wheel-wrapper position-relative">
+                                        <FortuneWheelRules
                                             spinnerRules={spinnerRules}
                                         />
-
+                                        <div className="inner-circle"></div>
                                         {/* SPIN BUTTON*/}
                                         <div
                                             className={`spin-button ${
@@ -400,12 +398,11 @@ const FortuneWheel = ({
                                                     isClickedSpin ? true : false
                                                 }
                                                 onClick={onClickSpinButton}
-                                                className="spin-button-inner-orange d-flex align-items-center justify-content-center"
+                                                className="spin-button"
                                             >
                                                 SPIN
                                             </button>
                                         </div>
-
                                         {/* TRIANGLE POINTER */}
                                         <img
                                             className="img-fluid pointer-img"
