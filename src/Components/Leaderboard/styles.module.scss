@@ -132,7 +132,6 @@
                     margin-top: 30px;
                 }
                 .button-flex-container {
-                    cursor: pointer;
                     width: auto;
                     height: auto;
                     @include media-min($md) {
@@ -190,6 +189,9 @@
                             z-index: 0;
                         }
                     }
+                }
+                .cursor-pointer {
+                    cursor: pointer;
                 }
             }
             .play-immediately-text-container {
