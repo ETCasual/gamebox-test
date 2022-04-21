@@ -225,7 +225,11 @@ export async function handleMetamask(dispatch) {
                 message: "Please install Metamask extension !",
             },
         });
-        throw "Metamask extension not installed";
+        const error = {
+            code: 'Metamask extension not installed',
+            message: "Metamask extension not installed",
+        };
+        throw error;
     } else {
         localStorage.setItem("wallet", "Metamask");
         await window.ethereum.enable();
