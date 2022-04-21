@@ -1,12 +1,24 @@
 import { useEffect } from "react";
 import { isBrowser } from "react-device-detect";
 
-const SelectWalletsModalPopup = ({ handleInstructionsCloseBtn, handleConnectMetamask, handleConnectWalletConnect }) => {
+const SelectWalletsModalPopup = ({
+    handleInstructionsCloseBtn,
+    handleConnectMetamask,
+    handleConnectWalletConnect,
+}) => {
     useEffect(() => {
         document.documentElement.style.overflowY = "hidden";
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
+
+    const checkMetaMaskInstalled = () => {
+        if (!window.web3) {
+            console.log("please install meta mask!");
+        } else {
+            handleConnectMetamask();
+        }
+    };
 
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
@@ -23,9 +35,11 @@ const SelectWalletsModalPopup = ({ handleInstructionsCloseBtn, handleConnectMeta
                 </div>
                 <div className="col-12 my-5 connect-wallet-list">
                     <div className="d-flex align-items-center">
-                        {isBrowser &&
-                            <div className="col-6 connect-wallet-item text-center"
-                                onClick={handleConnectMetamask}>
+                        {isBrowser && (
+                            <div
+                                className="col-6 connect-wallet-item text-center"
+                                onClick={checkMetaMaskInstalled}
+                            >
                                 <img
                                     className="icon"
                                     width="64"
@@ -33,13 +47,13 @@ const SelectWalletsModalPopup = ({ handleInstructionsCloseBtn, handleConnectMeta
                                     src={`${window.cdn}logo/logo_metamaskfox_01.png`}
                                     alt="metamask"
                                 />
-                                <p className="wallet-name">
-                                    Metamask
-                                </p>
+                                <p className="wallet-name">Metamask</p>
                             </div>
-                        }
-                        <div className="col-6 connect-wallet-item text-center"
-                            onClick={handleConnectWalletConnect}>
+                        )}
+                        <div
+                            className="col-6 connect-wallet-item text-center"
+                            onClick={handleConnectWalletConnect}
+                        >
                             <img
                                 className="icon"
                                 width="64"
@@ -47,9 +61,7 @@ const SelectWalletsModalPopup = ({ handleInstructionsCloseBtn, handleConnectMeta
                                 src={`${window.cdn}logo/logo_walletconnect_01.png`}
                                 alt="metamask"
                             />
-                            <p className="wallet-name">
-                                WalletConnect
-                            </p>
+                            <p className="wallet-name">WalletConnect</p>
                         </div>
                     </div>
                 </div>
