@@ -218,65 +218,19 @@
         }
 
         .fortune-wheel-wrapper {
-            width: 95%;
-
-            @include media-min($sm) {
-                width: 75%;
-            }
-
-            @include media-min($md) {
-                width: 55%;
-            }
-
-            @include media-min($xl) {
-                width: 25rem;
-                height: 25rem;
-            }
-
-            @include media-min($xxl) {
-                width: 28.063rem;
-                height: 28.063rem;
-            }
+            width: 100%;
 
             .fortune-wheel-rules-wrapper {
                 width: 100%;
                 position: relative;
-                @include media-min($xs) {
-                    padding-bottom: 80%;
-                }
-                
-                @include media-min($xl) {
-                    padding-bottom: 100%;
-                }
-                
-                @include media-min($xxl) {
-                    padding-bottom: 100%;
-                }
             }
 
             .outer-circle {
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 15rem;
-                height: 15rem;
-                @include media-min($xs) {
-                    width: 20rem;
-                    height: 20rem;
-                }
-                
-                @include media-min($xl) {
-                    width: 20rem;
-                    height: 20rem;
-                }
-                
-                @include media-min($xxl) {
-                    width: 30rem;
-                    height: 30rem;
-                }
+                height: 100%;
+                width: 100%;
                 border-radius: 100%;
                 background-color: #ededed;
-                position: absolute;
+                transform: rotate(162deg);
             }
 
             .inner-circle {
@@ -347,7 +301,7 @@
 
             .pointer-img {
                 position: absolute;
-                top: 27.5%;
+                top: 24.5%;
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 1rem;
@@ -359,8 +313,8 @@
                 }
 
                 @include media-min($xl) {
-                    width: 2rem;
-                    height: 2rem;
+                    width: 1.5rem;
+                    height: 1.5rem;
                 }
 
                 @include media-min($xxl) {
@@ -463,7 +417,6 @@
                             margin-bottom: 1.25rem;
                         }
 
-                        &:nth-child(1) {}
                     }
                 }
             }
@@ -474,5 +427,231 @@
         height: 1px;
         width: 100%;
         background-color: white;
+    }
+}
+
+.csstransforms {
+    .parallax-container {
+        height: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    
+        min-height: 300px;
+        height: auto;
+        width: 100%;
+    
+        position: relative;
+        overflow: hidden;
+        
+        .parallax {
+            background-color: #66a8d8;
+        }
+    }
+
+    .cn-wrapper {
+        position: relative;
+        width: 38em;
+        height: 38em;
+        border-radius: 50%;
+        background: transparent;
+        pointer-events: none;
+        overflow: hidden;
+        margin: 0 auto;
+
+        @include media-max($sm) {
+            width: 32em;
+            height: 32em;
+        }
+
+        ul {
+            position: relative;
+            margin: 0;
+            margin-left: -10px;
+        
+            li {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                overflow: hidden;
+                margin-top: -1.58em;
+                margin-left: -9.97em;
+                width: 10em;
+                height: 10em;
+                font-size: 2.2em;
+                -webkit-transform: rotate(76deg) skew(60deg);
+                -ms-transform: rotate(76deg) skew(60deg);
+                transform: rotate(76deg) skew(60deg);
+                -webkit-transform-origin: 102% 102%;
+                -ms-transform-origin: 102% 102%;
+                transform-origin: 102% 102%;
+                pointer-events: auto;
+            
+                @include media-max($sm) {
+                    margin-top: -1.78em;
+                    margin-left: -9.97em;
+                    font-size: 1.9em;
+                }
+
+                .slice {
+                    position: fixed;
+                    position: absolute;
+                    right: -7.25em;
+                    bottom: -7.25em;
+                    display: block;
+                    width: 14em;
+                    height: 14em;
+                    border-radius: 50%;
+                    // background: #66a8d8;
+                    // background: -webkit-radial-gradient(transparent 30%, rgba(195, 223, 244, .5) 0);
+                    // background: radial-gradient(transparent 30%, rgba(195, 223, 244, .5) 0);
+                    background: radial-gradient(transparent 50%, #eea908 50%, #fbd886 65%, #eea908 75%, #eea908 80%);
+                
+                    color: #fff;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 1.2em;
+                    line-height: 2;
+                    -webkit-transform: skew(-45deg) rotate(-60deg) scale(1);
+                    -ms-transform: skew(-45deg) rotate(-60deg) scale(1);
+                    transform: skew(-54deg) rotate(-72deg) scale(1);
+                    -webkit-backface-visibility: hidden;
+                    backface-visibility: hidden;
+                    pointer-events: none;
+
+                    span {
+                        position: relative;
+                        top: -4.2em;
+                        left: 0em;
+                        max-width: 8rem;
+                        min-height: 8rem;
+                        display: -webkit-box;
+                        display: -webkit-flex;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-orient: vertical;
+                        -webkit-box-direction: normal;
+                        -webkit-flex-direction: column;
+                        -ms-flex-direction: column;
+                        flex-direction: column;
+                        -webkit-box-pack: center;
+                        -webkit-justify-content: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        padding-top: 5px;
+                        font-size: .35em;
+                        line-height: 1.5em;
+                        -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
+                        margin: 0 auto;
+
+                        @include media-max($sm) {
+                            top: -5.5em;
+                        }
+
+                        p {
+                            margin-top: 0;
+                            font-size: 0.9rem;
+                            margin-bottom: 5px;
+                            font-weight: $fnt-wgt-700;
+                        }
+                    
+                    }
+                }
+
+                &:first-child {
+                    -webkit-transform: rotate(-90deg) skew(54deg);
+                    -ms-transform: rotate(-90deg) skew(54deg);
+                    transform: rotate(-90deg) skew(54deg);
+                }
+                &:nth-child(2) {
+                    -webkit-transform: rotate(-54deg) skew(54deg);
+                    -ms-transform: rotate(-54deg) skew(54deg);
+                    transform: rotate(-54deg) skew(54deg);
+                }
+                &:nth-child(3) {
+                    -webkit-transform: rotate(-18deg) skew(54deg);
+                    -ms-transform: rotate(-18deg) skew(54deg);
+                    transform: rotate(-18deg) skew(54deg);
+                }
+                &:nth-child(4) {
+                    -webkit-transform: rotate(18deg) skew(54deg);
+                    -ms-transform: rotate(18deg) skew(54deg);
+                    transform: rotate(18deg) skew(54deg);
+                }
+                &:nth-child(5) {
+                    -webkit-transform: rotate(54deg) skew(54deg);
+                    -ms-transform: rotate(54deg) skew(54deg);
+                    transform: rotate(54deg) skew(54deg);
+                }
+                &:nth-child(6) {
+                    -webkit-transform: rotate(90deg) skew(54deg);
+                    -ms-transform: rotate(90deg) skew(54deg);
+                    transform: rotate(90deg) skew(54deg);
+                                }
+                &:nth-child(7) {
+                    -webkit-transform: rotate(126deg) skew(54deg);
+                    -ms-transform: rotate(126deg) skew(54deg);
+                    transform: rotate(126deg) skew(54deg);
+                }
+                &:nth-child(8) {
+                    -webkit-transform: rotate(162deg) skew(54deg);
+                    -ms-transform: rotate(162deg) skew(54deg);
+                    transform: rotate(162deg) skew(54deg);
+                }
+                &:nth-child(9) {
+                    -webkit-transform: rotate(198deg) skew(54deg);
+                    -ms-transform: rotate(198deg) skew(54deg);
+                    transform: rotate(198deg) skew(54deg);
+                }
+                &:nth-child(10) {
+                    -webkit-transform: rotate(234deg) skew(54deg);
+                    -ms-transform: rotate(234deg) skew(54deg);
+                    transform: rotate(234deg) skew(54deg);
+                }
+
+                &:nth-child(5n + 1) {
+                    .slice span p {
+                        font-weight: $fnt-wgt-700;
+                        font-size: 1.35rem;        
+                    }
+                }
+            }
+        }
+
+        &:after {
+            display: block;
+            font-size: 2em;
+            width: 6.2em;
+            height: 6.2em;
+            position: absolute;
+            left: 50%;
+            margin-left: -3.1em;
+            top: 50%;
+            margin-top: -3.1em;
+            border-radius: 50%;
+            color: transparent;        
+        }
+    }
+
+    .corp-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 }

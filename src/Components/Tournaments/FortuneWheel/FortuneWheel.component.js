@@ -325,7 +325,7 @@ const FortuneWheel = ({
                                     <p className="earn-more-tickets-text my-2 d-none d-xl-block">
                                         Earn more tickets here
                                     </p>
-                                    <p className="spin-amount-left-wrapper mb-3 d-none d-xl-block">
+                                    <p className="spin-amount-left-wrapper my-3 d-none d-xl-block">
                                         <span className="you-have-text">
                                             You have
                                         </span>
