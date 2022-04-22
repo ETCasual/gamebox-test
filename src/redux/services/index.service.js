@@ -1281,6 +1281,8 @@ export async function updateUserSettings(
         ...user,
         username,
         picture,
+        firstname,
+        lastname,
         isNotifyAllowed,
     };
 }
