@@ -74,6 +74,7 @@ export async function handleConnectWallet(dispatch) {
                     ], // chainId must be in hexadecimal numbers
                 });
             } catch (error) {
+                console.log(error);
                 // Already trigger, check metamask
                 if (error.code === -32002) {
                     // UPDATE STORE
@@ -89,6 +90,7 @@ export async function handleConnectWallet(dispatch) {
                     // This error code indicates that the chain has not been added to MetaMask
                     // if it is not, then install it into the user MetaMask
                 } else if (error.code === 4902) {
+                    console.log(networks);
                     try {
                         await web3.currentProvider.request({
                             method: "wallet_addEthereumChain",
@@ -97,12 +99,16 @@ export async function handleConnectWallet(dispatch) {
                                     chainId: web3.utils.toHex(
                                         networks[0].chainId
                                     ),
-                                    rpcUrl: networks[0].rpcUrl,
+                                    blockExplorerUrls: [
+                                        networks[0].blockExplorerUrl,
+                                    ],
+                                    chainName: networks[0].networkName,
+                                    rpcUrls: [networks[0].rpcUrl],
                                 },
                             ],
                         });
                     } catch (addError) {
-                        console.error(addError);
+                        console.log(addError);
                     }
                 } else {
                     console.error(error);
@@ -226,7 +232,7 @@ export async function handleMetamask(dispatch) {
             },
         });
         const error = {
-            code: 'Metamask extension not installed',
+            code: "Metamask extension not installed",
             message: "Metamask extension not installed",
         };
         throw error;
