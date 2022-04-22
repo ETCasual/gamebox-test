@@ -113,6 +113,8 @@ export async function userSignIn() {
             email: signInResult.getEmail(),
             username: signInResult.getNickName() || signInResult.getFirstname(),
             picture: signInResult.getAvatarUrl(),
+            firstName: signInResult.getFirstname(),
+            lastName: signInResult.getLastname(),
             isNotifyAllowed: signInResult.getIsNotifyAllowed(),
             gems: signInResult.getGemBalance(),
             exp: signInResult.getExp(),
@@ -151,6 +153,21 @@ export async function getUserAccountInfoFroyo() {
         }
     );
     return data;
+}
+
+//
+//      COMPARE FROYO USER DETAILS WITH USER DETAILS IN DATABASAE
+//
+export async function compareUserDetails(user, _user) {
+    if (
+        user.username !== _user.displayName ||
+        user.firstName !== _user.firstName ||
+        user.lastName !== _user.lastName ||
+        (user.picture !== _user.imageUrl && _user.imageUrl != null)
+    ) {
+        return updateUserSettings(user, _user.displayName, _user.imageUrl);
+    }
+    return user;
 }
 
 //

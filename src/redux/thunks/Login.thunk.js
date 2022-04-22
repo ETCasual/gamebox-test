@@ -7,6 +7,7 @@ import {
 } from "redux/types";
 import {
     addUser,
+    compareUserDetails,
     getUserAccountInfoFroyo,
     loginUser,
     userSignIn,
@@ -20,11 +21,14 @@ export function loadLoginUserWithToken() {
         try {
             const user = await userSignIn();
             if (user.id) {
-                sessionStorage.removeItem("errorType");
-                dispatch({
-                    type: LOGIN_SUCCESS,
-                    payload: user,
-                });
+                const _user = await getUserAccountInfoFroyo();
+                if (_user.id) {
+                    sessionStorage.removeItem("errorType");
+                    dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: await compareUserDetails(user, _user),
+                    });
+                }
             } else {
                 const _user = await getUserAccountInfoFroyo();
                 if (_user.id) {
@@ -92,12 +96,15 @@ export function loadLogin(payload, setLoginError, history) {
                 );
                 const user = await userSignIn();
                 if (user.id) {
-                    sessionStorage.removeItem("errorType");
-                    dispatch({
-                        type: LOGIN_SUCCESS,
-                        payload: user,
-                    });
-                    history.push("/");
+                    const _user = await getUserAccountInfoFroyo();
+                    if (_user.id) {
+                        sessionStorage.removeItem("errorType");
+                        dispatch({
+                            type: LOGIN_SUCCESS,
+                            payload: await compareUserDetails(user, _user),
+                        });
+                        history.push("/");
+                    }
                 } else {
                     const _user = await getUserAccountInfoFroyo();
                     if (_user.id) {
