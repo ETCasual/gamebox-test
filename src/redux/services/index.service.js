@@ -165,7 +165,13 @@ export async function compareUserDetails(user, _user) {
         user.lastName !== _user.lastName ||
         (user.picture !== _user.imageUrl && _user.imageUrl != null)
     ) {
-        return updateUserSettings(user, _user.displayName, _user.imageUrl);
+        return updateUserSettings(
+            user,
+            _user.displayName,
+            _user.imageUrl,
+            _user.firstName,
+            _user.lastName
+        );
     }
     return user;
 }

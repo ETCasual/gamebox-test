@@ -1,6 +1,7 @@
 import {
     UPDATE_USER_WALLET,
     LOGIN_SUCCESS,
+    UPDATE_USER_SETTINGS,
     SHOW_TOAST,
     LOGIN_ERROR,
     LOGIN_STATUS,
@@ -21,11 +22,16 @@ export function loadLoginUserWithToken() {
         try {
             const user = await userSignIn();
             if (user.id) {
+                sessionStorage.removeItem("errorType");
+                dispatch({
+                    type: LOGIN_SUCCESS,
+                    payload: user,
+                });
+
                 const _user = await getUserAccountInfoFroyo();
                 if (_user.id) {
-                    sessionStorage.removeItem("errorType");
                     dispatch({
-                        type: LOGIN_SUCCESS,
+                        type: UPDATE_USER_SETTINGS,
                         payload: await compareUserDetails(user, _user),
                     });
                 }
@@ -96,15 +102,20 @@ export function loadLogin(payload, setLoginError, history) {
                 );
                 const user = await userSignIn();
                 if (user.id) {
+                    sessionStorage.removeItem("errorType");
+                    dispatch({
+                        type: LOGIN_SUCCESS,
+                        payload: user,
+                    });
+
                     const _user = await getUserAccountInfoFroyo();
                     if (_user.id) {
-                        sessionStorage.removeItem("errorType");
                         dispatch({
-                            type: LOGIN_SUCCESS,
+                            type: UPDATE_USER_SETTINGS,
                             payload: await compareUserDetails(user, _user),
                         });
-                        history.push("/");
                     }
+                    history.push("/");
                 } else {
                     const _user = await getUserAccountInfoFroyo();
                     if (_user.id) {
