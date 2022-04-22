@@ -218,7 +218,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                         src={`${window.cdn}buttons/button_back.png`}
                         alt="prev-btn"
                     />
-                    <div className="custom-pagination d-flex"></div>
+                    <div className="custom-pagination d-flex justify-content-center"></div>
                     <img
                         width={32}
                         className={`next ${
