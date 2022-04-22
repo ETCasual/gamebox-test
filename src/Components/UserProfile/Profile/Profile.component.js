@@ -83,7 +83,7 @@ const Profile = ({
                                         src={
                                             user
                                                 ? user.picture
-                                                : `${window.cdn}avatars/avatar_01.png`
+                                                : `${window.cdn}icons/icon_profile.svg`
                                         }
                                         alt="avatar"
                                     />
