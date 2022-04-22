@@ -103,6 +103,11 @@ button {
     display: none;
 }
 
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #555 #000;
+}
+
 // **********************
 /****** COMPONENTS *******/
 // *********************
