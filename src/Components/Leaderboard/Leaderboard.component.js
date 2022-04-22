@@ -83,7 +83,21 @@ const Leaderboard = ({
     // SORTING LEADERBOARD
     useEffect(() => {
         setLeaderboardList(leaderboard);
-    }, [leaderboard]);
+
+        // To notify the players that stayed in games tournament ended when they left the window
+        let destination = document.getElementById("destination")?.contentWindow;
+        if (destination) {
+            // END BY TIMER
+            destination?.endGameByTimer?.();
+
+            setEarnAdditionalDisabledStatus({
+                gems: false,
+                ads: false,
+            });
+
+            setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
+        }
+    }, [leaderboard, setEarnAdditionalDisabledStatus]);
 
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
