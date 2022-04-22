@@ -40,6 +40,8 @@ const Settings = () => {
             loadUpdateUserSettings(
                 user.username,
                 user.picture,
+                user.firstName,
+                user.lastName,
                 isNotificationAllowed
             )
         );

@@ -4204,7 +4204,9 @@ proto.api.gamebox.UpdateUserSettingsRequest.toObject = function(includeInstance,
     isNotifyNewTournament: jspb.Message.getFieldWithDefault(msg, 4, false),
     isNotifyTourEnding: jspb.Message.getFieldWithDefault(msg, 5, false),
     nickName: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    avatarUrl: jspb.Message.getFieldWithDefault(msg, 7, "")
+    avatarUrl: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    firstName: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    lastName: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -4268,6 +4270,14 @@ proto.api.gamebox.UpdateUserSettingsRequest.deserializeBinaryFromReader = functi
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setAvatarUrl(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setFirstName(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLastName(value);
       break;
     default:
       reader.skipField();
@@ -4344,6 +4354,20 @@ proto.api.gamebox.UpdateUserSettingsRequest.serializeBinaryToWriter = function(m
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getFirstName();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getLastName();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
       f
     );
   }
@@ -4460,6 +4484,36 @@ proto.api.gamebox.UpdateUserSettingsRequest.prototype.getAvatarUrl = function() 
 /** @param {string} value */
 proto.api.gamebox.UpdateUserSettingsRequest.prototype.setAvatarUrl = function(value) {
   jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string first_name = 8;
+ * @return {string}
+ */
+proto.api.gamebox.UpdateUserSettingsRequest.prototype.getFirstName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.UpdateUserSettingsRequest.prototype.setFirstName = function(value) {
+  jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional string last_name = 9;
+ * @return {string}
+ */
+proto.api.gamebox.UpdateUserSettingsRequest.prototype.getLastName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.UpdateUserSettingsRequest.prototype.setLastName = function(value) {
+  jspb.Message.setProto3StringField(this, 9, value);
 };
 
 

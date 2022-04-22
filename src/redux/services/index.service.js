@@ -1252,6 +1252,8 @@ export async function updateUserSettings(
     user,
     username,
     picture,
+    firstname,
+    lastname,
     isNotifyAllowed
 ) {
     const token = getToken();
@@ -1263,6 +1265,8 @@ export async function updateUserSettings(
     request.setIsNotifyTourEnding(isNotifyAllowed);
     request.setAvatarUrl(picture);
     request.setNickName(username);
+    request.setFirstName(firstname);
+    request.setLastName(lastname);
 
     await client.updateUserSettings(request, {
         authorization: `Bearer ${token}`,
