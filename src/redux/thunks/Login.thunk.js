@@ -1,12 +1,14 @@
 import {
     UPDATE_USER_WALLET,
     LOGIN_SUCCESS,
+    UPDATE_USER_SETTINGS,
     SHOW_TOAST,
     LOGIN_ERROR,
     LOGIN_STATUS,
 } from "redux/types";
 import {
     addUser,
+    compareUserDetails,
     getUserAccountInfoFroyo,
     loginUser,
     userSignIn,
@@ -25,6 +27,14 @@ export function loadLoginUserWithToken() {
                     type: LOGIN_SUCCESS,
                     payload: user,
                 });
+
+                const _user = await getUserAccountInfoFroyo();
+                if (_user.id) {
+                    dispatch({
+                        type: UPDATE_USER_SETTINGS,
+                        payload: await compareUserDetails(user, _user),
+                    });
+                }
             } else {
                 const _user = await getUserAccountInfoFroyo();
                 if (_user.id) {
@@ -97,6 +107,14 @@ export function loadLogin(payload, setLoginError, history) {
                         type: LOGIN_SUCCESS,
                         payload: user,
                     });
+
+                    const _user = await getUserAccountInfoFroyo();
+                    if (_user.id) {
+                        dispatch({
+                            type: UPDATE_USER_SETTINGS,
+                            payload: await compareUserDetails(user, _user),
+                        });
+                    }
                     history.push("/");
                 } else {
                     const _user = await getUserAccountInfoFroyo();

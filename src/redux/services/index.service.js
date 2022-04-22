@@ -113,6 +113,8 @@ export async function userSignIn() {
             email: signInResult.getEmail(),
             username: signInResult.getNickName() || signInResult.getFirstname(),
             picture: signInResult.getAvatarUrl(),
+            firstName: signInResult.getFirstname(),
+            lastName: signInResult.getLastname(),
             isNotifyAllowed: signInResult.getIsNotifyAllowed(),
             gems: signInResult.getGemBalance(),
             exp: signInResult.getExp(),
@@ -151,6 +153,27 @@ export async function getUserAccountInfoFroyo() {
         }
     );
     return data;
+}
+
+//
+//      COMPARE FROYO USER DETAILS WITH USER DETAILS IN DATABASAE
+//
+export async function compareUserDetails(user, _user) {
+    if (
+        user.username !== _user.displayName ||
+        user.firstName !== _user.firstName ||
+        user.lastName !== _user.lastName ||
+        user.picture !== (_user.imageUrl ?? "")
+    ) {
+        return updateUserSettings(
+            user,
+            _user.displayName,
+            _user.imageUrl ?? "",
+            _user.firstName,
+            _user.lastName
+        );
+    }
+    return user;
 }
 
 //
@@ -1235,6 +1258,8 @@ export async function updateUserSettings(
     user,
     username,
     picture,
+    firstname,
+    lastname,
     isNotifyAllowed
 ) {
     const token = getToken();
@@ -1246,6 +1271,8 @@ export async function updateUserSettings(
     request.setIsNotifyTourEnding(isNotifyAllowed);
     request.setAvatarUrl(picture);
     request.setNickName(username);
+    request.setFirstName(firstname);
+    request.setLastName(lastname);
 
     await client.updateUserSettings(request, {
         authorization: `Bearer ${token}`,
@@ -1254,6 +1281,8 @@ export async function updateUserSettings(
         ...user,
         username,
         picture,
+        firstname,
+        lastname,
         isNotifyAllowed,
     };
 }
