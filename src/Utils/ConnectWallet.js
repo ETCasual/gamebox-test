@@ -11,7 +11,6 @@ import _ from "lodash";
 export async function handleConnectWallet(dispatch) {
     const { web3, provider } = await getWeb3();
     if (!web3) return;
-    console.log(web3);
 
     const accounts = await web3.eth.getAccounts();
     const chainId = await web3.eth.getChainId();
@@ -58,7 +57,6 @@ export async function handleConnectWallet(dispatch) {
             }
         }
     } catch (error) {
-        console.log(error);
         if (error.code === -32002 || error.code === 4001)
             dispatch(loadConnectWalletAutoError(error));
         if (error.code === 4903) {
@@ -74,7 +72,6 @@ export async function handleConnectWallet(dispatch) {
                     ], // chainId must be in hexadecimal numbers
                 });
             } catch (error) {
-                console.log(error);
                 // Already trigger, check metamask
                 if (error.code === -32002) {
                     // UPDATE STORE
@@ -90,7 +87,6 @@ export async function handleConnectWallet(dispatch) {
                     // This error code indicates that the chain has not been added to MetaMask
                     // if it is not, then install it into the user MetaMask
                 } else if (error.code === 4902) {
-                    console.log(networks);
                     try {
                         await web3.currentProvider.request({
                             method: "wallet_addEthereumChain",
@@ -99,11 +95,15 @@ export async function handleConnectWallet(dispatch) {
                                     chainId: web3.utils.toHex(
                                         networks[0].chainId
                                     ),
+                                    chainName: networks[0].networkName,
+                                    nativeCurrency: {
+                                        symbol: networks[0].currencySymbol,
+                                        decimals: 18,
+                                    },
+                                    rpcUrls: [networks[0].rpcUrl],
                                     blockExplorerUrls: [
                                         networks[0].blockExplorerUrl,
                                     ],
-                                    chainName: networks[0].networkName,
-                                    rpcUrls: [networks[0].rpcUrl],
                                 },
                             ],
                         });
