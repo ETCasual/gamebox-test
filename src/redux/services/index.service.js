@@ -163,12 +163,12 @@ export async function compareUserDetails(user, _user) {
         user.username !== _user.displayName ||
         user.firstName !== _user.firstName ||
         user.lastName !== _user.lastName ||
-        (user.picture !== _user.imageUrl && _user.imageUrl != null)
+        user.picture !== (_user.imageUrl ?? "")
     ) {
         return updateUserSettings(
             user,
             _user.displayName,
-            _user.imageUrl,
+            _user.imageUrl ?? "",
             _user.firstName,
             _user.lastName
         );
