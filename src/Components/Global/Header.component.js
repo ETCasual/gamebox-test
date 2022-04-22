@@ -353,7 +353,7 @@ const Header = ({
                                     className="img-fluid"
                                     src={
                                         userImage ||
-                                        `${window.cdn}icons/icon_profile.png`
+                                        `${window.cdn}icons/icon_profile.svg`
                                     }
                                     alt="profile"
                                 />

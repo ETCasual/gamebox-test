@@ -139,7 +139,7 @@ const Settings = () => {
                                             onError={(e) => defaultUserImage(e)}
                                             src={
                                                 user?.picture ||
-                                                `${window.cdn}icons/icon_profile.png`
+                                                `${window.cdn}icons/icon_profile.svg`
                                             }
                                             alt="avatar"
                                         />

@@ -27,7 +27,7 @@ const HeaderHOC = () => {
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
 
     const [userImage, setUserImage] = useState(
-        `${window.cdn}icons/icon_profile.png`
+        `${window.cdn}icons/icon_profile.svg`
     );
     const [userGems, setUserGems] = useState(user.gems);
     const [isNotificationShown, setIsNotificationShown] = useState(false);

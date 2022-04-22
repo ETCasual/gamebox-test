@@ -366,7 +366,7 @@ const Leaderboard = ({
                             <img
                                 className="avatar"
                                 onError={(e) => defaultUserImage(e)}
-                                src={`${window.cdn}icons/icon_profile.png`}
+                                src={`${window.cdn}icons/icon_profile.svg`}
                                 alt="player"
                             />
                         </div>
@@ -408,7 +408,7 @@ const Leaderboard = ({
                                 onError={(e) => defaultUserImage(e)}
                                 src={
                                     leaderboardList[i]?.avatarUrl ||
-                                    `${window.cdn}icons/icon_profile.png`
+                                    `${window.cdn}icons/icon_profile.svg`
                                 }
                                 alt="player"
                             />
@@ -638,7 +638,7 @@ const Leaderboard = ({
                                                         }
                                                         src={
                                                             user.picture ||
-                                                            `${window.cdn}icons/icon_profile.png`
+                                                            `${window.cdn}icons/icon_profile.svg`
                                                         }
                                                         alt="player"
                                                     />
