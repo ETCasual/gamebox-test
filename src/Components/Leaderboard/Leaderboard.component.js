@@ -83,27 +83,27 @@ const Leaderboard = ({
     // SORTING LEADERBOARD
     useEffect(() => {
         setLeaderboardList(leaderboard);
-
-        // // To notify the players that stayed in games tournament ended when they left the window
-        // let destination = document.getElementById("destination")?.contentWindow;
-        // if (destination) {
-        //     // END BY TIMER
-        //     destination?.endGameByTimer?.();
-
-        //     setEarnAdditionalDisabledStatus({
-        //         gems: false,
-        //         ads: false,
-        //     });
-
-        //     setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
-        // }
     }, [leaderboard]);
 
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
         if (currentGameDetails?.gameId > 0)
             dispatch(loadLeaderboardRanks(currentGameDetails.gameId));
-    }, [currentGameDetails.gameId, dispatch]);
+
+        // To notify the players that stayed in games tournament ended when they left the window
+        let destination = document.getElementById("destination")?.contentWindow;
+        if (destination) {
+            // END BY TIMER
+            destination?.endGameByTimer?.();
+
+            setEarnAdditionalDisabledStatus({
+                gems: false,
+                ads: false,
+            });
+
+            setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
+        }
+    }, [currentGameDetails.gameId, dispatch, setEarnAdditionalDisabledStatus]);
 
     // COUNTDOWN TIMER
     useEffect(() => {
