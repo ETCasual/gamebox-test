@@ -133,7 +133,7 @@ const FortuneWheel = ({
         if (spinBuyProcess) setSpinBuyProcess(false);
 
         if (_spinner.freeSpins >= 0) {
-            const elem = document.querySelector(".fortune-wheel-rules-wrapper");
+            const elem = document.querySelector(".slice-circle");
             const tl = gsap.timeline();
 
             tl.to(elem, {

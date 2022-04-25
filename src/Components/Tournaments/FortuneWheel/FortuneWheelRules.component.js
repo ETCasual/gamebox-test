@@ -1,5 +1,4 @@
 const FortuneWheelRules = ({spinnerRules}) => {
-console.log(spinnerRules);
 
     let pizza = [];
     for (var i = 0; i < spinnerRules.length; i++) {
@@ -18,8 +17,8 @@ console.log(spinnerRules);
         <div className="fortune-wheel-rules-wrapper csstransforms">
             <div className="parallax-container">
                 <div className="cn-wrapper opened-nav" id="cn-wrapper">
-                    <div className="outer-circle">
-                        <ul>
+                    <div className="outer-circle d-flex align-items-center justify-content-center">
+                        <ul className="slice-circle">
                             {pizza}
                         </ul>
                     </div>
