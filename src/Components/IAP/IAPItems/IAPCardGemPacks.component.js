@@ -41,52 +41,56 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                         className={`col-12 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack ${
                             gem?.status === 0 ? "opacity-0-5" : ""
                         }`}
-                        style={{
-                            cursor: gem?.status === 1 ? "pointer" : "default",
-                        }}
-                        onClick={() =>
-                            gem?.status === 1
-                                ? handleSelectedGemPackPayment(
-                                      gem.id,
-                                      gem.price,
-                                      gem.quantity
-                                  )
-                                : null
-                        }
                     >
-                        <div className="gem-info text-center position-relative">
-                            <p className="mb-1 pt-2 gem-title text-center">
-                                {gem.title}
-                            </p>
-                            <p className="mb-1 quantity">
-                                {gem.quantity?.toLocaleString()} GEMS
-                            </p>
-                            <img
-                                className="img-fluid"
-                                src={gem.ImageUrl}
-                                alt={gem.title}
-                            />
-                        </div>
-                        <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
-                            <p className="mb-1 price">{`SGD $${gem?.price?.toFixed(
-                                2
-                            )}`}</p>
-                            {ipInfo?.currency && (
-                                <p className="mb-0 estimation">
-                                    Estimated price{" "}
-                                    <span className="estimation-value">
-                                        {`${
-                                            ipInfo?.currency === "MYR"
-                                                ? "RM"
-                                                : ipInfo?.currency
-                                        }${(
-                                            exchangeRate?.rates[
-                                                ipInfo?.currency
-                                            ] * gem?.price
-                                        ).toFixed(2)}`}
-                                    </span>
+                        <div
+                            style={{
+                                cursor:
+                                    gem?.status === 1 ? "pointer" : "default",
+                            }}
+                            onClick={() =>
+                                gem?.status === 1
+                                    ? handleSelectedGemPackPayment(
+                                          gem.id,
+                                          gem.price,
+                                          gem.quantity
+                                      )
+                                    : null
+                            }
+                        >
+                            <div className="gem-info text-center position-relative">
+                                <p className="mb-1 pt-2 gem-title text-center">
+                                    {gem.title}
                                 </p>
-                            )}
+                                <p className="mb-1 quantity">
+                                    {gem.quantity?.toLocaleString()} GEMS
+                                </p>
+                                <img
+                                    className="img-fluid"
+                                    src={gem.ImageUrl}
+                                    alt={gem.title}
+                                />
+                            </div>
+                            <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
+                                <p className="mb-1 price">{`SGD $${gem?.price?.toFixed(
+                                    2
+                                )}`}</p>
+                                {ipInfo?.currency && (
+                                    <p className="mb-0 estimation">
+                                        Estimated price{" "}
+                                        <span className="estimation-value">
+                                            {`${
+                                                ipInfo?.currency === "MYR"
+                                                    ? "RM"
+                                                    : ipInfo?.currency
+                                            }${(
+                                                exchangeRate?.rates[
+                                                    ipInfo?.currency
+                                                ] * gem?.price
+                                            ).toFixed(2)}`}
+                                        </span>
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     </div>
                 ))}

@@ -25,7 +25,7 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
 
     // GEMS
     useEffect(() => {
-        const froyoGemPacks = gemsList.filter(g => g.paymentTypeId === 2)
+        const froyoGemPacks = gemsList.filter((g) => g.paymentTypeId === 2);
         setGemList(_.orderBy(froyoGemPacks, ["id"], ["asc"]));
     }, [gemsList]);
 
@@ -39,42 +39,46 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                         className={`col-12 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack ${
                             gem?.status === 0 ? "opacity-0-5" : ""
                         }`}
-                        style={{
-                            cursor: gem?.status === 1 ? "pointer" : "default",
-                        }}
-                        onClick={() =>
-                            gem?.status === 1
-                                ? handleSelectedGemPackPayment(
-                                      gem.id,
-                                      gem.price,
-                                      gem.quantity
-                                  )
-                                : null
-                        }
                     >
-                        <div className="gem-info text-center position-relative">
-                            <p className="mb-1 pt-2 gem-title text-center">
-                                {gem.title}
-                            </p>
-                            <p className="mb-1 quantity">
-                                {gem.quantity?.toLocaleString()} GEMS
-                            </p>
-                            <img
-                                className="img-fluid"
-                                src={gem.ImageUrl}
-                                alt={gem.title}
-                            />
-                        </div>
-                        <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
-                            <p className="price mb-0 d-flex align-items-center">
+                        <div
+                            style={{
+                                cursor:
+                                    gem?.status === 1 ? "pointer" : "default",
+                            }}
+                            onClick={() =>
+                                gem?.status === 1
+                                    ? handleSelectedGemPackPayment(
+                                          gem.id,
+                                          gem.price,
+                                          gem.quantity
+                                      )
+                                    : null
+                            }
+                        >
+                            <div className="gem-info text-center position-relative">
+                                <p className="mb-1 pt-2 gem-title text-center">
+                                    {gem.title}
+                                </p>
+                                <p className="mb-1 quantity">
+                                    {gem.quantity?.toLocaleString()} GEMS
+                                </p>
                                 <img
-                                    width="24"
-                                    src={`${window.cdn}icons/icon_froyo.png`}
-                                    alt="wallet"
-                                    className="mr-2"
+                                    className="img-fluid"
+                                    src={gem.ImageUrl}
+                                    alt={gem.title}
                                 />
-                                {gem?.price?.toFixed(2)}
-                            </p>
+                            </div>
+                            <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
+                                <p className="price mb-0 d-flex align-items-center">
+                                    <img
+                                        width="24"
+                                        src={`${window.cdn}icons/icon_froyo.png`}
+                                        alt="wallet"
+                                        className="mr-2"
+                                    />
+                                    {gem?.price?.toFixed(2)}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 ))}
