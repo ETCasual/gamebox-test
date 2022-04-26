@@ -83,11 +83,11 @@ const Rewards = () => {
         return false;
     };
 
-    const handleNFTClaim = (winnerId, prizeBlockchainNetwork) => {
+    const handleNFTClaim = (winnerId, prizeBlockchainNetwork, prizeContractType) => {
         if (loader.status) return;
 
         setLoader({ status: true, id: winnerId });
-        dispatch(loadNFTClaim(winnerId, prizeBlockchainNetwork, setLoader));
+        dispatch(loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType, setLoader));
     };
 
     const handleTokenClaim = (winnerId, prizeBlockchainNetwork) => {
@@ -168,18 +168,17 @@ const Rewards = () => {
                                                     }}
                                                     key={`prizes-${i}`}
                                                     onClick={() =>
-                                                        data.prizeContractType ===
-                                                            1 
-                                                            ? handleNFTClaim(
-                                                                  data.id,
-                                                                  data.prizeBlockchainNetwork
-                                                              )
-                                                            : data.prizeContractType ===
-                                                                  2 
+                                                        data.prizeContractType === 1
                                                             ? handleTokenClaim(
-                                                                  data.id,
-                                                                  data.prizeBlockchainNetwork
-                                                              )
+                                                                data.id,
+                                                                data.prizeBlockchainNetwork
+                                                            )
+                                                            : (data.prizeContractType === 2 || data.prizeContractType === 3)
+                                                            ? handleNFTClaim(
+                                                                data.id,
+                                                                data.prizeBlockchainNetwork,
+                                                                data.prizeContractType
+                                                            )
                                                             : null
                                                     }
                                                 >
@@ -206,8 +205,7 @@ const Rewards = () => {
                                                                 </div>
                                                             </div>
 
-                                                            {data.prizeContractType ===
-                                                                1 &&
+                                                            {(data.prizeContractType === 2 || data.prizeContractType === 3) &&
                                                                 validClaimDate(
                                                                     data.prizeCanClaimDate
                                                                 ) && (
@@ -217,20 +215,19 @@ const Rewards = () => {
                                                                               )}`
                                                                     </div>
                                                                 )}
-                                                            {data.prizeContractType ===
-                                                                1 &&
+                                                            {(data.prizeContractType === 2 || data.prizeContractType === 3) &&
                                                                 !validClaimDate(
                                                                     data.prizeCanClaimDate
                                                                 ) && (
                                                                     <div className="prize-claimed text-red py-2">
-                                                                        "Claim your NFT"
+                                                                        Claim your NFT
                                                                     </div>
                                                                 )}
 
                                                             {data.prizeContractType ===
-                                                                2 && (
+                                                                1 && (
                                                                 <div className="prize-claimed text-red py-2">
-                                                                    "Claim your Token"
+                                                                    Claim your Token
                                                                 </div>
                                                             )}
                                                         </div>

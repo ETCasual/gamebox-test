@@ -27773,8 +27773,9 @@ proto.api.gamebox.ClaimPrizeResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     address: jspb.Message.getFieldWithDefault(msg, 1, ""),
     prizeIdAmt: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    nonce: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    signature: jspb.Message.getFieldWithDefault(msg, 4, "")
+    amount: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    nonce: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    signature: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -27821,9 +27822,13 @@ proto.api.gamebox.ClaimPrizeResponse.deserializeBinaryFromReader = function(msg,
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setNonce(value);
+      msg.setAmount(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNonce(value);
+      break;
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setSignature(value);
       break;
@@ -27870,17 +27875,24 @@ proto.api.gamebox.ClaimPrizeResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getNonce();
+  f = message.getAmount();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getSignature();
+  f = message.getNonce();
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getSignature();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -27918,32 +27930,47 @@ proto.api.gamebox.ClaimPrizeResponse.prototype.setPrizeIdAmt = function(value) {
 
 
 /**
- * optional string nonce = 3;
+ * optional string amount = 3;
  * @return {string}
  */
-proto.api.gamebox.ClaimPrizeResponse.prototype.getNonce = function() {
+proto.api.gamebox.ClaimPrizeResponse.prototype.getAmount = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.ClaimPrizeResponse.prototype.setNonce = function(value) {
+proto.api.gamebox.ClaimPrizeResponse.prototype.setAmount = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string signature = 4;
+ * optional string nonce = 4;
  * @return {string}
  */
-proto.api.gamebox.ClaimPrizeResponse.prototype.getSignature = function() {
+proto.api.gamebox.ClaimPrizeResponse.prototype.getNonce = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.ClaimPrizeResponse.prototype.setSignature = function(value) {
+proto.api.gamebox.ClaimPrizeResponse.prototype.setNonce = function(value) {
   jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string signature = 5;
+ * @return {string}
+ */
+proto.api.gamebox.ClaimPrizeResponse.prototype.getSignature = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.ClaimPrizeResponse.prototype.setSignature = function(value) {
+  jspb.Message.setProto3StringField(this, 5, value);
 };
 
 

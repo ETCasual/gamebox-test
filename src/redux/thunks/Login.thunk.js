@@ -197,6 +197,11 @@ export function loadConnectUserWallet(
                 type: SHOW_TOAST,
                 payload: { message: "Please check your metamask" },
             });
+        } else if (toastType === "no_wallet") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Please connect your wallet" },
+            })
         }
     };
 }
