@@ -54,8 +54,8 @@ const Invitation = ({ handleBackButton }) => {
                                     <p className="subtitle mb-1">
                                         {`Share your referral code with your
                                             friends and get ${config.gemsPerInvite} Gems on us (for
-                                            you and your friend) when your
-                                            friend creates an account with us.`}
+                                            you and your friend) when your friend reaches level 
+                                            ${config.rewardInvitesRank} in GameBox.`}
                                     </p>
                                 </div>
                                 {/* INVITATION CODE */}

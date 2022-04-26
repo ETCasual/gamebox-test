@@ -268,8 +268,8 @@ const Profile = ({
                                             {`Share your referral code with
                                                 your friends and get ${config.gemsPerInvite} Gems on
                                                 us (for you and your friend)
-                                                when your friend creates an
-                                                account with us.`}
+                                                when your friend reaches level ${config.rewardInvitesRank} 
+                                                in GameBox.`}
                                         </p>
                                     </div>
                                     <div className="col-4 col-md-6 px-0 d-flex align-items-end justify-content-end">
