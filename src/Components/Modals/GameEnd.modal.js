@@ -102,12 +102,12 @@ const GameEndModal = ({ handleContinueButton }) => {
                                 <div className="benefit d-flex align-items-center justify-content-center">
                                     {extraEarning.ticket > 0 && (
                                         <p className="mb-0 earn-tickets d-flex align-items-center justify-content-center">
-                                            + {extraEarning.ticket}
-                                            <img
+                                            {extraEarning.ticket} tickets
+                                            {/* <img
                                                 width="20"
                                                 src={`${window.cdn}icons/tickets.png`}
                                                 alt="tickets"
-                                            />
+                                            /> */}
                                         </p>
                                     )}
                                     {extraEarning.ticket > 0 &&
@@ -116,12 +116,12 @@ const GameEndModal = ({ handleContinueButton }) => {
                                         )}
                                     {extraEarning.experience > 0 && (
                                         <p className="mb-0 earn-exp d-flex align-items-center justify-content-center">
-                                            + {extraEarning.experience}{" "}
-                                            <img
+                                            {extraEarning.experience}{" "} exp
+                                            {/* <img
                                                 width="20"
                                                 src={`${window.cdn}icons/exp_01.png`}
                                                 alt="star"
-                                            />
+                                            /> */}
                                         </p>
                                     )}
                                 </div>
@@ -146,7 +146,7 @@ const GameEndModal = ({ handleContinueButton }) => {
                                     }}
                                 >
                                     {leaderboardHistory.length > 0
-                                        ? "View results"
+                                        ? "View Results"
                                         : "Fetching Results"}
                                 </button>
                                 <button
