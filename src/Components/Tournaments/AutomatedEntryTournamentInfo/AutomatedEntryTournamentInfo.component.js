@@ -119,13 +119,13 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             alt={data?.prizeTitle}
                                         />
                                         <p className="token-id mb-3">
-                                            Token ID: {data?.prizeContent}
+                                            Token ID: {data?.prizeSubtitle}
                                         </p>
                                         <p className="title text-center mb-3">
                                             {data?.prizeTitle}
                                         </p>
                                         <p className="subtitle text-center mb-4">
-                                            {data?.prizeSubtitle}
+                                            {data?.prizeContent}
                                         </p>
                                         <p className="countdown text-center mt-2 mb-5">
                                             {getTimerFullUnits(timer)}

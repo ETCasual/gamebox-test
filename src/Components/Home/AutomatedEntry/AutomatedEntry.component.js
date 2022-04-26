@@ -123,16 +123,17 @@ const AutomatedEntry = ({ data }) => {
             >
                 <div className="card-wrapper p-2 p-md-3">
                     <div className="row">
-                        <p className="prize-id mb-0">{data.prizeContent}</p>
+                        {/* PRIZE SUBTITLE */}
+                        <p className="prize-id mb-0">{data.prizeSubtitle}</p>
                         {/* PRIZE INFO */}
                         <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start justify-content-end position-relative">
                             {/* PRIZE NAME */}
                             <div className="prize-title mt-2">
                                 {data.prizeTitle}
                             </div>
-                            {/* PRIZE SUBTITLE */}
+                            {/* PRIZE DETAILED CONTENT */}
                             <div className="prize-subtitle mt-1">
-                                {data.prizeSubtitle}
+                                {data.prizeContent}
                             </div>
                             {/* TICKETS */}
                             <div className="ticket-info d-flex flex-column align-items-start mt-2 p-2">
