@@ -37,7 +37,7 @@ import loadSpinnerRules from "redux/thunks/SpinnerRules.thunk";
 import loadGamesList from "redux/thunks/GamesList.thunk";
 import loadNotificationToken from "redux/thunks/UpdateNotificationToken.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
-import { loadInitNotifications, loadWinnerAnnouncementNotifications } from "redux/thunks/Notifcations.thunk";
+import { loadInitNotifications } from "redux/thunks/Notifcations.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
@@ -165,7 +165,6 @@ const App = () => {
             // NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
             dispatch(loadNotificationNumber());
             dispatch(loadInitNotifications());
-            dispatch(loadWinnerAnnouncementNotifications());
             dispatch(loadUnClaimedPrizes());
         }
     }, [user.id, dispatch, consoleOpen]);

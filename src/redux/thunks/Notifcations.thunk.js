@@ -39,9 +39,31 @@ export function loadInitNotifications() {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
-        return getNotifications(user, 0)
+        return getWinnerAnnouncementNotifications(user, 2)
             .then((data) => {
-                dispatch({ type: LIST_NOTIFICATIONS, payload: data });
+                dispatch({
+                    type: LIST_WINNER_ANNOUNCEMENT_NOTIFICATIONS,
+                    payload: data,
+                });
+
+                getNotifications(user, 0)
+                    .then((data) => {
+                        dispatch({ type: LIST_NOTIFICATIONS, payload: data });
+                    })
+                    .catch((error) => {
+                        if (error.code === 7) {
+                            console.log(error.message);
+                            dispatch({ type: LOG_OUT });
+                            dispatch({
+                                type: SHOW_TOAST,
+                                payload: {
+                                    message: "Session Expired! Please login again.",
+                                },
+                            });
+                        } else if (error.code === 13)
+                            console.log("NOTIFICATIONS THUNK: No Result found!");
+                        else console.log(error);
+                    });
             })
             .catch((error) => {
                 if (error.code === 7) {
@@ -54,9 +76,13 @@ export function loadInitNotifications() {
                         },
                     });
                 } else if (error.code === 13)
-                    console.log("NOTIFICATIONS THUNK: No Result found!");
+                    console.log(
+                        "WINNER ANNOUNCEMENT NOTIFICATIONS THUNK: No Result found!"
+                    );
                 else console.log(error);
             });
+
+
     };
 }
 
