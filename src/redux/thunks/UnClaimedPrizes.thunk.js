@@ -53,9 +53,8 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
             setLoader({ id: null, status: false });
             return;
         }
-
-        const accounts = await web3.eth.getAccounts();
-        if (accounts.length === 0) {
+        
+        if (!user.walletAddress) {
             dispatch(
                 loadConnectUserWallet(
                     "no_wallet"
@@ -145,6 +144,7 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
                                 // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
                                 dispatch(loadClaimedPrizes());
                                 dispatch(loadUnClaimedPrizes());
+                                setLoader({ id: null, status: false });
                             })
                             .on("error", function (error) {
                                 console.log("error", error);
@@ -167,6 +167,7 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
                             })
                             .on("receipt", function (receipt) {
                                 console.log("receipt", receipt);
+                                setLoader({ id: null, status: false });
                                 // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
                                 dispatch(loadClaimedPrizes());
                                 dispatch(loadUnClaimedPrizes());
@@ -213,8 +214,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
             return;
         }
 
-        const accounts = await web3.eth.getAccounts();
-        if (accounts.length === 0) {
+        if (!user.walletAddress) {
             dispatch(
                 loadConnectUserWallet(
                     "no_wallet"
@@ -275,8 +275,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
             }
         } else {
             return getNFTClaim(winnerId, user.id, user.walletAddress)
-                .then(async ({ address, amount, nonce, signature }) => {
-
+                .then(async ({ address, tokenId, nonce, signature }) => {
                     const tokenContract = new web3.eth.Contract(
                         prizeDistTokenABI,
                         selectedNetwork[0]?.prizeDistributorAddress
@@ -284,7 +283,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
 
                     // Send tranfer function to receiver address
                     tokenContract.methods
-                        .claimToken(address, amount, nonce, signature)
+                        .claimToken(address, tokenId, nonce, signature)
                         .send({ from: user.walletAddress })
                         .on("sending", function (payload) {
                             console.log("sending", payload);

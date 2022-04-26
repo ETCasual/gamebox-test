@@ -303,7 +303,7 @@ const Rewards = () => {
                                                                 {data.status ===
                                                                 2
                                                                     ? getClaimedDate(
-                                                                          data.createdOn
+                                                                          data.claimedOn
                                                                       )
                                                                     : "Pending"}
                                                             </div>
