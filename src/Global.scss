@@ -218,24 +218,16 @@ html {
         }
     }
     .profile {
-        a {
+        img {
+            border: 2px solid #393939;
+            border-radius: 100%;
             width: 36px;
             height: 36px;
             @include media-min($lg) {
                 width: 40px;
                 height: 40px;
             }
-            img {
-                border: 2px solid #393939;
-                border-radius: 100%;
-                width: 36px;
-                height: 36px;
-                @include media-min($lg) {
-                    width: 40px;
-                    height: 40px;
-                }
-                object-fit: contain;
-            }
+            object-fit: contain;
         }
         &:hover {
             cursor: pointer;
@@ -334,6 +326,78 @@ html {
         font-size: $fnt-sz-12;
     }
     .overlay-disconnect-wallet {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
+    }
+    .profile-wallet-wrapper {
+        border-radius: 10px;
+        background: transparent linear-gradient(147deg, #272727 0%, #1D1D1D 100%) 0% 0% no-repeat padding-box;
+        box-shadow: 0px 10px 20px #00000040;
+
+        position: absolute;
+        top: 5rem;
+        right: 1rem;
+        z-index: 3;
+        min-width: 270px;
+        font-size: $fnt-sz-12;
+
+        .profile-avatar {
+            img {
+                border: 2px solid #393939;
+                border-radius: 100%;
+                width: 36px;
+                height: 36px;
+                @include media-min($lg) {
+                    width: 40px;
+                    height: 40px;
+                }
+                object-fit: contain;
+            }
+        }
+        .profile-name {
+            font-size: $fnt-sz-12;
+            font-weight: $fnt-wgt-600;
+        }
+        .wallet-info-wrapper {
+            .wallet-btn {
+                background-color: #F20086;
+                box-shadow: inset 0px 3px 6px #0000000F;
+                border-radius: 5px;
+            }
+        }
+        .wallet-connected-wrapper {
+            border-radius: 10px;
+            background-color: #1A1A1A;
+            .wallet-connected-label {
+                font-size: $fnt-sz-10;
+                color: #747474;
+            }
+            .wallet-connected-value {
+                font-size: $fnt-sz-12;
+                font-weight: $fnt-wgt-600;
+                color: #FFF7F7;
+            }
+            .wallet-disconnect-btn {
+                font-size: $fnt-sz-12;
+                font-weight: $fnt-wgt-600;
+                color: #C40000;
+                cursor: pointer;
+            }
+        }
+        .submenu-wrapper {
+            .submenu-sign-out {
+                font-size: $fnt-sz-12;
+                font-weight: $fnt-wgt-600;
+                color: #C40000;
+                cursor: pointer;
+            }
+        }
+    }
+    .overlay-profile-wallet {
         position: fixed;
         top: 0;
         left: 0;

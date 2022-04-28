@@ -11,6 +11,8 @@ import { defaultUserImage } from "Utils/DefaultImage";
 import { handleConnectWallet, disconnectWallet, handleMetamask, handleWalletConnect } from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
 
+import { handleSignOut } from "Utils/SignOut";
+
 const Header = ({
     userImage,
     userGems,
@@ -31,6 +33,7 @@ const Header = ({
     // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [onHoverWallet, setOnWalletHover] = useState(false);
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
+    const [mobileProfileWallet, setMobileProfileWallet] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -136,7 +139,7 @@ const Header = ({
                 <div className="col-12 px-1 px-lg-3 d-flex align-items-center justify-content-between">
                     {/* LOGO & NAV LINKS */}
                     <div className="left-items d-flex align-items-center justify-content-start">
-                        <div className="d-none d-sm-flex">
+                        <div className="d-flex">
                             <Link to="/" className="logo" onClick={handleHomeNavLink}>
                                 <img
                                     className="img-fluid"
@@ -181,53 +184,6 @@ const Header = ({
                                 >
                                     <div className="py-4 px-2 mx-2">Winners</div>
                                 </NavLink>
-                            </div>
-                        </div>
-                        
-                        <div
-                            className="wallet-wrapper d-flex d-sm-none"
-                            onClick={handleWallet}
-                            >
-                            {/* TOKEN VALUE & ADDRESS */}
-                            <div className="info-wrapper w-100 d-flex align-items-center">
-                                {!user.walletAddress && !user.network && (
-                                    <p className="mb-0">Connect Wallet</p>
-                                )}
-                                {user.walletAddress &&
-                                    user.network === "Wrong Network!" && (
-                                        <p className="mb-0">Wrong Network</p>
-                                )}
-
-                                {user.walletAddress && user.network !== "Wrong Network!" && (
-                                    <>
-                                        <img
-                                            className="icon"
-                                            src={`${window.cdn}icons/icon_froyo.png`}
-                                            alt="wallet"
-                                        />
-                                        <div className="ml-1">
-                                            <p className="mb-1 d-flex">
-                                                {user.tokenBalance >= 0 ? 
-                                                    parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
-                                                    : "Invalid token"
-                                                }{" "} 
-                                                <small className="d-flex align-self-center ml-1">
-                                                    {user.tokenSymbol}
-                                                </small>
-                                            </p>
-                                            <p className="mb-0">
-                                                {user.walletAddress?.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
-                                                {user.walletAddress?.substring(
-                                                    user.walletAddress.length - 4
-                                                )}
-                                            </p>
-                                        </div>
-                                    </>
-                                )}
                             </div>
                         </div>
 
@@ -341,6 +297,7 @@ const Header = ({
                         </div>
                         <div className="profile d-flex position-relative m-1">
                             <Link
+                                className="d-none d-sm-flex"
                                 to={{
                                     pathname: "/profile",
                                     state: {
@@ -358,6 +315,20 @@ const Header = ({
                                     alt="profile"
                                 />
                             </Link>
+                            <div 
+                                className="d-flex d-sm-none"
+                                onClick={() => setMobileProfileWallet(true)}
+                            >
+                                <img
+                                    onError={(e) => defaultUserImage(e)}
+                                    className="img-fluid"
+                                    src={
+                                        userImage ||
+                                        `${window.cdn}icons/icon_profile.svg`
+                                    }
+                                    alt="profile"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -384,6 +355,106 @@ const Header = ({
                                 onClick={handleWalletDisconnect}
                             >
                                 Disconnect
+                            </div>
+                        </>
+                    )}
+
+                    {/* MOBILE PROFILE WALLET */}
+                    {mobileProfileWallet && (
+                        <>
+                            <div className="overlay-profile-wallet"
+                                onClick={() => setMobileProfileWallet(false)}>
+                            </div>
+                            <div className="profile-wallet-wrapper p-3">
+                                <div className="profile-wrapper d-flex align-items-center mb-3">
+                                    <div className="profile-avatar">
+                                        <img
+                                            onError={(e) => defaultUserImage(e)}
+                                            className="img-fluid"
+                                            src={
+                                                user.picture ||
+                                                `${window.cdn}icons/icon_profile.svg`
+                                            }
+                                            alt="profile"
+                                        />
+                                    </div>
+                                    <div className="profile-name ml-3">{user.username}</div>
+                                </div>
+                                <div className="wallet-info-wrapper mb-3">
+                                    {/* <div
+                                        className="wallet-wrapper d-flex d-sm-none"
+                                        onClick={handleWallet}
+                                        > */}
+                                    {/* TOKEN VALUE & ADDRESS */}
+                                    {!user.walletAddress && !user.network && (
+                                        <div className="wallet-btn w-100 d-flex align-items-center justify-content-center p-3"
+                                            onClick={handleWallet}
+                                        >
+                                            <p className="mb-0">Connect Wallet</p>
+                                        </div>
+                                    )}
+                                    {user.walletAddress && user.network === "Wrong Network!" && (
+                                        <div className="wallet-btn w-100 d-flex align-items-center justify-content-center p-3"
+                                            onClick={handleWallet}
+                                        >
+                                            <p className="mb-0">Wrong Network</p>
+                                        </div>
+                                    )}
+                                    {user.walletAddress && user.network !== "Wrong Network!" && (
+                                        <>
+                                            <div className="wallet-connected-wrapper p-3 w-100">
+                                                <div className="d-flex justify-content-between">
+                                                    <div className="wallet-connected-label mb-2">Wallet address</div>
+                                                    <div className="wallet-connected-value">
+                                                        {user.walletAddress?.substring(
+                                                            0,
+                                                            5
+                                                        )}
+                                                        ....
+                                                        {user.walletAddress?.substring(
+                                                            user.walletAddress.length - 4
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex justify-content-between">
+                                                    <div className="wallet-connected-label mb-2">$Froyo tokens</div>
+                                                    <div className="wallet-connected-value">
+                                                        {user.tokenBalance >= 0 ? 
+                                                            parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
+                                                            : "Invalid token"
+                                                        }{" "} 
+                                                    </div>
+                                                </div>
+                                                <div className="wallet-disconnect-btn text-right mt-3"
+                                                    onClick={handleWalletDisconnect}
+                                                >
+                                                    Disconnect
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                                <div className="submenu-wrapper">
+                                    <Link
+                                        onClick={() => setMobileProfileWallet(false)}
+                                        to={{
+                                            pathname: "/profile",
+                                            state: {
+                                                prevPath: history.location.pathname,
+                                            },
+                                        }}
+                                    >
+                                        My account
+                                    </Link>
+                                    <p className="submenu-sign-out mt-2 mb-0" 
+                                        onClick={() => {
+                                            setMobileProfileWallet(false);
+                                            handleSignOut(dispatch);
+                                        }}
+                                    >
+                                        Sign out
+                                    </p>
+                                </div>
                             </div>
                         </>
                     )}
