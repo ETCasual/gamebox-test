@@ -662,7 +662,7 @@ html {
     min-height: 100vh;
     min-width: 100vw;
     @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-        background-color: rgba(244, 244, 244, 0.9);
+        background-color: rgba(36, 36, 36, 0.85);
     }
     @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
         backdrop-filter: blur(12px);
