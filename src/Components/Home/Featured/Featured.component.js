@@ -196,7 +196,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                     </div>
                                                 </div>
                                                 <button className="btn-participate w-100 p-3 mt-4">
-                                                    Participate tournament now
+                                                    Participate in featured prize tournaments
                                                 </button>
                                             </div>
                                         </div>
