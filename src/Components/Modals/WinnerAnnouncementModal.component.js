@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -11,17 +11,17 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
-import { handleConnectWallet } from "Utils/ConnectWallet";
+// import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
-    const { blockchainNetworks } = useSelector(
-        (state) => state.blockchainNetworks
-    );
+    // const { blockchainNetworks } = useSelector(
+    //     (state) => state.blockchainNetworks
+    // );
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
@@ -49,11 +49,11 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
 
-    const handleWallet = async () => {
-        if (user.walletAddress) return;
+    // const handleWallet = async () => {
+    //     if (user.walletAddress) return;
 
-        await handleConnectWallet(dispatch, blockchainNetworks);
-    };
+    //     await handleConnectWallet(dispatch, blockchainNetworks);
+    // };
 
     const getMintDate = (date) => {
         return new Date(date * 1000).toLocaleString("default", {
@@ -118,6 +118,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                     onError={(e) => defaultUserImage(e)}
                                     alt={e.winner}
                                 />
+                                {/* TODO: To change the checking to not use username */}
                                 {user.username.toLowerCase() ===
                                     e.winner.toLowerCase() && (
                                     <>
@@ -156,24 +157,13 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                             </>
                                         )}
 
-                                        {!user.walletAddress &&
-                                            e.canClaimDate <= 0 && (
-                                                <button
-                                                    className="connect-wallet-btn p-3"
-                                                    onClick={handleWallet}
-                                                >
-                                                    Connect your wallet to
-                                                    receive NFT
+                                        {e.canClaimDate <= 0 && (
+                                            <Link to="/profile/rewards">
+                                                <button className="connect-wallet-btn p-3">
+                                                    Claim your NFT
                                                 </button>
-                                            )}
-                                        {user.walletAddress &&
-                                            e.canClaimDate <= 0 && (
-                                                <Link to="/profile/rewards">
-                                                    <button className="connect-wallet-btn p-3">
-                                                        Claim your NFT
-                                                    </button>
-                                                </Link>
-                                            )}
+                                            </Link>
+                                        )}
                                     </>
                                 )}
                                 {user.username.toLowerCase() !==
