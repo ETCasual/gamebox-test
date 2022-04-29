@@ -12,6 +12,7 @@ import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 
 import getToken from "Utils/GetToken";
+import { useHistory } from "react-router-dom";
 
 const HeaderHOC = () => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const HeaderHOC = () => {
         (state) => state.leaderboardHistory
     );
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
+    const history = useHistory();
 
     const [userImage, setUserImage] = useState(
         `${window.cdn}icons/icon_profile.svg`
@@ -97,6 +99,8 @@ const HeaderHOC = () => {
     };
 
     const handleNotificationLeaderboardHistory = (data) => {
+        if (data?.type === "winprize") history.push("/profile/rewards");
+
         handleNotificationPanelBackButton();
         setIsSelectedNotificationShown((prev) => ({
             ...prev,

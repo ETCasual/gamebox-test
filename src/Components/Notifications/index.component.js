@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import NotificationLeaderboardHistory from "Components/Notifications/LeaderboardHistory/LeaderboardHistory.component";
@@ -25,6 +25,8 @@ const Index = () => {
     const [notificationData, setNotificationData] = useState([]);
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
         useState(null);
+
+    const history = useHistory();
 
     let timeOutRef = useRef(null);
 
@@ -66,6 +68,8 @@ const Index = () => {
     }
 
     const handleOnClickSelectedNotification = (data) => {
+        if (data?.type === "winprize") history.push("/profile/rewards");
+
         setIsSelectedNotificationShown({
             ...data,
             status: true,
@@ -134,12 +138,11 @@ const Index = () => {
                                                             defaultGameImage(e)
                                                         }
                                                         src={
-                                                            n.type === "rankup"
-                                                                ? `${window.cdn}assets/notification_level_01.jpg`
-                                                                : n.type ===
-                                                                  "tour"
-                                                                ? n?.picture
-                                                                : `${window.cdn}assets/notification_friends_01.jpg`
+                                                            n?.picture 
+                                                            ? n.picture
+                                                            : n.type === "rankup"
+                                                            ? `${window.cdn}assets/notification_level_01.jpg`
+                                                            : `${window.cdn}assets/notification_friends_01.jpg`
                                                         }
                                                         alt="icon"
                                                     />
@@ -175,29 +178,26 @@ const Index = () => {
                                                         </div>
                                                         {/* TOURNAMENT OR INVITE INFO */}
                                                         <div
-                                                            className={`col-12 d-flex align-items-center justify-content-between ${
-                                                                n?.type ===
-                                                                "tour"
-                                                                    ? "game-info"
-                                                                    : "invite-info"
-                                                            }`}
+                                                            className={`col-12 d-flex align-items-center justify-content-between noti-info`}
                                                         >
                                                             <p className="mb-0 d-flex align-items-center title">
                                                                 {n?.description}
                                                             </p>
                                                             <p
                                                                 className={`mb-0 d-flex align-items-center ${
-                                                                    n?.type ===
-                                                                    "tour"
-                                                                        ? "tickets"
-                                                                        : "gems"
+                                                                    n?.type === "winprize"
+                                                                    ? "prize"
+                                                                    : n?.type === "tour"
+                                                                    ? "tickets"
+                                                                    : "gems"
                                                                 }`}
                                                             >
-                                                                +
-                                                                {n?.type ===
-                                                                "tour"
-                                                                    ? `${n?.tickets} tickets`
-                                                                    : `${n?.gem} gems`}
+                                                                {
+                                                                n?.type === "winprize"
+                                                                ? `You've won`
+                                                                : n?.type === "tour"
+                                                                ? `+${n?.tickets} tickets`
+                                                                : `+${n?.gem} gems`}
                                                             </p>
                                                         </div>
                                                     </div>

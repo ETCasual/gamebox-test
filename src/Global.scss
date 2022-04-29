@@ -553,8 +553,7 @@ html {
             .prize-info {
                 font-size: $fnt-sz-10;
             }
-            .game-info,
-            .invite-info {
+            .noti-info {
                 font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-700;
                 .tickets {
@@ -562,6 +561,9 @@ html {
                 }
                 .gems {
                     color: #00c1b9;
+                }
+                .prize {
+                    color: #ff3399;
                 }
             }
             .invite-info {

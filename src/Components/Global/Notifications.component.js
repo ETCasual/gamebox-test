@@ -63,10 +63,10 @@ const Notification = ({
                                                     defaultGameImage(e)
                                                 }
                                                 src={
-                                                    n.type === "rankup"
+                                                    n?.picture 
+                                                        ? n.picture
+                                                        : n.type === "rankup"
                                                         ? `${window.cdn}assets/notification_level_01.jpg`
-                                                        : n.type === "tour"
-                                                        ? n?.picture
                                                         : `${window.cdn}assets/notification_friends_01.jpg`
                                                 }
                                                 alt="icon"
@@ -98,26 +98,26 @@ const Notification = ({
                                                 </div>
                                                 {/* TOURNAMENT OR INVITE INFO */}
                                                 <div
-                                                    className={`col-12 px-2 d-flex align-items-center justify-content-between ${
-                                                        n?.type === "tour"
-                                                            ? "game-info"
-                                                            : "invite-info"
-                                                    }`}
+                                                    className={`col-12 px-2 d-flex align-items-center justify-content-between noti-info`}
                                                 >
                                                     <p className="mb-0 d-flex align-items-center">
                                                         {n?.description}
                                                     </p>
                                                     <p
                                                         className={`mb-0 d-flex align-items-center ${
-                                                            n?.type === "tour"
-                                                                ? "tickets"
-                                                                : "gems"
+                                                            n?.type === "winprize"
+                                                            ? "prize"
+                                                            : n?.type === "tour"
+                                                            ? "tickets"
+                                                            : "gems"
                                                         }`}
                                                     >
-                                                        +
-                                                        {n?.type === "tour"
-                                                            ? `${n?.tickets} tickets`
-                                                            : `${n?.gem} gems`}
+                                                        
+                                                        { n?.type === "winprize" 
+                                                            ? `You've won`
+                                                            : n?.type === "tour"
+                                                            ? `+${n?.tickets} tickets`
+                                                            : `+${n?.gem} gems`}
                                                     </p>
                                                 </div>
                                             </div>
