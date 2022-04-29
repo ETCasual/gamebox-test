@@ -807,6 +807,27 @@ html {
             .wallet-name {
                 font-size: $fnt-sz-14;
             }
+
+        }
+        .connect-wallet-guide-btn {
+            &::before {
+                content: "";
+                background-color: #3E3E3E;
+                width: 90%;
+                height: 1px;
+                position: absolute;
+            }
+
+            p {
+                cursor: pointer;
+                font-size: $fnt-sz-12;
+                color: #868686;
+            }
+        }
+        .connect-wallet-guide {
+            p {
+                font-size: $fnt-sz-12;
+            }
         }
     }
 }
