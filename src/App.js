@@ -44,6 +44,7 @@ import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
 import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 import { LOG_OUT } from "redux/types";
+import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
@@ -193,6 +194,7 @@ const App = () => {
                 <OrientationModal />
                 <HeaderHOC />
                 <ScrollToTop />
+                <GoogleAnalytics />
                 <Switch>
                     <ProtectedRoute path="/" exact component={Home} />
                     <Route path="/invite/:id" component={Invite} />
