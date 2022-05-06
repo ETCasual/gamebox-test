@@ -130,34 +130,20 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                         </p>
                                                     </>
                                                 )}
-
-                                                {!user?.walletAddress &&
-                                                    e?.canClaimDate <= 0 && (
-                                                        <button
-                                                            className="connect-wallet-btn p-3"
-                                                            onClick={
-                                                                handleWallet
-                                                            }
-                                                        >
-                                                            Connect your wallet
-                                                            to receive NFT
+                                                {e?.canClaimDate <= 0 && (
+                                                    <Link
+                                                        to="/profile/rewards"
+                                                        onClick={() =>
+                                                            handleRevealBackButton(
+                                                                e?.prizeId
+                                                            )
+                                                        }
+                                                    >
+                                                        <button className="connect-wallet-btn p-3">
+                                                            Claim your NFT
                                                         </button>
-                                                    )}
-                                                {user?.walletAddress &&
-                                                    e?.canClaimDate <= 0 && (
-                                                        <Link
-                                                            to="/profile/rewards"
-                                                            onClick={() =>
-                                                                handleRevealBackButton(
-                                                                    e?.prizeId
-                                                                )
-                                                            }
-                                                        >
-                                                            <button className="connect-wallet-btn p-3">
-                                                                Claim your NFT
-                                                            </button>
-                                                        </Link>
-                                                    )}
+                                                    </Link>
+                                                )}
                                             </>
                                         )}
                                         {user?.username?.toLowerCase() !==
