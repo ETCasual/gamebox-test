@@ -66,13 +66,13 @@ const Index = () => {
         }, 3000);
         setNoDataLoaded((prev) => ({
             ...prev,
-            feature: prizes.featuredData.length <= 0 ? true : false,
+            feature: FeaturedData.length <= 0 ? true : false,
             premium: PremiumData.length <= 0 ? true : false,
             automated: prizes.automatedEntryData.length <= 0 ? true : false,
         }));
 
         return () => clearTimeout(timeOutRef);
-    }, [prizes.featuredData, prizes.premiumData, prizes.automatedEntryData, PremiumData]);
+    }, [prizes.featuredData, prizes.premiumData, prizes.automatedEntryData, FeaturedData, PremiumData]);
 
     // SETTING PRIZES (FEATURE & PREMIUM) TO STATE
     useEffect(() => {
