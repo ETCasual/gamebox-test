@@ -168,7 +168,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                     <div className="w-100 d-flex align-items-end justify-content-between">
                                                         <p className="score-date">
                                                             {getDateFormat(
-                                                                card.leaveTimeStamp *
+                                                                card.scoreTimestamp *
                                                                     1000
                                                             )}
                                                         </p>

@@ -10,7 +10,6 @@ import {
     ListWinnerRequest,
     ListLeaderboardRequest,
     ListGameLeaderRuleRequest,
-    ListLogGRequest,
     ListItemRequest,
     ListSpinnerRuleRequest,
     ListWinnerUnclaimedRequest,
@@ -1069,22 +1068,21 @@ export async function getWinnersList() {
 //
 export async function getHighScore(user) {
     const token = getToken();
-    const request = new ListLogGRequest();
-    request.setUserId(user.id);
-    request.setLimit(20);
-    request.setOffset(0);
+    const request = new ListPlayerHighscoreRequest();
+    request.setPlayerId(user.id);
 
-    const response = await client.listLogG(request, {
+    const response = await client.listPlayerHighscore(request, {
         authorization: `Bearer ${token}`,
     });
-    const logGResultList = response.getResultList();
+    const highScoreList = response.getResultList();
     const highScore = [];
-    logGResultList.forEach((e) => {
+    highScoreList.forEach((e) => {
         highScore.push({
-            leaveTimeStamp: e.getLeaveTimestamp(),
+            gameId: e.getGameId(),
             gameTitle: e.getGameTitle(),
             gameImageUrl: e.getGameImgUrl(),
             gameScore: e.getGameScore(),
+            scoreTimestamp: e.getScoreTimestamp(),
         });
     });
     return highScore;
@@ -1624,10 +1622,11 @@ export async function getPlayerHighScore(playerId) {
         const data = response.getResultList();
         data.forEach((e) => {
             playersHighScore.push({
-                leaveTimeStamp: e.getLeaveTimestamp(),
+                gameId: e.getGameId(),
                 gameTitle: e.getGameTitle(),
                 gameImageUrl: e.getGameImgUrl(),
                 gameScore: e.getGameScore(),
+                scoreTimestamp: e.getScoreTimestamp(),
             });
         });
     }

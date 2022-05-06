@@ -137,6 +137,7 @@ goog.exportSymbol('proto.api.gamebox.LogSLeaveRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.LogSLeaveResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.Notification', null, global);
 goog.exportSymbol('proto.api.gamebox.PlayerDetail', null, global);
+goog.exportSymbol('proto.api.gamebox.PlayerHighscore', null, global);
 goog.exportSymbol('proto.api.gamebox.PrizeBasicDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.PrizeDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.PrizeLeaderboardDetail', null, global);
@@ -11898,6 +11899,638 @@ proto.api.gamebox.ListLogGResponse.prototype.clearResultList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.gamebox.LogGDetail = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.LogGDetail, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.LogGDetail.displayName = 'proto.api.gamebox.LogGDetail';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.LogGDetail.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.LogGDetail.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.LogGDetail} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.LogGDetail.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    nickName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    avatarUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    prizeId: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    prizeTitle: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    prizeSubtitle: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    prizeContent: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    prizeTicketsRequired: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    prizeImgUrl: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    typeId: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    gameId: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    gameTitle: jspb.Message.getFieldWithDefault(msg, 13, ""),
+    gameImgUrl: jspb.Message.getFieldWithDefault(msg, 14, ""),
+    enterTimestamp: jspb.Message.getFieldWithDefault(msg, 15, 0),
+    leaveTimestamp: jspb.Message.getFieldWithDefault(msg, 16, 0),
+    isWatchedAd: jspb.Message.getFieldWithDefault(msg, 17, false),
+    isUsedGem: jspb.Message.getFieldWithDefault(msg, 18, false),
+    gameScore: jspb.Message.getFieldWithDefault(msg, 19, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.LogGDetail}
+ */
+proto.api.gamebox.LogGDetail.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.LogGDetail;
+  return proto.api.gamebox.LogGDetail.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.LogGDetail} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.LogGDetail}
+ */
+proto.api.gamebox.LogGDetail.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setId(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUserId(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNickName(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAvatarUrl(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPrizeId(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrizeTitle(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrizeSubtitle(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrizeContent(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setPrizeTicketsRequired(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrizeImgUrl(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setTypeId(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setGameId(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGameTitle(value);
+      break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGameImgUrl(value);
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setEnterTimestamp(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLeaveTimestamp(value);
+      break;
+    case 17:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsWatchedAd(value);
+      break;
+    case 18:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsUsedGem(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setGameScore(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.LogGDetail.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.LogGDetail.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.LogGDetail} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.LogGDetail.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+  f = message.getUserId();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getNickName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getAvatarUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getPrizeId();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
+  f = message.getPrizeTitle();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getPrizeSubtitle();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
+  f = message.getPrizeContent();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getPrizeTicketsRequired();
+  if (f !== 0) {
+    writer.writeInt64(
+      9,
+      f
+    );
+  }
+  f = message.getPrizeImgUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+  f = message.getTypeId();
+  if (f !== 0) {
+    writer.writeInt32(
+      11,
+      f
+    );
+  }
+  f = message.getGameId();
+  if (f !== 0) {
+    writer.writeInt64(
+      12,
+      f
+    );
+  }
+  f = message.getGameTitle();
+  if (f.length > 0) {
+    writer.writeString(
+      13,
+      f
+    );
+  }
+  f = message.getGameImgUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
+  f = message.getEnterTimestamp();
+  if (f !== 0) {
+    writer.writeInt64(
+      15,
+      f
+    );
+  }
+  f = message.getLeaveTimestamp();
+  if (f !== 0) {
+    writer.writeInt64(
+      16,
+      f
+    );
+  }
+  f = message.getIsWatchedAd();
+  if (f) {
+    writer.writeBool(
+      17,
+      f
+    );
+  }
+  f = message.getIsUsedGem();
+  if (f) {
+    writer.writeBool(
+      18,
+      f
+    );
+  }
+  f = message.getGameScore();
+  if (f !== 0) {
+    writer.writeInt32(
+      19,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int64 id = 1;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setId = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional int64 user_id = 2;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getUserId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setUserId = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional string nick_name = 3;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getNickName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setNickName = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string avatar_url = 4;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getAvatarUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setAvatarUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional int64 prize_id = 5;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getPrizeId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setPrizeId = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional string prize_title = 6;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getPrizeTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setPrizeTitle = function(value) {
+  jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string prize_subtitle = 7;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getPrizeSubtitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setPrizeSubtitle = function(value) {
+  jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string prize_content = 8;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getPrizeContent = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setPrizeContent = function(value) {
+  jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional int64 prize_tickets_required = 9;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getPrizeTicketsRequired = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setPrizeTicketsRequired = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional string prize_img_url = 10;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getPrizeImgUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setPrizeImgUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional int32 type_id = 11;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getTypeId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setTypeId = function(value) {
+  jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional int64 game_id = 12;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getGameId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setGameId = function(value) {
+  jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * optional string game_title = 13;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getGameTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setGameTitle = function(value) {
+  jspb.Message.setProto3StringField(this, 13, value);
+};
+
+
+/**
+ * optional string game_img_url = 14;
+ * @return {string}
+ */
+proto.api.gamebox.LogGDetail.prototype.getGameImgUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGDetail.prototype.setGameImgUrl = function(value) {
+  jspb.Message.setProto3StringField(this, 14, value);
+};
+
+
+/**
+ * optional int64 enter_timestamp = 15;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getEnterTimestamp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setEnterTimestamp = function(value) {
+  jspb.Message.setProto3IntField(this, 15, value);
+};
+
+
+/**
+ * optional int64 leave_timestamp = 16;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getLeaveTimestamp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setLeaveTimestamp = function(value) {
+  jspb.Message.setProto3IntField(this, 16, value);
+};
+
+
+/**
+ * optional bool is_watched_ad = 17;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.api.gamebox.LogGDetail.prototype.getIsWatchedAd = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 17, false));
+};
+
+
+/** @param {boolean} value */
+proto.api.gamebox.LogGDetail.prototype.setIsWatchedAd = function(value) {
+  jspb.Message.setProto3BooleanField(this, 17, value);
+};
+
+
+/**
+ * optional bool is_used_gem = 18;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.api.gamebox.LogGDetail.prototype.getIsUsedGem = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 18, false));
+};
+
+
+/** @param {boolean} value */
+proto.api.gamebox.LogGDetail.prototype.setIsUsedGem = function(value) {
+  jspb.Message.setProto3BooleanField(this, 18, value);
+};
+
+
+/**
+ * optional int32 game_score = 19;
+ * @return {number}
+ */
+proto.api.gamebox.LogGDetail.prototype.getGameScore = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogGDetail.prototype.setGameScore = function(value) {
+  jspb.Message.setProto3IntField(this, 19, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.gamebox.ListLogPrizePoolRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -14642,7 +15275,7 @@ proto.api.gamebox.ListPlayerHighscoreResponse.prototype.toObject = function(opt_
 proto.api.gamebox.ListPlayerHighscoreResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     resultList: jspb.Message.toObjectList(msg.getResultList(),
-    proto.api.gamebox.LogGDetail.toObject, includeInstance)
+    proto.api.gamebox.PlayerHighscore.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -14680,8 +15313,8 @@ proto.api.gamebox.ListPlayerHighscoreResponse.deserializeBinaryFromReader = func
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.api.gamebox.LogGDetail;
-      reader.readMessage(value,proto.api.gamebox.LogGDetail.deserializeBinaryFromReader);
+      var value = new proto.api.gamebox.PlayerHighscore;
+      reader.readMessage(value,proto.api.gamebox.PlayerHighscore.deserializeBinaryFromReader);
       msg.addResult(value);
       break;
     default:
@@ -14718,35 +15351,35 @@ proto.api.gamebox.ListPlayerHighscoreResponse.serializeBinaryToWriter = function
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.api.gamebox.LogGDetail.serializeBinaryToWriter
+      proto.api.gamebox.PlayerHighscore.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * repeated LogGDetail result = 1;
- * @return {!Array<!proto.api.gamebox.LogGDetail>}
+ * repeated PlayerHighscore result = 1;
+ * @return {!Array<!proto.api.gamebox.PlayerHighscore>}
  */
 proto.api.gamebox.ListPlayerHighscoreResponse.prototype.getResultList = function() {
-  return /** @type{!Array<!proto.api.gamebox.LogGDetail>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.gamebox.LogGDetail, 1));
+  return /** @type{!Array<!proto.api.gamebox.PlayerHighscore>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.gamebox.PlayerHighscore, 1));
 };
 
 
-/** @param {!Array<!proto.api.gamebox.LogGDetail>} value */
+/** @param {!Array<!proto.api.gamebox.PlayerHighscore>} value */
 proto.api.gamebox.ListPlayerHighscoreResponse.prototype.setResultList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.api.gamebox.LogGDetail=} opt_value
+ * @param {!proto.api.gamebox.PlayerHighscore=} opt_value
  * @param {number=} opt_index
- * @return {!proto.api.gamebox.LogGDetail}
+ * @return {!proto.api.gamebox.PlayerHighscore}
  */
 proto.api.gamebox.ListPlayerHighscoreResponse.prototype.addResult = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.gamebox.LogGDetail, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.gamebox.PlayerHighscore, opt_index);
 };
 
 
@@ -14766,12 +15399,12 @@ proto.api.gamebox.ListPlayerHighscoreResponse.prototype.clearResultList = functi
  * @extends {jspb.Message}
  * @constructor
  */
-proto.api.gamebox.LogGDetail = function(opt_data) {
+proto.api.gamebox.PlayerHighscore = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.api.gamebox.LogGDetail, jspb.Message);
+goog.inherits(proto.api.gamebox.PlayerHighscore, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.api.gamebox.LogGDetail.displayName = 'proto.api.gamebox.LogGDetail';
+  proto.api.gamebox.PlayerHighscore.displayName = 'proto.api.gamebox.PlayerHighscore';
 }
 
 
@@ -14786,8 +15419,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.api.gamebox.LogGDetail.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.gamebox.LogGDetail.toObject(opt_includeInstance, this);
+proto.api.gamebox.PlayerHighscore.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.PlayerHighscore.toObject(opt_includeInstance, this);
 };
 
 
@@ -14796,31 +15429,17 @@ proto.api.gamebox.LogGDetail.prototype.toObject = function(opt_includeInstance) 
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.api.gamebox.LogGDetail} msg The msg instance to transform.
+ * @param {!proto.api.gamebox.PlayerHighscore} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.gamebox.LogGDetail.toObject = function(includeInstance, msg) {
+proto.api.gamebox.PlayerHighscore.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    userId: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    nickName: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    avatarUrl: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    prizeId: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    prizeTitle: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    prizeSubtitle: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    prizeContent: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    prizeTicketsRequired: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    prizeImgUrl: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    typeId: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    gameId: jspb.Message.getFieldWithDefault(msg, 12, 0),
-    gameTitle: jspb.Message.getFieldWithDefault(msg, 13, ""),
-    gameImgUrl: jspb.Message.getFieldWithDefault(msg, 14, ""),
-    enterTimestamp: jspb.Message.getFieldWithDefault(msg, 15, 0),
-    leaveTimestamp: jspb.Message.getFieldWithDefault(msg, 16, 0),
-    isWatchedAd: jspb.Message.getFieldWithDefault(msg, 17, false),
-    isUsedGem: jspb.Message.getFieldWithDefault(msg, 18, false),
-    gameScore: jspb.Message.getFieldWithDefault(msg, 19, 0)
+    gameId: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    gameTitle: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    gameImgUrl: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    gameScore: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    scoreTimestamp: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -14834,23 +15453,23 @@ proto.api.gamebox.LogGDetail.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.gamebox.LogGDetail}
+ * @return {!proto.api.gamebox.PlayerHighscore}
  */
-proto.api.gamebox.LogGDetail.deserializeBinary = function(bytes) {
+proto.api.gamebox.PlayerHighscore.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.gamebox.LogGDetail;
-  return proto.api.gamebox.LogGDetail.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.api.gamebox.PlayerHighscore;
+  return proto.api.gamebox.PlayerHighscore.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.api.gamebox.LogGDetail} msg The message object to deserialize into.
+ * @param {!proto.api.gamebox.PlayerHighscore} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.gamebox.LogGDetail}
+ * @return {!proto.api.gamebox.PlayerHighscore}
  */
-proto.api.gamebox.LogGDetail.deserializeBinaryFromReader = function(msg, reader) {
+proto.api.gamebox.PlayerHighscore.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -14859,79 +15478,23 @@ proto.api.gamebox.LogGDetail.deserializeBinaryFromReader = function(msg, reader)
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setId(value);
-      break;
-    case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setUserId(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setNickName(value);
-      break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAvatarUrl(value);
-      break;
-    case 5:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setPrizeId(value);
-      break;
-    case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPrizeTitle(value);
-      break;
-    case 7:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPrizeSubtitle(value);
-      break;
-    case 8:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPrizeContent(value);
-      break;
-    case 9:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setPrizeTicketsRequired(value);
-      break;
-    case 10:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPrizeImgUrl(value);
-      break;
-    case 11:
-      var value = /** @type {number} */ (reader.readInt32());
-      msg.setTypeId(value);
-      break;
-    case 12:
-      var value = /** @type {number} */ (reader.readInt64());
       msg.setGameId(value);
       break;
-    case 13:
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setGameTitle(value);
       break;
-    case 14:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setGameImgUrl(value);
       break;
-    case 15:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setEnterTimestamp(value);
-      break;
-    case 16:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setLeaveTimestamp(value);
-      break;
-    case 17:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsWatchedAd(value);
-      break;
-    case 18:
-      var value = /** @type {boolean} */ (reader.readBool());
-      msg.setIsUsedGem(value);
-      break;
-    case 19:
+    case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setGameScore(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setScoreTimestamp(value);
       break;
     default:
       reader.skipField();
@@ -14946,9 +15509,9 @@ proto.api.gamebox.LogGDetail.deserializeBinaryFromReader = function(msg, reader)
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.api.gamebox.LogGDetail.prototype.serializeBinary = function() {
+proto.api.gamebox.PlayerHighscore.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.api.gamebox.LogGDetail.serializeBinaryToWriter(this, writer);
+  proto.api.gamebox.PlayerHighscore.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -14956,142 +15519,44 @@ proto.api.gamebox.LogGDetail.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.api.gamebox.LogGDetail} message
+ * @param {!proto.api.gamebox.PlayerHighscore} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.gamebox.LogGDetail.serializeBinaryToWriter = function(message, writer) {
+proto.api.gamebox.PlayerHighscore.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = message.getGameId();
   if (f !== 0) {
     writer.writeInt64(
       1,
       f
     );
   }
-  f = message.getUserId();
-  if (f !== 0) {
-    writer.writeInt64(
-      2,
-      f
-    );
-  }
-  f = message.getNickName();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-  f = message.getAvatarUrl();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
-      f
-    );
-  }
-  f = message.getPrizeId();
-  if (f !== 0) {
-    writer.writeInt64(
-      5,
-      f
-    );
-  }
-  f = message.getPrizeTitle();
-  if (f.length > 0) {
-    writer.writeString(
-      6,
-      f
-    );
-  }
-  f = message.getPrizeSubtitle();
-  if (f.length > 0) {
-    writer.writeString(
-      7,
-      f
-    );
-  }
-  f = message.getPrizeContent();
-  if (f.length > 0) {
-    writer.writeString(
-      8,
-      f
-    );
-  }
-  f = message.getPrizeTicketsRequired();
-  if (f !== 0) {
-    writer.writeInt64(
-      9,
-      f
-    );
-  }
-  f = message.getPrizeImgUrl();
-  if (f.length > 0) {
-    writer.writeString(
-      10,
-      f
-    );
-  }
-  f = message.getTypeId();
-  if (f !== 0) {
-    writer.writeInt32(
-      11,
-      f
-    );
-  }
-  f = message.getGameId();
-  if (f !== 0) {
-    writer.writeInt64(
-      12,
-      f
-    );
-  }
   f = message.getGameTitle();
   if (f.length > 0) {
     writer.writeString(
-      13,
+      2,
       f
     );
   }
   f = message.getGameImgUrl();
   if (f.length > 0) {
     writer.writeString(
-      14,
-      f
-    );
-  }
-  f = message.getEnterTimestamp();
-  if (f !== 0) {
-    writer.writeInt64(
-      15,
-      f
-    );
-  }
-  f = message.getLeaveTimestamp();
-  if (f !== 0) {
-    writer.writeInt64(
-      16,
-      f
-    );
-  }
-  f = message.getIsWatchedAd();
-  if (f) {
-    writer.writeBool(
-      17,
-      f
-    );
-  }
-  f = message.getIsUsedGem();
-  if (f) {
-    writer.writeBool(
-      18,
+      3,
       f
     );
   }
   f = message.getGameScore();
   if (f !== 0) {
     writer.writeInt32(
-      19,
+      4,
+      f
+    );
+  }
+  f = message.getScoreTimestamp();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
       f
     );
   }
@@ -15099,291 +15564,77 @@ proto.api.gamebox.LogGDetail.serializeBinaryToWriter = function(message, writer)
 
 
 /**
- * optional int64 id = 1;
+ * optional int64 game_id = 1;
  * @return {number}
  */
-proto.api.gamebox.LogGDetail.prototype.getId = function() {
+proto.api.gamebox.PlayerHighscore.prototype.getGameId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setId = function(value) {
+proto.api.gamebox.PlayerHighscore.prototype.setGameId = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional int64 user_id = 2;
- * @return {number}
+ * optional string game_title = 2;
+ * @return {string}
  */
-proto.api.gamebox.LogGDetail.prototype.getUserId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.api.gamebox.PlayerHighscore.prototype.getGameTitle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setUserId = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+/** @param {string} value */
+proto.api.gamebox.PlayerHighscore.prototype.setGameTitle = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string nick_name = 3;
+ * optional string game_img_url = 3;
  * @return {string}
  */
-proto.api.gamebox.LogGDetail.prototype.getNickName = function() {
+proto.api.gamebox.PlayerHighscore.prototype.getGameImgUrl = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setNickName = function(value) {
+proto.api.gamebox.PlayerHighscore.prototype.setGameImgUrl = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string avatar_url = 4;
- * @return {string}
+ * optional int32 game_score = 4;
+ * @return {number}
  */
-proto.api.gamebox.LogGDetail.prototype.getAvatarUrl = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+proto.api.gamebox.PlayerHighscore.prototype.getGameScore = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setAvatarUrl = function(value) {
-  jspb.Message.setProto3StringField(this, 4, value);
+/** @param {number} value */
+proto.api.gamebox.PlayerHighscore.prototype.setGameScore = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
 /**
- * optional int64 prize_id = 5;
+ * optional int64 score_timestamp = 5;
  * @return {number}
  */
-proto.api.gamebox.LogGDetail.prototype.getPrizeId = function() {
+proto.api.gamebox.PlayerHighscore.prototype.getScoreTimestamp = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setPrizeId = function(value) {
+proto.api.gamebox.PlayerHighscore.prototype.setScoreTimestamp = function(value) {
   jspb.Message.setProto3IntField(this, 5, value);
-};
-
-
-/**
- * optional string prize_title = 6;
- * @return {string}
- */
-proto.api.gamebox.LogGDetail.prototype.getPrizeTitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setPrizeTitle = function(value) {
-  jspb.Message.setProto3StringField(this, 6, value);
-};
-
-
-/**
- * optional string prize_subtitle = 7;
- * @return {string}
- */
-proto.api.gamebox.LogGDetail.prototype.getPrizeSubtitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setPrizeSubtitle = function(value) {
-  jspb.Message.setProto3StringField(this, 7, value);
-};
-
-
-/**
- * optional string prize_content = 8;
- * @return {string}
- */
-proto.api.gamebox.LogGDetail.prototype.getPrizeContent = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setPrizeContent = function(value) {
-  jspb.Message.setProto3StringField(this, 8, value);
-};
-
-
-/**
- * optional int64 prize_tickets_required = 9;
- * @return {number}
- */
-proto.api.gamebox.LogGDetail.prototype.getPrizeTicketsRequired = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setPrizeTicketsRequired = function(value) {
-  jspb.Message.setProto3IntField(this, 9, value);
-};
-
-
-/**
- * optional string prize_img_url = 10;
- * @return {string}
- */
-proto.api.gamebox.LogGDetail.prototype.getPrizeImgUrl = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setPrizeImgUrl = function(value) {
-  jspb.Message.setProto3StringField(this, 10, value);
-};
-
-
-/**
- * optional int32 type_id = 11;
- * @return {number}
- */
-proto.api.gamebox.LogGDetail.prototype.getTypeId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setTypeId = function(value) {
-  jspb.Message.setProto3IntField(this, 11, value);
-};
-
-
-/**
- * optional int64 game_id = 12;
- * @return {number}
- */
-proto.api.gamebox.LogGDetail.prototype.getGameId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setGameId = function(value) {
-  jspb.Message.setProto3IntField(this, 12, value);
-};
-
-
-/**
- * optional string game_title = 13;
- * @return {string}
- */
-proto.api.gamebox.LogGDetail.prototype.getGameTitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setGameTitle = function(value) {
-  jspb.Message.setProto3StringField(this, 13, value);
-};
-
-
-/**
- * optional string game_img_url = 14;
- * @return {string}
- */
-proto.api.gamebox.LogGDetail.prototype.getGameImgUrl = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
-};
-
-
-/** @param {string} value */
-proto.api.gamebox.LogGDetail.prototype.setGameImgUrl = function(value) {
-  jspb.Message.setProto3StringField(this, 14, value);
-};
-
-
-/**
- * optional int64 enter_timestamp = 15;
- * @return {number}
- */
-proto.api.gamebox.LogGDetail.prototype.getEnterTimestamp = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setEnterTimestamp = function(value) {
-  jspb.Message.setProto3IntField(this, 15, value);
-};
-
-
-/**
- * optional int64 leave_timestamp = 16;
- * @return {number}
- */
-proto.api.gamebox.LogGDetail.prototype.getLeaveTimestamp = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setLeaveTimestamp = function(value) {
-  jspb.Message.setProto3IntField(this, 16, value);
-};
-
-
-/**
- * optional bool is_watched_ad = 17;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
- * @return {boolean}
- */
-proto.api.gamebox.LogGDetail.prototype.getIsWatchedAd = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 17, false));
-};
-
-
-/** @param {boolean} value */
-proto.api.gamebox.LogGDetail.prototype.setIsWatchedAd = function(value) {
-  jspb.Message.setProto3BooleanField(this, 17, value);
-};
-
-
-/**
- * optional bool is_used_gem = 18;
- * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
- * You should avoid comparisons like {@code val === true/false} in those cases.
- * @return {boolean}
- */
-proto.api.gamebox.LogGDetail.prototype.getIsUsedGem = function() {
-  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 18, false));
-};
-
-
-/** @param {boolean} value */
-proto.api.gamebox.LogGDetail.prototype.setIsUsedGem = function(value) {
-  jspb.Message.setProto3BooleanField(this, 18, value);
-};
-
-
-/**
- * optional int32 game_score = 19;
- * @return {number}
- */
-proto.api.gamebox.LogGDetail.prototype.getGameScore = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
-};
-
-
-/** @param {number} value */
-proto.api.gamebox.LogGDetail.prototype.setGameScore = function(value) {
-  jspb.Message.setProto3IntField(this, 19, value);
 };
 
 
