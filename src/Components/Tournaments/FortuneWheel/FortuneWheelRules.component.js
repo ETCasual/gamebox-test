@@ -3,7 +3,7 @@ const FortuneWheelRules = ({spinnerRules}) => {
     let pizza = [];
     for (var i = 0; i < spinnerRules.length; i++) {
         pizza.push(
-            <li id={ "slice-" + (i+1) }>
+            <li id={ "slice-" + (i+1) } key={i}>
                 <div className="slice">
                     <span>
                         <p>{ spinnerRules[i].tickets }</p>
