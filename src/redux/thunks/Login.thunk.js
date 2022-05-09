@@ -136,12 +136,17 @@ export function loadLogin(payload, setLoginError, history) {
                 }
             }
         } catch (error) {
-            console.log(error.message);
-            setLoginError(
-                error.code >= 400 && error.code < 500
-                    ? "Invalid Username/Password!"
-                    : "Oops! Something went wrong. Please try again."
-            );
+            console.log(error.message, error.code);
+            localStorage.removeItem("froyo-authenticationtoken");
+            if (error.code === 16) {
+                setLoginError(error.message);
+            } else {
+                setLoginError(
+                    error.code >= 400 && error.code < 500
+                        ? "Invalid Username/Password!"
+                        : "Oops! Something went wrong. Please try again."
+                );
+            }
         }
     };
 }
