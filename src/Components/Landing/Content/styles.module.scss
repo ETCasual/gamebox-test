@@ -94,6 +94,7 @@
             -webkit-backdrop-filter: blur(12px);
         }
         .close-button {
+            cursor: pointer;
             width: 30px;
             height: 30px;  
             @include media-max($md) {
