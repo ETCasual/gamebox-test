@@ -5,6 +5,7 @@ import {
     SHOW_TOAST,
     LOGIN_ERROR,
     LOGIN_STATUS,
+    LOG_OUT,
 } from "redux/types";
 import {
     addUser,
@@ -54,6 +55,10 @@ export function loadLoginUserWithToken() {
                 }
             }
         } catch (error) {
+            localStorage.removeItem("froyo-authenticationtoken");
+            dispatch({
+                type: LOG_OUT,
+            });
             if (error.code === 7) {
                 console.log(error.message);
                 dispatch({
