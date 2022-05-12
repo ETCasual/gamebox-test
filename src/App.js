@@ -47,199 +47,211 @@ import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 
 const App = () => {
-    const { user } = useSelector((state) => state.userData);
-    const { prizes } = useSelector((state) => state.prizes);
-    const { blockchainNetworks } = useSelector(
-        (state) => state.blockchainNetworks
-    );
+	const { user } = useSelector((state) => state.userData);
+	const { prizes } = useSelector((state) => state.prizes);
+	const { blockchainNetworks } = useSelector(
+		(state) => state.blockchainNetworks
+	);
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const [pendingRegion, setPendingRegion] = useState(true);
-    const [regionAllow, setRegionAllow] = useState(false);
+	const [pendingRegion, setPendingRegion] = useState(true);
+	const [regionAllow, setRegionAllow] = useState(false);
 
-    const [consoleOpen, setConsoleOpen] = useState(false);
+	const [consoleOpen, setConsoleOpen] = useState(false);
 
-    if (process.env.REACT_APP_NODE_ENV === "production") {
-        addListener(isOpen => {
-            if (isOpen) {
-                setConsoleOpen(true);
-                sessionStorage.setItem("errorType", "Unusual");
-                dispatch({ type: LOG_OUT })
-            } else {
-                setConsoleOpen(false);
-            }
-        });
-        launch();
-    }
+	// CHECK IS DEVTOOLS CONSOLE OPEN
+	if (process.env.REACT_APP_NODE_ENV === "production") {
+		addListener((isOpen) => {
+			if (isOpen) {
+				setConsoleOpen(true);
+				sessionStorage.setItem("errorType", "Unusual");
+				dispatch({ type: LOG_OUT });
+			} else {
+				setConsoleOpen(false);
+			}
+		});
+		launch();
+	}
 
-    // FIREBASE ONMESSAGE
-    onMessageListener()
-        .then((payload) => {
-            console.log("Firebase File:", payload);
-            let notification =
-                JSON.parse(localStorage.getItem("notification")) || [];
-            notification.push({ data: payload.data });
-            localStorage.setItem("notification", JSON.stringify(notification));
-        })
-        .catch((error) => console.log("Notification OnMessage Error: ", error));
+	// FIREBASE ONMESSAGE
+	onMessageListener()
+		.then((payload) => {
+			console.log("Firebase File:", payload);
+			let notification =
+				JSON.parse(localStorage.getItem("notification")) || [];
+			notification.push({ data: payload.data });
+			localStorage.setItem("notification", JSON.stringify(notification));
+		})
+		.catch((error) => console.log("Notification OnMessage Error: ", error));
 
-    // ONAUTH CHANGED & API CALLS & CONSOLE OPEN
-    useEffect(() => {
-        document.addEventListener("visibilitychange", handleLoadPrize);
+	// ONAUTH CHANGED & API CALLS & CONSOLE OPEN
+	useEffect(() => {
+		document.addEventListener("visibilitychange", handleLoadPrize);
 
-        function handleLoadPrize() {
-            if (document.visibilityState === "visible" && user.id) dispatch(loadPrizes());
-        }
-        
-        if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
-            sessionStorage.setItem("errorType", "Unusual");
-            dispatch({ type: LOG_OUT })
-            return;
-        }
+		function handleLoadPrize() {
+			if (document.visibilityState === "visible" && user.id)
+				dispatch(loadPrizes());
+		}
 
-        if (user.id) {
-            // dispatch(loadLoginUser(authUser, isNewUser));
-            dispatch(loadPrizes());
-            dispatch(loadAvailableSpins());
-            dispatch(loadSpinnerRules());
-            dispatch(loadBlockChainNetworks());
-            dispatch(loadExchangeRate());
-            dispatch(loadRanks());
-            dispatch(loadConfig());
-            dispatch(loadGemsList());
-            dispatch(loadGamesList());
+		if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
+			// Show warning message to user in console panel
+			console.log(
+				"%cAny suspicious activity will result in account BAN!",
+				"background: #fff700; color: #ff2c44; font-size: 24px; font-weight: bold;"
+			);
+			sessionStorage.setItem("errorType", "Unusual");
+			dispatch({ type: LOG_OUT });
+			return;
+		}
 
-            // FOR FUTURE PURPOSE
-            // dispatch({ type: "LIST_PURCHASE_HISTORY" });
-        }
+		if (user.id) {
+			// dispatch(loadLoginUser(authUser, isNewUser));
+			dispatch(loadPrizes());
+			dispatch(loadAvailableSpins());
+			dispatch(loadSpinnerRules());
+			dispatch(loadBlockChainNetworks());
+			dispatch(loadExchangeRate());
+			dispatch(loadRanks());
+			dispatch(loadConfig());
+			dispatch(loadGemsList());
+			dispatch(loadGamesList());
 
-        return () =>
-            document.removeEventListener("visibilitychange", handleLoadPrize);
-    }, [dispatch, user.id, consoleOpen]);
+			// FOR FUTURE PURPOSE
+			// dispatch({ type: "LIST_PURCHASE_HISTORY" });
+		}
 
-    useEffect(() => {
-        // FOR LOADING WALLET IF ALREADY CONNECTED
-        if (blockchainNetworks.length > 0)
-            dispatch(loadConnectWalletAuto(blockchainNetworks));
-    }, [dispatch, blockchainNetworks]);
+		return () =>
+			document.removeEventListener("visibilitychange", handleLoadPrize);
+	}, [dispatch, user.id, consoleOpen]);
 
-    useEffect(() => {
-        if (user.id) sessionStorage.removeItem("errorType");
-    }, [user.id]);
+	useEffect(() => {
+		// FOR LOADING WALLET IF ALREADY CONNECTED
+		if (blockchainNetworks.length > 0)
+			dispatch(loadConnectWalletAuto(blockchainNetworks));
+	}, [dispatch, blockchainNetworks]);
 
-    // UPDATE NOTIFICATION TOKEN & LOAD NOTIFICATION
-    useEffect(() => {
-        if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
-            sessionStorage.setItem("errorType", "Unusual");
-            dispatch({ type: LOG_OUT })
-            return;
-        }
+	useEffect(() => {
+		if (user.id) sessionStorage.removeItem("errorType");
+	}, [user.id]);
 
-        if (user.id) {
-            // NOTIFICATION TOKEN UPDATE
-            if (messaging) {
-                messaging
-                    .getToken({
-                        vapidKey: process.env.REACT_APP_VAPID_KEY,
-                    })
-                    .then((currentToken) => {
-                        if (currentToken) {
-                            dispatch(loadNotificationToken(currentToken));
-                        } else {
-                            // TODO: Show permission request UI
-                            console.log(
-                                "No registration token available. Request permission to generate one."
-                            );
-                            Notification.requestPermission();
-                        }
-                    })
-                    .catch((err) => {
-                        console.log("Error: messaging.getToken: ", err);
-                        // TODO: handle the error here, maybe bcos of different browser problem
-                        // Brave browser will need to enable it manually
-                        // Brave settings > Privacy and Security > Use Google Services for Push Messaging
-                        // Chrome is OK by default
-                        // Other haven't check.
-                    });
-            }
-            // NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
-            dispatch(loadNotificationNumber());
-            dispatch(loadInitNotifications());
-            dispatch(loadUnClaimedPrizes());
-        }
-    }, [user.id, dispatch, consoleOpen]);
+	// UPDATE NOTIFICATION TOKEN & LOAD NOTIFICATION
+	useEffect(() => {
+		if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
+			// Show warning message to user in console panel
+			console.log(
+				"%cAny suspicious activity will result in account BAN!",
+				"background: #fff700; color: #ff2c44; font-size: 24px; font-weight: bold;"
+			);
+			sessionStorage.setItem("errorType", "Unusual");
+			dispatch({ type: LOG_OUT });
+			return;
+		}
 
-    // REGIONAL CHECK
-    useEffect(() => {
-        getExchangeRate()
-            .then(({ ipInfo }) => {
-                if (
-                    ipInfo &&
-                    (ipInfo.country_code === "MY" ||
-                        ipInfo.country_code === "SG" ||
-                        ipInfo.country_code === "ID")
-                )
-                    setRegionAllow(true);
-            })
-            .finally(() => setPendingRegion(false));
-    }, []);
+		if (user.id) {
+			// NOTIFICATION TOKEN UPDATE
+			if (messaging) {
+				messaging
+					.getToken({
+						vapidKey: process.env.REACT_APP_VAPID_KEY,
+					})
+					.then((currentToken) => {
+						if (currentToken) {
+							dispatch(loadNotificationToken(currentToken));
+						} else {
+							// TODO: Show permission request UI
+							console.log(
+								"No registration token available. Request permission to generate one."
+							);
+							Notification.requestPermission();
+						}
+					})
+					.catch((err) => {
+						console.log("Error: messaging.getToken: ", err);
+						// TODO: handle the error here, maybe bcos of different browser problem
+						// Brave browser will need to enable it manually
+						// Brave settings > Privacy and Security > Use Google Services for Push Messaging
+						// Chrome is OK by default
+						// Other haven't check.
+					});
+			}
+			// NOTIFICATION NUMBER & LIST AND UNCLAIMED PRIZES
+			dispatch(loadNotificationNumber());
+			dispatch(loadInitNotifications());
+			dispatch(loadUnClaimedPrizes());
+		}
+	}, [user.id, dispatch, consoleOpen]);
 
-    if (pendingRegion) return null;
-    else if (!regionAllow) return <LaunchingSoon />;
-    else {
-        return (
-            <Router basename={process.env.REACT_APP_PUBLIC_URL}>
-                <Toasty />
-                <OrientationModal />
-                <HeaderHOC />
-                <ScrollToTop />
-                <GoogleAnalytics />
-                <Switch>
-                    <ProtectedRoute path="/" exact component={Home} />
-                    <Route path="/invite/:id" component={Invite} />
-                    <ProtectedRoute path="/activity" component={Activity} />
-                    <ProtectedRoute path="/winners" component={Winners} />
-                    <ProtectedRoute
-                        path="/prize/:type/:id"
-                        component={Tournament}
-                    />
-                    <ProtectedRoute
-                        exact
-                        path="/notifications"
-                        component={Notifications}
-                    />
-                    <ProtectedRoute exact path="/profile" component={Profile} />
-                    <ProtectedRoute
-                        path="/profile/rewards"
-                        component={Rewards}
-                    />
-                    <ProtectedRoute
-                        path="/profile/settings"
-                        component={Settings}
-                    />
-                    <ProtectedRoute path="/iap" component={IAP} />
-                    <Route
-                        path="/terms-and-conditions"
-                        component={TermsAndConditions}
-                    />
-                    <Route path="/privacy-policy" component={PrivacyPolicy} />
-                    <Route
-                        path="/tournament-rules"
-                        component={TournamentRules}
-                    />
-                </Switch>
-                <NavigationHOC />
+	// REGIONAL CHECK
+	useEffect(() => {
+		getExchangeRate()
+			.then(({ ipInfo }) => {
+				if (
+					ipInfo &&
+					(ipInfo.country_code === "MY" ||
+						ipInfo.country_code === "SG" ||
+						ipInfo.country_code === "ID")
+				)
+					setRegionAllow(true);
+			})
+			.finally(() => setPendingRegion(false));
+	}, []);
 
-                {prizes?.featuredData.map((prize, idx) => (
-                    <GlobalTimer key={`prize_feature_${idx}`} data={prize} />
-                ))}
-                {prizes?.premiumData.map((prize, idx) => (
-                    <GlobalTimer key={`prize_premium_${idx}`} data={prize} />
-                ))}
-            </Router>
-        );
-    }
+	if (pendingRegion) return null;
+	else if (!regionAllow) return <LaunchingSoon />;
+	else {
+		return (
+			<Router basename={process.env.REACT_APP_PUBLIC_URL}>
+				<Toasty />
+				<OrientationModal />
+				<HeaderHOC />
+				<ScrollToTop />
+				<GoogleAnalytics />
+				<Switch>
+					<ProtectedRoute path="/" exact component={Home} />
+					<Route path="/invite/:id" component={Invite} />
+					<ProtectedRoute path="/activity" component={Activity} />
+					<ProtectedRoute path="/winners" component={Winners} />
+					<ProtectedRoute
+						path="/prize/:type/:id"
+						component={Tournament}
+					/>
+					<ProtectedRoute
+						exact
+						path="/notifications"
+						component={Notifications}
+					/>
+					<ProtectedRoute exact path="/profile" component={Profile} />
+					<ProtectedRoute
+						path="/profile/rewards"
+						component={Rewards}
+					/>
+					<ProtectedRoute
+						path="/profile/settings"
+						component={Settings}
+					/>
+					<ProtectedRoute path="/iap" component={IAP} />
+					<Route
+						path="/terms-and-conditions"
+						component={TermsAndConditions}
+					/>
+					<Route path="/privacy-policy" component={PrivacyPolicy} />
+					<Route
+						path="/tournament-rules"
+						component={TournamentRules}
+					/>
+				</Switch>
+				<NavigationHOC />
+
+				{prizes?.featuredData.map((prize, idx) => (
+					<GlobalTimer key={`prize_feature_${idx}`} data={prize} />
+				))}
+				{prizes?.premiumData.map((prize, idx) => (
+					<GlobalTimer key={`prize_premium_${idx}`} data={prize} />
+				))}
+			</Router>
+		);
+	}
 };
 
 export default App;
