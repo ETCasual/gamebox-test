@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SwiperCore, {
     Navigation,
@@ -9,17 +8,10 @@ import SwiperCore, {
     Autoplay,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
-
-    const { blockchainNetworks } = useSelector(
-        (state) => state.blockchainNetworks
-    );
-
-    const dispatch = useDispatch();
 
     const [prizeData, setPrizeData] = useState([]);
 
@@ -38,12 +30,6 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
-
-    const handleWallet = async () => {
-        if (user.walletAddress) return;
-
-        await handleConnectWallet(dispatch, blockchainNetworks);
-    };
 
     const getMintDate = (date) => {
         return new Date(date * 1000).toLocaleString("default", {
