@@ -5,7 +5,8 @@ export default function loadPlayerEnterTournamentId(
     prizeId,
     gameId,
     isAdWatched,
-    isGemUsed
+    isGemUsed,
+    recaptchaToken
 ) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
@@ -17,7 +18,8 @@ export default function loadPlayerEnterTournamentId(
             prizeId,
             gameId,
             isAdWatched,
-            isGemUsed
+            isGemUsed,
+            recaptchaToken,
         )
             .then((data) => {
                 dispatch({

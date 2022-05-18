@@ -7,8 +7,10 @@ import "swiper/swiper-bundle.min.css";
 import { Provider } from "react-redux";
 import store from "redux/store";
 import App from "./App";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 // import * as serviceWorker from "./serviceWorker";
+const recaptchaSiteKey = process.env.REACT_APP_RECAPTCHA_SITEKEY;
 
 window.cdn =
     "https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/";
@@ -16,7 +18,9 @@ window.cdn =
 ReactDOM.render(
     // REDUX STORE PROVIDER
     <Provider store={store}>
-        <App />
+        <GoogleReCaptchaProvider reCaptchaKey={recaptchaSiteKey}>
+            <App />
+        </GoogleReCaptchaProvider>
     </Provider>,
     document.getElementById("root")
 );

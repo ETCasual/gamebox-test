@@ -876,7 +876,8 @@ export async function logEnter(
     prizeId,
     gameId,
     isAdWatched,
-    isGemUsed
+    isGemUsed,
+    recaptchaToken
 ) {
     const token = getToken();
     const request = new LogGEnterRequest();
@@ -886,6 +887,7 @@ export async function logEnter(
     request.setGameId(gameId);
     request.setIsWatchedAd(isAdWatched);
     request.setIsUsedGem(isGemUsed);
+    request.setRecaptchaToken(recaptchaToken);
 
     const response = await client.logGEnter(request, {
         authorization: `Bearer ${token}`,
@@ -900,7 +902,7 @@ export async function logEnter(
 //
 //     LOG LEAVE
 //
-export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
+export async function logLeave(user, currentGameInfo, gameScore, extraEarning, recaptchaToken) {
     const token = getToken();
     const enterId = currentGameInfo.playerEnterGameId;
     const request = new LogGLeaveRequest();
@@ -908,6 +910,7 @@ export async function logLeave(user, currentGameInfo, gameScore, extraEarning) {
     if (enterId) request.setId(enterId);
     request.setUserId(user.id);
     request.setGameScore(gameScore);
+    request.setRecaptchaToken(recaptchaToken);
 
     const response = await client.logGLeave(request, {
         authorization: `Bearer ${token}`,

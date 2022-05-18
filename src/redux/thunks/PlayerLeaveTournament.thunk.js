@@ -1,13 +1,13 @@
 import { LOG_OUT, PLAYER_LOG_LEAVE, SHOW_TOAST } from "redux/types";
 import { logLeave } from "redux/services/index.service";
 
-export default function loadPlayerLeaveTournamentId(gameScore) {
+export default function loadPlayerLeaveTournamentId(gameScore, recaptchaToken) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
         const { currentGameInfo } = getState()?.playerTournamentInfo;
         const { extraEarning } = getState()?.playerTournamentInfo;
 
-        logLeave(user, currentGameInfo, gameScore, extraEarning)
+        logLeave(user, currentGameInfo, gameScore, extraEarning, recaptchaToken)
             .then((data) => {
                 dispatch({
                     type: PLAYER_LOG_LEAVE,

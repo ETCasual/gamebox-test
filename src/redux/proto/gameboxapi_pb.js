@@ -10734,7 +10734,8 @@ proto.api.gamebox.LogGEnterRequest.toObject = function(includeInstance, msg) {
     prizeId: jspb.Message.getFieldWithDefault(msg, 3, 0),
     gameId: jspb.Message.getFieldWithDefault(msg, 4, 0),
     isWatchedAd: jspb.Message.getFieldWithDefault(msg, 5, false),
-    isUsedGem: jspb.Message.getFieldWithDefault(msg, 6, false)
+    isUsedGem: jspb.Message.getFieldWithDefault(msg, 6, false),
+    recaptchaToken: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -10794,6 +10795,10 @@ proto.api.gamebox.LogGEnterRequest.deserializeBinaryFromReader = function(msg, r
     case 6:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsUsedGem(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRecaptchaToken(value);
       break;
     default:
       reader.skipField();
@@ -10863,6 +10868,13 @@ proto.api.gamebox.LogGEnterRequest.serializeBinaryToWriter = function(message, w
   if (f) {
     writer.writeBool(
       6,
+      f
+    );
+  }
+  f = message.getRecaptchaToken();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -10960,6 +10972,21 @@ proto.api.gamebox.LogGEnterRequest.prototype.getIsUsedGem = function() {
 /** @param {boolean} value */
 proto.api.gamebox.LogGEnterRequest.prototype.setIsUsedGem = function(value) {
   jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+/**
+ * optional string recaptcha_token = 7;
+ * @return {string}
+ */
+proto.api.gamebox.LogGEnterRequest.prototype.getRecaptchaToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGEnterRequest.prototype.setRecaptchaToken = function(value) {
+  jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
@@ -11155,7 +11182,8 @@ proto.api.gamebox.LogGLeaveRequest.toObject = function(includeInstance, msg) {
     secret: jspb.Message.getFieldWithDefault(msg, 1, ""),
     id: jspb.Message.getFieldWithDefault(msg, 2, 0),
     userId: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    gameScore: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    gameScore: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    recaptchaToken: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -11207,6 +11235,10 @@ proto.api.gamebox.LogGLeaveRequest.deserializeBinaryFromReader = function(msg, r
     case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setGameScore(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRecaptchaToken(value);
       break;
     default:
       reader.skipField();
@@ -11262,6 +11294,13 @@ proto.api.gamebox.LogGLeaveRequest.serializeBinaryToWriter = function(message, w
   if (f !== 0) {
     writer.writeInt32(
       4,
+      f
+    );
+  }
+  f = message.getRecaptchaToken();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -11325,6 +11364,21 @@ proto.api.gamebox.LogGLeaveRequest.prototype.getGameScore = function() {
 /** @param {number} value */
 proto.api.gamebox.LogGLeaveRequest.prototype.setGameScore = function(value) {
   jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional string recaptcha_token = 7;
+ * @return {string}
+ */
+proto.api.gamebox.LogGLeaveRequest.prototype.getRecaptchaToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGLeaveRequest.prototype.setRecaptchaToken = function(value) {
+  jspb.Message.setProto3StringField(this, 7, value);
 };
 
 

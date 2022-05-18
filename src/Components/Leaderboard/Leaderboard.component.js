@@ -31,6 +31,7 @@ import showAdsBeforeGame from "Utils/showAdsBeforeGame";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const Leaderboard = ({
     data,
@@ -71,6 +72,8 @@ const Leaderboard = ({
         isEarnAdditionalWinModalShown: false,
         isEarnAdditionalInfoShown: false,
     });
+
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     let watcherRef = useRef(null);
     let leaderBoardBackgroundRef = useRef(null);
@@ -119,7 +122,7 @@ const Leaderboard = ({
         }, 1000);
 
         // END COUNTDOWN TIMER
-        function countDownTimerEnded() {
+        async function countDownTimerEnded() {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
 
@@ -132,9 +135,15 @@ const Leaderboard = ({
                 if (score > -1 && currentGameInfo.playerEnterGameId) {
                     localStorage.setItem("currentGameScore", score);
 
+                    if (!executeRecaptcha) {
+                        console.log('Execute recaptcha not yet available');
+                        return;
+                    }
+                    const recaptchaToken = await executeRecaptcha('finishGame');
+
                     // END BY TIMER
                     destination?.endGameByTimer?.();
-                    dispatch(loadPlayerLeaveTournamentId(score));
+                    dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
                 }
             }
 
@@ -160,6 +169,7 @@ const Leaderboard = ({
         dispatch,
         setTimer,
         setEarnAdditionalDisabledStatus,
+        executeRecaptcha,
     ]);
 
     const isCurrentUser = (id) => {
@@ -177,6 +187,12 @@ const Leaderboard = ({
     };
 
     const handleOnClickPlayButton = async () => {
+        if (!executeRecaptcha) {
+            console.log('Execute recaptcha not yet available');
+            return;
+        }
+        const recaptchaToken = await executeRecaptcha('playGame');
+
         localStorage.removeItem("currentGameScore");
 
         setModalStatus((prev) => ({ ...prev, isGameReady: true }));
@@ -242,7 +258,8 @@ const Leaderboard = ({
                 data?.prizeId,
                 currentGameDetails?.gameId,
                 isAdWatched,
-                isGemUsed
+                isGemUsed,
+                recaptchaToken,
             )
         );
     };
@@ -279,7 +296,13 @@ const Leaderboard = ({
         return enterGameConfig;
     };
 
-    window.playerFinishGame = (score) => {
+    window.playerFinishGame = async (score) => {
+        if (!executeRecaptcha) {
+            console.log('Execute recaptcha not yet available');
+            return;
+        }
+        const recaptchaToken = await executeRecaptcha('finishGame');
+
         if (currentGameInfo.playerEnterGameId) {
             localStorage.setItem("currentGameScore", score);
 
@@ -288,7 +311,7 @@ const Leaderboard = ({
                 isQuitGameBtnDisabled: true,
             }));
 
-            dispatch(loadPlayerLeaveTournamentId(score));
+            dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
             dispatch(
                 loadCurrentUserRank(
                     data?.prizeId.toString(),
