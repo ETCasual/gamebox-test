@@ -190,54 +190,6 @@ const Header = ({
                     </div>
                     {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
                     <div className="right-items w-100 d-flex align-items-center justify-content-end">
-                        
-                        <div
-                            className="wallet-wrapper d-none d-sm-flex"
-                            onClick={handleWallet}
-                        >
-                            {/* TOKEN VALUE & ADDRESS */}
-                            <div className="info-wrapper w-100 d-flex align-items-center">
-                                {!user.walletAddress && !user.network && (
-                                    <p className="mb-0">Connect Wallet</p>
-                                )}
-                                {user.walletAddress &&
-                                    user.network === "Wrong Network!" && (
-                                        <p className="mb-0">Wrong Network</p>
-                                )}
-
-                                {user.walletAddress && user.network !== "Wrong Network!" && (
-                                    <>
-                                        <img
-                                            className="icon"
-                                            src={`${window.cdn}icons/icon_froyo.png`}
-                                            alt="wallet"
-                                        />
-                                        <div className="ml-1">
-                                            <p className="mb-1 d-flex">
-                                                {user.tokenBalance >= 0 ? 
-                                                    parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
-                                                    : "Invalid token"
-                                                }{" "} 
-                                                <small className="d-flex align-self-center ml-1">
-                                                    {user.tokenSymbol}
-                                                </small>
-                                            </p>
-                                            <p className="mb-0">
-                                                {user.walletAddress?.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
-                                                {user.walletAddress?.substring(
-                                                    user.walletAddress.length - 4
-                                                )}
-                                            </p>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-
                         <div className="position-relative d-flex flex-nowrap align-items-center mx-2">
                             <Link
                                 className="gem-wrapper"
@@ -296,27 +248,8 @@ const Header = ({
                             </button>
                         </div>
                         <div className="profile d-flex position-relative m-1">
-                            <Link
-                                className="d-none d-sm-flex"
-                                to={{
-                                    pathname: "/profile",
-                                    state: {
-                                        prevPath: history.location.pathname,
-                                    },
-                                }}
-                            >
-                                <img
-                                    onError={(e) => defaultUserImage(e)}
-                                    className="img-fluid"
-                                    src={
-                                        userImage ||
-                                        `${window.cdn}icons/icon_profile.svg`
-                                    }
-                                    alt="profile"
-                                />
-                            </Link>
                             <div 
-                                className="d-flex d-sm-none"
+                                className="d-flex"
                                 onClick={() => setMobileProfileWallet(true)}
                             >
                                 <img
@@ -366,20 +299,40 @@ const Header = ({
                                 onClick={() => setMobileProfileWallet(false)}>
                             </div>
                             <div className="profile-wallet-wrapper p-3">
-                                <div className="profile-wrapper d-flex align-items-center mb-3">
-                                    <div className="profile-avatar">
-                                        <img
-                                            onError={(e) => defaultUserImage(e)}
-                                            className="img-fluid"
-                                            src={
-                                                user.picture ||
-                                                `${window.cdn}icons/icon_profile.svg`
-                                            }
-                                            alt="profile"
-                                        />
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={ `${process.env.REACT_APP_FROYO_WEB_URL}/my-profile` }
+                                >
+                                    <div className="profile-wrapper d-flex align-items-center mb-3">
+                                        <div className="profile-avatar">
+                                            <img
+                                                onError={(e) => defaultUserImage(e)}
+                                                className="img-fluid"
+                                                src={
+                                                    user.picture ||
+                                                    `${window.cdn}icons/icon_profile.svg`
+                                                }
+                                                alt="profile"
+                                            />
+                                        </div>
+                                        <div>
+                                            <div className="profile-name ml-3 mb-1">{user.username}</div>
+                                            {user.walletAddress && (
+                                                <div className="profile-wallet ml-3 py-1 px-2">
+                                                    {user.walletAddress?.substring(
+                                                        0,
+                                                        5
+                                                    )}
+                                                    ....
+                                                    {user.walletAddress?.substring(
+                                                        user.walletAddress.length - 4
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="profile-name ml-3">{user.username}</div>
-                                </div>
+                                </a>
                                 <div className="wallet-info-wrapper mb-3">
                                     {/* <div
                                         className="wallet-wrapper d-flex d-sm-none"
@@ -402,33 +355,26 @@ const Header = ({
                                     )}
                                     {user.walletAddress && user.network !== "Wrong Network!" && (
                                         <>
-                                            <div className="wallet-connected-wrapper p-3 w-100">
-                                                <div className="d-flex justify-content-between">
-                                                    <div className="wallet-connected-label mb-2">Wallet address</div>
-                                                    <div className="wallet-connected-value">
-                                                        {user.walletAddress?.substring(
-                                                            0,
-                                                            5
-                                                        )}
-                                                        ....
-                                                        {user.walletAddress?.substring(
-                                                            user.walletAddress.length - 4
-                                                        )}
+                                            <div className="wallet-connected-wrapper py-3 w-100">
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <div className="wallet-connected-label mb-2">
+                                                        <img
+                                                            className="icon"
+                                                            src={`${window.cdn}icons/icon_froyo.png`}
+                                                            alt="wallet"
+                                                        />
                                                     </div>
-                                                </div>
-                                                <div className="d-flex justify-content-between">
-                                                    <div className="wallet-connected-label mb-2">$Froyo tokens</div>
                                                     <div className="wallet-connected-value">
                                                         {user.tokenBalance >= 0 ? 
-                                                            parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString()
+                                                            parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString() + " FROYO"
                                                             : "Invalid token"
                                                         }{" "} 
                                                     </div>
                                                 </div>
-                                                <div className="wallet-disconnect-btn text-right mt-3"
+                                                <div className="wallet-disconnect-btn w-100 d-flex align-items-center justify-content-center p-3 mt-3"
                                                     onClick={handleWalletDisconnect}
                                                 >
-                                                    Disconnect
+                                                    Disconnect Wallet
                                                 </div>
                                             </div>
                                         </>
@@ -444,7 +390,7 @@ const Header = ({
                                             },
                                         }}
                                     >
-                                        My account
+                                        Gamebox profile
                                     </Link>
                                     <p className="submenu-sign-out mt-2 mb-0" 
                                         onClick={() => {
@@ -452,7 +398,7 @@ const Header = ({
                                             handleSignOut(dispatch);
                                         }}
                                     >
-                                        Sign out
+                                        Logout
                                     </p>
                                 </div>
                             </div>

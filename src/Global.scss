@@ -349,49 +349,62 @@ html {
             img {
                 border: 2px solid #393939;
                 border-radius: 100%;
-                width: 36px;
-                height: 36px;
+                width: 54px;
+                height: 54px;
                 @include media-min($lg) {
-                    width: 40px;
-                    height: 40px;
+                    width: 60px;
+                    height: 60px;
                 }
                 object-fit: contain;
             }
         }
         .profile-name {
-            font-size: $fnt-sz-12;
+            font-size: $fnt-sz-14;
             font-weight: $fnt-wgt-600;
+        }
+        .profile-wallet {
+            border-radius: 10px;
+            background-color: #1A1A1A;
         }
         .wallet-info-wrapper {
             .wallet-btn {
                 background-color: #F20086;
                 box-shadow: inset 0px 3px 6px #0000000F;
                 border-radius: 5px;
+                font-size: $fnt-sz-14;
+                font-weight: $fnt-wgt-600;
+                cursor: pointer;
             }
         }
         .wallet-connected-wrapper {
-            border-radius: 10px;
-            background-color: #1A1A1A;
+            .icon {
+                width: 36px;
+                @include media-min($lg) {
+                    width: 40px;
+                }
+            }
+    
             .wallet-connected-label {
                 font-size: $fnt-sz-10;
                 color: #747474;
             }
             .wallet-connected-value {
-                font-size: $fnt-sz-12;
+                font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-600;
                 color: #FFF7F7;
             }
             .wallet-disconnect-btn {
-                font-size: $fnt-sz-12;
+                background-color: #F20086;
+                box-shadow: inset 0px 3px 6px #0000000F;
+                border-radius: 10px;
+                font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-600;
-                color: #C40000;
                 cursor: pointer;
             }
         }
         .submenu-wrapper {
+            font-size: $fnt-sz-14;
             .submenu-sign-out {
-                font-size: $fnt-sz-12;
-                font-weight: $fnt-wgt-600;
                 color: #C40000;
                 cursor: pointer;
             }
