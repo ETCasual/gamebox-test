@@ -48,7 +48,7 @@ const PurchaseContent = ({
         },
         isSuccess: {
             title: "Purchase successful.",
-            subTitle: `You have successfully purchased ${productInfo?.quantity} gems. Please allow a few minutes for the gems to be reflected in your account.`,
+            subTitle: `You have successfully purchased ${productInfo?.quantity} gems.`,
             button: "Continue",
         },
         isFail: {

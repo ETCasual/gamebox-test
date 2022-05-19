@@ -200,12 +200,6 @@ const Index = () => {
                     })
                     .on("transactionHash", function (hash) {
                         console.log("hash", hash);
-                        setPurchasingStatusModal(true);
-                        setPurchasingStatus((prev) => ({
-                            ...prev,
-                            processing: false,
-                            isSuccess: true,
-                        }));
 
                         dispatch(
                             loadIAPurchaseRequest(
@@ -220,6 +214,12 @@ const Index = () => {
                     .on("receipt", function (receipt) {
                         console.log("receipt", receipt);
                         dispatch(loadGemsList());
+                        setPurchasingStatusModal(true);
+                        setPurchasingStatus((prev) => ({
+                            ...prev,
+                            processing: false,
+                            isSuccess: true,
+                        }));
 
                         let timeOutRef = null;
                         clearTimeout(timeOutRef);
