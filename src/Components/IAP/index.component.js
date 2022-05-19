@@ -54,6 +54,18 @@ const Index = () => {
         isFail: false,
     });
 
+    // Styles
+    const imgIconStyle = {
+        width: "32px",
+        height: "32px",
+        marginLeft: "20px",
+        marginRight: "5px",
+    };
+    const buyFroyoStyle = {
+        fontSize: "14px",
+        fontWeight: 700,
+    };
+
     const handleWallet = async () => {
         setSelectWalletModalShown(true);
         // await handleConnectWallet(dispatch, blockchainNetworks);
@@ -290,6 +302,55 @@ const Index = () => {
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7">
                             <p className="title mb-4 d-flex align-items-end">
                                 Purchase Gems
+                                {/* BUY FROYO */}
+                                <div className="right-items w-100 d-flex align-items-center justify-content-end">
+                                    <ul className="list-unstyled mb-0 d-flex align-items-center">
+                                        <li
+                                            className="text-white-50"
+                                            style={buyFroyoStyle}
+                                        >
+                                            Buy $FROYO:
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://pancakeswap.finance/swap?inputCurrency=bnb&outputCurrency=0xe369fec23380f9F14ffD07a1DC4b7c1a9fdD81c9"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <img
+                                                    src="https://staging.froyo.games/assets/img/media/other/pancake.png"
+                                                    alt="pancake"
+                                                    style={imgIconStyle}
+                                                ></img>
+                                                <button
+                                                    className="text-white"
+                                                    style={buyFroyoStyle}
+                                                >
+                                                    Pancake
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0xcf0BCf85082e3CFE591bd2451Bc4B46faa34c7De"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <img
+                                                    src="https://staging.froyo.games/assets/img/media/other/sushi.png"
+                                                    alt="sushi"
+                                                    style={imgIconStyle}
+                                                ></img>
+                                                <button
+                                                    className="text-white"
+                                                    style={buyFroyoStyle}
+                                                >
+                                                    Sushi
+                                                </button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </p>
                             {/* TABS */}
                             <>
