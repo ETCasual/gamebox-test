@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 const OrientationModal = () => {
     const [orientationStatus, setOrientationStatus] = useState(false);
-    const isKeyboardOpen = useDetectKeyboardOpen();
 
     useEffect(() => {
         window.addEventListener("resize", handleResize, false);
 
         function handleResize() {
-            if (
-                navigator.userAgent.includes("Mobile") &&
-                window.screen.availWidth > window.screen.availHeight &&
-                !isKeyboardOpen
-            ) {
+            const isMobile = navigator.userAgent.includes("Mobile");
+            if (!isMobile) return;
+
+            let isPortrait = window.matchMedia(
+                "(orientation: portrait)"
+            ).matches;
+
+            if (!isPortrait) {
                 document.querySelector("body").style.overflow = "hidden";
                 setOrientationStatus(true);
             } else {
@@ -21,10 +22,11 @@ const OrientationModal = () => {
                 setOrientationStatus(false);
             }
         }
+
         handleResize();
 
         return () => window.removeEventListener("resize", handleResize, false);
-    }, [isKeyboardOpen]);
+    });
 
     return (
         <div
