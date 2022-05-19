@@ -3,9 +3,9 @@ import { processClaim } from "redux/services/index.service";
 import loadClaimedPrizes from "redux/thunks/ClaimedPrizes.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 
-export default function loadClaimPrize(winnerId, userId, hash) {
+export default function loadClaimPrize(winnerId, userId, hash, walletAddress) {
     return async (dispatch) => {
-        return processClaim(winnerId, userId, hash)
+        return processClaim(winnerId, userId, hash, walletAddress)
             .then((data) => {
                 if (data === 1) {
                     dispatch(loadClaimedPrizes());

@@ -1379,6 +1379,7 @@ export async function getClaimedPrizesList(userId) {
                 userCountry: e.getUserCountry(),
                 shipTracking: e.getShipTracking(),
                 deliveryCompany: e.getDeliveryCompany(),
+                walletAddress: e.getWalletAddress(),
                 createdOn: e.getCreatedOn(),
                 claimedOn: e.getClaimedOn(),
                 status: e.getStatus(),
@@ -1390,12 +1391,13 @@ export async function getClaimedPrizesList(userId) {
 //
 //     PROCESS CLAIM
 //
-export async function processClaim(winnerId, userId, hash) {
+export async function processClaim(winnerId, userId, hash, walletAddress) {
     const token = getToken();
     const request = new ClaimWinnerRequest();
     request.setId(winnerId);
     request.setUserId(userId);
     request.setTransactionHash(hash);
+    request.setWalletAddress(walletAddress);
 
     // request.setId(id);
     // request.setUserId(user.id);

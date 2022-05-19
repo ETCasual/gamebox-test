@@ -27310,7 +27310,8 @@ proto.api.gamebox.ClaimWinnerRequest.toObject = function(includeInstance, msg) {
     state: jspb.Message.getFieldWithDefault(msg, 9, ""),
     zipCode: jspb.Message.getFieldWithDefault(msg, 10, ""),
     country: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    transactionHash: jspb.Message.getFieldWithDefault(msg, 12, "")
+    transactionHash: jspb.Message.getFieldWithDefault(msg, 12, ""),
+    walletAddress: jspb.Message.getFieldWithDefault(msg, 13, "")
   };
 
   if (includeInstance) {
@@ -27394,6 +27395,10 @@ proto.api.gamebox.ClaimWinnerRequest.deserializeBinaryFromReader = function(msg,
     case 12:
       var value = /** @type {string} */ (reader.readString());
       msg.setTransactionHash(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWalletAddress(value);
       break;
     default:
       reader.skipField();
@@ -27505,6 +27510,13 @@ proto.api.gamebox.ClaimWinnerRequest.serializeBinaryToWriter = function(message,
   if (f.length > 0) {
     writer.writeString(
       12,
+      f
+    );
+  }
+  f = message.getWalletAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      13,
       f
     );
   }
@@ -27688,6 +27700,21 @@ proto.api.gamebox.ClaimWinnerRequest.prototype.getTransactionHash = function() {
 /** @param {string} value */
 proto.api.gamebox.ClaimWinnerRequest.prototype.setTransactionHash = function(value) {
   jspb.Message.setProto3StringField(this, 12, value);
+};
+
+
+/**
+ * optional string wallet_address = 13;
+ * @return {string}
+ */
+proto.api.gamebox.ClaimWinnerRequest.prototype.getWalletAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.ClaimWinnerRequest.prototype.setWalletAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 13, value);
 };
 
 
@@ -29593,7 +29620,8 @@ proto.api.gamebox.WinnerDetail.toObject = function(includeInstance, msg) {
     transactionHash: jspb.Message.getFieldWithDefault(msg, 24, ""),
     totalPlayer: jspb.Message.getFieldWithDefault(msg, 25, 0),
     prizeBlockchainNetwork: jspb.Message.getFieldWithDefault(msg, 26, 0),
-    prizeContractType: jspb.Message.getFieldWithDefault(msg, 27, 0)
+    prizeContractType: jspb.Message.getFieldWithDefault(msg, 27, 0),
+    walletAddress: jspb.Message.getFieldWithDefault(msg, 28, "")
   };
 
   if (includeInstance) {
@@ -29737,6 +29765,10 @@ proto.api.gamebox.WinnerDetail.deserializeBinaryFromReader = function(msg, reade
     case 27:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setPrizeContractType(value);
+      break;
+    case 28:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWalletAddress(value);
       break;
     default:
       reader.skipField();
@@ -29953,6 +29985,13 @@ proto.api.gamebox.WinnerDetail.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt32(
       27,
+      f
+    );
+  }
+  f = message.getWalletAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      28,
       f
     );
   }
@@ -30361,6 +30400,21 @@ proto.api.gamebox.WinnerDetail.prototype.getPrizeContractType = function() {
 /** @param {number} value */
 proto.api.gamebox.WinnerDetail.prototype.setPrizeContractType = function(value) {
   jspb.Message.setProto3IntField(this, 27, value);
+};
+
+
+/**
+ * optional string wallet_address = 28;
+ * @return {string}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getWalletAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 28, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.WinnerDetail.prototype.setWalletAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 28, value);
 };
 
 

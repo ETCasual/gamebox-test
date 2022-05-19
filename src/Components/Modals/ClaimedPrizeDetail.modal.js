@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 
 const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
-    const { user } = useSelector((state) => state.userData);
-
     const date = new Date(data.createdOn * 1000);
     const dateMonthYear = date.toLocaleString("default", {
         day: "2-digit",
@@ -53,10 +51,10 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                         NFT delivered to wallet address
                                     </p>
                                     <p className="wallet-address">
-                                        {user.walletAddress?.substring(0, 5)}
+                                        {data.walletAddress?.substring(0, 5)}
                                         ....
-                                        {user.walletAddress?.substring(
-                                            user.walletAddress.length - 4
+                                        {data.walletAddress?.substring(
+                                            data.walletAddress.length - 4
                                         )}
                                     </p>
                                 </div>

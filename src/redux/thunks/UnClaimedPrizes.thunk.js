@@ -137,7 +137,7 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
                             })
                             .on("transactionHash", function (hash) {
                                 console.log("hash", hash);
-                                dispatch(loadClaimPrize(winnerId, user.id, hash));
+                                dispatch(loadClaimPrize(winnerId, user.id, hash, user.walletAddress));
                             })
                             .on("receipt", function (receipt) {
                                 console.log("receipt", receipt);
@@ -163,7 +163,7 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
                             })
                             .on("transactionHash", function (hash) {
                                 console.log("hash", hash);
-                                dispatch(loadClaimPrize(winnerId, user.id, hash));
+                                dispatch(loadClaimPrize(winnerId, user.id, hash, user.walletAddress));
                             })
                             .on("receipt", function (receipt) {
                                 console.log("receipt", receipt);
@@ -293,7 +293,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
                         })
                         .on("transactionHash", function (hash) {
                             console.log("hash", hash);
-                            dispatch(loadClaimPrize(winnerId, user.id, hash));
+                            dispatch(loadClaimPrize(winnerId, user.id, hash, user.walletAddress));
                         })
                         .on("receipt", function (receipt) {
                             console.log("receipt", receipt);
