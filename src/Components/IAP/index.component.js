@@ -55,11 +55,21 @@ const Index = () => {
     });
 
     // Styles
-    const imgIconStyle = {
+    const pancakeImgIconStyle = {
         width: "32px",
         height: "32px",
         marginLeft: "20px",
         marginRight: "5px",
+        borderRadius: "100px",
+        backgroundColor: "#1FC7D4",
+    };
+    const sushiImgIconStyle = {
+        width: "32px",
+        height: "32px",
+        marginLeft: "20px",
+        marginRight: "5px",
+        borderRadius: "100px",
+        backgroundColor: "white",
     };
     const buyFroyoStyle = {
         fontSize: "14px",
@@ -318,9 +328,9 @@ const Index = () => {
                                                 rel="noreferrer"
                                             >
                                                 <img
-                                                    src="https://staging.froyo.games/assets/img/media/other/pancake.png"
+                                                    src={`${window.cdn}external_provider/pancakeswap.svg`}
                                                     alt="pancake"
-                                                    style={imgIconStyle}
+                                                    style={pancakeImgIconStyle}
                                                 ></img>
                                                 <button
                                                     className="text-white"
@@ -337,9 +347,9 @@ const Index = () => {
                                                 rel="noreferrer"
                                             >
                                                 <img
-                                                    src="https://staging.froyo.games/assets/img/media/other/sushi.png"
+                                                    src={`${window.cdn}external_provider/sushiswap.svg`}
                                                     alt="sushi"
-                                                    style={imgIconStyle}
+                                                    style={sushiImgIconStyle}
                                                 ></img>
                                                 <button
                                                     className="text-white"
