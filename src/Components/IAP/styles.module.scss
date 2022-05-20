@@ -103,4 +103,23 @@
             margin: 0 auto;
         }
     }
+    .providers {
+        font-size: $fnt-sz-14;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        grid-auto-rows: 1fr;
+        column-gap: 5px;
+        li {
+            display: inline-block;
+            min-width: 32px;
+            button {
+                padding: 0;
+            }
+            img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
 }

@@ -54,28 +54,6 @@ const Index = () => {
         isFail: false,
     });
 
-    // Styles
-    const pancakeImgIconStyle = {
-        width: "32px",
-        height: "32px",
-        marginLeft: "20px",
-        marginRight: "5px",
-        borderRadius: "100px",
-        backgroundColor: "#1FC7D4",
-    };
-    const sushiImgIconStyle = {
-        width: "32px",
-        height: "32px",
-        marginLeft: "20px",
-        marginRight: "5px",
-        borderRadius: "100px",
-        backgroundColor: "white",
-    };
-    const buyFroyoStyle = {
-        fontSize: "14px",
-        fontWeight: 700,
-    };
-
     const handleWallet = async () => {
         setSelectWalletModalShown(true);
         // await handleConnectWallet(dispatch, blockchainNetworks);
@@ -310,16 +288,43 @@ const Index = () => {
                 <div className="container-fluid">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                            <p className="title mb-4 d-flex align-items-end">
-                                Purchase Gems
+                            <p className="title mb-4 d-flex align-items-center">
+                                <span className="w-100">Purchase Gems</span>
                                 {/* BUY FROYO */}
                                 <div className="right-items w-100 d-flex align-items-center justify-content-end">
-                                    <ul className="list-unstyled mb-0 d-flex align-items-center">
-                                        <li
-                                            className="text-white-50"
-                                            style={buyFroyoStyle}
-                                        >
+                                    <ul className="list-unstyled mb-0 d-flex align-items-center providers">
+                                        <li className="text-white-50 pl-2">
                                             Buy $FROYO:
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.btse.com/en/otc"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/btse-icon.svg`}
+                                                        alt="btse"
+                                                        title="BTSE"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.bkex.com/trade/FROYO_USDT"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/bkex-icon.svg`}
+                                                        alt="bkex"
+                                                        title="BKEX"
+                                                    ></img>
+                                                </button>
+                                            </a>
                                         </li>
                                         <li>
                                             <a
@@ -327,16 +332,27 @@ const Index = () => {
                                                 target="_blank"
                                                 rel="noreferrer"
                                             >
-                                                <img
-                                                    src={`${window.cdn}external_provider/pancakeswap.svg`}
-                                                    alt="pancake"
-                                                    style={pancakeImgIconStyle}
-                                                ></img>
-                                                <button
-                                                    className="text-white"
-                                                    style={buyFroyoStyle}
-                                                >
-                                                    Pancake
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/pancake-icon.svg`}
+                                                        alt="pancake"
+                                                        title="PancakeSwap"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://apeswap.finance/swap?inputCurrency=bnb&outputCurrency=0xe369fec23380f9F14ffD07a1DC4b7c1a9fdD81c9"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/apeswap-icon.svg`}
+                                                        alt="ape"
+                                                        title="ApeSwap"
+                                                    ></img>
                                                 </button>
                                             </a>
                                         </li>
@@ -346,16 +362,12 @@ const Index = () => {
                                                 target="_blank"
                                                 rel="noreferrer"
                                             >
-                                                <img
-                                                    src={`${window.cdn}external_provider/sushiswap.svg`}
-                                                    alt="sushi"
-                                                    style={sushiImgIconStyle}
-                                                ></img>
-                                                <button
-                                                    className="text-white"
-                                                    style={buyFroyoStyle}
-                                                >
-                                                    Sushi
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/sushi-icon.svg`}
+                                                        alt="sushi"
+                                                        title="Sushi"
+                                                    ></img>
                                                 </button>
                                             </a>
                                         </li>
