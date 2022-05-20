@@ -254,7 +254,7 @@ const Header = ({
                             >
                                 <img
                                     onError={(e) => defaultUserImage(e)}
-                                    className="img-fluid"
+                                    className=""
                                     src={
                                         userImage ||
                                         `${window.cdn}icons/icon_profile.svg`
