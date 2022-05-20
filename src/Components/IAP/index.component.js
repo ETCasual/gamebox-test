@@ -288,8 +288,91 @@ const Index = () => {
                 <div className="container-fluid">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                            <p className="title mb-4 d-flex align-items-end">
-                                Purchase Gems
+                            <p className="title mb-4 d-flex align-items-center">
+                                <span className="w-100">Purchase Gems</span>
+                                {/* BUY FROYO */}
+                                <div className="right-items w-100 d-flex align-items-center justify-content-end">
+                                    <ul className="list-unstyled mb-0 d-flex align-items-center providers">
+                                        <li className="text-white-50 pl-2">
+                                            Buy $FROYO:
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.btse.com/en/otc"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/btse-icon.svg`}
+                                                        alt="btse"
+                                                        title="BTSE"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://www.bkex.com/trade/FROYO_USDT"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/bkex-icon.svg`}
+                                                        alt="bkex"
+                                                        title="BKEX"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://pancakeswap.finance/swap?inputCurrency=bnb&outputCurrency=0xe369fec23380f9F14ffD07a1DC4b7c1a9fdD81c9"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/pancake-icon.svg`}
+                                                        alt="pancake"
+                                                        title="PancakeSwap"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://apeswap.finance/swap?inputCurrency=bnb&outputCurrency=0xe369fec23380f9F14ffD07a1DC4b7c1a9fdD81c9"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/apeswap-icon.svg`}
+                                                        alt="ape"
+                                                        title="ApeSwap"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0xcf0BCf85082e3CFE591bd2451Bc4B46faa34c7De"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <button>
+                                                    <img
+                                                        src={`${window.cdn}external_provider/sushi-icon.svg`}
+                                                        alt="sushi"
+                                                        title="Sushi"
+                                                    ></img>
+                                                </button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </p>
                             {/* TABS */}
                             <>
