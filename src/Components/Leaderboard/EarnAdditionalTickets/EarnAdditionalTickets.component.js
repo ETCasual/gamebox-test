@@ -107,13 +107,13 @@ const EarnAdditionalTickets = ({
             <div className="select-one-option-text">
                 { earnAdditionalDisabledStatus.ads ? "You have chosen to watch ads to boost your ticket earnings" : "" }
                 { earnAdditionalDisabledStatus.gems ? "You have chosen to use gems to boost your ticket earnings" : "" }
-                { !earnAdditionalDisabledStatus.ads && !earnAdditionalDisabledStatus.gems ? "Select only one option" : "" }
+                { !earnAdditionalDisabledStatus.ads && !earnAdditionalDisabledStatus.gems ? "" : "" }
             </div>
 
             {/* BOTH OPTIONS*/}
             <div className="option-buttons-container d-flex">
                 {/* WATCH ADS */}
-                <div
+                {/* <div
                     className={`button-flex-container p-3 mx-2 mx-md-3 position-relative ${
                         earnAdditionalDisabledStatus.gems
                             ? "opacity-0-2"
@@ -146,10 +146,10 @@ const EarnAdditionalTickets = ({
                             <span>{currentGameRules.score} score points</span>
                         </p>
                     </div>
-                </div>
+                </div> */}
                 {/* USE GEMS*/}
                 <div
-                    className={`button-flex-container p-3 mx-2 mx-md-3 position-relative ${
+                    className={`button-flex-container p-3 mx-2 mx-md-3 position-relative text-center text-md-left ${
                         earnAdditionalDisabledStatus.ads
                             ? "opacity-0-2"
                             : "cursor-pointer"

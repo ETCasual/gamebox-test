@@ -132,7 +132,7 @@
                     margin-top: 30px;
                 }
                 .button-flex-container {
-                    width: auto;
+                    width: 13rem;
                     height: auto;
                     @include media-min($md) {
                         width: 16.25rem;
@@ -155,12 +155,15 @@
                     .ticket-holder {
                         background: #1414145e;
                         border-radius: 6px;
-                        width: fit-content;
+                        // width: fit-content;
                         height: 4.313rem;
                         z-index: 1;
                         position: relative;
                         backdrop-filter: blur(5px);
                         -webkit-backdrop-filter: blur(5px);
+                        @include media-min($md) {
+                            width: fit-content;
+                        }
                         .ticket-amount {
                             font-size: $fnt-sz-14;
                             @include media-min($md) {
@@ -196,10 +199,10 @@
             }
             .play-immediately-text-container {
                 margin: 32px 0;
-                width: 33.75rem;
+                width: 18.75rem;
                 .line {
                     height: 1px;
-                    width: 100%;
+                    width: 35%;
                     background: #282828;
                     @include media-min($md) {
                         background: white;
