@@ -12,7 +12,8 @@ const convertSecondsToHours = (timestamp) => {
     seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
 
     if (days < -3 || hours < -3 || minutes < -3 || seconds < -3)
-        window.location.reload(true);
+        // window.location.reload(true);
+        return "Ended";
     else if (days === 0 && hours === 0 && minutes === 0 && seconds === 0)
         return "Ended";
     else if (days < 0 || hours < 0 || minutes < 0 || seconds < 0)

@@ -209,26 +209,35 @@ const Index = () => {
             _arr = n?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
             );
-            console.log(_arr);
+            const _prizeList = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+
             if (_arr.length > 0) {
                 setRevealCardModalData(_arr);
 
-                // UPDATE LOCALSTORAGE
-                const _prizeList =
-                    JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
-
-                let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
-                if (idx > -1) {
-                    _prizeList[idx].seen = true;
-                    _prizeList[idx].completed = true;
-                    sessionStorage.setItem(
-                        "prizeDetailList",
-                        JSON.stringify(_prizeList)
-                    );
-                }
+                setIsRevealCardModalShown(true);
+            } else {
+                // Broken prizes
+                let featureArr = _prizeList.filter(
+                    (p) => p.type === 1 && p.prizeId !== prizeId
+                );
+                let premiumArr = _prizeList.filter(
+                    (p) => p.type === 2 && p.prizeId !== prizeId
+                );
+                setFeaturedData(featureArr);
+                setPremiumData(premiumArr);
             }
+            // UPDATE LOCALSTORAGE
+            let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
+            if (idx > -1) {
+                _prizeList[idx].seen = true;
+                _prizeList[idx].completed = true;
+                sessionStorage.setItem(
+                    "prizeDetailList",
+                    JSON.stringify(_prizeList)
+                );
+            }
+        
         });
-        setIsRevealCardModalShown(true);
         // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE
         return;
     }
