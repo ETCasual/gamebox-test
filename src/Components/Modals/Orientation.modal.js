@@ -37,7 +37,7 @@ const OrientationModal = () => {
             ).matches;
 
             // Note: In iOS [isKeyboardOpen] always return "true", so have to check separately for iOS
-            if (getMobileOperatingSystem() == "iOS" && !isPortrait) {
+            if (getMobileOperatingSystem() === "iOS" && !isPortrait) {
                 document.querySelector("body").style.overflow = "hidden";
                 setOrientationStatus(true);
             } else if (!isPortrait && !isKeyboardOpen) {

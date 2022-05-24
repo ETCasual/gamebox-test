@@ -24,11 +24,13 @@
             -webkit-filter: blur(15px);
         }
         .leaderboard-wrapper {
+            display: flex;
+            flex-direction: column;
             position: absolute;
             top: 0;
             left: 50%;
             transform: translate(-50%, 0%);
-            height: calc(100% - 86px);
+            height: 100%;
             width: 100%;
             @include media-min($md) {
                 width: 28rem;
@@ -67,6 +69,7 @@
                 overflow-y: scroll;
                 -ms-overflow-style: none; /* Internet Explorer 10+ */
                 scrollbar-width: none; /* Firefox */
+                padding-bottom: 200px;
                 .individual-rank {
                     margin-bottom: 1.5px;
                     height: 61px;
@@ -77,22 +80,29 @@
             }
         }
         .bottom-ready-tournament {
-            position: absolute;
             bottom: 0;
-            left: 0;
-            width: 100%;
+            position: sticky;
+            padding: 15px;
             height: 86px;
+            @media (pointer:none), (pointer:coarse) {
+                position: fixed;
+                width: 100%;
+                left: 0;
+                right: 0;
+            }
             background: linear-gradient(101deg, #1c1c1c 0%, #0b0b0b 100%);
             border-radius: 0px 0px 10px 10px;
             z-index: 1;
             button.ready-tournament-button {
+                display: block;
+                margin: 0 auto;
                 background: #cc0767;
                 box-shadow: inset 0px 3px 6px #0000000f;
                 border-radius: 10px;
                 text-align: center;
                 font-size: $fnt-sz-14;
                 color: #ffffff;
-                width: 90%;
+                width: 100%;
                 @include media-min($md) {
                     width: 18rem;
                 }
@@ -100,15 +110,19 @@
             }
         }
         .earn-additional-tickets-container {
-            position: absolute;
+            position: sticky;
             bottom: 0;
-            left: 0;
             min-height: 30rem;
             @include media-min($md) {
                 height: 26.25rem;
                 min-height: unset;
             }
             width: 100%;
+            @media (pointer:none), (pointer:coarse) {
+                position: fixed;
+                left: 0;
+                right: 0;
+            }
             background: linear-gradient(133deg, #1c1c1c 0%, #0b0b0b 100%);
             border-radius: 0px 0px 10px 10px;
             .increase-earning-text {
