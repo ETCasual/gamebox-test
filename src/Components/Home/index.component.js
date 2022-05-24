@@ -72,7 +72,13 @@ const Index = () => {
         }));
 
         return () => clearTimeout(timeOutRef);
-    }, [prizes.featuredData, prizes.premiumData, prizes.automatedEntryData, FeaturedData, PremiumData]);
+    }, [
+        prizes.featuredData,
+        prizes.premiumData,
+        prizes.automatedEntryData,
+        FeaturedData,
+        PremiumData,
+    ]);
 
     // SETTING PRIZES (FEATURE & PREMIUM) TO STATE
     useEffect(() => {
@@ -347,6 +353,7 @@ const Index = () => {
                                         ? "6rem"
                                         : 0
                                 }`,
+                                paddingBottom: "4.063rem",
                             }}
                         >
                             <div className="row justify-content-center">

@@ -83,18 +83,20 @@ const Index = () => {
                 trigger: workCardRef.current,
                 start: "10% bottom",
                 onEnter: () => {
-                    const tl = gsap.timeline();
-                    tl.to(
-                        workCardRef.current,
-                        {
-                            duration: 1,
-                            autoAlpha: 1,
-                            y: 0,
-                            ease: "power2.out",
-                            stagger: 0.2,
-                        },
-                        0
-                    );
+                    if (gsap) {
+                        const tl = gsap.timeline();
+                        tl.to(
+                            workCardRef.current,
+                            {
+                                duration: 1,
+                                autoAlpha: 1,
+                                y: 0,
+                                ease: "power2.out",
+                                stagger: 0.2,
+                            },
+                            0
+                        );
+                    }
                 },
             });
 
@@ -103,7 +105,7 @@ const Index = () => {
                 trigger: dailyRewardRef.current,
                 start: "100px bottom",
                 onEnter: () => {
-                    if (gsap) {
+                    if (gsap && dailyRewardRef.current) {
                         const tl = gsap.timeline();
                         tl.to(
                             [
