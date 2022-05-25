@@ -83,6 +83,19 @@ const Leaderboard = ({
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
+    // DISABLE SCROLLING
+    useEffect(() => {
+        window.addEventListener("resize", handleResize, { once: true });
+
+        function handleResize() {
+            document.documentElement.style.overflowY = "hidden";
+            document.documentElement.scrollTop = 0;
+        }
+
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    });
+
     // SORTING LEADERBOARD
     useEffect(() => {
         setLeaderboardList(leaderboard);
@@ -136,14 +149,16 @@ const Leaderboard = ({
                     localStorage.setItem("currentGameScore", score);
 
                     if (!executeRecaptcha) {
-                        console.log('Execute recaptcha not yet available');
+                        console.log("Execute recaptcha not yet available");
                         return;
                     }
-                    const recaptchaToken = await executeRecaptcha('finishGame');
+                    const recaptchaToken = await executeRecaptcha("finishGame");
 
                     // END BY TIMER
                     destination?.endGameByTimer?.();
-                    dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
+                    dispatch(
+                        loadPlayerLeaveTournamentId(score, recaptchaToken)
+                    );
                 }
             }
 
@@ -188,10 +203,10 @@ const Leaderboard = ({
 
     const handleOnClickPlayButton = async () => {
         if (!executeRecaptcha) {
-            console.log('Execute recaptcha not yet available');
+            console.log("Execute recaptcha not yet available");
             return;
         }
-        const recaptchaToken = await executeRecaptcha('playGame');
+        const recaptchaToken = await executeRecaptcha("playGame");
 
         localStorage.removeItem("currentGameScore");
 
@@ -259,7 +274,7 @@ const Leaderboard = ({
                 currentGameDetails?.gameId,
                 isAdWatched,
                 isGemUsed,
-                recaptchaToken,
+                recaptchaToken
             )
         );
     };
@@ -298,10 +313,10 @@ const Leaderboard = ({
 
     window.playerFinishGame = async (score) => {
         if (!executeRecaptcha) {
-            console.log('Execute recaptcha not yet available');
+            console.log("Execute recaptcha not yet available");
             return;
         }
-        const recaptchaToken = await executeRecaptcha('finishGame');
+        const recaptchaToken = await executeRecaptcha("finishGame");
 
         if (currentGameInfo.playerEnterGameId) {
             localStorage.setItem("currentGameScore", score);
@@ -700,7 +715,7 @@ const Leaderboard = ({
                                 {/* READY TOURNAMENT BUTTON */}
                                 {!modalStatus.isEarnAdditionalInfoShown && (
                                     <div
-                                        className="bottom-ready-tournament d-flex align-items-center justify-content-center"
+                                        className="bottom-ready-tournament d-block align-items-center justify-content-center"
                                         ref={readyTournamentButtonRef}
                                     >
                                         <button

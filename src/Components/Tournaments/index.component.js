@@ -78,6 +78,23 @@ const Index = ({ match }) => {
     //     return () => clearTimeout(timeOutRef);
     // }, [timer, dispatch]);
 
+    // DISABLE SCROLLING
+    useEffect(() => {
+        window.addEventListener("resize", handleResize, { once: true });
+
+        function handleResize() {
+            document.documentElement.style.overflowY = "hidden";
+            document.documentElement.scrollTop = 0;
+        }
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            document.documentElement.style.overflowY = "visible";
+        };
+    });
+
     // LOAD AVAILABLE SPINS
     useEffect(() => {
         if (user.id && spinner.freeSpins <= 0) dispatch(loadAvailableSpins());
@@ -200,7 +217,7 @@ const Index = ({ match }) => {
         });
         loadCurrentUserRank(user, id, gameId, currentUserRank, dispatch);
         setIsGameLeaderboardShown(true);
-    }
+    };
 
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);
@@ -279,10 +296,12 @@ const Index = ({ match }) => {
                                             src={currentPrize?.prizeBG}
                                             alt="prize"
                                         />
-                                        {currentPrize?.infoUrl ?
+                                        {currentPrize?.infoUrl ? (
                                             <a
                                                 className="contract-address"
-                                                href={currentPrize?.infoUrl || "#"}
+                                                href={
+                                                    currentPrize?.infoUrl || "#"
+                                                }
                                                 target="_blank"
                                                 rel="noreferrer"
                                             >
@@ -292,29 +311,31 @@ const Index = ({ match }) => {
                                                 )}
                                                 ....
                                                 {currentPrize?.nftContractAddress?.substring(
-                                                    currentPrize?.nftContractAddress
+                                                    currentPrize
+                                                        ?.nftContractAddress
                                                         .length - 5,
-                                                    currentPrize?.nftContractAddress
+                                                    currentPrize
+                                                        ?.nftContractAddress
                                                         .length - 1
                                                 )}
-                                            </a> 
-                                        : 
-                                            <div
-                                                className="contract-address"
-                                            >
+                                            </a>
+                                        ) : (
+                                            <div className="contract-address">
                                                 {currentPrize?.nftContractAddress?.substring(
                                                     0,
                                                     4
                                                 )}
                                                 ....
                                                 {currentPrize?.nftContractAddress?.substring(
-                                                    currentPrize?.nftContractAddress
+                                                    currentPrize
+                                                        ?.nftContractAddress
                                                         .length - 5,
-                                                    currentPrize?.nftContractAddress
+                                                    currentPrize
+                                                        ?.nftContractAddress
                                                         .length - 1
                                                 )}
                                             </div>
-                                        }
+                                        )}
                                         <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
                                             <div className="prize-id mb-lg-1 mt-2">
                                                 {currentPrize?.prizeSubtitle}
