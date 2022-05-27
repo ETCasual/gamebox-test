@@ -1,5 +1,5 @@
 const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
-    const date = new Date(data.createdOn * 1000);
+    const date = new Date(data.claimedOn * 1000);
     const dateMonthYear = date.toLocaleString("default", {
         day: "2-digit",
         month: "long",
@@ -38,7 +38,7 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                             {data.prizeTitle}
                                         </p>
                                         <div className="content">
-                                            {data?.prizeSubtitle}
+                                            {data?.prizeContent}
                                         </div>
                                     </div>
                                 </div>
