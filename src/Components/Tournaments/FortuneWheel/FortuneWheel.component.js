@@ -31,24 +31,29 @@ const FortuneWheel = ({
     const { config } = useSelector((state) => state.config);
     const { poolTickets } = useSelector((state) => state.playerTickets);
 
-    const [spinnerDict, setSpinnerDict] = useState({});
     const [outOfSpins, setOutOfSpins] = useState(false);
     const [outOfGems, setOutOfGems] = useState(false);
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [, setIsBuySpinConfirmModalShown] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
-    const [wheelRotation, setWheelRotation] = useState(0);
     const [modalHeight, setModalHeight] = useState({
         windowWidth: 0,
         wrapper: 0,
         cols: 0,
     });
-    const spinDuration = 3;
+    const [winAmount, setWinAmount] = useState(-1);
 
     const spinnerRef = useRef(spinner);
     const userGemsRef = useRef(user?.gems);
     const ConfigGemsRef = useRef(config.useGems);
+
+    // FETCH LATEST TICKETS
+    useEffect(() => {
+        // TICKETS API
+        dispatch(loadPlayerTickets(prizeId, true));
+        dispatch(loadPrizePoolTickets(prizeId, true, ticketsRequired));
+    }, []);
 
     // CHECK SPINS AVAILABILITY & CHECK GEMS AVAILABILITY
     useEffect(() => {
@@ -96,19 +101,6 @@ const FortuneWheel = ({
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // SPINNER DICT FOR SPINNER POSITIONS
-    useEffect(() => {
-        setTimeout(() => {
-            let _spinnerDict = {};
-            spinnerRules.forEach((e, i) => {
-                Object.assign(_spinnerDict, {
-                    [e.tickets]: 360 - 36 * i,
-                });
-            });
-            setSpinnerDict(_spinnerDict);
-        }, 200);
-    }, [spinnerRules, config]);
-
     function onClickSpinButton() {
         // PREVENT SPAMMING
         if (isClickedSpin) return;
@@ -124,73 +116,32 @@ const FortuneWheel = ({
         }
 
         setIsClickedSpin(true);
-        dispatch(loadPlayerSpinnerSpin(prizeId, spinWheel));
-    }
+        dispatch(loadPlayerSpinnerSpin(prizeId, updateWheelResult));
 
-    function spinWheel(_spinner) {
+        const randWin =
+            spinnerRules[Math.floor(Math.random() * spinnerRules.length)];
+        setWinAmount(randWin.tickets);
+    }
+    function updateWheelResult(_spinner) {
+        console.log(_spinner);
         if (_spinner.enterId === 0) return;
 
         if (spinBuyProcess) setSpinBuyProcess(false);
 
         if (_spinner.freeSpins >= 0) {
-            const elem = document.querySelector(".slice-circle");
-            const tl = gsap.timeline();
-
-            tl.to(elem, {
-                duration: spinDuration,
-                rotate: `${startUpSpin(spinDuration)}deg`,
-                ease: "power2.easeOut",
-            }).to(
-                elem,
-                {
-                    duration: spinDuration,
-                    rotate: `${finishSpin(
-                        spinnerDict[_spinner.winAmount],
-                        spinDuration
-                    )}deg`,
-                    ease: "power2.easeOut",
-                    onComplete: () => {
-                        setIsClickedSpin(false);
-
-                        // TICKETS API
-                        dispatch(loadPlayerTickets(prizeId, true));
-                        dispatch(
-                            loadPrizePoolTickets(prizeId, true, ticketsRequired)
-                        );
-
-                        // UPDATE FINISHED ROTATION TO STATE
-                        let finishedSpinningRotation = parseInt(
-                            elem.style.transform
-                                .match(/rotate\((.+)\)/)[1]
-                                .split("deg")[0]
-                        );
-                        setWheelRotation(finishedSpinningRotation);
-
-                        // ALLOWS COMPONENT RENDER TO REFLECT LATEST TICKETS
-                        setIsTicketsUpdated(true);
-                        setTimeout(() => setIsTicketsUpdated(false), 1000);
-                    },
-                },
-                // The second to() will interrupt the first to() after the first to() has played for 10%, since the interruption is =-0.9;
-                `=${(spinDuration * -0.9).toString()}`
-            );
+            setWinAmount(_spinner.winAmount);
         }
     }
-    function startUpSpin(startUpDuration) {
-        // Spins to current rotation + (start Up Duration * 360) degrees
-        // Example, currently is at 284 degree, spins 3 more seconds => 284 + (3 * 360) => 1364
-        let startUpSpinDegree = wheelRotation + startUpDuration * 360;
-        return startUpSpinDegree.toString();
-    }
-    function finishSpin(rotationToGetTicket, finishDuration) {
-        // Calculate how many rounds has been spun until now
-        // Example, if current wheel is at 1500, the iteration is Math.floor(1500/360) => 4
-        let currentIteration = Math.floor(wheelRotation / 360);
+    function onSpinFinished() {
+        setIsClickedSpin(false);
 
-        // Final rotation angle = Iteration * 360 + finish duration * 360 + rotation to get ticket
-        let finishSpinDegree =
-            rotationToGetTicket + (finishDuration + currentIteration) * 360;
-        return finishSpinDegree.toString();
+        // TICKETS API
+        dispatch(loadPlayerTickets(prizeId, true));
+        dispatch(loadPrizePoolTickets(prizeId, true, ticketsRequired));
+
+        // ALLOWS COMPONENT RENDER TO REFLECT LATEST TICKETS
+        setIsTicketsUpdated(true);
+        setTimeout(() => setIsTicketsUpdated(false), 1000);
     }
     const handleBuySpinModalYesButton = () => {
         setSpinBuyProcess(true);
@@ -379,38 +330,13 @@ const FortuneWheel = ({
                                 className="col-12 col-xl-7 py-0 py-lg-3 wrapper-col flex-column align-items-center justify-content-center"
                                 style={{ height: modalHeight.cols }}
                             >
-                                {modalHeight.wrapper && (
-                                    <div className="fortune-wheel-wrapper position-relative">
-                                        <FortuneWheelRules
-                                            spinnerRules={spinnerRules}
-                                        />
-                                        <div className="inner-circle"></div>
-                                        {/* SPIN BUTTON*/}
-                                        <div
-                                            className={`spin-button ${
-                                                isClickedSpin
-                                                    ? "opacity-0-5"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <button
-                                                disabled={
-                                                    isClickedSpin ? true : false
-                                                }
-                                                onClick={onClickSpinButton}
-                                                className="spin-button"
-                                            >
-                                                SPIN
-                                            </button>
-                                        </div>
-                                        {/* TRIANGLE POINTER */}
-                                        <img
-                                            className="img-fluid pointer-img"
-                                            src={`${window.cdn}spinner/spinner_arrow_01.png`}
-                                            alt="fortune-wheel"
-                                        />
-                                    </div>
-                                )}
+                                <FortuneWheelRules
+                                    spinnerRules={spinnerRules}
+                                    winAmount={winAmount}
+                                    isClickedSpin={isClickedSpin}
+                                    onSpinClicked={onClickSpinButton}
+                                    onFinished={onSpinFinished}
+                                />
                                 <p className="spin-amount-left-wrapper mb-3 d-block d-xl-none">
                                     <span className="you-have-text">
                                         You have
