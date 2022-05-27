@@ -1,5 +1,5 @@
 import { delay } from "lodash";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Winwheel from "winwheel";
 
 const FortuneWheelRules = ({
@@ -56,17 +56,10 @@ const FortuneWheelRules = ({
                 });
             }
         );
-    }, []);
+    }, [spinnerRules]);
 
     useEffect(() => {
-        console.warn(
-            "isClickedSpin: ",
-            isClickedSpin,
-            "winAmount: ",
-            winAmount
-        );
-        if (isClickedSpin && winAmount != -1) {
-            console.warn("Start spin");
+        if (isClickedSpin && winAmount !== -1) {
             startSpin();
         }
     }, [isClickedSpin, winAmount]);
@@ -128,7 +121,7 @@ const FortuneWheelRules = ({
             return a;
         }, []);
 
-        if (winSegments.length == 0) return;
+        if (winSegments.length === 0) return;
 
         // Random pick a winning segment
         const randIndex = Math.floor(Math.random() * winSegments.length);

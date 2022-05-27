@@ -1,7 +1,6 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { gsap } from "gsap";
 
 // COMPONENTS
 import FortuneWheelRules from "Components/Tournaments/FortuneWheel/FortuneWheelRules.component";
@@ -53,7 +52,7 @@ const FortuneWheel = ({
         // TICKETS API
         dispatch(loadPlayerTickets(prizeId, true));
         dispatch(loadPrizePoolTickets(prizeId, true, ticketsRequired));
-    }, []);
+    }, [dispatch, prizeId, ticketsRequired]);
 
     // CHECK SPINS AVAILABILITY & CHECK GEMS AVAILABILITY
     useEffect(() => {
@@ -123,7 +122,6 @@ const FortuneWheel = ({
         setWinAmount(randWin.tickets);
     }
     function updateWheelResult(_spinner) {
-        console.log(_spinner);
         if (_spinner.enterId === 0) return;
 
         if (spinBuyProcess) setSpinBuyProcess(false);
@@ -131,6 +129,8 @@ const FortuneWheel = ({
         if (_spinner.freeSpins >= 0) {
             setWinAmount(_spinner.winAmount);
         }
+
+        spinnerRef.current.freeSpins = _spinner.freeSpins;
     }
     function onSpinFinished() {
         setIsClickedSpin(false);

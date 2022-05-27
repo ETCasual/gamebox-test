@@ -902,7 +902,13 @@ export async function logEnter(
 //
 //     LOG LEAVE
 //
-export async function logLeave(user, currentGameInfo, gameScore, extraEarning, recaptchaToken) {
+export async function logLeave(
+    user,
+    currentGameInfo,
+    gameScore,
+    extraEarning,
+    recaptchaToken
+) {
     const token = getToken();
     const enterId = currentGameInfo.playerEnterGameId;
     const request = new LogGLeaveRequest();
@@ -1505,10 +1511,7 @@ export async function logSEnter(user, prizeId, spinner) {
         spinner = {
             ...spinner,
             enterId: result,
-            freeSpins:
-                spinner.freeSpins > 0
-                    ? spinner.freeSpins - 1
-                    : spinner.freeSpins,
+            freeSpins: response.getSpinLeft(),
             winType: response.getWinType(),
             winAmount: response.getWinAmount(),
         };
