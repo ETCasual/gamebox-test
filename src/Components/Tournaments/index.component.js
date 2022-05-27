@@ -170,6 +170,17 @@ const Index = ({ match }) => {
                     )
                 );
             }, 2000);
+        } else {
+            // PLAYER TICKETS
+            dispatch(loadPlayerTickets(parseInt(id), true));
+            // PRIZE TOTAL TICKETS
+            dispatch(
+                loadPrizePoolTickets(
+                    parseInt(id),
+                    true,
+                    currentPrize?.ticketsRequired
+                )
+            );
         }
         return () => clearTimeout(timeOut);
     }, [dispatch, id, currentPrize?.ticketsRequired]);

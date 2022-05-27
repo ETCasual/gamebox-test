@@ -218,84 +218,68 @@
         }
 
         .fortune-wheel-wrapper {
+            display: block;
             width: 100%;
+            padding-bottom: 15px;
 
-            .fortune-wheel-rules-wrapper {
-                width: 100%;
+            .fortune-wheel-holder {
+                aspect-ratio: 1;
+                max-width: 400px;
+                max-height: 400px;
+                display: flex;
+                margin: auto;
                 position: relative;
-            }
-
-            .outer-circle {
-                height: 100%;
-                width: 100%;
                 border-radius: 100%;
                 background-color: #ededed;
             }
 
+            canvas {
+                width: 100%;
+                background: transparent;
+                display: block;
+            }
+
             .inner-circle {
+                position: absolute;
                 top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                right: 50%;
+                transform: translate(50%,-50%);
+                width: 35%;
+                height: 35%;
                 border-radius: 100%;
                 background-color: white;
-                position: absolute;
-                width: 8rem;
-                height: 8rem;
-
-                @include media-min($xs) {
-                    width: 8rem;
-                    height: 8rem;
-                }
-
-                @include media-min($xl) {
-                    width: 9rem;
-                    height: 9rem;
-                }
-
-                @include media-min($xxl) {
-                    width: 10rem;
-                    height: 10rem;
-                }
             }
 
             .spin-button {
+                display: flex;
+                text-align: center;
+                justify-content: center;
                 position: absolute;
                 top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 4rem;
-                height: 4rem;
-                border: 5px solid F4F4F4;
+                right: 50%;
+                transform: translate(50%,-50%);
+                width: 25%;
+                height: 25%;
+                border: 3px solid #F4F4F4;
                 border-radius: 100%;
-                border-radius: 100%;
-                font-weight: $fnt-wgt-700;
-                color: white;
                 background: linear-gradient(180deg,
                         #fdc43d 0%,
                         #ff9300 100%);
                 cursor: pointer;
 
                 @include media-min($xs) {
-                    border: 6px solid #F4F4F4;
-                    width: 5rem;
-                    height: 5rem;
-                    font-size: $fnt-sz-14;
+                    border: 5px solid #F4F4F4;
                 }
 
-                @include media-min($xl) {
-                    border: 7px solid #F4F4F4;
-                    width: 6rem;
-                    height: 6rem;
-                    font-size: $fnt-sz-14;
-                }
+                button {
+                    width: 100%;
+                    color: white;
+                    font-weight: $fnt-wgt-700;
 
-                @include media-min($xxl) {
-                    border: 9px solid #F4F4F4;
-                    width: 6rem;
-                    height: 6rem;
-                    font-size: $fnt-sz-16;
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-14;
+                    }
                 }
-
             }
 
             .pointer-img {
@@ -303,20 +287,10 @@
                 top: 24.5%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 1rem;
-                height: 1rem;
+                width: 1.5rem;
+                height: 1.5rem;
 
                 @include media-min($xs) {
-                    width: 1rem;
-                    height: 1rem;
-                }
-
-                @include media-min($xl) {
-                    width: 1.5rem;
-                    height: 1.5rem;
-                }
-
-                @include media-min($xxl) {
                     width: 2rem;
                     height: 2rem;
                 }
@@ -426,216 +400,5 @@
         height: 1px;
         width: 100%;
         background-color: white;
-    }
-}
-
-.csstransforms {
-    .parallax-container {
-        height: 100%;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-    
-        min-height: 300px;
-        height: auto;
-        width: 100%;
-    
-        position: relative;
-        overflow: hidden;
-        
-        .parallax {
-            background-color: #66a8d8;
-        }
-    }
-
-    .cn-wrapper {
-        position: relative;
-        width: 380px;
-        height: 380px;
-        border-radius: 50%;
-        background: transparent;
-        pointer-events: none;
-        overflow: hidden;
-        margin: 0 auto;
-
-        @include media-max($sm) {
-            width: 32em;
-            height: 32em;
-        }
-
-        ul {
-            position: relative;
-            margin: 0;
-            width: 95%;
-            height: 95%;
-            padding: 0;
-        
-            li {
-                position: absolute;
-                overflow: hidden;
-                width: 50%;
-                height: 50%;
-                font-size: 2.2em;
-                transform-origin: bottom right;
-                pointer-events: auto;
-                border: 4px transparent solid;
-            
-                @include media-max($sm) {
-                    font-size: 1.9em;
-                }
-
-                .slice {
-                    position: absolute;
-                    display: block;
-                    width: 200%;
-                    height: 200%;
-                    border-radius: 50%;
-                    background: radial-gradient(transparent 50%, #eea908 50%, #fbd886 65%, #eea908 75%, #eea908 80%);
-                
-                    color: #fff;
-                    text-align: center;
-                    text-decoration: none;
-                    font-size: 1.2em;
-                    line-height: 2;
-                    transform: skew(-54deg) rotate(-72deg) scale(1);
-                    -webkit-backface-visibility: hidden;
-                    backface-visibility: hidden;
-                    pointer-events: none;
-                    margin: 4px;
-
-                    span {
-                        position: relative;
-                        top: -4.2em;
-                        left: 0em;
-                        max-width: 8rem;
-                        min-height: 8rem;
-                        display: -webkit-box;
-                        display: -webkit-flex;
-                        display: -ms-flexbox;
-                        display: flex;
-                        -webkit-box-orient: vertical;
-                        -webkit-box-direction: normal;
-                        -webkit-flex-direction: column;
-                        -ms-flex-direction: column;
-                        flex-direction: column;
-                        -webkit-box-pack: center;
-                        -webkit-justify-content: center;
-                        -ms-flex-pack: center;
-                        justify-content: center;
-                        padding-top: 5px;
-                        font-size: .35em;
-                        line-height: 1.5em;
-                        -webkit-backface-visibility: hidden;
-                        backface-visibility: hidden;
-                        margin: 0 auto;
-
-                        @include media-max($sm) {
-                            top: -5.5em;
-                        }
-
-                        p {
-                            margin-top: 0;
-                            font-size: 0.9rem;
-                            margin-bottom: 5px;
-                            font-weight: $fnt-wgt-700;
-                        }
-                    
-                    }
-                }
-
-                &:first-child {
-                    -webkit-transform: rotate(-288deg) skew(54deg);
-                    -ms-transform: rotate(-288deg) skew(54deg);
-                    transform: rotate(-288deg) skew(54deg);
-                }
-                &:nth-child(2) {
-                    -webkit-transform: rotate(-252deg) skew(54deg);
-                    -ms-transform: rotate(-252deg) skew(54deg);
-                    transform: rotate(-252deg) skew(54deg);
-                }
-                &:nth-child(3) {
-                    -webkit-transform: rotate(-216deg) skew(54deg);
-                    -ms-transform: rotate(-216deg) skew(54deg);
-                    transform: rotate(-216deg) skew(54deg);
-                }
-                &:nth-child(4) {
-                    -webkit-transform: rotate(-180deg) skew(54deg);
-                    -ms-transform: rotate(-180deg) skew(54deg);
-                    transform: rotate(-180deg) skew(54deg);
-                }
-                &:nth-child(5) {
-                    -webkit-transform: rotate(-144deg) skew(54deg);
-                    -ms-transform: rotate(-144deg) skew(54deg);
-                    transform: rotate(-144deg) skew(54deg);
-                }
-                &:nth-child(6) {
-                    -webkit-transform: rotate(-108deg) skew(54deg);
-                    -ms-transform: rotate(-108deg) skew(54deg);
-                    transform: rotate(-108deg) skew(54deg);
-                                }
-                &:nth-child(7) {
-                    -webkit-transform: rotate(-72deg) skew(54deg);
-                    -ms-transform: rotate(-72deg) skew(54deg);
-                    transform: rotate(-72deg) skew(54deg);
-                }
-                &:nth-child(8) {
-                    -webkit-transform: rotate(-36deg) skew(54deg);
-                    -ms-transform: rotate(-36deg) skew(54deg);
-                    transform: rotate(-36deg) skew(54deg);
-                }
-                &:nth-child(9) {
-                    -webkit-transform: rotate(0deg) skew(54deg);
-                    -ms-transform: rotate(0deg) skew(54deg);
-                    transform: rotate(0deg) skew(54deg);
-                }
-                &:nth-child(10) {
-                    -webkit-transform: rotate(36deg) skew(54deg);
-                    -ms-transform: rotate(36deg) skew(54deg);
-                    transform: rotate(36deg) skew(54deg);
-                }
-
-                &:nth-child(5n + 1) {
-                    .slice span p {
-                        font-weight: $fnt-wgt-700;
-                        font-size: 1.35rem;        
-                    }
-                }
-            }
-        }
-
-        &:after {
-            display: block;
-            font-size: 2em;
-            width: 6.2em;
-            height: 6.2em;
-            position: absolute;
-            left: 50%;
-            margin-left: -3.1em;
-            top: 50%;
-            margin-top: -3.1em;
-            border-radius: 50%;
-            color: transparent;        
-        }
-    }
-
-    .corp-logo {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
     }
 }
