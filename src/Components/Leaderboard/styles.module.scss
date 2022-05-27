@@ -154,6 +154,8 @@
                     }
                     border-radius: 10px;
                     background: #262626;
+                    box-shadow: rgb(0 0 0) 0px 30px 60px -12px inset, rgb(0 0 0 / 76%) 0px 18px 36px -18px inset;
+                    border: solid 5px #262626;
                     .boost-tickets {
                         font-size: $fnt-sz-14;
                         font-weight: $fnt-wgt-600;
@@ -206,6 +208,9 @@
                             z-index: 0;
                         }
                     }
+                }
+                .button-selected {
+                    border: solid 5px #fcc239;
                 }
                 .cursor-pointer {
                     cursor: pointer;

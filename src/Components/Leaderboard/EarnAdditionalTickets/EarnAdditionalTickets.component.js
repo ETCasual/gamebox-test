@@ -151,7 +151,9 @@ const EarnAdditionalTickets = ({
                 <div
                     className={`button-flex-container p-3 mx-2 mx-md-3 position-relative text-center text-md-left ${
                         earnAdditionalDisabledStatus.ads
-                            ? "opacity-0-2"
+                            ? "opacity-0-2" 
+                            : earnAdditionalDisabledStatus.gems 
+                            ? "button-selected"
                             : "cursor-pointer"
                     }`}
                     onClick={
