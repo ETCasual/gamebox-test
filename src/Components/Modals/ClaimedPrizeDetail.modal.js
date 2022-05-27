@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
     const date = new Date(data.createdOn * 1000);
     const dateMonthYear = date.toLocaleString("default", {
