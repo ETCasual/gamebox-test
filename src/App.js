@@ -126,6 +126,14 @@ const App = () => {
 	}, [dispatch, user.id, consoleOpen]);
 
 	useEffect(() => {
+		// Check if connect from Froyo side
+		let web3Connection = JSON.parse(localStorage.getItem("froyo-walletconnection"));
+		if (web3Connection?.connectionType === "metamask") {
+			localStorage.setItem("wallet", "Metamask");
+		} else if (web3Connection?.connectionType === "walletconnect") {
+			localStorage.setItem("wallet", "WalletConnect");
+		}
+
 		// FOR LOADING WALLET IF ALREADY CONNECTED
 		if (blockchainNetworks.length > 0)
 			dispatch(loadConnectWalletAuto(blockchainNetworks));
