@@ -129,8 +129,6 @@ const FortuneWheel = ({
         if (_spinner.freeSpins >= 0) {
             setWinAmount(_spinner.winAmount);
         }
-
-        spinnerRef.current.freeSpins = _spinner.freeSpins;
     }
     function onSpinFinished() {
         setIsClickedSpin(false);
