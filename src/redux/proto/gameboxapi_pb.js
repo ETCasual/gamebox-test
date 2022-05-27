@@ -16507,7 +16507,8 @@ proto.api.gamebox.LogSEnterResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     result: jspb.Message.getFieldWithDefault(msg, 1, 0),
     winType: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    winAmount: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    winAmount: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    spinLeft: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -16555,6 +16556,10 @@ proto.api.gamebox.LogSEnterResponse.deserializeBinaryFromReader = function(msg, 
     case 3:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setWinAmount(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setSpinLeft(value);
       break;
     default:
       reader.skipField();
@@ -16606,6 +16611,13 @@ proto.api.gamebox.LogSEnterResponse.serializeBinaryToWriter = function(message, 
       f
     );
   }
+  f = message.getSpinLeft();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -16651,6 +16663,21 @@ proto.api.gamebox.LogSEnterResponse.prototype.getWinAmount = function() {
 /** @param {number} value */
 proto.api.gamebox.LogSEnterResponse.prototype.setWinAmount = function(value) {
   jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 spin_left = 4;
+ * @return {number}
+ */
+proto.api.gamebox.LogSEnterResponse.prototype.getSpinLeft = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.LogSEnterResponse.prototype.setSpinLeft = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
