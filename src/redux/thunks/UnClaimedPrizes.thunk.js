@@ -7,7 +7,7 @@ import {
     getNFTClaim,
     getUnclaimedPrizesList,
 } from "redux/services/index.service";
-import { getWeb3 } from "Utils/ConnectWallet";
+import { getTokenBalance, getWeb3 } from "Utils/ConnectWallet";
 import { loadConnectUserWallet } from "./Login.thunk";
 
 export function loadUnClaimedPrizes() {
@@ -301,6 +301,22 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
                             // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
                             dispatch(loadClaimedPrizes());
                             dispatch(loadUnClaimedPrizes());
+
+                            setTimeout(async () => {    
+                                const { tokenBalance, symbol } =
+                                    await getTokenBalance(user.walletAddress);
+                                const chainId = await web3.eth.getChainId();
+                                if (tokenBalance && chainId)
+                                    dispatch(
+                                        loadConnectUserWallet(
+                                            "",
+                                            user.walletAddress,
+                                            parseFloat(tokenBalance),
+                                            chainId,
+                                            symbol
+                                        )
+                                    );
+                            }, 1000);
                         })
                         .on("error", function (error) {
                             console.log("error", error);
