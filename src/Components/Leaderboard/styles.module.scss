@@ -321,15 +321,6 @@
     .leader-curr-player-card,
     .you {
         background: #fdc43d;
-        &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(180deg, #00000000 30%, #00000047 119%);
-            width: 100%;
-            height: 100%;
-        }
         .player-name,
         .points,
         .number-holder,
