@@ -29648,7 +29648,9 @@ proto.api.gamebox.WinnerDetail.toObject = function(includeInstance, msg) {
     totalPlayer: jspb.Message.getFieldWithDefault(msg, 25, 0),
     prizeBlockchainNetwork: jspb.Message.getFieldWithDefault(msg, 26, 0),
     prizeContractType: jspb.Message.getFieldWithDefault(msg, 27, 0),
-    walletAddress: jspb.Message.getFieldWithDefault(msg, 28, "")
+    walletAddress: jspb.Message.getFieldWithDefault(msg, 28, ""),
+    prizeNftContractAddress: jspb.Message.getFieldWithDefault(msg, 29, ""),
+    prizeWinnerPendingInfo: jspb.Message.getFieldWithDefault(msg, 30, "")
   };
 
   if (includeInstance) {
@@ -29796,6 +29798,14 @@ proto.api.gamebox.WinnerDetail.deserializeBinaryFromReader = function(msg, reade
     case 28:
       var value = /** @type {string} */ (reader.readString());
       msg.setWalletAddress(value);
+      break;
+    case 29:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrizeNftContractAddress(value);
+      break;
+    case 30:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrizeWinnerPendingInfo(value);
       break;
     default:
       reader.skipField();
@@ -30019,6 +30029,20 @@ proto.api.gamebox.WinnerDetail.serializeBinaryToWriter = function(message, write
   if (f.length > 0) {
     writer.writeString(
       28,
+      f
+    );
+  }
+  f = message.getPrizeNftContractAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      29,
+      f
+    );
+  }
+  f = message.getPrizeWinnerPendingInfo();
+  if (f.length > 0) {
+    writer.writeString(
+      30,
       f
     );
   }
@@ -30442,6 +30466,36 @@ proto.api.gamebox.WinnerDetail.prototype.getWalletAddress = function() {
 /** @param {string} value */
 proto.api.gamebox.WinnerDetail.prototype.setWalletAddress = function(value) {
   jspb.Message.setProto3StringField(this, 28, value);
+};
+
+
+/**
+ * optional string prize_nft_contract_address = 29;
+ * @return {string}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getPrizeNftContractAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 29, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.WinnerDetail.prototype.setPrizeNftContractAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 29, value);
+};
+
+
+/**
+ * optional string prize_winner_pending_info = 30;
+ * @return {string}
+ */
+proto.api.gamebox.WinnerDetail.prototype.getPrizeWinnerPendingInfo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 30, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.WinnerDetail.prototype.setPrizeWinnerPendingInfo = function(value) {
+  jspb.Message.setProto3StringField(this, 30, value);
 };
 
 

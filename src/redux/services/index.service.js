@@ -1335,6 +1335,7 @@ export async function getUnclaimedPrizesList(user) {
             id: e.getId(),
             prizeId: e.getPrizeId(),
             prizeTitle: e.getPrizeTitle(),
+            prizeSubtitle: e.getPrizeSubtitle(),
             prizeType: e.getPrizeTypeId(),
             prizeContent: e?.getPrizeContent(),
             prizeImageUrl: e.getPrizeImgUrl(),
@@ -1345,6 +1346,8 @@ export async function getUnclaimedPrizesList(user) {
             prizeCanClaimDate: e.getPrizeCanClaimDate(),
             prizeBlockchainNetwork: e.getPrizeBlockchainNetwork(),
             prizeContractType: e.getPrizeContractType(),
+            prizeNftContractAddress: e.getPrizeNftContractAddress(),
+            prizeWinnerPendingInfo: e.getPrizeWinnerPendingInfo(),
         });
     });
     return unClaimedPrizes;
@@ -1386,6 +1389,8 @@ export async function getClaimedPrizesList(userId) {
                 shipTracking: e.getShipTracking(),
                 deliveryCompany: e.getDeliveryCompany(),
                 walletAddress: e.getWalletAddress(),
+                prizeNftContractAddress: e.getPrizeNftContractAddress(),
+                prizeWinnerPendingInfo: e.getPrizeWinnerPendingInfo(),
                 createdOn: e.getCreatedOn(),
                 claimedOn: e.getClaimedOn(),
                 status: e.getStatus(),

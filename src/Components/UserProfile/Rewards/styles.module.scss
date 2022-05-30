@@ -8,6 +8,15 @@
     .claimed {
         cursor: pointer;
     }
+    .unclaimed {
+        min-height: 10rem;
+        .card-wrapper {
+            .prize-image {
+                height: 9.875rem;
+                width: 9.875rem;
+            }
+        }
+    }
     .claimed-title,
     .unclaimed-title {
         font-weight: $fnt-wgt-600;
@@ -37,19 +46,25 @@
                 line-height: 120%;
             }
             .card-subtitle {
-                font-size: 0.75rem;
+                font-size: $fnt-sz-12;
                 @media only screen and (min-width: 1320px) {
-                    font-size: 0.875rem;
+                    font-size: $fnt-sz-12;
                 }
                 color: white;
                 line-height: 120%;
             }
         }
+        .prize-footer {
+            .card-winner-pending-info {
+                font-size: $fnt-sz-12;
+            }
+        }
         .prize-claimed {
-            position: absolute;
-            bottom: 0;
             font-size: $fnt-sz-12;
             font-weight: $fnt-wgt-700;
+        }
+        .cursor-pointer {
+            cursor: pointer;
         }
         .text-red {
             color: #bf0000;

@@ -151,36 +151,8 @@ const Rewards = () => {
                                         <div className="row">
                                             {unClaimedPrizes?.map((data, i) => (
                                                 <div
-                                                    className="col-12 col-md-6 mb-3 prize unclaimed pl-2 pr-1 position-relative"
-                                                    style={{
-                                                        cursor: `${
-                                                            (!loader.status &&
-                                                                data.prizeContractType ===
-                                                                    1 &&
-                                                                !validClaimDate(
-                                                                    data.prizeCanClaimDate
-                                                                )) ||
-                                                            data.prizeContractType ===
-                                                                2
-                                                                ? "pointer"
-                                                                : "default"
-                                                        }`,
-                                                    }}
+                                                    className="col-12 mb-3 prize unclaimed pl-2 pr-1 position-relative"
                                                     key={`prizes-${i}`}
-                                                    onClick={() =>
-                                                        data.prizeContractType === 1
-                                                            ? handleTokenClaim(
-                                                                data.id,
-                                                                data.prizeBlockchainNetwork
-                                                            )
-                                                            : (data.prizeContractType === 2 || data.prizeContractType === 3)
-                                                            ? handleNFTClaim(
-                                                                data.id,
-                                                                data.prizeBlockchainNetwork,
-                                                                data.prizeContractType
-                                                            )
-                                                            : null
-                                                    }
                                                 >
                                                     <div className="card-wrapper d-flex">
                                                         <div className="col-auto p-2">
@@ -191,45 +163,71 @@ const Rewards = () => {
                                                                 }}
                                                             />
                                                         </div>
-                                                        <div className="col py-2 pl-2 pr-1 mt-1">
-                                                            <div className="prize-text">
+                                                        <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
+                                                            <div className="prize-text mb-auto">
                                                                 <div className="card-title">
                                                                     {
                                                                         data.prizeTitle
                                                                     }
                                                                 </div>
-                                                                <div className="card-subtitle">
+                                                                <div className="card-subtitle mb-3">
                                                                     {
                                                                         data.prizeSubtitle
                                                                     }
                                                                 </div>
+                                                                {/* <div className="card-description mb-3">
+                                                                    {
+                                                                        data.prizeContent
+                                                                    }
+                                                                </div> */}
                                                             </div>
-
-                                                            {(data.prizeContractType === 2 || data.prizeContractType === 3) &&
-                                                                validClaimDate(
-                                                                    data.prizeCanClaimDate
-                                                                ) && (
-                                                                    <div className="prize-claimed text-wait py-2">
-                                                                        `Claim your NFT - ${getRemainingDaysToClaim(
-                                                                                  data.prizeCanClaimDate
-                                                                              )}`
-                                                                    </div>
-                                                                )}
-                                                            {(data.prizeContractType === 2 || data.prizeContractType === 3) &&
-                                                                !validClaimDate(
-                                                                    data.prizeCanClaimDate
-                                                                ) && (
-                                                                    <div className="prize-claimed text-red py-2">
-                                                                        Claim your NFT
-                                                                    </div>
-                                                                )}
-
-                                                            {data.prizeContractType ===
-                                                                1 && (
-                                                                <div className="prize-claimed text-red py-2">
-                                                                    Claim your Token
+                                                            <div className="prize-footer">
+                                                                <div className="card-winner-pending-info">
+                                                                    {
+                                                                        data.prizeWinnerPendingInfo
+                                                                    }
                                                                 </div>
-                                                            )}
+
+                                                                {data.prizeNftContractAddress &&
+                                                                    <>
+                                                                        {validClaimDate(
+                                                                                data.prizeCanClaimDate
+                                                                            ) && (
+                                                                                <div className="prize-claimed text-wait py-2">
+                                                                                    Claim your {data.prizeContractType === 1 ? "Token" : "NFT" } - {getRemainingDaysToClaim(
+                                                                                            data.prizeCanClaimDate
+                                                                                        )}
+                                                                                </div>
+                                                                            )}
+                                                                        {!validClaimDate(data.prizeCanClaimDate) &&
+                                                                            (data.prizeContractType === 2 || data.prizeContractType === 3) 
+                                                                            && (
+                                                                                <div className="prize-claimed text-red py-2 cursor-pointer"
+                                                                                    onClick={() => handleNFTClaim(
+                                                                                                data.id,
+                                                                                                data.prizeBlockchainNetwork,
+                                                                                                data.prizeContractType
+                                                                                            )
+                                                                                    }
+                                                                                >
+                                                                                    Claim your NFT
+                                                                                </div>
+                                                                            )}
+                                                                        {!validClaimDate(data.prizeCanClaimDate) &&
+                                                                            data.prizeContractType === 1
+                                                                            && (
+                                                                                <div className="prize-claimed text-red py-2 cursor-pointer"
+                                                                                    onClick={() => handleTokenClaim(
+                                                                                        data.id,
+                                                                                        data.prizeBlockchainNetwork
+                                                                                    )}
+                                                                                >
+                                                                                    Claim your Token
+                                                                                </div>
+                                                                        )}
+                                                                    </>
+                                                                }
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     {loader.id === data.id && (
@@ -285,8 +283,8 @@ const Rewards = () => {
                                                                 }}
                                                             ></div>
                                                         </div>
-                                                        <div className="col py-2 pl-2 pr-1 mt-1">
-                                                            <div className="prize-text">
+                                                        <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
+                                                            <div className="prize-text mb-auto">
                                                                 <div className="card-title">
                                                                     {
                                                                         data.prizeTitle
