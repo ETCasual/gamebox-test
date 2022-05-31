@@ -39,7 +39,12 @@ const Index = () => {
             heroRef.current &&
             workRef.current &&
             workCardRef.current &&
-            workCardRef.current.length > 0 &&
+            workCardRef.current[0] !== null &&
+            workCardRef.current[1] !== null &&
+            workCardRef.current[2] !== null &&
+            workCardRef.current[0] !== "" &&
+            workCardRef.current[1] !== "" &&
+            workCardRef.current[2] !== "" &&
             dailyRewardRef.current
         ) {
             // HERO
@@ -84,7 +89,12 @@ const Index = () => {
                     if (
                         gsap &&
                         workCardRef.current &&
-                        workCardRef.current.length > 0
+                        workCardRef.current[0] !== null &&
+                        workCardRef.current[1] !== null &&
+                        workCardRef.current[2] !== null &&
+                        workCardRef.current[0] !== "" &&
+                        workCardRef.current[1] !== "" &&
+                        workCardRef.current[2] !== ""
                     ) {
                         const tl = gsap.timeline();
                         tl.to(
