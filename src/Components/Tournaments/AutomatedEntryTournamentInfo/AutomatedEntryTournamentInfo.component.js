@@ -36,9 +36,6 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
         }
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
-            if (calculatedTime.getDate() < new Date().getDate())
-                calculatedTime.setDate(calculatedTime.getDate() + 1);
-
             let finalTimeRef = convertSecondsToHours(
                 calculatedTime.valueOf() / 1000,
                 "new"
