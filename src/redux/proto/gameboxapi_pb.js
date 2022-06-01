@@ -21385,7 +21385,8 @@ proto.api.gamebox.PrizeDetail.toObject = function(includeInstance, msg) {
     groupId: jspb.Message.getFieldWithDefault(msg, 43, 0),
     startTimestamp: jspb.Message.getFieldWithDefault(msg, 44, 0),
     endTimestamp: jspb.Message.getFieldWithDefault(msg, 45, 0),
-    overtime: jspb.Message.getFieldWithDefault(msg, 46, false)
+    overtime: jspb.Message.getFieldWithDefault(msg, 46, false),
+    serverTimestamp: jspb.Message.getFieldWithDefault(msg, 47, 0)
   };
 
   if (includeInstance) {
@@ -21605,6 +21606,10 @@ proto.api.gamebox.PrizeDetail.deserializeBinaryFromReader = function(msg, reader
     case 46:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setOvertime(value);
+      break;
+    case 47:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setServerTimestamp(value);
       break;
     default:
       reader.skipField();
@@ -21954,6 +21959,13 @@ proto.api.gamebox.PrizeDetail.serializeBinaryToWriter = function(message, writer
   if (f) {
     writer.writeBool(
       46,
+      f
+    );
+  }
+  f = message.getServerTimestamp();
+  if (f !== 0) {
+    writer.writeInt64(
+      47,
       f
     );
   }
@@ -22665,6 +22677,21 @@ proto.api.gamebox.PrizeDetail.prototype.getOvertime = function() {
 /** @param {boolean} value */
 proto.api.gamebox.PrizeDetail.prototype.setOvertime = function(value) {
   jspb.Message.setProto3BooleanField(this, 46, value);
+};
+
+
+/**
+ * optional int64 server_timestamp = 47;
+ * @return {number}
+ */
+proto.api.gamebox.PrizeDetail.prototype.getServerTimestamp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 47, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.PrizeDetail.prototype.setServerTimestamp = function(value) {
+  jspb.Message.setProto3IntField(this, 47, value);
 };
 
 
