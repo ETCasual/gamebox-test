@@ -109,9 +109,11 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
                         });
                     } catch (addError) {
                         console.error(addError);
+                        setLoader({ id: null, status: false });
                     }
                 } else {
                     console.error(error);
+                    setLoader({ id: null, status: false });
                 }
             }
         } else {
@@ -268,9 +270,11 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
                         });
                     } catch (addError) {
                         console.error(addError);
+                        setLoader({ id: null, status: false });
                     }
                 } else {
                     console.error(error);
+                    setLoader({ id: null, status: false });
                 }
             }
         } else {
