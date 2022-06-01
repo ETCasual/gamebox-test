@@ -11037,7 +11037,8 @@ proto.api.gamebox.LogGEnterResponse.prototype.toObject = function(opt_includeIns
  */
 proto.api.gamebox.LogGEnterResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    result: jspb.Message.getFieldWithDefault(msg, 1, "")
+    result: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    prevGame: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -11078,6 +11079,10 @@ proto.api.gamebox.LogGEnterResponse.deserializeBinaryFromReader = function(msg, 
       var value = /** @type {string} */ (reader.readString());
       msg.setResult(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPrevGame(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -11114,6 +11119,13 @@ proto.api.gamebox.LogGEnterResponse.serializeBinaryToWriter = function(message, 
       f
     );
   }
+  f = message.getPrevGame();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -11129,6 +11141,21 @@ proto.api.gamebox.LogGEnterResponse.prototype.getResult = function() {
 /** @param {string} value */
 proto.api.gamebox.LogGEnterResponse.prototype.setResult = function(value) {
   jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string prev_game = 2;
+ * @return {string}
+ */
+proto.api.gamebox.LogGEnterResponse.prototype.getPrevGame = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.LogGEnterResponse.prototype.setPrevGame = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
