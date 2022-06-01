@@ -35,13 +35,16 @@ const Index = () => {
     // SCROLL TRIGGER ANIMATIONS
     useEffect(() => {
         let g1, g2, g3;
-
         if (
             heroRef.current &&
             workRef.current &&
+            workCardRef.current &&
             workCardRef.current[0] !== null &&
             workCardRef.current[1] !== null &&
             workCardRef.current[2] !== null &&
+            workCardRef.current[0] !== "" &&
+            workCardRef.current[1] !== "" &&
+            workCardRef.current[2] !== "" &&
             dailyRewardRef.current
         ) {
             // HERO
@@ -83,7 +86,16 @@ const Index = () => {
                 trigger: workCardRef.current,
                 start: "10% bottom",
                 onEnter: () => {
-                    if (gsap) {
+                    if (
+                        gsap &&
+                        workCardRef.current &&
+                        workCardRef.current[0] !== null &&
+                        workCardRef.current[1] !== null &&
+                        workCardRef.current[2] !== null &&
+                        workCardRef.current[0] !== "" &&
+                        workCardRef.current[1] !== "" &&
+                        workCardRef.current[2] !== ""
+                    ) {
                         const tl = gsap.timeline();
                         tl.to(
                             workCardRef.current,
