@@ -1,7 +1,10 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Index = () => {
+    const { config } = useSelector((state) => state.config);
+
     const history = useHistory();
 
     return (
@@ -342,11 +345,13 @@ const Index = () => {
                                 <p className="description">
                                     The Prize Sponsor rewards existing users for
                                     inviting other users to the service. Users
-                                    will receive 5 gems added to their GameBox
+                                    will receive {config.gemsPerInvite} gems added to their GameBox
                                     account when the other users register using
-                                    the user’s invite link reaches level 5. The
-                                    invited user will also receive 5 gems upon
-                                    reaching level 5 when they register with
+                                    the user’s invite link 
+                                    {config.rewardInvitesRank > 1 ? `reaches level ${config.rewardInvitesRank}` : ""}. The
+                                    invited user will also receive {config.gemsPerInvite} gems 
+                                    {config.rewardInvitesRank > 1 ? `upon reaching level ${config.rewardInvitesRank}` : ""} when
+                                    they register with
                                     GameBox using an invite link. The Prize
                                     Sponsor reserves the right to evaluate and
                                     reject such reward in suspected cases of

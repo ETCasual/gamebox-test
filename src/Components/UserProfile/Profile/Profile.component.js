@@ -32,6 +32,8 @@ const Profile = ({
 
     const history = useHistory();
 
+    const enableLevel = false;
+
     // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
 
     // useEffect(() => {
@@ -165,89 +167,91 @@ const Profile = ({
                                 </div>
                             )} */}
                             {/* MULTIPLIER */}
-                            <div className="col-12 multiplier-holder mt-4">
-                                <div
-                                    className="multiplier p-3 p-md-4 d-flex flex-column align-items-start"
-                                    onClick={handlePlayerLevelPanel}
-                                >
-                                    <p className="multiplier-info">
-                                        Multiplier{" "}
-                                        <span>
-                                            {getCurrentMultiplier(
-                                                user,
-                                                ranks
-                                            ) || 0}
-                                            %
-                                        </span>
-                                    </p>
-                                    {/* LEVEL */}
-                                    <div className="w-100">
-                                        <div className="level mb-2 d-flex align-items-center justify-content-between">
-                                            <p className="mb-0 current-level">
-                                                <span>
-                                                    {getCurrentLevel(
-                                                        user,
-                                                        ranks
-                                                    )}
-                                                </span>
-                                            </p>
-                                            <div className="mb-0 d-flex align-items-center exp">
-                                                <span className="player-exp">
-                                                    {user.exp >
-                                                    ranks[ranks.length - 1]?.exp
-                                                        ? ranks[
-                                                              ranks.length - 1
-                                                          ]?.exp?.toLocaleString()
-                                                        : user.exp?.toLocaleString()}
-                                                </span>
-                                                <span className="px-1">/</span>
-                                                <span className="current-multiplier-total">
-                                                    {getCurrentLevelExp(
-                                                        user,
-                                                        ranks
-                                                    )?.toLocaleString() +
-                                                        " exp"}
-                                                </span>{" "}
-                                            </div>
-                                        </div>
-                                        <div className="col-12 px-0">
-                                            <div className="progress">
-                                                <div
-                                                    className="progress-bar"
-                                                    role="progressbar"
-                                                    style={{
-                                                        width: `${getLevelProgress(
+                            { enableLevel && (
+                                <div className="col-12 multiplier-holder mt-4">
+                                    <div
+                                        className="multiplier p-3 p-md-4 d-flex flex-column align-items-start"
+                                        onClick={handlePlayerLevelPanel}
+                                    >
+                                        <p className="multiplier-info">
+                                            Multiplier{" "}
+                                            <span>
+                                                {getCurrentMultiplier(
+                                                    user,
+                                                    ranks
+                                                ) || 0}
+                                                %
+                                            </span>
+                                        </p>
+                                        {/* LEVEL */}
+                                        <div className="w-100">
+                                            <div className="level mb-2 d-flex align-items-center justify-content-between">
+                                                <p className="mb-0 current-level">
+                                                    <span>
+                                                        {getCurrentLevel(
                                                             user,
                                                             ranks
-                                                        )}%`,
+                                                        )}
+                                                    </span>
+                                                </p>
+                                                <div className="mb-0 d-flex align-items-center exp">
+                                                    <span className="player-exp">
+                                                        {user.exp >
+                                                        ranks[ranks.length - 1]?.exp
+                                                            ? ranks[
+                                                                ranks.length - 1
+                                                            ]?.exp?.toLocaleString()
+                                                            : user.exp?.toLocaleString()}
+                                                    </span>
+                                                    <span className="px-1">/</span>
+                                                    <span className="current-multiplier-total">
+                                                        {getCurrentLevelExp(
+                                                            user,
+                                                            ranks
+                                                        )?.toLocaleString() +
+                                                            " exp"}
+                                                    </span>{" "}
+                                                </div>
+                                            </div>
+                                            <div className="col-12 px-0">
+                                                <div className="progress">
+                                                    <div
+                                                        className="progress-bar"
+                                                        role="progressbar"
+                                                        style={{
+                                                            width: `${getLevelProgress(
+                                                                user,
+                                                                ranks
+                                                            )}%`,
+                                                        }}
+                                                        aria-valuemin="0"
+                                                        aria-valuemax="100"
+                                                    />
+                                                </div>
+                                                <div
+                                                    className="progressbar-shadow"
+                                                    role="progressbar"
+                                                    style={{
+                                                        width: `${
+                                                            getLevelProgress(
+                                                                user,
+                                                                ranks
+                                                            ) >= 100
+                                                                ? 100
+                                                                : getLevelProgress(
+                                                                    user,
+                                                                    ranks
+                                                                )
+                                                        }%`,
                                                     }}
                                                     aria-valuemin="0"
                                                     aria-valuemax="100"
                                                 />
                                             </div>
-                                            <div
-                                                className="progressbar-shadow"
-                                                role="progressbar"
-                                                style={{
-                                                    width: `${
-                                                        getLevelProgress(
-                                                            user,
-                                                            ranks
-                                                        ) >= 100
-                                                            ? 100
-                                                            : getLevelProgress(
-                                                                  user,
-                                                                  ranks
-                                                              )
-                                                    }%`,
-                                                }}
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                            />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                             {/* INVITE FRIENDS */}
                             <div className="col-12 invite-friends-holder mt-4">
                                 <div
@@ -268,8 +272,12 @@ const Profile = ({
                                             {`Share your referral code with
                                                 your friends and get ${config.gemsPerInvite} Gems on
                                                 us (for you and your friend)
-                                                when your friend reaches level ${config.rewardInvitesRank} 
-                                                in GameBox.`}
+                                                when your friend 
+                                                ${config.rewardInvitesRank <= 0 
+                                                    ? "join Gamebox." 
+                                                    : `reaches level ${config.rewardInvitesRank} 
+                                                    in GameBox.`
+                                                }`}
                                         </p>
                                     </div>
                                     <div className="col-4 col-md-6 px-0 d-flex align-items-end justify-content-end">

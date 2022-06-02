@@ -80,7 +80,10 @@ const GameEndModal = ({ handleContinueButton }) => {
                             {extraEarning.ticket > 0 &&
                                 extraEarning.experience > 0 && (
                                     <p className="subtitle mb-2">
-                                        Additional tickets and experience points
+                                        Additional tickets 
+                                        {extraEarning.experience > 0 
+                                            ? "and experience points" 
+                                            : " "}
                                         earned
                                     </p>
                                 )}

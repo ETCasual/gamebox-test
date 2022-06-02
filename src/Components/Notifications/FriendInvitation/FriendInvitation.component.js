@@ -83,9 +83,12 @@ const NotificationFriendInvitation = ({
                             {user.id === getInvitationInfo("userId") && (
                                 <>
                                     <p className="title">
-                                        A friend has reached level{" "}
-                                        {config.rewardInvitesRank} with your
-                                        invite code.
+                                        A friend has 
+                                        {config.rewardInvitesRank <= 1 
+                                            ? " joined" 
+                                            : ` reached level ${config.rewardInvitesRank}`
+                                        } with your invite code. 
+                                        
                                     </p>
                                     <p className="subtitle">
                                         Your friend{" "}

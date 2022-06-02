@@ -164,10 +164,10 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                             )}
 
                             {/* LINE SEPARATOR */}
-                            <div className="line" />
+                            {/* <div className="line" /> */}
 
                             {/* EXP */}
-                            <div className="d-flex align-items-center justify-content-between leaderboard-exp">
+                            {/* <div className="d-flex align-items-center justify-content-between leaderboard-exp">
                                 <p className="mb-0">Experience points</p>
                                 <p className="exp mb-0 text-right">
                                     {getLeaderboardPrizeInfo(
@@ -187,7 +187,7 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                                         : "-"}{" "}
                                     exp
                                 </p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,8 @@ const UseGemConfirmationModalPopup = ({
             <div className="modal-body-small">
                 <p className="title">Confirm use {useHowManyGems} gems?</p>
                 <p className="subtitle">
-                    You will get the additional tickets and experience points
+                    You will get the additional tickets 
+                    {" "} {/* and experience points */}
                     immediately after every game.
                 </p>
                 <div className="p-0 btn-wrapper d-flex mt-4">
