@@ -8117,7 +8117,8 @@ proto.api.gamebox.ConfigDetail.toObject = function(includeInstance, msg) {
     adsPerSpins1: jspb.Message.getFieldWithDefault(msg, 6, 0),
     gemsPerSpins2: jspb.Message.getFieldWithDefault(msg, 7, 0),
     adsPerSpins2: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    rewardInvitesRank: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    rewardInvitesRank: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    serverTimestamp: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -8189,6 +8190,10 @@ proto.api.gamebox.ConfigDetail.deserializeBinaryFromReader = function(msg, reade
     case 9:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setRewardInvitesRank(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setServerTimestamp(value);
       break;
     default:
       reader.skipField();
@@ -8279,6 +8284,13 @@ proto.api.gamebox.ConfigDetail.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt32(
       9,
+      f
+    );
+  }
+  f = message.getServerTimestamp();
+  if (f !== 0) {
+    writer.writeInt64(
+      10,
       f
     );
   }
@@ -8417,6 +8429,21 @@ proto.api.gamebox.ConfigDetail.prototype.getRewardInvitesRank = function() {
 /** @param {number} value */
 proto.api.gamebox.ConfigDetail.prototype.setRewardInvitesRank = function(value) {
   jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int64 server_timestamp = 10;
+ * @return {number}
+ */
+proto.api.gamebox.ConfigDetail.prototype.getServerTimestamp = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.ConfigDetail.prototype.setServerTimestamp = function(value) {
+  jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
