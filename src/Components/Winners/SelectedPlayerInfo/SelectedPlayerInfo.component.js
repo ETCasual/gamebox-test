@@ -21,6 +21,8 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
 	const [ranksList, setRanksList] = useState([]);
 	const [playersHighScoreList, setPlayerHighScoreList] = useState([]);
 
+	const enableLevel = false;
+
 	useEffect(() => {
 		const navBottom = document.querySelector(".navbar-bottom");
 		if (navBottom)
@@ -70,73 +72,75 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
 										</div>
 									</div>
 									{/* PLAYER MULTIPLIER */}
-									<div className="col-12 mt-3">
-										<div className="multiplier p-3 p-md-4 d-flex flex-column align-items-start">
-											<p className="mb-md-3 multiplier-info">
-												Multiplier{" "}
-												<span>
-													{getCurrentMultiplier(
-														playerDetailsData,
-														ranksList
-													) || 0}
-													%
-												</span>
-											</p>
-											{/* LEVEL */}
-											<div className="w-100">
-												<div className="level mb-0 mb-md-2 d-flex align-items-center justify-content-between">
-													<p className="mb-0 current-level">
-														<span>
-															{getCurrentLevel(
-																playerDetailsData,
-																ranksList
-															)}
-														</span>
-													</p>
-													<div className="mb-0 d-flex align-items-center justify-content-end exp">
-														<span className="player-exp">
-															{playerDetailsData?.exp >
-															ranksList[
-																ranksList.length -
-																	1
-															]?.exp
-																? ranksList[
-																		ranksList.length -
-																			1
-																  ]?.exp?.toLocaleString()
-																: playerDetailsData?.exp?.toLocaleString()}
-														</span>
-														<span className="px-1">
-															/
-														</span>
-														<span className="current-mutliplier-total pr-1">
-															{getCurrentLevelExp(
-																playerDetailsData,
-																ranksList
-															)?.toLocaleString()}
-														</span>
-														<span>exp</span>
-													</div>
-												</div>
-												<div className="col-12 position-relative px-0">
-													<div className="progress">
-														<div
-															className="progress-bar"
-															role="progressbar"
-															style={{
-																width: `${getLevelProgress(
+									{ enableLevel && (
+										<div className="col-12 mt-3">
+											<div className="multiplier p-3 p-md-4 d-flex flex-column align-items-start">
+												<p className="mb-md-3 multiplier-info">
+													Multiplier{" "}
+													<span>
+														{getCurrentMultiplier(
+															playerDetailsData,
+															ranksList
+														) || 0}
+														%
+													</span>
+												</p>
+												{/* LEVEL */}
+												<div className="w-100">
+													<div className="level mb-0 mb-md-2 d-flex align-items-center justify-content-between">
+														<p className="mb-0 current-level">
+															<span>
+																{getCurrentLevel(
 																	playerDetailsData,
 																	ranksList
-																)}%`,
-															}}
-															aria-valuemin="0"
-															aria-valuemax="100"
-														/>
+																)}
+															</span>
+														</p>
+														<div className="mb-0 d-flex align-items-center justify-content-end exp">
+															<span className="player-exp">
+																{playerDetailsData?.exp >
+																ranksList[
+																	ranksList.length -
+																		1
+																]?.exp
+																	? ranksList[
+																			ranksList.length -
+																				1
+																	]?.exp?.toLocaleString()
+																	: playerDetailsData?.exp?.toLocaleString()}
+															</span>
+															<span className="px-1">
+																/
+															</span>
+															<span className="current-mutliplier-total pr-1">
+																{getCurrentLevelExp(
+																	playerDetailsData,
+																	ranksList
+																)?.toLocaleString()}
+															</span>
+															<span>exp</span>
+														</div>
+													</div>
+													<div className="col-12 position-relative px-0">
+														<div className="progress">
+															<div
+																className="progress-bar"
+																role="progressbar"
+																style={{
+																	width: `${getLevelProgress(
+																		playerDetailsData,
+																		ranksList
+																	)}%`,
+																}}
+																aria-valuemin="0"
+																aria-valuemax="100"
+															/>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									)}
 								</div>
 							</div>
 							{/* HIGHSCORES */}

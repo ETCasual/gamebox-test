@@ -111,7 +111,7 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                         {/* BOTTOM - EARNED POINTS */}
                         <div className="earned-points p-4">
                             {/* LEVEL MULTIPLIER */}
-                            <div className="d-flex align-items-center justify-content-between mb-3 leaderboard-level">
+                            {/* <div className="d-flex align-items-center justify-content-between mb-3 leaderboard-level">
                                 <p className="mb-0">Level Multiplier</p>
                                 <p className="tickets mb-0 text-right">
                                     {getLeaderboardPrizeInfo(
@@ -131,7 +131,7 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                                         : "-"}{" "}
                                     tickets
                                 </p>
-                            </div>
+                            </div> */}
                             {/* VIP */}
                             {getLeaderboardPrizeInfo(
                                 "vipMultiplier",
