@@ -1449,6 +1449,8 @@ export async function getConfig() {
         useGemsSpin: configResult.getGemsPerSpins2(),
         watchAdsSpin: configResult.getAdsPerSpins2(),
         rewardInvitesRank: configResult.getRewardInvitesRank(),
+        serverTimestamp: configResult.getServerTimestamp(),
+        offsetTimestamp: configResult.getServerTimestamp() * 1000 - Date.now(),
     });
     return config;
 }

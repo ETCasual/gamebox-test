@@ -1,6 +1,6 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useEffect, useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
@@ -23,6 +23,8 @@ const GameDuration = ({
 
     const dispatch = useDispatch();
 
+    const { config } = useSelector((state) => state.config);
+
     const [isGameAvailable, setIsGameAvailable] = useState(false);
 
     // GAME DURATION REF
@@ -42,7 +44,8 @@ const GameDuration = ({
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                data?.gameInfo[0]?.endTimeStamp
+                data?.gameInfo[0]?.endTimeStamp * 1000,
+                config.offsetTimestamp ? config.offsetTimestamp : 0
             );
             setTimer(finalTimeRef);
 
@@ -72,7 +75,13 @@ const GameDuration = ({
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         };
-    }, [data, setTimer, setIsGameAvailable, setEarnAdditionalDisabledStatus]);
+    }, [
+        data,
+        setTimer,
+        setIsGameAvailable,
+        setEarnAdditionalDisabledStatus,
+        config,
+    ]);
 
     const onClickEnterGame = () => {
         if (isGameAvailable) {

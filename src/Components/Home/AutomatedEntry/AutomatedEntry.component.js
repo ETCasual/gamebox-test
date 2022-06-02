@@ -15,6 +15,7 @@ const AutomatedEntry = ({ data }) => {
     const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.userData);
+    const { config } = useSelector((state) => state.config);
     const { automatedEntryTicket } = useSelector(
         (state) => state.automatedEntryTickets
     );
@@ -73,12 +74,9 @@ const AutomatedEntry = ({ data }) => {
             // COUNTDOWN TIMER INTERVAL
             clearInterval(watcherRef.current);
             watcherRef.current = setInterval(() => {
-                if (calculatedTime.getDate() < new Date().getDate()) {
-                    calculatedTime.setDate(calculatedTime.getDate() + 1);
-                }
-
                 let finalTimeRef = convertSecondsToHours(
-                    calculatedTime.valueOf() / 1000
+                    calculatedTime.valueOf(),
+                    config.offsetTimestamp ? config.offsetTimestamp : 0
                 );
                 setTimer(finalTimeRef);
                 if (finalTimeRef === "Ended") countDownTimerEnded();
@@ -100,7 +98,7 @@ const AutomatedEntry = ({ data }) => {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         };
-    }, [data]);
+    }, [data, config]);
 
     const getTickets = () => {
         const currentPrize = automatedEntryTicket.filter(

@@ -126,7 +126,8 @@ const Leaderboard = ({
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                data?.gameInfo[0]?.endTimeStamp
+                data?.gameInfo[0]?.endTimeStamp * 1000,
+                config.offsetTimestamp ? config.offsetTimestamp : 0
             );
 
             setTimer(finalTimeRef);
@@ -185,6 +186,7 @@ const Leaderboard = ({
         setTimer,
         setEarnAdditionalDisabledStatus,
         executeRecaptcha,
+        config,
     ]);
 
     const isCurrentUser = (id) => {

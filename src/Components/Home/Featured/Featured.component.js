@@ -20,6 +20,7 @@ import convertSecondsToHours from "Utils/TimeConversion";
 const Featured = ({ data, length, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
 
+    const { config } = useSelector((state) => state.config);
     const { poolTickets } = useSelector((state) => state.playerTickets);
     const { prizeTicketCollection } = useSelector(
         (state) => state.prizePoolTickets
@@ -59,7 +60,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
         clearInterval(watcherRef);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                data?.gameInfo[0]?.endTimeStamp
+                data?.gameInfo[0]?.endTimeStamp * 1000,
+                config.offsetTimestamp ? config.offsetTimestamp : 0
             );
             setTimer(finalTimeRef);
 
@@ -73,7 +75,7 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         };
-    }, [data?.gameInfo]);
+    }, [data?.gameInfo, config]);
 
     return (
         <>
@@ -196,7 +198,8 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                                                     </div>
                                                 </div>
                                                 <button className="btn-participate w-100 p-3 mt-4">
-                                                    Participate in featured prize tournaments
+                                                    Participate in featured
+                                                    prize tournaments
                                                 </button>
                                             </div>
                                         </div>

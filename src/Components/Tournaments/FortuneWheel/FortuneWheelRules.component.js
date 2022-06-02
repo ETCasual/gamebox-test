@@ -11,7 +11,10 @@ const FortuneWheelRules = ({
 }) => {
     const segmentAngleRef = useRef(360 / spinnerRules.length);
     const numOfSpinsRef = useRef(8);
+
+    const ticketList = useRef(spinnerRules.map((x) => x.tickets));
     const wheelRef = useRef(null);
+    const onFinishedRef = useRef(onFinished);
 
     useEffect(() => {
         // SETUP WHEEL
@@ -59,6 +62,65 @@ const FortuneWheelRules = ({
     }, [spinnerRules]);
 
     useEffect(() => {
+        const resetWheel = () => {
+            wheelRef.current.stopAnimation(false);
+            let winningSegmentNumber =
+                wheelRef.current.getIndicatedSegmentNumber();
+
+            const [fillStyle, strokeStyle] = normalSegmentStyles();
+            wheelRef.current.segments[winningSegmentNumber].fillStyle =
+                fillStyle;
+            wheelRef.current.segments[winningSegmentNumber].strokeStyle =
+                strokeStyle;
+
+            wheelRef.current.draw();
+        };
+
+        const startSpin = () => {
+            let winSegments = ticketList.current.reduce((a, e, i) => {
+                if (e === winAmount) {
+                    a.push(i);
+                }
+                return a;
+            }, []);
+
+            if (winSegments.length === 0) return;
+
+            // Random pick a winning segment
+            const randIndex = Math.floor(Math.random() * winSegments.length);
+            let resultAngle =
+                segmentAngleRef.current * winSegments[randIndex] +
+                segmentAngleRef.current / 2;
+
+            resetWheel();
+
+            wheelRef.current.animation.stopAngle = resultAngle;
+
+            // To make the spin continously spin for next spin
+            wheelRef.current.animation.spins += numOfSpinsRef.current;
+
+            wheelRef.current.startAnimation();
+
+            // Wait for wheel finish spin
+            delay(() => {
+                // Highlight winning segment
+                let winningSegmentNumber =
+                    wheelRef.current.getIndicatedSegmentNumber();
+
+                const [fillStyle, strokeStyle] = winSegmentStyles();
+                wheelRef.current.segments[winningSegmentNumber].fillStyle =
+                    fillStyle;
+                wheelRef.current.segments[winningSegmentNumber].strokeStyle =
+                    strokeStyle;
+
+                wheelRef.current.draw();
+
+                if (onFinishedRef.current) {
+                    onFinishedRef.current();
+                }
+            }, wheelRef.current.animation.duration * 1000);
+        };
+
         if (isClickedSpin && winAmount !== -1) {
             startSpin();
         }
@@ -111,63 +173,6 @@ const FortuneWheelRules = ({
         let strokeStyle = "#ee087fff";
 
         return [fillStyle, strokeStyle];
-    };
-
-    const startSpin = () => {
-        let winSegments = spinnerRules.reduce((a, e, i) => {
-            if (e.tickets === winAmount) {
-                a.push(i);
-            }
-            return a;
-        }, []);
-
-        if (winSegments.length === 0) return;
-
-        // Random pick a winning segment
-        const randIndex = Math.floor(Math.random() * winSegments.length);
-        let resultAngle =
-            segmentAngleRef.current * winSegments[randIndex] +
-            segmentAngleRef.current / 2;
-
-        resetWheel();
-
-        wheelRef.current.animation.stopAngle = resultAngle;
-
-        // To make the spin continously spin for next spin
-        wheelRef.current.animation.spins += numOfSpinsRef.current;
-
-        wheelRef.current.startAnimation();
-
-        // Wait for wheel finish spin
-        delay(() => {
-            // Highlight winning segment
-            let winningSegmentNumber =
-                wheelRef.current.getIndicatedSegmentNumber();
-
-            const [fillStyle, strokeStyle] = winSegmentStyles();
-            wheelRef.current.segments[winningSegmentNumber].fillStyle =
-                fillStyle;
-            wheelRef.current.segments[winningSegmentNumber].strokeStyle =
-                strokeStyle;
-
-            wheelRef.current.draw();
-
-            if (onFinished) {
-                onFinished();
-            }
-        }, wheelRef.current.animation.duration * 1000);
-    };
-
-    const resetWheel = () => {
-        wheelRef.current.stopAnimation(false);
-        let winningSegmentNumber = wheelRef.current.getIndicatedSegmentNumber();
-
-        const [fillStyle, strokeStyle] = normalSegmentStyles();
-        wheelRef.current.segments[winningSegmentNumber].fillStyle = fillStyle;
-        wheelRef.current.segments[winningSegmentNumber].strokeStyle =
-            strokeStyle;
-
-        wheelRef.current.draw();
     };
 
     //#endregion

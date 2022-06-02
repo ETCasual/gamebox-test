@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import VisibilitySensor from "react-visibility-sensor";
 import convertSecondsToHours from "Utils/TimeConversion";
 import getPoolTickets from "Utils/PoolTickets";
@@ -7,6 +7,8 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 
 const DailyBonus = ({ data, handleGamePanel }) => {
     const dispatch = useDispatch();
+
+    const { config } = useSelector((state) => state.config);
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
@@ -61,11 +63,9 @@ const DailyBonus = ({ data, handleGamePanel }) => {
             // COUNTDOWN TIMER INTERVAL
             clearInterval(watcherRef.current);
             watcherRef.current = setInterval(() => {
-                if (calculatedTime.getDate() < new Date().getDate())
-                    calculatedTime.setDate(calculatedTime.getDate() + 1);
-
                 let finalTimeRef = convertSecondsToHours(
-                    calculatedTime.valueOf() / 1000
+                    calculatedTime.valueOf(),
+                    config.offsetTimestamp ? config.offsetTimestamp : 0
                 );
                 setTimer(finalTimeRef);
                 if (finalTimeRef === "Ended") countDownTimerEnded();

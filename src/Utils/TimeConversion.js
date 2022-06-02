@@ -1,6 +1,12 @@
-const convertSecondsToHours = (timestamp) => {
-    const date_future = new Date(timestamp * 1000);
-    const date_now = new Date();
+/**
+ * Convert the timestamp into {_d _h _m _s} format.
+ * @param {*} endTimestamp The timestamp in milliseconds unit.
+ * @param {*} offsetInMs The offset timestamp in milliseconds unit.
+ * @returns
+ */
+const convertSecondsToHours = (endTimestamp, offsetInMs) => {
+    const date_future = new Date(endTimestamp);
+    const date_now = Date.now() + offsetInMs;
 
     let seconds = Math.floor((date_future - date_now) / 1000);
     let minutes = Math.floor(seconds / 60);

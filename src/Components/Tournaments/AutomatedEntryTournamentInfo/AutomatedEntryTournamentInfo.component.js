@@ -19,6 +19,8 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
     );
     const dispatch = useDispatch();
 
+    const { config } = useSelector((state) => state.config);
+
     const history = useHistory();
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
@@ -37,8 +39,8 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                calculatedTime.valueOf() / 1000,
-                "new"
+                calculatedTime.valueOf(),
+                config.offsetTimestamp ? config.offsetTimestamp : 0
             );
             setTimer(finalTimeRef);
             if (finalTimeRef === "Ended") countDownTimerEnded();
@@ -64,7 +66,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         };
-    }, [data, type, dispatch]);
+    }, [data, type, dispatch, config]);
 
     const getTickets = () => {
         let currentPrize = automatedEntryTicket.filter(
