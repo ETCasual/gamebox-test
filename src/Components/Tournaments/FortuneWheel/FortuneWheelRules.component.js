@@ -1,6 +1,7 @@
 import { delay } from "lodash";
 import React, { useEffect, useRef } from "react";
 import Winwheel from "winwheel";
+// To ignore the TweenMax not used warning
 // eslint-disable-next-line
 import TweenMax from "gsap/all";
 
@@ -16,6 +17,9 @@ const FortuneWheelRules = ({
     const wheelRef = useRef(null);
 
     useEffect(() => {
+        // Add TweenMax into global var
+        window.TweenMax = TweenMax;
+
         // SETUP WHEEL
         const [fillStyle, strokeStyle] = normalSegmentStyles();
 
