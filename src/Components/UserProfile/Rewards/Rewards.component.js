@@ -13,6 +13,7 @@ import {
 import GenericLoader from "Components/Loader/Generic.loader";
 
 const Rewards = () => {
+    const { config } = useSelector((state) => state.config);
     const { claimedPrizes } = useSelector((state) => state.claimedPrizes);
     const { unClaimedPrizes } = useSelector((state) => state.unClaimedPrizes);
 
@@ -27,6 +28,9 @@ const Rewards = () => {
         id: null,
         status: false,
     });
+
+    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
     // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
 
     // useEffect(() => {
@@ -45,7 +49,8 @@ const Rewards = () => {
     // }, []);
 
     const getClaimedDate = (createdOn) => {
-        let playerTimeZone = (new Date().getTimezoneOffset() / 60) * -1;
+        let playerTimeZone =
+            (new Date(nowTimeStamp()).getTimezoneOffset() / 60) * -1;
         let claimedTimeZone =
             (new Date(createdOn * 1000).getTimezoneOffset() / 60) * -1;
 
@@ -77,17 +82,28 @@ const Rewards = () => {
     };
 
     const validClaimDate = (claimDate) => {
-        const today = new Date().toLocaleDateString();
+        const today = new Date(nowTimeStamp()).toLocaleDateString();
         const _claimDated = new Date(claimDate * 1000).toLocaleDateString();
         if (today < _claimDated) return true;
         return false;
     };
 
-    const handleNFTClaim = (winnerId, prizeBlockchainNetwork, prizeContractType) => {
+    const handleNFTClaim = (
+        winnerId,
+        prizeBlockchainNetwork,
+        prizeContractType
+    ) => {
         if (loader.status) return;
 
         setLoader({ status: true, id: winnerId });
-        dispatch(loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType, setLoader));
+        dispatch(
+            loadNFTClaim(
+                winnerId,
+                prizeBlockchainNetwork,
+                prizeContractType,
+                setLoader
+            )
+        );
     };
 
     const handleTokenClaim = (winnerId, prizeBlockchainNetwork) => {
@@ -188,45 +204,67 @@ const Rewards = () => {
                                                                     }
                                                                 </div>
 
-                                                                {data.prizeNftContractAddress &&
+                                                                {data.prizeNftContractAddress && (
                                                                     <>
                                                                         {validClaimDate(
-                                                                                data.prizeCanClaimDate
-                                                                            ) && (
-                                                                                <div className="prize-claimed text-wait py-2">
-                                                                                    Claim your {data.prizeContractType === 1 ? "Token" : "NFT" } - {getRemainingDaysToClaim(
-                                                                                            data.prizeCanClaimDate
-                                                                                        )}
-                                                                                </div>
-                                                                            )}
-                                                                        {!validClaimDate(data.prizeCanClaimDate) &&
-                                                                            (data.prizeContractType === 2 || data.prizeContractType === 3) 
-                                                                            && (
-                                                                                <div className="prize-claimed text-red py-2 cursor-pointer"
-                                                                                    onClick={() => handleNFTClaim(
-                                                                                                data.id,
-                                                                                                data.prizeBlockchainNetwork,
-                                                                                                data.prizeContractType
-                                                                                            )
+                                                                            data.prizeCanClaimDate
+                                                                        ) && (
+                                                                            <div className="prize-claimed text-wait py-2">
+                                                                                Claim
+                                                                                your{" "}
+                                                                                {data.prizeContractType ===
+                                                                                1
+                                                                                    ? "Token"
+                                                                                    : "NFT"}{" "}
+                                                                                -{" "}
+                                                                                {getRemainingDaysToClaim(
+                                                                                    data.prizeCanClaimDate
+                                                                                )}
+                                                                            </div>
+                                                                        )}
+                                                                        {!validClaimDate(
+                                                                            data.prizeCanClaimDate
+                                                                        ) &&
+                                                                            (data.prizeContractType ===
+                                                                                2 ||
+                                                                                data.prizeContractType ===
+                                                                                    3) && (
+                                                                                <div
+                                                                                    className="prize-claimed text-red py-2 cursor-pointer"
+                                                                                    onClick={() =>
+                                                                                        handleNFTClaim(
+                                                                                            data.id,
+                                                                                            data.prizeBlockchainNetwork,
+                                                                                            data.prizeContractType
+                                                                                        )
                                                                                     }
                                                                                 >
-                                                                                    Claim your NFT
+                                                                                    Claim
+                                                                                    your
+                                                                                    NFT
                                                                                 </div>
                                                                             )}
-                                                                        {!validClaimDate(data.prizeCanClaimDate) &&
-                                                                            data.prizeContractType === 1
-                                                                            && (
-                                                                                <div className="prize-claimed text-red py-2 cursor-pointer"
-                                                                                    onClick={() => handleTokenClaim(
-                                                                                        data.id,
-                                                                                        data.prizeBlockchainNetwork
-                                                                                    )}
+                                                                        {!validClaimDate(
+                                                                            data.prizeCanClaimDate
+                                                                        ) &&
+                                                                            data.prizeContractType ===
+                                                                                1 && (
+                                                                                <div
+                                                                                    className="prize-claimed text-red py-2 cursor-pointer"
+                                                                                    onClick={() =>
+                                                                                        handleTokenClaim(
+                                                                                            data.id,
+                                                                                            data.prizeBlockchainNetwork
+                                                                                        )
+                                                                                    }
                                                                                 >
-                                                                                    Claim your Token
+                                                                                    Claim
+                                                                                    your
+                                                                                    Token
                                                                                 </div>
-                                                                        )}
+                                                                            )}
                                                                     </>
-                                                                }
+                                                                )}
                                                             </div>
                                                         </div>
                                                     </div>

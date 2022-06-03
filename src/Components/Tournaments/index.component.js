@@ -33,6 +33,7 @@ const Index = ({ match }) => {
 
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userData);
+    const { config } = useSelector((state) => state.config);
     const { prizes, prizeEnded } = useSelector((state) => state.prizes);
     const { spinner } = useSelector((state) => state.playerSpinnerInfo);
     const { poolTickets } = useSelector((state) => state.playerTickets);
@@ -101,55 +102,66 @@ const Index = ({ match }) => {
     }, [dispatch, user.id, spinner.freeSpins]);
 
     // SET CURRENT PRIZE
-    useEffect(() => {
-        let prizeType = prizes[PRIZE_TYPE[type]] || [];
-        let idx = prizeType?.findIndex((e) => e.prizeId === parseInt(id));
-        let gameEndTime =
-            type !== "automated"
-                ? prizeType[idx]?.gameInfo?.[0]?.endTimeStamp * 1000
-                : prizeType[idx]?.scheduledOff * 1000;
+    useEffect(
+        () => {
+            const nowTimeStamp = () =>
+                Date.now() + (config?.offsetTimestamp || 0);
 
-        if (prizeType.length > 0 && Date.now() < (gameEndTime || 0)) {
-            // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
-            if (idx > -1) {
-                setCurrentPrize(prizeType[idx]);
-                if (type !== "automated") {
-                    const currentGameInfo =
-                        JSON.parse(sessionStorage.getItem("currentGameInfo")) ||
-                        null;
-                    if (currentGameInfo !== null) {
-                        const gameIdx = prizeType[idx].gameInfo.findIndex(
-                            (g) => g.gameId === currentGameInfo.gameId
-                        );
-                        if (gameIdx === -1) {
-                            const _gameInfo = {
-                                gameId: prizeType[idx].gameInfo[0].gameId,
-                                gameIndex: prizeType[idx].gameInfo[0].gameIndex,
-                                gameTitle: prizeType[idx].gameInfo[0].gameTitle,
-                                gameIcon: prizeType[idx].gameInfo[0].gameIcon,
-                                endTimeStamp:
-                                    prizeType[idx].gameInfo[0].endTimeStamp,
-                            };
-                            sessionStorage.setItem(
-                                "currentGameInfo",
-                                JSON.stringify(_gameInfo)
+            let prizeType = prizes[PRIZE_TYPE[type]] || [];
+            let idx = prizeType?.findIndex((e) => e.prizeId === parseInt(id));
+            let gameEndTime =
+                type !== "automated"
+                    ? prizeType[idx]?.gameInfo?.[0]?.endTimeStamp * 1000
+                    : prizeType[idx]?.scheduledOff * 1000;
+
+            if (prizeType.length > 0 && nowTimeStamp() < (gameEndTime || 0)) {
+                // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
+                if (idx > -1) {
+                    setCurrentPrize(prizeType[idx]);
+                    if (type !== "automated") {
+                        const currentGameInfo =
+                            JSON.parse(
+                                sessionStorage.getItem("currentGameInfo")
+                            ) || null;
+                        if (currentGameInfo !== null) {
+                            const gameIdx = prizeType[idx].gameInfo.findIndex(
+                                (g) => g.gameId === currentGameInfo.gameId
                             );
-                            dispatch({
-                                type: CURRENT_GAME_DETAILS,
-                                payload: _gameInfo,
-                            });
-                            dispatch(
-                                loadLeaderboard(
-                                    parseInt(id),
-                                    prizeType[idx].gameInfo[0].gameId
-                                )
-                            );
+                            if (gameIdx === -1) {
+                                const _gameInfo = {
+                                    gameId: prizeType[idx].gameInfo[0].gameId,
+                                    gameIndex:
+                                        prizeType[idx].gameInfo[0].gameIndex,
+                                    gameTitle:
+                                        prizeType[idx].gameInfo[0].gameTitle,
+                                    gameIcon:
+                                        prizeType[idx].gameInfo[0].gameIcon,
+                                    endTimeStamp:
+                                        prizeType[idx].gameInfo[0].endTimeStamp,
+                                };
+                                sessionStorage.setItem(
+                                    "currentGameInfo",
+                                    JSON.stringify(_gameInfo)
+                                );
+                                dispatch({
+                                    type: CURRENT_GAME_DETAILS,
+                                    payload: _gameInfo,
+                                });
+                                dispatch(
+                                    loadLeaderboard(
+                                        parseInt(id),
+                                        prizeType[idx].gameInfo[0].gameId
+                                    )
+                                );
+                            }
                         }
                     }
                 }
-            }
-        } else dispatch(loadPrizes());
-    }, [prizes, id, type, dispatch]);
+            } else dispatch(loadPrizes());
+        },
+        // eslint-disable-next-line
+        [prizes, id, type, dispatch]
+    );
 
     // GET TICKETS
     useEffect(() => {

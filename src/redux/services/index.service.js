@@ -723,40 +723,8 @@ export async function getBlockchainNetworks() {
 //
 //  GET PRIZE LATEST TICKETS COLLECTED
 //
-export async function getPrizeLatestTicketsCollected(
-    prizeId,
-    ignoreChecking,
-    prizeTicketCollection
-) {
+export async function getPrizeLatestTicketsCollected(prizeId) {
     const token = getToken();
-
-    if (!ignoreChecking) {
-        const existingIndex = prizeTicketCollection.findIndex(
-            (e) => e.prizeId === prizeId
-        );
-        if (existingIndex > -1) {
-            //check if got existing data that's retrieved within last 5 seconds, as we don't allow spam to server
-
-            // lastChecked timestamp
-            //console.log(poolTickets[existingIndex].lastChecked);
-            let diff =
-                (Date.now() -
-                    prizeTicketCollection[existingIndex].lastChecked) /
-                1000;
-            if (diff < 5) {
-                //if smaller than 5 seconds, then do nothing and skip this api
-                //console.log("skip");
-                return prizeTicketCollection[existingIndex];
-            }
-        } else {
-            // setting this tempData immediately so that a very fast scrolling doesn't spam at the very first time visitng the page
-            return {
-                prizeId,
-                tickets: 0,
-                lastChecked: Date.now(),
-            };
-        }
-    }
 
     const request = new GetPrizeTicketsCollectedRequest();
     request.setPrizeId(prizeId);
@@ -764,41 +732,14 @@ export async function getPrizeLatestTicketsCollected(
         authorization: `Bearer ${token}`,
     });
     const tickets = response.getTickets();
-    return { prizeId, tickets, lastChecked: Date.now() };
+    return { prizeId, tickets };
 }
 
 //
 //     GET POOL TICKETS
 //
-export async function getPoolTickets(
-    prizeId,
-    ignoreChecking,
-    user,
-    poolTickets
-) {
+export async function getPoolTickets(prizeId, user) {
     const token = getToken();
-
-    if (!ignoreChecking) {
-        const existingIndex = poolTickets.findIndex(
-            (e) => e.prizeId === prizeId
-        );
-        if (existingIndex > -1) {
-            //check if got existing data that's retrieved within last 5 seconds, as we don't allow spam to server
-
-            // lastChecked timestamp
-            //console.log(esmData.poolTickets[existingIndex].lastChecked);
-            let diff =
-                (Date.now() - poolTickets[existingIndex].lastChecked) / 1000;
-            if (diff < 5) {
-                //if smaller than 5 seconds, then do nothing and skip this api
-                // console.log("skip");
-                return poolTickets[existingIndex];
-            }
-        } else {
-            // setting this tempData immediately so that a very fast scrolling doesn't spam at the very first time visitng the page
-            return { prizeId, tickets: 0, lastChecked: Date.now() };
-        }
-    }
 
     const request = new GetPrizeTicketPoolRequest();
     request.setUserId(user.id);
@@ -808,7 +749,7 @@ export async function getPoolTickets(
         authorization: `Bearer ${token}`,
     });
     const tickets = response.getTickets();
-    return { prizeId, tickets, lastChecked: Date.now() };
+    return { prizeId, tickets };
 }
 
 //

@@ -22,6 +22,7 @@ import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
     const { user } = useSelector((state) => state.userData);
+    const { config } = useSelector((state) => state.config);
     const { winnerAnnouncementNotificationList } = useSelector(
         (state) => state.notifications
     );
@@ -82,10 +83,12 @@ const Index = () => {
 
     // SETTING PRIZES (FEATURE & PREMIUM) TO STATE
     useEffect(() => {
+        const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
         const sessionTimeStamp = parseInt(
             sessionStorage.getItem("sessionTimeStamp")
         );
-        const diff = Date.now() - sessionTimeStamp;
+        const diff = nowTimeStamp() - sessionTimeStamp;
         // if (diff <= 15000) console.log("HOME PAGE TIMER CALLING TICKETS", diff);
 
         clearTimeout(timeOutRef1.current);
@@ -145,7 +148,12 @@ const Index = () => {
             clearTimeout(timeOutRef1.current);
             timeOutRef1.current = null;
         };
-    }, [dispatch, prizes.featuredData, prizes.premiumData]);
+    }, [
+        dispatch,
+        prizes.featuredData,
+        prizes.premiumData,
+        config?.offsetTimestamp,
+    ]);
 
     // SETTING PRIZE AUTOMATED TO STATE
     useEffect(() => {
@@ -215,7 +223,8 @@ const Index = () => {
             _arr = n?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
             );
-            const _prizeList = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+            const _prizeList =
+                JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
             if (_arr.length > 0) {
                 setRevealCardModalData(_arr);
@@ -242,7 +251,6 @@ const Index = () => {
                     JSON.stringify(_prizeList)
                 );
             }
-        
         });
         // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE
         return;

@@ -28,7 +28,11 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
     let watcherRef = useRef(null);
 
     useEffect(() => {
-        let currentTimeZone = -(new Date().getTimezoneOffset() / 60);
+        const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
+        let currentTimeZone = -(
+            new Date(nowTimeStamp()).getTimezoneOffset() / 60
+        );
         let calculatedTime = new Date(data?.scheduledOff * 1000);
         if (currentTimeZone !== data?.timeZone) {
             calculatedTime.setHours(

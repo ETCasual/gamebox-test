@@ -8,7 +8,12 @@ import loadPrizes from "redux/thunks/Prizes.thunk";
 import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
 
 import { defaultUserImage } from "Utils/DefaultImage";
-import { handleConnectWallet, disconnectWallet, handleMetamask, handleWalletConnect } from "Utils/ConnectWallet";
+import {
+    handleConnectWallet,
+    disconnectWallet,
+    handleMetamask,
+    handleWalletConnect,
+} from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
 
 import { handleSignOut } from "Utils/SignOut";
@@ -29,6 +34,7 @@ const Header = ({
         (state) => state.earnAdditional
     );
     const { user } = useSelector((state) => state.userData);
+    const { config } = useSelector((state) => state.config);
 
     // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [onHoverWallet, setOnWalletHover] = useState(false);
@@ -39,12 +45,14 @@ const Header = ({
 
     const history = useHistory();
 
+    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
     // useEffect(() => {
     //     window.addEventListener("resize", handleResize);
 
     //     function handleResize() {
     //         setHideGemsOnMobile(
-    //             window.innerWidth > 767 
+    //             window.innerWidth > 767
     //         );
     //     }
     //     handleResize();
@@ -58,7 +66,7 @@ const Header = ({
     const getGems = () => {
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         if (_earnAdditional.lenght > 1) {
-            let now = Date.now();
+            let now = nowTimeStamp();
             const output = _earnAdditional.reduce((prev, curr) =>
                 Math.abs(curr?.timestamp - now) <
                 Math.abs(prev?.timestamp - now)
@@ -78,7 +86,7 @@ const Header = ({
     const handleWallet = async () => {
         if (user.walletAddress) {
             if (user.network === "Wrong Network!") {
-                handleConnectWallet(dispatch);    
+                handleConnectWallet(dispatch);
             } else {
                 handleWalletDropDown();
             }
@@ -120,7 +128,7 @@ const Header = ({
                 console.log(err);
             }
         }
-    }
+    };
 
     const handleConnectWalletConnect = async () => {
         try {
@@ -131,7 +139,7 @@ const Header = ({
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     return (
         <>
@@ -140,7 +148,11 @@ const Header = ({
                     {/* LOGO & NAV LINKS */}
                     <div className="left-items d-flex align-items-center justify-content-start">
                         <div className="d-flex">
-                            <Link to="/" className="logo" onClick={handleHomeNavLink}>
+                            <Link
+                                to="/"
+                                className="logo"
+                                onClick={handleHomeNavLink}
+                            >
                                 <img
                                     className="img-fluid"
                                     src={`${window.cdn}logo/logo_gamebox.png`}
@@ -171,7 +183,9 @@ const Header = ({
                                     }}
                                     activeClassName="active"
                                 >
-                                    <div className="py-4 px-2 mx-2">Activities</div>
+                                    <div className="py-4 px-2 mx-2">
+                                        Activities
+                                    </div>
                                 </NavLink>
                                 <NavLink
                                     to={{
@@ -182,11 +196,12 @@ const Header = ({
                                     }}
                                     activeClassName="active"
                                 >
-                                    <div className="py-4 px-2 mx-2">Winners</div>
+                                    <div className="py-4 px-2 mx-2">
+                                        Winners
+                                    </div>
                                 </NavLink>
                             </div>
                         </div>
-
                     </div>
                     {/* GEMS, NOTIFICATION ICON & PROFILE ICON */}
                     <div className="right-items w-100 d-flex align-items-center justify-content-end">
@@ -248,7 +263,7 @@ const Header = ({
                             </button>
                         </div>
                         <div className="profile d-flex position-relative m-1">
-                            <div 
+                            <div
                                 className="d-flex"
                                 onClick={() => setMobileProfileWallet(true)}
                             >
@@ -295,19 +310,22 @@ const Header = ({
                     {/* MOBILE PROFILE WALLET */}
                     {mobileProfileWallet && (
                         <>
-                            <div className="overlay-profile-wallet"
-                                onClick={() => setMobileProfileWallet(false)}>
-                            </div>
+                            <div
+                                className="overlay-profile-wallet"
+                                onClick={() => setMobileProfileWallet(false)}
+                            ></div>
                             <div className="profile-wallet-wrapper p-3">
                                 <a
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    href={ `${process.env.REACT_APP_FROYO_WEB_URL}/my-profile` }
+                                    href={`${process.env.REACT_APP_FROYO_WEB_URL}/my-profile`}
                                 >
                                     <div className="profile-wrapper d-flex align-items-center mb-3">
                                         <div className="profile-avatar">
                                             <img
-                                                onError={(e) => defaultUserImage(e)}
+                                                onError={(e) =>
+                                                    defaultUserImage(e)
+                                                }
                                                 className="img-fluid"
                                                 src={
                                                     user.picture ||
@@ -317,7 +335,9 @@ const Header = ({
                                             />
                                         </div>
                                         <div>
-                                            <div className="profile-name ml-3 mb-1">{user.username}</div>
+                                            <div className="profile-name ml-3 mb-1">
+                                                {user.username}
+                                            </div>
                                             {user.walletAddress && (
                                                 <div className="profile-wallet ml-3 py-1 px-2">
                                                     {user.walletAddress?.substring(
@@ -326,7 +346,8 @@ const Header = ({
                                                     )}
                                                     ....
                                                     {user.walletAddress?.substring(
-                                                        user.walletAddress.length - 4
+                                                        user.walletAddress
+                                                            .length - 4
                                                     )}
                                                 </div>
                                             )}
@@ -340,59 +361,81 @@ const Header = ({
                                         > */}
                                     {/* TOKEN VALUE & ADDRESS */}
                                     {!user.walletAddress && !user.network && (
-                                        <div className="wallet-btn w-100 d-flex align-items-center justify-content-center p-3"
+                                        <div
+                                            className="wallet-btn w-100 d-flex align-items-center justify-content-center p-3"
                                             onClick={handleWallet}
                                         >
-                                            <p className="mb-0">Connect Wallet</p>
+                                            <p className="mb-0">
+                                                Connect Wallet
+                                            </p>
                                         </div>
                                     )}
-                                    {user.walletAddress && user.network === "Wrong Network!" && (
-                                        <div className="wallet-btn w-100 d-flex align-items-center justify-content-center p-3"
-                                            onClick={handleWallet}
-                                        >
-                                            <p className="mb-0">Wrong Network</p>
-                                        </div>
-                                    )}
-                                    {user.walletAddress && user.network !== "Wrong Network!" && (
-                                        <>
-                                            <div className="wallet-connected-wrapper py-3 w-100">
-                                                <div className="d-flex justify-content-between align-items-center">
-                                                    <div className="wallet-connected-label mb-2">
-                                                        <img
-                                                            className="icon"
-                                                            src={`${window.cdn}icons/icon_froyo.png`}
-                                                            alt="wallet"
-                                                        />
-                                                    </div>
-                                                    <div className="wallet-connected-value">
-                                                        {user.tokenBalance >= 0 ? 
-                                                            parseFloat(user.tokenBalance)?.toFixed(2)?.toLocaleString() + " FROYO"
-                                                            : "Invalid token"
-                                                        }{" "} 
-                                                    </div>
-                                                </div>
-                                                <div className="wallet-disconnect-btn w-100 d-flex align-items-center justify-content-center p-3 mt-3"
-                                                    onClick={handleWalletDisconnect}
-                                                >
-                                                    Disconnect Wallet
-                                                </div>
+                                    {user.walletAddress &&
+                                        user.network === "Wrong Network!" && (
+                                            <div
+                                                className="wallet-btn w-100 d-flex align-items-center justify-content-center p-3"
+                                                onClick={handleWallet}
+                                            >
+                                                <p className="mb-0">
+                                                    Wrong Network
+                                                </p>
                                             </div>
-                                        </>
-                                    )}
+                                        )}
+                                    {user.walletAddress &&
+                                        user.network !== "Wrong Network!" && (
+                                            <>
+                                                <div className="wallet-connected-wrapper py-3 w-100">
+                                                    <div className="d-flex justify-content-between align-items-center">
+                                                        <div className="wallet-connected-label mb-2">
+                                                            <img
+                                                                className="icon"
+                                                                src={`${window.cdn}icons/icon_froyo.png`}
+                                                                alt="wallet"
+                                                            />
+                                                        </div>
+                                                        <div className="wallet-connected-value">
+                                                            {user.tokenBalance >=
+                                                            0
+                                                                ? parseFloat(
+                                                                      user.tokenBalance
+                                                                  )
+                                                                      ?.toFixed(
+                                                                          2
+                                                                      )
+                                                                      ?.toLocaleString() +
+                                                                  " FROYO"
+                                                                : "Invalid token"}{" "}
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="wallet-disconnect-btn w-100 d-flex align-items-center justify-content-center p-3 mt-3"
+                                                        onClick={
+                                                            handleWalletDisconnect
+                                                        }
+                                                    >
+                                                        Disconnect Wallet
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
                                 </div>
                                 <div className="submenu-wrapper">
                                     <Link
-                                        onClick={() => setMobileProfileWallet(false)}
+                                        onClick={() =>
+                                            setMobileProfileWallet(false)
+                                        }
                                         to={{
                                             pathname: "/profile",
                                             state: {
-                                                prevPath: history.location.pathname,
+                                                prevPath:
+                                                    history.location.pathname,
                                             },
                                         }}
                                     >
                                         Gamebox profile
                                     </Link>
-                                    <p className="submenu-sign-out mt-2 mb-0" 
+                                    <p
+                                        className="submenu-sign-out mt-2 mb-0"
                                         onClick={() => {
                                             setMobileProfileWallet(false);
                                             handleSignOut(dispatch);
@@ -404,19 +447,17 @@ const Header = ({
                             </div>
                         </>
                     )}
-
                 </div>
             </div>
             {selectWalletModalShown && (
                 <SelectWalletsModal
-                    handleInstructionsCloseBtn={
-                        ()=>{setSelectWalletModalShown(false)}
-                    }
+                    handleInstructionsCloseBtn={() => {
+                        setSelectWalletModalShown(false);
+                    }}
                     handleConnectMetamask={handleConnectMetamask}
                     handleConnectWalletConnect={handleConnectWalletConnect}
                 />
             )}
-
         </>
     );
 };

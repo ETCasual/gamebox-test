@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+    const { config } = useSelector((state) => state.config);
+    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
     return (
         <div className="footer">
             <div className="footer-container mx-auto">
@@ -124,7 +128,9 @@ const Footer = () => {
                 </div>
                 <div className="terms-and-conditions-container d-flex position-absolute">
                     <div className="trademark-container">
-                        <span>© {new Date().getFullYear()} GameBox </span>
+                        <span>
+                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
+                        </span>
                         <span>&bull;</span>
                     </div>
                     <div className="clickable-container">

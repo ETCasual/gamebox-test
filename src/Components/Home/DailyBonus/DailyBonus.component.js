@@ -12,6 +12,8 @@ const DailyBonus = ({ data, handleGamePanel }) => {
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
+    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
     let watcherRef = useRef();
 
     const dispatchPoolTickets = (isVisible, id) => {
@@ -32,15 +34,18 @@ const DailyBonus = ({ data, handleGamePanel }) => {
             5: 5,
             6: 6,
         };
+
+        const nowDate = new Date(nowTimeStamp());
+
         // CURRENT PLAYER TIMEZONE
-        let currentTimeZone = -(new Date().getTimezoneOffset() / 60);
+        let currentTimeZone = -(nowDate.getTimezoneOffset() / 60);
 
         let isTimeValid =
-            new Date() >= new Date(data.scheduledOn * 1000) &&
-            new Date() <= new Date(data.scheduledOff * 1000);
+            nowDate >= new Date(data.scheduledOn * 1000) &&
+            nowDate <= new Date(data.scheduledOff * 1000);
 
         // IF TODAY DATE EXISTS IN THE REPEATED API DATA THEN PROCEED WITH THE COUNTDOWN TIMER
-        if (data.repeatedOn.includes(repeatedOnDict[new Date().getDay()])) {
+        if (data.repeatedOn.includes(repeatedOnDict[nowDate.getDay()])) {
             // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
             if (isTimeValid) initCountDownTimer();
         } else if (data.repeatedOn.length === 1 && data.repeatedOn[0] === 0) {
