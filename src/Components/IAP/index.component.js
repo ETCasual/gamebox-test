@@ -28,6 +28,7 @@ const Index = () => {
     const [stripePromise] = useState(
         loadStripe(process.env.REACT_APP_STRIPE_KEY)
     );
+    const fundAddress = process.env.REACT_APP_FUND_WALLET_ADDRESS;
 
     const { user } = useSelector((state) => state.userData);
     const { blockchainNetworks } = useSelector(
@@ -181,7 +182,7 @@ const Index = () => {
                 // Send tranfer function to receiver address
                 tokenContract.methods
                     .transfer(
-                        selectedNetwork[0]?.prizeDistributorAddress,
+                        fundAddress,
                         web3.utils.toBN(
                             web3.utils.toWei(productInfo?.price?.toString())
                         )
