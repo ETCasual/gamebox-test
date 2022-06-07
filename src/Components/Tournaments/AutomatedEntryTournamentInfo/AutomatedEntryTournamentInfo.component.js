@@ -160,9 +160,8 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             that easy.
                                         </p>
                                         <p className="instructions-tip text-center mb-5">
-                                            Tip: Earn more tickets by “watching
-                                            ads” or “use gems” to increase your
-                                            ticket count.
+                                            Tip: Earn more tickets by “use gems”
+                                            to increase your ticket count.
                                         </p>
                                     </div>
                                 </div>
