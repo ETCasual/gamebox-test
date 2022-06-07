@@ -45,9 +45,11 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
 					<div className="col-12 col-md-8 col-lg-5 mb-5 mx-auto">
 						<div className="row">
 							{/* BACK BUTTON */}
-							<div className="d-flex align-items-center back-button">
+							<div 
+								className="d-flex align-items-center back-button" 
+								onClick={handleBackButton}
+							>
 								<img
-									onClick={handleBackButton}
 									src={`${window.cdn}buttons/button_back.png`}
 									alt="back-btn"
 								/>
