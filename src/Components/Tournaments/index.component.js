@@ -632,22 +632,21 @@ const Index = ({ match }) => {
                                 </div>
                             </div>
                         </div>
+                        {/* FORTUNE WHEEL */}
+                        {fortuneWheelShown && (
+                            <FortuneWheel
+                                prizeId={parseInt(id)}
+                                setIsTicketsUpdated={setIsTicketsUpdated}
+                                ticketsRequired={currentPrize?.ticketsRequired}
+                                setFortuneWheelShown={setFortuneWheelShown}
+                            />
+                        )}
                     </section>
                 )}
                 {type === "automated" && (
                     <AutomatedEntryTournamentInfo
                         data={currentPrize}
                         type={type}
-                    />
-                )}
-
-                {/* FORTUNE WHEEL */}
-                {fortuneWheelShown && (
-                    <FortuneWheel
-                        prizeId={parseInt(id)}
-                        setIsTicketsUpdated={setIsTicketsUpdated}
-                        ticketsRequired={currentPrize?.ticketsRequired}
-                        setFortuneWheelShown={setFortuneWheelShown}
                     />
                 )}
                 {/* POPUP MODAL FOR OUT OF GEMS */}

@@ -1,8 +1,6 @@
 import { delay } from "lodash";
 import React, { useEffect, useRef } from "react";
 import Winwheel from "winwheel";
-// To ignore the TweenMax not used warning
-// eslint-disable-next-line
 import TweenMax from "gsap/all";
 
 const FortuneWheelRules = ({
