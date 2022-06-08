@@ -88,7 +88,7 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                                             ) * 1000
                                         )
                                             ?.toLocaleTimeString(
-                                                "en-us",
+                                                "en-GB",
                                                 timeOptions
                                             )
                                             ?.replace("AM", "")
