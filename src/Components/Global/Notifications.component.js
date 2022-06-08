@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { defaultGameImage } from "Utils/DefaultImage";
+import { timeOptions } from "Utils/Enums";
 
 const Notification = ({
     notificationData,
@@ -63,7 +64,7 @@ const Notification = ({
                                                     defaultGameImage(e)
                                                 }
                                                 src={
-                                                    n?.picture 
+                                                    n?.picture
                                                         ? n.picture
                                                         : n.type === "rankup"
                                                         ? `${window.cdn}assets/notification_level_01.jpg`
@@ -86,11 +87,8 @@ const Notification = ({
                                                             n?.createdOn * 1000
                                                         )
                                                             ?.toLocaleTimeString(
-                                                                "en-us",
-                                                                {
-                                                                    hour: "2-digit",
-                                                                    minute: "2-digit",
-                                                                }
+                                                                "en-GB",
+                                                                timeOptions
                                                             )
                                                             ?.replace("AM", "")
                                                             ?.replace("PM", "")}
@@ -105,15 +103,16 @@ const Notification = ({
                                                     </p>
                                                     <p
                                                         className={`mb-0 d-flex align-items-center ${
-                                                            n?.type === "winprize"
-                                                            ? "prize"
-                                                            : n?.type === "tour"
-                                                            ? "tickets"
-                                                            : "gems"
+                                                            n?.type ===
+                                                            "winprize"
+                                                                ? "prize"
+                                                                : n?.type ===
+                                                                  "tour"
+                                                                ? "tickets"
+                                                                : "gems"
                                                         }`}
                                                     >
-                                                        
-                                                        { n?.type === "winprize" 
+                                                        {n?.type === "winprize"
                                                             ? `You've won`
                                                             : n?.type === "tour"
                                                             ? `+${n?.tickets} tickets`

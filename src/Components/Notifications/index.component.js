@@ -138,11 +138,12 @@ const Index = () => {
                                                             defaultGameImage(e)
                                                         }
                                                         src={
-                                                            n?.picture 
-                                                            ? n.picture
-                                                            : n.type === "rankup"
-                                                            ? `${window.cdn}assets/notification_level_01.jpg`
-                                                            : `${window.cdn}assets/notification_friends_01.jpg`
+                                                            n?.picture
+                                                                ? n.picture
+                                                                : n.type ===
+                                                                  "rankup"
+                                                                ? `${window.cdn}assets/notification_level_01.jpg`
+                                                                : `${window.cdn}assets/notification_friends_01.jpg`
                                                         }
                                                         alt="icon"
                                                     />
@@ -163,7 +164,7 @@ const Index = () => {
                                                                         1000
                                                                 )
                                                                     ?.toLocaleTimeString(
-                                                                        "en-us",
+                                                                        "en-GB",
                                                                         timeOptions
                                                                     )
                                                                     ?.replace(
@@ -185,19 +186,22 @@ const Index = () => {
                                                             </p>
                                                             <p
                                                                 className={`mb-0 d-flex align-items-center ${
-                                                                    n?.type === "winprize"
-                                                                    ? "prize"
-                                                                    : n?.type === "tour"
-                                                                    ? "tickets"
-                                                                    : "gems"
+                                                                    n?.type ===
+                                                                    "winprize"
+                                                                        ? "prize"
+                                                                        : n?.type ===
+                                                                          "tour"
+                                                                        ? "tickets"
+                                                                        : "gems"
                                                                 }`}
                                                             >
-                                                                {
-                                                                n?.type === "winprize"
-                                                                ? `You've won`
-                                                                : n?.type === "tour"
-                                                                ? `+${n?.tickets} tickets`
-                                                                : `+${n?.gem} gems`}
+                                                                {n?.type ===
+                                                                "winprize"
+                                                                    ? `You've won`
+                                                                    : n?.type ===
+                                                                      "tour"
+                                                                    ? `+${n?.tickets} tickets`
+                                                                    : `+${n?.gem} gems`}
                                                             </p>
                                                         </div>
                                                     </div>
