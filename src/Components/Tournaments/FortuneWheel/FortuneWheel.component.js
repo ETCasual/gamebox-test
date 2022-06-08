@@ -44,8 +44,6 @@ const FortuneWheel = ({
     const [winAmount, setWinAmount] = useState(-1);
 
     const spinnerRef = useRef(spinner);
-    const userGemsRef = useRef(user?.gems);
-    const ConfigGemsRef = useRef(config.useGems);
 
     // FETCH LATEST TICKETS
     useEffect(() => {
@@ -56,12 +54,7 @@ const FortuneWheel = ({
 
     // CHECK SPINS AVAILABILITY & CHECK GEMS AVAILABILITY
     useEffect(() => {
-        if (
-            spinnerRef.current.freeSpins <= 0 &&
-            userGemsRef.current < ConfigGemsRef.current
-        ) {
-            setOutOfGems(true);
-        } else if (spinnerRef.current.freeSpins <= 0) {
+        if (spinnerRef.current.freeSpins <= 0) {
             setOutOfSpins(true);
         }
     }, []);
@@ -104,11 +97,6 @@ const FortuneWheel = ({
         // PREVENT SPAMMING
         if (isClickedSpin) return;
 
-        if (spinner?.freeSpins <= 0 && user?.gems <= config.useGems) {
-            setOutOfGems(true);
-            return;
-        }
-
         if (spinner?.freeSpins <= 0) {
             setOutOfSpins(true);
             return;
@@ -142,6 +130,11 @@ const FortuneWheel = ({
         setTimeout(() => setIsTicketsUpdated(false), 1000);
     }
     const handleBuySpinModalYesButton = () => {
+        if (spinner?.freeSpins <= 0 && user?.gems <= config.useGems) {
+            setOutOfGems(true);
+            return;
+        }
+
         setSpinBuyProcess(true);
 
         dispatch(loadConsumeUserGems(config.useGems));
@@ -355,7 +348,7 @@ const FortuneWheel = ({
             </div>
 
             {/* USE GEMS BUTTON */}
-            {outOfSpins && (
+            {outOfSpins && !outOfGems && (
                 <BuySpinConfirmModal
                     handleYes={handleBuySpinModalYesButton}
                     handleNo={() => {

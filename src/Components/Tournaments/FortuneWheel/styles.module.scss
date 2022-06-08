@@ -8,10 +8,6 @@
         top: 90px;
     }
 
-    @include media-min($lg) {
-        top: 80px;
-    }
-
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 3;
