@@ -71,31 +71,32 @@ const NotificationFriendInvitation = ({
                             {user.id === getInvitationInfo("inviteeId") && (
                                 <>
                                     <p className="title">
-                                        You have reached level{" "}
-                                        {config.rewardInvitesRank}.
+                                        {config.rewardInvitesRank <= 1 
+                                            ? "Welcome to GameBox"
+                                            : `You have reached level ${config.rewardInvitesRank}.`
+                                        }
                                     </p>
                                     <p className="subtitle">
-                                        Here's a rewards specially for you for
-                                        using your friends code.
+                                        Here's a rewards for
+                                        using referral code.
                                     </p>
                                 </>
                             )}
-                            {user.id === getInvitationInfo("userId") && (
+                            {user.id !== getInvitationInfo("inviteeId") && (
                                 <>
                                     <p className="title">
-                                        A friend has 
-                                        {config.rewardInvitesRank <= 1 
-                                            ? " joined" 
-                                            : ` reached level ${config.rewardInvitesRank}`
-                                        } with your invite code. 
-                                        
+                                        Say hi to your friend
                                     </p>
                                     <p className="subtitle">
                                         Your friend{" "}
                                         <span className="friend-username">
                                             {getInvitationInfo("inviteeName")}
                                         </span>{" "}
-                                        has used your invite code.
+                                        has
+                                        {config.rewardInvitesRank <= 1 
+                                            ? " joined" 
+                                            : ` reached level ${config.rewardInvitesRank}`
+                                        } with your referral code. 
                                     </p>
                                 </>
                             )}
