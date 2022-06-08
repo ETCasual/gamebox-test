@@ -20,6 +20,7 @@ import convertSecondsToHours from "Utils/TimeConversion";
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
 
+    const { config } = useSelector((state) => state.config);
     const { poolTickets } = useSelector((state) => state.playerTickets);
     const { prizeTicketCollection } = useSelector(
         (state) => state.prizePoolTickets
@@ -59,7 +60,8 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
         clearInterval(watcherRef);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                data?.gameInfo[0]?.endTimeStamp
+                data?.gameInfo[0]?.endTimeStamp * 1000,
+                config.offsetTimestamp ? config.offsetTimestamp : 0
             );
             setTimer(finalTimeRef);
 
@@ -73,7 +75,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         };
-    }, [data?.gameInfo]);
+    }, [data?.gameInfo, config]);
 
     return (
         <>

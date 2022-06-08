@@ -21,6 +21,7 @@ const EarnAdditionalTickets = ({
     const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.userData);
+    const { config } = useSelector((state) => state.config);
     const { currentGameRules } = useSelector((state) => state.prizes);
     const { earnAdditionalBenefitStatus } = useSelector(
         (state) => state.earnAdditional
@@ -67,6 +68,7 @@ const EarnAdditionalTickets = ({
             },
         });
     };
+
     function activateAdditionalTickets() {
         // TODO
         let _earnAdditional = [...earnAdditionalBenefitStatus];
@@ -97,6 +99,7 @@ const EarnAdditionalTickets = ({
     };
     const onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
     const handleNoAdAvailable = () => setNoAdAvailable(false);
+    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
     return (
         <>
@@ -105,9 +108,16 @@ const EarnAdditionalTickets = ({
             </div>
 
             <div className="select-one-option-text">
-                { earnAdditionalDisabledStatus.ads ? "You have chosen to watch ads to boost your ticket earnings" : "" }
-                { earnAdditionalDisabledStatus.gems ? "You have chosen to use gems to boost your ticket earnings" : "" }
-                { !earnAdditionalDisabledStatus.ads && !earnAdditionalDisabledStatus.gems ? "" : "" }
+                {earnAdditionalDisabledStatus.ads
+                    ? "You have chosen to watch ads to boost your ticket earnings"
+                    : ""}
+                {earnAdditionalDisabledStatus.gems
+                    ? "You have chosen to use gems to boost your ticket earnings"
+                    : ""}
+                {!earnAdditionalDisabledStatus.ads &&
+                !earnAdditionalDisabledStatus.gems
+                    ? ""
+                    : ""}
             </div>
 
             {/* BOTH OPTIONS*/}
@@ -151,8 +161,8 @@ const EarnAdditionalTickets = ({
                 <div
                     className={`button-flex-container p-3 mx-2 mx-md-3 position-relative text-center text-md-left ${
                         earnAdditionalDisabledStatus.ads
-                            ? "opacity-0-2" 
-                            : earnAdditionalDisabledStatus.gems 
+                            ? "opacity-0-2"
+                            : earnAdditionalDisabledStatus.gems
                             ? "button-selected"
                             : "cursor-pointer"
                     }`}
@@ -225,14 +235,14 @@ const EarnAdditionalTickets = ({
                                 isAdsSelected: false,
                                 isGemsSelected: true,
                                 gems: user.gems,
-                                timestamp: Date.now(),
+                                timestamp: nowTimeStamp(),
                             });
                         } else {
                             _earnAdditional[idx].prizeId = prizeId;
                             _earnAdditional[idx].isAdsSelected = false;
                             _earnAdditional[idx].isGemsSelected = true;
                             _earnAdditional[idx].gems = user.gems;
-                            _earnAdditional[idx].timestamp = Date.now();
+                            _earnAdditional[idx].timestamp = nowTimeStamp();
                         }
                         dispatch(
                             loadEarnAdditionalBenefitStatus(_earnAdditional)
