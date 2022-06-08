@@ -4,7 +4,10 @@ import loadPrizes from "redux/thunks/Prizes.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTicketsWithOvertime } from "redux/thunks/PrizePoolTickets.thunk";
-import { loadNotifications, loadWinnerAnnouncementNotifications } from "redux/thunks/Notifcations.thunk";
+import {
+    loadNotifications,
+    loadWinnerAnnouncementNotifications,
+} from "redux/thunks/Notifcations.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
 import convertSecondsToHours from "Utils/TimeConversion";
@@ -16,7 +19,10 @@ const GlobalTimer = ({ data }) => {
     );
     const dispatch = useDispatch();
 
+    const { config } = useSelector((state) => state.config);
+
     let watcherRef = useRef(null);
+    let offsetTimeLeftRef = useRef(0);
     let timeOutRef = useRef(null);
     let timeOutRef2 = useRef(null);
     let userRef = useRef(user);
@@ -26,7 +32,8 @@ const GlobalTimer = ({ data }) => {
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                data?.gameInfo[0]?.endTimeStamp
+                data?.gameInfo[0]?.endTimeStamp * 1000,
+                config.offsetTimestamp ? config.offsetTimestamp : 0
             );
             // TOURNAMENT ENDING
             if (finalTimeRef === "Ended") countDownTimerEnded();
@@ -70,7 +77,7 @@ const GlobalTimer = ({ data }) => {
             }, 4000);
 
             // CALLING PRIZE API
-            if (Date.now() > data?.gameInfo[0]?.endTimeStamp) {
+            if (offsetTimeLeftRef.current > data?.gameInfo[0]?.endTimeStamp) {
                 clearTimeout(timeOutRef2.current);
                 timeOutRef2.current = setTimeout(() => {
                     dispatch(loadPrizes());
@@ -86,6 +93,7 @@ const GlobalTimer = ({ data }) => {
         data?.ticketsRequired,
         data?.gameInfo,
         earnAdditionalBenefitStatus,
+        config,
     ]);
 
     return null;

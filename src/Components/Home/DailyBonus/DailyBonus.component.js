@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import VisibilitySensor from "react-visibility-sensor";
 import convertSecondsToHours from "Utils/TimeConversion";
 import getPoolTickets from "Utils/PoolTickets";
@@ -8,7 +8,11 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 const DailyBonus = ({ data, handleGamePanel }) => {
     const dispatch = useDispatch();
 
+    const { config } = useSelector((state) => state.config);
+
     const [timer, setTimer] = useState("0d 0h 0m 0s");
+
+    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
     let watcherRef = useRef();
 
@@ -30,15 +34,18 @@ const DailyBonus = ({ data, handleGamePanel }) => {
             5: 5,
             6: 6,
         };
+
+        const nowDate = new Date(nowTimeStamp());
+
         // CURRENT PLAYER TIMEZONE
-        let currentTimeZone = -(new Date().getTimezoneOffset() / 60);
+        let currentTimeZone = -(nowDate.getTimezoneOffset() / 60);
 
         let isTimeValid =
-            new Date() >= new Date(data.scheduledOn * 1000) &&
-            new Date() <= new Date(data.scheduledOff * 1000);
+            nowDate >= new Date(data.scheduledOn * 1000) &&
+            nowDate <= new Date(data.scheduledOff * 1000);
 
         // IF TODAY DATE EXISTS IN THE REPEATED API DATA THEN PROCEED WITH THE COUNTDOWN TIMER
-        if (data.repeatedOn.includes(repeatedOnDict[new Date().getDay()])) {
+        if (data.repeatedOn.includes(repeatedOnDict[nowDate.getDay()])) {
             // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
             if (isTimeValid) initCountDownTimer();
         } else if (data.repeatedOn.length === 1 && data.repeatedOn[0] === 0) {
@@ -61,11 +68,9 @@ const DailyBonus = ({ data, handleGamePanel }) => {
             // COUNTDOWN TIMER INTERVAL
             clearInterval(watcherRef.current);
             watcherRef.current = setInterval(() => {
-                if (calculatedTime.getDate() < new Date().getDate())
-                    calculatedTime.setDate(calculatedTime.getDate() + 1);
-
                 let finalTimeRef = convertSecondsToHours(
-                    calculatedTime.valueOf() / 1000
+                    calculatedTime.valueOf(),
+                    config.offsetTimestamp ? config.offsetTimestamp : 0
                 );
                 setTimer(finalTimeRef);
                 if (finalTimeRef === "Ended") countDownTimerEnded();

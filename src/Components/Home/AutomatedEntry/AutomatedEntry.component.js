@@ -15,6 +15,7 @@ const AutomatedEntry = ({ data }) => {
     const dispatch = useDispatch();
 
     const { user } = useSelector((state) => state.userData);
+    const { config } = useSelector((state) => state.config);
     const { automatedEntryTicket } = useSelector(
         (state) => state.automatedEntryTickets
     );
@@ -32,6 +33,8 @@ const AutomatedEntry = ({ data }) => {
 
     // COUNT DOWN TIMER
     useEffect(() => {
+        const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
         // DICT TO COMPARE THE DAYS WITH API DATA
         const repeatedOnDict = {
             0: 7,
@@ -42,15 +45,17 @@ const AutomatedEntry = ({ data }) => {
             5: 5,
             6: 6,
         };
+        const nowDate = new Date(nowTimeStamp());
+
         // CURRENT PLAYER TIMEZONE
-        let currentTimeZone = -(new Date().getTimezoneOffset() / 60);
+        let currentTimeZone = -(nowDate.getTimezoneOffset() / 60);
 
         let isTimeValid =
-            new Date() >= new Date(data.scheduledOn * 1000) &&
-            new Date() <= new Date(data.scheduledOff * 1000);
+            nowDate >= new Date(data.scheduledOn * 1000) &&
+            nowDate <= new Date(data.scheduledOff * 1000);
 
         // IF TODAY DATE EXISTS IN THE REPEATED API DATA THEN PROCEED WITH THE COUNTDOWN TIMER
-        if (data.repeatedOn.includes(repeatedOnDict[new Date().getDay()])) {
+        if (data.repeatedOn.includes(repeatedOnDict[nowDate.getDay()])) {
             // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
             if (isTimeValid) initCountDownTimer();
         } else if (data.repeatedOn.length === 1 && data.repeatedOn[0] === 0) {
@@ -73,12 +78,9 @@ const AutomatedEntry = ({ data }) => {
             // COUNTDOWN TIMER INTERVAL
             clearInterval(watcherRef.current);
             watcherRef.current = setInterval(() => {
-                if (calculatedTime.getDate() < new Date().getDate()) {
-                    calculatedTime.setDate(calculatedTime.getDate() + 1);
-                }
-
                 let finalTimeRef = convertSecondsToHours(
-                    calculatedTime.valueOf() / 1000
+                    calculatedTime.valueOf(),
+                    config.offsetTimestamp ? config.offsetTimestamp : 0
                 );
                 setTimer(finalTimeRef);
                 if (finalTimeRef === "Ended") countDownTimerEnded();
@@ -100,7 +102,7 @@ const AutomatedEntry = ({ data }) => {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         };
-    }, [data]);
+    }, [data, config]);
 
     const getTickets = () => {
         const currentPrize = automatedEntryTicket.filter(
