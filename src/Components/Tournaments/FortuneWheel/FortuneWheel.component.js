@@ -348,7 +348,7 @@ const FortuneWheel = ({
             </div>
 
             {/* USE GEMS BUTTON */}
-            {outOfSpins && (
+            {outOfSpins && !outOfGems && (
                 <BuySpinConfirmModal
                     handleYes={handleBuySpinModalYesButton}
                     handleNo={() => {
