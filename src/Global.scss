@@ -956,4 +956,17 @@ html {
     }
 }
 
+.recaptcha-text {
+    padding-top: 0.5em;
+    font-size: $fnt-sz-10;
+    @include media-min($md) {
+        font-size: $fnt-sz-12;
+    }
+    a {
+        color: #f20086 !important;
+    }
+}
+
+.grecaptcha-badge { visibility: hidden; }
+
 @import "./assets/css/all";

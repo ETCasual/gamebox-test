@@ -585,6 +585,11 @@ const Index = ({ match }) => {
                                                     )}
                                                 </div>
                                             </div>
+                                            <p className="recaptcha-text">
+                                                This site is protected by reCAPTCHA and the Google
+                                                    {""} <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                                    {""} <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                                            </p>
                                         </div>
                                         {/* SPINNER BUTTON */}
                                         <div className="col-2 col-md-3 col-xl-2 d-none d-xl-block">
