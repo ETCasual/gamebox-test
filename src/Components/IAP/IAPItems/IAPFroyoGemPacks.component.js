@@ -36,7 +36,7 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                 {gemList.map((gem, i) => (
                     <div
                         key={`gems-${i}`}
-                        className={`col-12 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack ${
+                        className={`col-12 col-sm-6 col-md-4 px-1 px-md-2 px-lg-2 mb-4 pack ${
                             gem?.status === 0 ? "opacity-0-5" : ""
                         }`}
                     >
@@ -62,11 +62,13 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                                 <p className="mb-1 quantity">
                                     {gem.quantity?.toLocaleString()} GEMS
                                 </p>
-                                <img
-                                    className="img-fluid"
-                                    src={gem.ImageUrl}
-                                    alt={gem.title}
-                                />
+                                <div>
+                                    <img
+                                        className="img-fluid"
+                                        src={gem.ImageUrl}
+                                        alt={gem.title}
+                                    />
+                                </div>
                             </div>
                             <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
                                 <p className="price mb-0 d-flex align-items-center">

@@ -38,7 +38,7 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                 {gemList.map((gem, i) => (
                     <div
                         key={`gems-${i}`}
-                        className={`col-12 col-md-4 col-lg-4 col-xl-3 px-1 px-md-2 px-lg-2 mb-4 pack ${
+                        className={`col-12 col-sm-6 col-md-4 px-1 px-md-2 px-lg-2 mb-4 pack ${
                             gem?.status === 0 ? "opacity-0-5" : ""
                         }`}
                     >
