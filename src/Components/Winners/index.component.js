@@ -1,6 +1,6 @@
 // REACT & REDUX
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
@@ -20,6 +20,7 @@ const Index = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userData);
     const { winners } = useSelector((state) => state.winners);
+    const history = useHistory();
 
     let timeOutRef = useRef(null);
     let winnerCardPrizeInfoRef = useRef(null);
@@ -51,10 +52,15 @@ const Index = () => {
     const isCurrentUser = (player) => {
         if (user.id === player.userId) return true;
     };
-    const handleWinnerDetails = (playerId) => {
-        dispatch(loadPlayerDetails(playerId));
-        dispatch(loadPlayerHighScore(playerId));
-        setIsCardClicked(true);
+    const handleWinnerDetails = (player) => {
+        const playerId = player.userId;
+        if (!isCurrentUser(player)) {
+            dispatch(loadPlayerDetails(playerId));
+            dispatch(loadPlayerHighScore(playerId));
+            setIsCardClicked(true);
+        } else {
+            history.push(`/profile/rewards`);
+        }
     };
     const handleCloseButton = () => setIsCardClicked(false);
 
@@ -124,7 +130,7 @@ const Index = () => {
                                                         className={`col-12 px-2 px-md-3 d-flex flex-row align-items-center justify-content-between winner-card`}
                                                         onClick={() =>
                                                             handleWinnerDetails(
-                                                                item.userId
+                                                                item
                                                             )
                                                         }
                                                         onMouseEnter={() =>
@@ -162,7 +168,9 @@ const Index = () => {
                                                                         1000
                                                                 )}
                                                             </p>
-                                                            <p className="player-name mb-0">
+                                                            <p className={`player-name mb-0 ${
+                                                                isCurrentUser(item) ? 'my-name' : ''
+                                                            } `}>
                                                                 {isCurrentUser(
                                                                     item
                                                                 )

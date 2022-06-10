@@ -30,7 +30,7 @@ const HighScore = ({ handleBackButton }) => {
             <section id="high-score">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-7 wrapper">
+                        <div className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper">
                             {/* BACK BUTTON */}
                             <div
                                 className="back-button mb-4 mb-md-5"

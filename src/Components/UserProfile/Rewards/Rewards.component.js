@@ -133,26 +133,19 @@ const Rewards = () => {
             <section id="rewards-panel">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-7 wrapper">
+                        <div className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper">
                             {/* BACK BUTTON */}
                             <div className="col-12 mb-5 px-1">
-                                <Link
-                                    className="back-button"
-                                    to={{
-                                        pathname:
-                                            history?.location?.state
-                                                ?.prevPath || "/",
-                                        state: {
-                                            prevPath: "/",
-                                        },
-                                    }}
+                                <div
+                                    className="d-flex align-items-center back-button"
+                                    onClick={history.goBack}
                                 >
                                     <img
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
                                     <span className="ml-2">Back</span>
-                                </Link>
+                                </div>
                             </div>
                             <div className="col-12">
                                 <h1 className={`main-title mb-4`}>Rewards</h1>
