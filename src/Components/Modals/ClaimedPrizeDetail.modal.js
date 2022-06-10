@@ -46,7 +46,7 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                 {/*  RECEIVER INFO */}
                                 <div className="delivery-address mt-4">
                                     <p className="title mb-2">
-                                        NFT delivered to wallet address
+                                        Prize delivered to wallet address
                                     </p>
                                     <p className="wallet-address">
                                         {data.walletAddress?.substring(0, 5)}

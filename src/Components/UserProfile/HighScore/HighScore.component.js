@@ -51,7 +51,7 @@ const HighScore = ({ handleBackButton }) => {
                                             No highscores yet...
                                         </p>
                                         <p className="subtitle">
-                                            <Link to="/">Tap here</Link> to check out available NFT’s.
+                                            <Link to="/">Tap here</Link> to check out available Prize’s.
                                         </p>
                                     </div>
                                 )}

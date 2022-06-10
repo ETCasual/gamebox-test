@@ -160,7 +160,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                         {e.canClaimDate <= 0 && (
                                             <Link to="/profile/rewards">
                                                 <button className="connect-wallet-btn p-3">
-                                                    Claim your NFT
+                                                    Claim prize
                                                 </button>
                                             </Link>
                                         )}
