@@ -317,12 +317,10 @@ const Leaderboard = ({
      * 
      * @param {
             a: this.currentScore, // score
-            b: scoreObject, // scoreObject
+            b: scoreObject, // scoreObject { timestamp: number, score: number }
             c: this.gameStartTime, // gameStartTime
             d: this.gameOverTime, // gameOverTime
-            e: Math.max(...scoreDiff), // highestScore
-            f: this.maximumAllowedScoreIncrement, // maxScore
-            g: this.sTick, // sTick} score 
+            e: this.sTick, // sTick} score 
      * @returns 
      */
     window.playerFinishGame = async (score) => {
