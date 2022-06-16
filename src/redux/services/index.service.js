@@ -18,6 +18,7 @@ import {
     ListLeaderboardHistoryRequest,
     ListNotificationRequest,
     ListGameRequest,
+    LogGameplayDetail,
     LogGEnterRequest,
     LogGLeaveRequest,
     LogSEnterRequest,
@@ -31,6 +32,7 @@ import {
     GetSpinAvailableRequest,
     GetPlayerRequest,
     GetNotificationNoRequest,
+    ScoreTrail,
     SignInRequest,
     UpdateNotificationSeenRequest,
     UpdateUserSettingsRequest,
@@ -856,7 +858,25 @@ export async function logLeave(
     request.setSecret("");
     if (enterId) request.setId(enterId);
     request.setUserId(user.id);
-    request.setGameScore(gameScore);
+    // request.setGameScore(gameScore);
+    const scoreTrailArr = [];
+    if (gameScore.b) {
+        for (let i = 0; i < gameScore.b.length; i++) {
+            const scoreTrail = new ScoreTrail();
+            scoreTrail.setTimestamp(gameScore.b[i].timestamp);
+            scoreTrail.setScore(gameScore.b[i].score);
+    
+            scoreTrailArr.push(scoreTrail);
+        }
+    }
+    const gameScoreObject = new LogGameplayDetail();
+    gameScoreObject.setCurrentScore(gameScore.a);
+    gameScoreObject.setScoreObjectList(scoreTrailArr);
+    gameScoreObject.setGameStartTime(gameScore.c);
+    gameScoreObject.setGameOverTime(gameScore.d);
+    gameScoreObject.setSTickList(gameScore.e);
+
+    request.setGameScoreObject(gameScoreObject)
     request.setRecaptchaToken(recaptchaToken);
 
     const response = await client.logGLeave(request, {

@@ -58,7 +58,8 @@
         "build:dev": "dotenv -e .env.development react-scripts build",
         "postbuild:dev": "cra-append-sw --mode build --env ./.env.development ./firebase-messaging-sw.js",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "patch-google-proto": "replace goog.DEBUG=!0 goog.DEBUG=!1 node_modules/google-protobuf/google-protobuf.js"
     },
     "eslintConfig": {
         "extends": [
@@ -83,6 +84,7 @@
     },
     "devDependencies": {
         "react-error-overlay": "6.0.9",
-        "redux-devtools-extension": "^2.13.9"
+        "redux-devtools-extension": "^2.13.9",
+        "replace": "^1.1.1"
     }
 }
