@@ -4,7 +4,7 @@ const getPrizeTicketCollected = (prizeTicketCollection, prizeId) => {
     let currentPrize = prizeTicketCollection.filter(
         (pool) => pool.prizeId === parseInt(prizeId)
     );
-    if (currentPrize) return _.maxBy(currentPrize, "tickets")?.tickets || 0;
+    if (currentPrize) return _.maxBy(currentPrize, "lastChecked")?.tickets || 0;
     return "-";
 };
 

@@ -242,14 +242,24 @@ const Index = () => {
                 setPremiumData(premiumArr);
             }
             // UPDATE LOCALSTORAGE
+            // Before update complete and seen, check if prize is on repeat
             let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
             if (idx > -1) {
-                _prizeList[idx].seen = true;
-                _prizeList[idx].completed = true;
-                sessionStorage.setItem(
-                    "prizeDetailList",
-                    JSON.stringify(_prizeList)
-                );
+                if (_prizeList[idx].repeatedOn.length === 0) {
+                    _prizeList[idx].seen = true;
+                    _prizeList[idx].completed = true;
+                    sessionStorage.setItem(
+                        "prizeDetailList",
+                        JSON.stringify(_prizeList)
+                    );
+                } else {
+                    _prizeList[idx].seen = false;
+                    _prizeList[idx].completed = false;
+                    sessionStorage.setItem(
+                        "prizeDetailList",
+                        JSON.stringify(_prizeList)
+                    );
+                }
             }
         });
         // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE

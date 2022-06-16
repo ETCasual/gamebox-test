@@ -22,16 +22,14 @@ const prizePoolTicketsReducer = (
 
                 // IF PRIZE ID DOESN'T EXIST THEN ADD THE NEW DATA TO THE prizeTicketCollection LIST
                 if (idx === -1) {
-                    prizeTicketCollection.push(
-                        ...prizeTicketCollection,
-                        payload
-                    );
+                    prizeTicketCollection.push(payload);
                 }
                 // IF PRIZE ID EXISTS AND IF EXISITING TICKETS IS LESS THAN THE
                 // NEW API DATA THEN UPDATE WITH NEW DATA
+
+                // SHOULDNT CHECK IF EXISTING TICKETS IS LESS THAN THE NEW API DUE TO REPEATING PRIZE
                 else {
-                    if (prizeTicketCollection[idx].tickets <= payload.tickets)
-                        prizeTicketCollection[idx] = payload;
+                    prizeTicketCollection[idx] = payload;
                 }
             }
             return { ...esmData, prizeTicketCollection };

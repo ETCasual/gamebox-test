@@ -18,13 +18,14 @@ const playerTicketsReducer = (esmData = INITIAL_STATE, { type, payload }) => {
 
                 // IF PRIZE ID DOESN'T EXIST THEN ADD THE NEW DATA TO THE poolTickets LIST
                 if (idx === -1) {
-                    poolTickets.push(...poolTickets, payload);
+                    poolTickets.push(payload);
                 }
                 // IF PRIZE ID EXISTS AND IF EXISITING TICKETS IS LESS THAN THE
                 // NEW API DATA THEN UPDATE WITH NEW DATA
+                
+                // SHOULDNT CHECK IF EXISTING TICKETS IS LESS THAN THE NEW API DUE TO REPEATING PRIZE
                 else {
-                    if (poolTickets[idx].tickets <= payload.tickets)
-                        poolTickets[idx] = payload;
+                    poolTickets[idx] = payload;
                 }
             }
             return { ...esmData, poolTickets };

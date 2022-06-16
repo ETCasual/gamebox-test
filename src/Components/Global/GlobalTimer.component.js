@@ -22,7 +22,6 @@ const GlobalTimer = ({ data }) => {
     const { config } = useSelector((state) => state.config);
 
     let watcherRef = useRef(null);
-    let offsetTimeLeftRef = useRef(0);
     let timeOutRef = useRef(null);
     let timeOutRef2 = useRef(null);
     let userRef = useRef(user);
@@ -77,15 +76,21 @@ const GlobalTimer = ({ data }) => {
             }, 4000);
 
             // CALLING PRIZE API
-            if (offsetTimeLeftRef.current > data?.gameInfo[0]?.endTimeStamp) {
+
+            // ? Not sure why we need to check again if now time is bigger than prize game endTimeStamp 
+            // ? since this function is already called when timer show "Ended"
+            // const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+            // const nowDate = new Date(nowTimeStamp());
+
+            // if (nowDate.getTime() / 1000 > data?.gameInfo[0]?.endTimeStamp) {
                 clearTimeout(timeOutRef2.current);
                 timeOutRef2.current = setTimeout(() => {
                     dispatch(loadPrizes());
 
                     clearTimeout(timeOutRef2.current);
                     timeOutRef2.current = null;
-                }, 5000);
-            }
+                }, 3000);
+            // }
         }
     }, [
         dispatch,

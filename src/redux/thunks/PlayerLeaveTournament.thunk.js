@@ -24,8 +24,9 @@ export default function loadPlayerLeaveTournamentId(gameScore, recaptchaToken) {
                             message: "Session Expired! Please login again.",
                         },
                     });
-                } else if (error.code === 13)
+                } else if (error.code === 13) {
                     console.log("PLAYER LOG LEAVE THUNK: No Result found!");
+                }
                 else console.log(error);
             });
     };

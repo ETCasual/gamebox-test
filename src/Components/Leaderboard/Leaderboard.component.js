@@ -161,6 +161,7 @@ const Leaderboard = ({
                         loadPlayerLeaveTournamentId(score, recaptchaToken)
                     );
                 }
+                setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
             }
 
             setEarnAdditionalDisabledStatus({
@@ -168,7 +169,6 @@ const Leaderboard = ({
                 ads: false,
             });
 
-            setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
 
             // setTimeout(() => {
             //     if (score === -1) dispatch(loadPrizes());
