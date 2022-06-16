@@ -144,10 +144,10 @@ const Leaderboard = ({
                 document.getElementById("destination")?.contentWindow;
             let score = -1;
             if (destination) {
-                // GET SCORES
-                score = destination?.getScore?.();
-                if (score > -1 && currentGameInfo.playerEnterGameId) {
-                    localStorage.setItem("currentGameScore", score);
+                // GET SCORE OBJECT
+                score = destination?.ggs?.();
+                if (score.a > -1 && currentGameInfo.playerEnterGameId) {
+                    localStorage.setItem("currentGameScore", score.a);
 
                     if (!executeRecaptcha) {
                         console.log("Execute recaptcha not yet available");
@@ -313,15 +313,26 @@ const Leaderboard = ({
         return enterGameConfig;
     };
 
+    /**
+     * 
+     * @param {
+            a: this.currentScore, // score
+            b: scoreObject, // scoreObject { timestamp: number, score: number }
+            c: this.gameStartTime, // gameStartTime
+            d: this.gameOverTime, // gameOverTime
+            e: this.sTick, // sTick} score 
+     * @returns 
+     */
     window.playerFinishGame = async (score) => {
         if (!executeRecaptcha) {
             console.log("Execute recaptcha not yet available");
             return;
         }
+
         const recaptchaToken = await executeRecaptcha("finishGame");
 
         if (currentGameInfo.playerEnterGameId) {
-            localStorage.setItem("currentGameScore", score);
+            localStorage.setItem("currentGameScore", score.a);
 
             setModalStatus((prev) => ({
                 ...prev,
