@@ -45,7 +45,7 @@ const StayTune = () => {
     return (
         <>
             {gameData && (
-                <>
+                <div class="game-wrapper">
                     <img
                         className="ml-1 mt-1 quit-demo-btn"
                         width="40"
@@ -59,7 +59,7 @@ const StayTune = () => {
                         srcDoc={gameData}
                         frameBorder="0"
                     />
-                </>
+                </div>
             )}
             <div className="container-fluid stay-tune">
                 <div className="row">
