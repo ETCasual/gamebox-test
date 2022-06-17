@@ -58,6 +58,11 @@
             .card-winner-pending-info {
                 font-size: $fnt-sz-12;
             }
+            .claim-btn {
+                background-color: #F20086;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                border-radius: 5px;
+            }
         }
         .prize-claimed {
             font-size: $fnt-sz-12;

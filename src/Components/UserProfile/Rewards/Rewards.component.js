@@ -172,7 +172,7 @@ const Rewards = () => {
                                                                 }}
                                                             />
                                                         </div>
-                                                        <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
+                                                        <div className="col py-2 px-2 mt-1 d-flex flex-column">
                                                             <div className="prize-text mb-auto">
                                                                 <div className="card-title">
                                                                     {
@@ -202,17 +202,14 @@ const Rewards = () => {
                                                                         {validClaimDate(
                                                                             data.prizeCanClaimDate
                                                                         ) && (
-                                                                            <div className="prize-claimed text-wait py-2">
-                                                                                Claim
-                                                                                your{" "}
-                                                                                {data.prizeContractType ===
-                                                                                1
-                                                                                    ? "Token"
-                                                                                    : "NFT"}{" "}
-                                                                                -{" "}
-                                                                                {getRemainingDaysToClaim(
-                                                                                    data.prizeCanClaimDate
-                                                                                )}
+                                                                            <div className="claim-btn opacity-0-5 d-inline-block py-2 px-3">
+                                                                                <p className="mb-0">
+                                                                                    Claim Reward
+                                                                                    -{" "}
+                                                                                    {getRemainingDaysToClaim(
+                                                                                        data.prizeCanClaimDate
+                                                                                    )}
+                                                                                </p>
                                                                             </div>
                                                                         )}
                                                                         {!validClaimDate(
@@ -223,7 +220,7 @@ const Rewards = () => {
                                                                                 data.prizeContractType ===
                                                                                     3) && (
                                                                                 <div
-                                                                                    className="prize-claimed text-red py-2 cursor-pointer"
+                                                                                    className="claim-btn d-inline-block py-2 px-3 cursor-pointer"
                                                                                     onClick={() =>
                                                                                         handleNFTClaim(
                                                                                             data.id,
@@ -232,9 +229,9 @@ const Rewards = () => {
                                                                                         )
                                                                                     }
                                                                                 >
-                                                                                    Claim
-                                                                                    your
-                                                                                    NFT
+                                                                                    <p className="mb-0">
+                                                                                        Claim Reward
+                                                                                    </p>
                                                                                 </div>
                                                                             )}
                                                                         {!validClaimDate(
@@ -243,7 +240,7 @@ const Rewards = () => {
                                                                             data.prizeContractType ===
                                                                                 1 && (
                                                                                 <div
-                                                                                    className="prize-claimed text-red py-2 cursor-pointer"
+                                                                                    className="claim-btn d-inline-block py-2 px-3 cursor-pointer"
                                                                                     onClick={() =>
                                                                                         handleTokenClaim(
                                                                                             data.id,
@@ -251,9 +248,9 @@ const Rewards = () => {
                                                                                         )
                                                                                     }
                                                                                 >
-                                                                                    Claim
-                                                                                    your
-                                                                                    Token
+                                                                                    <p className="mb-0">
+                                                                                        Claim Reward
+                                                                                    </p>
                                                                                 </div>
                                                                             )}
                                                                     </>
