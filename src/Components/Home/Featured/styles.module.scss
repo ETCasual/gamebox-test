@@ -25,15 +25,15 @@
     }
     .prize-type {
         left: 0;
-        @include media-min($md) {
-            left: 3rem;
-        }
+        // @include media-min($md) {
+        //     left: 3rem;
+        // }
         position: relative;
         font-size: 1rem;
         font-weight: 700;
     }
     .card-wrapper {
-        margin-top: 6rem;
+        // margin-top: 6rem;
         position: relative;
         z-index: 2;
         cursor: pointer;
@@ -42,12 +42,15 @@
         @include media-min($md) {
             min-height: clamp(20rem, 70vw, 31rem);
         }
+        width: inherit;
         .prize-info {
-            width: 90%;
+            background-color: #1d1d1d;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             @include media-min($md) {
-                width: 80%;
+                border-top-left-radius: 17px;
+                border-top-right-radius: 17px;
             }
-            margin-bottom: 2rem;
             &::after {
                 content: "";
                 position: absolute;
@@ -55,9 +58,11 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 100%;
-                border-radius: 10px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
                 @include media-min($md) {
-                    border-radius: 17px;
+                    border-top-left-radius: 17px;
+                    border-top-right-radius: 17px;
                 }
                 height: 100%;
                 z-index: 0;
@@ -71,16 +76,17 @@
                 position: relative;
                 width: 100%;
                 height: 100%;
-                border-radius: 10px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
                 @include media-min($md) {
-                    border-radius: 17px;
+                    border-top-left-radius: 17px;
+                    border-top-right-radius: 17px;
                 }
                 object-fit: cover;
             }
             .info-wrapper {
                 position: absolute;
-                bottom: -1rem;
-                left: -1rem;
+                bottom: 0;
                 width: 100%;
                 z-index: 2;
                 .prize-title {
@@ -93,40 +99,125 @@
                     font-weight: $fnt-wgt-600;
                     text-transform: capitalize;
                 }
-                .prize-subtitle {
+                .prize-description {
                     font-size: $fnt-sz-12;
                     line-height: 1.3;
                     @include media-min($md) {
-                        width: 50ch;
+                        width: 80ch;
                     }
                 }
             }
         }
-        .tickets-info {
-            padding: 0.7rem;
-            background: linear-gradient(121deg, #302f2f 0%, #0b0b0b 100%);
-            border-radius: 10px;
-            .ticket-label {
-                color: #00c1b9;
-                font-size: $fnt-sz-12;
-                @include media-min($md) {
-                    font-size: $fnt-sz-10;
+        // .tickets-info {
+        //     padding: 0.7rem;
+        //     background: linear-gradient(121deg, #302f2f 0%, #0b0b0b 100%);
+        //     border-radius: 10px;
+        //     .ticket-label {
+        //         color: #00c1b9;
+        //         font-size: $fnt-sz-12;
+        //         @include media-min($md) {
+        //             font-size: $fnt-sz-10;
+        //         }
+        //     }
+        //     .your-tickets,
+        //     .remaining-tickets {
+        //         font-size: $fnt-sz-12;
+        //     }
+        //     .remaining-tickets {
+        //         color: #9d9d9d;
+        //     }
+        //     .btn-participate {
+        //         background-color: #ff3399;
+        //         color: white;
+        //         font-size: $fnt-sz-14;
+        //         font-weight: $fnt-wgt-600;
+        //         box-shadow: inset 0px 3px 6px #0000000f;
+        //         border-radius: 5px;
+        //     }
+        // }
+    }
+    .ticket-info {
+        height: auto;
+        @include media-min($md) {
+            height: 80px;
+        }
+        .ticket-wrapper {
+            height: auto;
+            @include media-min($md) {
+                min-height: 50px;
+            }
+            .your-tickets {
+                img.icon {
+                    width: 18px;
+                    @include media-min($sm) {
+                        width: 40px;
+                        height: 24px;
+                        object-fit: cover;
+                    }
+                }
+            }
+            .pool-tickets {
+                img.icon {
+                    width: 18px;
+                    @include media-min($sm) {
+                        width: 24px;
+                        height: 27px;
+                        object-fit: cover;
+                    }
                 }
             }
             .your-tickets,
-            .remaining-tickets {
-                font-size: $fnt-sz-12;
+            .pool-tickets {
+                .label {
+                    font-size: $fnt-sz-10;
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-12;
+                    }
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-14;
+                    }
+                    line-height: 133%;
+                    color: #868686;
+                }
+                .tickets {
+                    font-size: $fnt-sz-12;
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-14;
+                    }
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-16;
+                    }
+                }
+                .timer {
+                    margin-top: 4px;
+                    font-size: $fnt-sz-12;
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-14;
+                    }
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-16;
+                    }
+
+                }
+                .required-tickets {
+                    color: #868686;
+                    font-size: $fnt-sz-10;
+                    font-weight: $fnt-wgt-600;
+                    @media only screen and (min-width: 768px) {
+                        font-size: $fnt-sz-14;
+                    }
+                }
             }
-            .remaining-tickets {
-                color: #9d9d9d;
-            }
-            .btn-participate {
-                background-color: #ff3399;
-                color: white;
-                font-size: $fnt-sz-14;
-                font-weight: $fnt-wgt-600;
-                box-shadow: inset 0px 3px 6px #0000000f;
-                border-radius: 5px;
+        }
+        .game-icon {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            @include media-min($md) {
+                height: 90px;
+                width: 90px;
+                top: -1.3em;
+                right: -3px;
             }
         }
     }

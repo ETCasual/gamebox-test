@@ -293,29 +293,43 @@ const Index = () => {
                 <section id="home">
                     {/* FEATURED CONTENT LOADER */}
                     {!noDataLoaded.feature && (
-                        <>
-                            {/* LOADER */}
-                            {FeaturedData?.length <= 0 && <FeaturedLoader />}
+                        <div
+                            className={`container-fluid ${
+                                FeaturedData?.length > 1 ? "mb-3" : "mb-5"
+                            } featured`}
+                        >
+                            <div className="row justify-content-center">
+                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <p className="prize-type">
+                                                Featured Reward
+                                            </p>
+                                        </div>
+                                        {/* LOADER */}
+                                        {FeaturedData?.length <= 0 && <FeaturedLoader />}
 
-                            {/* FEATURED CARD */}
-                            {FeaturedData?.map((prize, index) => {
-                                return (
-                                    !prize.seen && (
-                                        <React.Fragment
-                                            key={`featuredPrize-${index}`}
-                                        >
-                                            <Featured
-                                                data={prize}
-                                                length={FeaturedData?.length}
-                                                handleWinnerRevealCard={
-                                                    handleWinnerRevealCard
-                                                }
-                                            />
-                                        </React.Fragment>
-                                    )
-                                );
-                            })}
-                        </>
+                                        {/* FEATURED CARD */}
+                                        {FeaturedData?.map((prize, index) => {
+                                            return (
+                                                !prize.seen && (
+                                                    <React.Fragment
+                                                        key={`featuredPrize-${index}`}
+                                                    >
+                                                        <Featured
+                                                            data={prize}
+                                                            handleWinnerRevealCard={
+                                                                handleWinnerRevealCard
+                                                            }
+                                                        />
+                                                    </React.Fragment>
+                                                )
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     )}
 
                     {/* AUTOMATED */}
@@ -330,10 +344,10 @@ const Index = () => {
                         >
                             <div className="row justify-content-center">
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
-                                    <div className="col-12 col-xl-6 px-0">
+                                    <div className="col-12 px-0">
                                         <div className="description w-100">
                                             <h2 className="mb-3">
-                                                Bonus Rewards
+                                                Daily Rewards!
                                             </h2>
                                         </div>
                                         {/* LOADER */}
@@ -354,7 +368,6 @@ const Index = () => {
                                             )
                                         )}
                                     </div>
-                                    <div className="col-12 col-xl-6 px-0" />
                                 </div>
                             </div>
                         </div>
@@ -379,7 +392,7 @@ const Index = () => {
                                     <div className="row">
                                         <div className="col-12 description">
                                             <h2 className="mb-3">
-                                                Premium Rewards
+                                                Play and Win Rewards
                                             </h2>
                                         </div>
                                         {/* LOADER */}

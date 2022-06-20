@@ -16,8 +16,9 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
+import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 
-const Featured = ({ data, length, handleWinnerRevealCard }) => {
+const Featured = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
 
     const { config } = useSelector((state) => state.config);
@@ -86,126 +87,179 @@ const Featured = ({ data, length, handleWinnerRevealCard }) => {
                     partialVisibility="top"
                     onChange={(isVisible) => dispatchPoolTickets(isVisible)}
                 >
-                    <div
-                        className={`container-fluid featured ${
-                            length > 1 ? "mb-3" : "mb-5"
-                        }`}
-                        style={{
-                            backgroundImage: `url(${
-                                navigator.userAgent.indexOf("Firefox") > -1
-                                    ? ""
-                                    : data.prizeBG
-                            })`,
-                        }}
-                    >
-                        <div className="overlay" />
-                        <div className="row justify-content-center">
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-4">
-                                <Link
-                                    className="w-100"
-                                    to={{
-                                        pathname: `${`/prize/featured/${data?.prizeId}`}`,
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
-                                    }}
-                                >
-                                    <div className="card-wrapper d-flex flex-column flex-md-row">
-                                        <div className="col-12 pl-0 d-flex flex-column align-items-start justify-content-center position-relative p-3">
-                                            <p className="prize-type">
-                                                Featured Reward
-                                            </p>
-                                            {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                            <div className="prize-info position-relative d-flex align-self-center">
-                                                <img
-                                                    src={data.prizeBG}
-                                                    alt={data.prizeTitle}
-                                                />
-                                                <div className="info-wrapper">
-                                                    <div className="prize-id">
-                                                        {data?.prizeSubtitle}
-                                                    </div>
-                                                    <div className="prize-title mt-2 mb-2">
-                                                        {data?.prizeTitle}
-                                                    </div>
-                                                    <div className="prize-subtitle">
-                                                        {data?.prizeContent}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* TICKETS INFO */}
-                                            <div className="tickets-info mb-2 w-100">
-                                                {/* LABEL */}
-                                                <p className="ticket-label mb-2">
+                    <div className="col-12 d-flex align-items-center justify-content-center">
+                        <div className="card-wrapper">
+                            <Link
+                                to={{
+                                    pathname: `${`/prize/featured/${data?.prizeId}`}`,
+                                    state: {
+                                        prevPath: history.location.pathname,
+                                    },
+                                }}
+                            >
+                                {/* PRIZE TITLE, DESCRIPTION & ID */}
+                                <div className="prize-info position-relative d-flex align-self-center justify-content-center">
+                                    <picture>
+                                        <source
+                                            media="(max-width:768px)"
+                                            srcSet={data.prizeBG2}
+                                        />
+                                        <img
+                                            src={data.prizeBG}
+                                            alt={data.prizeTitle}
+                                        />
+                                    </picture>
+                                    <div className="info-wrapper p-3">
+                                        <div className="prize-subtitle">
+                                            {data?.prizeSubtitle}
+                                        </div>
+                                        <div className="prize-title mt-2 mb-2">
+                                            {data?.prizeTitle}
+                                        </div>
+                                        <div className="prize-description">
+                                            {data?.prizeContent}
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* TICKETS INFO */}
+                                <div className="col-12 d-flex flex-row align-items-center ticket-info py-2 py-md-0 px-2 px-md-3">
+                                    <div className="col px-0">
+                                        <div className="px-2 py-2 py-md-1 ticket-wrapper d-md-flex align-items-sm-center justify-content-sm-between">
+                                            <div className="your-tickets d-flex justify-content-between">
+                                                <p className="mb-0 px-md-2 label d-flex align-self-end">
                                                     Your tickets
                                                 </p>
-                                                <div className="col-12 d-flex align-items-center justify-content-between pl-0">
-                                                    {/* YOUR TICKETS */}
-                                                    <p className="mb-0 your-tickets d-flex align-items-end">
-                                                        {getPoolTickets(
-                                                            poolTickets,
-                                                            data?.prizeId
-                                                        )?.toLocaleString() ||
-                                                            0}
+                                                <p className="mb-0 tickets d-flex align-items-end">
+                                                    {getPoolTickets(
+                                                        poolTickets,
+                                                        data?.prizeId
+                                                    )?.toLocaleString() ||
+                                                        0}
+                                                </p>
+                                            </div>
+                                            <div className="pool-tickets d-flex justify-content-between mt-3 mt-md-0">
+                                                <p className="mb-0 pl-md-1 pr-md-2 label d-flex align-items-end">
+                                                    Draw starts in
+                                                </p>
+                                                <div className="d-flex">
+                                                    <p
+                                                        className={`mb-0 d-flex align-items-center ${
+                                                            OverTimeModeChecker(
+                                                                data?.prizeId,
+                                                                data?.ticketsRequired,
+                                                                prizeTicketCollection
+                                                            )
+                                                                ? "text-danger timer"
+                                                                : "tickets"
+                                                        }`}
+                                                    >
+                                                        {OverTimeModeChecker(
+                                                            data?.prizeId,
+                                                            data?.ticketsRequired,
+                                                            prizeTicketCollection
+                                                        )
+                                                            ? timer
+                                                            : getPrizeTicketCollected(
+                                                                    prizeTicketCollection,
+                                                                    data?.prizeId
+                                                                )?.toLocaleString() ||
+                                                                0}
                                                     </p>
-                                                    <div className="d-flex remaining-tickets">
-                                                        {getPrizeTicketCollected(
-                                                            prizeTicketCollection,
-                                                            data?.prizeId
-                                                        ) >=
-                                                            data?.ticketsRequired && (
-                                                            <p className="mb-0 draw-timer d-flex align-items-center">
-                                                                Draw starts in{" "}
-                                                                <span className="text-danger ml-1">
-                                                                    {timer}
-                                                                </span>
-                                                            </p>
-                                                        )}
-                                                        {getPrizeTicketCollected(
-                                                            prizeTicketCollection,
-                                                            data?.prizeId
-                                                        ) <
-                                                            data?.ticketsRequired && (
-                                                            <p className="mb-0 d-flex align-items-center">
-                                                                {data?.ticketsRequired -
-                                                                    getPrizeTicketCollected(
-                                                                        prizeTicketCollection,
-                                                                        data?.prizeId
-                                                                    ) <=
-                                                                0 ? (
-                                                                    <GenericLoader
-                                                                        height="30"
-                                                                        bg="#FF007C"
-                                                                        cx1="80%"
-                                                                        cx2="88%"
-                                                                        cx3="96%"
-                                                                        cy="15"
-                                                                    />
-                                                                ) : (
-                                                                    `${
-                                                                        (
-                                                                            data?.ticketsRequired -
-                                                                            getPrizeTicketCollected(
-                                                                                prizeTicketCollection,
-                                                                                data?.prizeId
-                                                                            )
-                                                                        )?.toLocaleString() ||
-                                                                        "-"
-                                                                    } tickets remaining`
-                                                                )}
-                                                            </p>
-                                                        )}
-                                                    </div>
+                                                    {!OverTimeModeChecker(
+                                                        data?.prizeId,
+                                                        data?.ticketsRequired,
+                                                        prizeTicketCollection
+                                                    ) && (
+                                                        <p className="required-tickets mb-0 d-flex align-items-center">
+                                                            {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
+                                                        </p>
+                                                    )}
                                                 </div>
-                                                <button className="btn-participate w-100 p-3 mt-4">
-                                                    Participate in featured
-                                                    prize tournaments
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
-                            </div>
+                                    <div className="game-icon ml-2 d-flex justify-content-center">
+                                        {data.gameInfo.map((e, i) => (
+                                            <img
+                                                key={`icon-${i}`}
+                                                className="img-fluid"
+                                                src={e.gameIcon}
+                                                alt="game-icon"
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                                { false && 
+                                    <div className="tickets-info mb-2 w-100">
+                                        {/* LABEL */}
+                                        <p className="ticket-label mb-2">
+                                            Your tickets
+                                        </p>
+                                        <div className="col-12 d-flex align-items-center justify-content-between pl-0">
+                                            {/* YOUR TICKETS */}
+                                            <p className="mb-0 your-tickets d-flex align-items-end">
+                                                {getPoolTickets(
+                                                    poolTickets,
+                                                    data?.prizeId
+                                                )?.toLocaleString() ||
+                                                    0}
+                                            </p>
+                                            <div className="d-flex remaining-tickets">
+                                                {getPrizeTicketCollected(
+                                                    prizeTicketCollection,
+                                                    data?.prizeId
+                                                ) >=
+                                                    data?.ticketsRequired && (
+                                                    <p className="mb-0 draw-timer d-flex align-items-center">
+                                                        Draw starts in{" "}
+                                                        <span className="text-danger ml-1">
+                                                            {timer}
+                                                        </span>
+                                                    </p>
+                                                )}
+                                                {getPrizeTicketCollected(
+                                                    prizeTicketCollection,
+                                                    data?.prizeId
+                                                ) <
+                                                    data?.ticketsRequired && (
+                                                    <p className="mb-0 d-flex align-items-center">
+                                                        {data?.ticketsRequired -
+                                                            getPrizeTicketCollected(
+                                                                prizeTicketCollection,
+                                                                data?.prizeId
+                                                            ) <=
+                                                        0 ? (
+                                                            <GenericLoader
+                                                                height="30"
+                                                                bg="#FF007C"
+                                                                cx1="80%"
+                                                                cx2="88%"
+                                                                cx3="96%"
+                                                                cy="15"
+                                                            />
+                                                        ) : (
+                                                            `${
+                                                                (
+                                                                    data?.ticketsRequired -
+                                                                    getPrizeTicketCollected(
+                                                                        prizeTicketCollection,
+                                                                        data?.prizeId
+                                                                    )
+                                                                )?.toLocaleString() ||
+                                                                "-"
+                                                            } tickets remaining`
+                                                        )}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <button className="btn-participate w-100 p-3 mt-4">
+                                            Participate in featured
+                                            prize tournaments
+                                        </button>
+                                    </div>
+                                }
+                            </Link>
                         </div>
                     </div>
                 </VisibilitySensor>
