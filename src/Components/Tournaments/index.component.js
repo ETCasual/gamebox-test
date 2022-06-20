@@ -63,7 +63,7 @@ const Index = ({ match }) => {
             gems: checkIsAdOrGemsUsed("gems"),
             ads: checkIsAdOrGemsUsed("ads"),
         });
-    const [timer, setTimer] = useState("calculating");
+    const [timer, setTimer] = useState("Calculating");
 
     // LOAD PRIZES WHEN TIMER END WITH 2 SECOND DELAY
     // useEffect(() => {

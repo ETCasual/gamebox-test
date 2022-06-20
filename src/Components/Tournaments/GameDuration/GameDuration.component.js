@@ -1,5 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
@@ -44,7 +44,14 @@ const GameDuration = ({
                 game.endTimeStamp
             );
         }
-    }, [gameId, dispatch, setIsGameAvailable]);
+    }, [
+        gameId,
+        index,
+        game,
+        dispatch,
+        setIsGameAvailable,
+        handleGameLeaderPanel,
+    ]);
 
     useEffect(() => {
         if (isGameAvailable) {
@@ -56,7 +63,7 @@ const GameDuration = ({
                 game.endTimeStamp
             );
         }
-    }, [isGameAvailable]);
+    }, [gameId, index, game, isGameAvailable, handleGameLeaderPanel]);
 
     // STARTING COUNTDOWN TIMER
     useEffect(() => {

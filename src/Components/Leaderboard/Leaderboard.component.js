@@ -35,8 +35,8 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const Leaderboard = ({
     data,
-    handleBackButton,
-    setIsGameLeaderboardShown,
+    // handleBackButton,
+    // setIsGameLeaderboardShown,
     timer,
     setTimer,
     earnAdditionalDisabledStatus,
@@ -64,6 +64,7 @@ const Leaderboard = ({
 
     const [gameData, setGameData] = useState(null);
     const [leaderboardList, setLeaderboardList] = useState([]);
+    const [isGameAvailable, setIsGameAvailable] = useState(false);
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
         isQuitGameBtnDisabled: false,
@@ -192,6 +193,20 @@ const Leaderboard = ({
         executeRecaptcha,
         config,
     ]);
+
+    useEffect(() => {
+        let isDisabled = false;
+        switch (timer) {
+            case "Calculating":
+            case "Ended":
+            case "0d 0h 0m 0s":
+                isDisabled = true;
+                break;
+            default:
+                isDisabled = false;
+        }
+        setIsGameAvailable(!isDisabled);
+    }, [timer]);
 
     const isCurrentUser = (id) => {
         if (id > 0 && user.id === id) return true;
@@ -527,7 +542,7 @@ const Leaderboard = ({
                                 isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
                             }));
-                            setIsGameLeaderboardShown(false);
+                            // setIsGameLeaderboardShown(false);
                         }}
                     />
                 )}
@@ -730,13 +745,23 @@ const Leaderboard = ({
                                         ref={readyTournamentButtonRef}
                                     >
                                         <button
-                                            onClick={() => {
-                                                setModalStatus((prev) => ({
-                                                    ...prev,
-                                                    isEarnAdditionalInfoShown: true,
-                                                }));
-                                            }}
-                                            className="ready-tournament-button"
+                                            className={`ready-tournament-button ${
+                                                isGameAvailable
+                                                    ? ""
+                                                    : "opacity-0-5"
+                                            }`}
+                                            onClick={
+                                                isGameAvailable
+                                                    ? () => {
+                                                          setModalStatus(
+                                                              (prev) => ({
+                                                                  ...prev,
+                                                                  isEarnAdditionalInfoShown: true,
+                                                              })
+                                                          );
+                                                      }
+                                                    : null
+                                            }
                                         >
                                             Ready Tournament
                                         </button>
@@ -759,16 +784,14 @@ const Leaderboard = ({
                                         {/* PLAY BUTTON*/}
                                         <div
                                             className={`play-button-container d-flex justify-content-center ${
-                                                timer !== "Ended" ||
-                                                timer !== "0d 0h 0m 0s"
+                                                isGameAvailable
                                                     ? ""
                                                     : "opacity-0-5"
                                             }`}
                                         >
                                             <button
                                                 onClick={
-                                                    timer !== "Ended" ||
-                                                    timer !== "0d 0h 0m 0s"
+                                                    isGameAvailable
                                                         ? handleOnClickPlayButton
                                                         : null
                                                 }
