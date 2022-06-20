@@ -83,6 +83,7 @@ const Leaderboard = ({
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
+    /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
     useEffect(() => {
         window.addEventListener("resize", handleResize, { once: true });
@@ -95,6 +96,7 @@ const Leaderboard = ({
         handleResize();
         return () => window.removeEventListener("resize", handleResize);
     });
+    */
 
     // SORTING LEADERBOARD
     useEffect(() => {
@@ -161,14 +163,16 @@ const Leaderboard = ({
                         loadPlayerLeaveTournamentId(score, recaptchaToken)
                     );
                 }
-                setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isTournamentEnded: true,
+                }));
             }
 
             setEarnAdditionalDisabledStatus({
                 gems: false,
                 ads: false,
             });
-
 
             // setTimeout(() => {
             //     if (score === -1) dispatch(loadPrizes());
@@ -314,7 +318,7 @@ const Leaderboard = ({
     };
 
     /**
-     * 
+     * Whenever a game is finished should call this function to submiting the score object
      * @param {
             a: this.currentScore, // score
             b: scoreObject, // scoreObject { timestamp: number, score: number }
@@ -585,20 +589,14 @@ const Leaderboard = ({
                     }
                 }}
             >
+                {/* TICKETS BOOSTER CLOSE LAYER */}
+                {modalStatus.isEarnAdditionalInfoShown && (
+                    <div className="leaderboard-tickets-booster-close"></div>
+                )}
+
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                            {/* BACK BUTTON */}
-                            <div
-                                className="d-flex align-items-center back-button mb-3 mb-md-4"
-                                onClick={handleBackButton}
-                            >
-                                <img
-                                    src={`${window.cdn}buttons/button_back.png`}
-                                    alt="back-btn"
-                                />
-                                <span className="ml-2">Back</span>
-                            </div>
+                        <div className="col-12">
                             {/* BACKGROUND IMAGE */}
                             <div
                                 className="col-12 px-0 leaderboard-background-wrapper position-relative"

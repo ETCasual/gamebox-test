@@ -1,10 +1,12 @@
 // GAME LEADERBOARD COMPONENT
 #game-leaderboard-screen {
-    position: relative;
-    height: 100vh;
-    padding-top: 5rem;
-    @include media-min($md) {
-        padding-top: 6rem;
+    width: 100%;
+    .leaderboard-tickets-booster-close {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
     }
     .leaderboard-background-wrapper {
         height: 80vh;
