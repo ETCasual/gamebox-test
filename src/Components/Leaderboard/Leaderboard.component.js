@@ -35,8 +35,8 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const Leaderboard = ({
     data,
-    handleBackButton,
-    setIsGameLeaderboardShown,
+    // handleBackButton,
+    // setIsGameLeaderboardShown,
     timer,
     setTimer,
     earnAdditionalDisabledStatus,
@@ -64,6 +64,7 @@ const Leaderboard = ({
 
     const [gameData, setGameData] = useState(null);
     const [leaderboardList, setLeaderboardList] = useState([]);
+    const [isGameAvailable, setIsGameAvailable] = useState(false);
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
         isQuitGameBtnDisabled: false,
@@ -83,6 +84,7 @@ const Leaderboard = ({
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
+    /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
     useEffect(() => {
         window.addEventListener("resize", handleResize, { once: true });
@@ -95,6 +97,7 @@ const Leaderboard = ({
         handleResize();
         return () => window.removeEventListener("resize", handleResize);
     });
+    */
 
     // SORTING LEADERBOARD
     useEffect(() => {
@@ -161,14 +164,16 @@ const Leaderboard = ({
                         loadPlayerLeaveTournamentId(score, recaptchaToken)
                     );
                 }
-                setModalStatus((prev) => ({ ...prev, isTournamentEnded: true }));
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isTournamentEnded: true,
+                }));
             }
 
             setEarnAdditionalDisabledStatus({
                 gems: false,
                 ads: false,
             });
-
 
             // setTimeout(() => {
             //     if (score === -1) dispatch(loadPrizes());
@@ -188,6 +193,20 @@ const Leaderboard = ({
         executeRecaptcha,
         config,
     ]);
+
+    useEffect(() => {
+        let isDisabled = false;
+        switch (timer) {
+            case "Calculating":
+            case "Ended":
+            case "0d 0h 0m 0s":
+                isDisabled = true;
+                break;
+            default:
+                isDisabled = false;
+        }
+        setIsGameAvailable(!isDisabled);
+    }, [timer]);
 
     const isCurrentUser = (id) => {
         if (id > 0 && user.id === id) return true;
@@ -314,7 +333,7 @@ const Leaderboard = ({
     };
 
     /**
-     * 
+     * Whenever a game is finished should call this function to submiting the score object
      * @param {
             a: this.currentScore, // score
             b: scoreObject, // scoreObject { timestamp: number, score: number }
@@ -523,7 +542,7 @@ const Leaderboard = ({
                                 isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
                             }));
-                            setIsGameLeaderboardShown(false);
+                            // setIsGameLeaderboardShown(false);
                         }}
                     />
                 )}
@@ -585,20 +604,14 @@ const Leaderboard = ({
                     }
                 }}
             >
+                {/* TICKETS BOOSTER CLOSE LAYER */}
+                {modalStatus.isEarnAdditionalInfoShown && (
+                    <div className="leaderboard-tickets-booster-close"></div>
+                )}
+
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7">
-                            {/* BACK BUTTON */}
-                            <div
-                                className="d-flex align-items-center back-button mb-3 mb-md-4"
-                                onClick={handleBackButton}
-                            >
-                                <img
-                                    src={`${window.cdn}buttons/button_back.png`}
-                                    alt="back-btn"
-                                />
-                                <span className="ml-2">Back</span>
-                            </div>
+                        <div className="col-12">
                             {/* BACKGROUND IMAGE */}
                             <div
                                 className="col-12 px-0 leaderboard-background-wrapper position-relative"
@@ -732,13 +745,23 @@ const Leaderboard = ({
                                         ref={readyTournamentButtonRef}
                                     >
                                         <button
-                                            onClick={() => {
-                                                setModalStatus((prev) => ({
-                                                    ...prev,
-                                                    isEarnAdditionalInfoShown: true,
-                                                }));
-                                            }}
-                                            className="ready-tournament-button"
+                                            className={`ready-tournament-button ${
+                                                isGameAvailable
+                                                    ? ""
+                                                    : "opacity-0-5"
+                                            }`}
+                                            onClick={
+                                                isGameAvailable
+                                                    ? () => {
+                                                          setModalStatus(
+                                                              (prev) => ({
+                                                                  ...prev,
+                                                                  isEarnAdditionalInfoShown: true,
+                                                              })
+                                                          );
+                                                      }
+                                                    : null
+                                            }
                                         >
                                             Ready Tournament
                                         </button>
@@ -761,16 +784,14 @@ const Leaderboard = ({
                                         {/* PLAY BUTTON*/}
                                         <div
                                             className={`play-button-container d-flex justify-content-center ${
-                                                timer !== "Ended" ||
-                                                timer !== "0d 0h 0m 0s"
+                                                isGameAvailable
                                                     ? ""
                                                     : "opacity-0-5"
                                             }`}
                                         >
                                             <button
                                                 onClick={
-                                                    timer !== "Ended" ||
-                                                    timer !== "0d 0h 0m 0s"
+                                                    isGameAvailable
                                                         ? handleOnClickPlayButton
                                                         : null
                                                 }

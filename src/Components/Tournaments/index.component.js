@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
-import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 import Leaderboard from "Components/Leaderboard/Leaderboard.component";
 import GameDuration from "Components/Tournaments/GameDuration/GameDuration.component";
 import AutomatedEntryTournamentInfo from "Components/Tournaments/AutomatedEntryTournamentInfo/AutomatedEntryTournamentInfo.component";
@@ -54,18 +53,17 @@ const Index = ({ match }) => {
     const [currentPrize, setCurrentPrize] = useState({});
     // DIFFERENT COMPONENT UI STATES
     const [isIntructionShown, setIsInstructionShown] = useState(false);
-    const [isGameLeaderboardShown, setIsGameLeaderboardShown] = useState(false);
+    // REASON COMMENTED: Leaderboard is moved to parent page
+    // const [isGameLeaderboardShown, setIsGameLeaderboardShown] = useState(false);
     const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
         useState(false);
-    const [fortuneWheelShown, setFortuneWheelShown] = useState(false);
     // EARN ADDITIONAL SELECTION STATES
     const [earnAdditionalDisabledStatus, setEarnAdditionalDisabledStatus] =
         useState({
             gems: checkIsAdOrGemsUsed("gems"),
             ads: checkIsAdOrGemsUsed("ads"),
         });
-    const [, setIsTicketsUpdated] = useState(false);
-    const [timer, setTimer] = useState("calculating");
+    const [timer, setTimer] = useState("Calculating");
 
     // LOAD PRIZES WHEN TIMER END WITH 2 SECOND DELAY
     // useEffect(() => {
@@ -79,6 +77,7 @@ const Index = ({ match }) => {
     //     return () => clearTimeout(timeOutRef);
     // }, [timer, dispatch]);
 
+    /* REASON COMMENTED: Since leaderboard is moved to parent page, scrolling is necessary.
     // DISABLE SCROLLING
     useEffect(() => {
         window.addEventListener("resize", handleResize, { once: true });
@@ -95,6 +94,7 @@ const Index = ({ match }) => {
             document.documentElement.style.overflowY = "visible";
         };
     });
+    */
 
     // LOAD AVAILABLE SPINS
     useEffect(() => {
@@ -239,14 +239,14 @@ const Index = ({ match }) => {
             payload: _gameInfo,
         });
         loadCurrentUserRank(user, id, gameId, currentUserRank, dispatch);
-        setIsGameLeaderboardShown(true);
+        // setIsGameLeaderboardShown(true);
     };
 
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);
-    const onClickGameLeaderBackButton = () => {
-        setIsGameLeaderboardShown(false);
-    };
+    // const onClickGameLeaderBackButton = () => {
+    //     setIsGameLeaderboardShown(false);
+    // };
 
     // PAYMENT
     const onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
@@ -259,420 +259,378 @@ const Index = ({ match }) => {
         history.push("/");
     };
 
-    if (isGameLeaderboardShown) {
-        return (
-            <>
-                <Leaderboard
-                    data={currentPrize}
-                    handleBackButton={onClickGameLeaderBackButton}
-                    setIsGameLeaderboardShown={setIsGameLeaderboardShown}
-                    timer={timer}
-                    setTimer={setTimer}
-                    earnAdditionalDisabledStatus={earnAdditionalDisabledStatus}
-                    setEarnAdditionalDisabledStatus={
-                        setEarnAdditionalDisabledStatus
-                    }
-                />
-                {/* PRIZE FINISHED */}
-                {prizeEnded && (
-                    <PrizeEndedModalPopup
-                        handleContinueBtn={handlePrizeEndedModalContinueBtn}
-                    />
-                )}
-            </>
-        );
-    } else {
-        return (
-            <>
-                {type !== "automated" && (
-                    <section id="game-screen">
-                        <div className="container-fluid">
-                            <div className="row justify-content-center">
-                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 px-0 full-wrapper">
-                                    {/* BACK BUTTON */}
-                                    <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
-                                        <Link
-                                            className="d-flex align-items-center"
-                                            onClick={handleHomeNavLink}
-                                            to={{
-                                                pathname:
-                                                    history.location?.state
-                                                        ?.prevPath || "/",
-                                                state: {
-                                                    prevPath:
-                                                        history.location
-                                                            .pathname,
-                                                },
-                                            }}
-                                        >
-                                            <img
-                                                src={`${window.cdn}buttons/button_back.png`}
-                                                alt="back-btn"
-                                            />
-                                            <span className="ml-2">Back</span>
-                                        </Link>
-                                    </div>
-                                    {/* TICKETS AND POOL INFO */}
-                                    <div className="col-12 px-3 position-relative d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
+    return (
+        <>
+            {type !== "automated" && (
+                <section id="game-screen">
+                    <div className="container-fluid">
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-10 col-lg-8 col-xl-7 px-0 full-wrapper">
+                                {/* BACK BUTTON */}
+                                <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
+                                    <Link
+                                        className="d-flex align-items-center"
+                                        onClick={handleHomeNavLink}
+                                        to={{
+                                            pathname:
+                                                history.location?.state
+                                                    ?.prevPath || "/",
+                                            state: {
+                                                prevPath:
+                                                    history.location.pathname,
+                                            },
+                                        }}
+                                    >
                                         <img
-                                            className="prize-img mr-3"
-                                            src={currentPrize?.prizeBG}
-                                            alt="prize"
+                                            src={`${window.cdn}buttons/button_back.png`}
+                                            alt="back-btn"
                                         />
-                                        {currentPrize?.infoUrl ? (
-                                            <a
-                                                className="contract-address"
-                                                href={
-                                                    currentPrize?.infoUrl || "#"
-                                                }
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                {currentPrize?.nftContractAddress?.substring(
-                                                    0,
-                                                    4
-                                                )}
-                                                ....
-                                                {currentPrize?.nftContractAddress?.substring(
-                                                    currentPrize
-                                                        ?.nftContractAddress
-                                                        .length - 5,
-                                                    currentPrize
-                                                        ?.nftContractAddress
-                                                        .length - 1
-                                                )}
-                                            </a>
-                                        ) : (
-                                            <div className="contract-address">
-                                                {currentPrize?.nftContractAddress?.substring(
-                                                    0,
-                                                    4
-                                                )}
-                                                ....
-                                                {currentPrize?.nftContractAddress?.substring(
-                                                    currentPrize
-                                                        ?.nftContractAddress
-                                                        .length - 5,
-                                                    currentPrize
-                                                        ?.nftContractAddress
-                                                        .length - 1
-                                                )}
-                                            </div>
-                                        )}
-                                        <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
-                                            <div className="prize-id mb-lg-1 mt-2">
-                                                {currentPrize?.prizeSubtitle}
-                                            </div>
-                                            <div className="prize-title mb-lg-3">
-                                                {currentPrize?.prizeTitle ||
-                                                    "-"}
-                                            </div>
-                                            <div className="prize-description">
-                                                {currentPrize?.prizeContent ||
-                                                    "-"}
-                                            </div>
-                                            {/* DESKTOP - TICKETS, TIMER & OVERTIME */}
-                                            <div className="token-and-draw-start-holder mt-auto mb-1 d-none d-lg-flex align-items-end justify-content-between w-100">
-                                                <div className="token-text-holder d-flex align-items-end justify-content-start">
-                                                    <div className="your-tokens-text">
-                                                        Your tickets
-                                                    </div>
-                                                    <div className="your-tokens-number ml-0 ml-md-2">
-                                                        {getPoolTickets(
-                                                            poolTickets,
-                                                            id
-                                                        )?.toLocaleString() ||
-                                                            0}
-                                                    </div>
+                                        <span className="ml-2">Back</span>
+                                    </Link>
+                                </div>
+                                {/* TICKETS AND POOL INFO */}
+                                <div className="col-12 px-3 position-relative d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
+                                    <img
+                                        className="prize-img mr-3"
+                                        src={currentPrize?.prizeBG}
+                                        alt="prize"
+                                    />
+                                    {currentPrize?.infoUrl ? (
+                                        <a
+                                            className="contract-address"
+                                            href={currentPrize?.infoUrl || "#"}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            {currentPrize?.nftContractAddress?.substring(
+                                                0,
+                                                4
+                                            )}
+                                            ....
+                                            {currentPrize?.nftContractAddress?.substring(
+                                                currentPrize?.nftContractAddress
+                                                    .length - 5,
+                                                currentPrize?.nftContractAddress
+                                                    .length - 1
+                                            )}
+                                        </a>
+                                    ) : (
+                                        <div className="contract-address">
+                                            {currentPrize?.nftContractAddress?.substring(
+                                                0,
+                                                4
+                                            )}
+                                            ....
+                                            {currentPrize?.nftContractAddress?.substring(
+                                                currentPrize?.nftContractAddress
+                                                    .length - 5,
+                                                currentPrize?.nftContractAddress
+                                                    .length - 1
+                                            )}
+                                        </div>
+                                    )}
+                                    <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100">
+                                        <div className="prize-id mb-lg-1 mt-2">
+                                            {currentPrize?.prizeSubtitle}
+                                        </div>
+                                        <div className="prize-title mb-lg-3">
+                                            {currentPrize?.prizeTitle || "-"}
+                                        </div>
+                                        <div className="prize-description">
+                                            {currentPrize?.prizeContent || "-"}
+                                        </div>
+                                        {/* DESKTOP - TICKETS, TIMER & OVERTIME */}
+                                        <div className="token-and-draw-start-holder mt-auto mb-1 d-none d-lg-flex align-items-end justify-content-between w-100">
+                                            <div className="token-text-holder d-flex align-items-end justify-content-start">
+                                                <div className="your-tokens-text">
+                                                    Your tickets
                                                 </div>
-
-                                                <div className="overtime-and-total-tickets-wrapper">
-                                                    {/* OVERTIME TEXT */}
-                                                    {currentPrize.overTime && (
-                                                        <p className="overtime-text mb-1 text-right text-danger">
-                                                            Overtime!
-                                                        </p>
-                                                    )}
-                                                    {/* TICKETS & OVERTIME TIMER */}
-                                                    <div className="draw-start-holder d-flex align-items-end ms-auto">
-                                                        <div className="draw-text mr-0 mr-md-2">
-                                                            {`Draw starts in \u00A0`}
-                                                        </div>
-
-                                                        {/* COUNT DOWN TIME */}
-                                                        <span
-                                                            className={`${
-                                                                currentPrize.overTime
-                                                                    ? "text-danger tickets-text-end"
-                                                                    : "tickets-text"
-                                                            }`}
-                                                        >
-                                                            {currentPrize.overTime
-                                                                ? timer
-                                                                : getPrizeTicketCollected(
-                                                                      prizeTicketCollection,
-                                                                      id
-                                                                  )?.toLocaleString() ||
-                                                                  0}
-                                                        </span>
-
-                                                        {/* TICKETS REQUIRED NUMBER */}
-                                                        {!currentPrize.overTime && (
-                                                            <span className="total-tickets-text">
-                                                                {`\u00A0 / ${
-                                                                    currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                    0
-                                                                }`}
-                                                            </span>
-                                                        )}
-                                                    </div>
+                                                <div className="your-tokens-number ml-0 ml-md-2">
+                                                    {getPoolTickets(
+                                                        poolTickets,
+                                                        id
+                                                    )?.toLocaleString() || 0}
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    {/* MOBILE - SEPARATOR */}
-                                    <div className="separator d-block d-lg-none px-3" />
-                                    {/* MOBILE - TICKETS, TIMER & OVERTIME */}
-                                    <div className="token-and-draw-start-holder px-3 mt-auto mb-1 d-flex d-lg-none align-items-end justify-content-between w-100">
-                                        <div className="token-text-holder">
-                                            <p className="your-tokens-text mb-0">
-                                                Your tickets
-                                            </p>
-                                            <p className="your-tokens-number mt-2">
-                                                {getPoolTickets(
-                                                    poolTickets,
-                                                    id
-                                                )?.toLocaleString() || 0}
-                                            </p>
-                                        </div>
-                                        <div className="overtime-and-total-tickets-wrapper">
-                                            {/* OVERTIME TEXT */}
-                                            {
-                                                // OverTimeModeChecker(
-                                                //     currentPrize?.prizeId,
-                                                //     currentPrize?.ticketsRequired,
-                                                //     prizeTicketCollection
-                                                // )
-                                                currentPrize.overTime && (
+
+                                            <div className="overtime-and-total-tickets-wrapper">
+                                                {/* OVERTIME TEXT */}
+                                                {currentPrize.overTime && (
                                                     <p className="overtime-text mb-1 text-right text-danger">
                                                         Overtime!
                                                     </p>
-                                                )
-                                            }
-                                            {/* TICKETS & OVERTIME TIMER */}
-                                            <div className="draw-start-holder">
-                                                <p className="draw-text mb-0">
-                                                    Draw starts in
-                                                </p>
+                                                )}
+                                                {/* TICKETS & OVERTIME TIMER */}
+                                                <div className="draw-start-holder d-flex align-items-end ms-auto">
+                                                    <div className="draw-text mr-0 mr-md-2">
+                                                        {`Draw starts in \u00A0`}
+                                                    </div>
 
-                                                {/* COUNT DOWN TIME */}
-                                                <p className="mt-2">
+                                                    {/* COUNT DOWN TIME */}
                                                     <span
                                                         className={`${
-                                                            // OverTimeModeChecker(
-                                                            //     currentPrize?.prizeId,
-                                                            //     currentPrize?.ticketsRequired,
-                                                            //     prizeTicketCollection
-                                                            // )
                                                             currentPrize.overTime
                                                                 ? "text-danger tickets-text-end"
                                                                 : "tickets-text"
                                                         }`}
                                                     >
-                                                        {
-                                                            // OverTimeModeChecker(
-                                                            //     currentPrize?.prizeId,
-                                                            //     currentPrize?.ticketsRequired,
-                                                            //     prizeTicketCollection
-                                                            // )
-                                                            currentPrize.overTime
-                                                                ? timer
-                                                                : getPrizeTicketCollected(
-                                                                      prizeTicketCollection,
-                                                                      id
-                                                                  )?.toLocaleString() ||
-                                                                  0
-                                                        }
+                                                        {currentPrize.overTime
+                                                            ? timer
+                                                            : getPrizeTicketCollected(
+                                                                  prizeTicketCollection,
+                                                                  id
+                                                              )?.toLocaleString() ||
+                                                              0}
                                                     </span>
 
                                                     {/* TICKETS REQUIRED NUMBER */}
-                                                    {
-                                                        // !OverTimeModeChecker(
+                                                    {!currentPrize.overTime && (
+                                                        <span className="total-tickets-text">
+                                                            {`\u00A0 / ${
+                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                0
+                                                            }`}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* MOBILE - SEPARATOR */}
+                                <div className="separator d-block d-lg-none px-3" />
+                                {/* MOBILE - TICKETS, TIMER & OVERTIME */}
+                                <div className="token-and-draw-start-holder px-3 mt-auto mb-1 d-flex d-lg-none align-items-end justify-content-between w-100">
+                                    <div className="token-text-holder">
+                                        <p className="your-tokens-text mb-0">
+                                            Your tickets
+                                        </p>
+                                        <p className="your-tokens-number mt-2">
+                                            {getPoolTickets(
+                                                poolTickets,
+                                                id
+                                            )?.toLocaleString() || 0}
+                                        </p>
+                                    </div>
+                                    <div className="overtime-and-total-tickets-wrapper">
+                                        {/* OVERTIME TEXT */}
+                                        {
+                                            // OverTimeModeChecker(
+                                            //     currentPrize?.prizeId,
+                                            //     currentPrize?.ticketsRequired,
+                                            //     prizeTicketCollection
+                                            // )
+                                            currentPrize.overTime && (
+                                                <p className="overtime-text mb-1 text-right text-danger">
+                                                    Overtime!
+                                                </p>
+                                            )
+                                        }
+                                        {/* TICKETS & OVERTIME TIMER */}
+                                        <div className="draw-start-holder">
+                                            <p className="draw-text mb-0">
+                                                Draw starts in
+                                            </p>
+
+                                            {/* COUNT DOWN TIME */}
+                                            <p className="mt-2">
+                                                <span
+                                                    className={`${
+                                                        // OverTimeModeChecker(
                                                         //     currentPrize?.prizeId,
                                                         //     currentPrize?.ticketsRequired,
                                                         //     prizeTicketCollection
                                                         // )
-                                                        !currentPrize.overTime && (
-                                                            <span className="total-tickets-text">
-                                                                {`\u00A0 / ${
-                                                                    currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                    0
-                                                                }`}
-                                                            </span>
-                                                        )
+                                                        currentPrize.overTime
+                                                            ? "text-danger tickets-text-end"
+                                                            : "tickets-text"
+                                                    }`}
+                                                >
+                                                    {
+                                                        // OverTimeModeChecker(
+                                                        //     currentPrize?.prizeId,
+                                                        //     currentPrize?.ticketsRequired,
+                                                        //     prizeTicketCollection
+                                                        // )
+                                                        currentPrize.overTime
+                                                            ? timer
+                                                            : getPrizeTicketCollected(
+                                                                  prizeTicketCollection,
+                                                                  id
+                                                              )?.toLocaleString() ||
+                                                              0
                                                     }
+                                                </span>
+
+                                                {/* TICKETS REQUIRED NUMBER */}
+                                                {
+                                                    // !OverTimeModeChecker(
+                                                    //     currentPrize?.prizeId,
+                                                    //     currentPrize?.ticketsRequired,
+                                                    //     prizeTicketCollection
+                                                    // )
+                                                    !currentPrize.overTime && (
+                                                        <span className="total-tickets-text">
+                                                            {`\u00A0 / ${
+                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                0
+                                                            }`}
+                                                        </span>
+                                                    )
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* GAME INFO */}
+                                <div className="d-flex align-items-end px-3 px-md-3">
+                                    {/* JOIN TITLE & STATEMENT */}
+                                    <div className="col-12 col-xl-12 game-info px-3 pt-3">
+                                        <div className="row">
+                                            <div className="col-12 mb-4">
+                                                <div className="join-tournament-wrapper d-flex align-items-center justify-content-between mb-2">
+                                                    <p className="statement-title algin mb-0">
+                                                        Join Tournaments!
+                                                    </p>
+                                                    <img
+                                                        width={20}
+                                                        src={`${window.cdn}buttons/button_question_01.png`}
+                                                        className="question-mark-img"
+                                                        alt="question-mark"
+                                                        onClick={
+                                                            handleInstructionPanel
+                                                        }
+                                                    />
+                                                </div>
+                                                <p className="statement-subtitle mb-0">
+                                                    Compete with other players,
+                                                    collect tickets and stand a
+                                                    chance to own this Prize!
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
-                                    {/* GAME INFO */}
-                                    <div className="d-flex align-items-end px-0 px-md-3">
-                                        {/* JOIN TITLE & STATEMENT */}
-                                        <div className="col-12 col-xl-10 game-info px-3 pt-3">
-                                            <div className="row">
-                                                <div className="col-12 mb-4">
-                                                    <div className="join-tournament-wrapper d-flex align-items-center justify-content-between mb-2">
-                                                        <p className="statement-title algin mb-0">
-                                                            Join Tournaments!
-                                                        </p>
-                                                        <img
-                                                            width={20}
-                                                            src={`${window.cdn}buttons/button_question_01.png`}
-                                                            className="question-mark-img"
-                                                            alt="question-mark"
-                                                            onClick={
-                                                                handleInstructionPanel
-                                                            }
-                                                        />
-                                                    </div>
-                                                    <p className="statement-subtitle mb-0">
-                                                        Compete with other
-                                                        players, collect tickets
-                                                        and stand a chance to
-                                                        own this Prize!
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            {/* GAME INFO CARDS */}
-                                            <div className="row scrolling-wrapper">
-                                                {/* GAME INFO & TIMER */}
-                                                {currentPrize?.gameInfo?.map(
-                                                    (game, index) => (
-                                                        <React.Fragment
-                                                            key={`time-${index}`}
-                                                        >
-                                                            <GameDuration
-                                                                game={game}
-                                                                index={index}
-                                                                data={
-                                                                    currentPrize
-                                                                }
-                                                                timer={timer}
-                                                                setTimer={
-                                                                    setTimer
-                                                                }
-                                                                handleGameLeaderPanel={
-                                                                    handleGameLeaderPanel
-                                                                }
-                                                                setEarnAdditionalDisabledStatus={
-                                                                    setEarnAdditionalDisabledStatus
-                                                                }
-                                                            />
-                                                        </React.Fragment>
-                                                    )
-                                                )}
-                                                <div className="col-6 col-md-4 col-lg-3 d-flex d-xl-none mb-3 align-self-end">
-                                                    {type !== "automated" && (
-                                                        <div
-                                                            className="fortune-wheel-btn p-3"
-                                                            onClick={() =>
-                                                                setFortuneWheelShown(
-                                                                    true
-                                                                )
-                                                            }
-                                                        >
-                                                            <p className="the-spinner-text mb-1">
-                                                                The spinner
-                                                            </p>
-                                                            <p className="earn-more-tickets-text">
-                                                                Earn more
-                                                                tickets here
-                                                            </p>
-                                                            <img
-                                                                className="earn-more-tickets-img"
-                                                                src={`${window.cdn}spinner/spinner_column_01.png`}
-                                                                alt="earn-more-tickets"
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <p className="recaptcha-text">
-                                                This site is protected by reCAPTCHA and the Google
-                                                    {""} <a href="https://policies.google.com/privacy">Privacy Policy</a> and
-                                                    {""} <a href="https://policies.google.com/terms">Terms of Service</a> apply.
-                                            </p>
-                                        </div>
-                                        {/* SPINNER BUTTON */}
-                                        <div className="col-2 col-md-3 col-xl-2 d-none d-xl-block">
-                                            {type !== "automated" && (
-                                                <div
-                                                    className="fortune-wheel-btn p-3"
-                                                    onClick={() =>
-                                                        setFortuneWheelShown(
-                                                            true
-                                                        )
+                                        {/* GAME INFO CARDS */}
+                                        <div className="row">
+                                            {/* GAME DURATION */}
+                                            {currentPrize?.gameInfo?.length >
+                                                0 && (
+                                                <GameDuration
+                                                    game={
+                                                        currentPrize
+                                                            ?.gameInfo[0]
                                                     }
-                                                >
-                                                    <p className="the-spinner-text mb-1">
-                                                        The spinner
-                                                    </p>
-                                                    <p className="earn-more-tickets-text">
-                                                        Earn more tickets here
-                                                    </p>
-                                                    <img
-                                                        className="earn-more-tickets-img"
-                                                        src={`${window.cdn}spinner/spinner_column_01.png`}
-                                                        alt="earn-more-tickets"
-                                                    />
-                                                </div>
+                                                    index={0}
+                                                    data={currentPrize}
+                                                    timer={timer}
+                                                    setTimer={setTimer}
+                                                    handleGameLeaderPanel={
+                                                        handleGameLeaderPanel
+                                                    }
+                                                    setEarnAdditionalDisabledStatus={
+                                                        setEarnAdditionalDisabledStatus
+                                                    }
+                                                />
+                                            )}
+
+                                            {/* TOURNAMENT LEADBOARD */}
+                                            <Leaderboard
+                                                data={currentPrize}
+                                                // handleBackButton={
+                                                //     onClickGameLeaderBackButton
+                                                // }
+                                                // setIsGameLeaderboardShown={
+                                                //     setIsGameLeaderboardShown
+                                                // }
+                                                timer={timer}
+                                                setTimer={setTimer}
+                                                earnAdditionalDisabledStatus={
+                                                    earnAdditionalDisabledStatus
+                                                }
+                                                setEarnAdditionalDisabledStatus={
+                                                    setEarnAdditionalDisabledStatus
+                                                }
+                                            />
+                                            {/* PRIZE FINISHED */}
+                                            {prizeEnded && (
+                                                <PrizeEndedModalPopup
+                                                    handleContinueBtn={
+                                                        handlePrizeEndedModalContinueBtn
+                                                    }
+                                                />
                                             )}
                                         </div>
+
+                                        {/* RECAPTCHA MESSAGES */}
+                                        <p className="recaptcha-text">
+                                            This site is protected by reCAPTCHA
+                                            and the Google
+                                            {""}{" "}
+                                            <a href="https://policies.google.com/privacy">
+                                                Privacy Policy
+                                            </a>{" "}
+                                            and
+                                            {""}{" "}
+                                            <a href="https://policies.google.com/terms">
+                                                Terms of Service
+                                            </a>{" "}
+                                            apply.
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {/* FORTUNE WHEEL */}
-                        {fortuneWheelShown && (
-                            <FortuneWheel
-                                prizeId={parseInt(id)}
-                                setIsTicketsUpdated={setIsTicketsUpdated}
-                                ticketsRequired={currentPrize?.ticketsRequired}
-                                setFortuneWheelShown={setFortuneWheelShown}
-                            />
-                        )}
-                    </section>
-                )}
-                {type === "automated" && (
-                    <AutomatedEntryTournamentInfo
-                        data={currentPrize}
-                        type={type}
-                    />
-                )}
-                {/* POPUP MODAL FOR OUT OF GEMS */}
-                {isSubscriptionModalShown && (
-                    <SubscriptionModal
-                        handleGetGemsLaterBtn={onClickSubscriptionCancel}
-                    />
-                )}
-                {/* POPUP MODAL FOR INSTRUCTIONS */}
-                {isIntructionShown && (
-                    <GameInstructionsModal
-                        handleInstructionsCloseBtn={
-                            onClickInstructionBackButton
-                        }
-                    />
-                )}
+                    </div>
+                </section>
+            )}
+            {type === "automated" && (
+                <AutomatedEntryTournamentInfo data={currentPrize} type={type} />
+            )}
+            {/* POPUP MODAL FOR OUT OF GEMS */}
+            {isSubscriptionModalShown && (
+                <SubscriptionModal
+                    handleGetGemsLaterBtn={onClickSubscriptionCancel}
+                />
+            )}
+            {/* POPUP MODAL FOR INSTRUCTIONS */}
+            {isIntructionShown && (
+                <GameInstructionsModal
+                    handleInstructionsCloseBtn={onClickInstructionBackButton}
+                />
+            )}
 
-                {/* PRIZE FINISHED */}
-                {prizeEnded && (
-                    <PrizeEndedModalPopup
-                        handleContinueBtn={handlePrizeEndedModalContinueBtn}
-                    />
-                )}
-            </>
-        );
-    }
+            {/* PRIZE FINISHED */}
+            {prizeEnded && (
+                <PrizeEndedModalPopup
+                    handleContinueBtn={handlePrizeEndedModalContinueBtn}
+                />
+            )}
+        </>
+    );
+
+    // REASON COMMENTED: Leaderboard is moved to parent page
+    // if (isGameLeaderboardShown) {
+    //     return (
+    //         <>
+    //             <Leaderboard
+    //                 data={currentPrize}
+    //                 handleBackButton={onClickGameLeaderBackButton}
+    //                 setIsGameLeaderboardShown={setIsGameLeaderboardShown}
+    //                 timer={timer}
+    //                 setTimer={setTimer}
+    //                 earnAdditionalDisabledStatus={earnAdditionalDisabledStatus}
+    //                 setEarnAdditionalDisabledStatus={
+    //                     setEarnAdditionalDisabledStatus
+    //                 }
+    //             />
+    //             {/* PRIZE FINISHED */}
+    //             {prizeEnded && (
+    //                 <PrizeEndedModalPopup
+    //                     handleContinueBtn={handlePrizeEndedModalContinueBtn}
+    //                 />
+    //             )}
+    //         </>
+    //     );
+    // }
 };
 
 export default Index;
