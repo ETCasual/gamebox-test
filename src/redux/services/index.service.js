@@ -1204,7 +1204,7 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 e?.gameId === rank.getGameId() &&
                 e?.rankFrom === rank.getRankFrom() &&
                 e?.rankTo === rank.getRankTo() &&
-                e?.ticket === rank.getTickets()
+                e?.tickets === rank.getTickets()
         );
         if (idx === -1)
             leaderRuleRanks.push({
