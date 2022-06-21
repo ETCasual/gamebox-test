@@ -302,9 +302,9 @@ const Index = () => {
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
                                         <div className="col-12">
-                                            <p className="prize-type">
+                                            <h2 className="section-title mb-3">
                                                 Featured Reward
-                                            </p>
+                                            </h2>
                                         </div>
                                         {/* LOADER */}
                                         {FeaturedData?.length <= 0 && <FeaturedLoader />}
@@ -346,7 +346,7 @@ const Index = () => {
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
                                     <div className="col-12 px-0">
                                         <div className="description w-100">
-                                            <h2 className="mb-3">
+                                            <h2 className="section-title mb-3">
                                                 Bonus Rewards!
                                             </h2>
                                         </div>
@@ -391,7 +391,7 @@ const Index = () => {
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
                                         <div className="col-12 description">
-                                            <h2 className="mb-3">
+                                            <h2 className="section-title mb-3">
                                                 Play and Win Rewards
                                             </h2>
                                         </div>
