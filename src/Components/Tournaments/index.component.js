@@ -153,7 +153,6 @@ const Index = ({ match }) => {
                                     )
                                 );
                             }
-                            handleGameLeaderPanel(currentGameInfo);
                         }
                     }
                 }
@@ -162,6 +161,33 @@ const Index = ({ match }) => {
         // eslint-disable-next-line
         [prizes, id, type, dispatch]
     );
+
+    useEffect(() => {
+        if (currentPrize?.gameInfo?.length > 0) {
+            const gameInfo = currentPrize?.gameInfo[0];
+
+            dispatch(loadLeaderboard(parseInt(id), gameInfo.gameId));
+            // TODO:: ADD PROPER DISPATCH TO IT
+            Object.assign(currentGameInfo, {
+                prizeId: id,
+                gameId: gameInfo.gameId,
+            });
+
+            sessionStorage.setItem("currentGameInfo", JSON.stringify(gameInfo));
+            dispatch({
+                type: CURRENT_GAME_DETAILS,
+                payload: gameInfo,
+            });
+            loadCurrentUserRank(
+                user,
+                id,
+                gameInfo.gameId,
+                currentUserRank,
+                dispatch
+            );
+            // setIsGameLeaderboardShown(true);
+        }
+    }, [currentPrize, id, user, currentGameInfo, currentUserRank, dispatch]);
 
     // GET TICKETS
     useEffect(() => {
@@ -211,30 +237,6 @@ const Index = ({ match }) => {
     }
     // INSTRUCTION POPUP MODAL
     const handleInstructionPanel = () => setIsInstructionShown(true);
-
-    // 3RD TIER DATA LOADING
-    const handleGameLeaderPanel = (gameInfo) => {
-        dispatch(loadLeaderboard(parseInt(id), gameInfo.gameId));
-        // TODO:: ADD PROPER DISPATCH TO IT
-        Object.assign(currentGameInfo, {
-            prizeId: id,
-            gameId: gameInfo.gameId,
-        });
-
-        sessionStorage.setItem("currentGameInfo", JSON.stringify(gameInfo));
-        dispatch({
-            type: CURRENT_GAME_DETAILS,
-            payload: gameInfo,
-        });
-        loadCurrentUserRank(
-            user,
-            id,
-            gameInfo.gameId,
-            currentUserRank,
-            dispatch
-        );
-        // setIsGameLeaderboardShown(true);
-    };
 
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);
