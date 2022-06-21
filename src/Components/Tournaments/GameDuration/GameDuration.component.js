@@ -36,34 +36,8 @@ const GameDuration = ({
         if (gameId > 0) {
             dispatch(loadLeaderboardRanks(gameId));
             dispatch(loadCurrentGameRules(gameId));
-            handleGameLeaderPanel(
-                gameId,
-                index,
-                game.gameTitle,
-                game.gameIcon,
-                game.endTimeStamp
-            );
         }
-    }, [
-        gameId,
-        index,
-        game,
-        dispatch,
-        setIsGameAvailable,
-        handleGameLeaderPanel,
-    ]);
-
-    useEffect(() => {
-        if (isGameAvailable) {
-            handleGameLeaderPanel(
-                gameId,
-                index,
-                game.gameTitle,
-                game.gameIcon,
-                game.endTimeStamp
-            );
-        }
-    }, [gameId, index, game, isGameAvailable, handleGameLeaderPanel]);
+    }, [gameId, index, game, dispatch, setIsGameAvailable]);
 
     // STARTING COUNTDOWN TIMER
     useEffect(() => {
@@ -109,10 +83,6 @@ const GameDuration = ({
         config,
     ]);
 
-    return null;
-
-    /* REASON OF COMMENTED: Since we only have 1 tournament at a time, so additional Game Info loading is closed.
-    NOTE: If future we have multiple tournaments in a prize, uncomment the following code
     const onClickEnterGame = () => {
         if (isGameAvailable) {
             handleGameLeaderPanel(
@@ -154,7 +124,6 @@ const GameDuration = ({
             <button className="join">Join Tournament</button>
         </div>
     );
-    */
 };
 
 export default GameDuration;

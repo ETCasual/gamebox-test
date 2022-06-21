@@ -21,6 +21,7 @@ import loadPlayerLeaveTournamentId from "redux/thunks/PlayerLeaveTournament.thun
 import loadLeaderboard from "redux/thunks/Leaderboard.thunk";
 import loadCurrentUserRank from "redux/thunks/CurrentUserRank.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
+import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 // import loadPrizes from "redux/thunks/Prizes.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
 
@@ -98,6 +99,15 @@ const Leaderboard = ({
         return () => window.removeEventListener("resize", handleResize);
     });
     */
+
+    // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
+    useEffect(() => {
+        setIsGameAvailable(false);
+        if (currentGameDetails?.gameId > 0) {
+            dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
+            dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
+        }
+    }, [currentGameDetails, dispatch]);
 
     // SORTING LEADERBOARD
     useEffect(() => {

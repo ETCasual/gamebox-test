@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
 import Leaderboard from "Components/Leaderboard/Leaderboard.component";
-import GameDuration from "Components/Tournaments/GameDuration/GameDuration.component";
 import AutomatedEntryTournamentInfo from "Components/Tournaments/AutomatedEntryTournamentInfo/AutomatedEntryTournamentInfo.component";
 import SubscriptionModal from "Components/Modals/Subscription.modal";
 import GameInstructionsModal from "Components/Modals/GameInstructions.modal";
@@ -154,6 +153,7 @@ const Index = ({ match }) => {
                                     )
                                 );
                             }
+                            handleGameLeaderPanel(currentGameInfo);
                         }
                     }
                 }
@@ -213,32 +213,26 @@ const Index = ({ match }) => {
     const handleInstructionPanel = () => setIsInstructionShown(true);
 
     // 3RD TIER DATA LOADING
-    const handleGameLeaderPanel = (
-        gameId,
-        gameIndex,
-        gameTitle,
-        gameIcon,
-        endTimeStamp
-    ) => {
-        dispatch(loadLeaderboard(parseInt(id), gameId));
+    const handleGameLeaderPanel = (gameInfo) => {
+        dispatch(loadLeaderboard(parseInt(id), gameInfo.gameId));
         // TODO:: ADD PROPER DISPATCH TO IT
         Object.assign(currentGameInfo, {
             prizeId: id,
-            gameId: gameId,
+            gameId: gameInfo.gameId,
         });
-        const _gameInfo = {
-            gameId,
-            gameIndex,
-            gameTitle,
-            gameIcon,
-            endTimeStamp,
-        };
-        sessionStorage.setItem("currentGameInfo", JSON.stringify(_gameInfo));
+
+        sessionStorage.setItem("currentGameInfo", JSON.stringify(gameInfo));
         dispatch({
             type: CURRENT_GAME_DETAILS,
-            payload: _gameInfo,
+            payload: gameInfo,
         });
-        loadCurrentUserRank(user, id, gameId, currentUserRank, dispatch);
+        loadCurrentUserRank(
+            user,
+            id,
+            gameInfo.gameId,
+            currentUserRank,
+            dispatch
+        );
         // setIsGameLeaderboardShown(true);
     };
 
@@ -511,27 +505,6 @@ const Index = ({ match }) => {
                                         </div>
                                         {/* GAME INFO CARDS */}
                                         <div className="row">
-                                            {/* GAME DURATION */}
-                                            {currentPrize?.gameInfo?.length >
-                                                0 && (
-                                                <GameDuration
-                                                    game={
-                                                        currentPrize
-                                                            ?.gameInfo[0]
-                                                    }
-                                                    index={0}
-                                                    data={currentPrize}
-                                                    timer={timer}
-                                                    setTimer={setTimer}
-                                                    handleGameLeaderPanel={
-                                                        handleGameLeaderPanel
-                                                    }
-                                                    setEarnAdditionalDisabledStatus={
-                                                        setEarnAdditionalDisabledStatus
-                                                    }
-                                                />
-                                            )}
-
                                             {/* TOURNAMENT LEADBOARD */}
                                             <Leaderboard
                                                 data={currentPrize}
