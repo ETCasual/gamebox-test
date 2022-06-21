@@ -31,6 +31,53 @@
         font-weight: $fnt-wgt-700;
     }
 
+    .spinner {
+        position: relative;
+        cursor: pointer;
+        background: linear-gradient(143deg, #302f2f 0%, #0b0b0b 100%);
+        @include media-min($md) {
+            background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
+        }
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+
+        .the-spinner-text {
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+            font-weight: $fnt-wgt-600;
+            line-height: 1.5;
+        }
+        .earn-more-tickets-text {
+            font-size: $fnt-sz-12;
+        }
+        .earn-more-tickets-img {
+            height: 4.25rem;
+            object-fit: cover;
+            border-radius: 17px;
+            align-self: end;
+        }
+    }
+
+    .timer {
+        background: #1d1d1d;
+        box-shadow: inset 0px 3px 6px #0000000f;
+        border-radius: 0px 0px 10px 10px;
+        min-height: 2.5rem;
+        @include media-min($md) {
+            min-height: 3.5rem;
+        }
+        .countdown {
+            color: #00c1b9;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
+            font-weight: $fnt-wgt-700;
+        }
+    }
+
 }
 
 // WINNER ANNOUNCEMENT MODAL COMPONENT

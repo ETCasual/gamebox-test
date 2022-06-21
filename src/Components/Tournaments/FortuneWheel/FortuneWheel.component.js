@@ -15,7 +15,7 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 
 // HELPER FUNCTION
-import getPoolTickets from "Utils/PoolTickets";
+// import getPoolTickets from "Utils/PoolTickets";
 
 const FortuneWheel = ({
     prizeId,
@@ -28,7 +28,7 @@ const FortuneWheel = ({
     const { spinnerRules } = useSelector((state) => state.spinnerRules);
     const { spinner } = useSelector((state) => state.playerSpinnerInfo);
     const { config } = useSelector((state) => state.config);
-    const { poolTickets } = useSelector((state) => state.playerTickets);
+    // const { poolTickets } = useSelector((state) => state.playerTickets);
 
     const [outOfSpins, setOutOfSpins] = useState(false);
     const [outOfGems, setOutOfGems] = useState(false);
@@ -36,11 +36,11 @@ const FortuneWheel = ({
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [, setIsBuySpinConfirmModalShown] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
-    const [modalHeight, setModalHeight] = useState({
-        windowWidth: 0,
-        wrapper: 0,
-        cols: 0,
-    });
+    // const [modalHeight, setModalHeight] = useState({
+    //     windowWidth: 0,
+    //     wrapper: 0,
+    //     cols: 0,
+    // });
     const [winAmount, setWinAmount] = useState(-1);
 
     const spinnerRef = useRef(spinner);
@@ -67,33 +67,37 @@ const FortuneWheel = ({
     }, []);
 
     // RESIZE EVENT
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
+    // useEffect(() => {
+    //     window.addEventListener("resize", handleResize);
 
-        function handleResize() {
-            const mainElemHeight =
-                document.querySelector(".full-wrapper")?.offsetHeight;
-            setModalHeight({
-                windowWidth: window.innerWidth,
-                wrapper: mainElemHeight + 50,
-                cols: window.innerWidth < 1200 ? "auto" : mainElemHeight + 50,
-            });
-            const col2 = document.querySelector(".wrapper-col:nth-child(2)");
-            const col3 = document.querySelector(".wrapper-col:nth-child(3)");
-            if (
-                col2.style.display === "none" ||
-                col3.style.display === "none"
-            ) {
-                col2.style.display = "flex";
-                col3.style.display = "flex";
-            }
-        }
-        handleResize();
+    //     function handleResize() {
+    //         const mainElemHeight =
+    //             document.querySelector(".full-wrapper")?.offsetHeight;
+    //         setModalHeight({
+    //             windowWidth: window.innerWidth,
+    //             wrapper: mainElemHeight + 50,
+    //             cols: window.innerWidth < 1200 ? "auto" : mainElemHeight + 50,
+    //         });
+    //         const col2 = document.querySelector(".wrapper-col:nth-child(2)");
+    //         const col3 = document.querySelector(".wrapper-col:nth-child(3)");
+    //         if (
+    //             col2.style.display === "none" ||
+    //             col3.style.display === "none"
+    //         ) {
+    //             col2.style.display = "flex";
+    //             col3.style.display = "flex";
+    //         }
+    //     }
+    //     handleResize();
 
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    //     return () => window.removeEventListener("resize", handleResize);
+    // }, []);
 
     function onClickSpinButton() {
+        // Prevent clicking for the moment, to show the new UI only
+        // Todo: To remove early return after backend changes is done
+        return;
+        
         // PREVENT SPAMMING
         if (isClickedSpin) return;
 
@@ -144,40 +148,40 @@ const FortuneWheel = ({
         setOutOfSpins(false);
         setIsClickedSpin(false);
     };
-    const handleProbabilityInfo = () => {
-        let currentShownFlag = isProbabilityShown;
-        setIsProbabilityShown(!currentShownFlag);
-        if (modalHeight.windowWidth < 1200) {
-            const col1 = document.querySelector(".wrapper-col:nth-child(1)");
-            const col2 = document.querySelector(".wrapper-col:nth-child(2)");
-            const col3 = document.querySelector(".wrapper-col:nth-child(3)");
-            const tapBackButton = document.querySelector(".tap-btn");
-            tapBackButton.style.display = !currentShownFlag ? "block" : "none";
-            col2.style.display = !currentShownFlag ? "none" : "flex";
-            col3.style.display = !currentShownFlag ? "none" : "flex";
-            col1.style.height = "auto";
-        }
-    };
+    // const handleProbabilityInfo = () => {
+    //     let currentShownFlag = isProbabilityShown;
+    //     setIsProbabilityShown(!currentShownFlag);
+    //     if (modalHeight.windowWidth < 1200) {
+    //         const col1 = document.querySelector(".wrapper-col:nth-child(1)");
+    //         const col2 = document.querySelector(".wrapper-col:nth-child(2)");
+    //         const col3 = document.querySelector(".wrapper-col:nth-child(3)");
+    //         const tapBackButton = document.querySelector(".tap-btn");
+    //         tapBackButton.style.display = !currentShownFlag ? "block" : "none";
+    //         col2.style.display = !currentShownFlag ? "none" : "flex";
+    //         col3.style.display = !currentShownFlag ? "none" : "flex";
+    //         col1.style.height = "auto";
+    //     }
+    // };
 
     return (
         <div
             className="fortune-wheel d-flex align-items-center justify-content-center"
-            style={{ height: `${modalHeight.wrapper}px` }}
+            // style={{ height: `${modalHeight.wrapper}px` }}
         >
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <div
                         className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper"
-                        style={{ height: `${modalHeight.wrapper}px` }}
+                        // style={{ height: `${modalHeight.wrapper}px` }}
                     >
-                        <div className="row">
+                        <div className="row h-100">
                             {/* FIRST COLUMN */}
                             <div
-                                className="col-12 col-xl-1 py-3 flex-column align-items-center justify-content-start justify-content-xl-between wrapper-col"
-                                style={{ height: modalHeight.cols }}
+                                className="col-12 py-3 align-items-center justify-content-between wrapper-col"
+                                // style={{ height: modalHeight.cols }}
                             >
                                 {/* FIRST ROW - SPINNER TEXT AND ICONS */}
-                                <div className="first-row w-100 d-flex flex-xl-column align-items-start align-items-xl-center justify-content-between">
+                                <div className="first-row w-100 d-flex align-items-start justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
                                         <img
                                             onClick={() =>
@@ -191,11 +195,11 @@ const FortuneWheel = ({
                                             alt="arrow-button"
                                         />
                                         <div className="text-wrapper ml-3">
-                                            <p className="the-spinner-text mb-0 d-block d-xl-none">
-                                                The spinner
+                                            <p className="the-spinner-text mb-0 d-block">
+                                                The Spinner
                                             </p>
-                                            <p className="earn-more-tickets-text my-1 d-block d-xl-none">
-                                                Earn more tickets here
+                                            <p className="earn-more-tickets-text my-1 d-block">
+                                                Earn more gems here
                                             </p>
                                         </div>
                                     </div>
@@ -205,15 +209,15 @@ const FortuneWheel = ({
                                         className="probability-btn"
                                         width={20}
                                         height={20}
-                                        onClick={handleProbabilityInfo}
+                                        onClick={() => setIsProbabilityShown(!isProbabilityShown)}
                                         src={`${window.cdn}buttons/button_question_01.png`}
                                         alt="question-mark"
                                     />
                                 </div>
                                 {/* SECOND ROW - PROBABILITY TABLE */}
-                                <div className="w-100">
-                                    {isProbabilityShown && (
-                                        <table className="probability-table d-block d-lg-none mt-3 mb-3 mx-auto">
+                                {/* {isProbabilityShown && (
+                                    <div className="w-100">
+                                        <table className="probability-table mt-3 mb-3 mx-auto">
                                             <tbody>
                                                 {spinnerRules?.map(
                                                     (rule, idx) => (
@@ -230,15 +234,19 @@ const FortuneWheel = ({
                                                             </td>
                                                             <td className="probability-tickets-text">
                                                                 {rule?.tickets}{" "}
-                                                                tickets
-                                                            </td>
+                                                                <img
+                                                                    className="icon"
+                                                                    src={`${window.cdn}assets/gem_01.png`}
+                                                                    alt="gems"
+                                                                />                                                            </td>
                                                         </tr>
                                                     )
                                                 )}
                                             </tbody>
                                         </table>
-                                    )}
-                                    <div
+                                    </div>
+                                )} */}
+                                    {/* <div
                                         className="tap-btn w-100 text-center d-xl-none"
                                         onClick={handleProbabilityInfo}
                                     >
@@ -251,14 +259,13 @@ const FortuneWheel = ({
                                         <p className=" mb-0">
                                             Tap here to return to spinner
                                         </p>
-                                    </div>
-                                </div>
+                                    </div> */}
                             </div>
 
                             {/* SECOND COLUMN */}
-                            <div
-                                className="col-12 col-xl-4 py-3 wrapper-col position-relative flex-column align-items-center justify-content-start"
-                                style={{ height: modalHeight.cols }}
+                            {/* <div
+                                className="d-none col-12 py-3 wrapper-col position-relative flex-column align-items-center justify-content-start"
+                                // style={{ height: modalHeight.cols }}
                             >
                                 <div className="spin-and-tickets-info">
                                     <p className="the-spinner-text mb-0 d-none d-xl-block">
@@ -294,7 +301,7 @@ const FortuneWheel = ({
                                 </div>
 
                                 {/* PROBABILITY TABLE */}
-                                {isProbabilityShown && (
+                                {/* {isProbabilityShown && (
                                     <table className="probability-table mt-auto d-none d-lg-block">
                                         <tbody>
                                             {spinnerRules?.map((rule, idx) => (
@@ -314,33 +321,66 @@ const FortuneWheel = ({
                                         </tbody>
                                     </table>
                                 )}
-                            </div>
+                            </div> */}
 
                             {/* THIRD COLUMN */}
                             <div
-                                className="col-12 col-xl-7 py-0 py-lg-3 wrapper-col flex-column align-items-center justify-content-center"
-                                style={{ height: modalHeight.cols }}
-                            >
-                                <FortuneWheelRules
-                                    spinnerRules={spinnerRules}
-                                    winAmount={winAmount}
-                                    isClickedSpin={isClickedSpin}
-                                    onSpinClicked={onClickSpinButton}
-                                    onFinished={onSpinFinished}
-                                />
-                                <p className="spin-amount-left-wrapper mb-3 d-block d-xl-none">
-                                    <span className="you-have-text">
-                                        You have
-                                    </span>
-                                    <span className="spin-number">
-                                        {spinner?.freeSpins > 0
-                                            ? spinner?.freeSpins
-                                            : 0}
-                                    </span>
-                                    <span className="spins-left-text">
-                                        spins left
-                                    </span>
-                                </p>
+                                className="col-12 py-5 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center"
+                                // style={{ height: modalHeight.cols }}
+                                >
+                                {!isProbabilityShown && (
+                                    <>
+                                        <FortuneWheelRules
+                                            spinnerRules={spinnerRules}
+                                            winAmount={winAmount}
+                                            isClickedSpin={isClickedSpin}
+                                            onSpinClicked={onClickSpinButton}
+                                            onFinished={onSpinFinished}
+                                        />
+                                        <p className="spin-amount-left-wrapper text-center mb-3">
+                                            <span className="you-have-text">
+                                                You have
+                                            </span>
+                                            <span className="spin-number">
+                                                {spinner?.freeSpins > 0
+                                                    ? spinner?.freeSpins
+                                                    : 0}
+                                            </span>
+                                            <span className="spins-left-text">
+                                                spins left
+                                            </span>
+                                        </p>
+                                    </>
+                                )}
+                                {isProbabilityShown && (
+                                    <table className="probability-table mt-3 mb-3 mx-auto">
+                                        <tbody>
+                                            {spinnerRules?.map(
+                                                (rule, idx) => (
+                                                    <tr
+                                                        className="probability-row"
+                                                        id={idx}
+                                                        key={`prob-${idx}`}
+                                                    >
+                                                        <td className="probability-percentage">
+                                                            {
+                                                                rule?.probability
+                                                            }
+                                                            %
+                                                        </td>
+                                                        <td className="probability-tickets-text">
+                                                            {rule?.tickets}{" "}
+                                                            <img
+                                                                className="icon"
+                                                                src={`${window.cdn}assets/gem_01.png`}
+                                                                alt="gems"
+                                                            />                                                            </td>
+                                                    </tr>
+                                                )
+                                            )}
+                                        </tbody>
+                                    </table>
+                                )}
                             </div>
                         </div>
                     </div>
