@@ -347,7 +347,7 @@ const Index = () => {
                                     <div className="col-12 px-0">
                                         <div className="description w-100">
                                             <h2 className="mb-3">
-                                                Daily Rewards!
+                                                Bonus Rewards!
                                             </h2>
                                         </div>
                                         {/* LOADER */}
