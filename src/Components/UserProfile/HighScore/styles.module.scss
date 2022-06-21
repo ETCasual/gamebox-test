@@ -2,6 +2,10 @@
 #high-score {
     position: relative;
     padding-top: 6rem;
+
+    @media (pointer:none), (pointer:coarse) {
+        margin-bottom: 150px;
+    }
     .wrapper {
         .main-title {
             font-weight: $fnt-wgt-700;
