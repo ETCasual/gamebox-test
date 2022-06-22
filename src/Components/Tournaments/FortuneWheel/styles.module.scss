@@ -53,86 +53,161 @@
             }
 
             .text-icon-wrapper {
-                cursor: pointer;
-
-                img {
-                    width: 1.5rem;
-
-                    @include media-min($xl) {
-                        width: 2rem;
+                .close-button {
+                    cursor: pointer;
+                    right: -10px;
+                    width: 30px;
+                    height: 30px;
+                    @include media-min($md) {
+                        width: 36px;
+                        height: 36px;
                     }
+                }
+
+                // img {
+                //     width: 1.5rem;
+
+                //     @include media-min($xl) {
+                //         width: 2rem;
+                //     }
+                // }
+            }
+
+            .your-balance {
+                box-shadow: 0px 15px 20px #00000029;
+                border: 1px solid #fdc43d;
+                border-radius: 10px;
+                min-width: 8rem;
+                max-width: 70%;
+                width: 15rem;
+                height: 3.75rem;
+    
+                .spin-number {
+                    font-size: $fnt-sz-24;
+                    font-weight: $fnt-wgt-600;
+                    color: #00c1b9;
+                }
+    
+                .balance-number {
+                    font-size: $fnt-sz-18;
+                    font-weight: $fnt-wgt-600;
+                    color: #fdc43d;
+                }
+    
+                .your-balance-text {
+                    font-size: $fnt-sz-12;
+                    color: #868686;
+                }
+    
+                img {
+                    width: 24px;
+                    margin-right: 8px;
                 }
             }
 
             .probability-btn {
-                cursor: pointer;
-            }
-
-            table.probability-table {
-                width: 14.063rem;
-                position: absolute;
-
-                tr:first-child td:first-child {
-                    border-top-left-radius: 10px;
+                width: 100%;
+                margin-top: 1rem;
+                margin-left: 3rem;
+                
+                @include media-min($xs) {
+                    font-size: $fnt-sz-12;
                 }
 
-                tr:first-child td:last-child {
-                    border-top-right-radius: 10px;
+                img {
+                    cursor: pointer;
+                    display: block;
+                    width: 30px;
+                    height: auto;
+                    padding-right: 10px;
+
+                    @include media-min($xs) {
+                        width: 40px;
+                    }
                 }
 
-                tr:last-child td:first-child {
-                    border-bottom-left-radius: 10px;
-                }
-
-                tr:last-child td:last-child {
-                    border-bottom-right-radius: 10px;
-                }
-
-                tr.probability-row {
+                button {
                     display: flex;
-                    text-align: center;
-
-                    td.probability-percentage-caption {
-                        font-size: $fnt-sz-14;
+                    span {
+                        font-size: $fnt-sz-10;
                         font-weight: bold;
-                        width: 93.75px;
-                        border: 1px solid #383838;
-                        line-height: 30px;
-                        color: aqua;
-                    }
-
-                    td.probability-tickets-text-caption {
-                        font-size: $fnt-sz-14;
-                        font-weight: bold;
-                        width: 131.25px;
-                        border: 1px solid #383838;
-                        line-height: 30px;
-                        color: aqua;
-                    }
-
-                    td.probability-percentage {
-                        font-size: $fnt-sz-14;
-                        font-weight: $fnt-wgt-600;
-                        width: 93.75px;
-                        border: 1px solid #383838;
-                        line-height: 30px;
-                    }
-
-                    td.probability-tickets-text {
-                        font-size: $fnt-sz-14;
-                        width: 131.25px;
-                        border: 1px solid #383838;
-                        line-height: 30px;
-                    }
-                }
-
-                .icon {
-                    width: 18px;
-                    @include media-min($lg) {
-                        width: 24px;
+                        color: #fdc43d;
                     }
                 }
             }
+
+            .fortune-wheel-content {
+                display: block;
+                width: 100%;
+                height: 100%;
+                margin-top: 10px;
+
+                table.probability-table {
+                    width: 14.063rem;
+    
+                    tr:first-child td:first-child {
+                        border-top-left-radius: 10px;
+                    }
+    
+                    tr:first-child td:last-child {
+                        border-top-right-radius: 10px;
+                    }
+    
+                    tr:last-child td:first-child {
+                        border-bottom-left-radius: 10px;
+                    }
+    
+                    tr:last-child td:last-child {
+                        border-bottom-right-radius: 10px;
+                    }
+    
+                    tr.probability-row {
+                        display: flex;
+                        text-align: center;
+    
+                        td.probability-percentage-caption {
+                            font-size: $fnt-sz-14;
+                            font-weight: bold;
+                            width: 93.75px;
+                            border: 1px solid #383838;
+                            line-height: 30px;
+                            color: aqua;
+                        }
+    
+                        td.probability-tickets-text-caption {
+                            font-size: $fnt-sz-14;
+                            font-weight: bold;
+                            width: 131.25px;
+                            border: 1px solid #383838;
+                            line-height: 30px;
+                            color: aqua;
+                        }
+    
+                        td.probability-percentage {
+                            font-size: $fnt-sz-14;
+                            font-weight: $fnt-wgt-600;
+                            width: 93.75px;
+                            border: 1px solid #383838;
+                            line-height: 30px;
+                        }
+    
+                        td.probability-tickets-text {
+                            font-size: $fnt-sz-14;
+                            width: 131.25px;
+                            border: 1px solid #383838;
+                            line-height: 30px;
+                        }
+                    }
+    
+                    .icon {
+                        width: 18px;
+                        @include media-min($lg) {
+                            width: 24px;
+                        }
+                    }
+                }
+            }
+            
 
             // &:nth-child(1),
             // &:nth-child(2),
@@ -155,8 +230,12 @@
                 background: linear-gradient(155deg,
                         #212121 17%,
                         #0b0b0b 110%);
-               height: 65vh;
+                height: 80vh;
 
+                @include media-min($xs) {
+                    height: 65vh;
+                }
+                
                 // .your-tickets {
                 //     box-shadow: 0px 15px 20px #00000029;
                 //     border: 1px solid #fdc43d;
@@ -224,36 +303,9 @@
             }
         }
 
-        .your-balance {
-            box-shadow: 0px 15px 20px #00000029;
-            border: 1px solid #fdc43d;
-            border-radius: 10px;
-            min-width: 15.313rem;
-            max-width: 70%;
-            height: 3.75rem;
-            margin: 1rem auto;
-
-            .your-balance-text {
-                font-size: $fnt-sz-12;
-                color: #868686;
-            }
-
-            .balance-number {
-                font-size: $fnt-sz-18;
-                font-weight: $fnt-wgt-600;
-                color: #fdc43d;
-            }
-
-            img {
-                width: 24px;
-                margin-right: 8px;
-            }
-        }
-
         .fortune-wheel-wrapper {
             display: block;
             width: 100%;
-            padding-bottom: 15px;
 
             .fortune-wheel-holder {
                 aspect-ratio: 1;
@@ -311,7 +363,7 @@
                     font-size: $fnt-sz-10;
 
                     @include media-min($xs) {
-                        font-size: $fnt-sz-14;
+                        font-size: $fnt-sz-16;
                     }
                 }
                 
