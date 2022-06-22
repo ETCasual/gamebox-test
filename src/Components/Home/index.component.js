@@ -20,6 +20,10 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 
+// HELPER FUNCTIONS
+import convertSecondsToHours from "Utils/TimeConversion";
+import getTimerFullUnits from "Utils/GetTImerFullUnits";
+
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
     const { user } = useSelector((state) => state.userData);
@@ -48,6 +52,9 @@ const Index = () => {
     const [isRevealCardModalShown, setIsRevealCardModalShown] = useState(false);
     const [isOnBoardingShown, setIsOnBoardingShown] = useState(false);
     const [fortuneWheelShown, setFortuneWheelShown] = useState(false);
+
+    let watcherRef = useRef(null);
+    const [timer, setTimer] = useState("0d 0h 0m 0s");
 
     // ONBOARDING
     useEffect(() => {
@@ -267,6 +274,7 @@ const Index = () => {
         // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE
         return;
     }
+
     // REVEAL CARD MODAL CONTINUE TO HOMEPAGE BUTTON
     const handleRevealBackButton = (id) => {
         dispatch(loadUpdateNotificationSeen(id));
@@ -284,6 +292,38 @@ const Index = () => {
 
         setIsRevealCardModalShown(false);
     };
+
+    // COUNT DOWN TIMER
+    useEffect(() => {
+        const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+        const nowDate = new Date(nowTimeStamp());
+
+        var endDatetime = new Date();
+        endDatetime.setUTCHours(0,0,0,0);
+
+        if (endDatetime < nowDate) {
+            endDatetime.setDate(endDatetime.getDate() + 1)
+        }
+
+        // COUNTDOWN TIMER INTERVAL
+        clearInterval(watcherRef.current);
+        watcherRef.current = setInterval(() => {
+            let finalTimeRef = convertSecondsToHours(
+                endDatetime.valueOf(),
+                config.offsetTimestamp ? config.offsetTimestamp : 0
+            );
+            setTimer(finalTimeRef);
+            if (finalTimeRef === "Ended") countDownTimerEnded();
+        }, 1000);
+
+        // END COUNTDOWN TIMER
+        function countDownTimerEnded() {
+            clearInterval(watcherRef.current);
+            watcherRef.current = null;
+        }
+
+        return countDownTimerEnded;
+    }, [config.offsetTimestamp]);
 
     return (
         <>
@@ -332,10 +372,9 @@ const Index = () => {
                                     </div>
                                     {/* TIMER */}
                                     <div className="timer d-flex align-items-center justify-content-center px-3">
-                                        {/* <p className="countdown mb-0">{`\u00A0 ${getTimerFullUnits(
-                                            timer
-                                        )} left`}</p> */}
-                                        <p className="countdown mb-0">18hours 23minutes</p>
+                                        <p className="countdown mb-0">
+                                           {`\u00A0 ${getTimerFullUnits(timer)} until more spins`}
+                                        </p>
                                     </div>
 
                                     {fortuneWheelShown && (

@@ -1,18 +1,13 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
 import FortuneWheelRules from "Components/Tournaments/FortuneWheel/FortuneWheelRules.component";
-import BuySpinConfirmModal from "Components/Modals/BuySpinConfirm.modal";
-import InsufficientGemsModal from "Components/Modals/InsufficientGems.modal";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerSpinnerSpin from "redux/thunks/PlayerSpinnerSpin.thunk";
-import loadPurchaseSpins from "redux/thunks/PurchaseSpins.thunk";
-import loadConsumeUserGems from "redux/thunks/ConsumeUserGems.thunk";
-import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
-import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
+import loadUserDetails from "redux/thunks/UserDetails.thunk";
 
 // HELPER FUNCTION
 // import getPoolTickets from "Utils/PoolTickets";
@@ -27,14 +22,9 @@ const FortuneWheel = ({
     const { user } = useSelector((state) => state.userData);
     const { spinnerRules } = useSelector((state) => state.spinnerRules);
     const { spinner } = useSelector((state) => state.playerSpinnerInfo);
-    const { config } = useSelector((state) => state.config);
-    // const { poolTickets } = useSelector((state) => state.playerTickets);
 
-    const [outOfSpins, setOutOfSpins] = useState(false);
-    const [outOfGems, setOutOfGems] = useState(false);
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
-    const [, setIsBuySpinConfirmModalShown] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
     // const [modalHeight, setModalHeight] = useState({
     //     windowWidth: 0,
@@ -42,22 +32,6 @@ const FortuneWheel = ({
     //     cols: 0,
     // });
     const [winAmount, setWinAmount] = useState(-1);
-
-    const spinnerRef = useRef(spinner);
-
-    // FETCH LATEST TICKETS
-    useEffect(() => {
-        // TICKETS API
-        dispatch(loadPlayerTickets(prizeId, true));
-        dispatch(loadPrizePoolTickets(prizeId, true, ticketsRequired));
-    }, [dispatch, prizeId, ticketsRequired]);
-
-    // CHECK SPINS AVAILABILITY & CHECK GEMS AVAILABILITY
-    useEffect(() => {
-        if (spinnerRef.current.freeSpins <= 0) {
-            setOutOfSpins(true);
-        }
-    }, []);
 
     // DISABLE HTML SCROLL
     useEffect(() => {
@@ -94,15 +68,10 @@ const FortuneWheel = ({
     // }, []);
 
     function onClickSpinButton() {
-        // Prevent clicking for the moment, to show the new UI only
-        // Todo: To remove early return after backend changes is done
-        return;
-
         // PREVENT SPAMMING
         if (isClickedSpin) return;
 
         if (spinner?.freeSpins <= 0) {
-            setOutOfSpins(true);
             return;
         }
 
@@ -125,61 +94,17 @@ const FortuneWheel = ({
     function onSpinFinished() {
         setIsClickedSpin(false);
 
-        // TICKETS API
-        dispatch(loadPlayerTickets(prizeId, true));
-        dispatch(loadPrizePoolTickets(prizeId, true, ticketsRequired));
-
-        // ALLOWS COMPONENT RENDER TO REFLECT LATEST TICKETS
-        setIsTicketsUpdated(true);
-        setTimeout(() => setIsTicketsUpdated(false), 1000);
+        dispatch(loadUserDetails());
     }
-    const handleBuySpinModalYesButton = () => {
-        if (spinner?.freeSpins <= 0 && user?.gems <= config.useGems) {
-            setOutOfGems(true);
-            return;
-        }
-
-        setSpinBuyProcess(true);
-
-        dispatch(loadConsumeUserGems(config.useGems));
-        dispatch(loadPurchaseSpins(true));
-
-        setIsBuySpinConfirmModalShown(false);
-        setOutOfSpins(false);
-        setIsClickedSpin(false);
-    };
-    // const handleProbabilityInfo = () => {
-    //     let currentShownFlag = isProbabilityShown;
-    //     setIsProbabilityShown(!currentShownFlag);
-    //     if (modalHeight.windowWidth < 1200) {
-    //         const col1 = document.querySelector(".wrapper-col:nth-child(1)");
-    //         const col2 = document.querySelector(".wrapper-col:nth-child(2)");
-    //         const col3 = document.querySelector(".wrapper-col:nth-child(3)");
-    //         const tapBackButton = document.querySelector(".tap-btn");
-    //         tapBackButton.style.display = !currentShownFlag ? "block" : "none";
-    //         col2.style.display = !currentShownFlag ? "none" : "flex";
-    //         col3.style.display = !currentShownFlag ? "none" : "flex";
-    //         col1.style.height = "auto";
-    //     }
-    // };
 
     return (
-        <div
-            className="fortune-wheel d-flex align-items-center justify-content-center"
-            // style={{ height: `${modalHeight.wrapper}px` }}
-        >
+        <div className="fortune-wheel d-flex align-items-center justify-content-center">
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div
-                        className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper"
-                        // style={{ height: `${modalHeight.wrapper}px` }}
-                    >
+                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper">
                         <div className="row h-100">
                             {/* FIRST COLUMN */}
-                            <div
-                                className="col-12 py-3 align-items-center justify-content-between wrapper-col"
-                                // style={{ height: modalHeight.cols }}
-                            >
+                            <div className="col-12 py-3 align-items-center justify-content-between wrapper-col">
                                 {/* FIRST ROW - SPINNER TEXT AND ICONS */}
                                 <div className="first-row w-100 d-flex align-items-start justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
@@ -269,71 +194,7 @@ const FortuneWheel = ({
                             </div>
 
                             {/* SECOND COLUMN */}
-                            {/* <div
-                                className="d-none col-12 py-3 wrapper-col position-relative flex-column align-items-center justify-content-start"
-                                // style={{ height: modalHeight.cols }}
-                            >
-                                <div className="spin-and-tickets-info">
-                                    <p className="the-spinner-text mb-0 d-none d-xl-block">
-                                        The spinner
-                                    </p>
-                                    <p className="earn-more-tickets-text my-2 d-none d-xl-block">
-                                        Earn more tickets here
-                                    </p>
-                                    <p className="spin-amount-left-wrapper my-3 d-none d-xl-block">
-                                        <span className="you-have-text">
-                                            You have
-                                        </span>
-                                        <span className="spin-number">
-                                            {spinner?.freeSpins > 0
-                                                ? spinner?.freeSpins
-                                                : 0}
-                                        </span>
-                                        <span className="spins-left-text">
-                                            spins left
-                                        </span>
-                                    </p>
-                                    <div className="your-tickets d-flex flex-column align-items-center justify-content-center p-3">
-                                        <div className="your-tickets-text mb-2">
-                                            Your tickets
-                                        </div>
-                                        <div className="ticket-number">
-                                            {getPoolTickets(
-                                                poolTickets,
-                                                prizeId
-                                            )?.toLocaleString() || 0}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            {/* PROBABILITY TABLE */}
-                            {/* {isProbabilityShown && (
-                                    <table className="probability-table mt-auto d-none d-lg-block">
-                                        <tbody>
-                                            {spinnerRules?.map((rule, idx) => (
-                                                <tr
-                                                    className="probability-row"
-                                                    id={idx}
-                                                    key={`prob-d-${idx}`}
-                                                >
-                                                    <td className="probability-percentage">
-                                                        {rule?.probability}%
-                                                    </td>
-                                                    <td className="probability-tickets-text">
-                                                        {rule?.tickets} tickets
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                )}
-                            </div> */}
-
-                            {/* THIRD COLUMN */}
-                            <div
-                                className="col-12 py-3 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center"
-                                // style={{ height: modalHeight.cols }}
-                            >
+                            <div className="col-12 py-3 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center">
                                 <div className="w-100 d-flex">
                                     {/* SPIN BALANCE */}
                                     <div className="your-balance d-flex flex-column align-items-center justify-content-center mr-auto">
@@ -461,21 +322,6 @@ const FortuneWheel = ({
                     </div>
                 </div>
             </div>
-
-            {/* USE GEMS BUTTON */}
-            {outOfSpins && !outOfGems && (
-                <BuySpinConfirmModal
-                    handleYes={handleBuySpinModalYesButton}
-                    handleNo={() => {
-                        setOutOfSpins(false);
-                    }}
-                    gemAmount={config.useGems}
-                    spinAmount={config.useGemsSpin}
-                />
-            )}
-
-            {/* PURCHASE GEMS BUTTON */}
-            {outOfGems && <InsufficientGemsModal setOutOfGems={setOutOfGems} />}
         </div>
     );
 };
