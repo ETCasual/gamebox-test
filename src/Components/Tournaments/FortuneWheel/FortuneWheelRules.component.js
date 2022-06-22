@@ -32,15 +32,15 @@ const FortuneWheelRules = ({
             textMargin: 0,
             textOrientation: "curved",
             textAligment: "center",
+            fillStyle: fillStyle,
+            strokeStyle: strokeStyle,
+            lineWidth: 2,
+            textFillStyle: "white",
+            textFontFamily: "'Open Sans',sans-serif",
             rotationAngle: -segmentAngleRef.current / 2,
             responsive: true,
             segments: spinnerRules.map((data, idx) => {
                 return {
-                    fillStyle: fillStyle,
-                    strokeStyle: strokeStyle,
-                    lineWidth: 2,
-                    textFillStyle: "white",
-                    textFontFamily: "'Open Sans',sans-serif",
                     text: data.tickets.toString(),
                 };
             }),
@@ -198,6 +198,15 @@ const FortuneWheelRules = ({
                         onClick={onSpinClicked}
                     >
                         SPIN
+                        <br />
+                        &
+                        <br />
+                        EARN
+                        <br />
+                        <img
+                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/assets/gem_01.png"
+                            alt="gems"
+                        ></img>
                     </button>
                 </div>
                 {/* TRIANGLE POINTER */}
