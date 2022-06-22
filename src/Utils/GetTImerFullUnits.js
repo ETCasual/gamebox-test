@@ -9,45 +9,46 @@ const getTimerFullUnits = (timer) => {
     const daysIncludeS =
         daysIdx > -1
             ? parseInt(splitTIme[daysIdx].split("d")[0]) > 1
-                ? "days"
-                : "day"
+                ? " days"
+                : " day"
             : "";
     const hoursIncludeS =
         hoursIdx > -1
             ? parseInt(splitTIme[hoursIdx].split("h")[0]) > 1
-                ? "hours"
-                : "hour"
+                ? " hours"
+                : " hour"
             : "";
     const minutesIncludeS =
         minutesIdx > -1
             ? parseInt(splitTIme[minutesIdx].split("m")[0]) > 1
-                ? "minutes"
-                : "minute"
+                ? " minutes"
+                : " minute"
             : "";
     const secondsIncludeS =
         secondsIdx > -1
             ? parseInt(splitTIme[secondsIdx].split("s")[0]) > 1
-                ? "seconds"
-                : "second"
+                ? " seconds"
+                : " second"
             : "";
 
-    const replacedTimeUnits = `${
-        daysIdx > -1
-            ? splitTIme[daysIdx]?.replaceAll("d", daysIncludeS)
-            : "0day"
-    } ${
-        hoursIdx > -1
-            ? splitTIme[hoursIdx]?.replace("h", hoursIncludeS)
-            : "0hour"
-    } ${
-        minutesIdx > -1
-            ? splitTIme[minutesIdx]?.replace("m", minutesIncludeS)
-            : "0minute"
-    } ${
-        secondsIdx > -1
-            ? splitTIme[secondsIdx]?.replace("s", secondsIncludeS)
-            : "0second"
-    }`;
+    let replacedTimeUnits =  '';
+    
+    if (daysIdx > -1) {
+        replacedTimeUnits += `${splitTIme[daysIdx]?.replaceAll("d", daysIncludeS)} `;
+    }
+
+    if (hoursIdx > -1) {
+        replacedTimeUnits += `${splitTIme[hoursIdx]?.replace("h", hoursIncludeS)} `;
+    }
+    
+    if (minutesIdx > -1) {
+        replacedTimeUnits += `${splitTIme[minutesIdx]?.replace("m", minutesIncludeS)} `;
+    }
+    
+    if (secondsIdx > -1) {
+        replacedTimeUnits += `${splitTIme[secondsIdx]?.replace("s", secondsIncludeS)} `;
+    }
+
     return replacedTimeUnits;
 };
 
