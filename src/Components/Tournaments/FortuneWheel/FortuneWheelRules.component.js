@@ -5,6 +5,7 @@ import TweenMax from "gsap/all";
 
 const FortuneWheelRules = ({
     spinnerRules,
+    spinLeft,
     winAmount,
     isClickedSpin,
     onSpinClicked,
@@ -32,15 +33,15 @@ const FortuneWheelRules = ({
             textMargin: 0,
             textOrientation: "curved",
             textAligment: "center",
+            fillStyle: fillStyle,
+            strokeStyle: strokeStyle,
+            lineWidth: 2,
+            textFillStyle: "white",
+            textFontFamily: "'Open Sans',sans-serif",
             rotationAngle: -segmentAngleRef.current / 2,
             responsive: true,
             segments: spinnerRules.map((data, idx) => {
                 return {
-                    fillStyle: fillStyle,
-                    strokeStyle: strokeStyle,
-                    lineWidth: 2,
-                    textFillStyle: "white",
-                    textFontFamily: "'Open Sans',sans-serif",
                     text: data.tickets.toString(),
                 };
             }),
@@ -198,6 +199,12 @@ const FortuneWheelRules = ({
                         onClick={onSpinClicked}
                     >
                         SPIN
+                        <br />
+                        &
+                        <br />
+                        WIN
+                        <br />
+                        <span className="spins-left-text">{spinLeft}</span>
                     </button>
                 </div>
                 {/* TRIANGLE POINTER */}

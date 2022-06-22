@@ -97,7 +97,7 @@ const FortuneWheel = ({
         // Prevent clicking for the moment, to show the new UI only
         // Todo: To remove early return after backend changes is done
         return;
-        
+
         // PREVENT SPAMMING
         if (isClickedSpin) return;
 
@@ -199,7 +199,7 @@ const FortuneWheel = ({
                                                 The Spinner
                                             </p>
                                             <p className="earn-more-tickets-text my-1 d-block">
-                                                Earn more gems here
+                                                Spin & earn more rewards here!
                                             </p>
                                         </div>
                                     </div>
@@ -209,7 +209,11 @@ const FortuneWheel = ({
                                         className="probability-btn"
                                         width={20}
                                         height={20}
-                                        onClick={() => setIsProbabilityShown(!isProbabilityShown)}
+                                        onClick={() =>
+                                            setIsProbabilityShown(
+                                                !isProbabilityShown
+                                            )
+                                        }
                                         src={`${window.cdn}buttons/button_question_01.png`}
                                         alt="question-mark"
                                     />
@@ -246,7 +250,7 @@ const FortuneWheel = ({
                                         </table>
                                     </div>
                                 )} */}
-                                    {/* <div
+                                {/* <div
                                         className="tap-btn w-100 text-center d-xl-none"
                                         onClick={handleProbabilityInfo}
                                     >
@@ -300,8 +304,8 @@ const FortuneWheel = ({
                                     </div>
                                 </div>
 
-                                {/* PROBABILITY TABLE */}
-                                {/* {isProbabilityShown && (
+                            {/* PROBABILITY TABLE */}
+                            {/* {isProbabilityShown && (
                                     <table className="probability-table mt-auto d-none d-lg-block">
                                         <tbody>
                                             {spinnerRules?.map((rule, idx) => (
@@ -325,19 +329,42 @@ const FortuneWheel = ({
 
                             {/* THIRD COLUMN */}
                             <div
-                                className="col-12 py-5 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center"
+                                className="col-12 py-3 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center"
                                 // style={{ height: modalHeight.cols }}
-                                >
+                            >
                                 {!isProbabilityShown && (
                                     <>
+                                        {/* BALANCE */}
+                                        <div className="your-balance d-flex flex-column align-items-center justify-content-center p-3">
+                                            <div className="your-balance-text mb-2">
+                                                Your Gems
+                                            </div>
+                                            <div className="balance-number">
+                                                <img
+                                                    className="icon"
+                                                    src={`${window.cdn}assets/gem_01.png`}
+                                                    alt="gems"
+                                                ></img>
+                                                {user?.gems || 0}
+                                            </div>
+                                        </div>
+
+                                        {/* FORTUNE WHEEL */}
                                         <FortuneWheelRules
                                             spinnerRules={spinnerRules}
+                                            spinLeft={
+                                                spinner?.freeSpins > 0
+                                                    ? spinner?.freeSpins
+                                                    : 0
+                                            }
                                             winAmount={winAmount}
                                             isClickedSpin={isClickedSpin}
                                             onSpinClicked={onClickSpinButton}
                                             onFinished={onSpinFinished}
                                         />
-                                        <p className="spin-amount-left-wrapper text-center mb-3">
+
+                                        {/* SPINS LEFT INFO */}
+                                        {/* <p className="spin-amount-left-wrapper text-center mb-3">
                                             <span className="you-have-text">
                                                 You have
                                             </span>
@@ -349,35 +376,39 @@ const FortuneWheel = ({
                                             <span className="spins-left-text">
                                                 spins left
                                             </span>
-                                        </p>
+                                        </p> */}
                                     </>
                                 )}
                                 {isProbabilityShown && (
                                     <table className="probability-table mt-3 mb-3 mx-auto">
                                         <tbody>
-                                            {spinnerRules?.map(
-                                                (rule, idx) => (
-                                                    <tr
-                                                        className="probability-row"
-                                                        id={idx}
-                                                        key={`prob-${idx}`}
-                                                    >
-                                                        <td className="probability-percentage">
-                                                            {
-                                                                rule?.probability
-                                                            }
-                                                            %
-                                                        </td>
-                                                        <td className="probability-tickets-text">
-                                                            {rule?.tickets}{" "}
-                                                            <img
-                                                                className="icon"
-                                                                src={`${window.cdn}assets/gem_01.png`}
-                                                                alt="gems"
-                                                            />                                                            </td>
-                                                    </tr>
-                                                )
-                                            )}
+                                            <tr className="probability-row">
+                                                <td className="probability-percentage-caption">
+                                                    CHANCES
+                                                </td>
+                                                <td className="probability-tickets-text-caption">
+                                                    REWARDS
+                                                </td>
+                                            </tr>
+                                            {spinnerRules?.map((rule, idx) => (
+                                                <tr
+                                                    className="probability-row"
+                                                    id={idx}
+                                                    key={`prob-${idx}`}
+                                                >
+                                                    <td className="probability-percentage">
+                                                        {rule?.probability}%
+                                                    </td>
+                                                    <td className="probability-tickets-text">
+                                                        {rule?.tickets}{" "}
+                                                        <img
+                                                            className="icon"
+                                                            src={`${window.cdn}assets/gem_01.png`}
+                                                            alt="gems"
+                                                        />{" "}
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 )}

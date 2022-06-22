@@ -40,6 +40,7 @@
                 .spins-left-text,
                 .you-have-text {
                     font-size: $fnt-sz-12;
+                    vertical-align: 3px;
                 }
 
                 .spin-number {
@@ -69,6 +70,7 @@
 
             table.probability-table {
                 width: 14.063rem;
+                position: absolute;
 
                 tr:first-child td:first-child {
                     border-top-left-radius: 10px;
@@ -89,6 +91,24 @@
                 tr.probability-row {
                     display: flex;
                     text-align: center;
+
+                    td.probability-percentage-caption {
+                        font-size: $fnt-sz-14;
+                        font-weight: bold;
+                        width: 93.75px;
+                        border: 1px solid #383838;
+                        line-height: 30px;
+                        color: aqua;
+                    }
+
+                    td.probability-tickets-text-caption {
+                        font-size: $fnt-sz-14;
+                        font-weight: bold;
+                        width: 131.25px;
+                        border: 1px solid #383838;
+                        line-height: 30px;
+                        color: aqua;
+                    }
 
                     td.probability-percentage {
                         font-size: $fnt-sz-14;
@@ -135,27 +155,27 @@
                 background: linear-gradient(155deg,
                         #212121 17%,
                         #0b0b0b 110%);
-                min-height: 60vh;
+               height: 65vh;
 
-                .your-tickets {
-                    box-shadow: 0px 15px 20px #00000029;
-                    border: 1px solid #fdc43d;
-                    border-radius: 10px;
-                    min-width: 15.313rem;
-                    max-width: 70%;
-                    height: 3.75rem;
+                // .your-tickets {
+                //     box-shadow: 0px 15px 20px #00000029;
+                //     border: 1px solid #fdc43d;
+                //     border-radius: 10px;
+                //     min-width: 15.313rem;
+                //     max-width: 70%;
+                //     height: 3.75rem;
 
-                    .your-tickets-text {
-                        font-size: $fnt-sz-10;
-                        color: #868686;
-                    }
+                //     .your-tickets-text {
+                //         font-size: $fnt-sz-10;
+                //         color: #868686;
+                //     }
 
-                    .ticket-number {
-                        font-size: $fnt-sz-18;
-                        font-weight: $fnt-wgt-600;
-                        color: #fdc43d;
-                    }
-                }
+                //     .ticket-number {
+                //         font-size: $fnt-sz-18;
+                //         font-weight: $fnt-wgt-600;
+                //         color: #fdc43d;
+                //     }
+                // }
 
                 // .use-gems-button {
                 //     cursor: pointer;
@@ -204,6 +224,32 @@
             }
         }
 
+        .your-balance {
+            box-shadow: 0px 15px 20px #00000029;
+            border: 1px solid #fdc43d;
+            border-radius: 10px;
+            min-width: 15.313rem;
+            max-width: 70%;
+            height: 3.75rem;
+            margin: 1rem auto;
+
+            .your-balance-text {
+                font-size: $fnt-sz-12;
+                color: #868686;
+            }
+
+            .balance-number {
+                font-size: $fnt-sz-18;
+                font-weight: $fnt-wgt-600;
+                color: #fdc43d;
+            }
+
+            img {
+                width: 24px;
+                margin-right: 8px;
+            }
+        }
+
         .fortune-wheel-wrapper {
             display: block;
             width: 100%;
@@ -231,8 +277,8 @@
                 top: 50%;
                 right: 50%;
                 transform: translate(50%,-50%);
-                width: 35%;
-                height: 35%;
+                width: 38%;
+                height: 38%;
                 border-radius: 100%;
                 background-color: white;
             }
@@ -245,8 +291,8 @@
                 top: 50%;
                 right: 50%;
                 transform: translate(50%,-50%);
-                width: 25%;
-                height: 25%;
+                width: 30%;
+                height: 30%;
                 border: 3px solid #F4F4F4;
                 border-radius: 100%;
                 background: linear-gradient(180deg,
@@ -262,9 +308,22 @@
                     width: 100%;
                     color: white;
                     font-weight: $fnt-wgt-700;
+                    font-size: $fnt-sz-10;
 
                     @include media-min($xs) {
                         font-size: $fnt-sz-14;
+                    }
+                }
+                
+                .spins-left-text {
+                    font-size: $fnt-sz-16;
+                    font-weight: bold;
+                    color: aqua;
+                    -webkit-text-stroke-width: 0.5px;
+                    -webkit-text-stroke-color: #eea908;
+
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-30;
                     }
                 }
             }
