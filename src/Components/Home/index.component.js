@@ -18,6 +18,7 @@ import RevealCardModal from "Components/Modals/RevealCardModal.component";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
+import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -46,6 +47,7 @@ const Index = () => {
     const [revealCardModalData, setRevealCardModalData] = useState([]);
     const [isRevealCardModalShown, setIsRevealCardModalShown] = useState(false);
     const [isOnBoardingShown, setIsOnBoardingShown] = useState(false);
+    const [fortuneWheelShown, setFortuneWheelShown] = useState(false);
 
     // ONBOARDING
     useEffect(() => {
@@ -291,6 +293,64 @@ const Index = () => {
             {/* IF PRIZE AVAILABLE */}
             {!noDataLoaded.all && (
                 <section id="home">
+
+                    {/* FORTUNE WHEEL */}
+                    <div className='container-fluid mb-5'>
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
+                                <div className="col-12 px-0">
+                                    <div className="description w-100">
+                                        <h2 className="section-title mb-3">
+                                            Claim your free spins
+                                        </h2>
+                                    </div>
+                                    <div 
+                                        className="card-wrapper spinner p-2 p-md-3"
+                                        onClick={() =>
+                                            setFortuneWheelShown(
+                                                true
+                                            )
+                                        }
+                                    >
+                                        <div className="row">
+                                            <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative">
+                                                <p className="the-spinner-text mb-0">
+                                                    The Spinner
+                                                </p>
+                                                <div className="earn-more-tickets-text mt-2">
+                                                    Spin to get your daily gems to participate in tournaments.
+                                                </div>
+                                            </div>
+                                            <div className="col-6 col-md-4 col-lg-5 d-flex align-items-center justify-content-end position-relative">
+                                                <img
+                                                    className="earn-more-tickets-img"
+                                                    src={`${window.cdn}spinner/spinner_column_01.png`}
+                                                    alt="earn-more-tickets"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* TIMER */}
+                                    <div className="timer d-flex align-items-center justify-content-center px-3">
+                                        {/* <p className="countdown mb-0">{`\u00A0 ${getTimerFullUnits(
+                                            timer
+                                        )} left`}</p> */}
+                                        <p className="countdown mb-0">18hours 23minutes</p>
+                                    </div>
+
+                                    {fortuneWheelShown && (
+                                        <FortuneWheel
+                                            prizeId={0}
+                                            setIsTicketsUpdated={false}
+                                            ticketsRequired={0}
+                                            setFortuneWheelShown={setFortuneWheelShown}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* FEATURED CONTENT LOADER */}
                     {!noDataLoaded.feature && (
                         <div
@@ -302,9 +362,9 @@ const Index = () => {
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
                                         <div className="col-12">
-                                            <p className="prize-type">
+                                            <h2 className="section-title mb-3">
                                                 Featured Reward
-                                            </p>
+                                            </h2>
                                         </div>
                                         {/* LOADER */}
                                         {FeaturedData?.length <= 0 && <FeaturedLoader />}
@@ -346,7 +406,7 @@ const Index = () => {
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
                                     <div className="col-12 px-0">
                                         <div className="description w-100">
-                                            <h2 className="mb-3">
+                                            <h2 className="section-title mb-3">
                                                 Bonus Rewards!
                                             </h2>
                                         </div>
@@ -391,7 +451,7 @@ const Index = () => {
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
                                         <div className="col-12 description">
-                                            <h2 className="mb-3">
+                                            <h2 className="section-title mb-3">
                                                 Play and Win Rewards
                                             </h2>
                                         </div>

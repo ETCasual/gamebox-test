@@ -2,24 +2,17 @@
 .fortune-wheel {
     position: fixed;
     width: 100vw;
-    top: 80px;
-
-    @include media-min($md) {
-        top: 90px;
-    }
-
+    height: 100vh;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0%);
-    z-index: 3;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
     .wrapper {
-        background: linear-gradient(146deg, #292929 0%, #191919 100%);
-
-        @include media-min($xl) {
-            background: linear-gradient(145deg, #1c1c1c 10%, #0b0b0b 140%);
-        }
-
         border-radius: 10px;
+        background-color: #2b2b2b;
 
         .wrapper-col {
             .the-spinner-text {
@@ -98,7 +91,7 @@
                     text-align: center;
 
                     td.probability-percentage {
-                        font-size: $fnt-sz-12;
+                        font-size: $fnt-sz-14;
                         font-weight: $fnt-wgt-600;
                         width: 93.75px;
                         border: 1px solid #383838;
@@ -106,33 +99,32 @@
                     }
 
                     td.probability-tickets-text {
-                        font-size: $fnt-sz-12;
+                        font-size: $fnt-sz-14;
                         width: 131.25px;
                         border: 1px solid #383838;
                         line-height: 30px;
                     }
                 }
+
+                .icon {
+                    width: 18px;
+                    @include media-min($lg) {
+                        width: 24px;
+                    }
+                }
             }
 
-            &:nth-child(1),
-            &:nth-child(2),
-            &:nth-child(3) {
-                display: flex;
-            }
+            // &:nth-child(1),
+            // &:nth-child(2),
+            // &:nth-child(3) {
+            //     display: flex;
+            // }
 
             &:nth-child(1) {
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
 
-                @include media-max($xl) {
-                    background-color: #2b2b2b;
-                }
-
-                .first-row {
-                    @include media-min($xl) {
-                        height: 100%;
-                    }
-                }
+                // background-color: #2b2b2b;
 
                 .tap-btn {
                     display: none;
@@ -140,11 +132,10 @@
             }
 
             &:nth-child(2) {
-                @include media-min($xl) {
-                    background: linear-gradient(155deg,
-                            #212121 17%,
-                            #0b0b0b 110%);
-                }
+                background: linear-gradient(155deg,
+                        #212121 17%,
+                        #0b0b0b 110%);
+                min-height: 60vh;
 
                 .your-tickets {
                     box-shadow: 0px 15px 20px #00000029;
