@@ -203,8 +203,8 @@ const FortuneWheelRules = ({
                         &
                         <br />
                         WIN
-                        <br />
-                        <span className="spins-left-text">{spinLeft}</span>
+                        {/* <br />
+                        <span className="spins-left-text">{spinLeft}</span> */}
                     </button>
                 </div>
                 {/* TRIANGLE POINTER */}

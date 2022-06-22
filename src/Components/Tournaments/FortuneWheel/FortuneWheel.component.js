@@ -183,7 +183,22 @@ const FortuneWheel = ({
                                 {/* FIRST ROW - SPINNER TEXT AND ICONS */}
                                 <div className="first-row w-100 d-flex align-items-start justify-content-between">
                                     <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
+                                        {/* CLOSE BUTTON */}
                                         <img
+                                            width="36"
+                                            className="close-button"
+                                            onClick={() =>
+                                                !isClickedSpin
+                                                    ? setFortuneWheelShown(
+                                                          false
+                                                      )
+                                                    : null
+                                            }
+                                            src={`${window.cdn}buttons/button_close.png`}
+                                            alt="close-btn"
+                                        />
+                                        {/* MINIMIZE BUTTON */}
+                                        {/* <img
                                             onClick={() =>
                                                 !isClickedSpin
                                                     ? setFortuneWheelShown(
@@ -193,7 +208,7 @@ const FortuneWheel = ({
                                             }
                                             src={`${window.cdn}icons/icon_minimize.png`}
                                             alt="arrow-button"
-                                        />
+                                        /> */}
                                         <div className="text-wrapper ml-3">
                                             <p className="the-spinner-text mb-0 d-block">
                                                 The Spinner
@@ -203,21 +218,8 @@ const FortuneWheel = ({
                                             </p>
                                         </div>
                                     </div>
-
-                                    {/* PROBABILITY DISPLAY BUTTON */}
-                                    <img
-                                        className="probability-btn"
-                                        width={20}
-                                        height={20}
-                                        onClick={() =>
-                                            setIsProbabilityShown(
-                                                !isProbabilityShown
-                                            )
-                                        }
-                                        src={`${window.cdn}buttons/button_question_01.png`}
-                                        alt="question-mark"
-                                    />
                                 </div>
+
                                 {/* SECOND ROW - PROBABILITY TABLE */}
                                 {/* {isProbabilityShown && (
                                     <div className="w-100">
@@ -332,39 +334,75 @@ const FortuneWheel = ({
                                 className="col-12 py-3 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center"
                                 // style={{ height: modalHeight.cols }}
                             >
-                                {!isProbabilityShown && (
-                                    <>
-                                        {/* BALANCE */}
-                                        <div className="your-balance d-flex flex-column align-items-center justify-content-center p-3">
-                                            <div className="your-balance-text mb-2">
-                                                Your Gems
-                                            </div>
-                                            <div className="balance-number">
-                                                <img
-                                                    className="icon"
-                                                    src={`${window.cdn}assets/gem_01.png`}
-                                                    alt="gems"
-                                                ></img>
-                                                {user?.gems || 0}
-                                            </div>
+                                <div className="w-100 d-flex">
+                                    {/* SPIN BALANCE */}
+                                    <div className="your-balance d-flex flex-column align-items-center justify-content-center mr-auto">
+                                        <div className="your-balance-text mb-2">
+                                            YOUR SPINS
                                         </div>
+                                        <div className="spin-number">
+                                            {spinner?.freeSpins > 0
+                                                ? spinner?.freeSpins
+                                                : 0}
+                                        </div>
+                                    </div>
 
-                                        {/* FORTUNE WHEEL */}
-                                        <FortuneWheelRules
-                                            spinnerRules={spinnerRules}
-                                            spinLeft={
-                                                spinner?.freeSpins > 0
-                                                    ? spinner?.freeSpins
-                                                    : 0
-                                            }
-                                            winAmount={winAmount}
-                                            isClickedSpin={isClickedSpin}
-                                            onSpinClicked={onClickSpinButton}
-                                            onFinished={onSpinFinished}
+                                    {/* GEMS BALANCE */}
+                                    <div className="your-balance d-flex flex-column align-items-center justify-content-center ml-auto">
+                                        <div className="your-balance-text mb-2">
+                                            YOUR GEMS
+                                        </div>
+                                        <div className="balance-number">
+                                            <img
+                                                className="icon"
+                                                src={`${window.cdn}assets/gem_01.png`}
+                                                alt="gems"
+                                            ></img>
+                                            {user?.gems || 0}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* PROBABILITY DISPLAY BUTTON */}
+                                <div className="probability-btn">
+                                    <button
+                                        onClick={() =>
+                                            setIsProbabilityShown(
+                                                !isProbabilityShown
+                                            )
+                                        }
+                                    >
+                                        <img
+                                            src={`${window.cdn}buttons/button_question_01.png`}
+                                            alt="question-mark"
                                         />
+                                        <span className="mt-auto mb-auto">
+                                            Rewards Informations
+                                        </span>
+                                    </button>
+                                </div>
 
-                                        {/* SPINS LEFT INFO */}
-                                        {/* <p className="spin-amount-left-wrapper text-center mb-3">
+                                <div className="fortune-wheel-content">
+                                    {!isProbabilityShown && (
+                                        <>
+                                            {/* FORTUNE WHEEL */}
+                                            <FortuneWheelRules
+                                                spinnerRules={spinnerRules}
+                                                spinLeft={
+                                                    spinner?.freeSpins > 0
+                                                        ? spinner?.freeSpins
+                                                        : 0
+                                                }
+                                                winAmount={winAmount}
+                                                isClickedSpin={isClickedSpin}
+                                                onSpinClicked={
+                                                    onClickSpinButton
+                                                }
+                                                onFinished={onSpinFinished}
+                                            />
+
+                                            {/* SPINS LEFT INFO */}
+                                            {/* <p className="spin-amount-left-wrapper text-center mb-3">
                                             <span className="you-have-text">
                                                 You have
                                             </span>
@@ -377,41 +415,47 @@ const FortuneWheel = ({
                                                 spins left
                                             </span>
                                         </p> */}
-                                    </>
-                                )}
-                                {isProbabilityShown && (
-                                    <table className="probability-table mt-3 mb-3 mx-auto">
-                                        <tbody>
-                                            <tr className="probability-row">
-                                                <td className="probability-percentage-caption">
-                                                    CHANCES
-                                                </td>
-                                                <td className="probability-tickets-text-caption">
-                                                    REWARDS
-                                                </td>
-                                            </tr>
-                                            {spinnerRules?.map((rule, idx) => (
-                                                <tr
-                                                    className="probability-row"
-                                                    id={idx}
-                                                    key={`prob-${idx}`}
-                                                >
-                                                    <td className="probability-percentage">
-                                                        {rule?.probability}%
+                                        </>
+                                    )}
+                                    {isProbabilityShown && (
+                                        <table className="probability-table mx-auto">
+                                            <tbody>
+                                                <tr className="probability-row">
+                                                    <td className="probability-percentage-caption">
+                                                        CHANCES
                                                     </td>
-                                                    <td className="probability-tickets-text">
-                                                        {rule?.tickets}{" "}
-                                                        <img
-                                                            className="icon"
-                                                            src={`${window.cdn}assets/gem_01.png`}
-                                                            alt="gems"
-                                                        />{" "}
+                                                    <td className="probability-tickets-text-caption">
+                                                        REWARDS
                                                     </td>
                                                 </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                )}
+                                                {spinnerRules?.map(
+                                                    (rule, idx) => (
+                                                        <tr
+                                                            className="probability-row"
+                                                            id={idx}
+                                                            key={`prob-${idx}`}
+                                                        >
+                                                            <td className="probability-percentage">
+                                                                {
+                                                                    rule?.probability
+                                                                }
+                                                                %
+                                                            </td>
+                                                            <td className="probability-tickets-text">
+                                                                {rule?.tickets}{" "}
+                                                                <img
+                                                                    className="icon"
+                                                                    src={`${window.cdn}assets/gem_01.png`}
+                                                                    alt="gems"
+                                                                />{" "}
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                )}
+                                            </tbody>
+                                        </table>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
