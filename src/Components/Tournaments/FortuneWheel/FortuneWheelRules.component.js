@@ -5,6 +5,7 @@ import TweenMax from "gsap/all";
 
 const FortuneWheelRules = ({
     spinnerRules,
+    spinLeft,
     winAmount,
     isClickedSpin,
     onSpinClicked,
@@ -201,12 +202,9 @@ const FortuneWheelRules = ({
                         <br />
                         &
                         <br />
-                        EARN
+                        WIN
                         <br />
-                        <img
-                            src="https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/assets/assets/gem_01.png"
-                            alt="gems"
-                        ></img>
+                        <span className="spins-left-text">{spinLeft}</span>
                     </button>
                 </div>
                 {/* TRIANGLE POINTER */}
