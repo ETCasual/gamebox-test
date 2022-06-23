@@ -68,6 +68,14 @@
         @include media-min($md) {
             min-height: 3.5rem;
         }
+        .timer-text {
+            color: white;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
+            font-weight: $fnt-wgt-700;
+        }
         .countdown {
             color: #00c1b9;
             font-size: $fnt-sz-12;

@@ -299,10 +299,10 @@ const Index = () => {
         const nowDate = new Date(nowTimeStamp());
 
         var endDatetime = new Date();
-        endDatetime.setUTCHours(0,0,0,0);
+        endDatetime.setUTCHours(0, 0, 0, 0);
 
         if (endDatetime < nowDate) {
-            endDatetime.setDate(endDatetime.getDate() + 1)
+            endDatetime.setDate(endDatetime.getDate() + 1);
         }
 
         // COUNTDOWN TIMER INTERVAL
@@ -333,32 +333,30 @@ const Index = () => {
             {/* IF PRIZE AVAILABLE */}
             {!noDataLoaded.all && (
                 <section id="home">
-
                     {/* FORTUNE WHEEL */}
-                    <div className='container-fluid mb-5'>
+                    <div className="container-fluid mb-5">
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
                                 <div className="col-12 px-0">
                                     <div className="description w-100">
                                         <h2 className="section-title mb-3">
-                                            Claim your free spins
+                                            Free Rewards
                                         </h2>
                                     </div>
-                                    <div 
+                                    <div
                                         className="card-wrapper spinner p-2 p-md-3"
                                         onClick={() =>
-                                            setFortuneWheelShown(
-                                                true
-                                            )
+                                            setFortuneWheelShown(true)
                                         }
                                     >
                                         <div className="row">
                                             <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                                                 <p className="the-spinner-text mb-0">
-                                                    The Spinner
+                                                    FREE GEMS
                                                 </p>
                                                 <div className="earn-more-tickets-text mt-2">
-                                                    Spin to get your daily gems to participate in tournaments.
+                                                    Claim your daily free gems
+                                                    here!
                                                 </div>
                                             </div>
                                             <div className="col-6 col-md-4 col-lg-5 d-flex align-items-center justify-content-end position-relative">
@@ -372,8 +370,11 @@ const Index = () => {
                                     </div>
                                     {/* TIMER */}
                                     <div className="timer d-flex align-items-center justify-content-center px-3">
+                                        <p className="timer-text mb-0">
+                                            Next Rewards
+                                        </p>
                                         <p className="countdown mb-0">
-                                           {`\u00A0 ${getTimerFullUnits(timer)} until more spins`}
+                                            {`\u00A0 ${timer}`}
                                         </p>
                                     </div>
 
@@ -382,7 +383,9 @@ const Index = () => {
                                             prizeId={0}
                                             setIsTicketsUpdated={false}
                                             ticketsRequired={0}
-                                            setFortuneWheelShown={setFortuneWheelShown}
+                                            setFortuneWheelShown={
+                                                setFortuneWheelShown
+                                            }
                                         />
                                     )}
                                 </div>
@@ -406,7 +409,9 @@ const Index = () => {
                                             </h2>
                                         </div>
                                         {/* LOADER */}
-                                        {FeaturedData?.length <= 0 && <FeaturedLoader />}
+                                        {FeaturedData?.length <= 0 && (
+                                            <FeaturedLoader />
+                                        )}
 
                                         {/* FEATURED CARD */}
                                         {FeaturedData?.map((prize, index) => {
