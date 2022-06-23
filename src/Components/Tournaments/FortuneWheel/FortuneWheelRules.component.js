@@ -18,6 +18,8 @@ const FortuneWheelRules = ({
     const wheelRef = useRef(null);
     const onFinishedRef = useRef(onFinished);
 
+    const isAbleToSpin = spinLeft > 0;
+
     useEffect(() => {
         // Add TweenMax into global var
         window.TweenMax = TweenMax;
@@ -191,11 +193,11 @@ const FortuneWheelRules = ({
                 {/* SPIN BUTTON*/}
                 <div
                     className={`spin-button ${
-                        isClickedSpin ? "opacity-0-5" : ""
+                        !isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
                     }`}
                 >
                     <button
-                        disabled={isClickedSpin ? true : false}
+                        disabled={!isAbleToSpin || isClickedSpin ? true : false}
                         onClick={onSpinClicked}
                     >
                         SPIN

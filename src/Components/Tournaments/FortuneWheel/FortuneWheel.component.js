@@ -101,7 +101,7 @@ const FortuneWheel = ({
         <div className="fortune-wheel d-flex align-items-center justify-content-center">
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper">
+                    <div className="col-11 col-md-10 col-lg-8 col-xl-7 wrapper">
                         <div className="row h-100">
                             {/* FIRST COLUMN */}
                             <div className="col-12 py-3 align-items-center justify-content-between wrapper-col">

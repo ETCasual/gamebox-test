@@ -77,31 +77,45 @@
                 box-shadow: 0px 15px 20px #00000029;
                 border: 1px solid #fdc43d;
                 border-radius: 10px;
-                min-width: 8rem;
+                min-width: 5rem;
                 max-width: 70%;
                 width: 15rem;
                 height: 3.75rem;
     
                 .spin-number {
-                    font-size: $fnt-sz-24;
+                    font-size: $fnt-sz-20;
                     font-weight: $fnt-wgt-600;
                     color: #00c1b9;
+
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-24;
+                    }
                 }
     
                 .balance-number {
-                    font-size: $fnt-sz-18;
+                    font-size: $fnt-sz-16;
                     font-weight: $fnt-wgt-600;
                     color: #fdc43d;
+
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-18;
+                    }
                 }
     
                 .your-balance-text {
-                    font-size: $fnt-sz-12;
+                    font-size: $fnt-sz-10;
                     color: #868686;
+                    @include media-min($xs) {
+                        font-size: $fnt-sz-12;
+                    }
                 }
     
                 img {
-                    width: 24px;
+                    width: 18px;
                     margin-right: 8px;
+                    @include media-min($xs) {
+                        width: 24px;
+                    }
                 }
             }
 
@@ -140,11 +154,10 @@
                 display: block;
                 width: 100%;
                 height: 100%;
+                min-height: 400px;
                 margin-top: 10px;
 
                 table.probability-table {
-                    width: 14.063rem;
-    
                     tr:first-child td:first-child {
                         border-top-left-radius: 10px;
                     }
@@ -166,36 +179,52 @@
                         text-align: center;
     
                         td.probability-percentage-caption {
-                            font-size: $fnt-sz-14;
+                            font-size: $fnt-sz-12;
                             font-weight: bold;
-                            width: 93.75px;
+                            width: 70px;
                             border: 1px solid #383838;
                             line-height: 30px;
                             color: aqua;
+                            @include media-min($xs) {
+                                font-size: $fnt-sz-14;
+                                width: 90px;
+                            }
                         }
     
                         td.probability-tickets-text-caption {
-                            font-size: $fnt-sz-14;
+                            font-size: $fnt-sz-12;
                             font-weight: bold;
-                            width: 131.25px;
+                            width: 100px;
                             border: 1px solid #383838;
                             line-height: 30px;
                             color: aqua;
+                            @include media-min($xs) {
+                                font-size: $fnt-sz-14;
+                                width: 130px;
+                            }
                         }
     
                         td.probability-percentage {
-                            font-size: $fnt-sz-14;
+                            font-size: $fnt-sz-12;
                             font-weight: $fnt-wgt-600;
-                            width: 93.75px;
+                            width: 70px;
                             border: 1px solid #383838;
                             line-height: 30px;
+                            @include media-min($xs) {
+                                font-size: $fnt-sz-14;
+                                width: 90px;
+                            }
                         }
     
                         td.probability-tickets-text {
-                            font-size: $fnt-sz-14;
-                            width: 131.25px;
+                            font-size: $fnt-sz-12;
+                            width: 100px;
                             border: 1px solid #383838;
                             line-height: 30px;
+                            @include media-min($xs) {
+                                font-size: $fnt-sz-14;
+                                width: 130px;
+                            }
                         }
                     }
     
@@ -230,11 +259,6 @@
                 background: linear-gradient(155deg,
                         #212121 17%,
                         #0b0b0b 110%);
-                height: 80vh;
-
-                @include media-min($xs) {
-                    height: 65vh;
-                }
                 
                 // .your-tickets {
                 //     box-shadow: 0px 15px 20px #00000029;
