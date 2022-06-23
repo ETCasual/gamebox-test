@@ -327,25 +327,22 @@ const Index = () => {
 
     return (
         <>
-            {/* STAY TUNE & PLAY GAMES */}
-            {noDataLoaded.all && <StayTune />}
+            <section id="home">
 
-            {/* IF PRIZE AVAILABLE */}
-            {!noDataLoaded.all && (
-                <section id="home">
+                {/* FORTUNE WHEEL */}
+                <div className='container-fluid mb-5'>
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                            <div className="row">
 
-                    {/* FORTUNE WHEEL */}
-                    <div className='container-fluid mb-5'>
-                        <div className="row justify-content-center">
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
-                                <div className="col-12 px-0">
+                                <div className="col d-flex flex-column px-2">
                                     <div className="description w-100">
-                                        <h2 className="section-title mb-3">
+                                        <h2 className="section-title h-100 mb-3">
                                             Claim your free spins
                                         </h2>
                                     </div>
                                     <div 
-                                        className="card-wrapper spinner p-2 p-md-3"
+                                        className="card-wrapper spinner h-100 p-2 p-md-3"
                                         onClick={() =>
                                             setFortuneWheelShown(
                                                 true
@@ -361,7 +358,7 @@ const Index = () => {
                                                     Spin to get your daily gems to participate in tournaments.
                                                 </div>
                                             </div>
-                                            <div className="col-6 col-md-4 col-lg-5 d-flex align-items-center justify-content-end position-relative">
+                                            <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">
                                                 <img
                                                     className="earn-more-tickets-img"
                                                     src={`${window.cdn}spinner/spinner_column_01.png`}
@@ -373,7 +370,7 @@ const Index = () => {
                                     {/* TIMER */}
                                     <div className="timer d-flex align-items-center justify-content-center px-3">
                                         <p className="countdown mb-0">
-                                           {`\u00A0 ${getTimerFullUnits(timer)} until more spins`}
+                                            {`\u00A0 ${getTimerFullUnits(timer)} `}
                                         </p>
                                     </div>
 
@@ -386,17 +383,52 @@ const Index = () => {
                                         />
                                     )}
                                 </div>
+
+
+                                {/* AUTOMATED */}
+                                <div className="automatedEntry col-6 px-2">
+                                    <div className="description w-100">
+                                        <h2 className="section-title mb-3">
+                                            Bonus Rewards!
+                                        </h2>
+                                    </div>
+                                    {/* LOADER */}
+                                    {automatedEntryData.length <= 0 && (
+                                        <AutomatedEntryLoader />
+                                    )}
+
+                                    {!noDataLoaded.automated && (
+                                        <>
+                                            {/* AUTOMATED CARD */}
+                                            {automatedEntryData?.map(
+                                                (prize, index) => (
+                                                    <React.Fragment
+                                                        key={`automatedEntry-${index}`}
+                                                    >
+                                                        <AutomatedEntry
+                                                            data={prize}
+                                                        />
+                                                    </React.Fragment>
+                                                )
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* FEATURED CONTENT LOADER */}
-                    {!noDataLoaded.feature && (
-                        <div
-                            className={`container-fluid ${
-                                FeaturedData?.length > 1 ? "mb-3" : "mb-5"
-                            } featured`}
-                        >
+                {/* STAY TUNE & PLAY GAMES */}
+                {noDataLoaded.all && <StayTune />}
+
+                {/* IF PRIZE AVAILABLE */}
+                {!noDataLoaded.all && (
+                    <>
+
+                        {/* FEATURED CONTENT LOADER */}
+                        <div className="container-fluid mb-5 featured">
                             <div className="row justify-content-center">
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
@@ -408,84 +440,34 @@ const Index = () => {
                                         {/* LOADER */}
                                         {FeaturedData?.length <= 0 && <FeaturedLoader />}
 
-                                        {/* FEATURED CARD */}
-                                        {FeaturedData?.map((prize, index) => {
-                                            return (
-                                                !prize.seen && (
-                                                    <React.Fragment
-                                                        key={`featuredPrize-${index}`}
-                                                    >
-                                                        <Featured
-                                                            data={prize}
-                                                            handleWinnerRevealCard={
-                                                                handleWinnerRevealCard
-                                                            }
-                                                        />
-                                                    </React.Fragment>
-                                                )
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* AUTOMATED */}
-                    {!noDataLoaded.automated && (
-                        <div
-                            className="container-fluid mb-5 automatedEntry"
-                            style={{
-                                paddingTop: `${
-                                    noDataLoaded?.feature ? "6rem" : 0
-                                }`,
-                            }}
-                        >
-                            <div className="row justify-content-center">
-                                <div className="col-12 col-md-10 col-lg-8 col-xl-7 d-xl-flex">
-                                    <div className="col-12 px-0">
-                                        <div className="description w-100">
-                                            <h2 className="section-title mb-3">
-                                                Bonus Rewards!
-                                            </h2>
-                                        </div>
-                                        {/* LOADER */}
-                                        {automatedEntryData.length <= 0 && (
-                                            <AutomatedEntryLoader />
-                                        )}
-
-                                        {/* AUTOMATED CARD */}
-                                        {automatedEntryData?.map(
-                                            (prize, index) => (
-                                                <React.Fragment
-                                                    key={`automatedEntry-${index}`}
-                                                >
-                                                    <AutomatedEntry
-                                                        data={prize}
-                                                    />
-                                                </React.Fragment>
-                                            )
+                                        {!noDataLoaded.feature && (
+                                            <>
+                                                {/* FEATURED CARD */}
+                                                {FeaturedData?.map((prize, index) => {
+                                                    return (
+                                                        !prize.seen && (
+                                                            <React.Fragment
+                                                                key={`featuredPrize-${index}`}
+                                                            >
+                                                                <Featured
+                                                                    data={prize}
+                                                                    handleWinnerRevealCard={
+                                                                        handleWinnerRevealCard
+                                                                    }
+                                                                />
+                                                            </React.Fragment>
+                                                        )
+                                                    );
+                                                })}
+                                            </>
                                         )}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    )}
 
-                    {/* PREMIUM & PREMIUM COMPLETED*/}
-                    {!noDataLoaded.premium && (
-                        <div
-                            className="container-fluid premium"
-                            style={{
-                                paddingTop: `${
-                                    noDataLoaded?.feature ||
-                                    noDataLoaded?.automated
-                                        ? "6rem"
-                                        : 0
-                                }`,
-                                paddingBottom: "4.063rem",
-                            }}
-                        >
+                        {/* PREMIUM & PREMIUM COMPLETED*/}
+                        <div className="container-fluid premium pb-5">
                             <div className="row justify-content-center">
                                 <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-lg-auto">
                                     <div className="row">
@@ -498,30 +480,35 @@ const Index = () => {
                                         {PremiumData.length <= 0 && (
                                             <PremiumLoader />
                                         )}
-                                        {/* PREMIUM CARD */}
-                                        {PremiumData?.map((prize, index) => {
-                                            return (
-                                                !prize.seen && (
-                                                    <React.Fragment
-                                                        key={`premiumPrize-${index}`}
-                                                    >
-                                                        <Premium
-                                                            data={prize}
-                                                            handleWinnerRevealCard={
-                                                                handleWinnerRevealCard
-                                                            }
-                                                        />
-                                                    </React.Fragment>
-                                                )
-                                            );
-                                        })}
+
+                                        {!noDataLoaded.premium && (
+                                            <>
+                                                {/* PREMIUM CARD */}
+                                                {PremiumData?.map((prize, index) => {
+                                                    return (
+                                                        !prize.seen && (
+                                                            <React.Fragment
+                                                                key={`premiumPrize-${index}`}
+                                                            >
+                                                                <Premium
+                                                                    data={prize}
+                                                                    handleWinnerRevealCard={
+                                                                        handleWinnerRevealCard
+                                                                    }
+                                                                />
+                                                            </React.Fragment>
+                                                        )
+                                                    );
+                                                })}
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    )}
-                </section>
-            )}
+                    </>
+                )}
+            </section>
 
             {/* WINNER ANNOUNCEMENTS */}
             {isWinnerAnnouncementShown && (

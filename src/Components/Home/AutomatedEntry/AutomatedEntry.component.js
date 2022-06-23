@@ -112,61 +112,61 @@ const AutomatedEntry = ({ data }) => {
         return 0;
     };
 
-    if (timer === "Ended" || timer === "0d 0h 0m 0s") return "";
-    else
-        return (
-            <Link
-                to={{
-                    pathname: `/prize/automated/${data.prizeId}`,
-                    state: {
-                        prevPath: history.location.pathname,
-                    },
-                }}
-            >
-                <div className="card-wrapper p-2 p-md-3">
-                    <div className="row">
-                        {/* PRIZE SUBTITLE */}
-                        <p className="prize-id mb-0">{data.prizeSubtitle}</p>
-                        {/* PRIZE INFO */}
-                        <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start justify-content-end position-relative">
-                            {/* PRIZE NAME */}
-                            <div className="prize-title mt-2">
-                                {data.prizeTitle}
-                            </div>
-                            {/* PRIZE DETAILED CONTENT */}
-                            <div className="prize-subtitle mt-1">
-                                {data.prizeContent}
-                            </div>
-                            {/* TICKETS */}
-                            <div className="ticket-info d-flex flex-column align-items-start mt-2 p-2">
-                                <p className="mb-2 ticket-label d-flex align-items-center">
-                                    Your total tickets
-                                </p>
-                                <p className="mb-0 tickets-value">
-                                    {getTickets()?.toLocaleString() || "-"}
-                                </p>
-                            </div>
+    return (
+        <Link
+            to={{
+                pathname: `/prize/automated/${data.prizeId}`,
+                state: {
+                    prevPath: history.location.pathname,
+                },
+            }}
+        >
+            <div className="card-wrapper p-2 p-md-3">
+                <div className="row">
+                    {/* PRIZE SUBTITLE */}
+                    {/* <p className="prize-id mb-0">{data.prizeSubtitle}</p> */}
+                    {/* PRIZE INFO */}
+                    <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative">
+                        {/* PRIZE NAME */}
+                        <div className="prize-title">
+                            {data.prizeTitle}
                         </div>
-                        {/* PRIZE PICTURE */}
-                        <div className="col-6 col-md-4 col-lg-5 d-flex align-items-center justify-content-end position-relative">
-                            <picture>
-                                <source
-                                    media="(max-width:768px)"
-                                    srcSet={data.prizeBG2}
-                                />
-                                <img src={data.prizeBG} alt={data.prizeTitle} />
-                            </picture>
+                        {/* PRIZE DETAILED CONTENT */}
+                        <div className="prize-subtitle mt-2">
+                            {data.prizeContent}
+                        </div>
+                    </div>
+                    {/* PRIZE PICTURE */}
+                    <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">
+                        <picture>
+                            <source
+                                media="(max-width:768px)"
+                                srcSet={data.prizeBG2}
+                            />
+                            <img src={data.prizeBG} alt={data.prizeTitle} />
+                        </picture>
+                    </div>
+                    {/* TICKETS */}
+                    <div className="col-12">
+                        <div className="total-ticket-info d-flex justify-content-between mt-4">
+                            <p className="mb-0 ticket-label d-flex align-items-center">
+                                Total tickets collected
+                            </p>
+                            <p className="mb-0 ticket-value">
+                                {getTickets()?.toLocaleString() || "-"}
+                            </p>
                         </div>
                     </div>
                 </div>
-                {/* TIMER */}
-                <div className="timer d-flex align-items-center justify-content-center px-3">
-                    <p className="countdown mb-0">{`\u00A0 ${getTimerFullUnits(
-                        timer
-                    )} left`}</p>
-                </div>
-            </Link>
-        );
+            </div>
+            {/* TIMER */}
+            <div className="timer d-flex align-items-center justify-content-center px-3">
+                <p className="countdown mb-0">{`\u00A0 ${getTimerFullUnits(
+                    timer
+                )} left`}</p>
+            </div>
+        </Link>
+    );
 };
 
 export default AutomatedEntry;
