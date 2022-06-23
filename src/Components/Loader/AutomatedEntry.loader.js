@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader";
 
 const AutomatedEntryLoader = (props) => (
     <ContentLoader
-        style={{ width: "100%", minHeight: "30vh" }}
+        style={{ width: "100%", minHeight: "22vh" }}
         speed={2}
         backgroundColor="#d4d4d4"
         foregroundColor="#ecebeb"

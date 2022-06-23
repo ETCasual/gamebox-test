@@ -1,6 +1,7 @@
 // AUTOMATED ENTRY COMPONENT
 .automatedEntry {
     .card-wrapper {
+        min-height: 16vh;
         position: relative;
         cursor: pointer;
         background: linear-gradient(143deg, #302f2f 0%, #0b0b0b 100%);
@@ -9,7 +10,6 @@
         }
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        min-height: 10rem;
         .prize-id {
             position: absolute;
             top: 0.6rem;
@@ -35,22 +35,20 @@
         picture {
             img {
                 width: 100%;
-                height: 9.25rem;
+                height: 4.25rem;
                 object-fit: cover;
                 border-radius: 17px;
-                align-self: end;
             }
         }
-        .ticket-info {
-            background: #1d1d1d;
+        .total-ticket-info {
             border-radius: 5px;
             min-width: 7rem;
             .ticket-label {
                 color: #00c1b9;
-                font-size: $fnt-sz-10;
+                font-size: $fnt-sz-12;
             }
             .ticket-value {
-                font-size: $fnt-sz-12;
+                font-size: $fnt-sz-16;
             }
         }
     }

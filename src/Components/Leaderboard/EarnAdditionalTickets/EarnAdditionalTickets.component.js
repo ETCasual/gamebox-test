@@ -175,7 +175,7 @@ const EarnAdditionalTickets = ({
                 >
                     <img
                         className="earn-type-img"
-                        src={`${window.cdn}assets/additional_gems_01.png`}
+                        src={`${window.cdn}assets/gemspack_01.png`}
                         alt="use gems"
                     />
                     <p className="boost-tickets mb-1 mb-md-2">

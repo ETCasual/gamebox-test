@@ -2,7 +2,7 @@ import React from "react";
 import ContentLoader from "react-content-loader";
 
 const FeaturedLoader = (props) => (
-    <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto mb-4">
+    <div className="col-12 mx-auto mb-4">
         <ContentLoader
             style={{ width: "100%", minHeight: " clamp(20rem, 70vh, 35rem)" }}
             speed={2}
