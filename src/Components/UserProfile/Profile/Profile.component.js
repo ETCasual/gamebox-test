@@ -113,7 +113,7 @@ const Profile = ({
                                     <div className="gem-wrapper">
                                         <img
                                             width="24"
-                                            src={`${window.cdn}assets/additional_gems_01.png`}
+                                            src={`${window.cdn}assets/gem_01.png`}
                                             alt="gems"
                                         />
                                         <span className="gems">
