@@ -17,6 +17,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
+import getFileType from "Utils/GetFileType";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -101,16 +102,39 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                 }}
                             >
                                 <div className="position-relative">
-                                    <picture>
-                                        <source
-                                            media="(max-width:768px)"
-                                            srcSet={data.prizeBG2}
-                                        />
-                                        <img
-                                            src={data.prizeBG}
-                                            alt={data.prizeTitle}
-                                        />
-                                    </picture>
+                                    {/* VIDEO */}
+                                    {getFileType(data.prizeBG) === "mp4" && (
+                                        <video
+                                            autoPlay
+                                            loop
+                                            playsInline
+                                            preload="metadata"
+                                        >
+                                            <source
+                                                src={data.prizeBG}
+                                                type="video/mp4"
+                                            />
+                                        </video>
+                                    )}
+
+                                    {/* PNG, JPG, GIF */}
+                                    {(getFileType(data.prizeBG) === "gif" ||
+                                        getFileType(data.prizeBG) === "png" ||
+                                        getFileType(data.prizeBG) === "jpg" ||
+                                        getFileType(data.prizeBG) ===
+                                            "jpeg") && (
+                                        <picture>
+                                            <source
+                                                media="(max-width:768px)"
+                                                srcSet={data.prizeBG2}
+                                            />
+                                            <img
+                                                src={data.prizeBG}
+                                                alt={data.prizeTitle}
+                                            />
+                                        </picture>
+                                    )}
+
                                     <div className="info-wrapper p-3">
                                         <div className="prize-title mt-2 mb-2">
                                             {data?.prizeTitle}
@@ -253,78 +277,79 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     </div>
                                 </div>
 
-                                { false && 
-                                <>
-                                    <div className="prize-info py-3">
-                                        <div className="col-12 d-flex align-items-center justify-content-between mb-2">
-                                            <p className="prize-title mb-0">
-                                                {data.prizeTitle}
-                                            </p>
-                                            <p className="mb-1 ticket-label d-flex align-items-center">
-                                                Your tickets
-                                            </p>
-                                        </div>
-                                        <div className="col-12 d-flex align-items-center justify-content-between">
-                                            <div className="prize-subtitle">
-                                                {data.prizeSubtitle}
+                                {false && (
+                                    <>
+                                        <div className="prize-info py-3">
+                                            <div className="col-12 d-flex align-items-center justify-content-between mb-2">
+                                                <p className="prize-title mb-0">
+                                                    {data.prizeTitle}
+                                                </p>
+                                                <p className="mb-1 ticket-label d-flex align-items-center">
+                                                    Your tickets
+                                                </p>
                                             </div>
-                                            <p className="mb-0 ticket-value d-flex align-items-center">
-                                                {`\u00A0${
-                                                    getPoolTickets(
-                                                        poolTickets,
-                                                        data?.prizeId
-                                                    )?.toLocaleString() || 0
-                                                }`}
-                                            </p>
+                                            <div className="col-12 d-flex align-items-center justify-content-between">
+                                                <div className="prize-subtitle">
+                                                    {data.prizeSubtitle}
+                                                </div>
+                                                <p className="mb-0 ticket-value d-flex align-items-center">
+                                                    {`\u00A0${
+                                                        getPoolTickets(
+                                                            poolTickets,
+                                                            data?.prizeId
+                                                        )?.toLocaleString() || 0
+                                                    }`}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="d-flex align-items-center justify-content-center remaining-tickets">
-                                        {getPrizeTicketCollected(
-                                            prizeTicketCollection,
-                                            data?.prizeId
-                                        ) >= data?.ticketsRequired && (
-                                            <p className="mb-0 draw-timer d-flex align-items-center justify-content-center">
-                                                Draw starts in{" "}
-                                                <span className="text-danger ml-1">
-                                                    {timer}
-                                                </span>
-                                            </p>
-                                        )}
-                                        {getPrizeTicketCollected(
-                                            prizeTicketCollection,
-                                            data?.prizeId
-                                        ) < data?.ticketsRequired && (
-                                            <p className="mb-0">
-                                                {data?.ticketsRequired -
-                                                    getPrizeTicketCollected(
-                                                        prizeTicketCollection,
-                                                        data?.prizeId
-                                                    ) <=
-                                                0 ? (
-                                                    <GenericLoader
-                                                        height="30"
-                                                        bg="#FF007C"
-                                                        cx1="43%"
-                                                        cx2="50%"
-                                                        cx3="58%"
-                                                        cy="15"
-                                                    />
-                                                ) : (
-                                                    `${
-                                                        (
-                                                            data?.ticketsRequired -
-                                                            getPrizeTicketCollected(
-                                                                prizeTicketCollection,
-                                                                data?.prizeId
-                                                            )
-                                                        )?.toLocaleString() || "-"
-                                                    } tickets remaining`
-                                                )}
-                                            </p>
-                                        )}
-                                    </div>
-                                </>
-                                }
+                                        <div className="d-flex align-items-center justify-content-center remaining-tickets">
+                                            {getPrizeTicketCollected(
+                                                prizeTicketCollection,
+                                                data?.prizeId
+                                            ) >= data?.ticketsRequired && (
+                                                <p className="mb-0 draw-timer d-flex align-items-center justify-content-center">
+                                                    Draw starts in{" "}
+                                                    <span className="text-danger ml-1">
+                                                        {timer}
+                                                    </span>
+                                                </p>
+                                            )}
+                                            {getPrizeTicketCollected(
+                                                prizeTicketCollection,
+                                                data?.prizeId
+                                            ) < data?.ticketsRequired && (
+                                                <p className="mb-0">
+                                                    {data?.ticketsRequired -
+                                                        getPrizeTicketCollected(
+                                                            prizeTicketCollection,
+                                                            data?.prizeId
+                                                        ) <=
+                                                    0 ? (
+                                                        <GenericLoader
+                                                            height="30"
+                                                            bg="#FF007C"
+                                                            cx1="43%"
+                                                            cx2="50%"
+                                                            cx3="58%"
+                                                            cy="15"
+                                                        />
+                                                    ) : (
+                                                        `${
+                                                            (
+                                                                data?.ticketsRequired -
+                                                                getPrizeTicketCollected(
+                                                                    prizeTicketCollection,
+                                                                    data?.prizeId
+                                                                )
+                                                            )?.toLocaleString() ||
+                                                            "-"
+                                                        } tickets remaining`
+                                                    )}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </>
+                                )}
                             </Link>
                         </div>
                     </div>
