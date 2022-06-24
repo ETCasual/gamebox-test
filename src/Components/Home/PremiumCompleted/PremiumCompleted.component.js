@@ -73,7 +73,6 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                     </div>
                 </div>
                 <div className="card-wrapper">
-                    <p className="prize-id mb-0">{data.prizeContent}</p>
                     <picture>
                         <source
                             media="(max-width:768px)"
