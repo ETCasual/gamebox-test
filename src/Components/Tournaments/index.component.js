@@ -23,6 +23,7 @@ import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
 import { CURRENT_GAME_DETAILS, PRIZE_ENDED } from "redux/types";
 import PrizeEndedModalPopup from "Components/Modals/PrizeEnded.modal";
+import getFileType from "Utils/GetFileType";
 
 const Index = ({ match }) => {
     const {
@@ -63,6 +64,7 @@ const Index = ({ match }) => {
             ads: checkIsAdOrGemsUsed("ads"),
         });
     const [timer, setTimer] = useState("Calculating");
+    const [thumbFileType, setThumbFileType] = useState("");
 
     // LOAD PRIZES WHEN TIMER END WITH 2 SECOND DELAY
     // useEffect(() => {
@@ -187,6 +189,9 @@ const Index = ({ match }) => {
             );
             // setIsGameLeaderboardShown(true);
         }
+
+        // Read the prize thumbnail file type
+        setThumbFileType(getFileType(currentPrize?.prizeBG));
     }, [currentPrize, id, user, currentGameInfo, currentUserRank, dispatch]);
 
     // GET TICKETS
@@ -286,11 +291,35 @@ const Index = ({ match }) => {
                                 </div>
                                 {/* TICKETS AND POOL INFO */}
                                 <div className="col-12 px-3 position-relative d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
-                                    <img
-                                        className="prize-img mr-3"
-                                        src={currentPrize?.prizeBG}
-                                        alt="prize"
-                                    />
+                                    {/* VIDEO */}
+                                    {thumbFileType === "mp4" && (
+                                        <video
+                                            className="prize-video"
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            preload="metadata"
+                                        >
+                                            <source
+                                                src={currentPrize?.prizeBG}
+                                                type="video/mp4"
+                                            />
+                                        </video>
+                                    )}
+
+                                    {/* PNG, JPG, GIF */}
+                                    {(thumbFileType === "gif" ||
+                                        thumbFileType === "png" ||
+                                        thumbFileType === "jpg" ||
+                                        thumbFileType === "jpeg") && (
+                                        <img
+                                            className="prize-thumb mr-3"
+                                            src={currentPrize?.prizeBG}
+                                            alt="prize"
+                                        />
+                                    )}
+
                                     {currentPrize?.infoUrl ? (
                                         <a
                                             className="contract-address"

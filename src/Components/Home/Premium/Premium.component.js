@@ -27,12 +27,16 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
     const { prizeTicketCollection } = useSelector(
         (state) => state.prizePoolTickets
     );
-
     const history = useHistory();
 
     let watcherRef = useRef(null);
+    let thumbPrizeRef = useRef(null);
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
+    const [thumbFileType, setThumbFileType] = useState("");
+    const [isMobile, setIsMobile] = useState(
+        navigator.userAgent.includes("Mobile")
+    );
 
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
@@ -43,7 +47,10 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                 data?.ticketsRequired
             )
         );
-    }, [dispatch, data?.prizeId, data?.ticketsRequired]);
+
+        // Read the prize thumbnail file type
+        setThumbFileType(getFileType(data?.prizeBG));
+    }, [dispatch, data?.prizeId, data?.ticketsRequired, data?.prizeBG]);
 
     const dispatchPoolTickets = (isVisible) => {
         if (isVisible) {
@@ -89,6 +96,16 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                     partialVisibility="top"
                     onChange={(isVisible) => {
                         dispatchPoolTickets(isVisible);
+
+                        if (!isMobile) return;
+
+                        if (thumbPrizeRef.current?.localName === "video") {
+                            if (isVisible) {
+                                thumbPrizeRef.current?.play();
+                            } else {
+                                thumbPrizeRef.current?.pause();
+                            }
+                        }
                     }}
                 >
                     <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
@@ -103,34 +120,41 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                             >
                                 <div className="position-relative">
                                     {/* VIDEO */}
-                                    {getFileType(data.prizeBG) === "mp4" && (
+                                    {thumbFileType === "mp4" && (
                                         <video
-                                            autoPlay
+                                            ref={thumbPrizeRef}
+                                            // autoPlay
                                             loop
+                                            muted
                                             playsInline
                                             preload="metadata"
+                                            onMouseEnter={(e) => {
+                                                e.target.play();
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.target.pause();
+                                            }}
                                         >
                                             <source
-                                                src={data.prizeBG}
+                                                src={data?.prizeBG}
                                                 type="video/mp4"
                                             />
                                         </video>
                                     )}
 
                                     {/* PNG, JPG, GIF */}
-                                    {(getFileType(data.prizeBG) === "gif" ||
-                                        getFileType(data.prizeBG) === "png" ||
-                                        getFileType(data.prizeBG) === "jpg" ||
-                                        getFileType(data.prizeBG) ===
-                                            "jpeg") && (
-                                        <picture>
+                                    {(thumbFileType === "gif" ||
+                                        thumbFileType === "png" ||
+                                        thumbFileType === "jpg" ||
+                                        thumbFileType === "jpeg") && (
+                                        <picture ref={thumbPrizeRef}>
                                             <source
                                                 media="(max-width:768px)"
-                                                srcSet={data.prizeBG2}
+                                                srcSet={data?.prizeBG2}
                                             />
                                             <img
-                                                src={data.prizeBG}
-                                                alt={data.prizeTitle}
+                                                src={data?.prizeBG}
+                                                alt={data?.prizeTitle}
                                             />
                                         </picture>
                                     )}
