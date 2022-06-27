@@ -28,7 +28,10 @@
         }
         video {
             width: 100%;
-            height: auto;
+            @include media-min($md) {
+                min-height: 22.5rem;
+            }
+            object-fit: cover;
             border-top-left-radius: 17px;
             border-top-right-radius: 17px;
         }
