@@ -26,6 +26,12 @@
                 border-top-right-radius: 17px;
             }
         }
+        video {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 17px;
+            border-top-right-radius: 17px;
+        }
         .prize-info {
             .prize-title {
                 font-size: $fnt-sz-14;

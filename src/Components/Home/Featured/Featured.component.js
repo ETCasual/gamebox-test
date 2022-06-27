@@ -17,6 +17,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
+import getFileType from "Utils/GetFileType";
 
 const Featured = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -30,8 +31,13 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
     const history = useHistory();
 
     let watcherRef = useRef(null);
+    let thumbPrizeRef = useRef(null);
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
+    const [thumbFileType, setThumbFileType] = useState("");
+    const [isMobile, setIsMobile] = useState(
+        navigator.userAgent.includes("Mobile")
+    );
 
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
@@ -42,7 +48,10 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                 data?.ticketsRequired
             )
         );
-    }, [dispatch, data?.prizeId, data?.ticketsRequired]);
+
+        // Read the prize thumbnail file type
+        setThumbFileType(getFileType(data?.prizeBG));
+    }, [dispatch, data?.prizeId, data?.ticketsRequired, data?.prizeBG]);
 
     const dispatchPoolTickets = (isVisible) => {
         if (isVisible) {
@@ -85,7 +94,19 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                     resizeCheck={true}
                     scrollCheck={true}
                     partialVisibility="top"
-                    onChange={(isVisible) => dispatchPoolTickets(isVisible)}
+                    onChange={(isVisible) => {
+                        dispatchPoolTickets(isVisible);
+
+                        if (!isMobile) return;
+
+                        if (thumbPrizeRef.current?.localName === "video") {
+                            if (isVisible) {
+                                thumbPrizeRef.current?.play();
+                            } else {
+                                thumbPrizeRef.current?.pause();
+                            }
+                        }
+                    }}
                 >
                     <div className="col-12 d-flex align-items-center justify-content-center">
                         <div className="card-wrapper">
@@ -99,16 +120,47 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                             >
                                 {/* PRIZE TITLE, DESCRIPTION & ID */}
                                 <div className="prize-info position-relative d-flex align-self-center justify-content-center">
-                                    <picture>
-                                        <source
-                                            media="(max-width:768px)"
-                                            srcSet={data.prizeBG2}
-                                        />
-                                        <img
-                                            src={data.prizeBG}
-                                            alt={data.prizeTitle}
-                                        />
-                                    </picture>
+                                    {/* VIDEO */}
+                                    {thumbFileType === "mp4" && (
+                                        <video
+                                            ref={thumbPrizeRef}
+                                            // autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            preload="metadata"
+                                            onMouseEnter={(e) => {
+                                                console.log(e.target);
+                                                e.target.play();
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.target.pause();
+                                            }}
+                                        >
+                                            <source
+                                                src={data?.prizeBG}
+                                                type="video/mp4"
+                                            />
+                                        </video>
+                                    )}
+
+                                    {/* PNG, JPG, GIF */}
+                                    {(thumbFileType === "gif" ||
+                                        thumbFileType === "png" ||
+                                        thumbFileType === "jpg" ||
+                                        thumbFileType === "jpeg") && (
+                                        <picture ref={thumbPrizeRef}>
+                                            <source
+                                                media="(max-width:768px)"
+                                                srcSet={data?.prizeBG2}
+                                            />
+                                            <img
+                                                src={data?.prizeBG}
+                                                alt={data?.prizeTitle}
+                                            />
+                                        </picture>
+                                    )}
+
                                     <div className="info-wrapper p-3">
                                         <div className="prize-subtitle">
                                             {data?.prizeSubtitle}
@@ -133,8 +185,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                     {getPoolTickets(
                                                         poolTickets,
                                                         data?.prizeId
-                                                    )?.toLocaleString() ||
-                                                        0}
+                                                    )?.toLocaleString() || 0}
                                                 </p>
                                             </div>
                                             <div className="pool-tickets d-flex justify-content-between mt-3 mt-md-0">
@@ -160,10 +211,10 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                         )
                                                             ? timer
                                                             : getPrizeTicketCollected(
-                                                                    prizeTicketCollection,
-                                                                    data?.prizeId
-                                                                )?.toLocaleString() ||
-                                                                0}
+                                                                  prizeTicketCollection,
+                                                                  data?.prizeId
+                                                              )?.toLocaleString() ||
+                                                              0}
                                                     </p>
                                                     {!OverTimeModeChecker(
                                                         data?.prizeId,
@@ -189,7 +240,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                         ))}
                                     </div>
                                 </div>
-                                { false && 
+                                {false && (
                                     <div className="tickets-info mb-2 w-100">
                                         {/* LABEL */}
                                         <p className="ticket-label mb-2">
@@ -201,15 +252,13 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                 {getPoolTickets(
                                                     poolTickets,
                                                     data?.prizeId
-                                                )?.toLocaleString() ||
-                                                    0}
+                                                )?.toLocaleString() || 0}
                                             </p>
                                             <div className="d-flex remaining-tickets">
                                                 {getPrizeTicketCollected(
                                                     prizeTicketCollection,
                                                     data?.prizeId
-                                                ) >=
-                                                    data?.ticketsRequired && (
+                                                ) >= data?.ticketsRequired && (
                                                     <p className="mb-0 draw-timer d-flex align-items-center">
                                                         Draw starts in{" "}
                                                         <span className="text-danger ml-1">
@@ -220,8 +269,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                 {getPrizeTicketCollected(
                                                     prizeTicketCollection,
                                                     data?.prizeId
-                                                ) <
-                                                    data?.ticketsRequired && (
+                                                ) < data?.ticketsRequired && (
                                                     <p className="mb-0 d-flex align-items-center">
                                                         {data?.ticketsRequired -
                                                             getPrizeTicketCollected(
@@ -254,11 +302,11 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                         </div>
                                         <button className="btn-participate w-100 p-3 mt-4">
-                                            Participate in featured
-                                            prize tournaments
+                                            Participate in featured prize
+                                            tournaments
                                         </button>
                                     </div>
-                                }
+                                )}
                             </Link>
                         </div>
                     </div>
