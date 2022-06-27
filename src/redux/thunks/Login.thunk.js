@@ -120,7 +120,8 @@ export function loadLogin(payload, setLoginError, history) {
                             payload: await compareUserDetails(user, _user),
                         });
                     }
-                    history.push("/");
+                    // TODO: KIV why we redirect root last time
+                    // history.push("/");
                 } else {
                     const _user = await getUserAccountInfoFroyo();
                     if (_user.id) {
@@ -135,7 +136,8 @@ export function loadLogin(payload, setLoginError, history) {
                                 type: LOGIN_SUCCESS,
                                 payload: user,
                             });
-                            history.push("/");
+                            // TODO: KIV why we redirect root last time
+                            // history.push("/");
                         }
                     }
                 }
