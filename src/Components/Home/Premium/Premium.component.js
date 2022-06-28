@@ -34,9 +34,12 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
     const [thumbFileType, setThumbFileType] = useState("");
-    const [isMobile, setIsMobile] = useState(
-        navigator.userAgent.includes("Mobile")
-    );
+    const [isMobile, setIsMobile] = useState(false);
+
+    // CHECK IS MOBILE
+    useEffect(() => {
+        setIsMobile(navigator.userAgent.includes("Mobile"));
+    }, [setIsMobile]);
 
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
