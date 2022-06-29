@@ -97,7 +97,7 @@ const Settings = () => {
         <section id="settings">
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-7 wrapper">
+                    <div className="col-12 col-md-10 col-lg-9 wrapper">
                         <div className="row">
                             {/* BACK BUTTON */}
                             <div className="col-12 mb-3 mb-md-4">

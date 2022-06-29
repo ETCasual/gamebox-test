@@ -133,7 +133,7 @@ const Rewards = () => {
             <section id="rewards-panel">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper">
+                        <div className="col-12 col-md-10 col-lg-9 wrapper">
                             {/* BACK BUTTON */}
                             <div className="col-12 mb-5 px-1">
                                 <div

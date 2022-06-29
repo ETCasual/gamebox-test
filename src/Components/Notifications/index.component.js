@@ -85,7 +85,7 @@ const Index = () => {
             <div className="container-fluid px-0 px-md-3" id="notification">
                 {/* NOTIFICATIONS */}
                 <div className="row justify-content-center">
-                    <div className="col-11 col-md-10 col-lg-8 col-xl-7">
+                    <div className="col-11 col-md-10 col-lg-9">
                         <h1 className="mb-0 main-title">Notifications</h1>
                         {noDataLoaded && (
                             <div className="no-result">

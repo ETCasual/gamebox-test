@@ -116,7 +116,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
         <>
             <div className="container-fluid" id="payment-panel">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-8">
+                    <div className="col-12 col-md-10 col-lg-9">
                         <div className="row justify-content-between px-2 mt-2">
                             {/* BACK BUTTON */}
                             <div
