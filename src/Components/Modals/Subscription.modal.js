@@ -9,8 +9,7 @@ const SubscriptionModalPopup = ({ handleGetGemsLaterBtn }) => {
                 <p className="title">Out of Gems?</p>
                 <p className="subtitle">
                     It appears that you don't have enough Gems. Gems can be used
-                    to purchase free spins and earn additional tickets and
-                    experience points.
+                    to join tournaments and earn additional tickets.
                 </p>
                 <div className="p-0 btn-wrapper d-flex mt-4">
                     <button

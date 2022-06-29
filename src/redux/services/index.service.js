@@ -307,7 +307,6 @@ export async function getPrizes() {
             useGemExp: p.getUseGemGetExp(),
             useHowManyGems: p.getUseHowManyGems(),
         });
-
         // ADDING PRIZE LIST TO SESSION STORAGE
         if (p.getTypeId() === 1 || p.getTypeId() === 2 || p.getTypeId() === 3) {
             // PRIZE DETAILS LIST
@@ -364,6 +363,7 @@ export async function getPrizes() {
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
                     cgId: p.getTsgId(),
+                    gemsNeeded: p.getGemsNeeded(),
                 });
                 sessionStorage.setItem(
                     "prizeDetailList",
@@ -460,6 +460,7 @@ export async function getPrizes() {
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
                     cgId: p.getTsgId(),
+                    gemsNeeded: p.getGemsNeeded(),
                 });
             } else {
                 _featuredData[featuredIndex].gameInfo.push({
@@ -538,6 +539,7 @@ export async function getPrizes() {
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
                     cgId: p.getTsgId(),
+                    gemsNeeded: p.getGemsNeeded(),
                 });
             } else {
                 _premiumData[premiumIndex].gameInfo.push({
@@ -615,6 +617,7 @@ export async function getPrizes() {
                     nftTokenId: p.getNftTokenId(),
                     infoUrl: p.getInfoUrl(),
                     cgId: p.getTsgId(),
+                    gemsNeeded: p.getGemsNeeded(),
                 });
             } else {
                 _dailyData[dailyIndex].gameInfo.push({

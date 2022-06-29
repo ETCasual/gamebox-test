@@ -39,7 +39,9 @@ export default function loadPlayerEnterTournamentId(
                     });
                 } else if (error.code === 13)
                     console.log("PLAYER LOG ENTER THUNK: No Result found!");
-                else console.log(error);
+                else {
+                    throw error;
+                }
             });
     };
 }
