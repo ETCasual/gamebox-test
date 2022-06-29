@@ -31,7 +31,7 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
     }, [data.prizeId, notificationList, dispatch]);
 
     return (
-        <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
+        <div className="col-12 col-sm-6 col-xl-4 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
             <div className="w-100 h-100 position-relative">
                 <div
                     className="complete-overlay"
