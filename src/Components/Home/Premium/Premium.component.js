@@ -7,6 +7,7 @@ import VisibilitySensor from "react-visibility-sensor";
 // COMPONENTS
 import PremiumCompleted from "Components/Home/PremiumCompleted/PremiumCompleted.component";
 import GenericLoader from "Components/Loader/Generic.loader";
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // REDUX
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
@@ -17,7 +18,6 @@ import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import convertSecondsToHours from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
-import getFileType from "Utils/GetFileType";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -30,16 +30,9 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
     const history = useHistory();
 
     let watcherRef = useRef(null);
-    let thumbPrizeRef = useRef(null);
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
-    const [thumbFileType, setThumbFileType] = useState("");
-    const [isMobile, setIsMobile] = useState(false);
-
-    // CHECK IS MOBILE
-    useEffect(() => {
-        setIsMobile(navigator.userAgent.includes("Mobile"));
-    }, [setIsMobile]);
+    const [isPlayVideo, setIsPlayVideo] = useState(false);
 
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
@@ -50,10 +43,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                 data?.ticketsRequired
             )
         );
-
-        // Read the prize thumbnail file type
-        setThumbFileType(getFileType(data?.prizeBG));
-    }, [dispatch, data?.prizeId, data?.ticketsRequired, data?.prizeBG]);
+    }, [dispatch, data?.prizeId, data?.ticketsRequired]);
 
     const dispatchPoolTickets = (isVisible) => {
         if (isVisible) {
@@ -99,16 +89,6 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                     partialVisibility="top"
                     onChange={(isVisible) => {
                         dispatchPoolTickets(isVisible);
-
-                        if (!isMobile) return;
-
-                        if (thumbPrizeRef.current?.localName === "video") {
-                            if (isVisible) {
-                                thumbPrizeRef.current?.play();
-                            } else {
-                                thumbPrizeRef.current?.pause();
-                            }
-                        }
                     }}
                 >
                     <div className="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
@@ -120,47 +100,21 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         prevPath: history.location.pathname,
                                     },
                                 }}
+                                onMouseEnter={(e) => {
+                                    // HOVER TO PLAY VIDEO
+                                    setIsPlayVideo(true);
+                                }}
+                                onMouseLeave={(e) => {
+                                    // LEAVE HOVER TO PAUSE VIDEO
+                                    setIsPlayVideo(false);
+                                }}
                             >
                                 <div className="position-relative">
-                                    {/* VIDEO */}
-                                    {thumbFileType === "mp4" && (
-                                        <video
-                                            ref={thumbPrizeRef}
-                                            // autoPlay
-                                            loop
-                                            muted
-                                            playsInline
-                                            preload="metadata"
-                                            onMouseEnter={(e) => {
-                                                e.target.play();
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.target.pause();
-                                            }}
-                                        >
-                                            <source
-                                                src={data?.prizeBG}
-                                                type="video/mp4"
-                                            />
-                                        </video>
-                                    )}
-
-                                    {/* PNG, JPG, GIF */}
-                                    {(thumbFileType === "gif" ||
-                                        thumbFileType === "png" ||
-                                        thumbFileType === "jpg" ||
-                                        thumbFileType === "jpeg") && (
-                                        <picture ref={thumbPrizeRef}>
-                                            <source
-                                                media="(max-width:768px)"
-                                                srcSet={data?.prizeBG2}
-                                            />
-                                            <img
-                                                src={data?.prizeBG}
-                                                alt={data?.prizeTitle}
-                                            />
-                                        </picture>
-                                    )}
+                                    <ThumbnailMedia
+                                        url={data?.prizeBG}
+                                        isPlayVideo={isPlayVideo}
+                                        setIsPlayVideo={setIsPlayVideo}
+                                    />
 
                                     <div className="info-wrapper p-3">
                                         <div className="prize-title mt-2 mb-2">

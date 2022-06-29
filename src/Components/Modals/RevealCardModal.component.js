@@ -1,3 +1,4 @@
+// REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SwiperCore, {
@@ -8,6 +9,11 @@ import SwiperCore, {
     Autoplay,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// COMPONENTS
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
+// HELPER FUNCTION
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
@@ -53,10 +59,16 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                             <SwiperSlide key={idx}>
                                 <div className="prize">
                                     <div className="picture-wrapper d-flex flex-column align-items-center">
-                                        <img
+                                        {/* <img
                                             className="picture mb-4"
                                             src={e?.picture}
                                             alt="prize"
+                                        /> */}
+                                        {/* THUMBNAIL MEDIA */}
+                                        <ThumbnailMedia
+                                            url={e.picture}
+                                            isPlayVideo={true}
+                                            setIsPlayVideo={null}
                                         />
                                         <img
                                             width="36"

@@ -1,3 +1,4 @@
+// REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +12,10 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
+// COMPONENTS
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
+// HELPER FUNCTION
 // import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
@@ -95,10 +100,11 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                         <div className="prize">
                             {/* PRIZE INFO */}
                             <div className="picture-wrapper d-flex flex-column align-items-center">
-                                <img
-                                    className="picture"
-                                    src={e.picture}
-                                    alt="prize"
+                                {/* THUMBNAIL MEDIA */}
+                                <ThumbnailMedia
+                                    url={e.picture}
+                                    isPlayVideo={true}
+                                    setIsPlayVideo={null}
                                 />
                                 <img
                                     width={28}
