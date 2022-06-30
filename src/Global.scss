@@ -559,7 +559,8 @@ html {
         border-radius: 10px;
         .notification-card {
             cursor: pointer;
-            .prize-img {
+            video, img {
+                width: 50px;
                 z-index: 1;
                 border-radius: 5px;
                 border: 2px solid white;
@@ -580,9 +581,9 @@ html {
                     color: #ff3399;
                 }
             }
-            .invite-info {
+            // .invite-info {
                 // background-color: #d6d6d6;
-            }
+            // }
             &:not(:last-child):after {
                 content: "";
                 position: absolute;

@@ -25,7 +25,8 @@
             background: #131313;
             border-radius: 10px 0px 0px 10px;
         }
-        .prize-img {
+        video, img {
+            width: 50px;
             z-index: 1;
             border-radius: 5px;
             border: 2px solid white;

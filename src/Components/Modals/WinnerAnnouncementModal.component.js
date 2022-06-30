@@ -1,3 +1,4 @@
+// REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +12,10 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 
+// COMPONENTS
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
+// HELPER FUNCTION
 // import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
 
@@ -36,9 +41,12 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
         if (data.length > 0) {
             clearTimeout(timeOutRef);
             timeOutRef = setTimeout(() => {
+                data.push(data[0]);
                 setPrizeData(data);
             }, 500);
         }
+
+        console.log(prizeData);
 
         return () => clearTimeout(timeOutRef);
     }, [data]);
@@ -73,6 +81,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                     clickable: true,
                     dynamicBullets: true,
                     renderBullet: (index, className) => {
+                        // TODO: USE STATIC IMG IN SMALL THUMBNAIL
                         return `<div class="${className} d-flex align-items-center justify-content-center">
                             <img src="${prizeData[index]?.picture}" alt="prize"/>
                         </div>`;
@@ -95,10 +104,12 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                         <div className="prize">
                             {/* PRIZE INFO */}
                             <div className="picture-wrapper d-flex flex-column align-items-center">
-                                <img
-                                    className="picture"
-                                    src={e.picture}
-                                    alt="prize"
+                                {/* THUMBNAIL MEDIA */}
+                                <ThumbnailMedia
+                                    url={e.picture}
+                                    isPlayVideo={true}
+                                    setIsPlayVideo={null}
+                                    className="thumb-media"
                                 />
                                 <img
                                     width={28}

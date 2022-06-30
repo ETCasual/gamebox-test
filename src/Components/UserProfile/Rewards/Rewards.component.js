@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
 import ClaimedPrizeDetailModal from "Components/Modals/ClaimedPrizeDetail.modal";
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 import {
     loadNFTClaim,
@@ -28,6 +29,8 @@ const Rewards = () => {
         id: null,
         status: false,
     });
+
+    const [isPlayVideo, setIsPlayVideo] = useState(false);
 
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
@@ -163,14 +166,40 @@ const Rewards = () => {
                                                     className="col-12 mb-3 prize unclaimed pl-2 pr-1 position-relative"
                                                     key={`prizes-${i}`}
                                                 >
-                                                    <div className="card-wrapper d-flex">
+                                                    <div
+                                                        className="card-wrapper d-flex"
+                                                        onMouseEnter={(e) => {
+                                                            // HOVER TO PLAY VIDEO
+                                                            setIsPlayVideo(
+                                                                true
+                                                            );
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            // LEAVE HOVER TO PAUSE VIDEO
+                                                            setIsPlayVideo(
+                                                                false
+                                                            );
+                                                        }}
+                                                    >
                                                         <div className="col-auto p-2">
-                                                            <div
+                                                            {/* THUMBNAIL MEDIA */}
+                                                            <ThumbnailMedia
+                                                                url={
+                                                                    data.prizeImageUrl
+                                                                }
+                                                                isPlayVideo={
+                                                                    isPlayVideo
+                                                                }
+                                                                setIsPlayVideo={
+                                                                    setIsPlayVideo
+                                                                }
+                                                            />
+                                                            {/* <div
                                                                 className="prize-image"
                                                                 style={{
                                                                     backgroundImage: `url("${data.prizeImageUrl}")`,
                                                                 }}
-                                                            />
+                                                            /> */}
                                                         </div>
                                                         <div className="col py-2 px-2 mt-1 d-flex flex-column">
                                                             <div className="prize-text mb-auto">
@@ -204,7 +233,8 @@ const Rewards = () => {
                                                                         ) && (
                                                                             <div className="claim-btn opacity-0-5 d-inline-block py-2 px-3">
                                                                                 <p className="mb-0">
-                                                                                    Claim Reward
+                                                                                    Claim
+                                                                                    Reward
                                                                                     -{" "}
                                                                                     {getRemainingDaysToClaim(
                                                                                         data.prizeCanClaimDate
@@ -230,7 +260,8 @@ const Rewards = () => {
                                                                                     }
                                                                                 >
                                                                                     <p className="mb-0">
-                                                                                        Claim Reward
+                                                                                        Claim
+                                                                                        Reward
                                                                                     </p>
                                                                                 </div>
                                                                             )}
@@ -249,7 +280,8 @@ const Rewards = () => {
                                                                                     }
                                                                                 >
                                                                                     <p className="mb-0">
-                                                                                        Claim Reward
+                                                                                        Claim
+                                                                                        Reward
                                                                                     </p>
                                                                                 </div>
                                                                             )}
@@ -302,14 +334,38 @@ const Rewards = () => {
                                                                   )
                                                                 : null
                                                         }
+                                                        onMouseEnter={(e) => {
+                                                            // HOVER TO PLAY VIDEO
+                                                            setIsPlayVideo(
+                                                                true
+                                                            );
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            // LEAVE HOVER TO PAUSE VIDEO
+                                                            setIsPlayVideo(
+                                                                false
+                                                            );
+                                                        }}
                                                     >
                                                         <div className="col-auto p-2">
-                                                            <div
+                                                            {/* THUMBNAIL MEDIA */}
+                                                            <ThumbnailMedia
+                                                                url={
+                                                                    data.prizeImageUrl
+                                                                }
+                                                                isPlayVideo={
+                                                                    isPlayVideo
+                                                                }
+                                                                setIsPlayVideo={
+                                                                    setIsPlayVideo
+                                                                }
+                                                            />
+                                                            {/* <div
                                                                 className="prize-image"
                                                                 style={{
                                                                     backgroundImage: `url("${data.prizeImageUrl}")`,
                                                                 }}
-                                                            ></div>
+                                                            ></div> */}
                                                         </div>
                                                         <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
                                                             <div className="prize-text mb-auto">

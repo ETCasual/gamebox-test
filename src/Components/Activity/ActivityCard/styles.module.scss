@@ -1,0 +1,81 @@
+// ACTIVITY CARD COMPONENT
+.activity-card {
+    .card-wrapper {
+        /* COMMENTED FOLLOWING STYLE, MOVED TO [img] & [video] */
+        // min-height: 9rem;
+        // @include media-min($md) {
+        //     min-height: 11.063rem;
+        // }
+        // border-radius: 17px 0 0 17px;
+        // position: relative;
+        // background-repeat: no-repeat;
+        // background-size: cover;
+        // background-position: top;
+        cursor: pointer;
+
+        img, video {
+            width: 100%;
+            min-height: 9rem;
+            @include media-min($md) {
+                min-height: 11.063rem;
+            }
+            object-fit: cover;
+            border-radius: 17px 0 0 17px;
+        }
+    }
+
+    .ticket-info {
+        background: linear-gradient(124deg, #1c1c1c 0%, #101010 100%);
+        border-radius: 0 17px 17px 0;
+        min-height: 9rem;
+        @include media-min($md) {
+            min-height: 11.063rem;
+        }
+        .prize-info {
+            .prize-title {
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
+                font-weight: $fnt-wgt-600;
+                color: white;
+            }
+            .prize-subtitle {
+                color: white;
+                font-size: $fnt-sz-10;
+                @include media-min($md) {
+                    font-size: $fnt-sz-12;
+                }
+                line-height: 120%;
+            }
+        }
+
+        .ticket-wrapper {
+            .your-tickets {
+                .label {
+                    color: #00c1b9;
+                    font-size: $fnt-sz-8;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-10;
+                    }
+                    font-weight: $fnt-wgt-600;
+                }
+                .tickets {
+                    color: white;
+                    font-size: $fnt-sz-10;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-12;
+                    }
+                }
+            }
+            .pool-tickets {
+                background-color: #1d1d1d;
+                border-bottom-right-radius: 17px;
+                .required-tickets {
+                    color: #9d9d9d;
+                    font-size: $fnt-sz-12;
+                }
+            }
+        }
+    }
+}

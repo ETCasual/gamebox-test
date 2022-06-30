@@ -10,17 +10,7 @@
         @include media-min($lg) {
             min-height: 10rem;
         }
-        .prize-video {
-            height: 5rem;
-            width: 5rem;
-            @include media-min($lg) {
-                height: 9.875rem;
-                width: 9.875rem;
-            }
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        .prize-thumb {
+        video, img {
             height: 5rem;
             width: 5rem;
             @include media-min($lg) {

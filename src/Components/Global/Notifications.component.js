@@ -1,5 +1,11 @@
+// REACT, REDUX & 3RD PARTY LIBRARIES
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+
+// COMPONENTS
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
+// HELPER FUNCTION
 import { defaultGameImage } from "Utils/DefaultImage";
 import { timeOptions } from "Utils/Enums";
 
@@ -57,20 +63,20 @@ const Notification = ({
                                         }
                                     >
                                         <div className="col-12 d-flex align-items-center justify-content-between">
-                                            <img
-                                                width={50}
-                                                className="prize-img"
-                                                onError={(e) =>
-                                                    defaultGameImage(e)
-                                                }
-                                                src={
+                                            {/* THUMBNAIL MEDIA */}
+                                            <ThumbnailMedia
+                                                url={
                                                     n?.picture
                                                         ? n.picture
                                                         : n.type === "rankup"
                                                         ? `${window.cdn}assets/notification_level_01.jpg`
                                                         : `${window.cdn}assets/notification_friends_01.jpg`
                                                 }
-                                                alt="icon"
+                                                isPlayVideo={true}
+                                                setIsPlayVideo={null}
+                                                onError={(e) =>
+                                                    defaultGameImage(e)
+                                                }
                                             />
                                             <div className="w-100">
                                                 {/* PRIZE INFO */}

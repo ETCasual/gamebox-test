@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 // COMPONENTS
 import SelectedPlayerInfo from "Components/Winners/SelectedPlayerInfo/SelectedPlayerInfo.component";
 import WinnerLoader from "Components/Loader/Winner.loader";
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadWinners from "redux/thunks/Winners.thunk";
@@ -89,21 +90,19 @@ const Index = () => {
                 <section id="winners">
                     <div className="container-fluid px-0">
                         <div className="col-12 col-md-10 col-lg-9 mx-auto">
-                            <h1 className="main-title mb-2">
-                                Latest Winners
-                            </h1>
+                            <h1 className="main-title mb-2">Latest Winners</h1>
                             {noDataLoaded && (
                                 <div className="no-result">
                                     <p className="title mb-2">
                                         No Winners found yet!
                                     </p>
                                     <p className="subtitle mt-1 mb-0">
-                                        Looks like you've not played for
-                                        any prizes yet.{" "}
+                                        Looks like you've not played for any
+                                        prizes yet.{" "}
                                     </p>
                                     <p className="subtitle">
-                                        <Link to="/">Click here</Link>{" "}
-                                        to look for one you like.
+                                        <Link to="/">Click here</Link> to look
+                                        for one you like.
                                     </p>
                                 </div>
                             )}
@@ -168,9 +167,15 @@ const Index = () => {
                                                                         1000
                                                                 )}
                                                             </p>
-                                                            <p className={`player-name mb-0 ${
-                                                                isCurrentUser(item) ? 'my-name' : ''
-                                                            } `}>
+                                                            <p
+                                                                className={`player-name mb-0 ${
+                                                                    isCurrentUser(
+                                                                        item
+                                                                    )
+                                                                        ? "my-name"
+                                                                        : ""
+                                                                } `}
+                                                            >
                                                                 {isCurrentUser(
                                                                     item
                                                                 )
@@ -200,13 +205,13 @@ const Index = () => {
                                         className="winner-card-prize-info d-flex"
                                         ref={winnerCardPrizeInfoRef}
                                     >
-                                        {/* IMAGE */}
-                                        <div
-                                            className="col prize-img"
-                                            style={{
-                                                backgroundImage: `url("${winnerHoverCardData?.imageUrl}")`,
-                                            }}
+                                        {/* THUMBNAIL MEDIA */}
+                                        <ThumbnailMedia
+                                            url={winnerHoverCardData?.imageUrl}
+                                            isPlayVideo={true}
+                                            setIsPlayVideo={null}
                                         />
+
                                         {/* INFO */}
                                         <div className="col p-3 info d-flex flex-column align-items-start justify-content-between">
                                             <div className="prize-info">
