@@ -31,7 +31,7 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
     }, [data.prizeId, notificationList, dispatch]);
 
     return (
-        <div className="col-12 col-sm-6 col-xl-4 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
+        <div className="col-12 col-sm-6 col-xl-4 mb-4 px-3 px-md-2 d-flex align-items-center justify-content-center mb-4">
             <div className="w-100 h-100 position-relative">
                 <div
                     className="complete-overlay"
@@ -151,15 +151,24 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="ml-2 game-icon d-flex justify-content-center position-relative">
-                        {data.gameInfo.map((e, i) => (
-                            <img
-                                key={`icon-${i}`}
-                                className="img-fluid"
-                                src={e.gameIcon}
-                                alt="game-icon"
-                            />
-                        ))}
+                    <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
+                        <div className="game-icon position-relative">
+                            {data.gameInfo.map((e, i) => (
+                                <>
+                                    <img
+                                        key={`icon-${i}`}
+                                        className="img-fluid"
+                                        src={e.gameIcon}
+                                        alt="game-icon"
+                                    />
+                                    <img
+                                        className="play-icon"
+                                        src={`${window.cdn}icons/icon_play.png`}
+                                        alt="play"
+                                    />
+                                </>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

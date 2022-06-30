@@ -42,16 +42,16 @@
             }
         }
     }
-    .prize-img {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        @include media-min($md) {
-            border-radius: 17px;
-        }
-        object-fit: cover;
-    }
+    // .prize-img {
+    //     position: relative;
+    //     width: 100%;
+    //     height: 100%;
+    //     border-radius: 10px;
+    //     @include media-min($md) {
+    //         border-radius: 17px;
+    //     }
+    //     object-fit: cover;
+    // }
     .text-wrapper {
         position: relative;
         inset: unset;

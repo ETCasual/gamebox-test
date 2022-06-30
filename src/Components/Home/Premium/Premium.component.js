@@ -117,20 +117,20 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     />
 
                                     <div className="info-wrapper p-3">
-                                        <div className="prize-title mt-2 mb-2">
-                                            {data?.prizeTitle}
-                                        </div>
                                         <div className="prize-subtitle">
                                             {data?.prizeSubtitle}
+                                        </div>
+                                        <div className="prize-title mt-2 mb-2">
+                                            {data?.prizeTitle}
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* TICKET INFO */}
-                                <div className="col-12 d-flex flex-row align-items-center ticket-info">
+                                <div className="col-12 d-flex align-items-center ticket-info p-3">
                                     <div className="col px-0">
                                         {/* MOBILE */}
-                                        <div className="px-2 py-2 ticket-wrapper d-block d-sm-none">
+                                        <div className="py-2 ticket-wrapper d-block d-sm-none">
                                             <div className="your-tickets d-flex justify-content-end">
                                                 <div className="col d-flex justify-content-between px-0">
                                                     <p className="mb-0 px-md-2 label d-flex align-self-end">
@@ -186,7 +186,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                         </div>
                                         {/* DESKTOP */}
-                                        <div className="px-2 py-2 ticket-wrapper d-none d-sm-block">
+                                        <div className="py-2 ticket-wrapper d-none d-sm-block">
                                             <div className="your-tickets">
                                                 <p className="mb-1 label d-flex align-items-center">
                                                     Your tickets
@@ -216,7 +216,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                                 prizeTicketCollection
                                                             )
                                                                 ? "text-danger timer"
-                                                                : "tickets"
+                                                                : "current-tickets tickets"
                                                         }`}
                                                     >
                                                         {`\u00A0${
@@ -238,7 +238,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                         data?.ticketsRequired,
                                                         prizeTicketCollection
                                                     ) && (
-                                                        <p className="required-tickets mb-0 mt-1 d-flex align-items-center">
+                                                        <p className="tickets mb-0 d-flex align-items-center">
                                                             {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
                                                         </p>
                                                     )}
@@ -246,91 +246,30 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="ml-2 game-icon d-flex justify-content-center position-relative">
-                                        {data.gameInfo.map((e, i) => (
-                                            <img
-                                                key={`icon-${i}`}
-                                                className="img-fluid"
-                                                src={e.gameIcon}
-                                                alt="game-icon"
-                                            />
-                                        ))}
+                                    <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
+                                        <div className="game-icon position-relative">
+                                            {data.gameInfo.map((e, i) => (
+                                                <>
+                                                    <img
+                                                        key={`icon-${i}`}
+                                                        className="img-fluid"
+                                                        src={e.gameIcon}
+                                                        alt="game-icon"
+                                                    />
+                                                    <img
+                                                        className="play-icon"
+                                                        src={`${window.cdn}icons/icon_play.png`}
+                                                        alt="play"
+                                                    />
+                                                </>
+                                            ))}
+                                        </div>
+                                        <div className="play-text text-center px-2 py-1">
+                                            PLAY
+                                        </div>
                                     </div>
                                 </div>
 
-                                {false && (
-                                    <>
-                                        <div className="prize-info py-3">
-                                            <div className="col-12 d-flex align-items-center justify-content-between mb-2">
-                                                <p className="prize-title mb-0">
-                                                    {data.prizeTitle}
-                                                </p>
-                                                <p className="mb-1 ticket-label d-flex align-items-center">
-                                                    Your tickets
-                                                </p>
-                                            </div>
-                                            <div className="col-12 d-flex align-items-center justify-content-between">
-                                                <div className="prize-subtitle">
-                                                    {data.prizeSubtitle}
-                                                </div>
-                                                <p className="mb-0 ticket-value d-flex align-items-center">
-                                                    {`\u00A0${
-                                                        getPoolTickets(
-                                                            poolTickets,
-                                                            data?.prizeId
-                                                        )?.toLocaleString() || 0
-                                                    }`}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex align-items-center justify-content-center remaining-tickets">
-                                            {getPrizeTicketCollected(
-                                                prizeTicketCollection,
-                                                data?.prizeId
-                                            ) >= data?.ticketsRequired && (
-                                                <p className="mb-0 draw-timer d-flex align-items-center justify-content-center">
-                                                    Draw starts in{" "}
-                                                    <span className="text-danger ml-1">
-                                                        {timer}
-                                                    </span>
-                                                </p>
-                                            )}
-                                            {getPrizeTicketCollected(
-                                                prizeTicketCollection,
-                                                data?.prizeId
-                                            ) < data?.ticketsRequired && (
-                                                <p className="mb-0">
-                                                    {data?.ticketsRequired -
-                                                        getPrizeTicketCollected(
-                                                            prizeTicketCollection,
-                                                            data?.prizeId
-                                                        ) <=
-                                                    0 ? (
-                                                        <GenericLoader
-                                                            height="30"
-                                                            bg="#FF007C"
-                                                            cx1="43%"
-                                                            cx2="50%"
-                                                            cx3="58%"
-                                                            cy="15"
-                                                        />
-                                                    ) : (
-                                                        `${
-                                                            (
-                                                                data?.ticketsRequired -
-                                                                getPrizeTicketCollected(
-                                                                    prizeTicketCollection,
-                                                                    data?.prizeId
-                                                                )
-                                                            )?.toLocaleString() ||
-                                                            "-"
-                                                        } tickets remaining`
-                                                    )}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </>
-                                )}
                             </Link>
                         </div>
                     </div>

@@ -110,92 +110,114 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                 }}
                             >
                                 {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                <div className="prize-info position-relative d-flex align-self-center justify-content-center">
-                                    <ThumbnailMedia
-                                        url={data?.prizeBG}
-                                        isPlayVideo={isPlayVideo}
-                                        setIsPlayVideo={setIsPlayVideo}
-                                    />
-
-                                    <div className="info-wrapper p-3">
-                                        <div className="prize-subtitle">
-                                            {data?.prizeSubtitle}
-                                        </div>
-                                        <div className="prize-title mt-2 mb-2">
-                                            {data?.prizeTitle}
-                                        </div>
-                                        <div className="prize-description">
-                                            {data?.prizeContent}
-                                        </div>
+                                <div className="prize-info position-relative d-flex p-3">
+                                    <div className="prize-img p-0 col position-relative">
+                                        <ThumbnailMedia
+                                            url={data?.prizeBG}
+                                            isPlayVideo={isPlayVideo}
+                                            setIsPlayVideo={setIsPlayVideo}
+                                        />
                                     </div>
-                                </div>
-                                {/* TICKETS INFO */}
-                                <div className="col-12 d-flex flex-row align-items-center ticket-info py-2 py-md-0 px-2 px-md-3">
-                                    <div className="col px-0">
-                                        <div className="px-2 py-2 py-md-1 ticket-wrapper d-md-flex align-items-sm-center justify-content-sm-between">
-                                            <div className="your-tickets d-flex justify-content-between">
-                                                <p className="mb-0 px-md-2 label d-flex align-self-end">
-                                                    Your tickets
-                                                </p>
-                                                <p className="mb-0 tickets d-flex align-items-end">
-                                                    {getPoolTickets(
-                                                        poolTickets,
-                                                        data?.prizeId
-                                                    )?.toLocaleString() || 0}
-                                                </p>
+                                    <div className="d-flex flex-column justify-content-between col-6 col-xl-7">
+                                        <div className="info-wrapper pt-4">
+                                            <div className="prize-subtitle">
+                                                {data?.prizeSubtitle}
                                             </div>
-                                            <div className="pool-tickets d-flex justify-content-between mt-3 mt-md-0">
-                                                <p className="mb-0 pl-md-1 pr-md-2 label d-flex align-items-end">
-                                                    Draw starts in
-                                                </p>
-                                                <div className="d-flex">
-                                                    <p
-                                                        className={`mb-0 d-flex align-items-center ${
-                                                            OverTimeModeChecker(
+                                            <div className="prize-title mt-2 mb-2">
+                                                {data?.prizeTitle}
+                                            </div>
+                                            <div className="prize-description">
+                                                {data?.prizeContent}
+                                            </div>
+                                        </div>
+                                        {/* TICKETS INFO */}
+                                        <div className="d-flex flex-row align-items-center featured-ticket-info p-3">
+                                            <div className="col px-0">
+                                                <div className="ticket-wrapper align-items-sm-center">
+                                                    <div className="your-tickets">
+                                                        <p className="mb-0 label d-flex align-self-center">
+                                                            Your tickets
+                                                        </p>
+                                                        <p className="mb-0 tickets d-flex align-items-center">
+                                                            {`\u00A0${
+                                                                getPoolTickets(
+                                                                    poolTickets,
+                                                                    data?.prizeId
+                                                                )?.toLocaleString() ||
+                                                                0
+                                                            }`}
+                                                        </p>
+                                                    </div>
+                                                    <div className="pool-tickets mt-3">
+                                                        <p className="mb-0 pr-md-2 label d-flex align-items-end">
+                                                            Draw starts in
+                                                        </p>
+                                                        <div className="d-flex">
+                                                            <p
+                                                                className={`mb-0 d-flex align-items-center ${
+                                                                    OverTimeModeChecker(
+                                                                        data?.prizeId,
+                                                                        data?.ticketsRequired,
+                                                                        prizeTicketCollection
+                                                                    )
+                                                                        ? "text-danger timer"
+                                                                        : "current-tickets tickets"
+                                                                }`}
+                                                            >
+                                                                {`\u00A0${
+                                                                    OverTimeModeChecker(
+                                                                        data?.prizeId,
+                                                                        data?.ticketsRequired,
+                                                                        prizeTicketCollection
+                                                                    )
+                                                                        ? timer
+                                                                        : getPrizeTicketCollected(
+                                                                            prizeTicketCollection,
+                                                                            data?.prizeId
+                                                                        )?.toLocaleString() ||
+                                                                        0
+                                                                }`}
+                                                            </p>
+                                                            {!OverTimeModeChecker(
                                                                 data?.prizeId,
                                                                 data?.ticketsRequired,
                                                                 prizeTicketCollection
-                                                            )
-                                                                ? "text-danger timer"
-                                                                : "tickets"
-                                                        }`}
-                                                    >
-                                                        {OverTimeModeChecker(
-                                                            data?.prizeId,
-                                                            data?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
-                                                            ? timer
-                                                            : getPrizeTicketCollected(
-                                                                  prizeTicketCollection,
-                                                                  data?.prizeId
-                                                              )?.toLocaleString() ||
-                                                              0}
-                                                    </p>
-                                                    {!OverTimeModeChecker(
-                                                        data?.prizeId,
-                                                        data?.ticketsRequired,
-                                                        prizeTicketCollection
-                                                    ) && (
-                                                        <p className="required-tickets mb-0 d-flex align-items-center">
-                                                            {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
-                                                        </p>
-                                                    )}
+                                                            ) && (
+                                                                <p className="tickets mb-0 d-flex align-items-center">
+                                                                    {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
+                                                                </p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
+                                                <div className="game-icon position-relative">
+                                                    {data.gameInfo.map((e, i) => (
+                                                        <>
+                                                            <img
+                                                                key={`icon-${i}`}
+                                                                className="img-fluid"
+                                                                src={e.gameIcon}
+                                                                alt="game-icon"
+                                                            />
+                                                            <img
+                                                                className="play-icon"
+                                                                src={`${window.cdn}icons/icon_play.png`}
+                                                                alt="play"
+                                                            />
+                                                        </>
+                                                    ))}
+                                                </div>
+                                                <div className="play-text text-center px-2 py-1">
+                                                    PLAY
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="game-icon ml-2 d-flex justify-content-center">
-                                        {data.gameInfo.map((e, i) => (
-                                            <img
-                                                key={`icon-${i}`}
-                                                className="img-fluid"
-                                                src={e.gameIcon}
-                                                alt="game-icon"
-                                            />
-                                        ))}
-                                    </div>
+
                                 </div>
+
                                 {false && (
                                     <div className="tickets-info mb-2 w-100">
                                         {/* LABEL */}
