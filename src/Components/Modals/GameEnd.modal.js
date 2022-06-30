@@ -6,7 +6,7 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton }) => {
+const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -71,7 +71,12 @@ const GameEndModal = ({ handleContinueButton }) => {
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
                     <div className="modal-body-small text-center">
                         <>
-                            <p className="title">The tournament has ended.</p>
+                            <p className="title">{panelTitle}</p>
+                            {!score && (
+                                <p className="subtitle">
+                                    Submitting score...
+                                </p>
+                            )}
                             {score && (
                                 <p className="subtitle">
                                     You scored {score} points.

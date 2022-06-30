@@ -72,6 +72,7 @@ const Leaderboard = ({
         isQuitGameBtnDisabled: false,
         isQuitGameConfirm: false,
         isTournamentEnded: false,
+        isGameOver:false,
         isEarnAdditionalWinModalShown: false,
         isEarnAdditionalInfoShown: false,
     });
@@ -417,6 +418,15 @@ const Leaderboard = ({
         }
     };
 
+
+    window.showFrontEndGameOverPanel= () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isGameOver: true,
+        }));
+
+    };
+
     window.playerQuitGame = () => {
         setModalStatus((prev) => ({
             ...prev,
@@ -549,6 +559,22 @@ const Leaderboard = ({
                     />
                 )}
 
+                {/* MODAL FOR GAME OVER */}
+                {modalStatus.isGameOver && (
+                    <GameEndModal
+                        handleContinueButton={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isGameReady: false,
+                                isQuitGameBtnDisabled: false,
+                                isGameOver: false,
+                            }));
+                            // setIsGameLeaderboardShown(false);
+                        }}
+                        panelTitle="Game Over"
+                    />
+                )}
+
                 {/* MODAL FOR TOURNAMENT HAS ENDED */}
                 {modalStatus.isTournamentEnded && (
                     <GameEndModal
@@ -561,6 +587,7 @@ const Leaderboard = ({
                             }));
                             // setIsGameLeaderboardShown(false);
                         }}
+                        panelTitle="The tournament has ended."
                     />
                 )}
 
