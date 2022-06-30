@@ -162,6 +162,9 @@ const Leaderboard = ({
                 document.getElementById("destination")?.contentWindow;
             let score = -1;
             if (destination) {
+                // END BY TIMER
+                destination?.endGameByTimer?.();
+
                 // GET SCORE OBJECT
                 score = destination?.ggs?.();
                 if (score.a > -1 && currentGameInfo.playerEnterGameId) {
@@ -173,8 +176,6 @@ const Leaderboard = ({
                     }
                     const recaptchaToken = await executeRecaptcha("finishGame");
 
-                    // END BY TIMER
-                    destination?.endGameByTimer?.();
                     dispatch(
                         loadPlayerLeaveTournamentId(score, recaptchaToken)
                     );
@@ -366,7 +367,6 @@ const Leaderboard = ({
         }
 
         const recaptchaToken = await executeRecaptcha("finishGame");
-
         if (currentGameInfo.playerEnterGameId) {
             localStorage.setItem("currentGameScore", score.a);
 
