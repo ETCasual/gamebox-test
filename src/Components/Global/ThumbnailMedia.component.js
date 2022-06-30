@@ -10,6 +10,7 @@ const ThumbnailMedia = ({
     isPlayVideo,
     setIsPlayVideo,
     onError = null,
+    className = "",
 }) => {
     const [thumbFileType, setThumbFileType] = useState("");
     const [isMobile, setIsMobile] = useState(
@@ -47,6 +48,7 @@ const ThumbnailMedia = ({
                 }
             }}
             onError={(e) => (onError ? onError(e) : null)}
+            className={className}
         >
             <source src={url} type="video/mp4" />
         </video>
@@ -59,6 +61,7 @@ const ThumbnailMedia = ({
                 src={url}
                 alt={url}
                 onError={(e) => (onError ? onError(e) : null)}
+                className={className}
             />
         </picture>
     );

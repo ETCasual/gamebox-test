@@ -41,9 +41,12 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
         if (data.length > 0) {
             clearTimeout(timeOutRef);
             timeOutRef = setTimeout(() => {
+                data.push(data[0]);
                 setPrizeData(data);
             }, 500);
         }
+
+        console.log(prizeData);
 
         return () => clearTimeout(timeOutRef);
     }, [data]);
@@ -78,6 +81,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                     clickable: true,
                     dynamicBullets: true,
                     renderBullet: (index, className) => {
+                        // TODO: USE STATIC IMG IN SMALL THUMBNAIL
                         return `<div class="${className} d-flex align-items-center justify-content-center">
                             <img src="${prizeData[index]?.picture}" alt="prize"/>
                         </div>`;
@@ -105,6 +109,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                     url={e.picture}
                                     isPlayVideo={true}
                                     setIsPlayVideo={null}
+                                    className="thumb-media"
                                 />
                                 <img
                                     width={28}

@@ -59,16 +59,12 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                             <SwiperSlide key={idx}>
                                 <div className="prize">
                                     <div className="picture-wrapper d-flex flex-column align-items-center">
-                                        {/* <img
-                                            className="picture mb-4"
-                                            src={e?.picture}
-                                            alt="prize"
-                                        /> */}
                                         {/* THUMBNAIL MEDIA */}
                                         <ThumbnailMedia
                                             url={e.picture}
                                             isPlayVideo={true}
                                             setIsPlayVideo={null}
+                                            className="thumb-media"
                                         />
                                         <img
                                             width="36"
