@@ -34,6 +34,14 @@
             min-height: clamp(20rem, 70vw, 31rem);
         }
         width: inherit;
+
+        .enabled {
+            pointer-events: auto;
+        }
+        .disabled {
+            pointer-events: none;
+        }
+        
         .prize-info {
             background-color: #1d1d1d;
             border-top-left-radius: 10px;
