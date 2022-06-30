@@ -24,6 +24,7 @@ import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 // import loadPrizes from "redux/thunks/Prizes.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
+import SubscriptionModal from "Components/Modals/Subscription.modal";
 
 // HELPER FUNCTION
 import { defaultUserImage } from "Utils/DefaultImage";
@@ -74,6 +75,8 @@ const Leaderboard = ({
         isEarnAdditionalWinModalShown: false,
         isEarnAdditionalInfoShown: false,
     });
+    const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
+        useState(false);
 
     const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -84,6 +87,8 @@ const Leaderboard = ({
     let readyTournamentButtonRef = useRef(null);
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
+
+    let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -241,54 +246,6 @@ const Leaderboard = ({
 
         localStorage.removeItem("currentGameScore");
 
-        setModalStatus((prev) => ({ ...prev, isGameReady: true }));
-
-        const token = getToken();
-
-        setModalStatus((prev) => ({
-            ...prev,
-            isEarnAdditionalInfoShown: false,
-        }));
-
-        if (currentGameDetails.gameId > 0) {
-            try {
-                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
-                let options = {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-                        Authorization: `Bearer ${token}`,
-                    },
-                };
-                let response = await axios.get(url, options);
-                if (response.data) {
-                    sessionStorage.setItem(
-                        "lbId",
-                        JSON.stringify({
-                            cgId: data.cgId,
-                            gameId: currentGameDetails.gameId,
-                        })
-                    );
-                    setGameData(response.data);
-                    let gameCount =
-                        parseInt(localStorage.getItem("gameCount")) || 0;
-                    if (gameCount <= config.adsPerGame) {
-                        gameCount = gameCount + 1;
-                        localStorage.setItem("gameCount", gameCount);
-                    }
-
-                    showAdsBeforeGame(config);
-                }
-            } catch (error) {
-                console.log(error.message);
-            }
-        }
-
-        setEarnAdditionalDisabledStatus({
-            gems: false,
-            ads: false,
-        });
-
         // TODO
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -307,7 +264,57 @@ const Leaderboard = ({
                 isGemUsed,
                 recaptchaToken
             )
-        );
+        ).then(async () => {
+            const token = getToken();
+            setModalStatus((prev) => ({
+                ...prev,
+                isGameReady: true,
+                isEarnAdditionalInfoShown: false,
+            }));
+
+            if (currentGameDetails.gameId > 0) {
+                try {
+                    let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
+                    let options = {
+                        headers: {
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    };
+                    let response = await axios.get(url, options);
+                    if (response.data) {
+                        sessionStorage.setItem(
+                            "lbId",
+                            JSON.stringify({
+                                cgId: data.cgId,
+                                gameId: currentGameDetails.gameId,
+                            })
+                        );
+                        setGameData(response.data);
+                        let gameCount =
+                            parseInt(localStorage.getItem("gameCount")) || 0;
+                        if (gameCount <= config.adsPerGame) {
+                            gameCount = gameCount + 1;
+                            localStorage.setItem("gameCount", gameCount);
+                        }
+    
+                        showAdsBeforeGame(config);
+                    }
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }
+
+            setEarnAdditionalDisabledStatus({
+                gems: false,
+                ads: false,
+            });
+    
+        }).catch((err) => {
+            setIsSubscriptionModalShown(true);
+        });
+
     };
 
     const handleQuitGame = () => {
@@ -774,8 +781,20 @@ const Leaderboard = ({
                                             }
                                         >
                                             Ready Tournament
+                                            <img
+                                                width={18}
+                                                className="icon ml-3 mr-1"
+                                                src={`${window.cdn}assets/gem_01.png`}
+                                                alt="gems"
+                                            />
+                                            {data?.gemsNeeded}
                                         </button>
                                     </div>
+                                )}
+                                {isSubscriptionModalShown && (
+                                    <SubscriptionModal
+                                        handleGetGemsLaterBtn={onClickSubscriptionCancel}
+                                    />
                                 )}
 
                                 {/* EARN ADDITIONAL BENEFITS */}

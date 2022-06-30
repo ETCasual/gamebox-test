@@ -65,7 +65,7 @@ const Index = () => {
     return (
         <section id="activity">
             <div className="container-fluid px-0">
-                <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
+                <div className="col-12 col-md-10 col-lg-9 mx-auto">
                     <h1 className="main-title mb-4">Your Activities</h1>
 
                     {noDataLoaded && (

@@ -1,17 +1,24 @@
 // REACT & REDUX
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import loadHighScore from "redux/thunks/HighScore.thunk";
 
 // HELPER FUNCTIONS
 import getDateFormat from "Utils/DateFormat";
 
 const HighScore = ({ handleBackButton }) => {
-    const { highScore } = useSelector((state) => state.highScore);
+    const dispatch = useDispatch();
+    const history = useHistory()
 
+    const { highScore } = useSelector((state) => state.highScore);
     const [noDataLoaded, setNoDataLoaded] = useState(false);
 
     let timeOutRef = useRef(null);
+
+    useEffect(() => {
+        dispatch(loadHighScore());
+    }, [dispatch]);
 
     // STAY TUNED
     useEffect(() => {
@@ -30,12 +37,12 @@ const HighScore = ({ handleBackButton }) => {
             <section id="high-score">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7 wrapper">
+                        <div className="col-12 col-md-10 col-lg-9 wrapper">
                             {/* BACK BUTTON */}
                             <div
                                 className="back-button mb-4 mb-md-5"
-                                onClick={handleBackButton}
-                            >
+                                onClick={history.goBack}
+                                >
                                 <img
                                     src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"

@@ -262,7 +262,7 @@ const Index = ({ match }) => {
                 <section id="game-screen">
                     <div className="container-fluid">
                         <div className="row justify-content-center">
-                            <div className="col-12 col-md-10 col-lg-8 col-xl-7 px-0 full-wrapper">
+                            <div className="col-12 col-md-10 col-lg-9 px-0 full-wrapper">
                                 {/* BACK BUTTON */}
                                 <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
                                     <Link

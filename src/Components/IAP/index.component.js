@@ -288,7 +288,7 @@ const Index = () => {
             <section id="iap-items">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7">
+                        <div className="col-12 col-md-10 col-lg-9">
                             <p className="title mb-4 d-flex align-items-center">
                                 <span className="w-100">Purchase Gems</span>
                             </p>

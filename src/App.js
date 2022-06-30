@@ -21,6 +21,7 @@ import Profile from "Pages/Profile.page";
 import Invite from "Pages/Invite.page";
 import Settings from "Pages/Settings.page";
 import Rewards from "Pages/Rewards.page";
+import HighScore from "Pages/Highscore.page";
 import Notifications from "Pages/Notifications.page";
 import IAP from "Pages/IAP.page";
 import TermsAndConditions from "Pages/TermsAndConditions.page";
@@ -230,6 +231,10 @@ const App = () => {
 						component={Notifications}
 					/>
 					<ProtectedRoute exact path="/profile" component={Profile} />
+					<ProtectedRoute
+						path="/profile/highscore"
+						component={HighScore}
+					/>
 					<ProtectedRoute
 						path="/profile/rewards"
 						component={Rewards}

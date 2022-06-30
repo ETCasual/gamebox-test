@@ -75,7 +75,7 @@ const Profile = ({
             <div className="container-fluid">
                 {/* PROFILE */}
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-5">
+                    <div className="col-12 col-md-10 col-lg-9">
                         <div className="row">
                             {/* PROFILE INFO */}
                             <div className="col-12 text-center mb-4 mb-md-5">
@@ -299,11 +299,20 @@ const Profile = ({
                                 <div className="row">
                                     <div
                                         className="col-6 col-md-6 pr-1 pr-md-3 mb-4 mb-md-0"
-                                        onClick={handleHighScorePanel}
                                     >
-                                        <div className="highscore d-flex align-items-center justify-content-center">
-                                            <p className="mb-0">Highscores</p>
-                                        </div>
+                                        <Link
+                                            to={{
+                                                pathname: "/profile/highscore",
+                                                state: {
+                                                    prevPath:
+                                                        history.location.pathname,
+                                                },
+                                            }}
+                                        >
+                                            <div className="highscore d-flex align-items-center justify-content-center">
+                                                <p className="mb-0">Highscores</p>
+                                            </div>
+                                        </Link>
                                     </div>
                                     <div className="col-6 col-md-6 pl-1 pl-md-3 mb-4 mb-md-0">
                                         <Link

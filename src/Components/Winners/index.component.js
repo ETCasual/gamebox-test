@@ -88,8 +88,8 @@ const Index = () => {
             )}
             {!isCardClicked && (
                 <section id="winners">
-                    <div className="container-fluid">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
+                    <div className="container-fluid px-0">
+                        <div className="col-12 col-md-10 col-lg-9 mx-auto">
                             <h1 className="main-title mb-2">Latest Winners</h1>
                             {noDataLoaded && (
                                 <div className="no-result">

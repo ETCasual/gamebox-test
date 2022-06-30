@@ -103,6 +103,9 @@
                 border-radius: 10px;
                 text-align: center;
                 font-size: $fnt-sz-14;
+                .bold {
+                    font-weight: $fnt-wgt-700;
+                }
                 color: #ffffff;
                 width: 100%;
                 @include media-min($md) {

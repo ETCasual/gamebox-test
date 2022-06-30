@@ -17,12 +17,6 @@ const HeroContent = ({ setLoginModal, setRegistrationInstructionModal }) => {
                 >
                     Register now!
                 </button>
-                <button
-                    className="login-button w-100 p-3"
-                    onClick={() => setLoginModal(true)}
-                >
-                    Login
-                </button>
             </div>
         </>
     );
