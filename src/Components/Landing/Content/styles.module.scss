@@ -44,13 +44,17 @@
                 }    
                 .email,
                 .password {
-                    background: #1f1e1e;
+                    background: #3f3f3f;
                     box-shadow: inset 0px 3px 6px #0000000f;
                     border: 1px solid #242424;
                     border-radius: 5px;
                     height: 3.25rem;
-                    color: #868686;
+                    color: #9c9c9c;
                     font-size: $fnt-sz-14;
+                }
+                ::placeholder {
+                    color: #9c9c9c;
+                    opacity: 1;
                 }
                 .error {
                     font-weight: $fnt-wgt-600;
