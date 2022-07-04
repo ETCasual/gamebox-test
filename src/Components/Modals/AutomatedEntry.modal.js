@@ -1,6 +1,7 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import _ from "lodash";
 
 // COMPONENTS
@@ -11,6 +12,8 @@ import convertSecondsToHours from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
+    const location = useLocation();
+
     const { automatedEntryTicket } = useSelector(
         (state) => state.automatedEntryTickets
     );
@@ -22,7 +25,6 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
 
     useEffect(() => {
         document.documentElement.style.overflowY = "hidden";
-        console.warn(data);
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
@@ -34,10 +36,11 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
             new Date(nowTimeStamp()).getTimezoneOffset() / 60
         );
         let calculatedTime = new Date(data?.scheduledOff * 1000);
-        if (currentTimeZone !== data?.timeZone) {
+        if (currentTimeZone !== data?.timeZone)
+        {
             calculatedTime.setHours(
                 calculatedTime.getHours() -
-                    timeZoneHourDifference(currentTimeZone, data?.timeZone)
+                timeZoneHourDifference(currentTimeZone, data?.timeZone)
             );
         }
         clearInterval(watcherRef.current);
@@ -79,7 +82,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
     return (
         <>
             <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                <div className="modal-body-automated-entry position-relative">
+                <div className="modal-body-automated-entry col-12 position-relative">
                     {/* CLOSE BTN */}
                     <img
                         className="close-button"
@@ -90,38 +93,79 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                     />
 
                     {/* CARD */}
-                    <section id="automatedEntryModalPopup">
-                        <div className="row justify-content-center">
-                            <div className="col-10 col-sm-8 col-md-6 mb-3 pl-2 pr-1">
-                                <div className="card-prize d-flex flex-row">
-                                    <div className="col-auto p-2">
-                                        {/* THUMBNAIL MEDIA */}
-                                        <ThumbnailMedia
-                                            url={data.prizeBG}
-                                            isPlayVideo={true}
-                                            setIsPlayVideo={null}
-                                        />
-                                    </div>
-                                    <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
-                                        <div className="prize-text mb-auto">
-                                            <p className="card-subtitle m-auto pb-2">
-                                                Token ID: {data?.prizeSubtitle}
-                                            </p>
-                                            <p className="card-title m-auto pb-3">
-                                                {data?.prizeTitle}
-                                            </p>
-                                            <p className="card-content m-auto">
-                                                {data?.prizeContent}
-                                            </p>
-                                        </div>
+                    <div className="row justify-content-center mt-5">
+                        <div className="col-10 col-md-8 col-lg-6 mb-3 pl-2 pr-1">
+                            <div className="card-prize d-flex flex-row">
+                                <div className="p-2">
+                                    {/* THUMBNAIL MEDIA */}
+                                    <ThumbnailMedia
+                                        url={data.prizeBG}
+                                        isPlayVideo={true}
+                                        setIsPlayVideo={null}
+                                    />
+                                </div>
+                                <div className="w-100 p-2 d-flex flex-column">
+                                    <div className="prize-text mb-auto">
+                                        <p className="card-subtitle m-auto pb-2">
+                                            Token ID: {data?.prizeSubtitle}
+                                        </p>
+                                        <p className="card-title m-auto pb-3">
+                                            {data?.prizeTitle}
+                                        </p>
+                                        <p className="card-content m-auto">
+                                            {data?.prizeContent}
+                                        </p>
                                     </div>
                                 </div>
-                                <p className="countdown text-center mt-2 mb-5">
-                                    {getTimerFullUnits(timer)}
+                            </div>
+                            <p className="countdown mob-text col-8 text-center mx-auto my-4">
+                                {getTimerFullUnits(timer)}
+                            </p>
+                            <div className="text-center my-4">
+                                <p className="tickets-label mb-2">
+                                    Tickets you have collected
+                                </p>
+                                <p className="tickets-value">
+                                    <span className="mob-text mr-2">{getTickets()?.toLocaleString() ||
+                                        0}</span>
+
+                                    tickets
                                 </p>
                             </div>
+                            <div className="col-9 mx-auto my-4">
+                                <Link
+                                    className="start-earning-btn d-block text-center"
+                                    to={{
+                                        pathname: "/",
+                                        state: location.pathname,
+                                    }}
+                                    onClick={handleInstructionsCloseBtn}
+                                >
+                                    Start earning tickets
+                                </Link>
+                            </div>
+                            <div className="line" />
+                            <p className="instructions-title text-center">
+                                How to win tickets for the Bonus
+                                Draw?
+                            </p>
+                            <p className="instructions-subtitle text-center">
+                                Participate in any tournament
+                                throughout the platform before the
+                                timer runs out.
+                                <br />
+                                Tickets won from the
+                                tournaments will automatically be
+                                added into the Bonus Draw pool. It’s
+                                that easy.
+                            </p>
+                            <p className="instructions-tip text-center mb-4">
+                                Tip: Earn more tickets by “spent gems”
+                                to increase your ticket count.
+                            </p>
                         </div>
-                    </section>
+                    </div>
+
                     {/* <div className="col-12 p-3">
                     <h5 className="title"></h5>
                     <p className="subtitle"></p>
