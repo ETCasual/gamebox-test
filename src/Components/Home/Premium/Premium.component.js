@@ -81,7 +81,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
     return (
         <>
-            {!data?.completed && (
+            {
                 <VisibilitySensor
                     resizeCheck={true}
                     scrollCheck={true}
@@ -108,6 +108,9 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     // LEAVE HOVER TO PAUSE VIDEO
                                     setIsPlayVideo(false);
                                 }}
+                                className={
+                                    data?.completed ? "disabled" : "enabled"
+                                }
                             >
                                 <div className="position-relative">
                                     <ThumbnailMedia
@@ -272,15 +275,15 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
                             </Link>
                         </div>
+                        {data?.completed && (
+                            <PremiumCompleted
+                                data={data}
+                                handleWinnerRevealCard={handleWinnerRevealCard}
+                            />
+                        )}
                     </div>
                 </VisibilitySensor>
-            )}
-            {data?.completed && (
-                <PremiumCompleted
-                    data={data}
-                    handleWinnerRevealCard={handleWinnerRevealCard}
-                />
-            )}
+            }
         </>
     );
 };
