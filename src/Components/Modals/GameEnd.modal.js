@@ -72,11 +72,6 @@ const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
                     <div className="modal-body-small text-center">
                         <>
                             <p className="title">{panelTitle}</p>
-                            {!score && (
-                                <p className="subtitle">
-                                    Submitting score...
-                                </p>
-                            )}
                             {score && (
                                 <p className="subtitle">
                                     You scored {score} points.
