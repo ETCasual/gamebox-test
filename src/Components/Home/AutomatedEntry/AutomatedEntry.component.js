@@ -123,18 +123,28 @@ const AutomatedEntry = ({ data }) => {
         >
             <div className="card-wrapper p-2 p-md-3">
                 <div className="row">
-                    {/* PRIZE SUBTITLE */}
-                    {/* <p className="prize-id mb-0">{data.prizeSubtitle}</p> */}
                     {/* PRIZE INFO */}
-                    <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative">
-                        {/* PRIZE NAME */}
-                        <div className="prize-title">
-                            {data.prizeTitle}
+                    <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative justify-content-between">
+                        <div>
+                            {/* PRIZE NAME */}
+                            <div className="prize-title">
+                                {data.prizeTitle}
+                            </div>
+                            {/* PRIZE DETAILED CONTENT */}
+                            <div className="prize-subtitle">
+                                {data.prizeContent}
+                            </div>
                         </div>
-                        {/* PRIZE DETAILED CONTENT */}
-                        <div className="prize-subtitle mt-2">
-                            {data.prizeContent}
+                        {/* TICKETS */}
+                        <div className="total-ticket-info d-flex mt-4">
+                            <p className="mb-0 ticket-label d-flex align-items-center mr-5">
+                                Total tickets collected
+                            </p>
+                            <p className="mb-0 ticket-value">
+                                {getTickets()?.toLocaleString() || "-"}
+                            </p>
                         </div>
+
                     </div>
                     {/* PRIZE PICTURE */}
                     <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">
@@ -145,17 +155,6 @@ const AutomatedEntry = ({ data }) => {
                             />
                             <img src={data.prizeBG} alt={data.prizeTitle} />
                         </picture>
-                    </div>
-                    {/* TICKETS */}
-                    <div className="col-12">
-                        <div className="total-ticket-info d-flex justify-content-between mt-4">
-                            <p className="mb-0 ticket-label d-flex align-items-center">
-                                Total tickets collected
-                            </p>
-                            <p className="mb-0 ticket-value">
-                                {getTickets()?.toLocaleString() || "-"}
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>

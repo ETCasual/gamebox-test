@@ -1,15 +1,27 @@
 // AUTOMATED ENTRY COMPONENT
 .automatedEntry {
+    a:hover {
+        .card-wrapper {
+            border-left: solid 2px #ff027c;
+            border-top: solid 2px #ff027c;
+            border-right: solid 2px #ff027c;
+        }
+        .timer {
+            border-left: solid 2px #ff027c;
+            border-bottom: solid 2px #ff027c;
+            border-right: solid 2px #ff027c;
+        }
+    }
     .card-wrapper {
         min-height: 9rem;
         position: relative;
         cursor: pointer;
-        background: linear-gradient(143deg, #302f2f 0%, #0b0b0b 100%);
-        @include media-min($md) {
-            background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
-        }
+        background: #693151;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        border-left: solid 2px transparent;
+        border-top: solid 2px transparent;
+        border-right: solid 2px transparent;
         .prize-id {
             position: absolute;
             top: 0.6rem;
@@ -22,9 +34,10 @@
             }
         }
         .prize-title {
+            color: #f7b621;
             font-size: $fnt-sz-14;
             @include media-min($md) {
-                font-size: $fnt-sz-18;
+                font-size: $fnt-sz-22;
             }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
@@ -35,7 +48,7 @@
         picture {
             img {
                 width: 100%;
-                height: 4.25rem;
+                height: 6.5rem;
                 object-fit: cover;
                 border-radius: 17px;
             }
@@ -44,18 +57,22 @@
             border-radius: 5px;
             min-width: 7rem;
             .ticket-label {
-                color: #00c1b9;
                 font-size: $fnt-sz-12;
             }
             .ticket-value {
-                font-size: $fnt-sz-16;
+                color: #00c1b9;
+                font-size: $fnt-sz-14;
+                font-weight: $fnt-wgt-500;
             }
         }
     }
     .timer {
-        background: #1d1d1d;
+        background: #151116;
         box-shadow: inset 0px 3px 6px #0000000f;
         border-radius: 0px 0px 10px 10px;
+        border-left: solid 2px transparent;
+        border-bottom: solid 2px transparent;
+        border-right: solid 2px transparent;
         min-height: 2.5rem;
         @include media-min($md) {
             min-height: 3.5rem;
