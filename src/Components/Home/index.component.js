@@ -439,7 +439,7 @@ const Index = () => {
                                     <div className="row">
                                         <div className="col-12">
                                             <h2 className="section-title mb-3">
-                                                Featured Reward
+                                                Featured Rewards
                                             </h2>
                                         </div>
                                         {/* LOADER */}

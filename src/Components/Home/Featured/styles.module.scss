@@ -30,12 +30,9 @@
         cursor: pointer;
         border-radius: 10px;
         min-height: auto;
-        @include media-min($md) {
-            min-height: clamp(20rem, 70vw, 31rem);
-        }
         width: inherit;
         .prize-info {
-            background-color: #342d38;
+            background: linear-gradient(90deg, #38303d, #231e26) ;
             border-radius: 10px;
             @include media-min($md) {
                 border-radius: 17px;
@@ -63,8 +60,12 @@
                 }
                 img, video {
                     position: relative;
-                    border-radius: 10px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
                     width: 100%;
+                    @include media-min($sm) {
+                        border-radius: 10px;
+                    }
                     @include media-min($md) {
                         border-radius: 17px;
                     }
@@ -140,7 +141,7 @@
                     height: 100%;
                     border-top-left-radius: 12px;
                     border-top-right-radius: 12px;
-                    background: #ff027ca3;
+                    background: #ff3399a3;
                 }
                 .play-icon {
                     display: block;
@@ -155,7 +156,7 @@
     }
     .featured-ticket-info {
         height: auto;
-        background-color: #433849;
+        background-color: #433848;
         border-radius: 10px;
         .ticket-wrapper {
             height: auto;
@@ -235,7 +236,7 @@
             .play-text {
                 font-size: $fnt-sz-12;
                 font-weight: $fnt-wgt-600;
-                background: #ff027c;
+                background: #ff3399;
                 border-bottom-left-radius: 12px;
                 border-bottom-right-radius: 12px;
             }

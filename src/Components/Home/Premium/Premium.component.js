@@ -109,7 +109,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     setIsPlayVideo(false);
                                 }}
                             >
-                                <div className="position-relative">
+                                <div className="position-relative prize-img">
                                     <ThumbnailMedia
                                         url={data?.prizeBG}
                                         isPlayVideo={isPlayVideo}
