@@ -6,7 +6,6 @@ import VisibilitySensor from "react-visibility-sensor";
 
 // COMPONENTS
 import PremiumCompleted from "Components/Home/PremiumCompleted/PremiumCompleted.component";
-import GenericLoader from "Components/Loader/Generic.loader";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // REDUX
@@ -269,7 +268,6 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         </div>
                                     </div>
                                 </div>
-
                             </Link>
                         </div>
                     </div>

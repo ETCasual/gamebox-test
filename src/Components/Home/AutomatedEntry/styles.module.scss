@@ -1,6 +1,13 @@
 // AUTOMATED ENTRY COMPONENT
 .automatedEntry {
-    a:hover {
+    .bonus-card {
+        position: relative;
+        cursor: pointer;
+        background: #693151;
+        border-radius: 12px;
+    }
+
+    &:hover {
         .card-wrapper {
             border-left: solid 2px #ff027c;
             border-top: solid 2px #ff027c;

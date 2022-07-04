@@ -702,7 +702,7 @@ html {
             cursor: pointer;
             z-index: 1;
         }
-        background: linear-gradient(132deg, #302f2f 0%, #0b0b0b 100%);
+        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
         box-shadow: 0px 3px 6px #00000029;
         border-radius: 10px;
         padding: 0.7em;
@@ -801,7 +801,7 @@ html {
         }
     }
     .modal-body-connect-wallet {
-        background: linear-gradient(132deg, #302f2f 0%, #0b0b0b 100%);
+        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
         box-shadow: 0px 3px 6px #00000029;
         border-radius: 10px;
         padding: 0.7em;
@@ -849,6 +849,190 @@ html {
                 font-size: $fnt-sz-12;
             }
         }
+    }
+    .modal-body-automated-entry {
+        .close-button {
+            width: 30px;
+            height: 30px;
+            @include media-min($md) {
+                width: 36px;
+                height: 36px;
+            }
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 60rem;
+
+        .card-prize {
+            height: 8rem;
+            border-radius: 10px;
+            border: 1px solid #949494c1;
+            position: relative;
+            video, img {
+                height: 100%;
+                border-radius: 10px;
+                position: relative;
+            }
+            
+            // .card-subtitle {
+            //     font-size: $fnt-sz-20;
+            // }
+            // .card-title {
+            //     font-weight: $fnt-wgt-700;
+            //     font-size: $fnt-sz-22;
+            //     width: 30ch;
+            // }
+            
+            .prize-text {
+                color: white;
+
+                .card-title {
+                    font-size: $fnt-sz-20;
+                    font-weight: $fnt-wgt-600;
+                }
+                .card-subtitle {
+                    font-size: $fnt-sz-12;
+                }
+                .card-content {
+                    font-size: $fnt-sz-14;
+                }
+            }
+        }
+
+        .countdown {
+            font-size: $fnt-sz-12;
+            @include media-min($xs) {
+                font-size: $fnt-sz-14;
+            }
+            font-weight: $fnt-wgt-600;
+            background: #433948;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 10px;
+            padding: 1rem;
+            min-width: 90%;
+            @include media-min($md) {
+                min-width: 20rem;
+            }
+            color: #00c1b9;
+        }
+
+        .prize {
+            h4 {
+                font-size: 16px;
+                @media only screen and (min-width: 768px) {
+                    font-size: 28px;
+                }
+            }
+            p {
+                font-size: 0.75rem;
+                @media only screen and (min-width: 768px) {
+                    font-size: 0.875rem;
+                }
+                a {
+                    color: #7824f8 !important;
+                }
+            }
+            
+        }
+
+        // .prize-img {
+        //     width: 18em;
+        //     height: auto;
+        // }
+        // .result-info {
+        //     font-size: $fnt-sz-10;
+        // }
+        // .title {
+        //     font-size: $fnt-sz-16;
+        //     @include media-min($md) {
+        //         font-size: $fnt-sz-18;
+        //     }
+        // }
+        // .subtitle {
+        //     font-size: $fnt-sz-12;
+        //     @include media-min($md) {
+        //         font-size: $fnt-sz-14;
+        //     }
+        //     color: #868686;
+        //     line-height: 1.5;
+        //     .email {
+        //         color: #7824f8 !important;
+        //     }
+        // }
+        // ul {
+        //     font-size: $fnt-sz-12;
+        //     @include media-min($md) {
+        //         font-size: $fnt-sz-14;
+        //     }
+        //     color: #868686;
+        //     li {
+        //         line-height: 2;
+        //     }
+        // }
+        // .additional {
+        //     font-weight: $fnt-wgt-700;
+        //     font-size: $fnt-sz-18;
+        // }
+        // .earn-tickets,
+        // .earn-exp {
+        //     padding: 1rem;
+        //     color: #fcc239;
+        //     background: #141414;
+        //     border-radius: 6px;
+        //     min-width: 13rem;
+        //     height: 3rem;
+        //     font-size: $fnt-sz-20;
+        //     font-weight: $fnt-wgt-600;
+        // }
+        // .earn-exp {
+        //     background: linear-gradient(90deg, #fdc33d73 0%, #efa30065 100%);
+        // }
+        // button {
+        //     height: 3.5em;
+        //     border-radius: 10px;
+        //     font-size: 14px;
+        //     cursor: pointer;
+        // }
+        // .btn-yes,
+        // .btn-results {
+        //     background: #d3076a 0% 0% no-repeat padding-box;
+        //     box-shadow: inset 0px 3px 6px #0000000f;
+        //     border-radius: 5px;
+        //     color: white;
+        //     margin-left: 0.25em;
+        //     font-size: $fnt-sz-14;
+        //     font-weight: bold;
+        // }
+        // .btn-no {
+        //     margin-right: 0.25em;
+        //     background: transparent
+        //         linear-gradient(105deg, #1c1c1c 0%, #101010 100%) 0% 0%
+        //         no-repeat padding-box;
+        //     border-radius: 5px;
+        //     font-size: $fnt-sz-14;
+        //     color: #ffffff;
+        // }
+        // .btn-results,
+        // .btn-continue {
+        //     width: 100%;
+        //     margin: auto;
+        // }
+        // .btn-continue {
+        //     color: white;
+        // }
+        // .continue {
+        //     color: black;
+        //     background: linear-gradient(264deg, #fdc43d 0%, #efa500 100%);
+        // }
+        // .claim-later-btn {
+        //     color: #868686;
+        // }
     }
 }
 
