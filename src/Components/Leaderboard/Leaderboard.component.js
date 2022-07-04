@@ -358,6 +358,7 @@ const Leaderboard = ({
             setModalStatus((prev) => ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
+                isGameOver: true,
             }));
 
             dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
@@ -400,15 +401,6 @@ const Leaderboard = ({
                 }
             }, 1000);
         }
-    };
-
-
-    window.showFrontEndGameOverPanel= () => {
-        setModalStatus((prev) => ({
-            ...prev,
-            isGameOver: true,
-        }));
-
     };
 
     window.playerQuitGame = () => {
