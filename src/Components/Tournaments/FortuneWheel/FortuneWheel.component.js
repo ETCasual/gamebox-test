@@ -106,8 +106,8 @@ const FortuneWheel = ({
                             {/* FIRST COLUMN */}
                             <div className="col-12 py-3 align-items-center justify-content-between wrapper-col">
                                 {/* FIRST ROW - SPINNER TEXT AND ICONS */}
-                                <div className="first-row w-100 d-flex align-items-start justify-content-between">
-                                    <div className="text-icon-wrapper d-flex align-items-center justify-content-between">
+                                <div className="first-row d-flex flex-column">
+                                    <div className="text-icon-wrapper m-auto">
                                         {/* CLOSE BUTTON */}
                                         <img
                                             width="36"
@@ -134,11 +134,11 @@ const FortuneWheel = ({
                                             src={`${window.cdn}icons/icon_minimize.png`}
                                             alt="arrow-button"
                                         /> */}
-                                        <div className="text-wrapper ml-3">
-                                            <p className="the-spinner-text mb-0 d-block">
+                                        <div className="text-wrapper">
+                                            {/* <p className="the-spinner-text mb-0 d-block">
                                                 The Spinner
-                                            </p>
-                                            <p className="earn-more-tickets-text my-1 d-block">
+                                            </p> */}
+                                            <p className="earn-more-tickets-text d-block m-auto">
                                                 Spin & earn more rewards here!
                                             </p>
                                         </div>
@@ -197,7 +197,7 @@ const FortuneWheel = ({
                             <div className="col-12 py-3 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center">
                                 <div className="w-100 d-flex">
                                     {/* SPIN BALANCE */}
-                                    <div className="your-balance d-flex flex-column align-items-center justify-content-center mr-auto">
+                                    {/* <div className="your-balance d-flex flex-column align-items-center justify-content-center mr-auto">
                                         <div className="your-balance-text mb-2">
                                             YOUR SPINS
                                         </div>
@@ -206,26 +206,26 @@ const FortuneWheel = ({
                                                 ? spinner?.freeSpins
                                                 : 0}
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     {/* GEMS BALANCE */}
-                                    <div className="your-balance d-flex flex-column align-items-center justify-content-center ml-auto">
-                                        <div className="your-balance-text mb-2">
+                                    <div className="your-balance d-flex flex-row align-items-center justify-content-center m-auto">
+                                        <div className="your-balance-text ml-3 mr-auto">
                                             YOUR GEMS
                                         </div>
-                                        <div className="balance-number">
+                                        <div className="balance-number d-flex flex-row align-items-center justify-content-center mr-3 ml-auto">
+                                            {user?.gems || 0}
                                             <img
                                                 className="icon"
                                                 src={`${window.cdn}assets/gem_01.png`}
                                                 alt="gems"
                                             ></img>
-                                            {user?.gems || 0}
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* PROBABILITY DISPLAY BUTTON */}
-                                <div className="probability-btn">
+                                <div className="probability-btn my-3">
                                     <button
                                         onClick={() =>
                                             setIsProbabilityShown(
@@ -263,19 +263,19 @@ const FortuneWheel = ({
                                             />
 
                                             {/* SPINS LEFT INFO */}
-                                            {/* <p className="spin-amount-left-wrapper text-center mb-3">
-                                            <span className="you-have-text">
-                                                You have
-                                            </span>
-                                            <span className="spin-number">
-                                                {spinner?.freeSpins > 0
-                                                    ? spinner?.freeSpins
-                                                    : 0}
-                                            </span>
-                                            <span className="spins-left-text">
-                                                spins left
-                                            </span>
-                                        </p> */}
+                                            <p className="spin-amount-left-wrapper text-center my-3">
+                                                <span className="you-have-text">
+                                                    You have
+                                                </span>
+                                                <span className="spin-number">
+                                                    {spinner?.freeSpins > 0
+                                                        ? spinner?.freeSpins
+                                                        : 0}
+                                                </span>
+                                                <span className="spins-left-text">
+                                                    spins left
+                                                </span>
+                                            </p>
                                         </>
                                     )}
                                     {isProbabilityShown && (
