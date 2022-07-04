@@ -70,9 +70,10 @@ const Leaderboard = ({
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
         isQuitGameBtnDisabled: false,
+        isPlayBtnDisabled: false,
         isQuitGameConfirm: false,
         isTournamentEnded: false,
-        isGameOver:false,
+        isGameOver: false,
         isEarnAdditionalWinModalShown: false,
         isEarnAdditionalInfoShown: false,
     });
@@ -224,6 +225,12 @@ const Leaderboard = ({
     };
 
     const handleOnClickPlayButton = async () => {
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isPlayBtnDisabled: true,
+        }));
+
         if (!executeRecaptcha) {
             console.log("Execute recaptcha not yet available");
             return;
@@ -316,6 +323,7 @@ const Leaderboard = ({
                 ...prev,
                 isGameReady: false,
                 isQuitGameConfirm: false,
+                isPlayBtnDisabled:false,
             }));
         else if (choice === "no")
             setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
@@ -359,6 +367,7 @@ const Leaderboard = ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
                 isGameOver: true,
+                isPlayBtnDisabled: false,
             }));
 
             dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
@@ -375,6 +384,7 @@ const Leaderboard = ({
                     setModalStatus((prev) => ({
                         ...prev,
                         isQuitGameBtnDisabled: false,
+                        isPlayBtnDisabled: false,
                     }));
                     // setIsShowAdditionalBenefitsModal(true);
                     // setIsGameLeaderboardShown(false);
@@ -530,6 +540,7 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isEarnAdditionalWinModalShown: false,
+                                isPlayBtnDisabled: false,
                             }));
                         }}
                     />
@@ -544,6 +555,7 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isGameOver: false,
+                                isPlayBtnDisabled: false,
                             }));
                             // setIsGameLeaderboardShown(false);
                         }}
@@ -560,6 +572,7 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
+                                isPlayBtnDisabled: false,
                             }));
                             // setIsGameLeaderboardShown(false);
                         }}
@@ -823,11 +836,15 @@ const Leaderboard = ({
                                         >
                                             <button
                                                 onClick={
-                                                    isGameAvailable
+                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
                                                         ? handleOnClickPlayButton
                                                         : null
                                                 }
-                                                className="play-button"
+                                                className={`play-button ${
+                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                                        ? ""
+                                                        : "opacity-0-5"
+                                                }`}
                                             >
                                                 Play Tournament!
                                             </button>
