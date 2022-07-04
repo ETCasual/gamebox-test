@@ -108,6 +108,9 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                     // LEAVE HOVER TO PAUSE VIDEO
                                     setIsPlayVideo(false);
                                 }}
+                                className={
+                                    data?.completed ? "disabled" : "enabled"
+                                }
                             >
                                 {/* PRIZE TITLE, DESCRIPTION & ID */}
                                 <div className="prize-info position-relative d-flex flex-wrap p-0 pb-3 p-sm-3">
@@ -287,14 +290,14 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                 )}
                             </Link>
                         </div>
+                        {data?.completed && (
+                            <FeaturedCompleted
+                                data={data}
+                                handleWinnerRevealCard={handleWinnerRevealCard}
+                            />
+                        )}
                     </div>
                 </VisibilitySensor>
-            )}
-            {data?.completed && (
-                <FeaturedCompleted
-                    data={data}
-                    handleWinnerRevealCard={handleWinnerRevealCard}
-                />
             )}
         </>
     );

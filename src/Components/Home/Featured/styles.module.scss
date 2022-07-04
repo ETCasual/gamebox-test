@@ -31,6 +31,14 @@
         border-radius: 10px;
         min-height: auto;
         width: inherit;
+
+        .enabled {
+            pointer-events: auto;
+        }
+        .disabled {
+            pointer-events: none;
+        }
+        
         .prize-info {
             background: linear-gradient(90deg, #38303d, #231e26) ;
             border-radius: 10px;
