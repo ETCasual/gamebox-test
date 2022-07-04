@@ -161,26 +161,10 @@ const Leaderboard = ({
 
             let destination =
                 document.getElementById("destination")?.contentWindow;
-            let score = -1;
+
             if (destination) {
                 // END BY TIMER
                 destination?.endGameByTimer?.();
-
-                // GET SCORE OBJECT
-                score = destination?.ggs?.();
-                if (score.a > -1 && currentGameInfo.playerEnterGameId) {
-                    localStorage.setItem("currentGameScore", score.a);
-
-                    if (!executeRecaptcha) {
-                        console.log("Execute recaptcha not yet available");
-                        return;
-                    }
-                    const recaptchaToken = await executeRecaptcha("finishGame");
-
-                    dispatch(
-                        loadPlayerLeaveTournamentId(score, recaptchaToken)
-                    );
-                }
                 setModalStatus((prev) => ({
                     ...prev,
                     isTournamentEnded: true,
