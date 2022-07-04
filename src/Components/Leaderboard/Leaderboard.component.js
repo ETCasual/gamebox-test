@@ -403,26 +403,26 @@ const Leaderboard = ({
         }
     };
 
-    window.playerQuitGame = () => {
-        setModalStatus((prev) => ({
-            ...prev,
-            isQuitGameBtnDisabled: true,
-        }));
+    // window.playerQuitGame = () => {
+    //     setModalStatus((prev) => ({
+    //         ...prev,
+    //         isQuitGameBtnDisabled: true,
+    //     }));
 
-        if (extraEarning.experience !== 0 || extraEarning.ticket !== 0)
-            setModalStatus((prev) => ({
-                ...prev,
-                isEarnAdditionalWinModalShown: true,
-            }));
-        else
-            setModalStatus((prev) => ({
-                ...prev,
-                isQuitGameBtnDisabled: false,
-                isGameReady: false,
-                isTournamentEnded: false,
-                isEarnAdditionalWinModalShown: false,
-            }));
-    };
+    //     if (extraEarning.experience !== 0 || extraEarning.ticket !== 0)
+    //         setModalStatus((prev) => ({
+    //             ...prev,
+    //             isEarnAdditionalWinModalShown: true,
+    //         }));
+    //     else
+    //         setModalStatus((prev) => ({
+    //             ...prev,
+    //             isQuitGameBtnDisabled: false,
+    //             isGameReady: false,
+    //             isTournamentEnded: false,
+    //             isEarnAdditionalWinModalShown: false,
+    //         }));
+    // };
 
     function getEmptyLeaderboardList() {
         let rankList = [];
