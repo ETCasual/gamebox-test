@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import { useHistory } from "react-router-dom";
 
 import IAPFroyoGemPacks from "Components/IAP/IAPItems/IAPFroyoGemPacks.component";
 import IAPCardGemPacks from "Components/IAP/IAPItems/IAPCardGemPacks.component";
@@ -283,12 +284,29 @@ const Index = () => {
         }
     };
 
+    const history = useHistory();
+    
     return (
         <>
             <section id="iap-items">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-9">
+                             {/* BACK BUTTON */}
+                            {(history.location?.state?.prevPath.includes(("premium").toLowerCase())||history.location?.state?.prevPath.includes(("featured").toLowerCase())) && (
+                                     <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
+                                     <div
+                                         className="d-flex align-items-center"
+                                         onClick={history.goBack}
+                                     >
+                                         <img
+                                             src={`${window.cdn}buttons/button_back.png`}
+                                             alt="back-btn"
+                                         />
+                                         <span className="ml-2">Back</span>
+                                     </div>
+                                 </div>
+                                )}
                             <p className="title mb-4 d-flex align-items-center">
                                 <span className="w-100">Purchase Gems</span>
                             </p>

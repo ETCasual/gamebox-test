@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import React, { useState,useEffect } from "react";
+import { NavLink, Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Notification from "Components/Global/Notifications.component";
@@ -44,6 +44,7 @@ const Header = ({
     const dispatch = useDispatch();
 
     const history = useHistory();
+    const location = useLocation();
 
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
@@ -61,6 +62,10 @@ const Header = ({
     //         window.removeEventListener("resize", handleResize);
     //     };
     // }, []);
+    //Force Rerender the page every time the link to the path changes
+    useEffect(() => {
+    }, [location]);
+
 
     // GETTING GEMS
     const getGems = () => {
@@ -166,9 +171,6 @@ const Header = ({
                                     exact
                                     to={{
                                         pathname: "/",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
                                     }}
                                     activeClassName="active"
                                 >
@@ -177,9 +179,6 @@ const Header = ({
                                 <NavLink
                                     to={{
                                         pathname: "/activity",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
                                     }}
                                     activeClassName="active"
                                 >
@@ -190,9 +189,6 @@ const Header = ({
                                 <NavLink
                                     to={{
                                         pathname: "/winners",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
                                     }}
                                     activeClassName="active"
                                 >

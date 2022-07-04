@@ -265,25 +265,16 @@ const Index = ({ match }) => {
                             <div className="col-12 col-md-10 col-lg-8 px-0 full-wrapper">
                                 {/* BACK BUTTON */}
                                 <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
-                                    <Link
+                                    <div
                                         className="d-flex align-items-center"
-                                        onClick={handleHomeNavLink}
-                                        to={{
-                                            pathname:
-                                                history.location?.state
-                                                    ?.prevPath || "/",
-                                            state: {
-                                                prevPath:
-                                                    history.location.pathname,
-                                            },
-                                        }}
+                                        onClick={()=>{handleHomeNavLink(); history.goBack()}}
                                     >
                                         <img
                                             src={`${window.cdn}buttons/button_back.png`}
                                             alt="back-btn"
                                         />
                                         <span className="ml-2">Back</span>
-                                    </Link>
+                                    </div>
                                 </div>
                                 {/* TICKETS AND POOL INFO */}
                                 <div className="col-12 px-3 position-relative d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
