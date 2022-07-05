@@ -285,27 +285,29 @@ const Index = () => {
     };
 
     const history = useHistory();
-    
+
     return (
         <>
             <section id="iap-items">
                 <div className="container-fluid">
                     <div className="row justify-content-center">
                         <div className="col-12 col-md-10 col-lg-9">
-                             {/* BACK BUTTON */}
-                            {(history.location?.state?.prevPath.includes(("premium").toLowerCase())||history.location?.state?.prevPath.includes(("featured").toLowerCase())) && (
-                                     <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
-                                     <div
-                                         className="d-flex align-items-center"
-                                         onClick={history.goBack}
-                                     >
-                                         <img
-                                             src={`${window.cdn}buttons/button_back.png`}
-                                             alt="back-btn"
-                                         />
-                                         <span className="ml-2">Back</span>
-                                     </div>
-                                 </div>
+                            {/* BACK BUTTON */}
+                            {(history.location?.state?.prevPath.includes(("premium").toLowerCase())
+                                || history.location?.state?.prevPath.includes(("featured").toLowerCase())) &&
+                                (
+                                    <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
+                                        <div
+                                            className="d-flex align-items-center"
+                                            onClick={history.goBack}
+                                        >
+                                            <img
+                                                src={`${window.cdn}buttons/button_back.png`}
+                                                alt="back-btn"
+                                            />
+                                            <span className="ml-2">Back</span>
+                                        </div>
+                                    </div>
                                 )}
                             <p className="title mb-4 d-flex align-items-center">
                                 <span className="w-100">Purchase Gems</span>
@@ -397,11 +399,10 @@ const Index = () => {
                             <>
                                 <ul className="list-unstyled mb-0 d-flex align-items-center justify-content-start tabs">
                                     <li
-                                        className={`${
-                                            productInfo.tab === "froyo"
-                                                ? "active"
-                                                : ""
-                                        } p-3 froyo`}
+                                        className={`${productInfo.tab === "froyo"
+                                            ? "active"
+                                            : ""
+                                            } p-3 froyo`}
                                         onClick={() =>
                                             handleSelectedTab("froyo")
                                         }
@@ -409,11 +410,10 @@ const Index = () => {
                                         Pay using Froyo Tokens
                                     </li>
                                     <li
-                                        className={`${
-                                            productInfo.tab === "card"
-                                                ? "active"
-                                                : ""
-                                        } p-3 credit`}
+                                        className={`${productInfo.tab === "card"
+                                            ? "active"
+                                            : ""
+                                            } p-3 credit`}
                                         onClick={() =>
                                             handleSelectedTab("card")
                                         }
