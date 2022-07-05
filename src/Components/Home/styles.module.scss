@@ -1,4 +1,6 @@
 #home {
+    padding-bottom: 6rem;
+
     .bonus {
         background: linear-gradient(90deg, #5c0d39, #1e1120);
     }
@@ -13,7 +15,7 @@
         position: relative;
         cursor: pointer;
         background: linear-gradient(90deg, #844770, #692049);
-        border-radius: 12px;
+        border-radius: 10px;
         .the-spinner-text {
             color: #f7b621;
             font-size: $fnt-sz-14;
@@ -27,9 +29,20 @@
             font-size: $fnt-sz-12;
         }
         .earn-more-tickets-img {
-            height: 4.25rem;
             object-fit: cover;
-            border-radius: 17px;
+            height: 4.25rem;
+            border-radius: 7px;
+            @include media-min($sm) {
+                border-radius: 17px;
+            }
+        }
+        .earn-more-tickets-img-wrapper {
+            right: -10px;
+            position: absolute;
+            @include media-min($sm) {
+                right: unset;
+                position: relative;
+            }
         }
 
         &:hover {
@@ -63,7 +76,6 @@
                 min-height: 3.5rem;
             }
             .timer-text {
-                color: white;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
                     font-size: $fnt-sz-14;
