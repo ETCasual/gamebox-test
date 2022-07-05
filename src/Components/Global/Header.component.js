@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import Notification from "Components/Global/Notifications.component";
@@ -43,7 +43,7 @@ const Header = ({
 
     const dispatch = useDispatch();
 
-    const history = useHistory();
+    const location = useLocation();
 
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
@@ -69,7 +69,7 @@ const Header = ({
             let now = nowTimeStamp();
             const output = _earnAdditional.reduce((prev, curr) =>
                 Math.abs(curr?.timestamp - now) <
-                Math.abs(prev?.timestamp - now)
+                    Math.abs(prev?.timestamp - now)
                     ? curr
                     : prev
             );
@@ -167,7 +167,7 @@ const Header = ({
                                     to={{
                                         pathname: "/",
                                         state: {
-                                            prevPath: history.location.pathname,
+                                            prevPath: location.pathname,
                                         },
                                     }}
                                     activeClassName="active"
@@ -178,7 +178,7 @@ const Header = ({
                                     to={{
                                         pathname: "/activity",
                                         state: {
-                                            prevPath: history.location.pathname,
+                                            prevPath: location.pathname,
                                         },
                                     }}
                                     activeClassName="active"
@@ -191,7 +191,7 @@ const Header = ({
                                     to={{
                                         pathname: "/winners",
                                         state: {
-                                            prevPath: history.location.pathname,
+                                            prevPath: location.pathname,
                                         },
                                     }}
                                     activeClassName="active"
@@ -211,7 +211,7 @@ const Header = ({
                                 to={{
                                     pathname: "/iap",
                                     state: {
-                                        prevPath: history.location.pathname,
+                                        prevPath: location.pathname,
                                     },
                                 }}
                             >
@@ -237,7 +237,7 @@ const Header = ({
                                     style={{
                                         filter:
                                             notificationNumber.count > 0 &&
-                                            notificationData.length > 0
+                                                notificationData.length > 0
                                                 ? "none"
                                                 : "grayscale(0.9)",
                                     }}
@@ -246,16 +246,15 @@ const Header = ({
                                     alt="bell"
                                 />
                                 <div
-                                    className={`notification-number ${
-                                        notificationNumber.count > 0 &&
+                                    className={`notification-number ${notificationNumber.count > 0 &&
                                         notificationData.length > 0
-                                            ? "d-flex"
-                                            : "d-none"
-                                    } align-items-center justify-content-center`}
+                                        ? "d-flex"
+                                        : "d-none"
+                                        } align-items-center justify-content-center`}
                                 >
                                     <span className="w-100">
                                         {notificationNumber.count > 0 &&
-                                        notificationData.length > 0
+                                            notificationData.length > 0
                                             ? notificationNumber.count
                                             : 0}
                                     </span>
@@ -395,15 +394,15 @@ const Header = ({
                                                         </div>
                                                         <div className="wallet-connected-value">
                                                             {user.tokenBalance >=
-                                                            0
+                                                                0
                                                                 ? parseFloat(
-                                                                      user.tokenBalance
-                                                                  )
-                                                                      ?.toFixed(
-                                                                          2
-                                                                      )
-                                                                      ?.toLocaleString() +
-                                                                  " FROYO"
+                                                                    user.tokenBalance
+                                                                )
+                                                                    ?.toFixed(
+                                                                        2
+                                                                    )
+                                                                    ?.toLocaleString() +
+                                                                " FROYO"
                                                                 : "Invalid token"}{" "}
                                                         </div>
                                                     </div>
@@ -428,7 +427,7 @@ const Header = ({
                                             pathname: "/profile",
                                             state: {
                                                 prevPath:
-                                                    history.location.pathname,
+                                                    location.pathname,
                                             },
                                         }}
                                     >

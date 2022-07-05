@@ -143,6 +143,7 @@ const AutomatedEntry = ({ data }) => {
                                     {getTickets()?.toLocaleString() || "-"}
                                 </p>
                             </div>
+
                         </div>
                         {/* PRIZE PICTURE */}
                         <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">

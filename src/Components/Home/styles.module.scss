@@ -1,6 +1,6 @@
 #home {
     .bonus {
-        background: linear-gradient(130deg, #5c0d39, #151116);
+        background: linear-gradient(90deg, #5c0d39, #1e1120);
     }
 
     .section-title {
@@ -12,7 +12,7 @@
     .spinner {
         position: relative;
         cursor: pointer;
-        background: #693151;
+        background: linear-gradient(90deg, #844770, #692049);
         border-radius: 12px;
         .the-spinner-text {
             color: #f7b621;
@@ -34,14 +34,14 @@
 
         &:hover {
             .card-wrapper {
-                border-left: solid 2px #ff027c;
-                border-top: solid 2px #ff027c;
-                border-right: solid 2px #ff027c;
+                border-left: solid 2px #ff3399;
+                border-top: solid 2px #ff3399;
+                border-right: solid 2px #ff3399;
             }
             .timer {
-                border-left: solid 2px #ff027c;
-                border-bottom: solid 2px #ff027c;
-                border-right: solid 2px #ff027c;
+                border-left: solid 2px #ff3399;
+                border-bottom: solid 2px #ff3399;
+                border-right: solid 2px #ff3399;
             }
         }
         .card-wrapper {

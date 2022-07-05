@@ -13,12 +13,12 @@ import AutomatedEntryLoader from "Components/Loader/AutomatedEntry.loader";
 import PremiumLoader from "Components/Loader/Premium.loader";
 import StayTune from "Components/Home/StayTune/StayTune.component";
 import RevealCardModal from "Components/Modals/RevealCardModal.component";
+import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
-import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
@@ -236,7 +236,9 @@ const Index = () => {
                 JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
             if (_arr.length > 0) {
-                setRevealCardModalData(_arr);
+                // ONLY SHOW LATEST WINNER
+                const latestEntry = [_arr[0]];
+                setRevealCardModalData(latestEntry);
 
                 setIsRevealCardModalShown(true);
             } else {
@@ -437,7 +439,7 @@ const Index = () => {
                                     <div className="row">
                                         <div className="col-12">
                                             <h2 className="section-title mb-3">
-                                                Featured Reward
+                                                Featured Rewards
                                             </h2>
                                         </div>
                                         {/* LOADER */}

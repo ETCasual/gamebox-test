@@ -108,17 +108,20 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                     // LEAVE HOVER TO PAUSE VIDEO
                                     setIsPlayVideo(false);
                                 }}
+                                className={
+                                    data?.completed ? "disabled" : "enabled"
+                                }
                             >
                                 {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                <div className="prize-info position-relative d-flex p-3">
-                                    <div className="prize-img p-0 col position-relative">
+                                <div className="prize-info position-relative d-flex flex-wrap p-0 pb-3 p-sm-3">
+                                    <div className="prize-img p-0 col-12 col-sm-6 col-xl-5 position-relative">
                                         <ThumbnailMedia
                                             url={data?.prizeBG}
                                             isPlayVideo={isPlayVideo}
                                             setIsPlayVideo={setIsPlayVideo}
                                         />
                                     </div>
-                                    <div className="d-flex flex-column justify-content-between col-6 col-xl-7">
+                                    <div className="d-flex flex-column justify-content-between col-12 col-sm-6 col-xl-7">
                                         <div className="info-wrapper pt-4">
                                             <div className="prize-subtitle">
                                                 {data?.prizeSubtitle}
@@ -290,14 +293,14 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                 )}
                             </Link>
                         </div>
+                        {data?.completed && (
+                            <FeaturedCompleted
+                                data={data}
+                                handleWinnerRevealCard={handleWinnerRevealCard}
+                            />
+                        )}
                     </div>
                 </VisibilitySensor>
-            )}
-            {data?.completed && (
-                <FeaturedCompleted
-                    data={data}
-                    handleWinnerRevealCard={handleWinnerRevealCard}
-                />
             )}
         </>
     );
