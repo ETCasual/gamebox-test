@@ -2,7 +2,7 @@
 .automatedEntry {
     .auto {
         background: linear-gradient(90deg, #844770, #692049);
-        border-radius: 12px;
+        border-radius: 10px;
     }
     a:hover {
         .card-wrapper {
@@ -17,7 +17,6 @@
         }
     }
     .card-wrapper {
-        min-height: 9rem;
         position: relative;
         cursor: pointer;
         border-top-left-radius: 10px;
@@ -48,12 +47,22 @@
         .prize-subtitle {
             font-size: $fnt-sz-12;
         }
+        .picture-wrapper {
+            right: -10px;
+            position: absolute;
+            @include media-min($sm) {
+                right: unset;
+                position: relative;
+            }            
+        }
         picture {
             img {
-                width: 100%;
-                height: 6.5rem;
+                height: 4.25rem;
                 object-fit: cover;
-                border-radius: 17px;
+                border-radius: 7px;
+                @include media-min($sm) {
+                    border-radius: 17px;
+                }
             }
         }
         .total-ticket-info {
@@ -79,6 +88,13 @@
         min-height: 2.5rem;
         @include media-min($md) {
             min-height: 3.5rem;
+        }
+        .timer-text {
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
+            font-weight: $fnt-wgt-700;
         }
         .countdown {
             color: #00c1b9;
