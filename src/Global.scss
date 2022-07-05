@@ -725,7 +725,7 @@ html {
             @include media-min($md) {
                 font-size: $fnt-sz-14;
             }
-            color: #868686;
+            // color: #868686;
             line-height: 1.5;
             .email {
                 color: #7824f8 !important;
@@ -736,7 +736,7 @@ html {
             @include media-min($md) {
                 font-size: $fnt-sz-14;
             }
-            color: #868686;
+            // color: #868686;
             li {
                 line-height: 2;
             }

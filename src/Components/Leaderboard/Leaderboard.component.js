@@ -70,8 +70,10 @@ const Leaderboard = ({
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
         isQuitGameBtnDisabled: false,
+        isPlayBtnDisabled: false,
         isQuitGameConfirm: false,
         isTournamentEnded: false,
+        isGameOver: false,
         isEarnAdditionalWinModalShown: false,
         isEarnAdditionalInfoShown: false,
     });
@@ -160,26 +162,10 @@ const Leaderboard = ({
 
             let destination =
                 document.getElementById("destination")?.contentWindow;
-            let score = -1;
+
             if (destination) {
                 // END BY TIMER
                 destination?.endGameByTimer?.();
-
-                // GET SCORE OBJECT
-                score = destination?.ggs?.();
-                if (score.a > -1 && currentGameInfo.playerEnterGameId) {
-                    localStorage.setItem("currentGameScore", score.a);
-
-                    if (!executeRecaptcha) {
-                        console.log("Execute recaptcha not yet available");
-                        return;
-                    }
-                    const recaptchaToken = await executeRecaptcha("finishGame");
-
-                    dispatch(
-                        loadPlayerLeaveTournamentId(score, recaptchaToken)
-                    );
-                }
                 setModalStatus((prev) => ({
                     ...prev,
                     isTournamentEnded: true,
@@ -239,6 +225,12 @@ const Leaderboard = ({
     };
 
     const handleOnClickPlayButton = async () => {
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isPlayBtnDisabled: true,
+        }));
+
         if (!executeRecaptcha) {
             console.log("Execute recaptcha not yet available");
             return;
@@ -331,6 +323,7 @@ const Leaderboard = ({
                 ...prev,
                 isGameReady: false,
                 isQuitGameConfirm: false,
+                isPlayBtnDisabled:false,
             }));
         else if (choice === "no")
             setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
@@ -373,6 +366,8 @@ const Leaderboard = ({
             setModalStatus((prev) => ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
+                isGameOver: true,
+                isPlayBtnDisabled: false,
             }));
 
             dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
@@ -389,6 +384,7 @@ const Leaderboard = ({
                     setModalStatus((prev) => ({
                         ...prev,
                         isQuitGameBtnDisabled: false,
+                        isPlayBtnDisabled: false,
                     }));
                     // setIsShowAdditionalBenefitsModal(true);
                     // setIsGameLeaderboardShown(false);
@@ -417,26 +413,26 @@ const Leaderboard = ({
         }
     };
 
-    window.playerQuitGame = () => {
-        setModalStatus((prev) => ({
-            ...prev,
-            isQuitGameBtnDisabled: true,
-        }));
+    // window.playerQuitGame = () => {
+    //     setModalStatus((prev) => ({
+    //         ...prev,
+    //         isQuitGameBtnDisabled: true,
+    //     }));
 
-        if (extraEarning.experience !== 0 || extraEarning.ticket !== 0)
-            setModalStatus((prev) => ({
-                ...prev,
-                isEarnAdditionalWinModalShown: true,
-            }));
-        else
-            setModalStatus((prev) => ({
-                ...prev,
-                isQuitGameBtnDisabled: false,
-                isGameReady: false,
-                isTournamentEnded: false,
-                isEarnAdditionalWinModalShown: false,
-            }));
-    };
+    //     if (extraEarning.experience !== 0 || extraEarning.ticket !== 0)
+    //         setModalStatus((prev) => ({
+    //             ...prev,
+    //             isEarnAdditionalWinModalShown: true,
+    //         }));
+    //     else
+    //         setModalStatus((prev) => ({
+    //             ...prev,
+    //             isQuitGameBtnDisabled: false,
+    //             isGameReady: false,
+    //             isTournamentEnded: false,
+    //             isEarnAdditionalWinModalShown: false,
+    //         }));
+    // };
 
     function getEmptyLeaderboardList() {
         let rankList = [];
@@ -544,8 +540,26 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isEarnAdditionalWinModalShown: false,
+                                isPlayBtnDisabled: false,
                             }));
                         }}
+                    />
+                )}
+
+                {/* MODAL FOR GAME OVER */}
+                {modalStatus.isGameOver && (
+                    <GameEndModal
+                        handleContinueButton={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isGameReady: false,
+                                isQuitGameBtnDisabled: false,
+                                isGameOver: false,
+                                isPlayBtnDisabled: false,
+                            }));
+                            // setIsGameLeaderboardShown(false);
+                        }}
+                        panelTitle="Game Over"
                     />
                 )}
 
@@ -558,9 +572,11 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
+                                isPlayBtnDisabled: false,
                             }));
                             // setIsGameLeaderboardShown(false);
                         }}
+                        panelTitle="The tournament has ended."
                     />
                 )}
 
@@ -820,11 +836,15 @@ const Leaderboard = ({
                                         >
                                             <button
                                                 onClick={
-                                                    isGameAvailable
+                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
                                                         ? handleOnClickPlayButton
                                                         : null
                                                 }
-                                                className="play-button"
+                                                className={`play-button ${
+                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                                        ? ""
+                                                        : "opacity-0-5"
+                                                }`}
                                             >
                                                 Play Tournament!
                                             </button>

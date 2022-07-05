@@ -6,7 +6,7 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton }) => {
+const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const GameEndModal = ({ handleContinueButton }) => {
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
                     <div className="modal-body-small text-center">
                         <>
-                            <p className="title">The tournament has ended.</p>
+                            <p className="title col-12 p-3">{panelTitle}</p>
                             {score && (
                                 <p className="subtitle">
                                     You scored {score} points.
@@ -98,6 +98,36 @@ const GameEndModal = ({ handleContinueButton }) => {
                                         ? "Additional Experience points earned"
                                         : ""}
                                 </p>
+                            )}
+
+                            { (
+                                <p className="subtitle mb-2">
+                                    {extraEarning.ticket > 0
+                                        ? "* Every 5 score will give you 10 extra "
+                                        
+                                        : "* Every 5 score will give you 10 extra "}
+
+                                          <img
+                                                width="20"
+                                                src={`${window.cdn}assets/tickets_05.png`}
+                                                alt="tickets"
+                                            />
+                                        .
+                                </p>
+                                
+                            )}
+                              { (
+                                <p className="subtitle mb-2">
+                                    {extraEarning.ticket > 0
+                                        ? `${score} \u00f7 5 \u00d7 10 = ${(score/5)*10} `
+                                        : `${score} \u00f7 5 \u00d7 10 = ${(score/5)*10} `}
+                                         <img
+                                                width="20"
+                                                src={`${window.cdn}assets/tickets_05.png`}
+                                                alt="tickets"
+                                            />
+                                </p>
+                                
                             )}
 
                             {(extraEarning.ticket > 0 ||
@@ -129,8 +159,8 @@ const GameEndModal = ({ handleContinueButton }) => {
                                     )}
                                 </div>
                             )}
-                            <div className="p-0 btn-wrapper d-flex flex-column mt-4">
-                                <button
+                            <div className="p-0 btn-wrapper d-flex flex-column mt-4 col-12 p-3">
+                                {/* <button
                                     className={`btn-results ${
                                         leaderboardHistory.length > 0
                                             ? ""
@@ -151,9 +181,9 @@ const GameEndModal = ({ handleContinueButton }) => {
                                     {leaderboardHistory.length > 0
                                         ? "View Results"
                                         : "Fetching Results"}
-                                </button>
+                                </button> */}
                                 <button
-                                    className="btn-continue"
+                                    className="btn-yes w-100"
                                     onClick={handleContinueButton}
                                 >
                                     Continue
