@@ -124,7 +124,12 @@ export function getLeaderboardList(
                     <span>
                         {_leaderboardHistory[x]?.tickets ||
                             getRankTickets(x, leaderRuleRanks)}{" "}
-                        tickets
+                        <img
+                            width={30}
+                            className="ml-1"
+                            src={`${window.cdn}assets/tickets_05.png`}
+                            alt="ticket"
+                        />
                     </span>
                 </div>
             </div>

@@ -121,8 +121,18 @@ const Notification = ({
                                                         {n?.type === "winprize"
                                                             ? `You've won`
                                                             : n?.type === "tour"
-                                                            ? `+${n?.tickets} tickets`
+                                                            ? `+${n?.tickets}`
                                                             : `+${n?.gem} gems`}
+
+                                                        {n?.type === "tour" ? (
+                                                            <img
+                                                                className="icon ml-1"
+                                                                src={`${window.cdn}assets/tickets_05.png`}
+                                                                alt="ticket"
+                                                            />
+                                                        ) : (
+                                                            ""
+                                                        )}
                                                     </p>
                                                 </div>
                                             </div>
