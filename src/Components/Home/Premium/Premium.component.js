@@ -6,7 +6,6 @@ import VisibilitySensor from "react-visibility-sensor";
 
 // COMPONENTS
 import PremiumCompleted from "Components/Home/PremiumCompleted/PremiumCompleted.component";
-import GenericLoader from "Components/Loader/Generic.loader";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // REDUX
@@ -16,7 +15,7 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 // HELPER FUNCTIONS
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
@@ -272,7 +271,6 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         </div>
                                     </div>
                                 </div>
-
                             </Link>
                         </div>
                         {data?.completed && (

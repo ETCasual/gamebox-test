@@ -21,7 +21,7 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 
 // HELPER FUNCTIONS
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const Index = () => {
@@ -330,12 +330,10 @@ const Index = () => {
     return (
         <>
             <section id="home">
-
                 <div className="container-fluid mb-5 bonus">
                     <div className="row justify-content-center px-1 py-3 pt-sm-4 pb-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">
-
                                 {/* FORTUNE WHEEL */}
                                 <div className="col-12 col-sm-6 d-flex flex-column px-2 mb-3 mb-sm-0">
                                     <div className="description w-100">
@@ -356,8 +354,8 @@ const Index = () => {
                                                         FREE GEMS
                                                     </p>
                                                     <div className="earn-more-tickets-text">
-                                                        Claim your daily free gems
-                                                        here!
+                                                        Claim your daily free
+                                                        gems here!
                                                     </div>
                                                 </div>
                                                 <div className="earn-more-tickets-img-wrapper col-4 col-lg-5 d-flex justify-content-end">

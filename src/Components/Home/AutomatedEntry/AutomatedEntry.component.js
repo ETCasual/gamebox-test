@@ -1,14 +1,16 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import _ from "lodash";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadAutomatedEntryTickets from "redux/thunks/AutomatedEntryTickets.thunk";
 
+// COMPONENTS
+import AutomatedEntryModalPopup from "Components/Modals/AutomatedEntry.modal";
+
 // HELPER FUNCTIONS
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntry = ({ data }) => {
@@ -20,15 +22,15 @@ const AutomatedEntry = ({ data }) => {
         (state) => state.automatedEntryTickets
     );
 
-    const history = useHistory();
-
+    const [bonusRewardShown, setBonusRewardShown] = useState(false);
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
     let watcherRef = useRef(null);
 
     useEffect(() => {
-        if (user.id)
+        if (user.id) {
             dispatch(loadAutomatedEntryTickets(data.scheduledOn, data.prizeId));
+        }
     }, [dispatch, data.scheduledOn, data.prizeId, user.id]);
 
     // COUNT DOWN TIMER
@@ -113,15 +115,11 @@ const AutomatedEntry = ({ data }) => {
     };
 
     return (
-        <Link
-            to={{
-                pathname: `/prize/automated/${data.prizeId}`,
-                state: {
-                    prevPath: history.location.pathname,
-                },
-            }}
-        >
-            <div className="auto">
+        <>
+            <div
+                className="bonus-card"
+                onClick={() => setBonusRewardShown(true)}
+            >
                 <div className="card-wrapper p-2 p-md-3">
                     <div className="row">
                         {/* PRIZE INFO */}
@@ -168,7 +166,16 @@ const AutomatedEntry = ({ data }) => {
                 </div>
             </div>
 
-        </Link>
+            {/* BONUS REWARDS */}
+            {bonusRewardShown && (
+                <AutomatedEntryModalPopup
+                    data={data}
+                    handleInstructionsCloseBtn={() =>
+                        setBonusRewardShown(false)
+                    }
+                />
+            )}
+        </>
     );
 };
 

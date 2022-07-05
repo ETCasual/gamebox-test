@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import VisibilitySensor from "react-visibility-sensor";
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import getPoolTickets from "Utils/PoolTickets";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 

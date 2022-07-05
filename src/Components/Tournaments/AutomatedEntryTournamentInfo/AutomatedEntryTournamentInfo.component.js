@@ -8,7 +8,7 @@ import _ from "lodash";
 import loadPrizes from "redux/thunks/Prizes.thunk";
 
 // HELPER FUNCTIONS
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntryTournamentInfo = ({ data, type }) => {

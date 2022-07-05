@@ -1,10 +1,18 @@
 // AUTOMATED ENTRY COMPONENT
 .automatedEntry {
+    .bonus-card {
+        position: relative;
+        cursor: pointer;
+        background: #693151;
+        border-radius: 12px;
+    }
+
     .auto {
         background: linear-gradient(90deg, #844770, #692049);
         border-radius: 10px;
     }
-    a:hover {
+    
+    &:hover {
         .card-wrapper {
             border-left: solid 2px #ff3399;
             border-top: solid 2px #ff3399;

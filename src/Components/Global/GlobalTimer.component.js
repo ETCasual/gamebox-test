@@ -10,7 +10,7 @@ import {
 } from "redux/thunks/Notifcations.thunk";
 import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const GlobalTimer = ({ data }) => {
     const { user } = useSelector((state) => state.userData);
@@ -77,19 +77,19 @@ const GlobalTimer = ({ data }) => {
 
             // CALLING PRIZE API
 
-            // ? Not sure why we need to check again if now time is bigger than prize game endTimeStamp 
+            // ? Not sure why we need to check again if now time is bigger than prize game endTimeStamp
             // ? since this function is already called when timer show "Ended"
             // const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
             // const nowDate = new Date(nowTimeStamp());
 
             // if (nowDate.getTime() / 1000 > data?.gameInfo[0]?.endTimeStamp) {
-                clearTimeout(timeOutRef2.current);
-                timeOutRef2.current = setTimeout(() => {
-                    dispatch(loadPrizes());
+            clearTimeout(timeOutRef2.current);
+            timeOutRef2.current = setTimeout(() => {
+                dispatch(loadPrizes());
 
-                    clearTimeout(timeOutRef2.current);
-                    timeOutRef2.current = null;
-                }, 3000);
+                clearTimeout(timeOutRef2.current);
+                timeOutRef2.current = null;
+            }, 3000);
             // }
         }
     }, [

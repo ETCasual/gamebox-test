@@ -33,4 +33,35 @@ const convertSecondsToHours = (endTimestamp, offsetInMs) => {
     }
 };
 
-export default convertSecondsToHours;
+const convertSecondsTo24HoursBase = (endTimestamp, offsetInMs) => {
+    const date_future = new Date(endTimestamp);
+    const date_now = Date.now() + offsetInMs;
+
+    let seconds = Math.floor((date_future - date_now) / 1000);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+    let days = Math.floor(hours / 24);
+
+    hours = hours - days * 24;
+    minutes = minutes - days * 24 * 60 - hours * 60;
+    seconds = seconds - days * 24 * 60 * 60 - hours * 60 * 60 - minutes * 60;
+
+    if (days < -3 || hours < -3 || minutes < -3 || seconds < -3) {
+        return "Ended";
+    } else if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+        return "Ended";
+    } else {
+        //(days >= 0 && hours >= 0 && minutes >= 0 && seconds >= 0)
+        const formatted = {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+        };
+        const fday = days.toLocaleString("en-US", formatted);
+        const fhour = hours.toLocaleString("en-US", formatted);
+        const fmin = minutes.toLocaleString("en-US", formatted);
+        const fsec = seconds.toLocaleString("en-US", formatted);
+        return `${fday}:${fhour}:${fmin}:${fsec}`;
+    }
+};
+
+export { convertSecondsToHours, convertSecondsTo24HoursBase };
