@@ -251,9 +251,10 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
                                         <div className="game-icon position-relative">
                                             {data.gameInfo.map((e, i) => (
-                                                <>
+                                                <React.Fragment
+                                                    key={`game-icon-${i}`}
+                                                >
                                                     <img
-                                                        key={`icon-${i}`}
                                                         className="img-fluid"
                                                         src={e.gameIcon}
                                                         alt="game-icon"
@@ -263,7 +264,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                         src={`${window.cdn}icons/icon_play.png`}
                                                         alt="play"
                                                     />
-                                                </>
+                                                </React.Fragment>
                                             ))}
                                         </div>
                                         <div className="play-text text-center px-2 py-1">

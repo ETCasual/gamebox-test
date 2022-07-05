@@ -142,12 +142,13 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                             Your tickets
                                                         </p>
                                                         <p className="mb-0 tickets d-flex align-items-center">
-                                                            {`\u00A0${getPoolTickets(
-                                                                poolTickets,
-                                                                data?.prizeId
-                                                            )?.toLocaleString() ||
+                                                            {`\u00A0${
+                                                                getPoolTickets(
+                                                                    poolTickets,
+                                                                    data?.prizeId
+                                                                )?.toLocaleString() ||
                                                                 0
-                                                                }`}
+                                                            }`}
                                                         </p>
                                                     </div>
                                                     <div className="pool-tickets mt-3">
@@ -156,48 +157,51 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                         </p>
                                                         <div className="d-flex">
                                                             <p
-                                                                className={`mb-0 d-flex align-items-center ${OverTimeModeChecker(
-                                                                    data?.prizeId,
-                                                                    data?.ticketsRequired,
-                                                                    prizeTicketCollection
-                                                                )
+                                                                className={`mb-0 d-flex align-items-center ${
+                                                                    OverTimeModeChecker(
+                                                                        data?.prizeId,
+                                                                        data?.ticketsRequired,
+                                                                        prizeTicketCollection
+                                                                    )
                                                                         ? "text-danger timer"
                                                                         : "current-tickets tickets"
-                                                                    }`}
+                                                                }`}
                                                             >
-                                                                {`\u00A0${OverTimeModeChecker(
-                                                                    data?.prizeId,
-                                                                    data?.ticketsRequired,
-                                                                    prizeTicketCollection
-                                                                )
+                                                                {`\u00A0${
+                                                                    OverTimeModeChecker(
+                                                                        data?.prizeId,
+                                                                        data?.ticketsRequired,
+                                                                        prizeTicketCollection
+                                                                    )
                                                                         ? timer
                                                                         : getPrizeTicketCollected(
-                                                                            prizeTicketCollection,
-                                                                            data?.prizeId
-                                                                        )?.toLocaleString() ||
-                                                                        0
-                                                                    }`}
+                                                                              prizeTicketCollection,
+                                                                              data?.prizeId
+                                                                          )?.toLocaleString() ||
+                                                                          0
+                                                                }`}
                                                             </p>
                                                             {!OverTimeModeChecker(
                                                                 data?.prizeId,
                                                                 data?.ticketsRequired,
                                                                 prizeTicketCollection
                                                             ) && (
-                                                                    <p className="tickets mb-0 d-flex align-items-center">
-                                                                        {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
-                                                                    </p>
-                                                                )}
+                                                                <p className="tickets mb-0 d-flex align-items-center">
+                                                                    {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
+                                                                </p>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
                                                 <div className="game-icon position-relative">
-                                                    {data.gameInfo.map(
+                                                    {data.gameInfo?.map(
                                                         (e, i) => (
-                                                            <>
+                                                            <React.Fragment
+                                                                key={`game-icon-${i}`}
+                                                            >
                                                                 <img
-                                                                    key={`icon-${i}`}
                                                                     className="img-fluid"
                                                                     src={
                                                                         e.gameIcon
@@ -209,7 +213,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                                     src={`${window.cdn}icons/icon_play.png`}
                                                                     alt="play"
                                                                 />
-                                                            </>
+                                                            </React.Fragment>
                                                         )
                                                     )}
                                                 </div>
@@ -240,34 +244,35 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                     prizeTicketCollection,
                                                     data?.prizeId
                                                 ) >= data?.ticketsRequired && (
-                                                        <p className="mb-0 draw-timer d-flex align-items-center">
-                                                            Draw starts in{" "}
-                                                            <span className="text-danger ml-1">
-                                                                {timer}
-                                                            </span>
-                                                        </p>
-                                                    )}
+                                                    <p className="mb-0 draw-timer d-flex align-items-center">
+                                                        Draw starts in{" "}
+                                                        <span className="text-danger ml-1">
+                                                            {timer}
+                                                        </span>
+                                                    </p>
+                                                )}
                                                 {getPrizeTicketCollected(
                                                     prizeTicketCollection,
                                                     data?.prizeId
                                                 ) < data?.ticketsRequired && (
-                                                        <p className="mb-0 d-flex align-items-center">
-                                                            {data?.ticketsRequired -
-                                                                getPrizeTicketCollected(
-                                                                    prizeTicketCollection,
-                                                                    data?.prizeId
-                                                                ) <=
-                                                                0 ? (
-                                                                <GenericLoader
-                                                                    height="30"
-                                                                    bg="#FF007C"
-                                                                    cx1="80%"
-                                                                    cx2="88%"
-                                                                    cx3="96%"
-                                                                    cy="15"
-                                                                />
-                                                            ) : (
-                                                                `${(
+                                                    <p className="mb-0 d-flex align-items-center">
+                                                        {data?.ticketsRequired -
+                                                            getPrizeTicketCollected(
+                                                                prizeTicketCollection,
+                                                                data?.prizeId
+                                                            ) <=
+                                                        0 ? (
+                                                            <GenericLoader
+                                                                height="30"
+                                                                bg="#FF007C"
+                                                                cx1="80%"
+                                                                cx2="88%"
+                                                                cx3="96%"
+                                                                cy="15"
+                                                            />
+                                                        ) : (
+                                                            `${
+                                                                (
                                                                     data?.ticketsRequired -
                                                                     getPrizeTicketCollected(
                                                                         prizeTicketCollection,
@@ -275,10 +280,10 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                                     )
                                                                 )?.toLocaleString() ||
                                                                 "-"
-                                                                } tickets remaining`
-                                                            )}
-                                                        </p>
-                                                    )}
+                                                            } tickets remaining`
+                                                        )}
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                         <button className="btn-participate w-100 p-3 mt-4">

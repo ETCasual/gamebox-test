@@ -22,7 +22,6 @@ import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
-import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -181,7 +180,7 @@ const Index = () => {
                     n?.list?.forEach((e, idx) => {
                         if (
                             winnerAnnouncementNotificationList.length - 1 ===
-                            nIdx &&
+                                nIdx &&
                             n.list.length - 1 === idx
                         ) {
                             sessionStorage.setItem("showAnnouncement", 0);
