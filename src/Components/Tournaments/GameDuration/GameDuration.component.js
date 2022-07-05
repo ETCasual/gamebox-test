@@ -7,7 +7,7 @@ import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 
 // HELPER FUNCTION
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const GameDuration = ({
     game,

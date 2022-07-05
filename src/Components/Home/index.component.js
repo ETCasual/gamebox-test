@@ -21,7 +21,7 @@ import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 
 // HELPER FUNCTIONS
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const Index = () => {
@@ -328,12 +328,10 @@ const Index = () => {
     return (
         <>
             <section id="home">
-
                 <div className="container-fluid mb-5 bonus">
                     <div className="row justify-content-center px-1 pt-4 pb-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">
-
                                 {/* FORTUNE WHEEL */}
                                 <div className="col d-flex flex-column px-2">
                                     <div className="description w-100">
@@ -354,8 +352,8 @@ const Index = () => {
                                                         FREE GEMS
                                                     </p>
                                                     <div className="earn-more-tickets-text">
-                                                        Claim your daily free gems
-                                                        here!
+                                                        Claim your daily free
+                                                        gems here!
                                                     </div>
                                                 </div>
                                                 <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">

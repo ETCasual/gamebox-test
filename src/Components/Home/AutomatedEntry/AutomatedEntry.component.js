@@ -10,7 +10,7 @@ import loadAutomatedEntryTickets from "redux/thunks/AutomatedEntryTickets.thunk"
 import AutomatedEntryModalPopup from "Components/Modals/AutomatedEntry.modal";
 
 // HELPER FUNCTIONS
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntry = ({ data }) => {

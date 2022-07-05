@@ -31,22 +31,34 @@ const getTimerFullUnits = (timer) => {
                 : " second"
             : "";
 
-    let replacedTimeUnits =  '';
-    
+    let replacedTimeUnits = "";
+
     if (daysIdx > -1) {
-        replacedTimeUnits += `${splitTIme[daysIdx]?.replaceAll("d", daysIncludeS)} `;
+        replacedTimeUnits += `${splitTIme[daysIdx]?.replaceAll(
+            "d",
+            daysIncludeS
+        )} `;
     }
 
     if (hoursIdx > -1) {
-        replacedTimeUnits += `${splitTIme[hoursIdx]?.replace("h", hoursIncludeS)} `;
+        replacedTimeUnits += `${splitTIme[hoursIdx]?.replace(
+            "h",
+            hoursIncludeS
+        )} `;
     }
-    
+
     if (minutesIdx > -1) {
-        replacedTimeUnits += `${splitTIme[minutesIdx]?.replace("m", minutesIncludeS)} `;
+        replacedTimeUnits += `${splitTIme[minutesIdx]?.replace(
+            "m",
+            minutesIncludeS
+        )} `;
     }
-    
+
     if (secondsIdx > -1) {
-        replacedTimeUnits += `${splitTIme[secondsIdx]?.replace("s", secondsIncludeS)} `;
+        replacedTimeUnits += `${splitTIme[secondsIdx]?.replace(
+            "s",
+            secondsIncludeS
+        )} `;
     }
 
     return replacedTimeUnits;

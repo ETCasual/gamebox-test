@@ -8,7 +8,7 @@ import _ from "lodash";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // HELPER FUNCTIONS
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsTo24HoursBase } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
@@ -36,16 +36,15 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
             new Date(nowTimeStamp()).getTimezoneOffset() / 60
         );
         let calculatedTime = new Date(data?.scheduledOff * 1000);
-        if (currentTimeZone !== data?.timeZone)
-        {
+        if (currentTimeZone !== data?.timeZone) {
             calculatedTime.setHours(
                 calculatedTime.getHours() -
-                timeZoneHourDifference(currentTimeZone, data?.timeZone)
+                    timeZoneHourDifference(currentTimeZone, data?.timeZone)
             );
         }
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
-            let finalTimeRef = convertSecondsToHours(
+            let finalTimeRef = convertSecondsTo24HoursBase(
                 calculatedTime.valueOf(),
                 config.offsetTimestamp ? config.offsetTimestamp : 0
             );
@@ -82,7 +81,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
     return (
         <>
             <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                <div className="modal-body-automated-entry col-12 position-relative">
+                <div className="modal-body-automated-entry col-12 col-md-10 col-lg-8 position-relative">
                     {/* CLOSE BTN */}
                     <img
                         className="close-button"
@@ -93,23 +92,25 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                     />
 
                     {/* CARD */}
-                    <div className="row justify-content-center mt-5">
-                        <div className="col-10 col-md-8 col-lg-6 mb-3 pl-2 pr-1">
-                            <div className="card-prize d-flex flex-row">
-                                <div className="p-2">
+                    <div className="row justify-content-center mt-3 mt-sm-5">
+                        <div className="col-10 col-md-8 col-lg-8 mb-3 pl-2 pr-1">
+                            {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
+                            <div className="card-prize d-flex m-auto">
+                                <div className="p-1 m-auto">
                                     {/* THUMBNAIL MEDIA */}
                                     <ThumbnailMedia
                                         url={data.prizeBG}
                                         isPlayVideo={true}
                                         setIsPlayVideo={null}
+                                        className={"thumb"}
                                     />
                                 </div>
                                 <div className="w-100 p-2 d-flex flex-column">
                                     <div className="prize-text mb-auto">
-                                        <p className="card-subtitle m-auto pb-2">
+                                        <p className="card-subtitle m-auto pb-1 pb-sm-2">
                                             Token ID: {data?.prizeSubtitle}
                                         </p>
-                                        <p className="card-title m-auto pb-3">
+                                        <p className="card-title m-auto pb-1 pb-sm-3">
                                             {data?.prizeTitle}
                                         </p>
                                         <p className="card-content m-auto">
@@ -118,23 +119,30 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     </div>
                                 </div>
                             </div>
-                            <p className="countdown mob-text col-8 text-center mx-auto my-4">
-                                {getTimerFullUnits(timer)}
-                            </p>
-                            <div className="text-center my-4">
-                                <p className="tickets-label mb-2">
+                            <div className="countdown d-flex flex-row align-items-center justify-content-center my-3 my-sm-4 mx-auto">
+                                <p className="countdown-text mb-0 mr-2">
+                                    Ends in
+                                </p>
+                                <p className="mob-text mb-0">{timer}</p>
+                            </div>
+
+                            <div className="text-center my-2 my-sm-4">
+                                <p className="tickets-label mb-1 mb-sm-2">
                                     Tickets you have collected
                                 </p>
-                                <p className="tickets-value">
-                                    <span className="mob-text mr-2">{getTickets()?.toLocaleString() ||
-                                        0}</span>
-
-                                    tickets
+                                <p className="tickets-value d-flex flex-row align-items-center justify-content-center mx-auto">
+                                    <span className="tickets mob-text mr-2">
+                                        {getTickets()?.toLocaleString() || 0}
+                                    </span>
+                                    <img
+                                        className="icon"
+                                        src={`${window.cdn}assets/tickets_05.png`}
+                                    />
                                 </p>
                             </div>
-                            <div className="col-9 mx-auto my-4">
+                            <div className="mx-auto my-2 my-sm-4">
                                 <Link
-                                    className="start-earning-btn d-block text-center"
+                                    className="start-earning-btn d-block text-center m-auto"
                                     to={{
                                         pathname: "/",
                                         state: location.pathname,
@@ -146,22 +154,19 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                             </div>
                             <div className="line" />
                             <p className="instructions-title text-center">
-                                How to win tickets for the Bonus
-                                Draw?
+                                How to win tickets for the Bonus Draw?
                             </p>
                             <p className="instructions-subtitle text-center">
-                                Participate in any tournament
-                                throughout the platform before the
-                                timer runs out.
+                                Participate in any tournament throughout the
+                                platform before the timer runs out.
                                 <br />
-                                Tickets won from the
-                                tournaments will automatically be
-                                added into the Bonus Draw pool. It’s
-                                that easy.
+                                Tickets won from the tournaments will
+                                automatically be added into the Bonus Draw pool.
+                                It’s that easy.
                             </p>
-                            <p className="instructions-tip text-center mb-4">
-                                Tip: Earn more tickets by “spent gems”
-                                to increase your ticket count.
+                            <p className="instructions-tip text-center mb-0 mb-sm-4">
+                                Tip: Earn more tickets by “spent gems” to
+                                increase your ticket count.
                             </p>
                         </div>
                     </div>

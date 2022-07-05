@@ -16,7 +16,7 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 // HELPER FUNCTIONS
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 
 const Featured = ({ data, handleWinnerRevealCard }) => {
@@ -172,10 +172,10 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                                     )
                                                                         ? timer
                                                                         : getPrizeTicketCollected(
-                                                                            prizeTicketCollection,
-                                                                            data?.prizeId
-                                                                        )?.toLocaleString() ||
-                                                                        0
+                                                                              prizeTicketCollection,
+                                                                              data?.prizeId
+                                                                          )?.toLocaleString() ||
+                                                                          0
                                                                 }`}
                                                             </p>
                                                             {!OverTimeModeChecker(
@@ -193,21 +193,25 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                             <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
                                                 <div className="game-icon position-relative">
-                                                    {data.gameInfo.map((e, i) => (
-                                                        <>
-                                                            <img
-                                                                key={`icon-${i}`}
-                                                                className="img-fluid"
-                                                                src={e.gameIcon}
-                                                                alt="game-icon"
-                                                            />
-                                                            <img
-                                                                className="play-icon"
-                                                                src={`${window.cdn}icons/icon_play.png`}
-                                                                alt="play"
-                                                            />
-                                                        </>
-                                                    ))}
+                                                    {data.gameInfo.map(
+                                                        (e, i) => (
+                                                            <>
+                                                                <img
+                                                                    key={`icon-${i}`}
+                                                                    className="img-fluid"
+                                                                    src={
+                                                                        e.gameIcon
+                                                                    }
+                                                                    alt="game-icon"
+                                                                />
+                                                                <img
+                                                                    className="play-icon"
+                                                                    src={`${window.cdn}icons/icon_play.png`}
+                                                                    alt="play"
+                                                                />
+                                                            </>
+                                                        )
+                                                    )}
                                                 </div>
                                                 <div className="play-text text-center px-2 py-1">
                                                     PLAY
@@ -215,7 +219,6 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 {false && (

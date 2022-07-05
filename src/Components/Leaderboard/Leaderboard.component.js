@@ -30,7 +30,7 @@ import SubscriptionModal from "Components/Modals/Subscription.modal";
 import { defaultUserImage } from "Utils/DefaultImage";
 import getPoolTickets from "Utils/PoolTickets";
 import showAdsBeforeGame from "Utils/showAdsBeforeGame";
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -265,57 +265,59 @@ const Leaderboard = ({
                 isGemUsed,
                 recaptchaToken
             )
-        ).then(async () => {
-            const token = getToken();
-            setModalStatus((prev) => ({
-                ...prev,
-                isGameReady: true,
-                isEarnAdditionalInfoShown: false,
-            }));
+        )
+            .then(async () => {
+                const token = getToken();
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isGameReady: true,
+                    isEarnAdditionalInfoShown: false,
+                }));
 
-            if (currentGameDetails.gameId > 0) {
-                try {
-                    let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
-                    let options = {
-                        headers: {
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-                            Authorization: `Bearer ${token}`,
-                        },
-                    };
-                    let response = await axios.get(url, options);
-                    if (response.data) {
-                        sessionStorage.setItem(
-                            "lbId",
-                            JSON.stringify({
-                                cgId: data.cgId,
-                                gameId: currentGameDetails.gameId,
-                            })
-                        );
-                        setGameData(response.data);
-                        let gameCount =
-                            parseInt(localStorage.getItem("gameCount")) || 0;
-                        if (gameCount <= config.adsPerGame) {
-                            gameCount = gameCount + 1;
-                            localStorage.setItem("gameCount", gameCount);
+                if (currentGameDetails.gameId > 0) {
+                    try {
+                        let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
+                        let options = {
+                            headers: {
+                                "Access-Control-Allow-Origin": "*",
+                                "Access-Control-Allow-Methods":
+                                    "POST, GET, OPTIONS",
+                                Authorization: `Bearer ${token}`,
+                            },
+                        };
+                        let response = await axios.get(url, options);
+                        if (response.data) {
+                            sessionStorage.setItem(
+                                "lbId",
+                                JSON.stringify({
+                                    cgId: data.cgId,
+                                    gameId: currentGameDetails.gameId,
+                                })
+                            );
+                            setGameData(response.data);
+                            let gameCount =
+                                parseInt(localStorage.getItem("gameCount")) ||
+                                0;
+                            if (gameCount <= config.adsPerGame) {
+                                gameCount = gameCount + 1;
+                                localStorage.setItem("gameCount", gameCount);
+                            }
+
+                            showAdsBeforeGame(config);
                         }
-    
-                        showAdsBeforeGame(config);
+                    } catch (error) {
+                        console.log(error.message);
                     }
-                } catch (error) {
-                    console.log(error.message);
                 }
-            }
 
-            setEarnAdditionalDisabledStatus({
-                gems: false,
-                ads: false,
+                setEarnAdditionalDisabledStatus({
+                    gems: false,
+                    ads: false,
+                });
+            })
+            .catch((err) => {
+                setIsSubscriptionModalShown(true);
             });
-    
-        }).catch((err) => {
-            setIsSubscriptionModalShown(true);
-        });
-
     };
 
     const handleQuitGame = () => {
@@ -793,7 +795,9 @@ const Leaderboard = ({
                                 )}
                                 {isSubscriptionModalShown && (
                                     <SubscriptionModal
-                                        handleGetGemsLaterBtn={onClickSubscriptionCancel}
+                                        handleGetGemsLaterBtn={
+                                            onClickSubscriptionCancel
+                                        }
                                     />
                                 )}
 

@@ -15,7 +15,7 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 // HELPER FUNCTIONS
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
-import convertSecondsToHours from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
