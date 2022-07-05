@@ -7,11 +7,20 @@ const Footer = () => {
 
     return (
         <div className="footer">
-            <div className="footer-container mx-auto">
-                <div className="about-info-container d-flex position-absolute">
-                    <div className="about-detail-container d-flex flex-column">
-                        <div className="title-text">ABOUT</div>
-                        <div className="subtitle-text">GameBox</div>
+            <div className="col-12 col-md-10 col-xl-8 footer-container mx-auto py-4 row">
+                <div className="logo-image-container col-12 d-md-none mb-5">
+                    <Link to="/">
+                        <img
+                            className="footer-img"
+                            src={`${window.cdn}logo/logo_gamebox.png`}
+                            alt="game-box-logo"
+                        />
+                    </Link>
+                </div>
+                <div className="about-info-container col-12 col-md-8 col-xl-7 no-gutters d-flex flex-wrap mb-3 mb-md-5">
+                    <div className="about-detail-container d-flex flex-column col-12 col-md-4 mb-3">
+                        <div className="title-text mb-2">ABOUT</div>
+                        <div className="subtitle-text mb-1">GameBox</div>
                         <a
                             className="subtitle-text"
                             target="_blank"
@@ -21,8 +30,8 @@ const Footer = () => {
                             Froyo
                         </a>
                     </div>
-                    <div className="help-detail-container d-flex flex-column">
-                        <div className="title-text">HELP</div>
+                    <div className="help-detail-container d-flex flex-column col-12 col-md-4 mb-3">
+                        <div className="title-text mb-2">HELP</div>
                         <a
                             className="subtitle-text"
                             href="mailto:info@froyo.games"
@@ -32,8 +41,8 @@ const Footer = () => {
                             Contact us
                         </a>
                     </div>
-                    <div className="froyo-coin-detail-container d-flex flex-column">
-                        <div className="title-text">FROYO COIN</div>
+                    <div className="froyo-coin-detail-container d-flex flex-column col-12 col-md-4 mb-3">
+                        <div className="title-text mb-2">FROYO COIN</div>
                         <a
                             className="subtitle-text"
                             target="_blank"
@@ -44,8 +53,8 @@ const Footer = () => {
                         </a>
                     </div>
                 </div>
-                <div className="join-community-container d-flex position-absolute flex-column">
-                    <div className="title-text">JOIN OUR COMMUNITY</div>
+                <div className="join-community-container col-12 col-md-4 col-xl-5 text-md-right mb-5">
+                    <div className="title-text mb-2">JOIN OUR COMMUNITY</div>
 
                     <div className="logo-img-container">
                         <a
@@ -126,24 +135,31 @@ const Footer = () => {
                         </a>
                     </div>
                 </div>
-                <div className="terms-and-conditions-container d-flex position-absolute">
-                    <div className="trademark-container">
-                        <span>
-                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
+                <div className="terms-and-conditions-container col-12 col-md-9 align-self-end">
+                    <div className="trademark-container d-flex flex-wrap">
+                        <span className="pr-2 d-none d-md-inline-flex">
+                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "} 
                         </span>
-                        <span>&bull;</span>
-                    </div>
-                    <div className="clickable-container">
-                        <Link to="/terms-and-conditions">
+                        <span className="d-none d-md-inline-flex">
+                            &bull;
+                        </span>
+                        <Link className="pr-2 px-md-2" to="/terms-and-conditions">
                             Terms and Conditions
                         </Link>
                         <span>&bull;</span>
-                        <Link to="/privacy-policy">Privacy Policy</Link>
+                        <Link className="px-2" to="/privacy-policy">Privacy Policy</Link>
                         <span>&bull;</span>
-                        <Link to="/tournament-rules">Tournament Rules</Link>
+                        <Link className="px-2" to="/tournament-rules">Tournament Rules</Link>
+                        <span className="d-md-none">
+                            &bull;
+                        </span>
+                        <span className="pl-2 d-md-none">
+                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
+                        </span>
+
                     </div>
                 </div>
-                <div className="logo-image-container d-flex position-absolute">
+                <div className="logo-image-container col-12 col-md-3 justify-content-end d-none d-md-inline-flex">
                     <Link to="/">
                         <img
                             className="footer-img"
