@@ -9,7 +9,6 @@ import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // HELPER FUNCTIONS
 import { convertSecondsTo24HoursBase } from "Utils/TimeConversion";
-import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
     const location = useLocation();
@@ -137,6 +136,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     <img
                                         className="icon"
                                         src={`${window.cdn}assets/tickets_05.png`}
+                                        alt={"icon"}
                                     />
                                 </p>
                             </div>
