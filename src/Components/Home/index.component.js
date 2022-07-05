@@ -181,7 +181,7 @@ const Index = () => {
                     n?.list?.forEach((e, idx) => {
                         if (
                             winnerAnnouncementNotificationList.length - 1 ===
-                                nIdx &&
+                            nIdx &&
                             n.list.length - 1 === idx
                         ) {
                             sessionStorage.setItem("showAnnouncement", 0);
@@ -331,13 +331,13 @@ const Index = () => {
         <>
             <section id="home">
                 <div className="container-fluid mb-5 bonus">
-                    <div className="row justify-content-center px-1 pt-4 pb-5">
+                    <div className="row justify-content-center px-1 py-3 pt-sm-4 pb-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">
                                 {/* FORTUNE WHEEL */}
-                                <div className="col d-flex flex-column px-2">
+                                <div className="col-12 col-sm-6 d-flex flex-column px-2 mb-3 mb-sm-0">
                                     <div className="description w-100">
-                                        <h2 className="section-title mb-3">
+                                        <h2 className="section-title mb-3 d-none d-sm-block">
                                             Free Rewards
                                         </h2>
                                     </div>
@@ -349,7 +349,7 @@ const Index = () => {
                                             }
                                         >
                                             <div className="row">
-                                                <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative">
+                                                <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                                                     <p className="the-spinner-text mb-0">
                                                         FREE GEMS
                                                     </p>
@@ -358,7 +358,7 @@ const Index = () => {
                                                         gems here!
                                                     </div>
                                                 </div>
-                                                <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">
+                                                <div className="earn-more-tickets-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
                                                     <img
                                                         className="earn-more-tickets-img"
                                                         src={`${window.cdn}spinner/spinner_column_01.png`}
@@ -368,14 +368,12 @@ const Index = () => {
                                             </div>
                                         </div>
                                         {/* TIMER */}
-                                        <div className="timer d-flex align-items-center justify-content-center px-3">
+                                        <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
                                             <p className="timer-text mb-0">
                                                 Next Rewards
                                             </p>
                                             <p className="countdown mb-0">
-                                                {`\u00A0 ${getTimerFullUnits(
-                                                    timer
-                                                )} `}
+                                                {`\u00A0 ${timer} `}
                                             </p>
                                         </div>
                                     </div>
@@ -393,9 +391,9 @@ const Index = () => {
                                 </div>
 
                                 {/* AUTOMATED */}
-                                <div className="automatedEntry col-6 px-2">
+                                <div className="automatedEntry col-12 col-sm-6 px-2 mb-3 mb-sm-0">
                                     <div className="description w-100">
-                                        <h2 className="section-title mb-3">
+                                        <h2 className="section-title mb-3 d-none d-sm-block">
                                             Bonus Rewards
                                         </h2>
                                     </div>

@@ -46,6 +46,7 @@ import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
+import Footer from "Components/Landing/Footer/Footer.component";
 
 const App = () => {
 	const { user } = useSelector((state) => state.userData);
@@ -254,6 +255,7 @@ const App = () => {
 						component={TournamentRules}
 					/>
 				</Switch>
+				<Footer />
 				<NavigationHOC />
 
 				{prizes?.featuredData.map((prize, idx) => (
