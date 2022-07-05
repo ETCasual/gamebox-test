@@ -21,36 +21,40 @@ const Footer = () => {
                     <div className="about-detail-container d-flex flex-column col-12 col-md-4 mb-3">
                         <div className="title-text mb-2">ABOUT</div>
                         <div className="subtitle-text mb-1">GameBox</div>
-                        <a
-                            className="subtitle-text"
-                            target="_blank"
-                            rel="noreferrer"
-                            href="https://froyo.games/home"
-                        >
-                            Froyo
-                        </a>
+                        <div className="subtitle-text">
+                            <a
+                                target="_blank"
+                                rel="noreferrer"
+                                href="https://froyo.games/home"
+                            >
+                                Froyo
+                            </a>
+                        </div>
                     </div>
                     <div className="help-detail-container d-flex flex-column col-12 col-md-4 mb-3">
                         <div className="title-text mb-2">HELP</div>
-                        <a
-                            className="subtitle-text"
-                            href="mailto:info@froyo.games"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Contact us
-                        </a>
+                        <div className="subtitle-text">
+                            <a
+                                href="mailto:info@froyo.games"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Contact us
+                            </a>
+                        </div>
                     </div>
                     <div className="froyo-coin-detail-container d-flex flex-column col-12 col-md-4 mb-3">
                         <div className="title-text mb-2">FROYO COIN</div>
-                        <a
-                            className="subtitle-text"
-                            target="_blank"
-                            rel="noreferrer"
-                            href="https://froyo.games/token"
-                        >
-                            Get Froyo Coin
-                        </a>
+                        <div className="subtitle-text">
+                            <a
+                                className="subtitle-text"
+                                target="_blank"
+                                rel="noreferrer"
+                                href="https://froyo.games/token"
+                            >
+                                Get Froyo Coin
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className="join-community-container col-12 col-md-4 col-xl-5 text-md-right mb-5">
@@ -138,7 +142,7 @@ const Footer = () => {
                 <div className="terms-and-conditions-container col-12 col-md-9 align-self-end">
                     <div className="trademark-container d-flex flex-wrap">
                         <span className="pr-2 d-none d-md-inline-flex">
-                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "} 
+                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
                         </span>
                         <span className="d-none d-md-inline-flex">
                             &bull;
