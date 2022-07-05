@@ -25,17 +25,22 @@
             background: #131313;
             border-radius: 10px 0px 0px 10px;
         }
-        video, img {
+        video, 
+        img:not(.icon) {
             width: 50px;
             z-index: 1;
             border-radius: 5px;
             border: 2px solid white;
         }
+        img {
+            width: 30px;
+            z-index: 1;
+        }
         .prize-info {
             font-size: $fnt-sz-10;
         }
         .noti-info {
-            font-size: $fnt-sz-14;
+            font-size: $fnt-sz-16;
             font-weight: $fnt-wgt-700;
             .tickets {
                 color: #f6b622;
