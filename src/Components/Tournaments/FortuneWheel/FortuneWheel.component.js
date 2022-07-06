@@ -77,10 +77,6 @@ const FortuneWheel = ({
 
         setIsClickedSpin(true);
         dispatch(loadPlayerSpinnerSpin(prizeId, updateWheelResult));
-
-        const randWin =
-            spinnerRules[Math.floor(Math.random() * spinnerRules.length)];
-        setWinAmount(randWin.tickets);
     }
     function updateWheelResult(_spinner) {
         if (_spinner.enterId === 0) return;
