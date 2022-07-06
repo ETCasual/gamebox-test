@@ -159,7 +159,22 @@ const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
                                     )}
                                 </div>
                             )}
-                            <div className="p-0 btn-wrapper d-flex flex-column mt-4 col-12 p-3">
+
+                             {/* TICKETS INFO */}
+                             <div className="total-tickets-container d-flex justify-content-between">
+                                <div className="total" >Total </div>
+                                <div className="number" >10 &nbsp;  
+                                <img
+                                        src={`${window.cdn}assets/tickets_05.png`}
+                                        alt="tickets"
+                                />
+                                </div>
+                               
+                               
+                              
+                            </div>
+                                    
+                            <div className="p-0 btn-wrapper d-inline-flex p-2 mt-4 col-12 p-3">
                                 {/* <button
                                     className={`btn-results ${
                                         leaderboardHistory.length > 0

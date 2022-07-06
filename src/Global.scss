@@ -726,9 +726,10 @@ html {
             font-size: $fnt-sz-10;
         }
         .title {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-30;
+            font-weight: $fnt-wgt-600;
             @include media-min($md) {
-                font-size: $fnt-sz-18;
+                font-size: $fnt-sz-40;
             }
         }
         .subtitle {
@@ -1157,5 +1158,36 @@ html {
 }
 
 .grecaptcha-badge { visibility: hidden; }
+
+.total-tickets-container{
+    background: #433848;
+    border-radius: 4px;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    .total {
+        text-align: left;
+        font-weight: $fnt-wgt-600;
+        font-size: $fnt-sz-24;
+    }
+    .number {
+        text-align: left;
+        color: #F7B620 ;
+        font-weight: $fnt-wgt-700;
+        font-size: $fnt-sz-30;
+        @include media-min($sm) {
+            font-size: $fnt-sz-50;
+        }
+    }
+    img {
+        width:50px;
+        @include media-min($sm) {
+            width:90px;
+        }
+    }
+}
+  
+   
+  
 
 @import "./assets/css/all";
