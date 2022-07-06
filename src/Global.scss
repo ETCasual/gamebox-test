@@ -1055,6 +1055,58 @@ html {
             top: 3rem;
         }
 
+        .title {
+            width: 100%;
+            font-size: $fnt-sz-16;
+
+            @include media-min($xs) {
+                font-size: $fnt-sz-24;
+            }
+
+            font-weight: $fnt-wgt-700;
+        }
+
+        .selections {
+            .panel {
+                width: 100%;
+                height: 10rem;
+                background: linear-gradient(133deg, #1c1c1c 0%, #0b0b0b 100%);
+                border-radius: 10px;
+                border: 0.15rem solid transparent;
+            }
+            .panel:hover {
+                border: 0.15rem solid #fdc43d;
+            }
+        }
+
+        .buttons {
+            .play-btn {
+                width: 50%;
+                max-width: 25rem;
+                font-size: $fnt-sz-14;
+                font-weight: $fnt-wgt-600;
+                background: #ff3399;
+                color: white;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                border-radius: 10px;
+                padding: 0.8rem;
+
+                @include media-min($sm) {
+                    font-size: $fnt-sz-16;
+                    padding: 0.8rem;
+                }
+
+                .icon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+            .play-btn:hover {
+                background: #f20086;
+            }
+        }
+
+
         .card-prize {
             width: 100%;
             // @include media-min($sm) {

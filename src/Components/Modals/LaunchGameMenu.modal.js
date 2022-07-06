@@ -34,7 +34,32 @@ const LaunchGameMenuModalPopup = ({
                         alt="close-btn"
                     />
 
-                    {/* CARD */}
+                    <div className="d-flex flex-column align-items-center justify-content-center mt-1">
+                        <div className="col-10 col-md-8 p-2">
+                            <div className="title p-1 m-auto text-center">Game Menu</div>
+                            <div className="selections d-flex my-2">
+                                <div className="panel mr-1 my-3">selection 1</div>
+                                <div className="panel ml-1 my-3">selection 2</div>
+                            </div>
+                            <div className="buttons">
+                                <button
+                                    className="play-btn d-flex align-items-center justify-content-center m-auto"
+                                // onClick={}
+                                >
+                                    <p className="my-auto mr-2">Start Play</p>
+                                    <div className="d-flex ml-2">
+                                        <span className="m-auto">+10</span>
+                                        <img
+                                            className="icon ml-1"
+                                            src={`${window.cdn}assets/gem_01.png`}
+                                            alt="gems"
+                                        /></div>
+
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>
