@@ -726,10 +726,10 @@ html {
             font-size: $fnt-sz-10;
         }
         .title {
-            font-size: $fnt-sz-30;
+            font-size: $fnt-sz-16;
             font-weight: $fnt-wgt-600;
             @include media-min($md) {
-                font-size: $fnt-sz-40;
+                font-size: $fnt-sz-18;
             }
         }
         .subtitle {
