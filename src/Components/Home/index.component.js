@@ -369,7 +369,7 @@ const Index = () => {
                                         {/* TIMER */}
                                         <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
                                             <p className="timer-text mb-0">
-                                                Next Rewards
+                                                Refresh In
                                             </p>
                                             <p className="countdown mb-0">
                                                 {`\u00A0 ${timer} `}
