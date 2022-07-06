@@ -23,13 +23,6 @@
     }
     .unclaimed {
         min-height: 10rem;
-        .card-wrapper {
-            video,
-            img {
-                height: 9.875rem;
-                width: 9.875rem;
-            }
-        }
     }
     .claimed-title,
     .unclaimed-title {
@@ -43,20 +36,7 @@
         border-radius: 10px;
         background: linear-gradient(116deg, #302f2f 0%, #101010 100%);
         position: relative;
-        video,
-        img {
-            border-radius: 10px;
-            position: relative;
-        }
-        // img, video {
-        //     width: 100%;
-        //     min-height: 9rem;
-        //     @include media-min($md) {
-        //         min-height: 11.063rem;
-        //     }
-        //     object-fit: cover;
-        //     border-radius: 17px 0 0 17px;
-        // }
+
         .prize-text {
             .card-title {
                 font-size: $fnt-sz-14;
@@ -125,5 +105,11 @@
                 color: #7824f8 !important;
             }
         }
+    }
+    .prize-image {
+        height: 9.875rem;
+        width: 9.875rem;
+        border-radius: 10px;
+        position: relative;
     }
 }

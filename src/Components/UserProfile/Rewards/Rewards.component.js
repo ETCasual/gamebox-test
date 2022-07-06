@@ -245,6 +245,7 @@ const Rewards = () => {
                                                                         setIsPlayVideo={
                                                                             setIsPlayVideo
                                                                         }
+                                                                        className="prize-image"
                                                                     />
                                                                     {/* <div
                                                                 className="prize-image"
@@ -327,6 +328,7 @@ const Rewards = () => {
                                                                         setIsPlayVideo={
                                                                             setIsPlayVideo
                                                                         }
+                                                                        className="prize-image"
                                                                     />
                                                                     {/* <div
                                                                 className="prize-image"
