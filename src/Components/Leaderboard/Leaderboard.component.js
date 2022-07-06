@@ -575,6 +575,7 @@ const Leaderboard = ({
                                 isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
                                 isPlayBtnDisabled: false,
+                                isGameOver: false,
                             }));
                             // setIsGameLeaderboardShown(false);
                         }}
