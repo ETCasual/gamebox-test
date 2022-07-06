@@ -267,7 +267,10 @@ const Index = ({ match }) => {
                                 <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
                                     <div
                                         className="d-flex align-items-center"
-                                        onClick={() => { handleHomeNavLink(); history.goBack(); }}
+                                        onClick={() => {
+                                            handleHomeNavLink();
+                                            history.goBack();
+                                        }}
                                     >
                                         <img
                                             src={`${window.cdn}buttons/button_back.png`}
@@ -282,7 +285,6 @@ const Index = ({ match }) => {
                                     <ThumbnailMedia
                                         url={currentPrize?.prizeBG}
                                         isPlayVideo={true}
-                                        setIsPlayVideo={null}
                                     />
 
                                     {currentPrize?.infoUrl ? (
@@ -358,26 +360,28 @@ const Index = ({ match }) => {
 
                                                     {/* COUNT DOWN TIME */}
                                                     <span
-                                                        className={`${currentPrize.overTime
-                                                            ? "text-danger tickets-text-end"
-                                                            : "tickets-text"
-                                                            }`}
+                                                        className={`${
+                                                            currentPrize.overTime
+                                                                ? "text-danger tickets-text-end"
+                                                                : "tickets-text"
+                                                        }`}
                                                     >
                                                         {currentPrize.overTime
                                                             ? timer
                                                             : getPrizeTicketCollected(
-                                                                prizeTicketCollection,
-                                                                id
-                                                            )?.toLocaleString() ||
-                                                            0}
+                                                                  prizeTicketCollection,
+                                                                  id
+                                                              )?.toLocaleString() ||
+                                                              0}
                                                     </span>
 
                                                     {/* TICKETS REQUIRED NUMBER */}
                                                     {!currentPrize.overTime && (
                                                         <span className="total-tickets-text">
-                                                            {`\u00A0 / ${currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                            {`\u00A0 / ${
+                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
                                                                 0
-                                                                }`}
+                                                            }`}
                                                         </span>
                                                     )}
                                                 </div>
@@ -432,7 +436,7 @@ const Index = ({ match }) => {
                                                         currentPrize.overTime
                                                             ? "text-danger tickets-text-end"
                                                             : "tickets-text"
-                                                        }`}
+                                                    }`}
                                                 >
                                                     {
                                                         // OverTimeModeChecker(
@@ -443,10 +447,10 @@ const Index = ({ match }) => {
                                                         currentPrize.overTime
                                                             ? timer
                                                             : getPrizeTicketCollected(
-                                                                prizeTicketCollection,
-                                                                id
-                                                            )?.toLocaleString() ||
-                                                            0
+                                                                  prizeTicketCollection,
+                                                                  id
+                                                              )?.toLocaleString() ||
+                                                              0
                                                     }
                                                 </span>
 
@@ -459,9 +463,10 @@ const Index = ({ match }) => {
                                                     // )
                                                     !currentPrize.overTime && (
                                                         <span className="total-tickets-text">
-                                                            {`\u00A0 / ${currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                            {`\u00A0 / ${
+                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
                                                                 0
-                                                                }`}
+                                                            }`}
                                                         </span>
                                                     )
                                                 }

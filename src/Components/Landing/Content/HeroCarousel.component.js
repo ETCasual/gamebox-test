@@ -44,24 +44,20 @@ const Carousel = () => {
                     slideShadows: false,
                 }}
             >
-                {swiperImageSources.map(
-                    (src, i) => {
-                        return (
-                            <SwiperSlide key={`slider-${i}`}>
-                                {({ isActive }) => (
-                                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                                        <ThumbnailMedia
-                                            url={src}
-                                            isPlayVideo={isActive}
-                                            setIsPlayVideo={null}
-                                        />
-                                    </div>
-                                )}
-                            </SwiperSlide>
-                        )
-                    }
-                )}
-
+                {swiperImageSources.map((src, i) => {
+                    return (
+                        <SwiperSlide key={`slider-${i}`}>
+                            {({ isActive }) => (
+                                <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                                    <ThumbnailMedia
+                                        url={src}
+                                        isPlayVideo={isActive}
+                                    />
+                                </div>
+                            )}
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
         </div>
     );

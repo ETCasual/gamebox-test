@@ -147,7 +147,6 @@ const Index = () => {
                                                                 : `${window.cdn}assets/notification_friends_01.jpg`
                                                         }
                                                         isPlayVideo={true}
-                                                        setIsPlayVideo={null}
                                                         onError={(e) =>
                                                             defaultGameImage(e)
                                                         }
