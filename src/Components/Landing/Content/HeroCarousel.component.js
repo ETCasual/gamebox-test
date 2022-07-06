@@ -1,8 +1,22 @@
 import React from "react";
 import SwiperCore, { Pagination, Autoplay, EffectCoverflow } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 const Carousel = () => {
+    const swiperImageSources = [
+        `${window.cdn}landing_samples/mp4/hg_nft_001.mp4`,
+        `${window.cdn}landing_samples/mp4/hg_nft_002.mp4`,
+        `${window.cdn}landing_samples/mp4/hg_nft_003.mp4`,
+        `${window.cdn}landing_samples/mp4/hg_nft_004.mp4`,
+        `${window.cdn}landing_samples/mp4/hg_nft_005.mp4`,
+        `${window.cdn}landing_samples/mp4/ufo_nft_001.mp4`,
+        `${window.cdn}landing_samples/mp4/ufo_nft_002.mp4`,
+        `${window.cdn}landing_samples/mp4/ufo_nft_003.mp4`,
+        `${window.cdn}landing_samples/mp4/ufo_nft_004.mp4`,
+        `${window.cdn}landing_samples/mp4/ufo_nft_005.mp4`,
+    ];
+
     SwiperCore.use([EffectCoverflow, Pagination, Autoplay]);
 
     return (
@@ -30,90 +44,24 @@ const Carousel = () => {
                     slideShadows: false,
                 }}
             >
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/hg_nft_001_SPECIAL-SPACESUIT.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/hg_nft_002_UNIQUE-SPACESUIT.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/hg_nft_003_DISTINCT-SPACESUIT.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/hg_nft_004_BIZARRE-SPACESUIT.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/hg_nft_005_SUPREME-SPACESUIT.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/ufo_nft_001_SPECIAL-SPACESHIP.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
+                {swiperImageSources.map(
+                    (src, i) => {
+                        return (
+                            <SwiperSlide key={`slider-${i}`}>
+                                {({ isActive }) => (
+                                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
+                                        <ThumbnailMedia
+                                            url={src}
+                                            isPlayVideo={isActive}
+                                            setIsPlayVideo={null}
+                                        />
+                                    </div>
+                                )}
+                            </SwiperSlide>
+                        )
+                    }
+                )}
 
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/ufo_nft_002_UNIQUE-SPACESHIP.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/ufo_nft_003_DISTINCT-SPACESHIP.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/ufo_nft_004_BIZARRE-SPACESHIP.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <div className="w-100 d-flex align-items-center justify-content-end justify-content-md-center">
-                        <img
-                            src={`${window.cdn}landing_samples/ufo_nft_005_SUPREME-SPACESHIP.jpg`}
-                            alt="Sample NFT"
-                        />
-                    </div>
-                </SwiperSlide>
             </Swiper>
         </div>
     );

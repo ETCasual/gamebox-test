@@ -12,7 +12,7 @@ const ThumbnailMedia = ({
     onError = null,
     className = "",
 }) => {
-    const [thumbFileType, setThumbFileType] = useState("");
+    const [thumbFileType] = useState(getFileType(url));
     const [isMobile, setIsMobile] = useState(
         navigator.userAgent.includes("Mobile")
     );
@@ -20,9 +20,6 @@ const ThumbnailMedia = ({
     let videoRef = useRef(null);
 
     useEffect(() => {
-        // Read the prize thumbnail file type
-        setThumbFileType(getFileType(url));
-
         // Check is mobile platform
         setIsMobile(navigator.userAgent.includes("Mobile"));
     }, [url]);

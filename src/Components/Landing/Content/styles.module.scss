@@ -297,7 +297,7 @@
                         }
                     }
                     .swiper-slide {
-                        img {
+                        img, video {
                             @include media-max($sm) {
                                 position: relative;
                                 left: 2rem;
