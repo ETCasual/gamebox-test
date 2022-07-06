@@ -106,7 +106,6 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                 <ThumbnailMedia
                                     url={e.picture}
                                     isPlayVideo={true}
-                                    setIsPlayVideo={null}
                                     className="thumb-media"
                                 />
                                 <img
@@ -130,87 +129,89 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                 {/* TODO: To change the checking to not use username */}
                                 {user.username.toLowerCase() ===
                                     e.winner.toLowerCase() && (
-                                        <>
-                                            <p className="winner-name p-3">
-                                                {e.winner} (You)
-                                            </p>
-                                            <p className="won-text mb-0">Won the</p>
-                                            <p className="prize-name my-2">
-                                                {e.title}
-                                            </p>
-                                            <p className="nft-token">
-                                                TokenID:{" "}
-                                                {e.nftContractAddress.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
-                                                {e.nftContractAddress.substring(
-                                                    e.nftContractAddress.length - 4
-                                                )}
-                                            </p>
-
-                                            {e.canClaimDate > 0 && (
-                                                <>
-                                                    <p className="mb-2 mt-4 not-minted">
-                                                        This NFT is not minted yet.
-                                                        We’ll notify you once it’s
-                                                        out.
-                                                    </p>
-                                                    <p className="mint-date">
-                                                        NFT mint date:{" "}
-                                                        {getMintDate(
-                                                            e.canClaimDate
-                                                        )}
-                                                    </p>
-                                                </>
+                                    <>
+                                        <p className="winner-name p-3">
+                                            {e.winner} (You)
+                                        </p>
+                                        <p className="won-text mb-0">Won the</p>
+                                        <p className="prize-name my-2">
+                                            {e.title}
+                                        </p>
+                                        <p className="nft-token">
+                                            TokenID:{" "}
+                                            {e.nftContractAddress.substring(
+                                                0,
+                                                5
                                             )}
-
-                                            {e.canClaimDate <= 0 && (
-                                                <Link to="/profile/rewards">
-                                                    <button className="connect-wallet-btn p-3">
-                                                        Claim prize
-                                                    </button>
-                                                </Link>
+                                            ....
+                                            {e.nftContractAddress.substring(
+                                                e.nftContractAddress.length - 4
                                             )}
-                                        </>
-                                    )}
+                                        </p>
+
+                                        {e.canClaimDate > 0 && (
+                                            <>
+                                                <p className="mb-2 mt-4 not-minted">
+                                                    This NFT is not minted yet.
+                                                    We’ll notify you once it’s
+                                                    out.
+                                                </p>
+                                                <p className="mint-date">
+                                                    NFT mint date:{" "}
+                                                    {getMintDate(
+                                                        e.canClaimDate
+                                                    )}
+                                                </p>
+                                            </>
+                                        )}
+
+                                        {e.canClaimDate <= 0 && (
+                                            <Link to="/profile/rewards">
+                                                <button className="connect-wallet-btn p-3">
+                                                    Claim prize
+                                                </button>
+                                            </Link>
+                                        )}
+                                    </>
+                                )}
                                 {user.username.toLowerCase() !==
                                     e.winner.toLowerCase() && (
-                                        <>
-                                            <p className="winner-name mt-5 p-3">
-                                                {e.winner}
-                                            </p>
-                                            <p className="won-text mb-0">won the</p>
-                                            <p className="prize-name my-2">
-                                                {e.title}
-                                            </p>
-                                            <p className="nft-token">
-                                                TokenID:{" "}
-                                                {e.nftContractAddress.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
-                                                {e.nftContractAddress.substring(
-                                                    e.nftContractAddress.length - 4
-                                                )}
-                                            </p>
-                                        </>
-                                    )}
+                                    <>
+                                        <p className="winner-name mt-5 p-3">
+                                            {e.winner}
+                                        </p>
+                                        <p className="won-text mb-0">won the</p>
+                                        <p className="prize-name my-2">
+                                            {e.title}
+                                        </p>
+                                        <p className="nft-token">
+                                            TokenID:{" "}
+                                            {e.nftContractAddress.substring(
+                                                0,
+                                                5
+                                            )}
+                                            ....
+                                            {e.nftContractAddress.substring(
+                                                e.nftContractAddress.length - 4
+                                            )}
+                                        </p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </SwiperSlide>
                 ))}
 
                 <div
-                    className={`pagination p-3 mx-auto ${prizeData.length > 1 ? "d-flex" : "d-none"
-                        } align-items-center justify-content-between`}
+                    className={`pagination p-3 mx-auto ${
+                        prizeData.length > 1 ? "d-flex" : "d-none"
+                    } align-items-center justify-content-between`}
                 >
                     <img
                         width={32}
-                        className={`prev ${activeSlide > 0 ? "" : "opacity-0-5"
-                            }`}
+                        className={`prev ${
+                            activeSlide > 0 ? "" : "opacity-0-5"
+                        }`}
                         ref={navigationPrevRef}
                         src={`${window.cdn}buttons/button_back.png`}
                         alt="prev-btn"
@@ -218,10 +219,11 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                     <div className="custom-pagination d-flex justify-content-center"></div>
                     <img
                         width={32}
-                        className={`next ${activeSlide === prizeData.length - 1
+                        className={`next ${
+                            activeSlide === prizeData.length - 1
                                 ? "opacity-0-5"
                                 : ""
-                            }`}
+                        }`}
                         ref={navigationNextRef}
                         src={`${window.cdn}buttons/button_back.png`}
                         alt="next-btn"

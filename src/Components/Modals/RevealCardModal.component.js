@@ -63,7 +63,6 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                         <ThumbnailMedia
                                             url={e.picture}
                                             isPlayVideo={true}
-                                            setIsPlayVideo={null}
                                             className="thumb-media"
                                         />
                                         <img

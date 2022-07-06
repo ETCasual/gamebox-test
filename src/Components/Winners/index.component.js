@@ -209,7 +209,6 @@ const Index = () => {
                                         <ThumbnailMedia
                                             url={winnerHoverCardData?.imageUrl}
                                             isPlayVideo={true}
-                                            setIsPlayVideo={null}
                                         />
 
                                         {/* INFO */}

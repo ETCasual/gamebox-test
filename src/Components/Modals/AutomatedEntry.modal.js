@@ -100,7 +100,6 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     <ThumbnailMedia
                                         url={data.prizeBG}
                                         isPlayVideo={true}
-                                        setIsPlayVideo={null}
                                         className={"thumb"}
                                     />
                                 </div>
