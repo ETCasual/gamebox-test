@@ -8,7 +8,7 @@ import _ from "lodash";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // HELPER FUNCTIONS
-import { convertSecondsTo24HoursBase } from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
     const location = useLocation();
@@ -43,10 +43,14 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
         }
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
-            let finalTimeRef = convertSecondsTo24HoursBase(
+            let finalTimeRef = convertSecondsToHours(
                 calculatedTime.valueOf(),
                 config.offsetTimestamp ? config.offsetTimestamp : 0
             );
+            // let finalTimeRef = convertSecondsTo24HoursBase(
+            //     calculatedTime.valueOf(),
+            //     config.offsetTimestamp ? config.offsetTimestamp : 0
+            // );
             setTimer(finalTimeRef);
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
@@ -80,7 +84,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
     return (
         <>
             <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                <div className="modal-body-automated-entry col-12 col-md-10 col-lg-8 position-relative">
+                <div className="modal-body-automated-entry position-relative">
                     {/* CLOSE BTN */}
                     <img
                         className="close-button"
@@ -92,7 +96,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
 
                     {/* CARD */}
                     <div className="row justify-content-center mt-3 mt-sm-5">
-                        <div className="col-10 col-md-8 col-lg-8 mb-3 pl-2 pr-1">
+                        <div className="col-10 col-md-8 mb-3 pl-2 pr-1">
                             {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                             <div className="card-prize d-flex m-auto">
                                 <div className="p-1 m-auto">
