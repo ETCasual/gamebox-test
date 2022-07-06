@@ -34,6 +34,7 @@ import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import LaunchGameMenuModalPopup from "Components/Modals/LaunchGameMenu.modal";
 
 const Leaderboard = ({
     data,
@@ -225,7 +226,6 @@ const Leaderboard = ({
     };
 
     const handleOnClickPlayButton = async () => {
-
         setModalStatus((prev) => ({
             ...prev,
             isPlayBtnDisabled: true,
@@ -325,7 +325,7 @@ const Leaderboard = ({
                 ...prev,
                 isGameReady: false,
                 isQuitGameConfirm: false,
-                isPlayBtnDisabled:false,
+                isPlayBtnDisabled: false,
             }));
         else if (choice === "no")
             setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
@@ -819,41 +819,52 @@ const Leaderboard = ({
 
                                 {/* EARN ADDITIONAL BENEFITS */}
                                 {modalStatus.isEarnAdditionalInfoShown && (
-                                    <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
-                                        <EarnAdditionalTickets
-                                            gameId={currentGameDetails.gameId}
-                                            prizeId={data?.prizeId}
-                                            earnAdditionalDisabledStatus={
-                                                earnAdditionalDisabledStatus
-                                            }
-                                            setEarnAdditionalDisabledStatus={
-                                                setEarnAdditionalDisabledStatus
-                                            }
-                                        />
-                                        {/* PLAY BUTTON*/}
-                                        <div
-                                            className={`play-button-container d-flex justify-content-center ${
-                                                isGameAvailable
-                                                    ? ""
-                                                    : "opacity-0-5"
-                                            }`}
-                                        >
-                                            <button
-                                                onClick={
-                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                                        ? handleOnClickPlayButton
-                                                        : null
-                                                }
-                                                className={`play-button ${
-                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                                        ? ""
-                                                        : "opacity-0-5"
-                                                }`}
-                                            >
-                                                Play Tournament!
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <LaunchGameMenuModalPopup
+                                        gameId={currentGameDetails.gameId}
+                                        prizeId={data?.prizeId}
+                                        earnAdditionalDisabledStatus={
+                                            earnAdditionalDisabledStatus
+                                        }
+                                        setEarnAdditionalDisabledStatus={
+                                            setEarnAdditionalDisabledStatus
+                                        }
+                                    />
+
+                                    // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
+                                    //     <EarnAdditionalTickets
+                                    //         gameId={currentGameDetails.gameId}
+                                    //         prizeId={data?.prizeId}
+                                    //         earnAdditionalDisabledStatus={
+                                    //             earnAdditionalDisabledStatus
+                                    //         }
+                                    //         setEarnAdditionalDisabledStatus={
+                                    //             setEarnAdditionalDisabledStatus
+                                    //         }
+                                    //     />
+                                    //     {/* PLAY BUTTON*/}
+                                    //     <div
+                                    //         className={`play-button-container d-flex justify-content-center ${
+                                    //             isGameAvailable
+                                    // //                 ? ""
+                                    //                 : "opacity-0-5"
+                                    //         }`}
+                                    //     >
+                                    //         <button
+                                    //             onClick={
+                                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                    // //                     ? handleOnClickPlayButton
+                                    //                     : null
+                                    //             }
+                                    //             className={`play-button ${
+                                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                    // //                     ? ""
+                                    //                     : "opacity-0-5"
+                                    //             }`}
+                                    //         >
+                                    //             Play Tournament!
+                                    //         </button>
+                                    //     </div>
+                                    // </div>
                                 )}
                             </div>
                         </div>

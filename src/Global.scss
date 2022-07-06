@@ -1031,6 +1031,170 @@ html {
             color: aqua;
         }
     }
+    .modal-body-launch-game-menu {
+        .close-button {
+            width: 30px;
+            height: 30px;
+            @include media-min($md) {
+                width: 36px;
+                height: 36px;
+            }
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 60rem;
+
+        // Check is mobile
+        @media (pointer:none), (pointer:coarse) {
+            top: 3rem;
+        }
+
+        .card-prize {
+            width: 100%;
+            // @include media-min($sm) {
+            //     width: 30rem;
+            // }
+            border-radius: 10px;
+            border: 0.15rem solid #424242;
+            
+            .thumb {
+                max-height: 6rem;
+                max-width: 6rem;
+                @include media-min($sm) {
+                    max-height: 9rem;
+                    max-width: 9rem;
+                }
+                width: 100%;
+                border-radius: 10px;
+                position: relative;
+            }
+            
+            .prize-text {
+                color: white;
+
+                .card-title {
+                    font-size: $fnt-sz-14;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-20;
+                    }
+                    font-weight: $fnt-wgt-600;
+                }
+                .card-subtitle {
+                    font-size: $fnt-sz-8;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-12;
+                    }
+                }
+                .card-content {
+                    font-size: $fnt-sz-10;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-14;
+                    }
+                }
+            }
+        }
+
+        .countdown {
+            width: 60%;
+            max-width: 18rem;
+            font-size: $fnt-sz-12;
+            font-weight: $fnt-wgt-600;
+            background: #433948;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 10px;
+            padding: 0.7rem;
+
+            @include media-min($sm) {
+                font-size: $fnt-sz-14;
+                padding: 1rem;
+            }
+
+            .countdown-text {
+                color: white;
+                font-weight: $fnt-wgt-700;
+            }
+        }
+
+        .tickets-label {
+            font-size: $fnt-sz-12;
+            @include media-min($sm) {
+                font-size: $fnt-sz-14;
+            }
+        }
+
+        .tickets-value {
+            .tickets {
+                font-size: $fnt-sz-22;
+                @include media-min($sm) {
+                    font-size: $fnt-sz-28;
+                }
+                font-weight: $fnt-wgt-600;
+            }
+
+            .icon {
+                width: 2.5rem;
+                @include media-min($sm) {
+                    width: 3.5rem;
+                }
+            }
+        }
+
+        .start-earning-btn {
+            width: 90%;
+            max-width: 25rem;
+            font-size: $fnt-sz-14;
+            font-weight: $fnt-wgt-600;
+            background: #ff3399;
+            color: white;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 10px;
+            padding: 0.8rem;
+
+            @include media-min($sm) {
+                font-size: $fnt-sz-16;
+                padding: 1.2rem;
+            }
+        }
+        .start-earning-btn:hover {
+            background: #f20086;
+        }
+
+        .line {
+            background-color: #433948;
+            width: 2rem;
+            height: 2px;
+            margin: 1rem auto;
+            @include media-min($sm) {
+                margin: 1.5rem auto;
+            }
+        }
+
+        .instructions-title {
+            font-size: $fnt-sz-10;
+            font-weight: $fnt-wgt-600;
+            @include media-min($sm) {
+                font-size: $fnt-sz-12;
+            }
+        }
+
+        .instructions-subtitle,
+        .instructions-tip {
+            font-size: $fnt-sz-8;
+            @include media-min($sm) {
+                font-size: $fnt-sz-10;
+            }
+        }
+
+        .mob-text {
+            color: aqua;
+        }
+    }
 }
 
 // INFO PAGES
