@@ -1,5 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,7 +32,28 @@ const Rewards = () => {
 
     const [isPlayVideo, setIsPlayVideo] = useState(false);
 
-    const [isClaimedClicked, setIsClaimedClicked] = useState("claimed");
+    const [isClaimedClicked, setIsClaimedClicked] = useState("unclaimed");
+    const [statusOpacity, setStatusOpacity] = useState(0.1);
+    const [isIncrementing, setIsIncrementing] = useState(true);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (isIncrementing) {
+                if (statusOpacity < 1) {
+                    setStatusOpacity(statusOpacity + 0.1);
+                } else {
+                    setIsIncrementing(false);
+                }
+            } else if (!isIncrementing) {
+                if (statusOpacity > 0.3) {
+                    setStatusOpacity(statusOpacity - 0.1);
+                } else {
+                    setIsIncrementing(true);
+                }
+            }
+        }, 50);
+        return () => clearInterval(interval);
+    });
 
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
@@ -164,129 +185,159 @@ const Rewards = () => {
                                 <h1 className={`main-title mb-4`}>Rewards</h1>
                             </div>
                             <div className="div-items col-12 d-flex justify-content-start">
-                                {isClaimedClicked === "claimed" ? (
-                                    <div className="btn-clicked mr-4 mb-4">
-                                        Claimed Reward
-                                    </div>
-                                ) : (
+                                <div
+                                    className={
+                                        isClaimedClicked === "claimed"
+                                            ? "btn-unclicked mr-4 mb-4 d-flex justify-content-start"
+                                            : "btn-clicked mr-4 mb-4 d-flex justify-content-start"
+                                    }
+                                    onClick={handleClickUnclaimedReward}
+                                >
+                                    Unclaimed Rewards
                                     <div
-                                        className="btn-unclicked mr-4 mb-4"
-                                        onClick={handleClickClaimedReward}
-                                    >
-                                        Claimed Reward
-                                    </div>
-                                )}
-                                {isClaimedClicked === "claimed" ? (
-                                    <div
-                                        className="btn-unclicked mb-4"
-                                        onClick={handleClickUnclaimedReward}
-                                    >
-                                        Unclaimed Reward
-                                    </div>
-                                ) : (
-                                    <div className="btn-clicked mb-4">
-                                        Unclaimed Reward
-                                    </div>
-                                )}
+                                        className="unclaimed-status-icon ml-1"
+                                        style={
+                                            unClaimedPrizes.length === 0
+                                                ? { opacity: "0" }
+                                                : { opacity: statusOpacity }
+                                        }
+                                    ></div>
+                                </div>
+                                <div
+                                    className={
+                                        isClaimedClicked === "claimed"
+                                            ? "btn-clicked mb-4"
+                                            : "btn-unclicked mb-4"
+                                    }
+                                    onClick={handleClickClaimedReward}
+                                >
+                                    Claimed Rewards
+                                </div>
                             </div>
                             {isClaimedClicked === "claimed" ? (
-                                <div className="col-12">
-                                    {/* CLAIMED */}
-                                    {claimedPrizes.length > 0 && (
-                                        <>
-                                            <div className="row">
-                                                {claimedPrizes?.map(
-                                                    (data, i) => (
-                                                        <div
-                                                            className={`col-12 col-md-6 mb-3 pl-2 pr-1 prize ${
-                                                                data.status ===
-                                                                2
-                                                                    ? "claimed"
-                                                                    : ""
-                                                            }`}
-                                                            key={`prizes-${i}`}
-                                                        >
+                                claimedPrizes.length === 0 ? (
+                                    <div className="no-result">
+                                        <p className="title mb-1">
+                                            No Rewards found yet!
+                                        </p>
+                                        <p className="subtitle mt-1 mb-0">
+                                            Looks like you've not claimed for
+                                            any prizes yet.{" "}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="col-12 min-height">
+                                        {/* CLAIMED */}
+                                        {claimedPrizes.length > 0 && (
+                                            <>
+                                                <div className="row">
+                                                    {claimedPrizes?.map(
+                                                        (data, i) => (
                                                             <div
-                                                                className="card-wrapper d-flex"
-                                                                onClick={() =>
+                                                                className={`col-12 col-md-6 mb-3 pl-2 pr-1 prize ${
                                                                     data.status ===
                                                                     2
-                                                                        ? handleClaimedInfo(
-                                                                              data
-                                                                          )
-                                                                        : null
-                                                                }
-                                                                onMouseEnter={(
-                                                                    e
-                                                                ) => {
-                                                                    // HOVER TO PLAY VIDEO
-                                                                    setIsPlayVideo(
-                                                                        true
-                                                                    );
-                                                                }}
-                                                                onMouseLeave={(
-                                                                    e
-                                                                ) => {
-                                                                    // LEAVE HOVER TO PAUSE VIDEO
-                                                                    setIsPlayVideo(
-                                                                        false
-                                                                    );
-                                                                }}
+                                                                        ? "claimed"
+                                                                        : ""
+                                                                }`}
+                                                                key={`prizes-${i}`}
                                                             >
-                                                                <div className="col-auto p-2">
-                                                                    {/* THUMBNAIL MEDIA */}
-                                                                    <ThumbnailMedia
-                                                                        url={
-                                                                            data.prizeImageUrl
-                                                                        }
-                                                                        isPlayVideo={
-                                                                            isPlayVideo
-                                                                        }
-                                                                        setIsPlayVideo={
-                                                                            setIsPlayVideo
-                                                                        }
-                                                                        className="prize-image"
-                                                                    />
-                                                                    {/* <div
+                                                                <div
+                                                                    className="card-wrapper d-flex"
+                                                                    onClick={() =>
+                                                                        data.status ===
+                                                                        2
+                                                                            ? handleClaimedInfo(
+                                                                                  data
+                                                                              )
+                                                                            : null
+                                                                    }
+                                                                    onMouseEnter={(
+                                                                        e
+                                                                    ) => {
+                                                                        // HOVER TO PLAY VIDEO
+                                                                        setIsPlayVideo(
+                                                                            true
+                                                                        );
+                                                                    }}
+                                                                    onMouseLeave={(
+                                                                        e
+                                                                    ) => {
+                                                                        // LEAVE HOVER TO PAUSE VIDEO
+                                                                        setIsPlayVideo(
+                                                                            false
+                                                                        );
+                                                                    }}
+                                                                >
+                                                                    <div className="col-auto p-2">
+                                                                        {/* THUMBNAIL MEDIA */}
+                                                                        <ThumbnailMedia
+                                                                            url={
+                                                                                data.prizeImageUrl
+                                                                            }
+                                                                            isPlayVideo={
+                                                                                isPlayVideo
+                                                                            }
+                                                                            setIsPlayVideo={
+                                                                                setIsPlayVideo
+                                                                            }
+                                                                            className="prize-image"
+                                                                        />
+                                                                        {/* <div
                                                                 className="prize-image"
                                                                 style={{
                                                                     backgroundImage: `url("${data.prizeImageUrl}")`,
                                                                 }}
                                                             ></div> */}
-                                                                </div>
-                                                                <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
-                                                                    <div className="prize-text mb-auto">
-                                                                        <div className="card-title">
-                                                                            {
-                                                                                data.prizeTitle
-                                                                            }
-                                                                        </div>
-                                                                        <div className="card-subtitle">
-                                                                            {
-                                                                                data.prizeSubtitle
-                                                                            }
-                                                                        </div>
                                                                     </div>
+                                                                    <div className="col py-2 pl-2 pr-1 mt-1 d-flex flex-column">
+                                                                        <div className="prize-text mb-auto">
+                                                                            <div className="card-title">
+                                                                                {
+                                                                                    data.prizeTitle
+                                                                                }
+                                                                            </div>
+                                                                            <div className="card-subtitle">
+                                                                                {
+                                                                                    data.prizeSubtitle
+                                                                                }
+                                                                            </div>
+                                                                        </div>
 
-                                                                    <div className="prize-claimed py-2">
-                                                                        {data.status ===
-                                                                        2
-                                                                            ? getClaimedDate(
-                                                                                  data.claimedOn
-                                                                              )
-                                                                            : "Pending"}
+                                                                        <div className="prize-claimed py-2">
+                                                                            {data.status ===
+                                                                            2
+                                                                                ? getClaimedDate(
+                                                                                      data.claimedOn
+                                                                                  )
+                                                                                : "Pending"}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    )
-                                                )}
-                                            </div>
-                                        </>
-                                    )}
+                                                        )
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                )
+                            ) : unClaimedPrizes.length === 0 ? (
+                                <div className="no-result">
+                                    <p className="title mb-1">
+                                        No Rewards found yet!
+                                    </p>
+                                    <p className="subtitle mt-1 mb-0">
+                                        Looks like you've not played for any
+                                        prizes yet.{" "}
+                                    </p>
+                                    <p className="subtitle">
+                                        <Link to="/">Click here</Link> to look
+                                        for one you like.
+                                    </p>
                                 </div>
                             ) : (
-                                <div className="col-12">
+                                <div className="col-12  min-height">
                                     {/* UNCLAIMED */}
                                     {unClaimedPrizes.length > 0 && (
                                         <>
@@ -447,23 +498,6 @@ const Rewards = () => {
                                     )}
                                 </div>
                             )}
-
-                            {claimedPrizes.length === 0 &&
-                                unClaimedPrizes.length === 0 && (
-                                    <div className="no-result">
-                                        <p className="title mb-1">
-                                            No Rewards found yet!
-                                        </p>
-                                        <p className="subtitle mt-1 mb-0">
-                                            Looks like you've not played for any
-                                            prizes yet.{" "}
-                                        </p>
-                                        <p className="subtitle">
-                                            <Link to="/">Click here</Link> to
-                                            look for one you like.
-                                        </p>
-                                    </div>
-                                )}
                         </div>
                     </div>
                 </div>

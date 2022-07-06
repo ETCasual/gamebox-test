@@ -7,7 +7,10 @@
     }
     .div-items {
         height: inherit;
-        font-size: $fnt-sz-20;
+        font-size: $fnt-sz-14;
+        @include media-min($md) {
+            font-size: $fnt-sz-20;
+        }
         .btn-clicked {
             cursor: pointer;
             color: #f20086;
@@ -15,8 +18,20 @@
             padding-bottom: $fnt-sz-8;
         }
         .btn-unclicked {
+            color: #909090;
             cursor: pointer;
         }
+    }
+    .min-height {
+        min-height: 80vh;
+    }
+    .unclaimed-status-icon {
+        background-color: #f20086;
+        border-radius: 100%;
+        width: $fnt-sz-8;
+        height: $fnt-sz-8;
+        min-width: $fnt-sz-8;
+        min-height: $fnt-sz-8;
     }
     .claimed {
         cursor: pointer;
