@@ -5,7 +5,6 @@ import axios from "axios";
 import _ from "lodash";
 
 // COMPONENTS
-import EarnAdditionalTickets from "Components/Leaderboard/EarnAdditionalTickets/EarnAdditionalTickets.component";
 import LeaderRankIndicator from "Components/Global/LeaderRankIndicator.component";
 import GenericLoader from "Components/Loader/Generic.loader";
 import GameQuitModal from "Components/Modals/GameQuit.modal";
@@ -24,7 +23,7 @@ import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 // import loadPrizes from "redux/thunks/Prizes.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
-import SubscriptionModal from "Components/Modals/Subscription.modal";
+import InsufficientBalanceModalPopup from "Components/Modals/InsufficientBalance.modal";
 
 // HELPER FUNCTION
 import { defaultUserImage } from "Utils/DefaultImage";
@@ -111,7 +110,8 @@ const Leaderboard = ({
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
         setIsGameAvailable(false);
-        if (currentGameDetails?.gameId > 0) {
+        if (currentGameDetails?.gameId > 0)
+        {
             dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
             dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
         }
@@ -129,7 +129,8 @@ const Leaderboard = ({
 
         // To notify the players that stayed in games tournament ended when they left the window
         let destination = document.getElementById("destination")?.contentWindow;
-        if (destination) {
+        if (destination)
+        {
             // END BY TIMER
             destination?.endGameByTimer?.();
 
@@ -164,7 +165,8 @@ const Leaderboard = ({
             let destination =
                 document.getElementById("destination")?.contentWindow;
 
-            if (destination) {
+            if (destination)
+            {
                 // END BY TIMER
                 destination?.endGameByTimer?.();
                 setModalStatus((prev) => ({
@@ -199,7 +201,8 @@ const Leaderboard = ({
 
     useEffect(() => {
         let isDisabled = false;
-        switch (timer) {
+        switch (timer)
+        {
             case "Calculating":
             case "Ended":
             case "0d 0h 0m 0s":
@@ -229,9 +232,11 @@ const Leaderboard = ({
         setModalStatus((prev) => ({
             ...prev,
             isPlayBtnDisabled: true,
+            isEarnAdditionalInfoShown: false,
         }));
 
-        if (!executeRecaptcha) {
+        if (!executeRecaptcha)
+        {
             console.log("Execute recaptcha not yet available");
             return;
         }
@@ -266,8 +271,10 @@ const Leaderboard = ({
                     isEarnAdditionalInfoShown: false,
                 }));
 
-                if (currentGameDetails.gameId > 0) {
-                    try {
+                if (currentGameDetails.gameId > 0)
+                {
+                    try
+                    {
                         let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
                         let options = {
                             headers: {
@@ -278,7 +285,8 @@ const Leaderboard = ({
                             },
                         };
                         let response = await axios.get(url, options);
-                        if (response.data) {
+                        if (response.data)
+                        {
                             sessionStorage.setItem(
                                 "lbId",
                                 JSON.stringify({
@@ -290,14 +298,16 @@ const Leaderboard = ({
                             let gameCount =
                                 parseInt(localStorage.getItem("gameCount")) ||
                                 0;
-                            if (gameCount <= config.adsPerGame) {
+                            if (gameCount <= config.adsPerGame)
+                            {
                                 gameCount = gameCount + 1;
                                 localStorage.setItem("gameCount", gameCount);
                             }
 
                             showAdsBeforeGame(config);
                         }
-                    } catch (error) {
+                    } catch (error)
+                    {
                         console.log(error.message);
                     }
                 }
@@ -356,13 +366,15 @@ const Leaderboard = ({
      * @returns 
      */
     window.playerFinishGame = async (score) => {
-        if (!executeRecaptcha) {
+        if (!executeRecaptcha)
+        {
             console.log("Execute recaptcha not yet available");
             return;
         }
 
         const recaptchaToken = await executeRecaptcha("finishGame");
-        if (currentGameInfo.playerEnterGameId) {
+        if (currentGameInfo.playerEnterGameId)
+        {
             localStorage.setItem("currentGameScore", score.a);
 
             setModalStatus((prev) => ({
@@ -382,7 +394,8 @@ const Leaderboard = ({
 
             // CALL USER & LEADERBOARD API AFTER 1 SECOND DELAY
             setTimeout(() => {
-                if (timer === "Ended") {
+                if (timer === "Ended")
+                {
                     setModalStatus((prev) => ({
                         ...prev,
                         isQuitGameBtnDisabled: false,
@@ -397,7 +410,8 @@ const Leaderboard = ({
                     loadLeaderboard(data?.prizeId, currentGameDetails?.gameId)
                 );
                 // CALLING TICKETS API TO GET LATEST NUMBERS
-                if (earnAdditionalBenefitStatus.length > 0) {
+                if (earnAdditionalBenefitStatus.length > 0)
+                {
                     // PLAYER TICKETS
                     dispatch(loadPlayerTickets(data?.prizeId, true));
                     // PRIZE TOTAL TICKETS
@@ -438,7 +452,8 @@ const Leaderboard = ({
 
     function getEmptyLeaderboardList() {
         let rankList = [];
-        for (let x = 0; x < rankLength; x++) {
+        for (let x = 0; x < rankLength; x++)
+        {
             rankList.push(
                 <div key={`leaderboard-${x}`} className="individual-rank">
                     <div className="leader-player-card d-flex align-items-center">
@@ -473,15 +488,15 @@ const Leaderboard = ({
     function getLeaderboardList() {
         let _leaderboardList = [];
 
-        for (let i = 0; i < rankLength; i++) {
+        for (let i = 0; i < rankLength; i++)
+        {
             _leaderboardList.push(
                 <div key={`leaderboard-${i}`} className="individual-rank">
                     <div
-                        className={`leader-player-card d-flex align-items-center ${
-                            isCurrentUser(leaderboardList[i]?.userId)
-                                ? "you"
-                                : ""
-                        }`}
+                        className={`leader-player-card d-flex align-items-center ${isCurrentUser(leaderboardList[i]?.userId)
+                            ? "you"
+                            : ""
+                            }`}
                     >
                         <div className="number-holder">
                             <LeaderRankIndicator index={i} type="lb" />
@@ -503,13 +518,12 @@ const Leaderboard = ({
                             <p className="player-name">
                                 {leaderboardList[i]?.userId
                                     ? isCurrentUser(leaderboardList[i]?.userId)
-                                        ? `${
-                                              leaderboardList[i]?.nickName ||
-                                              user.username ||
-                                              "Player"
-                                          } (You)`
+                                        ? `${leaderboardList[i]?.nickName ||
+                                        user.username ||
+                                        "Player"
+                                        } (You)`
                                         : leaderboardList[i]?.nickName ||
-                                          `Player ${leaderboardList[i]?.userId}`
+                                        `Player ${leaderboardList[i]?.userId}`
                                     : "-"}
                             </p>
                             <p className="points">
@@ -530,7 +544,8 @@ const Leaderboard = ({
         return _leaderboardList;
     }
 
-    if (modalStatus.isGameReady) {
+    if (modalStatus.isGameReady)
+    {
         return (
             <div className="game-wrapper">
                 {/* ADDITIONAL TICKETS & EXPERIENCE POINTS WIN MODAL */}
@@ -623,22 +638,23 @@ const Leaderboard = ({
                 )}
             </div>
         );
-    } else {
+    } else
+    {
         return (
             <section
                 id="game-leaderboard-screen"
-                // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
-                // onClick={(e) => {
-                //     if (
-                // //         !e.target.closest(".bottom-ready-tournament") &&
-                // //         !e.target.closest(".earn-additional-tickets-container")
-                //     ) {
-                //         setModalStatus((prev) => ({
-                //             ...prev,
-                //             isEarnAdditionalInfoShown: false,
-                //         }));
-                //     }
-                // }}
+            // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
+            // onClick={(e) => {
+            //     if (
+            // //         !e.target.closest(".bottom-ready-tournament") &&
+            // //         !e.target.closest(".earn-additional-tickets-container")
+            //     ) {
+            //         setModalStatus((prev) => ({
+            //             ...prev,
+            //             isEarnAdditionalInfoShown: false,
+            //         }));
+            //     }
+            // }}
             >
                 {/* TICKETS BOOSTER CLOSE LAYER */}
                 {/* {modalStatus.isEarnAdditionalInfoShown && (
@@ -680,15 +696,14 @@ const Leaderboard = ({
                                                     Tournament ends in
                                                 </p>
                                                 <p
-                                                    className={`mb-0 ${
-                                                        OverTimeModeChecker(
-                                                            data?.prizeId,
-                                                            data?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
-                                                            ? "text-danger"
-                                                            : "timer-text"
-                                                    }`}
+                                                    className={`mb-0 ${OverTimeModeChecker(
+                                                        data?.prizeId,
+                                                        data?.ticketsRequired,
+                                                        prizeTicketCollection
+                                                    )
+                                                        ? "text-danger"
+                                                        : "timer-text"
+                                                        }`}
                                                 >
                                                     {timer || "0d 0h 0m 0s"}
                                                 </p>
@@ -698,19 +713,17 @@ const Leaderboard = ({
                                     {/* LEADERBOARD LIST */}
                                     <div
                                         ref={leaderboardRef}
-                                        className={`leaderboard ${
-                                            currentUserRank.rank > rankLength ||
+                                        className={`leaderboard ${currentUserRank.rank > rankLength ||
                                             currentUserRank.rank === "-"
-                                                ? ""
-                                                : "leaderboard-rank-layer-without-user"
-                                        }`}
+                                            ? ""
+                                            : "leaderboard-rank-layer-without-user"
+                                            }`}
                                         style={{
-                                            padding: `${
-                                                currentUserRank.rank >
+                                            padding: `${currentUserRank.rank >
                                                 rankLength
-                                                    ? "0.25rem 0.25rem 5rem 0.25rem"
-                                                    : ""
-                                            }`,
+                                                ? "0.25rem 0.25rem 5rem 0.25rem"
+                                                : ""
+                                                }`,
                                         }}
                                     >
                                         {leaderboardList.length > 0
@@ -762,7 +775,7 @@ const Leaderboard = ({
                                                     <span>
                                                         {getRankTickets(
                                                             currentUserRank.rank -
-                                                                1
+                                                            1
                                                         ) || "0"}{" "}
                                                         tickets
                                                     </span>
@@ -775,44 +788,42 @@ const Leaderboard = ({
                                 </div>
 
                                 {/* READY TOURNAMENT BUTTON */}
-                                {!modalStatus.isEarnAdditionalInfoShown && (
-                                    <div
-                                        className="bottom-ready-tournament d-block align-items-center justify-content-center"
-                                        ref={readyTournamentButtonRef}
-                                    >
-                                        <button
-                                            className={`ready-tournament-button ${
-                                                isGameAvailable
-                                                    ? ""
-                                                    : "opacity-0-5"
+                                <div
+                                    className="bottom-ready-tournament d-block align-items-center justify-content-center"
+                                    ref={readyTournamentButtonRef}
+                                >
+                                    <button
+                                        className={`ready-tournament-button ${isGameAvailable
+                                            ? ""
+                                            : "opacity-0-5"
                                             }`}
-                                            onClick={
-                                                isGameAvailable
-                                                    ? () => {
-                                                          setModalStatus(
-                                                              (prev) => ({
-                                                                  ...prev,
-                                                                  isEarnAdditionalInfoShown: true,
-                                                              })
-                                                          );
-                                                      }
-                                                    : null
-                                            }
-                                        >
-                                            Ready Tournament
-                                            <img
-                                                width={18}
-                                                className="icon ml-3 mr-1"
-                                                src={`${window.cdn}assets/gem_01.png`}
-                                                alt="gems"
-                                            />
-                                            {data?.gemsNeeded}
-                                        </button>
-                                    </div>
-                                )}
+                                        onClick={
+                                            isGameAvailable
+                                                ? () => {
+                                                    setModalStatus(
+                                                        (prev) => ({
+                                                            ...prev,
+                                                            isEarnAdditionalInfoShown: true,
+                                                        })
+                                                    );
+                                                }
+                                                : null
+                                        }
+                                    >
+                                        Join Tournament
+                                        {/* <img
+                                            width={18}
+                                            className="icon ml-3 mr-1"
+                                            src={`${window.cdn}assets/gem_01.png`}
+                                            alt="gems"
+                                        />
+                                        {data?.gemsNeeded} */}
+                                    </button>
+                                </div>
+
                                 {isSubscriptionModalShown && (
-                                    <SubscriptionModal
-                                        handleGetGemsLaterBtn={
+                                    <InsufficientBalanceModalPopup
+                                        onCloseClicked={
                                             onClickSubscriptionCancel
                                         }
                                     />
@@ -824,18 +835,25 @@ const Leaderboard = ({
                                         gameId={currentGameDetails.gameId}
                                         prizeId={data?.prizeId}
                                         playCost={data?.gemsNeeded}
+                                        setEarnAdditionalDisabledStatus={
+                                            setEarnAdditionalDisabledStatus
+                                        }
                                         onCloseClicked={() => {
                                             setModalStatus((prev) => ({
                                                 ...prev,
                                                 isEarnAdditionalInfoShown: false,
                                             }));
                                         }}
-                                        earnAdditionalDisabledStatus={
-                                            earnAdditionalDisabledStatus
+                                        onPlayClicked={
+                                            handleOnClickPlayButton
                                         }
-                                        setEarnAdditionalDisabledStatus={
-                                            setEarnAdditionalDisabledStatus
-                                        }
+                                        onInsufficientPayment={() => {
+                                            setModalStatus((prev) => ({
+                                                ...prev,
+                                                isEarnAdditionalInfoShown: false,
+                                            }));
+                                            setIsSubscriptionModalShown(true);
+                                        }}
                                     />
 
                                     // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">

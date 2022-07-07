@@ -14,9 +14,10 @@ const LaunchGameMenuModalPopup = ({
     gameId,
     prizeId,
     playCost,
-    onCloseClicked,
-    earnAdditionalDisabledStatus,
     setEarnAdditionalDisabledStatus,
+    onCloseClicked,
+    onPlayClicked,
+    onInsufficientPayment,
 }) => {
     const dispatch = useDispatch();
 
@@ -46,23 +47,37 @@ const LaunchGameMenuModalPopup = ({
     function onUseBoosterYes() {
         setIsActiveBooster(true);
         setStartGameCost(playCost + currentGameRules.useHowManyGems);
-        if (toggleRef?.current) {
+        if (toggleRef?.current)
+        {
             toggleRef.current.checked = true;
         }
+
+        setEarnAdditionalDisabledStatus((prev) => ({
+            ...prev,
+            gems: true,
+        }));
     }
 
     function onUseBoosterNo() {
         setIsActiveBooster(false);
         setStartGameCost(playCost);
-        if (toggleRef?.current) {
+        if (toggleRef?.current)
+        {
             toggleRef.current.checked = false;
         }
+
+        setEarnAdditionalDisabledStatus((prev) => ({
+            ...prev,
+            gems: false,
+        }));
     }
 
     function onStartPlay() {
         // Check is sufficient gems
-        if (user.gems <= 0 || user.gems < currentGameRules.useHowManyGems) {
+        if (user.gems < playCost)
+        {
             // Show insufficient popup
+            onInsufficientPayment();
             return;
         }
 
@@ -71,7 +86,8 @@ const LaunchGameMenuModalPopup = ({
         // TODO
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let idx = _earnAdditional.findIndex((e) => e.prizeId === prizeId);
-        if (idx === -1) {
+        if (idx === -1)
+        {
             _earnAdditional.push({
                 prizeId: prizeId,
                 isAdsSelected: false,
@@ -79,7 +95,8 @@ const LaunchGameMenuModalPopup = ({
                 gems: user.gems,
                 timestamp: nowTimeStamp(),
             });
-        } else {
+        } else
+        {
             _earnAdditional[idx].prizeId = prizeId;
             _earnAdditional[idx].isAdsSelected = false;
             _earnAdditional[idx].isGemsSelected = true;
@@ -87,11 +104,8 @@ const LaunchGameMenuModalPopup = ({
             _earnAdditional[idx].timestamp = nowTimeStamp();
         }
         dispatch(loadEarnAdditionalBenefitStatus(_earnAdditional));
-        setEarnAdditionalDisabledStatus((prev) => ({
-            ...prev,
-            gems: true,
-            ads: false,
-        }));
+
+        onPlayClicked();
     }
 
     return (
@@ -110,9 +124,8 @@ const LaunchGameMenuModalPopup = ({
                     <div className="d-flex flex-column align-items-center justify-content-center my-4">
                         <div className="col-12 col-md-8 p-2">
                             <div
-                                className={`selections d-flex flex-column my-2 mx-auto ${
-                                    isActiveBooster ? "checked" : ""
-                                }`}
+                                className={`selections d-flex flex-column my-2 mx-auto ${isActiveBooster ? "checked" : ""
+                                    }`}
                                 onClick={() => {
                                     isActiveBooster
                                         ? onUseBoosterNo()
@@ -122,21 +135,21 @@ const LaunchGameMenuModalPopup = ({
                                 <div className="title p-1 text-center">
                                     BOOSTER
                                 </div>
-                                <div className="content d-flex flex-column m-auto">
-                                    <div className="info-text text-center mt-3">
+                                <div className="content d-flex flex-column py-4">
+                                    <div className="info-text text-center">
                                         Every {currentGameRules.score} Score
                                     </div>
                                     <div className="content-tickets d-flex align-items-center justify-content-center">
-                                        <span className="tickets my-1 mr-2">
+                                        <span className="tickets my-1">
                                             +{currentGameRules.useGemTickets}
                                         </span>
                                         <img
-                                            className="icon"
+                                            className="icon ml-3"
                                             src={`${window.cdn}assets/tickets_05.png`}
                                             alt={"icon"}
                                         />
                                     </div>
-                                    <div className="content-toggle d-flex m-auto">
+                                    <div className="content-toggle d-flex mx-auto mt-3">
                                         <input
                                             ref={toggleRef}
                                             type={"checkbox"}
@@ -144,11 +157,10 @@ const LaunchGameMenuModalPopup = ({
                                         <span className="slider"></span>
                                         <div className="d-flex m-auto position-relative">
                                             <span
-                                                className={`toggle-text m-auto ${
-                                                    isActiveBooster
-                                                        ? "checked"
-                                                        : ""
-                                                }`}
+                                                className={`toggle-text m-auto ${isActiveBooster
+                                                    ? "checked"
+                                                    : ""
+                                                    }`}
                                             >
                                                 {
                                                     currentGameRules.useHowManyGems
@@ -165,13 +177,12 @@ const LaunchGameMenuModalPopup = ({
                             </div>
                             <div className="line"></div>
                             <div
-                                className={`buttons ${
-                                    isActiveBooster ? "checked" : ""
-                                }`}
+                                className={`buttons ${isActiveBooster ? "checked" : ""
+                                    }`}
                             >
                                 <button
                                     className="play-btn d-flex flex-column align-items-center justify-content-center m-auto"
-                                    // onClick={}
+                                    onClick={onStartPlay}
                                 >
                                     Start Playing
                                     <div className="d-flex mt-2">

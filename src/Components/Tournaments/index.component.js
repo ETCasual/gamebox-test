@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 // COMPONENTS
 import Leaderboard from "Components/Leaderboard/Leaderboard.component";
 import AutomatedEntryTournamentInfo from "Components/Tournaments/AutomatedEntryTournamentInfo/AutomatedEntryTournamentInfo.component";
-import SubscriptionModal from "Components/Modals/Subscription.modal";
 import GameInstructionsModal from "Components/Modals/GameInstructions.modal";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
@@ -55,8 +54,7 @@ const Index = ({ match }) => {
     const [isIntructionShown, setIsInstructionShown] = useState(false);
     // REASON COMMENTED: Leaderboard is moved to parent page
     // const [isGameLeaderboardShown, setIsGameLeaderboardShown] = useState(false);
-    const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
-        useState(false);
+    // const [isSubscriptionModalShown, setIsSubscriptionModalShown] = useState(false);
     // EARN ADDITIONAL SELECTION STATES
     const [earnAdditionalDisabledStatus, setEarnAdditionalDisabledStatus] =
         useState({
@@ -64,6 +62,7 @@ const Index = ({ match }) => {
             ads: checkIsAdOrGemsUsed("ads"),
         });
     const [timer, setTimer] = useState("Calculating");
+    const [gameName, setGameName] = useState("");
 
     // LOAD PRIZES WHEN TIMER END WITH 2 SECOND DELAY
     // useEffect(() => {
@@ -114,20 +113,26 @@ const Index = ({ match }) => {
                     ? prizeType[idx]?.gameInfo?.[0]?.endTimeStamp * 1000
                     : prizeType[idx]?.scheduledOff * 1000;
 
-            if (prizeType.length > 0 && nowTimeStamp() < (gameEndTime || 0)) {
+            if (prizeType.length > 0 && nowTimeStamp() < (gameEndTime || 0))
+            {
                 // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
-                if (idx > -1) {
+                if (idx > -1)
+                {
                     setCurrentPrize(prizeType[idx]);
-                    if (type !== "automated") {
+
+                    if (type !== "automated")
+                    {
                         const currentGameInfo =
                             JSON.parse(
                                 sessionStorage.getItem("currentGameInfo")
                             ) || null;
-                        if (currentGameInfo !== null) {
+                        if (currentGameInfo !== null)
+                        {
                             const gameIdx = prizeType[idx].gameInfo.findIndex(
                                 (g) => g.gameId === currentGameInfo.gameId
                             );
-                            if (gameIdx === -1) {
+                            if (gameIdx === -1)
+                            {
                                 const _gameInfo = {
                                     gameId: prizeType[idx].gameInfo[0].gameId,
                                     gameIndex:
@@ -164,7 +169,8 @@ const Index = ({ match }) => {
     );
 
     useEffect(() => {
-        if (currentPrize?.gameInfo?.length > 0) {
+        if (currentPrize?.gameInfo?.length > 0)
+        {
             const gameInfo = currentPrize?.gameInfo[0];
 
             dispatch(loadLeaderboard(parseInt(id), gameInfo.gameId));
@@ -187,6 +193,8 @@ const Index = ({ match }) => {
                 dispatch
             );
             // setIsGameLeaderboardShown(true);
+
+            setGameName(currentPrize?.gameInfo[0].gameTitle);
         }
     }, [currentPrize, id, user, currentGameInfo, currentUserRank, dispatch]);
 
@@ -196,7 +204,8 @@ const Index = ({ match }) => {
         if (
             performance.getEntriesByType("navigation")[0] &&
             performance.getEntriesByType("navigation")[0].type === "reload"
-        ) {
+        )
+        {
             timeOut = setTimeout(async () => {
                 // PLAYER TICKETS
                 dispatch(loadPlayerTickets(parseInt(id), true));
@@ -209,7 +218,8 @@ const Index = ({ match }) => {
                     )
                 );
             }, 2000);
-        } else {
+        } else
+        {
             // PLAYER TICKETS
             dispatch(loadPlayerTickets(parseInt(id), true));
             // PRIZE TOTAL TICKETS
@@ -246,7 +256,7 @@ const Index = ({ match }) => {
     // };
 
     // PAYMENT
-    const onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
+    // const onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
 
     const handleHomeNavLink = () => dispatch(loadPrizes());
 
@@ -360,28 +370,26 @@ const Index = ({ match }) => {
 
                                                     {/* COUNT DOWN TIME */}
                                                     <span
-                                                        className={`${
-                                                            currentPrize.overTime
-                                                                ? "text-danger tickets-text-end"
-                                                                : "tickets-text"
-                                                        }`}
+                                                        className={`${currentPrize.overTime
+                                                            ? "text-danger tickets-text-end"
+                                                            : "tickets-text"
+                                                            }`}
                                                     >
                                                         {currentPrize.overTime
                                                             ? timer
                                                             : getPrizeTicketCollected(
-                                                                  prizeTicketCollection,
-                                                                  id
-                                                              )?.toLocaleString() ||
-                                                              0}
+                                                                prizeTicketCollection,
+                                                                id
+                                                            )?.toLocaleString() ||
+                                                            0}
                                                     </span>
 
                                                     {/* TICKETS REQUIRED NUMBER */}
                                                     {!currentPrize.overTime && (
                                                         <span className="total-tickets-text">
-                                                            {`\u00A0 / ${
-                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                            {`\u00A0 / ${currentPrize?.ticketsRequired?.toLocaleString() ||
                                                                 0
-                                                            }`}
+                                                                }`}
                                                         </span>
                                                     )}
                                                 </div>
@@ -436,7 +444,7 @@ const Index = ({ match }) => {
                                                         currentPrize.overTime
                                                             ? "text-danger tickets-text-end"
                                                             : "tickets-text"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {
                                                         // OverTimeModeChecker(
@@ -447,10 +455,10 @@ const Index = ({ match }) => {
                                                         currentPrize.overTime
                                                             ? timer
                                                             : getPrizeTicketCollected(
-                                                                  prizeTicketCollection,
-                                                                  id
-                                                              )?.toLocaleString() ||
-                                                              0
+                                                                prizeTicketCollection,
+                                                                id
+                                                            )?.toLocaleString() ||
+                                                            0
                                                     }
                                                 </span>
 
@@ -463,10 +471,9 @@ const Index = ({ match }) => {
                                                     // )
                                                     !currentPrize.overTime && (
                                                         <span className="total-tickets-text">
-                                                            {`\u00A0 / ${
-                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                            {`\u00A0 / ${currentPrize?.ticketsRequired?.toLocaleString() ||
                                                                 0
-                                                            }`}
+                                                                }`}
                                                         </span>
                                                     )
                                                 }
@@ -482,7 +489,7 @@ const Index = ({ match }) => {
                                             <div className="col-12 mb-4">
                                                 <div className="join-tournament-wrapper d-flex align-items-center justify-content-between mb-2">
                                                     <p className="statement-title algin mb-0">
-                                                        Join Tournaments!
+                                                        Tournament - {gameName}
                                                     </p>
                                                     <img
                                                         width={20}
@@ -557,11 +564,11 @@ const Index = ({ match }) => {
                 <AutomatedEntryTournamentInfo data={currentPrize} type={type} />
             )}
             {/* POPUP MODAL FOR OUT OF GEMS */}
-            {isSubscriptionModalShown && (
+            {/* {isSubscriptionModalShown && (
                 <SubscriptionModal
-                    handleGetGemsLaterBtn={onClickSubscriptionCancel}
+                    onCloseClicked={onClickSubscriptionCancel}
                 />
-            )}
+            )} */}
             {/* POPUP MODAL FOR INSTRUCTIONS */}
             {isIntructionShown && (
                 <GameInstructionsModal
