@@ -627,22 +627,23 @@ const Leaderboard = ({
         return (
             <section
                 id="game-leaderboard-screen"
-                onClick={(e) => {
-                    if (
-                        !e.target.closest(".bottom-ready-tournament") &&
-                        !e.target.closest(".earn-additional-tickets-container")
-                    ) {
-                        setModalStatus((prev) => ({
-                            ...prev,
-                            isEarnAdditionalInfoShown: false,
-                        }));
-                    }
-                }}
+                // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
+                // onClick={(e) => {
+                //     if (
+                // //         !e.target.closest(".bottom-ready-tournament") &&
+                // //         !e.target.closest(".earn-additional-tickets-container")
+                //     ) {
+                //         setModalStatus((prev) => ({
+                //             ...prev,
+                //             isEarnAdditionalInfoShown: false,
+                //         }));
+                //     }
+                // }}
             >
                 {/* TICKETS BOOSTER CLOSE LAYER */}
-                {modalStatus.isEarnAdditionalInfoShown && (
+                {/* {modalStatus.isEarnAdditionalInfoShown && (
                     <div className="leaderboard-tickets-booster-close"></div>
-                )}
+                )} */}
 
                 <div className="container-fluid">
                     <div className="row justify-content-center">
@@ -822,6 +823,13 @@ const Leaderboard = ({
                                     <LaunchGameMenuModalPopup
                                         gameId={currentGameDetails.gameId}
                                         prizeId={data?.prizeId}
+                                        playCost={data?.gemsNeeded}
+                                        onCloseClicked={() => {
+                                            setModalStatus((prev) => ({
+                                                ...prev,
+                                                isEarnAdditionalInfoShown: false,
+                                            }));
+                                        }}
                                         earnAdditionalDisabledStatus={
                                             earnAdditionalDisabledStatus
                                         }
