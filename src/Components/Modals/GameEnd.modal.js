@@ -6,7 +6,7 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
+const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -77,23 +77,33 @@ const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
                             <p className="text-center panel-title">
                                             GAME RESULT
                                          </p>
-                            <p className="text-center tournament-has-ended-text">
+
+                            {isShowTournamentEndedText&&(
+                                <p className="text-center tournament-has-ended-text">
                                             (The tournament has ended)
                             </p>
-                            <p className="text-center score-text mt-5 mb-0">
-                            Score
-                            </p>    
-                            <p className="text-center score-number ">
-                                           {score}
-                                         </p>
+                            )}
+                          
+                            {score && (
+                                <p className="text-center score-text mt-5 mb-0">
+                                Score
+                                </p>  
+                           )}
+                              
+                           {score && (
+                              <p className="text-center score-number ">
+                                {score}
+                              </p>
+                           )}
+                         
  
                              <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
                                  <p className="pr-2 ticket-rate-text-score">
                                      every 50 score
                                     
                                  </p>
-                                 <p className=" ticket-rate-text-ticket">
-                                      +10 &#8202;
+                                 <p className=" ticket-rate-text-ticket d-flex tickets-amount align-items-center">
+                                 <span className="mr-2">+10</span>
                                       <img
                                         width="20"
                                         src={`${window.cdn}assets/tickets_05.png`}
@@ -103,11 +113,11 @@ const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
                                 
                              </div>
                              <div className="row text-center mx-auto total-tickets-earned align-items-center">
-                             <p className=" col pl-2 pr-2 you-earned  align-items-center justify-content-between">
+                             <p className=" col py-2 pl-2 pr-2 you-earned d-flex m-auto justify-content-end">
                                     You earned
                                  </p>
-                                 <p className="col pr-2 tickets-amount  align-items-center">
-                                      20 &#8202;
+                                 <p className="col pr-2 d-flex tickets-amount align-items-center d-flex m-auto">
+                                    <span className="mr-2">20</span>
                                       <img
                                         width="40"
                                         src={`${window.cdn}assets/tickets_05.png`}
@@ -144,8 +154,8 @@ const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
                                 }}
                             >
                                     {leaderboardHistory.length > 0
-                                       ? "View Results"
-                                      : "Fetching Results"}
+                                       ? "View Leaderboard"
+                                      : "Fetching Leaderboard"}
                             </button>
                              </div>
                      </div>
