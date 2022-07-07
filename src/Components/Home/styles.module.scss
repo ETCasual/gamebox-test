@@ -18,22 +18,26 @@
         border-radius: 10px;
         .the-spinner-text {
             color: #f7b621;
-            font-size: $fnt-sz-14;
-            @include media-min($md) {
-                font-size: $fnt-sz-22;
+            font-size: $fnt-sz-20;
+            @include media-min($sm) {
+                font-size: $fnt-sz-30;
             }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
         }
         .earn-more-tickets-text {
-            font-size: $fnt-sz-12;
+            font-size: $fnt-sz-14;
+            @include media-min($sm) {
+                font-size: $fnt-sz-12;
+            }
         }
         .earn-more-tickets-img {
             object-fit: cover;
-            height: 4.25rem;
+            height: 5.5rem;
             border-radius: 7px;
             @include media-min($sm) {
                 border-radius: 17px;
+                height: 7rem;
             }
         }
         .earn-more-tickets-img-wrapper {
@@ -76,10 +80,7 @@
                 min-height: 3.5rem;
             }
             .timer-text {
-                font-size: $fnt-sz-12;
-                @include media-min($md) {
-                    font-size: $fnt-sz-14;
-                }
+                font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-700;
             }
             .countdown {
@@ -233,7 +234,8 @@
                     width: auto;
                     height: auto;
                     margin: 0 0.25rem;
-                    video, img {
+                    video,
+                    img {
                         transition: all 0.3s ease-in-out;
                         width: 50px;
                         height: 50px;

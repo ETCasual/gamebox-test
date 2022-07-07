@@ -10,8 +10,26 @@
     .auto {
         background: linear-gradient(90deg, #844770, #692049);
         border-radius: 10px;
+
+        .bonus-reward-img {
+            object-fit: cover;
+            height: 5.5rem;
+            border-radius: 7px;
+            @include media-min($sm) {
+                border-radius: 17px;
+                height: 7rem;
+            }
+        }
+        .bonus-reward-img-wrapper {
+            right: -10px;
+            position: absolute;
+            @include media-min($sm) {
+                right: unset;
+                position: relative;
+            }
+        }
     }
-    
+
     &:hover {
         .card-wrapper {
             border-left: solid 2px #ff3399;
@@ -45,15 +63,18 @@
         }
         .prize-title {
             color: #f7b621;
-            font-size: $fnt-sz-14;
-            @include media-min($md) {
-                font-size: $fnt-sz-22;
+            font-size: $fnt-sz-20;
+            @include media-min($sm) {
+                font-size: $fnt-sz-30;
             }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
         }
         .prize-subtitle {
-            font-size: $fnt-sz-12;
+            font-size: 0;
+            @include media-min($sm) {
+                font-size: $fnt-sz-12;
+            }
         }
         .picture-wrapper {
             right: -10px;
@@ -61,7 +82,7 @@
             @include media-min($sm) {
                 right: unset;
                 position: relative;
-            }            
+            }
         }
         picture {
             img {
@@ -77,12 +98,21 @@
             border-radius: 5px;
             min-width: 7rem;
             .ticket-label {
-                font-size: $fnt-sz-12;
+                font-size: $fnt-sz-14;
+                @include media-min($sm) {
+                    font-size: $fnt-sz-12;
+                }
             }
             .ticket-value {
                 color: #00c1b9;
                 font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-500;
+                .icon {
+                    width: 20px;
+                    @include media-min($lg) {
+                        width: 24px;
+                    }
+                }
             }
         }
     }
@@ -98,10 +128,7 @@
             min-height: 3.5rem;
         }
         .timer-text {
-            font-size: $fnt-sz-12;
-            @include media-min($md) {
-                font-size: $fnt-sz-14;
-            }
+            font-size: $fnt-sz-14;
             font-weight: $fnt-wgt-700;
         }
         .countdown {
