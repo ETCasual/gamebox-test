@@ -69,51 +69,84 @@ const GameEndModal = ({ handleContinueButton ,panelTitle}) => {
         <>
             {!isSelectedNotificationShown.status && (
                  <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                 <div className="game-result-panel col-12 col-md-10 col-lg-8 position-relative">
+                 <div className="game-result-panel col-12 col-md-10 col-xl-6 position-relative">
                      {/* CARD */}
-                     <div className="row justify-content-center mt-3 mt-sm-5">
-                         <div className="col-10 col-md-8 col-lg-8 mb-3 pl-2 pr-1">
+                     <div className="row justify-content-center mt-3 mt-sm-3">
+                         <div className="col-10 col-lg-8 mb-3 pl-2 pr-1">
                              {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
-                            <p className="text-center panel-title my-2">
+                            <p className="text-center panel-title">
                                             GAME RESULT
                                          </p>
-                            <p className="text-center score-text my-1">
-                            score
+                            <p className="text-center tournament-has-ended-text">
+                                            (The tournament has ended)
                             </p>
-                            <p className="text-center score-number my-2">
+                            <p className="text-center score-text mt-5 mb-0">
+                            Score
+                            </p>    
+                            <p className="text-center score-number ">
                                            {score}
                                          </p>
  
-                             <div className="text-center my-2 my-sm-4">
-                                 <p className="tickets-label mb-1 mb-sm-2">
-                                     Tickets you have collected
+                             <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
+                                 <p className="pr-2 ticket-rate-text-score">
+                                     every 50 score
+                                    
                                  </p>
-                               
+                                 <p className=" ticket-rate-text-ticket">
+                                      +10 &#8202;
+                                      <img
+                                        width="20"
+                                        src={`${window.cdn}assets/tickets_05.png`}
+                                        alt="tickets"
+                                 />
+                                 </p>
+                                
                              </div>
-                             <div className="mx-auto my-2 my-sm-4">
-                                <button
-                                    className="continue-button d-block text-center m-auto"
-                                    onClick={handleContinueButton}
-                                >
-                                   Continue
-                                </button>
+                             <div className="row text-center mx-auto total-tickets-earned align-items-center">
+                             <p className=" col pl-2 pr-2 you-earned  align-items-center justify-content-between">
+                                    You earned
+                                 </p>
+                                 <p className="col pr-2 tickets-amount  align-items-center">
+                                      20 &#8202;
+                                      <img
+                                        width="40"
+                                        src={`${window.cdn}assets/tickets_05.png`}
+                                        alt="tickets"
+                                 />
+                                 </p>
+                              
                             </div>
-                             {/* <div className="line" />
-                             <p className="instructions-title text-center">
-                                 How to win tickets for the Bonus Draw?
-                             </p>
-                             <p className="instructions-subtitle text-center">
-                                 Participate in any tournament throughout the
-                                 platform before the timer runs out.
-                                 <br />
-                                 Tickets won from the tournaments will
-                                 automatically be added into the Bonus Draw pool.
-                                 It’s that easy.
-                             </p>
-                             <p className="instructions-tip text-center mb-0 mb-sm-4">
-                                 Tip: Earn more tickets by “spent gems” to
-                                 increase your ticket count.
-                             </p> */}
+                            <button
+                                className="continue-button d-block text-center mx-auto mt-4 py-3"
+                                onClick={handleContinueButton}
+                            >
+                                Continue
+                            </button>
+
+                            <button
+                             className={`btn-results d-block text-center mx-auto mt-2 py-3 ${
+                                leaderboardHistory.length > 0
+                                    ? ""
+                                   : "opacity-0-5"
+                                }`}
+
+                                onClick={
+                                    leaderboardHistory.length > 0
+                                        ? handleViewResult
+                                        : null
+                                }
+
+                                style={{
+                                    cursor:
+                                        leaderboardHistory.length > 0
+                                            ? "pointer"
+                                           : "default",
+                                }}
+                            >
+                                    {leaderboardHistory.length > 0
+                                       ? "View Results"
+                                      : "Fetching Results"}
+                            </button>
                              </div>
                      </div>
                  </div>
