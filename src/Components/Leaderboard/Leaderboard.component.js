@@ -557,29 +557,12 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isGameOver: false,
-                                isPlayBtnDisabled: false,
-                            }));
-                            // setIsGameLeaderboardShown(false);
-                        }}
-                        panelTitle="Game Over"
-                    />
-                )}
-
-                {/* MODAL FOR TOURNAMENT HAS ENDED */}
-                {modalStatus.isTournamentEnded && (
-                    <GameEndModal
-                        handleContinueButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
                                 isPlayBtnDisabled: false,
-                                isGameOver: false,
                             }));
                             // setIsGameLeaderboardShown(false);
                         }}
-                        panelTitle="The tournament has ended."
+                        isShowTournamentEndedText={ modalStatus.isTournamentEnded?true:false}
                     />
                 )}
 
