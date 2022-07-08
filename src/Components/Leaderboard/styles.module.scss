@@ -311,6 +311,10 @@
                 font-size: $fnt-sz-14;
                 font-weight: bold;
                 color: #f8ba29;
+
+                .icon {
+                    width: 30px;
+                }
             }
         }
         .number-holder {
@@ -336,6 +340,12 @@
             }
             span {
                 color: #000000;
+
+                .icon {
+                    width: 30px;
+                    -webkit-filter: drop-shadow(0px 1px 2px #222);
+                    filter: drop-shadow(0px 1px 2px #222);
+                }
             }
         }
     }

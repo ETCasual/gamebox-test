@@ -8,7 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadConsumeUserGemsTickets from "redux/thunks/ConsumeUserGemsTickets.thunk";
-import { loadEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
+import {
+    loadEarnAdditionalBenefitStatus,
+    removeEarnAdditionalBenefitStatus,
+} from "redux/thunks/EarnAdditionalTickets.thunk";
 
 const LaunchGameMenuModalPopup = ({
     gameId,
@@ -36,74 +39,70 @@ const LaunchGameMenuModalPopup = ({
     let toggleRef = useRef(null);
 
     useEffect(() => {
-        console.log(currentGameRules);
-        console.warn(earnAdditionalBenefitStatus);
+        // Init the earnAdditional status data
+        dispatch(removeEarnAdditionalBenefitStatus(prizeId));
 
+        // Disable the scrolling
         document.documentElement.style.overflowY = "hidden";
 
         return () => (document.documentElement.style.overflowY = "visible");
-    }, []);
+    }, [prizeId, dispatch]);
+
+    useEffect(() => {
+        const updateEarnAdditionalStatus = () => {
+            let _earnAdditional = [...earnAdditionalBenefitStatus];
+            let idx = _earnAdditional.findIndex((e) => e.prizeId === prizeId);
+            if (idx === -1) {
+                _earnAdditional.push({
+                    prizeId: prizeId,
+                    isAdsSelected: false,
+                    isGemsSelected: isActiveBooster,
+                    gems: user.gems,
+                    timestamp: nowTimeStamp(),
+                });
+            } else {
+                _earnAdditional[idx].prizeId = prizeId;
+                _earnAdditional[idx].isAdsSelected = false;
+                _earnAdditional[idx].isGemsSelected = isActiveBooster;
+                _earnAdditional[idx].gems = user.gems;
+                _earnAdditional[idx].timestamp = nowTimeStamp();
+            }
+            dispatch(loadEarnAdditionalBenefitStatus(_earnAdditional));
+        };
+
+        updateEarnAdditionalStatus();
+
+        setEarnAdditionalDisabledStatus((prev) => ({
+            ...prev,
+            gems: isActiveBooster,
+        }));
+    }, [isActiveBooster]);
 
     function onUseBoosterYes() {
         setIsActiveBooster(true);
         setStartGameCost(playCost + currentGameRules.useHowManyGems);
-        if (toggleRef?.current)
-        {
+        if (toggleRef?.current) {
             toggleRef.current.checked = true;
         }
-
-        setEarnAdditionalDisabledStatus((prev) => ({
-            ...prev,
-            gems: true,
-        }));
     }
 
     function onUseBoosterNo() {
         setIsActiveBooster(false);
         setStartGameCost(playCost);
-        if (toggleRef?.current)
-        {
+        if (toggleRef?.current) {
             toggleRef.current.checked = false;
         }
-
-        setEarnAdditionalDisabledStatus((prev) => ({
-            ...prev,
-            gems: false,
-        }));
     }
 
     function onStartPlay() {
         // Check is sufficient gems
-        if (user.gems < playCost)
-        {
+        if (user.gems < startGameCost) {
             // Show insufficient popup
             onInsufficientPayment();
             return;
         }
 
-        dispatch(loadConsumeUserGemsTickets(currentGameRules.useHowManyGems));
-
-        // TODO
-        let _earnAdditional = [...earnAdditionalBenefitStatus];
-        let idx = _earnAdditional.findIndex((e) => e.prizeId === prizeId);
-        if (idx === -1)
-        {
-            _earnAdditional.push({
-                prizeId: prizeId,
-                isAdsSelected: false,
-                isGemsSelected: true,
-                gems: user.gems,
-                timestamp: nowTimeStamp(),
-            });
-        } else
-        {
-            _earnAdditional[idx].prizeId = prizeId;
-            _earnAdditional[idx].isAdsSelected = false;
-            _earnAdditional[idx].isGemsSelected = true;
-            _earnAdditional[idx].gems = user.gems;
-            _earnAdditional[idx].timestamp = nowTimeStamp();
-        }
-        dispatch(loadEarnAdditionalBenefitStatus(_earnAdditional));
+        dispatch(loadConsumeUserGemsTickets(startGameCost));
 
         onPlayClicked();
     }
@@ -124,8 +123,9 @@ const LaunchGameMenuModalPopup = ({
                     <div className="d-flex flex-column align-items-center justify-content-center my-4">
                         <div className="col-12 col-md-8 p-2">
                             <div
-                                className={`selections d-flex flex-column my-2 mx-auto ${isActiveBooster ? "checked" : ""
-                                    }`}
+                                className={`selections d-flex flex-column my-2 mx-auto ${
+                                    isActiveBooster ? "checked" : ""
+                                }`}
                                 onClick={() => {
                                     isActiveBooster
                                         ? onUseBoosterNo()
@@ -157,10 +157,11 @@ const LaunchGameMenuModalPopup = ({
                                         <span className="slider"></span>
                                         <div className="d-flex m-auto position-relative">
                                             <span
-                                                className={`toggle-text m-auto ${isActiveBooster
-                                                    ? "checked"
-                                                    : ""
-                                                    }`}
+                                                className={`toggle-text m-auto ${
+                                                    isActiveBooster
+                                                        ? "checked"
+                                                        : ""
+                                                }`}
                                             >
                                                 {
                                                     currentGameRules.useHowManyGems
@@ -177,8 +178,9 @@ const LaunchGameMenuModalPopup = ({
                             </div>
                             <div className="line"></div>
                             <div
-                                className={`buttons ${isActiveBooster ? "checked" : ""
-                                    }`}
+                                className={`buttons ${
+                                    isActiveBooster ? "checked" : ""
+                                }`}
                             >
                                 <button
                                     className="play-btn d-flex flex-column align-items-center justify-content-center m-auto"
