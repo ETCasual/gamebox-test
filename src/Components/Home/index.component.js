@@ -21,7 +21,7 @@ import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 
 // HELPER FUNCTIONS
-import { convertSecondsTo24HoursBase } from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -309,7 +309,7 @@ const Index = () => {
         // COUNTDOWN TIMER INTERVAL
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
-            let finalTimeRef = convertSecondsTo24HoursBase(
+            let finalTimeRef = convertSecondsToHours(
                 endDatetime.valueOf(),
                 config.offsetTimestamp ? config.offsetTimestamp : 0
             );
@@ -329,7 +329,7 @@ const Index = () => {
     return (
         <>
             <section id="home">
-                <div className="container-fluid mb-5 bonus">
+                <div className="container-fluid mb-4 bonus">
                     <div className="row justify-content-center px-1 py-3 pt-sm-4 pb-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">

@@ -8,7 +8,7 @@ import _ from "lodash";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // HELPER FUNCTIONS
-import { convertSecondsTo24HoursBase } from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
     const location = useLocation();
@@ -43,7 +43,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
         }
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
-            let finalTimeRef = convertSecondsTo24HoursBase(
+            let finalTimeRef = convertSecondsToHours(
                 calculatedTime.valueOf(),
                 config.offsetTimestamp ? config.offsetTimestamp : 0
             );

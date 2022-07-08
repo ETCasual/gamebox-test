@@ -10,7 +10,7 @@ import loadAutomatedEntryTickets from "redux/thunks/AutomatedEntryTickets.thunk"
 import AutomatedEntryModalPopup from "Components/Modals/AutomatedEntry.modal";
 
 // HELPER FUNCTIONS
-import { convertSecondsTo24HoursBase } from "Utils/TimeConversion";
+import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const AutomatedEntry = ({ data }) => {
     const dispatch = useDispatch();
@@ -79,7 +79,7 @@ const AutomatedEntry = ({ data }) => {
             // COUNTDOWN TIMER INTERVAL
             clearInterval(watcherRef.current);
             watcherRef.current = setInterval(() => {
-                let finalTimeRef = convertSecondsTo24HoursBase(
+                let finalTimeRef = convertSecondsToHours(
                     calculatedTime.valueOf(),
                     config.offsetTimestamp ? config.offsetTimestamp : 0
                 );
@@ -130,7 +130,7 @@ const AutomatedEntry = ({ data }) => {
                                         {data.prizeTitle}
                                     </div>
                                     {/* PRIZE DETAILED CONTENT */}
-                                    <div className="prize-subtitle">
+                                    <div className="prize-subtitle d-none d-sm-flex">
                                         {data.prizeContent}
                                     </div>
                                 </div>

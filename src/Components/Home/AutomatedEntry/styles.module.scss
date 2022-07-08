@@ -71,10 +71,7 @@
             line-height: 1.5;
         }
         .prize-subtitle {
-            font-size: 0;
-            @include media-min($sm) {
-                font-size: $fnt-sz-12;
-            }
+            font-size: $fnt-sz-12;
         }
         .picture-wrapper {
             right: -10px;
@@ -105,12 +102,12 @@
             }
             .ticket-value {
                 color: #00c1b9;
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-16;
                 font-weight: $fnt-wgt-500;
                 .icon {
-                    width: 20px;
-                    @include media-min($lg) {
-                        width: 24px;
+                    width: 30px;
+                    @include media-min($md) {
+                        width: 40px;
                     }
                 }
             }

@@ -1,6 +1,8 @@
 .premium {
     .complete-overlay {
-        padding: 1rem;
+        padding-top: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -8,13 +10,13 @@
         .wrapper {
             position: relative;
             .reward-icon {
-                width: clamp(8rem, 10vw, 10rem);
+                width: clamp(3rem, 10vw, 10rem);
             }
             .loader,
             .content {
                 border-radius: 10px;
                 background: linear-gradient(137deg, #302f2f 0%, #0b0b0b 80%);
-                min-height: 9rem;
+                min-height: 3rem;
                 width: 100%;
             }
             .loader {
@@ -26,18 +28,27 @@
             .content {
                 .title,
                 .tap-btn {
-                    font-size: $fnt-sz-14;
+                    font-size: $fnt-sz-10;
                     font-weight: $fnt-wgt-700;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-14;
+                    }
                 }
                 .subtitle {
-                    font-size: $fnt-sz-12;
+                    font-size: $fnt-sz-8;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-12;
+                    }
                 }
                 .tap-btn {
                     text-align: center;
                     width: 100%;
                     border-bottom-left-radius: 5px;
                     border-bottom-right-radius: 5px;
-                    padding: 1.3rem;
+                    padding: 0.3rem;
+                    @include media-min($sm) {
+                        padding: 1.3rem;
+                    }
                     background: #cc0767;
                 }
             }
