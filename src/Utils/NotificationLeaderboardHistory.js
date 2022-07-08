@@ -110,11 +110,16 @@ export function getLeaderboardList(
                     {/* PLAYER NAME & POINTS */}
                     <div className="details ml-1 ml-md-3">
                         <p className="player-name mb-0">
-                            {_leaderboardHistory[x]?.nickName?.split(" ")[0]  ||
-                                "-"} {_leaderboardHistory[x]?.userId === userId ? '(You)': ''}
+                            {_leaderboardHistory[x]?.nickName?.split(" ")[0] ||
+                                "-"}{" "}
+                            {_leaderboardHistory[x]?.userId === userId
+                                ? "(You)"
+                                : ""}
                         </p>
                         <p className="points mb-0">
-                            {`${_leaderboardHistory[x]?.gameScore || "-"} points`}
+                            {`${
+                                _leaderboardHistory[x]?.gameScore || "-"
+                            } points`}
                         </p>
                     </div>
                 </div>
@@ -125,9 +130,8 @@ export function getLeaderboardList(
                         {_leaderboardHistory[x]?.tickets ||
                             getRankTickets(x, leaderRuleRanks)}{" "}
                         <img
-                            width={30}
-                            className="ml-1"
-                            src={`${window.cdn}assets/tickets_05.png`}
+                            className="icon ml-1"
+                            src={`${window.cdn}assets/tickets_06.png`}
                             alt="ticket"
                         />
                     </span>

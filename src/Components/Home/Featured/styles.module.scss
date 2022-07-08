@@ -38,9 +38,9 @@
         .disabled {
             pointer-events: none;
         }
-        
+
         .prize-info {
-            background: linear-gradient(90deg, #38303d, #231e26) ;
+            background: linear-gradient(90deg, #38303d, #231e26);
             border-radius: 10px;
             @include media-min($md) {
                 border-radius: 17px;
@@ -66,7 +66,8 @@
                     );
                     pointer-events: none;
                 }
-                img, video {
+                img,
+                video {
                     position: relative;
                     border-top-left-radius: 10px;
                     border-top-right-radius: 10px;
@@ -96,16 +97,28 @@
                 bottom: 0;
                 width: 100%;
                 z-index: 2;
+                .prize-subtitle {
+                    font-size: $fnt-sz-12;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-14;
+                    }
+                }
                 .prize-title {
                     font-size: $fnt-sz-18;
                     @include media-min($md) {
                         font-size: $fnt-sz-30;
+                    }
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-40;
                     }
                     font-weight: $fnt-wgt-600;
                     text-transform: capitalize;
                 }
                 .prize-description {
                     font-size: $fnt-sz-12;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-14;
+                    }
                     line-height: 1.3;
                 }
             }
@@ -168,7 +181,7 @@
     }
     .featured-ticket-info {
         height: auto;
-        background-color: #433848;
+        background: linear-gradient(90deg, #433849, #2f2833);
         border-radius: 10px;
         .ticket-wrapper {
             height: auto;
@@ -198,24 +211,21 @@
             .your-tickets,
             .pool-tickets {
                 .label {
-                    font-size: $fnt-sz-10;
+                    font-size: $fnt-sz-20;
                     @include media-min($xs) {
-                        font-size: $fnt-sz-12;
-                    }
-                    @include media-min($xl) {
-                        font-size: $fnt-sz-14;
+                        font-size: $fnt-sz-16;
                     }
                     line-height: 133%;
                     color: #868686;
                 }
                 .tickets {
                     // color: #00c1b9;
-                    font-size: $fnt-sz-12;
-                    @include media-min($xs) {
+                    font-size: $fnt-sz-16;
+                    @include media-min($sm) {
                         font-size: $fnt-sz-14;
                     }
                     @include media-min($xl) {
-                        font-size: $fnt-sz-16;
+                        font-size: $fnt-sz-20;
                     }
                 }
                 .timer {
@@ -227,7 +237,6 @@
                     @include media-min($xl) {
                         font-size: $fnt-sz-16;
                     }
-
                 }
             }
             .pool-tickets {
@@ -237,8 +246,12 @@
             }
         }
         .game-icon-wrapper {
-            width: 80px;
-            height: 80px;
+            width: 110px;
+            height: 40px;
+            @include media-min($sm) {
+                width: 120px;
+                height: 100px;
+            }
             object-fit: cover;
             .img-fluid {
                 border-radius: 0;
@@ -264,6 +277,5 @@
                 display: none;
             }
         }
-
     }
 }

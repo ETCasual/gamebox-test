@@ -90,7 +90,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                         dispatchPoolTickets(isVisible);
                     }}
                 >
-                    <div className="col-12 col-sm-6 col-xl-4 px-3 px-sm-2 d-flex align-items-center justify-content-center mb-4">
+                    <div className="col-6 col-xl-4 px-2 d-flex align-items-center justify-content-center mb-4">
                         <div className="card-wrapper">
                             <Link
                                 to={{
@@ -111,14 +111,14 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     data?.completed ? "disabled" : "enabled"
                                 }
                             >
-                                <div className="position-relative prize-img">
+                                <div className="position-relative prize-img mx-2 mt-2">
                                     <ThumbnailMedia
                                         url={data?.prizeBG}
                                         isPlayVideo={isPlayVideo}
                                         setIsPlayVideo={setIsPlayVideo}
                                     />
 
-                                    <div className="info-wrapper p-3">
+                                    <div className="info-wrapper p-1 p-sm-3">
                                         <div className="prize-subtitle">
                                             {data?.prizeSubtitle}
                                         </div>
@@ -129,68 +129,11 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                 </div>
 
                                 {/* TICKET INFO */}
-                                <div className="col-12 d-flex align-items-center ticket-info p-3">
+                                <div className="col-12 d-flex align-items-center ticket-info px-2 px-sm-3 py-0 py-sm-2">
                                     <div className="col px-0">
-                                        {/* MOBILE */}
-                                        <div className="py-2 ticket-wrapper d-block d-sm-none">
-                                            <div className="your-tickets d-flex justify-content-end">
-                                                <div className="col d-flex justify-content-between px-0">
-                                                    <p className="mb-0 px-md-2 label d-flex align-self-end">
-                                                        Your tickets
-                                                    </p>
-                                                </div>
-                                                <p className="mb-0 tickets d-flex align-items-center">
-                                                    {getPoolTickets(
-                                                        poolTickets,
-                                                        data?.prizeId
-                                                    )?.toLocaleString() || 0}
-                                                </p>
-                                            </div>
-                                            <div className="pool-tickets d-flex justify-content-end mt-3">
-                                                <div className="col d-flex justify-content-between px-0">
-                                                    <p className="mb-0 mb-md-1 pl-md-1 pr-md-2 label d-flex align-items-end">
-                                                        Draw starts in
-                                                    </p>
-                                                </div>
-
-                                                <p
-                                                    className={`mb-0 d-flex align-items-center ${
-                                                        OverTimeModeChecker(
-                                                            data?.prizeId,
-                                                            data?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
-                                                            ? "text-danger timer"
-                                                            : "tickets"
-                                                    }`}
-                                                >
-                                                    {OverTimeModeChecker(
-                                                        data?.prizeId,
-                                                        data?.ticketsRequired,
-                                                        prizeTicketCollection
-                                                    )
-                                                        ? timer
-                                                        : getPrizeTicketCollected(
-                                                              prizeTicketCollection,
-                                                              data?.prizeId
-                                                          )?.toLocaleString() ||
-                                                          0}
-                                                    {!OverTimeModeChecker(
-                                                        data?.prizeId,
-                                                        data?.ticketsRequired,
-                                                        prizeTicketCollection
-                                                    ) && (
-                                                        <span className="required-tickets">
-                                                            {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
-                                                        </span>
-                                                    )}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        {/* DESKTOP */}
-                                        <div className="py-2 ticket-wrapper d-none d-sm-block">
+                                        <div className="py-2 ticket-wrapper d-block">
                                             <div className="your-tickets">
-                                                <p className="mb-1 label d-flex align-items-center">
+                                                <p className="mb-0 label d-flex align-items-center">
                                                     Your tickets
                                                 </p>
                                                 <div className="col d-flex flex-row align-items-center px-0">
@@ -206,12 +149,15 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 </div>
                                             </div>
                                             <div className="pool-tickets mt-2">
-                                                <p className="mb-1 label d-flex align-items-end">
+                                                <p className="mb-0 label d-none align-items-end d-sm-flex">
                                                     Draw starts in
+                                                </p>
+                                                <p className="mb-0 label d-flex align-items-end d-sm-none">
+                                                    Prize pool
                                                 </p>
                                                 <div className="col d-flex align-items-center px-0">
                                                     <p
-                                                        className={`mb-0 d-flex align-items-center ${
+                                                        className={`mb-0 d-none d-sm-flex align-items-center ${
                                                             OverTimeModeChecker(
                                                                 data?.prizeId,
                                                                 data?.ticketsRequired,
@@ -235,20 +181,22 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                                   0
                                                         }`}
                                                     </p>
+                                                    <p className="tickets mb-0 d-none align-items-center d-sm-flex">{`\u00A0/`}</p>
+
                                                     {!OverTimeModeChecker(
                                                         data?.prizeId,
                                                         data?.ticketsRequired,
                                                         prizeTicketCollection
                                                     ) && (
                                                         <p className="tickets mb-0 d-flex align-items-center">
-                                                            {`\u00A0/ ${data?.ticketsRequired?.toLocaleString()}`}
+                                                            {`\u00A0${data?.ticketsRequired?.toLocaleString()}`}
                                                         </p>
                                                     )}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
+                                    <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative pb-4 pb-sm-5 pr-1">
                                         <div className="game-icon position-relative">
                                             {data.gameInfo.map((e, i) => (
                                                 <React.Fragment

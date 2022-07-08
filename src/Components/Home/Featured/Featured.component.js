@@ -113,28 +113,36 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                 }
                             >
                                 {/* PRIZE TITLE, DESCRIPTION & ID */}
-                                <div className="prize-info position-relative d-flex flex-wrap p-0 pb-3 p-sm-3">
+                                <div className="prize-info position-relative d-flex flex-wrap p-2 pb-3 p-sm-3">
                                     <div className="prize-img p-0 col-12 col-sm-6 col-xl-5 position-relative">
                                         <ThumbnailMedia
                                             url={data?.prizeBG}
                                             isPlayVideo={isPlayVideo}
                                             setIsPlayVideo={setIsPlayVideo}
                                         />
-                                    </div>
-                                    <div className="d-flex flex-column justify-content-between col-12 col-sm-6 col-xl-7">
-                                        <div className="info-wrapper pt-4">
+                                        <div className="info-wrapper position-absolute d-block d-sm-none p-3">
                                             <div className="prize-subtitle">
                                                 {data?.prizeSubtitle}
                                             </div>
-                                            <div className="prize-title mt-2 mb-2">
+                                            <div className="prize-title mt-2">
                                                 {data?.prizeTitle}
                                             </div>
-                                            <div className="prize-description mb-2">
+                                        </div>
+                                    </div>
+                                    <div className="d-flex flex-column justify-content-between col-12 col-sm-6 col-xl-7 px-sm-4 px-1">
+                                        <div className="info-wrapper pt-3">
+                                            <div className="prize-subtitle d-none d-sm-block">
+                                                {data?.prizeSubtitle}
+                                            </div>
+                                            <div className="prize-title mt-2 d-none d-sm-block">
+                                                {data?.prizeTitle}
+                                            </div>
+                                            <div className="prize-description mb-2 mt-0 mt-sm-4 ml-2 ml-sm-0">
                                                 {data?.prizeContent}
                                             </div>
                                         </div>
                                         {/* TICKETS INFO */}
-                                        <div className="d-flex flex-row align-items-center featured-ticket-info p-3">
+                                        <div className="d-flex flex-row align-items-center featured-ticket-info p-3 mt-4">
                                             <div className="col px-0">
                                                 <div className="ticket-wrapper align-items-sm-center">
                                                     <div className="your-tickets">
@@ -194,7 +202,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative">
+                                            <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative pb-4 mr-0 mr-sm-2">
                                                 <div className="game-icon position-relative">
                                                     {data.gameInfo?.map(
                                                         (e, i) => (

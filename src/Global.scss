@@ -35,9 +35,6 @@ button {
     border: 0;
     background: transparent;
 }
-section {
-    padding-top: 70px;
-}
 .opacity-0-5 {
     opacity: 0.5;
 }
@@ -1030,6 +1027,270 @@ html {
 
         .mob-text {
             color: aqua;
+        }
+    }
+    .modal-body-launch-game-menu {
+        .close-button {
+            width: 30px;
+            height: 30px;
+            @include media-min($md) {
+                width: 36px;
+                height: 36px;
+            }
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 30rem;
+
+        // Check is mobile
+        @media (pointer:none), (pointer:coarse) {
+            top: 3rem;
+        }
+
+        .selections {
+            cursor: pointer;
+            width: 100%;
+            max-width: 15rem;
+            height: 12rem;
+            background: linear-gradient(90deg, #716c74 0%, #4a454d 100%);
+            padding: 0.2rem;
+
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 0 0pt transparent;
+
+            .title {
+                font-size: $fnt-sz-16;
+                font-weight: $fnt-wgt-500;
+            }
+
+            .content {
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, #403746 0%, #322a36 100%);
+                border-radius: 0px 0px 10px 10px;
+
+                .info-text {
+                    width: 100%;
+                    font-size: $fnt-sz-16;
+                    font-weight: $fnt-wgt-600;
+                    letter-spacing: 0.07rem;
+                }
+
+                .content-tickets {
+                    .tickets {
+                        color: #f8b61f;
+                        font-size: $fnt-sz-30;
+                        font-weight: $fnt-wgt-600;
+                    }
+        
+                    .icon {
+                        width: 2.5rem;
+                    }
+                }
+
+                .content-toggle {
+                    position: relative;
+                    display: inline-block;
+                    width: 130px;
+                    height: 34px;
+
+                    input {
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+                    }
+                    input:checked + .slider {
+                        background-color: #f8b61f;
+                    }
+                    input:focus + .slider {
+                        box-shadow: 0 0 1px #f8b61f;
+                    }
+                    input:checked + .slider:before {
+                        -webkit-transform: translateX(97px);
+                        -ms-transform: translateX(97px);
+                        transform: translateX(97px);
+                    }
+
+                    .slider {
+                        position: absolute;
+                        cursor: pointer;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: #736c75dd;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                        border-radius: 34px;
+                    }
+
+                    .slider:before {
+                        position: absolute;
+                        content: "";
+                        height: 26px;
+                        width: 26px;
+                        left: 4px;
+                        bottom: 4px;
+                        background-color: #ffffffdd;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                        border-radius: 50%;
+                    }
+
+                    .toggle-text {
+                        color: white;
+                        font-size: $fnt-sz-18;
+                        font-weight: $fnt-wgt-600;
+                    }
+                    .toggle-text.checked {
+                        color: black;
+                    }
+
+                    .icon {
+                        width: 1.25rem;
+                        height: 1.25rem;
+                    }
+                }
+            }
+            &:hover {
+                // outline: 2px solid #719ECE;
+                // outline: none;
+                // border: none;
+                // border-radius: 2pt;
+                box-shadow: 0 0 0 2pt #719ECE;
+            }
+        }
+        .selections.checked {
+            // outline: 2px solid #f8b61f;
+            box-shadow: 0 0 0 2pt #f8b61f;
+            &:hover {
+                // outline: 2px solid #f8b61f;
+                box-shadow: 0 0 0 2pt #f8b61f;
+            }
+        }
+        
+        .line {
+            background-color: #433948;
+            width: 100%;
+            max-width: 15rem;
+            height: 2px;
+            margin: 1.5rem auto;
+        }
+
+        .buttons {
+            .play-btn {
+                width: 100%;
+                max-width: 15rem;
+                font-size: $fnt-sz-18;
+                font-weight: $fnt-wgt-600;
+                background: #ff3399;
+                color: white;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                border-radius: 10px;
+                padding: 0.5rem;
+                transition: .4s;
+
+                .btn-text {
+                    color: white;
+                    font-size: $fnt-sz-22;
+                    font-weight: $fnt-wgt-600;
+                    transition: .4s;
+                }
+
+                .icon {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+            .play-btn:before {
+                background: #f8b61f;
+                color: black;
+
+                .btn-text:before {
+                    color: black;
+                }
+            }
+            .play-btn:hover {
+                background: #f20086;
+            }
+        }
+        .buttons.checked {
+            .play-btn {
+                background: #f8b61f;
+                color: black;
+
+                .btn-text {
+                    color: black;
+                }
+            }
+            .play-btn:hover {
+                background: #ffae00;
+            }
+        }
+    }
+    .modal-body-insufficient-balance {
+        .close-button {
+            width: 30px;
+            height: 30px;
+            @include media-min($md) {
+                width: 36px;
+                height: 36px;
+            }
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 30rem;
+
+        // Check is mobile
+        @media (pointer:none), (pointer:coarse) {
+            top: 3rem;
+        }
+
+        .title {
+            font-size: $fnt-sz-18;
+            font-weight: $fnt-wgt-700;
+            @include media-min($sm) {
+                font-size: $fnt-sz-20;
+            }
+        }
+
+        .subtitle {
+            font-size: $fnt-sz-12;
+            font-weight: $fnt-wgt-500;
+            @include media-min($sm) {
+                font-size: $fnt-sz-14;
+            }
+        }
+
+        .buttons {
+            .buy-btn {
+                width: 100%;
+                max-width: 15rem;
+                font-size: $fnt-sz-18;
+                font-weight: $fnt-wgt-600;
+                background: #ff3399;
+                color: white;
+                box-shadow: inset 0px 3px 6px #0000000f;
+                border-radius: 10px;
+                padding: 0.5rem;
+            }
+            .buy-btn:hover {
+                background: #f20086;
+            }
         }
     }
 }
