@@ -34,6 +34,7 @@ import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { PLAYER_LOG_RESET } from "redux/types";
 
 const Leaderboard = ({
     data,
@@ -561,6 +562,7 @@ const Leaderboard = ({
                                 isPlayBtnDisabled: false,
                             }));
                             // setIsGameLeaderboardShown(false);
+                            dispatch({ type: PLAYER_LOG_RESET })
                         }}
                         isShowTournamentEndedText={ modalStatus.isTournamentEnded?true:false}
                     />
