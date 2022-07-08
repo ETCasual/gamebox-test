@@ -369,12 +369,6 @@ const Leaderboard = ({
         if (currentGameInfo.playerEnterGameId) {
             localStorage.setItem("currentGameScore", score.a);
 
-            setModalStatus((prev) => ({
-                ...prev,
-                isQuitGameBtnDisabled: true,
-                isGameOver: true,
-                isPlayBtnDisabled: false,
-            }));
 
             dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
             dispatch(
@@ -384,12 +378,13 @@ const Leaderboard = ({
                 )
             );
 
-            // CALL USER & LEADERBOARD API AFTER 1 SECOND DELAY
+            // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
             setTimeout(() => {
                 if (timer === "Ended") {
                     setModalStatus((prev) => ({
                         ...prev,
                         isQuitGameBtnDisabled: false,
+                        isGameOver: true,
                         isPlayBtnDisabled: false,
                     }));
                     // setIsShowAdditionalBenefitsModal(true);
