@@ -6,7 +6,11 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, currentGameBoosterInfo }) => {
+const GameEndModal = ({
+    handleContinueButton,
+    isShowTournamentEndedText,
+    currentGameBoosterInfo,
+}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -15,7 +19,6 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
         (state) => state.leaderboardHistory
     );
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
-
 
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
         useState({
@@ -78,14 +81,15 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                                     GAME RESULT
                                 </p>
 
-                                {isShowTournamentEndedText? (
+                                {isShowTournamentEndedText ? (
                                     <p className="text-center tournament-has-ended-text">
                                         (The tournament has ended)
                                     </p>
-                                    ): <p className="text-center tournament-has-ended-text">
-                                    &nbsp;
+                                ) : (
+                                    <p className="text-center tournament-has-ended-text">
+                                        &nbsp;
                                     </p>
-                                }
+                                )}
 
                                 {score && (
                                     <p className="text-center score-text mt-5 mb-0">
@@ -99,21 +103,28 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                                     </p>
                                 )}
 
-
                                 {currentGameBoosterInfo.isUseBooster && (
                                     <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
                                         <p className="pr-2 ticket-rate-text-score">
-                                            every {currentGameBoosterInfo.scoreNeededPerExtraTickets} score
+                                            every{" "}
+                                            {
+                                                currentGameBoosterInfo.scoreNeededPerExtraTickets
+                                            }{" "}
+                                            score
                                         </p>
                                         <p className=" ticket-rate-text-ticket d-flex tickets-amount align-items-center">
-                                            <span className="mr-2">+ {currentGameBoosterInfo.extraTickets}</span>
+                                            <span className="mr-2">
+                                                +{" "}
+                                                {
+                                                    currentGameBoosterInfo.extraTickets
+                                                }
+                                            </span>
                                             <img
                                                 width="20"
-                                                src={`${window.cdn}assets/tickets_05.png`}
+                                                src={`${window.cdn}assets/tickets_06.png`}
                                                 alt="tickets"
                                             />
                                         </p>
-
                                     </div>
                                 )}
 
@@ -123,14 +134,15 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                                             You earned
                                         </p>
                                         <p className="col pr-2 d-flex tickets-amount align-items-center d-flex m-auto">
-                                            <span className="mr-2">{extraEarning.ticket}</span>
+                                            <span className="mr-2">
+                                                {extraEarning.ticket}
+                                            </span>
                                             <img
                                                 width="40"
-                                                src={`${window.cdn}assets/tickets_05.png`}
+                                                src={`${window.cdn}assets/tickets_06.png`}
                                                 alt="tickets"
                                             />
                                         </p>
-
                                     </div>
                                 )}
 
@@ -142,17 +154,16 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                                 </button>
 
                                 <button
-                                    className={`btn-results d-block text-center mx-auto mt-2 py-3 ${leaderboardHistory.length > 0
+                                    className={`btn-results d-block text-center mx-auto mt-2 py-3 ${
+                                        leaderboardHistory.length > 0
                                             ? ""
                                             : "opacity-0-5"
-                                        }`}
-
+                                    }`}
                                     onClick={
                                         leaderboardHistory.length > 0
                                             ? handleViewResult
                                             : null
                                     }
-
                                     style={{
                                         cursor:
                                             leaderboardHistory.length > 0
@@ -181,9 +192,9 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                 //             {extraEarning.ticket > 0 &&
                 //                 extraEarning.experience > 0 && (
                 //                     <p className="subtitle mb-2">
-                //                         Additional tickets 
-                //                         {extraEarning.experience > 0 
-                //                             ? "and experience points" 
+                //                         Additional tickets
+                //                         {extraEarning.experience > 0
+                //                             ? "and experience points"
                 //                             : " "}
                 //                         earned
                 //                     </p>
@@ -210,7 +221,7 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
 
                 //                           <img
                 //                                 width="20"
-                //                                 src={`${window.cdn}assets/tickets_05.png`}
+                //                                 src={`${window.cdn}assets/tickets_06.png`}
                 //                                 alt="tickets"
                 //                             />
                 //                         .
@@ -224,7 +235,7 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                 //                         : `${score} \u00f7 5 \u00d7 10 = ${(score/5)*10} `}
                 //                          <img
                 //                                 width="20"
-                //                                 src={`${window.cdn}assets/tickets_05.png`}
+                //                                 src={`${window.cdn}assets/tickets_06.png`}
                 //                                 alt="tickets"
                 //                             />
                 //                 </p>
@@ -264,14 +275,12 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                 //              {/* TICKETS INFO */}
                 //              <div className="total-tickets-container d-flex justify-content-between">
                 //                 <div className="total" >Total </div>
-                //                 <div className="number" >10 &nbsp;  
+                //                 <div className="number" >10 &nbsp;
                 //                 <img
-                //                         src={`${window.cdn}assets/tickets_05.png`}
+                //                         src={`${window.cdn}assets/tickets_06.png`}
                 //                         alt="tickets"
                 //                 />
                 //                 </div>
-
-
 
                 //             </div>
 

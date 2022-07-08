@@ -3,7 +3,6 @@ import RegistrationInstructions from "Components/Landing/Content/RegistrationIns
 import Hero from "Components/Landing/Content/Hero.component";
 import HowItWorks from "Components/Landing/Content/HowItWorks.component";
 import DailyRewards from "Components/Landing/Content/DailyRewards.component";
-import Footer from "Components/Landing/Footer/Footer.component";
 
 const Content = ({
     heroRef,

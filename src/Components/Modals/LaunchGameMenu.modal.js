@@ -34,8 +34,6 @@ const LaunchGameMenuModalPopup = ({
     const [isActiveBooster, setIsActiveBooster] = useState(false);
     const [startGameCost, setStartGameCost] = useState(playCost);
 
-    const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
-
     let toggleRef = useRef(null);
 
     useEffect(() => {
@@ -49,6 +47,8 @@ const LaunchGameMenuModalPopup = ({
     }, [prizeId, dispatch]);
 
     useEffect(() => {
+        const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
         const updateEarnAdditionalStatus = () => {
             let _earnAdditional = [...earnAdditionalBenefitStatus];
             let idx = _earnAdditional.findIndex((e) => e.prizeId === prizeId);
@@ -76,7 +76,14 @@ const LaunchGameMenuModalPopup = ({
             ...prev,
             gems: isActiveBooster,
         }));
-    }, [isActiveBooster]);
+    }, [
+        isActiveBooster,
+        prizeId,
+        config,
+        dispatch,
+        setEarnAdditionalDisabledStatus,
+        user.gems,
+    ]);
 
     function onUseBoosterYes() {
         setIsActiveBooster(true);
@@ -145,7 +152,7 @@ const LaunchGameMenuModalPopup = ({
                                         </span>
                                         <img
                                             className="icon ml-3"
-                                            src={`${window.cdn}assets/tickets_05.png`}
+                                            src={`${window.cdn}assets/tickets_06.png`}
                                             alt={"icon"}
                                         />
                                     </div>

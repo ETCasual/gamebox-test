@@ -11,7 +11,6 @@ import AutomatedEntryModalPopup from "Components/Modals/AutomatedEntry.modal";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
-import getTimerFullUnits from "Utils/GetTImerFullUnits";
 
 const AutomatedEntry = ({ data }) => {
     const dispatch = useDispatch();
@@ -73,7 +72,7 @@ const AutomatedEntry = ({ data }) => {
             if (currentTimeZone !== data.timeZone) {
                 calculatedTime.setHours(
                     calculatedTime.getHours() -
-                    timeZoneHourDifference(currentTimeZone, data.timeZone)
+                        timeZoneHourDifference(currentTimeZone, data.timeZone)
                 );
             }
 
@@ -162,12 +161,8 @@ const AutomatedEntry = ({ data }) => {
                     </div>
                     {/* TIMER */}
                     <div className="timer d-flex align-items-center justify-content-center px-3">
-                        <p className="timer-text mb-0">
-                            Next Draw In
-                        </p>
-                        <p className="countdown mb-0">
-                            {`\u00A0 ${timer}`}
-                        </p>
+                        <p className="timer-text mb-0">Next Draw In</p>
+                        <p className="countdown mb-0">{`\u00A0 ${timer}`}</p>
                     </div>
                 </div>
             </div>

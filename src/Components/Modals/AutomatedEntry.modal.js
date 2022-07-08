@@ -138,7 +138,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     </span>
                                     <img
                                         className="icon"
-                                        src={`${window.cdn}assets/tickets_05.png`}
+                                        src={`${window.cdn}assets/tickets_06.png`}
                                         alt={"icon"}
                                     />
                                 </p>
