@@ -7,7 +7,12 @@ import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
 import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
 
 import { defaultUserImage } from "Utils/DefaultImage";
-import { disconnectWallet, handleConnectWallet, handleMetamask, handleWalletConnect } from "Utils/ConnectWallet";
+import {
+    disconnectWallet,
+    handleConnectWallet,
+    handleMetamask,
+    handleWalletConnect,
+} from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
 
 const Settings = () => {
@@ -80,7 +85,7 @@ const Settings = () => {
                 console.log(err);
             }
         }
-    }
+    };
 
     const handleConnectWalletConnect = async () => {
         try {
@@ -91,7 +96,7 @@ const Settings = () => {
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     return (
         <section id="settings">
@@ -382,7 +387,7 @@ const Settings = () => {
                                             </li>
                                             <li>
                                                 <a
-                                                    href="mailto:info@froyo.games"
+                                                    href="mailto:support@froyo.games"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
@@ -391,7 +396,7 @@ const Settings = () => {
                                             </li>
                                             <li className="d-flex align-items-center justify-content-between">
                                                 <a
-                                                    href="mailto:info@froyo.games"
+                                                    href="mailto:support@froyo.games"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
@@ -415,15 +420,13 @@ const Settings = () => {
             </div>
             {selectWalletModalShown && (
                 <SelectWalletsModal
-                    handleInstructionsCloseBtn={
-                        ()=>{setSelectWalletModalShown(false)}
-                    }
+                    handleInstructionsCloseBtn={() => {
+                        setSelectWalletModalShown(false);
+                    }}
                     handleConnectMetamask={handleConnectMetamask}
                     handleConnectWalletConnect={handleConnectWalletConnect}
                 />
             )}
-
-
         </section>
     );
 };

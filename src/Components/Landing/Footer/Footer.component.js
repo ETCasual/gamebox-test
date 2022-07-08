@@ -20,14 +20,14 @@ const Footer = () => {
                 <div className="about-info-container col-12 col-md-8 col-xl-7 no-gutters d-flex flex-wrap mb-3 mb-md-5">
                     <div className="about-detail-container d-flex flex-column col-12 col-md-4 mb-3">
                         <div className="title-text mb-2">ABOUT</div>
-                        <div className="subtitle-text mb-1">GameBox</div>
+                        {/* <div className="subtitle-text mb-1">GameBox</div> */}
                         <div className="subtitle-text">
                             <a
                                 target="_blank"
                                 rel="noreferrer"
                                 href="https://froyo.games/home"
                             >
-                                Froyo
+                                Froyo Games
                             </a>
                         </div>
                     </div>
@@ -35,7 +35,7 @@ const Footer = () => {
                         <div className="title-text mb-2">HELP</div>
                         <div className="subtitle-text">
                             <a
-                                href="mailto:info@froyo.games"
+                                href="mailto:support@froyo.games"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -44,7 +44,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="froyo-coin-detail-container d-flex flex-column col-12 col-md-4 mb-3">
-                        <div className="title-text mb-2">FROYO COIN</div>
+                        <div className="title-text mb-2">FROYO TOKEN</div>
                         <div className="subtitle-text">
                             <a
                                 className="subtitle-text"
@@ -52,7 +52,7 @@ const Footer = () => {
                                 rel="noreferrer"
                                 href="https://froyo.games/token"
                             >
-                                Get Froyo Coin
+                                Get $FROYO
                             </a>
                         </div>
                     </div>
@@ -144,23 +144,25 @@ const Footer = () => {
                         <span className="pr-2 d-none d-md-inline-flex">
                             © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
                         </span>
-                        <span className="d-none d-md-inline-flex">
-                            &bull;
-                        </span>
-                        <Link className="pr-2 px-md-2" to="/terms-and-conditions">
+                        <span className="d-none d-md-inline-flex">&bull;</span>
+                        <Link
+                            className="pr-2 px-md-2"
+                            to="/terms-and-conditions"
+                        >
                             Terms and Conditions
                         </Link>
                         <span>&bull;</span>
-                        <Link className="px-2" to="/privacy-policy">Privacy Policy</Link>
+                        <Link className="px-2" to="/privacy-policy">
+                            Privacy Policy
+                        </Link>
                         <span>&bull;</span>
-                        <Link className="px-2" to="/tournament-rules">Tournament Rules</Link>
-                        <span className="d-md-none">
-                            &bull;
-                        </span>
+                        <Link className="px-2" to="/tournament-rules">
+                            Tournament Rules
+                        </Link>
+                        <span className="d-md-none">&bull;</span>
                         <span className="pl-2 d-md-none">
                             © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
                         </span>
-
                     </div>
                 </div>
                 <div className="logo-image-container col-12 col-md-3 justify-content-end d-none d-md-inline-flex">
