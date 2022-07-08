@@ -227,8 +227,10 @@ const Index = () => {
     // REVEAL CARD ONCLICK SHOW MODAL
     function handleWinnerRevealCard(prizeId) {
         let _arr = [];
-        winnerAnnouncementNotificationList.forEach((n) => {
-            _arr = n?.list?.filter(
+        let winnerList = [];
+        if (winnerAnnouncementNotificationList?.length > 0) {
+            winnerList = winnerAnnouncementNotificationList[0];
+            _arr = winnerList?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
             );
             const _prizeList =
@@ -236,8 +238,7 @@ const Index = () => {
 
             if (_arr.length > 0) {
                 // ONLY SHOW LATEST WINNER
-                const latestEntry = [_arr[0]];
-                setRevealCardModalData(latestEntry);
+                setRevealCardModalData([_arr[0]]);
 
                 setIsRevealCardModalShown(true);
             } else {
@@ -271,7 +272,51 @@ const Index = () => {
                     );
                 }
             }
-        });
+        }
+        // winnerAnnouncementNotificationList.forEach((n) => {
+        //     _arr = n?.list?.filter(
+        //         (l) => l.prizeId === prizeId && l.type === "winner"
+        //     );
+        //     const _prizeList =
+        //         JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+
+        //     if (_arr.length > 0) {
+        //         // ONLY SHOW LATEST WINNER
+        //         setRevealCardModalData(_arr);
+
+        //         setIsRevealCardModalShown(true);
+        //     } else {
+        //         // Broken prizes
+        //         let featureArr = _prizeList.filter(
+        //             (p) => p.type === 1 && p.prizeId !== prizeId
+        //         );
+        //         let premiumArr = _prizeList.filter(
+        //             (p) => p.type === 2 && p.prizeId !== prizeId
+        //         );
+        //         setFeaturedData(featureArr);
+        //         setPremiumData(premiumArr);
+        //     }
+        //     // UPDATE LOCALSTORAGE
+        //     // Before update complete and seen, check if prize is on repeat
+        //     let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
+        //     if (idx > -1) {
+        //         if (_prizeList[idx].repeatedOn.length === 0) {
+        //             _prizeList[idx].seen = true;
+        //             _prizeList[idx].completed = true;
+        //             sessionStorage.setItem(
+        //                 "prizeDetailList",
+        //                 JSON.stringify(_prizeList)
+        //             );
+        //         } else {
+        //             _prizeList[idx].seen = false;
+        //             _prizeList[idx].completed = false;
+        //             sessionStorage.setItem(
+        //                 "prizeDetailList",
+        //                 JSON.stringify(_prizeList)
+        //             );
+        //         }
+        //     }
+        // });
         // TODO:: SHOW MODAL THAT SOMETHING WENT WRONG / SOMETHING SUITABLE MESSAGE
         return;
     }

@@ -313,7 +313,7 @@ const Index = () => {
                                 <span className="w-100">Purchase Gems</span>
                             </p>
                             {/* BUY FROYO */}
-                            <div className="right-items w-100 d-flex align-items-center justify-content-end float-right">
+                            <div className="right-items w-100 d-flex align-items-center justify-content-end float-lg-right">
                                 <ul className="list-unstyled mb-0 d-flex align-items-center providers">
                                     <li className="text-white-50 pl-2">
                                         Buy $FROYO:

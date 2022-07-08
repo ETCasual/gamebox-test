@@ -24,6 +24,7 @@ import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 // import loadPrizes from "redux/thunks/Prizes.thunk";
 import { removeEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
 import InsufficientBalanceModalPopup from "Components/Modals/InsufficientBalance.modal";
+import LaunchGameMenuModalPopup from "Components/Modals/LaunchGameMenu.modal";
 
 // HELPER FUNCTION
 import { defaultUserImage } from "Utils/DefaultImage";
@@ -33,7 +34,7 @@ import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import LaunchGameMenuModalPopup from "Components/Modals/LaunchGameMenu.modal";
+import { PLAYER_LOG_RESET } from "redux/types";
 
 const Leaderboard = ({
     data,
@@ -49,6 +50,13 @@ const Leaderboard = ({
     const { poolTickets } = useSelector((state) => state.playerTickets);
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
     const { leaderboard } = useSelector((state) => state.leaderboard);
+    const { currentGameRules } = useSelector((state) => state.prizes);
+    const [currentGameBoosterInfo, setCurrentGameBoosterInfo] = useState({
+        isUseBooster: false,
+        scoreNeededPerExtraTickets: 0,
+        extraTickets: 0,
+    });
+
     const { currentGameInfo } = useSelector(
         (state) => state.playerTournamentInfo
     );
@@ -249,6 +257,12 @@ const Leaderboard = ({
         let isGemUsed =
             index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
 
+        setCurrentGameBoosterInfo(() => ({
+            isUseBooster: isGemUsed,
+            extraTickets: currentGameRules.useGemTickets,
+            scoreNeededPerExtraTickets: currentGameRules.score,
+        }));
+
         dispatch(
             loadPlayerEnterTournamentId(
                 data?.prizeId,
@@ -365,13 +379,6 @@ const Leaderboard = ({
         if (currentGameInfo.playerEnterGameId) {
             localStorage.setItem("currentGameScore", score.a);
 
-            setModalStatus((prev) => ({
-                ...prev,
-                isQuitGameBtnDisabled: true,
-                isGameOver: true,
-                isPlayBtnDisabled: false,
-            }));
-
             dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
             dispatch(
                 loadCurrentUserRank(
@@ -380,17 +387,16 @@ const Leaderboard = ({
                 )
             );
 
-            // CALL USER & LEADERBOARD API AFTER 1 SECOND DELAY
+            // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
             setTimeout(() => {
-                if (timer === "Ended") {
-                    setModalStatus((prev) => ({
-                        ...prev,
-                        isQuitGameBtnDisabled: false,
-                        isPlayBtnDisabled: false,
-                    }));
-                    // setIsShowAdditionalBenefitsModal(true);
-                    // setIsGameLeaderboardShown(false);
-                }
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isQuitGameBtnDisabled: false,
+                    isGameOver: true,
+                    isPlayBtnDisabled: false,
+                }));
+                // setIsShowAdditionalBenefitsModal(true);
+                // setIsGameLeaderboardShown(false);
 
                 dispatch(loadUserDetails());
                 dispatch(
@@ -571,28 +577,16 @@ const Leaderboard = ({
                                 isGameReady: false,
                                 isQuitGameBtnDisabled: false,
                                 isGameOver: false,
-                                isPlayBtnDisabled: false,
-                            }));
-                            // setIsGameLeaderboardShown(false);
-                        }}
-                        panelTitle="Game Over"
-                    />
-                )}
-
-                {/* MODAL FOR TOURNAMENT HAS ENDED */}
-                {modalStatus.isTournamentEnded && (
-                    <GameEndModal
-                        handleContinueButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
                                 isTournamentEnded: false,
                                 isPlayBtnDisabled: false,
                             }));
                             // setIsGameLeaderboardShown(false);
+                            dispatch({ type: PLAYER_LOG_RESET });
                         }}
-                        panelTitle="The tournament has ended."
+                        isShowTournamentEndedText={
+                            modalStatus.isTournamentEnded
+                        }
+                        currentGameBoosterInfo={currentGameBoosterInfo}
                     />
                 )}
 

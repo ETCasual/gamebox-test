@@ -73,7 +73,7 @@ const AutomatedEntry = ({ data }) => {
             if (currentTimeZone !== data.timeZone) {
                 calculatedTime.setHours(
                     calculatedTime.getHours() -
-                        timeZoneHourDifference(currentTimeZone, data.timeZone)
+                    timeZoneHourDifference(currentTimeZone, data.timeZone)
                 );
             }
 
@@ -162,9 +162,12 @@ const AutomatedEntry = ({ data }) => {
                     </div>
                     {/* TIMER */}
                     <div className="timer d-flex align-items-center justify-content-center px-3">
-                        <p className="countdown mb-0">{`\u00A0 ${getTimerFullUnits(
-                            timer
-                        )} left`}</p>
+                        <p className="timer-text mb-0">
+                            Next Draw In
+                        </p>
+                        <p className="countdown mb-0">
+                            {`\u00A0 ${timer}`}
+                        </p>
                     </div>
                 </div>
             </div>
