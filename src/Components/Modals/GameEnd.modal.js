@@ -15,6 +15,7 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
         (state) => state.leaderboardHistory
     );
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
+    const { currentGameRules } = useSelector((state) => state.prizes);
 
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
         useState({
@@ -64,7 +65,7 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
         }));
         handleContinueButton();
     };
-
+    console.log(extraEarning)
     return (
         <>
             {!isSelectedNotificationShown.status && (
@@ -97,35 +98,41 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
                            )}
                          
  
-                             <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
-                                 <p className="pr-2 ticket-rate-text-score">
-                                     every 50 score
-                                    
-                                 </p>
-                                 <p className=" ticket-rate-text-ticket d-flex tickets-amount align-items-center">
-                                 <span className="mr-2">+10</span>
-                                      <img
-                                        width="20"
-                                        src={`${window.cdn}assets/tickets_05.png`}
-                                        alt="tickets"
-                                 />
-                                 </p>
-                                
-                             </div>
-                             <div className="row text-center mx-auto total-tickets-earned align-items-center">
-                             <p className=" col py-2 pl-2 pr-2 you-earned d-flex m-auto justify-content-end">
-                                    You earned
-                                 </p>
-                                 <p className="col pr-2 d-flex tickets-amount align-items-center d-flex m-auto">
-                                    <span className="mr-2">20</span>
-                                      <img
-                                        width="40"
-                                        src={`${window.cdn}assets/tickets_05.png`}
-                                        alt="tickets"
-                                 />
-                                 </p>
-                              
+                          {extraEarning.ticket>0 && (
+                              <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
+                              <p className="pr-2 ticket-rate-text-score">
+                                  every {currentGameRules.score} score
+                                 
+                              </p>
+                              <p className=" ticket-rate-text-ticket d-flex tickets-amount align-items-center">
+                              <span className="mr-2">+{currentGameRules.useGemTickets}</span>
+                                   <img
+                                     width="20"
+                                     src={`${window.cdn}assets/tickets_05.png`}
+                                     alt="tickets"
+                              />
+                              </p>
+                             
                             </div>
+                          )}
+
+                           {extraEarning.ticket>0 && (
+                               <div className="row text-center mx-auto total-tickets-earned align-items-center">
+                               <p className=" col py-2 pl-2 pr-2 you-earned d-flex m-auto justify-content-end">
+                                      You earned
+                                   </p>
+                                   <p className="col pr-2 d-flex tickets-amount align-items-center d-flex m-auto">
+                                      <span className="mr-2">{extraEarning.ticket}</span>
+                                        <img
+                                          width="40"
+                                          src={`${window.cdn}assets/tickets_05.png`}
+                                          alt="tickets"
+                                   />
+                                   </p>
+                                
+                              </div>
+                            )}
+                         
                             <button
                                 className="continue-button d-block text-center mx-auto mt-4 py-3"
                                 onClick={handleContinueButton}
