@@ -1,4 +1,4 @@
-import { PLAYER_LOG_ENTER, PLAYER_LOG_LEAVE } from "redux/types";
+import { PLAYER_LOG_ENTER, PLAYER_LOG_LEAVE, PLAYER_LOG_RESET } from "redux/types";
 
 const INITIAL_STATE = {
     currentGameInfo: { playerEnterGameId: 0 },
@@ -22,6 +22,9 @@ const playerTournamentInfoReducer = (
                 ...esmData,
                 extraEarning: payload,
             };
+
+        case PLAYER_LOG_RESET:
+            return INITIAL_STATE
 
         default:
             return esmData;
