@@ -345,17 +345,22 @@ const Index = () => {
                                 <p className="description">
                                     The Prize Sponsor rewards existing users for
                                     inviting other users to the service. Users
-                                    will receive {config.gemsPerInvite} gems added to their GameBox
-                                    account when the other users register using
-                                    the user’s invite link 
-                                    {config.rewardInvitesRank > 1 ? `reaches level ${config.rewardInvitesRank}` : ""}. The
-                                    invited user will also receive {config.gemsPerInvite} gems 
-                                    {config.rewardInvitesRank > 1 ? `upon reaching level ${config.rewardInvitesRank}` : ""} when
-                                    they register with
-                                    GameBox using an invite link. The Prize
-                                    Sponsor reserves the right to evaluate and
-                                    reject such reward in suspected cases of
-                                    fraud.
+                                    will receive {config.gemsPerInvite} gems
+                                    added to their GameBox account when the
+                                    other users register using the user’s invite
+                                    link
+                                    {config.rewardInvitesRank > 1
+                                        ? `reaches level ${config.rewardInvitesRank}`
+                                        : ""}
+                                    . The invited user will also receive{" "}
+                                    {config.gemsPerInvite} gems
+                                    {config.rewardInvitesRank > 1
+                                        ? `upon reaching level ${config.rewardInvitesRank}`
+                                        : ""}{" "}
+                                    when they register with GameBox using an
+                                    invite link. The Prize Sponsor reserves the
+                                    right to evaluate and reject such reward in
+                                    suspected cases of fraud.
                                 </p>
                                 <p className="description">
                                     There is no limit as to how many users that
@@ -691,9 +696,9 @@ const Index = () => {
                                         className="email"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href="mailto:info@froyo.games"
+                                        href="mailto:support@froyo.games"
                                     >
-                                        info@froyo.games
+                                        support@froyo.games
                                     </a>
                                 </p>
                             </div>
@@ -708,9 +713,9 @@ const Index = () => {
                                             className="email"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            href="mailto:info@froyo.games"
+                                            href="mailto:support@froyo.games"
                                         >
-                                            info@froyo.games
+                                            support@froyo.games
                                         </a>
                                         .
                                     </p>

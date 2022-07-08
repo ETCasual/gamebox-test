@@ -39,9 +39,9 @@ const ClaimPrizeModalSuccess = ({
                                 className="email"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                href="mailto:info@froyo.games"
+                                href="mailto:support@froyo.games"
                             >
-                                info@froyo.games
+                                support@froyo.games
                             </a>
                         </p>
                         <div className="p-0 btn-wrapper d-flex mt-4">
@@ -71,9 +71,9 @@ const ClaimPrizeModalSuccess = ({
                                 className="email"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                href="mailto:info@froyo.games"
+                                href="mailto:support@froyo.games"
                             >
-                                info@froyo.games
+                                support@froyo.games
                             </a>
                         </p>
                         <div className="p-0 btn-wrapper d-flex flex-column mt-4">

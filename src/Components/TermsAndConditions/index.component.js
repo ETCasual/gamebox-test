@@ -193,9 +193,9 @@ const Index = () => {
                                         className="email"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href="mailto:info@froyo.games"
+                                        href="mailto:support@froyo.games"
                                     >
-                                        info@froyo.games
+                                        support@froyo.games
                                     </a>
                                     . Please note that some or all of the
                                     User-Provided Data may be required in order
