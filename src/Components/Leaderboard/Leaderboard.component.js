@@ -390,16 +390,14 @@ const Leaderboard = ({
 
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
             setTimeout(() => {
-                if (timer === "Ended") {
-                    setModalStatus((prev) => ({
-                        ...prev,
-                        isQuitGameBtnDisabled: false,
-                        isGameOver: true,
-                        isPlayBtnDisabled: false,
-                    }));
-                    // setIsShowAdditionalBenefitsModal(true);
-                    // setIsGameLeaderboardShown(false);
-                }
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isQuitGameBtnDisabled: false,
+                    isGameOver: true,
+                    isPlayBtnDisabled: false,
+                }));
+                // setIsShowAdditionalBenefitsModal(true);
+                // setIsGameLeaderboardShown(false);
 
                 dispatch(loadUserDetails());
                 dispatch(
