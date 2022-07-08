@@ -6,7 +6,7 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBooster,currentGameBoosterInfo}) => {
+const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,currentGameBoosterInfo}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -97,7 +97,7 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBoo
                            )}
                          
  
-                          {isUseBooster && (
+                          {currentGameBoosterInfo.isUseBooster && (
                               <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
                               <p className="pr-2 ticket-rate-text-score">
                                   every {currentGameBoosterInfo.scoreNeededPerExtraTickets} score
@@ -114,7 +114,7 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBoo
                             </div>
                           )}
 
-                           {isUseBooster && (
+                           {currentGameBoosterInfo.isUseBooster && (
                                <div className="row text-center mx-auto total-tickets-earned align-items-center">
                                <p className=" col py-2 pl-2 pr-2 you-earned d-flex m-auto justify-content-end">
                                         You earned

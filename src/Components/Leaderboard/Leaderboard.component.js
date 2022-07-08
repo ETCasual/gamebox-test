@@ -52,6 +52,7 @@ const Leaderboard = ({
     const { leaderboard } = useSelector((state) => state.leaderboard);
     const { currentGameRules } = useSelector((state) => state.prizes);
     const [currentGameBoosterInfo, setCurrentGameBoosterInfo] = useState({
+        isUseBooster:false,
         scoreNeededPerExtraTickets: 0,
         extraTickets: 0,
     });
@@ -59,7 +60,6 @@ const Leaderboard = ({
     const { extraEarning, currentGameInfo } = useSelector(
         (state) => state.playerTournamentInfo
     );
-    const [isUseBooster, setIsUseBooster] = useState(false);
     const { currentUserRank } = useSelector((state) => state.currentUserRank);
     const { config } = useSelector((state) => state.config);
     const { prizeTicketCollection } = useSelector(
@@ -257,8 +257,8 @@ const Leaderboard = ({
         let isGemUsed =
             index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
         
-        setIsUseBooster(isGemUsed);
         setCurrentGameBoosterInfo(() => ({
+            isUseBooster:isGemUsed,
             extraTickets:currentGameRules.useGemTickets,
             scoreNeededPerExtraTickets:currentGameRules.score
         }));
@@ -573,7 +573,6 @@ const Leaderboard = ({
                             dispatch({ type: PLAYER_LOG_RESET })
                         }}
                         isShowTournamentEndedText={ modalStatus.isTournamentEnded}
-                        isUseBooster={ isUseBooster}
                         currentGameBoosterInfo={currentGameBoosterInfo}
                     />
                 )}
