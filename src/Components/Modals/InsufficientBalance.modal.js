@@ -2,7 +2,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const InsufficientBalanceModalPopup = ({
     onCloseClicked,
-    onBuyClicked = () => { }
+    onBuyClicked = () => {},
 }) => {
     const history = useHistory();
 
@@ -26,7 +26,8 @@ const InsufficientBalanceModalPopup = ({
                             </p>
 
                             <p className="subtitle text-center my-4">
-                                Out of Gems?
+                                You are out of gems. Please purchase more gems
+                                to continue.
                             </p>
 
                             <Link
@@ -39,9 +40,7 @@ const InsufficientBalanceModalPopup = ({
                                 }}
                                 onClick={onBuyClicked}
                             >
-                                <button
-                                    className="buy-btn d-flex flex-column align-items-center justify-content-center m-auto"
-                                >
+                                <button className="buy-btn d-flex flex-column align-items-center justify-content-center m-auto">
                                     Get it Now!
                                 </button>
                             </Link>
