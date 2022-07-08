@@ -6,7 +6,7 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBooster}) => {
+const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBooster,currentGameBoosterInfo}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBoo
         (state) => state.leaderboardHistory
     );
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
-    const { currentGameRules } = useSelector((state) => state.prizes);
+
 
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
         useState({
@@ -100,11 +100,10 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBoo
                           {isUseBooster && (
                               <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
                               <p className="pr-2 ticket-rate-text-score">
-                                  every {currentGameRules.score} score
-                                 
+                                  every {currentGameBoosterInfo.scoreNeededPerExtraTickets} score
                               </p>
                               <p className=" ticket-rate-text-ticket d-flex tickets-amount align-items-center">
-                              <span className="mr-2">+{currentGameRules.useGemTickets}</span>
+                              <span className="mr-2">+ {currentGameBoosterInfo.extraTickets}</span>
                                    <img
                                      width="20"
                                      src={`${window.cdn}assets/tickets_05.png`}

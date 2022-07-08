@@ -50,6 +50,12 @@ const Leaderboard = ({
     const { poolTickets } = useSelector((state) => state.playerTickets);
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
     const { leaderboard } = useSelector((state) => state.leaderboard);
+    const { currentGameRules } = useSelector((state) => state.prizes);
+    const [currentGameBoosterInfo, setCurrentGameBoosterInfo] = useState({
+        scoreNeededPerExtraTickets: 0,
+        extraTickets: 0,
+    });
+
     const { extraEarning, currentGameInfo } = useSelector(
         (state) => state.playerTournamentInfo
     );
@@ -252,6 +258,10 @@ const Leaderboard = ({
             index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
         
         setIsUseBooster(isGemUsed);
+        setCurrentGameBoosterInfo(() => ({
+            extraTickets:currentGameRules.useGemTickets,
+            scoreNeededPerExtraTickets:currentGameRules.score
+        }));
 
         dispatch(
             loadPlayerEnterTournamentId(
@@ -564,6 +574,7 @@ const Leaderboard = ({
                         }}
                         isShowTournamentEndedText={ modalStatus.isTournamentEnded}
                         isUseBooster={ isUseBooster}
+                        currentGameBoosterInfo={currentGameBoosterInfo}
                     />
                 )}
 
