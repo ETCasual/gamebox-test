@@ -40,7 +40,6 @@ const Content = ({
                     setRegistrationInstructionModal
                 }
             />
-            <Footer />
         </section>
     );
 };
