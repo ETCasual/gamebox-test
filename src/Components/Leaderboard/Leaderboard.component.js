@@ -562,7 +562,7 @@ const Leaderboard = ({
                             // setIsGameLeaderboardShown(false);
                             dispatch({ type: PLAYER_LOG_RESET })
                         }}
-                        isShowTournamentEndedText={ modalStatus.isTournamentEnded?true:false}
+                        isShowTournamentEndedText={ modalStatus.isTournamentEnded}
                         isUseBooster={ isUseBooster}
                     />
                 )}
