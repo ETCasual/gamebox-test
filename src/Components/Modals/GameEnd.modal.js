@@ -78,11 +78,14 @@ const GameEndModal = ({ handleContinueButton, isShowTournamentEndedText, current
                                     GAME RESULT
                                 </p>
 
-                                {isShowTournamentEndedText && (
+                                {isShowTournamentEndedText? (
                                     <p className="text-center tournament-has-ended-text">
                                         (The tournament has ended)
                                     </p>
-                                )}
+                                    ): <p className="text-center tournament-has-ended-text">
+                                    &nbsp;
+                                    </p>
+                                }
 
                                 {score && (
                                     <p className="text-center score-text mt-5 mb-0">
