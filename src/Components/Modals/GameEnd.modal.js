@@ -6,7 +6,7 @@ import NotificationLeaderboard from "Components/Notifications/LeaderboardHistory
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
-const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
+const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText,isUseBooster}) => {
     const score = localStorage.getItem("currentGameScore");
 
     const dispatch = useDispatch();
@@ -65,7 +65,6 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
         }));
         handleContinueButton();
     };
-    console.log(extraEarning)
     return (
         <>
             {!isSelectedNotificationShown.status && (
@@ -98,7 +97,7 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
                            )}
                          
  
-                          {extraEarning.ticket>0 && (
+                          {isUseBooster && (
                               <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
                               <p className="pr-2 ticket-rate-text-score">
                                   every {currentGameRules.score} score
@@ -116,10 +115,10 @@ const GameEndModal = ({ handleContinueButton ,isShowTournamentEndedText}) => {
                             </div>
                           )}
 
-                           {extraEarning.ticket>0 && (
+                           {isUseBooster && (
                                <div className="row text-center mx-auto total-tickets-earned align-items-center">
                                <p className=" col py-2 pl-2 pr-2 you-earned d-flex m-auto justify-content-end">
-                                      You earned
+                                        You earned
                                    </p>
                                    <p className="col pr-2 d-flex tickets-amount align-items-center d-flex m-auto">
                                       <span className="mr-2">{extraEarning.ticket}</span>
