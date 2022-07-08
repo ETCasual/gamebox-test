@@ -120,38 +120,44 @@ const AutomatedEntry = ({ data }) => {
                 onClick={() => setBonusRewardShown(true)}
             >
                 <div className="auto">
-                    <div className="card-wrapper p-2 p-md-3">
+                    <div className="card-wrapper pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
                         <div className="row">
                             {/* PRIZE INFO */}
-                            <div className="col-6 col-md-8 col-lg-7 d-flex flex-column align-items-start position-relative justify-content-between">
+                            <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                                 <div>
                                     {/* PRIZE NAME */}
-                                    <div className="prize-title">
+                                    <div className="prize-title mb-1">
                                         {data.prizeTitle}
                                     </div>
                                     {/* PRIZE DETAILED CONTENT */}
-                                    <div className="prize-subtitle">
+                                    <div className="prize-subtitle d-none d-sm-flex">
                                         {data.prizeContent}
                                     </div>
                                 </div>
                                 {/* TICKETS */}
-                                <div className="total-ticket-info d-flex mt-4">
-                                    <p className="mb-0 ticket-label d-flex align-items-center mr-5">
-                                        Total tickets collected
+                                <div className="total-ticket-info d-flex mt-sm-4">
+                                    <p className="mb-0 ticket-label d-flex align-items-center mr-3">
+                                        My tickets
                                     </p>
                                     <p className="mb-0 ticket-value">
                                         {getTickets()?.toLocaleString() || "-"}
+                                        <img
+                                            className="icon ml-1"
+                                            src={`${window.cdn}assets/tickets_05.png`}
+                                            alt="ticket"
+                                        />
                                     </p>
                                 </div>
                             </div>
                             {/* PRIZE PICTURE */}
-                            <div className="col-6 col-md-4 col-lg-5 d-flex justify-content-end position-relative">
+                            <div className="bonus-reward-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
                                 <picture>
                                     <source
                                         media="(max-width:768px)"
                                         srcSet={data.prizeBG2}
                                     />
                                     <img
+                                        className="bonus-reward-img mt-sm-2"
                                         src={data.prizeBG}
                                         alt={data.prizeTitle}
                                     />
@@ -160,9 +166,9 @@ const AutomatedEntry = ({ data }) => {
                         </div>
                     </div>
                     {/* TIMER */}
-                    <div className="timer d-flex align-items-center justify-content-center px-3">
-                        <p className="timer-text mb-0">Next Draw In</p>
-                        <p className="countdown mb-0">{`\u00A0 ${timer}`}</p>
+                    <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
+                        <p className="timer-text mb-0">Ends in</p>
+                        <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
                     </div>
                 </div>
             </div>

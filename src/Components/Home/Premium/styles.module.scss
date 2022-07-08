@@ -2,9 +2,9 @@
 .premium {
     .card-wrapper {
         position: relative;
-        background: linear-gradient(137deg, #302f2f -5%, #0b0b0b 30%);
+        background: linear-gradient(90deg, #433849, #2f2833);
         border-radius: 17px;
-        min-height: clamp(10rem, 30vh, 20rem);
+        // min-height: clamp(10rem, 30vh, 20rem);
         width: inherit;
 
         .enabled {
@@ -96,7 +96,10 @@
             width: 100%;
             z-index: 2;
             .prize-title {
-                font-size: $fnt-sz-18;
+                font-size: $fnt-sz-12;
+                @include media-min($sm) {
+                    font-size: $fnt-sz-18;
+                }
                 width: 20ch;
                 font-weight: $fnt-wgt-600;
                 text-transform: capitalize;
@@ -123,7 +126,6 @@
             background: linear-gradient(180deg, #02020200 75%, #0b0b0bb3 100%);
         }
 
-
         &:hover {
             .game-icon-wrapper {
                 .game-icon::after {
@@ -148,11 +150,8 @@
                 }
             }
         }
-
     }
     .ticket-info {
-        padding: 0.7em;
-        background-color: #342d38;
         border-bottom-left-radius: 17px;
         border-bottom-right-radius: 17px;
         .your-tickets {
@@ -179,20 +178,20 @@
             .your-tickets,
             .pool-tickets {
                 .label {
-                    font-size: $fnt-sz-10;
-                    @include media-min($xs) {
-                        font-size: $fnt-sz-12;
+                    font-size: $fnt-sz-12;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-18;
                     }
                     @include media-min($xl) {
-                        font-size: $fnt-sz-14;
+                        font-size: $fnt-sz-16;
                     }
                     line-height: 133%;
                     color: #868686;
                 }
                 .tickets {
                     font-size: $fnt-sz-12;
-                    @include media-min($xs) {
-                        font-size: $fnt-sz-14;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-20;
                     }
                     @include media-min($xl) {
                         font-size: $fnt-sz-16;
@@ -209,13 +208,21 @@
             }
             .pool-tickets {
                 .current-tickets {
+                    font-size: 20;
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-16;
+                    }
                     color: #00c1b9;
                 }
             }
         }
         .game-icon-wrapper {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 40px;
+            @include media-min($sm) {
+                width: 120px;
+                height: 100px;
+            }
             object-fit: cover;
             .img-fluid {
                 border-top-left-radius: 12px;

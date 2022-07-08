@@ -54,14 +54,15 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                             cx2={"48%"}
                             cx3={"53%"}
                             cx4={"58%"}
-
                         />
                     </div>
                 )}
                 {!loading && (
                     <div className="content text-center d-flex flex-column align-items-center justify-content-end">
-                        <div className="prize-info p-3 w-100">
-                            <p className="title mb-2 px-3">{data.prizeTitle}</p>
+                        <div className="prize-info p-1 p-sm-3 w-100">
+                            <p className="title mb-1 mb-sm-2 px-3">
+                                {data.prizeTitle}
+                            </p>
                             <p className="subtitle mb-0 px-3">
                                 {data.prizeSubtitle}
                             </p>
@@ -69,7 +70,6 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                         <p className="tap-btn mb-0">Tap to reveal the winner</p>
                     </div>
                 )}
-
             </div>
         </div>
     );

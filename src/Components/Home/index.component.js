@@ -374,27 +374,22 @@ const Index = () => {
     return (
         <>
             <section id="home">
-                <div className="container-fluid mb-5 bonus">
+                <div className="container-fluid mb-4 bonus">
                     <div className="row justify-content-center px-1 py-3 pt-sm-4 pb-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">
                                 {/* FORTUNE WHEEL */}
                                 <div className="col-12 col-sm-6 d-flex flex-column px-2 mb-3 mb-sm-0">
-                                    <div className="description w-100">
-                                        <h2 className="section-title mb-3 d-none d-sm-block">
-                                            Free Rewards
-                                        </h2>
-                                    </div>
                                     <div className="spinner d-flex flex-column justify-content-between h-100">
                                         <div
-                                            className="card-wrapper h-100 p-2 p-md-3"
+                                            className="card-wrapper h-100  pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3"
                                             onClick={() =>
                                                 setFortuneWheelShown(true)
                                             }
                                         >
                                             <div className="row">
                                                 <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
-                                                    <p className="the-spinner-text mb-0">
+                                                    <p className="the-spinner-text mb-1">
                                                         FREE GEMS
                                                     </p>
                                                     <div className="earn-more-tickets-text">
@@ -404,7 +399,7 @@ const Index = () => {
                                                 </div>
                                                 <div className="earn-more-tickets-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
                                                     <img
-                                                        className="earn-more-tickets-img"
+                                                        className="earn-more-tickets-img mt-sm-2"
                                                         src={`${window.cdn}spinner/spinner_column_01.png`}
                                                         alt="earn-more-tickets"
                                                     />
@@ -414,7 +409,7 @@ const Index = () => {
                                         {/* TIMER */}
                                         <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
                                             <p className="timer-text mb-0">
-                                                Refresh In
+                                                Refresh in
                                             </p>
                                             <p className="countdown mb-0">
                                                 {`\u00A0 ${timer} `}
@@ -436,11 +431,6 @@ const Index = () => {
 
                                 {/* AUTOMATED */}
                                 <div className="automatedEntry col-12 col-sm-6 px-2 mb-3 mb-sm-0">
-                                    <div className="description w-100">
-                                        <h2 className="section-title mb-3 d-none d-sm-block">
-                                            Bonus Rewards
-                                        </h2>
-                                    </div>
                                     {/* LOADER */}
                                     {automatedEntryData.length <= 0 && (
                                         <AutomatedEntryLoader />
