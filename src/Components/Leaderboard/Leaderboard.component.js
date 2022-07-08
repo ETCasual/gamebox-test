@@ -52,7 +52,7 @@ const Leaderboard = ({
     const { leaderboard } = useSelector((state) => state.leaderboard);
     const { currentGameRules } = useSelector((state) => state.prizes);
     const [currentGameBoosterInfo, setCurrentGameBoosterInfo] = useState({
-        isUseBooster:false,
+        isUseBooster: false,
         scoreNeededPerExtraTickets: 0,
         extraTickets: 0,
     });
@@ -256,11 +256,11 @@ const Leaderboard = ({
             index > -1 ? _earnAdditional[index]?.isAdsSelected : false;
         let isGemUsed =
             index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
-        
+
         setCurrentGameBoosterInfo(() => ({
-            isUseBooster:isGemUsed,
-            extraTickets:currentGameRules.useGemTickets,
-            scoreNeededPerExtraTickets:currentGameRules.score
+            isUseBooster: isGemUsed,
+            extraTickets: currentGameRules.useGemTickets,
+            scoreNeededPerExtraTickets: currentGameRules.score
         }));
 
         dispatch(
@@ -339,7 +339,7 @@ const Leaderboard = ({
                 ...prev,
                 isGameReady: false,
                 isQuitGameConfirm: false,
-                isPlayBtnDisabled:false,
+                isPlayBtnDisabled: false,
             }));
         else if (choice === "no")
             setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
@@ -486,11 +486,10 @@ const Leaderboard = ({
             _leaderboardList.push(
                 <div key={`leaderboard-${i}`} className="individual-rank">
                     <div
-                        className={`leader-player-card d-flex align-items-center ${
-                            isCurrentUser(leaderboardList[i]?.userId)
+                        className={`leader-player-card d-flex align-items-center ${isCurrentUser(leaderboardList[i]?.userId)
                                 ? "you"
                                 : ""
-                        }`}
+                            }`}
                     >
                         <div className="number-holder">
                             <LeaderRankIndicator index={i} type="lb" />
@@ -512,13 +511,12 @@ const Leaderboard = ({
                             <p className="player-name">
                                 {leaderboardList[i]?.userId
                                     ? isCurrentUser(leaderboardList[i]?.userId)
-                                        ? `${
-                                              leaderboardList[i]?.nickName ||
-                                              user.username ||
-                                              "Player"
-                                          } (You)`
+                                        ? `${leaderboardList[i]?.nickName ||
+                                        user.username ||
+                                        "Player"
+                                        } (You)`
                                         : leaderboardList[i]?.nickName ||
-                                          `Player ${leaderboardList[i]?.userId}`
+                                        `Player ${leaderboardList[i]?.userId}`
                                     : "-"}
                             </p>
                             <p className="points">
@@ -572,7 +570,7 @@ const Leaderboard = ({
                             // setIsGameLeaderboardShown(false);
                             dispatch({ type: PLAYER_LOG_RESET })
                         }}
-                        isShowTournamentEndedText={ modalStatus.isTournamentEnded}
+                        isShowTournamentEndedText={modalStatus.isTournamentEnded}
                         currentGameBoosterInfo={currentGameBoosterInfo}
                     />
                 )}
@@ -674,15 +672,14 @@ const Leaderboard = ({
                                                     Tournament ends in
                                                 </p>
                                                 <p
-                                                    className={`mb-0 ${
-                                                        OverTimeModeChecker(
-                                                            data?.prizeId,
-                                                            data?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
+                                                    className={`mb-0 ${OverTimeModeChecker(
+                                                        data?.prizeId,
+                                                        data?.ticketsRequired,
+                                                        prizeTicketCollection
+                                                    )
                                                             ? "text-danger"
                                                             : "timer-text"
-                                                    }`}
+                                                        }`}
                                                 >
                                                     {timer || "0d 0h 0m 0s"}
                                                 </p>
@@ -692,19 +689,17 @@ const Leaderboard = ({
                                     {/* LEADERBOARD LIST */}
                                     <div
                                         ref={leaderboardRef}
-                                        className={`leaderboard ${
-                                            currentUserRank.rank > rankLength ||
-                                            currentUserRank.rank === "-"
+                                        className={`leaderboard ${currentUserRank.rank > rankLength ||
+                                                currentUserRank.rank === "-"
                                                 ? ""
                                                 : "leaderboard-rank-layer-without-user"
-                                        }`}
+                                            }`}
                                         style={{
-                                            padding: `${
-                                                currentUserRank.rank >
-                                                rankLength
+                                            padding: `${currentUserRank.rank >
+                                                    rankLength
                                                     ? "0.25rem 0.25rem 5rem 0.25rem"
                                                     : ""
-                                            }`,
+                                                }`,
                                         }}
                                     >
                                         {leaderboardList.length > 0
@@ -756,7 +751,7 @@ const Leaderboard = ({
                                                     <span>
                                                         {getRankTickets(
                                                             currentUserRank.rank -
-                                                                1
+                                                            1
                                                         ) || "0"}{" "}
                                                         tickets
                                                     </span>
@@ -775,21 +770,20 @@ const Leaderboard = ({
                                         ref={readyTournamentButtonRef}
                                     >
                                         <button
-                                            className={`ready-tournament-button ${
-                                                isGameAvailable
+                                            className={`ready-tournament-button ${isGameAvailable
                                                     ? ""
                                                     : "opacity-0-5"
-                                            }`}
+                                                }`}
                                             onClick={
                                                 isGameAvailable
                                                     ? () => {
-                                                          setModalStatus(
-                                                              (prev) => ({
-                                                                  ...prev,
-                                                                  isEarnAdditionalInfoShown: true,
-                                                              })
-                                                          );
-                                                      }
+                                                        setModalStatus(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                isEarnAdditionalInfoShown: true,
+                                                            })
+                                                        );
+                                                    }
                                                     : null
                                             }
                                         >
@@ -827,11 +821,10 @@ const Leaderboard = ({
                                         />
                                         {/* PLAY BUTTON*/}
                                         <div
-                                            className={`play-button-container d-flex justify-content-center ${
-                                                isGameAvailable
+                                            className={`play-button-container d-flex justify-content-center ${isGameAvailable
                                                     ? ""
                                                     : "opacity-0-5"
-                                            }`}
+                                                }`}
                                         >
                                             <button
                                                 onClick={
@@ -839,11 +832,10 @@ const Leaderboard = ({
                                                         ? handleOnClickPlayButton
                                                         : null
                                                 }
-                                                className={`play-button ${
-                                                    isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                                className={`play-button ${isGameAvailable && !modalStatus.isPlayBtnDisabled
                                                         ? ""
                                                         : "opacity-0-5"
-                                                }`}
+                                                    }`}
                                             >
                                                 Play Tournament!
                                             </button>
