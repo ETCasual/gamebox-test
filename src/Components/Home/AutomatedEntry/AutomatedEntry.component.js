@@ -143,7 +143,7 @@ const AutomatedEntry = ({ data }) => {
                                         {getTickets()?.toLocaleString() || "-"}
                                         <img
                                             className="icon ml-1"
-                                            src={`${window.cdn}assets/tickets_05.png`}
+                                            src={`${window.cdn}assets/tickets_06.png`}
                                             alt="ticket"
                                         />
                                     </p>

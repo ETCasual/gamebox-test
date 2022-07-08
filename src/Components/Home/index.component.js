@@ -400,7 +400,7 @@ const Index = () => {
                                                 <div className="earn-more-tickets-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
                                                     <img
                                                         className="earn-more-tickets-img mt-sm-2"
-                                                        src={`${window.cdn}spinner/spinner_column_01.png`}
+                                                        src={`${window.cdn}icons/icon_spinner.png`}
                                                         alt="earn-more-tickets"
                                                     />
                                                 </div>
