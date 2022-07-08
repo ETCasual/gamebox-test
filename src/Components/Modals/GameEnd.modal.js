@@ -153,7 +153,8 @@ const GameEndModal = ({
                                     Continue
                                 </button>
 
-                                <button
+                                {/* {isShowTournamentEndedText ? 
+                                (<button
                                     className={`btn-results d-block text-center mx-auto mt-2 py-3 ${
                                         leaderboardHistory.length > 0
                                             ? ""
@@ -174,7 +175,11 @@ const GameEndModal = ({
                                     {leaderboardHistory.length > 0
                                         ? "View Leaderboard"
                                         : "Fetching Leaderboard"}
-                                </button>
+                                </button>) : (
+                                    <p className="btn-results d-block text-center mx-auto mt-2 py-3">
+                                        &nbsp;
+                                    </p>
+                                )} */}
                             </div>
                         </div>
                     </div>
