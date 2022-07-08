@@ -390,7 +390,7 @@ const Leaderboard = ({
 
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
             setTimeout(() => {
-                if (timer === "Ended") {
+                // if (timer === "Ended") {
                     setModalStatus((prev) => ({
                         ...prev,
                         isQuitGameBtnDisabled: false,
@@ -399,7 +399,7 @@ const Leaderboard = ({
                     }));
                     // setIsShowAdditionalBenefitsModal(true);
                     // setIsGameLeaderboardShown(false);
-                }
+                // }
 
                 dispatch(loadUserDetails());
                 dispatch(
