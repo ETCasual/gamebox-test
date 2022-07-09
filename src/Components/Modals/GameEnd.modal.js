@@ -15,9 +15,9 @@ const GameEndModal = ({
 
     const dispatch = useDispatch();
 
-    const { leaderboardHistory } = useSelector(
-        (state) => state.leaderboardHistory
-    );
+    // const { leaderboardHistory } = useSelector(
+    //     (state) => state.leaderboardHistory
+    // );
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
 
     const [isSelectedNotificationShown, setIsSelectedNotificationShown] =
@@ -33,7 +33,8 @@ const GameEndModal = ({
         clearInterval(timeoutRef);
         timeoutRef = setTimeout(() => {
             const lbId = JSON.parse(sessionStorage.getItem("lbId"));
-            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0) {
+            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0)
+            {
                 dispatch(loadLeaderboardHistory(parseInt(lbId?.cgId)));
                 dispatch(loadLeaderboardRanks(parseInt(lbId.gameId)));
 
@@ -48,18 +49,18 @@ const GameEndModal = ({
         return () => clearTimeout(timeoutRef);
     }, [dispatch]);
 
-    const handleViewResult = () => {
-        if (
-            isSelectedNotificationShown.cgId > 0 &&
-            isSelectedNotificationShown.gameId > 0 &&
-            isSelectedNotificationShown.type === "tour"
-        ) {
-            setIsSelectedNotificationShown((prev) => ({
-                ...prev,
-                status: true,
-            }));
-        }
-    };
+    // const handleViewResult = () => {
+    //     if (
+    //         isSelectedNotificationShown.cgId > 0 &&
+    //         isSelectedNotificationShown.gameId > 0 &&
+    //         isSelectedNotificationShown.type === "tour"
+    //     ) {
+    //         setIsSelectedNotificationShown((prev) => ({
+    //             ...prev,
+    //             status: true,
+    //         }));
+    //     }
+    // };
 
     const handleCloseLeaderboardHistory = () => {
         setIsSelectedNotificationShown((prev) => ({

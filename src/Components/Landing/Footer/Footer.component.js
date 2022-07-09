@@ -2,8 +2,34 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Footer = () => {
+    const socialList = [
+        { id: "twitter", icon: `${window.cdn}icons/social/icon_twitter.png`, url: "https://twitter.com/realfroyogames" },
+        { id: "medium", icon: `${window.cdn}icons/social/icon_medium.png`, url: "https://medium.com/@froyogames" },
+        { id: "discord", icon: `${window.cdn}icons/social/icon_discord.png`, url: "https://discord.com/invite/Aja3uWSSAS" },
+        { id: "telegram", icon: `${window.cdn}icons/social/icon_telegram.png`, url: "https://t.me/froyogames" },
+        { id: "github", icon: `${window.cdn}icons/social/icon_github.png`, url: "https://github.com/froyogames" },
+        { id: "facebook", icon: `${window.cdn}icons/social/icon_facebook.png`, url: "https://www.facebook.com/realfroyogames" },
+        { id: "instagram", icon: `${window.cdn}icons/social/icon_instagram.png`, url: "https://www.instagram.com/realfroyogames" },
+        { id: "youtube", icon: `${window.cdn}icons/social/icon_youtube.png`, url: "https://www.youtube.com/channel/UC_IS0oR68lKx1qGxoIw-J3Q" },
+    ];
+
     const { config } = useSelector((state) => state.config);
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
+    const renderSocialElement = socialList.map((data) =>
+        <li>
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={data.url}
+            >
+                <img
+                    src={data.icon}
+                    alt={data.id}
+                />
+            </a>
+        </li>
+    );
 
     return (
         <div className="footer">
@@ -61,7 +87,11 @@ const Footer = () => {
                     <div className="title-text mb-2">JOIN OUR COMMUNITY</div>
 
                     <div className="logo-img-container">
-                        <a
+                        <ul className="float-md-right">
+                            {renderSocialElement}
+                        </ul>
+
+                        {/* <a
                             target="_blank"
                             rel="noopener noreferrer"
                             href="https://www.facebook.com/EsportsMini/"
@@ -136,7 +166,7 @@ const Footer = () => {
         C86.391,45.366,88.664,43.005,90.461,40.316L90.461,40.316z"
                                 />
                             </svg>
-                        </a>
+                        </a> */}
                     </div>
                 </div>
                 <div className="terms-and-conditions-container col-12 col-md-9 align-self-end">
