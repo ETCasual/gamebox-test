@@ -81,7 +81,7 @@ const Index = () => {
                         </div>
                     )}
                     {!noDataLoaded && (
-                        <div className="row">
+                        <div className="content-min-height row">
                             {activityData.length <= 0 && <ActivityLoader />}
                             {activityData.map((card, index) => (
                                 <ActivityCard

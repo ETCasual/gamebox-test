@@ -338,8 +338,8 @@
                 margin: auto;
                 object-fit: cover;
 
-                -webkit-mask-image: linear-gradient(to top, #00000000, #00000033, #000000CC, #00000000);
-                mask-image: linear-gradient(to top, #00000000, #00000033, #000000CC, #00000000);
+                -webkit-mask-image: radial-gradient(closest-side at 60% 55%, #000000CC, #00000000);
+                mask-image: radial-gradient(closest-side at 60% 55%, #000000CC, #00000000);
             }
         }
     }

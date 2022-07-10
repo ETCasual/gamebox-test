@@ -42,7 +42,7 @@ const HighScore = ({ handleBackButton }) => {
                             <div
                                 className="back-button mb-4 mb-md-5"
                                 onClick={history.goBack}
-                                >
+                            >
                                 <img
                                     src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
@@ -65,38 +65,41 @@ const HighScore = ({ handleBackButton }) => {
                             </div>
                             {/* HIGHSCORES LIST */}
                             {!noDataLoaded &&
-                                highScore?.map((card, i) => (
-                                    <div
-                                        key={`highscore-${i}`}
-                                        className="col-12 col-md-9 col-xl-8"
-                                    >
-                                        <div className="row mb-3 px-3 align-items-center justify-content-between highscore-card position-relative">
-                                            <div className="col-auto px-0 game-icon">
-                                                <img
-                                                    className="img-fluid"
-                                                    src={card.gameImageUrl}
-                                                    alt="game"
-                                                />
-                                            </div>
-                                            <div className="col d-flex flex-column align-items-start justify-content-end mt-0 mb-1">
-                                                <p className="game-title mb-2">
-                                                    {card.gameTitle}
-                                                </p>
-                                                <div className="w-100 d-flex align-items-end justify-content-between">
-                                                    <p className="score-date mb-0">
-                                                        {getDateFormat(
-                                                            card.scoreTimestamp *
+                                <div className="content-min-height pb-5">
+                                    {highScore?.map((card, i) => (
+                                        <div
+                                            key={`highscore-${i}`}
+                                            className="col-12 col-md-9 col-xl-8"
+                                        >
+                                            <div className="row mb-3 px-3 align-items-center justify-content-between highscore-card position-relative">
+                                                <div className="col-auto px-0 game-icon">
+                                                    <img
+                                                        className="img-fluid"
+                                                        src={card.gameImageUrl}
+                                                        alt="game"
+                                                    />
+                                                </div>
+                                                <div className="col d-flex flex-column align-items-start justify-content-end mt-0 mb-1">
+                                                    <p className="game-title mb-2">
+                                                        {card.gameTitle}
+                                                    </p>
+                                                    <div className="w-100 d-flex align-items-end justify-content-between">
+                                                        <p className="score-date mb-0">
+                                                            {getDateFormat(
+                                                                card.scoreTimestamp *
                                                                 1000
-                                                        )}
-                                                    </p>
-                                                    <p className="px-0 score mb-0 d-flex align-items-start justify-content-end">
-                                                        {`${card.gameScore?.toLocaleString()} pts`}
-                                                    </p>
+                                                            )}
+                                                        </p>
+                                                        <p className="px-0 score mb-0 d-flex align-items-start justify-content-end">
+                                                            {`${card.gameScore?.toLocaleString()} pts`}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
