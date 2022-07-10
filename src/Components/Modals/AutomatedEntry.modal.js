@@ -35,10 +35,11 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
             new Date(nowTimeStamp()).getTimezoneOffset() / 60
         );
         let calculatedTime = new Date(data?.scheduledOff * 1000);
-        if (currentTimeZone !== data?.timeZone) {
+        if (currentTimeZone !== data?.timeZone)
+        {
             calculatedTime.setHours(
                 calculatedTime.getHours() -
-                    timeZoneHourDifference(currentTimeZone, data?.timeZone)
+                timeZoneHourDifference(currentTimeZone, data?.timeZone)
             );
         }
         clearInterval(watcherRef.current);
@@ -121,7 +122,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="countdown d-flex flex-row align-items-center justify-content-center my-3 my-sm-4 mx-auto">
+                            <div className="countdown d-flex flex-row align-items-center justify-content-center my-2 my-sm-4 mx-auto">
                                 <p className="countdown-text mb-0 mr-2">
                                     Ends in
                                 </p>
@@ -156,10 +157,10 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                 </Link>
                             </div>
                             <div className="line" />
-                            <p className="instructions-title text-center">
+                            <p className="instructions-title text-center mb-1 mb-sm-3">
                                 How to win tickets for the Bonus Draw?
                             </p>
-                            <p className="instructions-subtitle text-center">
+                            <p className="instructions-subtitle text-center mb-2 mb-sm-3">
                                 Participate in any tournament throughout the
                                 platform before the timer runs out.
                                 <br />

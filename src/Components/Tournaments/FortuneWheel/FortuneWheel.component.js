@@ -102,7 +102,7 @@ const FortuneWheel = ({
                     <div className="col-11 col-md-10 col-lg-8 col-xl-7 wrapper">
                         <div className="row h-100">
                             {/* FIRST COLUMN */}
-                            <div className="col-12 py-3 align-items-center justify-content-between wrapper-col">
+                            <div className="col-12 pt-3 align-items-center justify-content-between wrapper-col">
                                 {/* FIRST ROW - SPINNER TEXT AND ICONS */}
                                 <div className="first-row d-flex flex-column">
                                     <div className="text-icon-wrapper m-auto">
@@ -223,7 +223,7 @@ const FortuneWheel = ({
                                 </div>
 
                                 {/* PROBABILITY DISPLAY BUTTON */}
-                                <div className="probability-btn my-3">
+                                <div className="probability-btn my-1 my-mb-3">
                                     <button
                                         onClick={() =>
                                             setIsProbabilityShown(
@@ -241,7 +241,7 @@ const FortuneWheel = ({
                                     </button>
                                 </div>
 
-                                <div className="fortune-wheel-content">
+                                <div className="fortune-wheel-content mt-1">
                                     {!isProbabilityShown && (
                                         <>
                                             {/* FORTUNE WHEEL */}
@@ -261,7 +261,7 @@ const FortuneWheel = ({
                                             />
 
                                             {/* SPINS LEFT INFO */}
-                                            <p className="spin-amount-left-wrapper text-center my-3">
+                                            <p className="spin-amount-left-wrapper text-center mt-2">
                                                 <span className="you-have-text">
                                                     You have
                                                 </span>
