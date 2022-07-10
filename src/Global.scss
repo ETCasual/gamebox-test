@@ -1404,6 +1404,16 @@ html {
     }
 }
 
+.content-min-height {
+    min-height: 55vh;
+    @include media-min($xs) {
+        min-height: 65vh;
+    }
+    @include media-min($md) {
+        min-height: 60vh;
+    }
+}
+
 .recaptcha-text {
     padding-top: 0.5em;
     font-size: $fnt-sz-10;

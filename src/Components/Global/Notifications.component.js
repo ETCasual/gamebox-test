@@ -51,11 +51,10 @@ const Notification = ({
                                 n.type !== "winner" && (
                                     <div
                                         key={`notification-${i}`}
-                                        className={`col-12 notification-card px-0 ${
-                                            notificationData.length - 1 !== i
+                                        className={`col-12 notification-card px-0 ${notificationData.length - 1 !== i
                                                 ? "mb-4"
                                                 : ""
-                                        }`}
+                                            }`}
                                         onClick={() =>
                                             handleNotificationLeaderboardHistory(
                                                 n
@@ -69,8 +68,8 @@ const Notification = ({
                                                     n?.picture
                                                         ? n.picture
                                                         : n.type === "rankup"
-                                                        ? `${window.cdn}assets/notification_level_01.jpg`
-                                                        : `${window.cdn}assets/notification_friends_01.jpg`
+                                                            ? `${window.cdn}assets/notification_level_01.jpg`
+                                                            : `${window.cdn}assets/notification_friends_01.jpg`
                                                 }
                                                 isPlayVideo={true}
                                                 onError={(e) =>
@@ -107,21 +106,20 @@ const Notification = ({
                                                         {n?.description}
                                                     </p>
                                                     <p
-                                                        className={`mb-0 d-flex align-items-center ${
-                                                            n?.type ===
-                                                            "winprize"
+                                                        className={`mb-0 d-flex align-items-center ${n?.type ===
+                                                                "winprize"
                                                                 ? "prize"
                                                                 : n?.type ===
-                                                                  "tour"
-                                                                ? "tickets"
-                                                                : "gems"
-                                                        }`}
+                                                                    "tour"
+                                                                    ? "tickets"
+                                                                    : "gems"
+                                                            }`}
                                                     >
                                                         {n?.type === "winprize"
                                                             ? `You've won`
                                                             : n?.type === "tour"
-                                                            ? `+${n?.tickets}`
-                                                            : `+${n?.gem} gems`}
+                                                                ? `+${n?.tickets}`
+                                                                : `+${n?.gem} gems`}
 
                                                         {n?.type === "tour" ? (
                                                             <img

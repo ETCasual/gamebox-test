@@ -108,7 +108,7 @@ const Index = () => {
                             </div>
                         )}
                         {!noDataLoaded && (
-                            <>
+                            <div className="content-min-height">
                                 {notificationData?.map((notice, i) => (
                                     <React.Fragment key={`notification-${i}`}>
                                         {!getListExists(notice?.list) && (
@@ -116,11 +116,10 @@ const Index = () => {
                                         )}
                                         {getListExists(notice?.list) && (
                                             <p
-                                                className={`${
-                                                    i === 0
-                                                        ? "mt-primary"
-                                                        : "mt-secondary"
-                                                } month-year mb-4`}
+                                                className={`${i === 0
+                                                    ? "mt-primary"
+                                                    : "mt-secondary"
+                                                    } month-year mb-4`}
                                             >
                                                 {notice?.monthYear}
                                             </p>
@@ -142,9 +141,9 @@ const Index = () => {
                                                             n?.picture
                                                                 ? n.picture
                                                                 : n.type ===
-                                                                  "rankup"
-                                                                ? `${window.cdn}assets/notification_level_01.jpg`
-                                                                : `${window.cdn}assets/notification_friends_01.jpg`
+                                                                    "rankup"
+                                                                    ? `${window.cdn}assets/notification_level_01.jpg`
+                                                                    : `${window.cdn}assets/notification_friends_01.jpg`
                                                         }
                                                         isPlayVideo={true}
                                                         onError={(e) =>
@@ -161,12 +160,12 @@ const Index = () => {
                                                             <p className="mb-0">
                                                                 {new Date(
                                                                     n?.createdOn *
-                                                                        1000
+                                                                    1000
                                                                 )?.toDateString()}{" "}
                                                                 |{" "}
                                                                 {new Date(
                                                                     n?.createdOn *
-                                                                        1000
+                                                                    1000
                                                                 )
                                                                     ?.toLocaleTimeString(
                                                                         "en-GB",
@@ -190,26 +189,25 @@ const Index = () => {
                                                                 {n?.description}
                                                             </p>
                                                             <p
-                                                                className={`mb-0 d-flex align-items-center ${
-                                                                    n?.type ===
+                                                                className={`mb-0 d-flex align-items-center ${n?.type ===
                                                                     "winprize"
-                                                                        ? "prize"
-                                                                        : n?.type ===
-                                                                          "tour"
+                                                                    ? "prize"
+                                                                    : n?.type ===
+                                                                        "tour"
                                                                         ? "tickets"
                                                                         : "gems"
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 {n?.type ===
-                                                                "winprize"
+                                                                    "winprize"
                                                                     ? `You've won`
                                                                     : n?.type ===
-                                                                      "tour"
-                                                                    ? `+${n?.tickets}`
-                                                                    : `+${n?.gem} gems`}
+                                                                        "tour"
+                                                                        ? `+${n?.tickets}`
+                                                                        : `+${n?.gem} gems`}
 
                                                                 {n?.type ===
-                                                                "tour" ? (
+                                                                    "tour" ? (
                                                                     <img
                                                                         className="icon ml-1"
                                                                         src={`${window.cdn}assets/tickets_06.png`}
@@ -228,7 +226,7 @@ const Index = () => {
                                         })}
                                     </React.Fragment>
                                 ))}
-                            </>
+                            </div>
                         )}
                         {/* LEADERBOARD HISTORY */}
                         {isSelectedNotificationShown?.status &&

@@ -10,6 +10,13 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
+    .fortune-wheel-container {
+        margin-top: 4rem;
+        @include media-min($md) {
+            margin-top: 0;
+        }
+    }
+
     .wrapper {
         border-radius: 10px;
         // background-color: #2b2b2b;
@@ -21,7 +28,7 @@
             .the-spinner-text {
                 font-size: $fnt-sz-10;
 
-                @include media-min($xl) {
+                @include media-min($md) {
                     font-size: $fnt-sz-12;
                 }
 
@@ -31,7 +38,7 @@
             .earn-more-tickets-text {
                 font-size: $fnt-sz-16;
 
-                @include media-min($xs) {
+                @include media-min($md) {
                     font-size: $fnt-sz-24;
                 }
 
@@ -45,7 +52,7 @@
                     font-size: $fnt-sz-14;
                     vertical-align: 3px;
 
-                    @include media-min($xs) {
+                    @include media-min($md) {
                         font-size: $fnt-sz-18;
                     }
                 }
@@ -57,7 +64,7 @@
                     margin-left: 5px;
                     margin-right: 5px;
 
-                    @include media-min($xs) {
+                    @include media-min($md) {
                         font-size: $fnt-sz-24;
                         margin-left: 10px;
                         margin-right: 10px;
@@ -93,14 +100,18 @@
                 min-width: 5rem;
                 max-width: 70%;
                 width: 15rem;
-                height: 3.75rem;
+                height: 2.5rem;
     
+                @include media-min($md) {
+                    height: 3.75rem;
+                }
+
                 .spin-number {
                     font-size: $fnt-sz-20;
                     font-weight: $fnt-wgt-600;
                     color: aqua;
 
-                    @include media-min($xs) {
+                    @include media-min($md) {
                         font-size: $fnt-sz-24;
                     }
                 }
@@ -110,7 +121,7 @@
                     font-weight: $fnt-wgt-600;
                     color: #f8b61f;
 
-                    @include media-min($xs) {
+                    @include media-min($md) {
                         font-size: $fnt-sz-22;
                     }
                 }
@@ -119,7 +130,7 @@
                     font-size: $fnt-sz-12;
                     color: white;
 
-                    @include media-min($xs) {
+                    @include media-min($md) {
                         font-size: $fnt-sz-14;
                     }
                 }
@@ -157,8 +168,12 @@
                 display: block;
                 width: 100%;
                 height: 100%;
-                min-height: 400px;
+                min-height: 300px;
                 margin-top: 10px;
+
+                @include media-min($md) {
+                    min-height: 400px;
+                }
 
                 table.probability-table {
                     tr:first-child td:first-child {
@@ -186,11 +201,12 @@
                             font-weight: bold;
                             width: 70px;
                             border: 1px solid #383838;
-                            line-height: 30px;
+                            line-height: 25px;
                             color: #c6c6c6;
-                            @include media-min($xs) {
+                            @include media-min($md) {
                                 font-size: $fnt-sz-14;
                                 width: 90px;
+                                line-height: 30px;
                             }
                         }
     
@@ -199,11 +215,12 @@
                             font-weight: bold;
                             width: 100px;
                             border: 1px solid #383838;
-                            line-height: 30px;
+                            line-height: 25px;
                             color: #c6c6c6;
-                            @include media-min($xs) {
+                            @include media-min($md) {
                                 font-size: $fnt-sz-14;
                                 width: 130px;
+                                line-height: 30px;
                             }
                         }
     
@@ -212,10 +229,11 @@
                             font-weight: $fnt-wgt-600;
                             width: 70px;
                             border: 1px solid #383838;
-                            line-height: 30px;
-                            @include media-min($xs) {
+                            line-height: 25px;
+                            @include media-min($md) {
                                 font-size: $fnt-sz-14;
                                 width: 90px;
+                                line-height: 30px;
                             }
                         }
     
@@ -223,17 +241,18 @@
                             font-size: $fnt-sz-12;
                             width: 100px;
                             border: 1px solid #383838;
-                            line-height: 30px;
-                            @include media-min($xs) {
+                            line-height: 25px;
+                            @include media-min($md) {
                                 font-size: $fnt-sz-14;
                                 width: 130px;
+                                line-height: 30px;
                             }
                         }
                     }
     
                     .icon {
                         width: 18px;
-                        @include media-min($lg) {
+                        @include media-min($md) {
                             width: 24px;
                         }
                     }
@@ -387,9 +406,10 @@
                     width: 100%;
                     color: white;
                     font-weight: $fnt-wgt-700;
-                    font-size: $fnt-sz-10;
+                    font-size: $fnt-sz-12;
 
-                    @include media-min($xs) {
+                    @include media-min($md) {
+                        font-weight: $fnt-wgt-700;
                         font-size: $fnt-sz-16;
                     }
                 }

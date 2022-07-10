@@ -80,7 +80,8 @@ const FortuneWheelRules = ({
 
         const startSpin = () => {
             let winSegments = ticketList.current.reduce((a, e, i) => {
-                if (e === winAmount) {
+                if (e === winAmount)
+                {
                     a.push(i);
                 }
                 return a;
@@ -117,13 +118,15 @@ const FortuneWheelRules = ({
 
                 wheelRef.current.draw();
 
-                if (onFinishedRef.current) {
+                if (onFinishedRef.current)
+                {
                     onFinishedRef.current();
                 }
             }, wheelRef.current.animation.duration * 1000);
         };
 
-        if (isClickedSpin && winAmount !== -1) {
+        if (isClickedSpin && winAmount !== -1)
+        {
             startSpin();
         }
     }, [isClickedSpin, winAmount]);
@@ -180,7 +183,7 @@ const FortuneWheelRules = ({
     //#endregion
 
     return (
-        <div className="fortune-wheel-wrapper position-relative">
+        <div className="fortune-wheel-wrapper position-relative px-5">
             <div className="fortune-wheel-holder">
                 <canvas
                     id="canvas"
@@ -192,9 +195,8 @@ const FortuneWheelRules = ({
                 <div className="inner-circle"></div>
                 {/* SPIN BUTTON*/}
                 <div
-                    className={`spin-button ${
-                        !isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
-                    }`}
+                    className={`spin-button ${!isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
+                        }`}
                 >
                     <button
                         disabled={!isAbleToSpin || isClickedSpin ? true : false}

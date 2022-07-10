@@ -55,18 +55,21 @@ const Index = () => {
     };
     const handleWinnerDetails = (player) => {
         const playerId = player.userId;
-        if (!isCurrentUser(player)) {
+        if (!isCurrentUser(player))
+        {
             dispatch(loadPlayerDetails(playerId));
             dispatch(loadPlayerHighScore(playerId));
             setIsCardClicked(true);
-        } else {
+        } else
+        {
             history.push(`/profile/rewards`);
         }
     };
     const handleCloseButton = () => setIsCardClicked(false);
 
     const handleMouseHover = (type, item = null) => {
-        if (type === "enter") {
+        if (type === "enter")
+        {
             winnerCardPrizeInfoRef.current.style.opacity = 1;
             winnerCardPrizeInfoRef.current.style.visibility = "visible";
             setWinnerHoverCardData({
@@ -106,7 +109,7 @@ const Index = () => {
                                     </p>
                                 </div>
                             )}
-                            <div className="row">
+                            <div className="content-min-height row">
                                 <div className="col-12 col-xl-6 pl-2">
                                     {!noDataLoaded &&
                                         winnerData.length <= 0 && (
@@ -116,9 +119,8 @@ const Index = () => {
                                         winnerData.map((winner, i) => (
                                             <div
                                                 key={`winner-${i}`}
-                                                className={`winner-card-wrapper ${
-                                                    i !== 0 ? "mt-4" : "mt-2"
-                                                }`}
+                                                className={`winner-card-wrapper ${i !== 0 ? "mt-4" : "mt-2"
+                                                    }`}
                                             >
                                                 <p className="mt-2 mt-md-4 mb-2 mb-md-3 month-year">
                                                     {winner.monthYear}
@@ -164,27 +166,25 @@ const Index = () => {
                                                             <p className="date mb-1">
                                                                 {getDateFormat(
                                                                     item.createdOn *
-                                                                        1000
+                                                                    1000
                                                                 )}
                                                             </p>
                                                             <p
-                                                                className={`player-name mb-0 ${
-                                                                    isCurrentUser(
-                                                                        item
-                                                                    )
+                                                                className={`player-name mb-0 ${isCurrentUser(
+                                                                    item
+                                                                )
                                                                         ? "my-name"
                                                                         : ""
-                                                                } `}
+                                                                    } `}
                                                             >
                                                                 {isCurrentUser(
                                                                     item
                                                                 )
-                                                                    ? `${
-                                                                          item.userNickName ||
-                                                                          "Player"
-                                                                      } (You)`
+                                                                    ? `${item.userNickName ||
+                                                                    "Player"
+                                                                    } (You)`
                                                                     : item.userNickName ||
-                                                                      `Player ${item.userId}`}
+                                                                    `Player ${item.userId}`}
                                                             </p>
                                                         </div>
                                                         {/* REWARD NAME */}
