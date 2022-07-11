@@ -28,30 +28,25 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
 
+    // COUNT DOWN TIMER
     useEffect(() => {
         const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+        const nowDate = new Date(nowTimeStamp());
 
-        let currentTimeZone = -(
-            new Date(nowTimeStamp()).getTimezoneOffset() / 60
-        );
-        let calculatedTime = new Date(data?.scheduledOff * 1000);
-        if (currentTimeZone !== data?.timeZone)
-        {
-            calculatedTime.setHours(
-                calculatedTime.getHours() -
-                timeZoneHourDifference(currentTimeZone, data?.timeZone)
-            );
+        var endDatetime = new Date();
+        endDatetime.setUTCHours(0, 0, 0, 0);
+
+        if (endDatetime < nowDate) {
+            endDatetime.setDate(endDatetime.getDate() + 1);
         }
+
+        // COUNTDOWN TIMER INTERVAL
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                calculatedTime.valueOf(),
+                endDatetime.valueOf(),
                 config.offsetTimestamp ? config.offsetTimestamp : 0
             );
-            // let finalTimeRef = convertSecondsTo24HoursBase(
-            //     calculatedTime.valueOf(),
-            //     config.offsetTimestamp ? config.offsetTimestamp : 0
-            // );
             setTimer(finalTimeRef);
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
@@ -62,17 +57,54 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
             watcherRef.current = null;
         }
 
-        function timeZoneHourDifference(currentTimeZone, prizeTimeZone) {
-            if (currentTimeZone > prizeTimeZone)
-                return currentTimeZone - prizeTimeZone;
-            return prizeTimeZone - currentTimeZone;
-        }
+        return countDownTimerEnded;
+    }, [config.offsetTimestamp]);
 
-        return () => {
-            clearInterval(watcherRef.current);
-            watcherRef.current = null;
-        };
-    }, [data, config]);
+    // useEffect(() => {
+    //     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+
+    //     let currentTimeZone = -(
+    //         new Date(nowTimeStamp()).getTimezoneOffset() / 60
+    //     );
+    //     let calculatedTime = new Date(data?.scheduledOff * 1000);
+    //     if (currentTimeZone !== data?.timeZone)
+    //     {
+    //         calculatedTime.setHours(
+    //             calculatedTime.getHours() -
+    //             timeZoneHourDifference(currentTimeZone, data?.timeZone)
+    //         );
+    //     }
+    //     clearInterval(watcherRef.current);
+    //     watcherRef.current = setInterval(() => {
+    //         let finalTimeRef = convertSecondsToHours(
+    //             calculatedTime.valueOf(),
+    //             config.offsetTimestamp ? config.offsetTimestamp : 0
+    //         );
+    //         // let finalTimeRef = convertSecondsTo24HoursBase(
+    //         //     calculatedTime.valueOf(),
+    //         //     config.offsetTimestamp ? config.offsetTimestamp : 0
+    //         // );
+    //         setTimer(finalTimeRef);
+    //         if (finalTimeRef === "Ended") countDownTimerEnded();
+    //     }, 1000);
+
+    //     // END COUNTDOWN TIMER
+    //     function countDownTimerEnded() {
+    //         clearInterval(watcherRef.current);
+    //         watcherRef.current = null;
+    //     }
+
+    //     function timeZoneHourDifference(currentTimeZone, prizeTimeZone) {
+    //         if (currentTimeZone > prizeTimeZone)
+    //             return currentTimeZone - prizeTimeZone;
+    //         return prizeTimeZone - currentTimeZone;
+    //     }
+
+    //     return () => {
+    //         clearInterval(watcherRef.current);
+    //         watcherRef.current = null;
+    //     };
+    // }, [data, config]);
 
     const getTickets = () => {
         let currentPrize = automatedEntryTicket.filter(
@@ -124,7 +156,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                             </div>
                             <div className="countdown d-flex flex-row align-items-center justify-content-center my-2 my-sm-4 mx-auto">
                                 <p className="countdown-text mb-0 mr-2">
-                                    Ends in
+                                    Draw starts in
                                 </p>
                                 <p className="mob-text mb-0">{timer}</p>
                             </div>

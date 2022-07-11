@@ -104,26 +104,21 @@ const Index = () => {
             if (
                 prizes.featuredData.length > 0 ||
                 prizes.premiumData.length > 0
-            )
-            {
+            ) {
                 let _fData = [];
                 let _pData = [];
                 const prizeList =
                     JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
-                for (let i = 0; i < prizeList.length; i++)
-                {
+                for (let i = 0; i < prizeList.length; i++) {
                     const element = prizeList[i];
                     if (
                         (!element.completed || element.completed) &&
                         !element.seen
-                    )
-                    {
-                        if (element.type === 1)
-                        {
+                    ) {
+                        if (element.type === 1) {
                             _fData.push(element);
-                            if (diff <= 15000)
-                            {
+                            if (diff <= 15000) {
                                 dispatch(
                                     loadPlayerTickets(element.prizeId, true)
                                 );
@@ -135,11 +130,9 @@ const Index = () => {
                                     )
                                 );
                             }
-                        } else if (element.type === 2)
-                        {
+                        } else if (element.type === 2) {
                             _pData.push(element);
-                            if (diff <= 15000)
-                            {
+                            if (diff <= 15000) {
                                 dispatch(
                                     loadPlayerTickets(element.prizeId, true)
                                 );
@@ -181,22 +174,19 @@ const Index = () => {
             let showAnnouncement = JSON.parse(
                 sessionStorage.getItem("showAnnouncement") || null
             );
-            if (showAnnouncement === null)
-            {
+            if (showAnnouncement === null) {
                 let _arr = [];
                 winnerAnnouncementNotificationList.forEach((n, nIdx) => {
                     n?.list?.forEach((e, idx) => {
                         if (
                             winnerAnnouncementNotificationList.length - 1 ===
-                            nIdx &&
+                                nIdx &&
                             n.list.length - 1 === idx
-                        )
-                        {
+                        ) {
                             sessionStorage.setItem("showAnnouncement", 0);
                         }
 
-                        if (e.type === "winner" && !e.seen)
-                        {
+                        if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
@@ -223,12 +213,10 @@ const Index = () => {
         sessionStorage.setItem("showAnnouncement", 0);
         const pl = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
         let idx = pl.findIndex((p) => p.prizeId === prizeId);
-        if (idx > -1)
-        {
+        if (idx > -1) {
             pl.splice(idx, 1);
             sessionStorage.setItem("prizeDetailList", JSON.stringify(pl));
-        } else
-        {
+        } else {
             console.log(
                 "Possible prize detail list matching failure point prizeId: ",
                 prizeId
@@ -240,8 +228,7 @@ const Index = () => {
     function handleWinnerRevealCard(prizeId) {
         let _arr = [];
         let winnerList = [];
-        if (winnerAnnouncementNotificationList?.length > 0)
-        {
+        if (winnerAnnouncementNotificationList?.length > 0) {
             winnerList = winnerAnnouncementNotificationList[0];
             _arr = winnerList?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
@@ -249,14 +236,12 @@ const Index = () => {
             const _prizeList =
                 JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
-            if (_arr.length > 0)
-            {
+            if (_arr.length > 0) {
                 // ONLY SHOW LATEST WINNER
                 setRevealCardModalData([_arr[0]]);
 
                 setIsRevealCardModalShown(true);
-            } else
-            {
+            } else {
                 // Broken prizes
                 let featureArr = _prizeList.filter(
                     (p) => p.type === 1 && p.prizeId !== prizeId
@@ -270,18 +255,15 @@ const Index = () => {
             // UPDATE LOCALSTORAGE
             // Before update complete and seen, check if prize is on repeat
             let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
-            if (idx > -1)
-            {
-                if (_prizeList[idx].repeatedOn.length === 0)
-                {
+            if (idx > -1) {
+                if (_prizeList[idx].repeatedOn.length === 0) {
                     _prizeList[idx].seen = true;
                     _prizeList[idx].completed = true;
                     sessionStorage.setItem(
                         "prizeDetailList",
                         JSON.stringify(_prizeList)
                     );
-                } else
-                {
+                } else {
                     _prizeList[idx].seen = false;
                     _prizeList[idx].completed = false;
                     sessionStorage.setItem(
@@ -365,8 +347,7 @@ const Index = () => {
         var endDatetime = new Date();
         endDatetime.setUTCHours(0, 0, 0, 0);
 
-        if (endDatetime < nowDate)
-        {
+        if (endDatetime < nowDate) {
             endDatetime.setDate(endDatetime.getDate() + 1);
         }
 

@@ -65,13 +65,16 @@
             color: #f7b621;
             font-size: $fnt-sz-20;
             @include media-min($sm) {
-                font-size: $fnt-sz-30;
+                font-size: $fnt-sz-26;
             }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
         }
         .prize-subtitle {
-            font-size: $fnt-sz-12;
+            font-size: $fnt-sz-16;
+            @include media-min($sm) {
+                font-size: $fnt-sz-20;
+            }
         }
         .picture-wrapper {
             right: -10px;

@@ -35,75 +35,109 @@ const AutomatedEntry = ({ data }) => {
     // COUNT DOWN TIMER
     useEffect(() => {
         const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
-
-        // DICT TO COMPARE THE DAYS WITH API DATA
-        const repeatedOnDict = {
-            0: 7,
-            1: 1,
-            2: 2,
-            3: 3,
-            4: 4,
-            5: 5,
-            6: 6,
-        };
         const nowDate = new Date(nowTimeStamp());
 
-        // CURRENT PLAYER TIMEZONE
-        let currentTimeZone = -(nowDate.getTimezoneOffset() / 60);
+        var endDatetime = new Date();
+        endDatetime.setUTCHours(0, 0, 0, 0);
 
-        let isTimeValid =
-            nowDate >= new Date(data.scheduledOn * 1000) &&
-            nowDate <= new Date(data.scheduledOff * 1000);
-
-        // IF TODAY DATE EXISTS IN THE REPEATED API DATA THEN PROCEED WITH THE COUNTDOWN TIMER
-        if (data.repeatedOn.includes(repeatedOnDict[nowDate.getDay()])) {
-            // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
-            if (isTimeValid) initCountDownTimer();
-        } else if (data.repeatedOn.length === 1 && data.repeatedOn[0] === 0) {
-            // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
-            if (isTimeValid) initCountDownTimer();
+        if (endDatetime < nowDate) {
+            endDatetime.setDate(endDatetime.getDate() + 1);
         }
 
-        // COUNTDOWN TIMER INIT
-        function initCountDownTimer() {
-            let calculatedTime = new Date(data.scheduledOff * 1000);
+        // COUNTDOWN TIMER INTERVAL
+        clearInterval(watcherRef.current);
+        watcherRef.current = setInterval(() => {
+            let finalTimeRef = convertSecondsToHours(
+                endDatetime.valueOf(),
+                config.offsetTimestamp ? config.offsetTimestamp : 0
+            );
+            setTimer(finalTimeRef);
+            if (finalTimeRef === "Ended") countDownTimerEnded();
+        }, 1000);
 
-            // CHECKING IF TIMEZONE IS DIFFERENT THEN GET THE TIMEZONE DIFFERENCE
-            if (currentTimeZone !== data.timeZone) {
-                calculatedTime.setHours(
-                    calculatedTime.getHours() -
-                        timeZoneHourDifference(currentTimeZone, data.timeZone)
-                );
-            }
-
-            // COUNTDOWN TIMER INTERVAL
-            clearInterval(watcherRef.current);
-            watcherRef.current = setInterval(() => {
-                let finalTimeRef = convertSecondsToHours(
-                    calculatedTime.valueOf(),
-                    config.offsetTimestamp ? config.offsetTimestamp : 0
-                );
-                setTimer(finalTimeRef);
-                if (finalTimeRef === "Ended") countDownTimerEnded();
-            }, 1000);
-        }
         // END COUNTDOWN TIMER
         function countDownTimerEnded() {
             clearInterval(watcherRef.current);
             watcherRef.current = null;
         }
-        // GETTING TIMEZONE HOUR DIFFERENCE
-        function timeZoneHourDifference(currentTimeZone, prizeTimeZone) {
-            if (currentTimeZone > prizeTimeZone)
-                return currentTimeZone - prizeTimeZone;
-            return prizeTimeZone - currentTimeZone;
-        }
 
-        return () => {
-            clearInterval(watcherRef.current);
-            watcherRef.current = null;
-        };
-    }, [data, config]);
+        return countDownTimerEnded;
+    }, [config.offsetTimestamp]);
+
+    // // COUNT DOWN TIMER
+    // useEffect(() => {
+    //     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
+    //     const nowDate = new Date(nowTimeStamp());
+
+    //     // DICT TO COMPARE THE DAYS WITH API DATA
+    //     const repeatedOnDict = {
+    //         0: 7,
+    //         1: 1,
+    //         2: 2,
+    //         3: 3,
+    //         4: 4,
+    //         5: 5,
+    //         6: 6,
+    //     };
+
+    //     // CURRENT PLAYER TIMEZONE
+    //     let currentTimeZone = -(nowDate.getTimezoneOffset() / 60);
+
+    //     let isTimeValid =
+    //         nowDate >= new Date(data.scheduledOn * 1000) &&
+    //         nowDate <= new Date(data.scheduledOff * 1000);
+
+    //     // IF TODAY DATE EXISTS IN THE REPEATED API DATA THEN PROCEED WITH THE COUNTDOWN TIMER
+    //     if (data.repeatedOn.includes(repeatedOnDict[nowDate.getDay()])) {
+    //         // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
+    //         if (isTimeValid) initCountDownTimer();
+    //     } else if (data.repeatedOn.length === 1 && data.repeatedOn[0] === 0) {
+    //         // CHEKING IF CURRENT TIME IS IN-BETWEEN THE SCHEDULE ON & OFF TIME
+    //         if (isTimeValid) initCountDownTimer();
+    //     }
+
+    //     // COUNTDOWN TIMER INIT
+    //     function initCountDownTimer() {
+    //         let calculatedTime = new Date(data.scheduledOff * 1000);
+
+    //         // CHECKING IF TIMEZONE IS DIFFERENT THEN GET THE TIMEZONE DIFFERENCE
+    //         if (currentTimeZone !== data.timeZone) {
+    //             calculatedTime.setHours(
+    //                 calculatedTime.getHours() -
+    //                     timeZoneHourDifference(currentTimeZone, data.timeZone)
+    //             );
+    //         }
+
+    //         console.error(calculatedTime);
+
+    //         // COUNTDOWN TIMER INTERVAL
+    //         clearInterval(watcherRef.current);
+    //         watcherRef.current = setInterval(() => {
+    //             let finalTimeRef = convertSecondsToHours(
+    //                 calculatedTime.valueOf(),
+    //                 config.offsetTimestamp ? config.offsetTimestamp : 0
+    //             );
+    //             setTimer(finalTimeRef);
+    //             if (finalTimeRef === "Ended") countDownTimerEnded();
+    //         }, 1000);
+    //     }
+    //     // END COUNTDOWN TIMER
+    //     function countDownTimerEnded() {
+    //         clearInterval(watcherRef.current);
+    //         watcherRef.current = null;
+    //     }
+    //     // GETTING TIMEZONE HOUR DIFFERENCE
+    //     function timeZoneHourDifference(currentTimeZone, prizeTimeZone) {
+    //         if (currentTimeZone > prizeTimeZone)
+    //             return currentTimeZone - prizeTimeZone;
+    //         return prizeTimeZone - currentTimeZone;
+    //     }
+
+    //     return () => {
+    //         clearInterval(watcherRef.current);
+    //         watcherRef.current = null;
+    //     };
+    // }, [data, config]);
 
     const getTickets = () => {
         const currentPrize = automatedEntryTicket.filter(
@@ -127,15 +161,15 @@ const AutomatedEntry = ({ data }) => {
                                 <div>
                                     {/* PRIZE NAME */}
                                     <div className="prize-title mb-1">
-                                        {data.prizeTitle}
+                                        BONUS REWARD
                                     </div>
                                     {/* PRIZE DETAILED CONTENT */}
-                                    <div className="prize-subtitle d-none d-sm-flex">
-                                        {data.prizeContent}
+                                    <div className="prize-subtitle d-sm-flex">
+                                        {data.prizeTitle}
                                     </div>
                                 </div>
                                 {/* TICKETS */}
-                                <div className="total-ticket-info d-flex mt-sm-4">
+                                <div className="total-ticket-info d-flex mt-2 mt-sm-4">
                                     <p className="mb-0 ticket-label d-flex align-items-center mr-3">
                                         My tickets
                                     </p>
@@ -167,7 +201,7 @@ const AutomatedEntry = ({ data }) => {
                     </div>
                     {/* TIMER */}
                     <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
-                        <p className="timer-text mb-0">Ends in</p>
+                        <p className="timer-text mb-0">Draw starts in</p>
                         <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
                     </div>
                 </div>
