@@ -198,9 +198,9 @@ const App = () => {
 
 	// REGIONAL CHECK
 	useEffect(() => {
-		if (process.env.REACT_APP_NODE_ENV !== "production") {
-			getExchangeRate()
-				.then(({ ipInfo }) => {
+		getExchangeRate()
+			.then(({ ipInfo }) => {
+				if (process.env.REACT_APP_NODE_ENV !== "production") {
 					if (
 						ipInfo &&
 						(ipInfo.country_code === "MY" ||
@@ -208,9 +208,9 @@ const App = () => {
 							ipInfo.country_code === "ID")
 					)
 						setRegionAllow(true);
-				})
-				.finally(() => setPendingRegion(false));
-		}
+				}
+			})
+			.finally(() => setPendingRegion(false));
 	}, []);
 
 	if (pendingRegion) return null;
