@@ -198,17 +198,19 @@ const App = () => {
 
 	// REGIONAL CHECK
 	useEffect(() => {
-		getExchangeRate()
-			.then(({ ipInfo }) => {
-				if (
-					ipInfo &&
-					(ipInfo.country_code === "MY" ||
-						ipInfo.country_code === "SG" ||
-						ipInfo.country_code === "ID")
-				)
-					setRegionAllow(true);
-			})
-			.finally(() => setPendingRegion(false));
+		if (process.env.REACT_APP_NODE_ENV !== "production") {
+			getExchangeRate()
+				.then(({ ipInfo }) => {
+					if (
+						ipInfo &&
+						(ipInfo.country_code === "MY" ||
+							ipInfo.country_code === "SG" ||
+							ipInfo.country_code === "ID")
+					)
+						setRegionAllow(true);
+				})
+				.finally(() => setPendingRegion(false));
+		}
 	}, []);
 
 	if (pendingRegion) return null;
