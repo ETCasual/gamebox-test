@@ -1,4 +1,4 @@
-import { addListener, launch } from "devtools-detector";
+// import { addListener, launch } from "devtools-detector";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -44,7 +44,7 @@ import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
 import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
-import { LOG_OUT } from "redux/types";
+// import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 import Footer from "Components/Landing/Footer/Footer.component";
 
@@ -60,21 +60,21 @@ const App = () => {
 	const [pendingRegion, setPendingRegion] = useState(true);
 	const [regionAllow, setRegionAllow] = useState(false);
 
-	const [consoleOpen, setConsoleOpen] = useState(false);
+	// const [consoleOpen, setConsoleOpen] = useState(false);
 
 	// CHECK IS DEVTOOLS CONSOLE OPEN
-	if (process.env.REACT_APP_NODE_ENV === "production") {
-		addListener((isOpen) => {
-			if (isOpen) {
-				setConsoleOpen(true);
-				sessionStorage.setItem("errorType", "Unusual");
-				dispatch({ type: LOG_OUT });
-			} else {
-				setConsoleOpen(false);
-			}
-		});
-		launch();
-	}
+	// if (process.env.REACT_APP_NODE_ENV === "production") {
+	// 	addListener((isOpen) => {
+	// 		if (isOpen) {
+	// 			setConsoleOpen(true);
+	// 			sessionStorage.setItem("errorType", "Unusual");
+	// 			dispatch({ type: LOG_OUT });
+	// 		} else {
+	// 			setConsoleOpen(false);
+	// 		}
+	// 	});
+	// 	launch();
+	// }
 
 	// FIREBASE ONMESSAGE
 	onMessageListener()
@@ -96,16 +96,16 @@ const App = () => {
 				dispatch(loadPrizes());
 		}
 
-		if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
-			// Show warning message to user in console panel
-			console.log(
-				"%cAny suspicious activity will result in account BAN!",
-				"background: #fff700; color: #ff2c44; font-size: 24px; font-weight: bold;"
-			);
-			sessionStorage.setItem("errorType", "Unusual");
-			dispatch({ type: LOG_OUT });
-			return;
-		}
+		// if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
+		// 	// Show warning message to user in console panel
+		// 	console.log(
+		// 		"%cAny suspicious activity will result in account BAN!",
+		// 		"background: #fff700; color: #ff2c44; font-size: 24px; font-weight: bold;"
+		// 	);
+		// 	sessionStorage.setItem("errorType", "Unusual");
+		// 	dispatch({ type: LOG_OUT });
+		// 	return;
+		// }
 
 		if (user.id) {
 			// dispatch(loadLoginUser(authUser, isNewUser));
@@ -125,7 +125,9 @@ const App = () => {
 
 		return () =>
 			document.removeEventListener("visibilitychange", handleLoadPrize);
-	}, [dispatch, user.id, consoleOpen]);
+	}, [dispatch, user.id,
+		// consoleOpen
+	]);
 
 	useEffect(() => {
 		// Check if connect from Froyo side
@@ -147,16 +149,16 @@ const App = () => {
 
 	// UPDATE NOTIFICATION TOKEN & LOAD NOTIFICATION
 	useEffect(() => {
-		if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
-			// Show warning message to user in console panel
-			console.log(
-				"%cAny suspicious activity will result in account BAN!",
-				"background: #fff700; color: #ff2c44; font-size: 24px; font-weight: bold;"
-			);
-			sessionStorage.setItem("errorType", "Unusual");
-			dispatch({ type: LOG_OUT });
-			return;
-		}
+		// if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {
+		// 	// Show warning message to user in console panel
+		// 	console.log(
+		// 		"%cAny suspicious activity will result in account BAN!",
+		// 		"background: #fff700; color: #ff2c44; font-size: 24px; font-weight: bold;"
+		// 	);
+		// 	sessionStorage.setItem("errorType", "Unusual");
+		// 	dispatch({ type: LOG_OUT });
+		// 	return;
+		// }
 
 		if (user.id) {
 			// NOTIFICATION TOKEN UPDATE
@@ -190,7 +192,9 @@ const App = () => {
 			dispatch(loadInitNotifications());
 			dispatch(loadUnClaimedPrizes());
 		}
-	}, [user.id, dispatch, consoleOpen]);
+	}, [user.id, dispatch,
+		// consoleOpen
+	]);
 
 	// REGIONAL CHECK
 	useEffect(() => {
