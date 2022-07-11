@@ -1,6 +1,6 @@
 {
     "name": "gamebox",
-    "version": "0.1.51",
+    "version": "0.1.52",
     "private": true,
     "dependencies": {
         "@grpc/grpc-js": "^1.2.0",
