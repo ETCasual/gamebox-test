@@ -200,7 +200,9 @@ const App = () => {
 	useEffect(() => {
 		getExchangeRate()
 			.then(({ ipInfo }) => {
-				if (process.env.REACT_APP_NODE_ENV !== "production") {
+				if (process.env.REACT_APP_NODE_ENV === "production") {
+					setRegionAllow(true);
+				} else {
 					if (
 						ipInfo &&
 						(ipInfo.country_code === "MY" ||
