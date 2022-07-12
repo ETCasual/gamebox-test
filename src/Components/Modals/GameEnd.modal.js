@@ -135,7 +135,7 @@ const GameEndModal = ({
 
                                 {currentGameBoosterInfo.isUseBooster && (
                                     <div className="row text-center mx-auto total-tickets-earned align-items-center">
-                                        <p className=" col-7 py-2 pl-0 pr-3 you-earned d-flex my-auto justify-content-end">
+                                        <p className=" col-7 py-2 pl-0 pr-3 you-earned d-flex mt-3 mb-3 justify-content-end">
                                             You earned
                                         </p>
                                         <p className="col-5 pl-2 d-flex tickets-amount align-items-center d-flex my-auto">

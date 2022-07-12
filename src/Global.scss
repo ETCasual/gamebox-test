@@ -1511,7 +1511,7 @@ html {
         }
      
         .total-tickets-earned{
-            width: 100%;
+            width: 60%;
             max-width: 25rem;
             font-size: $fnt-sz-16;
             font-weight: $fnt-wgt-600;
@@ -1520,6 +1520,9 @@ html {
             border-radius: 10px;
             max-height:100px;
             text-align: center;
+            @include media-min($md) {
+                width: 80%;
+            }
 
             .you-earned {
             font-size: $fnt-sz-16;
@@ -1542,12 +1545,17 @@ html {
             }
 
             img {
+                width: 35%;
                 vertical-align: middle;
+                @include media-min($xl) {
+                    width: 40%;
+                }
             }
+          
         }
 
         .continue-button{
-            width: 100%;
+            width: 60%;
             max-width: 25rem;
             font-weight: $fnt-wgt-700;
             font-size: $fnt-sz-20;  
@@ -1556,6 +1564,11 @@ html {
             box-shadow: inset 0px 3px 6px #0000000f;
             border-radius: 10px;
             padding: 0.8rem;
+            @include media-min($md) {
+                width: 80%;
+            }
+
+
         }
 
         .btn-results{
