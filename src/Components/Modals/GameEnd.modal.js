@@ -76,7 +76,7 @@ const GameEndModal = ({
                     <div className="game-result-panel col-12 col-md-10 col-xl-6 position-relative">
                         {/* CARD */}
                         <div className="row justify-content-center mt-3 mt-sm-3">
-                            <div className="col-10 col-lg-8 mb-3 pl-2 pr-1">
+                            <div className="col-10 col-lg-8 mb-4 pl-2 pr-1">
                                 {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                                 <p className="text-center panel-title">
                                     GAME RESULT
@@ -93,7 +93,7 @@ const GameEndModal = ({
                                 )}
 
                                 {score && (
-                                    <p className="text-center score-text mt-5 mb-0">
+                                    <p className="text-center score-text mt-4 mb-0">
                                         Score
                                     </p>
                                 )}
@@ -104,8 +104,8 @@ const GameEndModal = ({
                                     </p>
                                 )}
 
-                                {currentGameBoosterInfo.isUseBooster && (
-                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
+                            {currentGameBoosterInfo.isUseBooster ? (
+                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
                                         <p className="pr-2 ticket-rate-text-score">
                                             every{" "}
                                             {
@@ -126,6 +126,10 @@ const GameEndModal = ({
                                                 alt="tickets"
                                             />
                                         </p>
+                                    </div>
+                                ):
+                                (
+                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
                                     </div>
                                 )}
 
