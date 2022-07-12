@@ -350,6 +350,7 @@ export async function getPrizes() {
                             useHowManyGems: p.getUseHowManyGems(),
                         },
                     ],
+                    isRepeat: p.getIsRepeat(),
                     repeatedOn: p.getRepeatedOnList(),
                     prizeDuration: {
                         days: p.getPrizeDurationDays(),
@@ -409,9 +410,9 @@ export async function getPrizes() {
                 (e) =>
                     e.prizeId === p.getPrizeId() &&
                     p.getEndTimestamp() ===
-                        e.gameInfo.find(
-                            (el) => el.endTimeStamp === p.getEndTimestamp()
-                        )?.endTimeStamp
+                    e.gameInfo.find(
+                        (el) => el.endTimeStamp === p.getEndTimestamp()
+                    )?.endTimeStamp
             );
             if (featuredIndex === -1) {
                 _featuredData.push({
@@ -449,6 +450,7 @@ export async function getPrizes() {
                             useHowManyGems: p.getUseHowManyGems(),
                         },
                     ],
+                    isRepeat: p.getIsRepeat(),
                     repeatedOn: p.getRepeatedOnList(),
                     prizeDuration: {
                         days: p.getPrizeDurationDays(),
@@ -488,9 +490,9 @@ export async function getPrizes() {
                 (e) =>
                     e.prizeId === p.getPrizeId() &&
                     p.getEndTimestamp() ===
-                        e.gameInfo.find(
-                            (el) => el.endTimeStamp === p.getEndTimestamp()
-                        )?.endTimeStamp
+                    e.gameInfo.find(
+                        (el) => el.endTimeStamp === p.getEndTimestamp()
+                    )?.endTimeStamp
             );
             if (premiumIndex === -1) {
                 _premiumData.push({
@@ -528,6 +530,7 @@ export async function getPrizes() {
                             useHowManyGems: p.getUseHowManyGems(),
                         },
                     ],
+                    isRepeat: p.getIsRepeat(),
                     repeatedOn: p.getRepeatedOnList(),
                     prizeDuration: {
                         days: p.getPrizeDurationDays(),
@@ -567,9 +570,9 @@ export async function getPrizes() {
                 (e) =>
                     e.prizeId === p.getPrizeId() &&
                     p.getEndTimestamp() ===
-                        e.gameInfo.find(
-                            (el) => el.endTimeStamp === p.getEndTimestamp()
-                        )?.endTimeStamp
+                    e.gameInfo.find(
+                        (el) => el.endTimeStamp === p.getEndTimestamp()
+                    )?.endTimeStamp
             );
             if (dailyIndex === -1) {
                 _dailyData.push({
@@ -606,6 +609,7 @@ export async function getPrizes() {
                             useHowManyGems: p.getUseHowManyGems(),
                         },
                     ],
+                    isRepeat: p.getIsRepeat(),
                     repeatedOn: p.getRepeatedOnList(),
                     prizeDuration: {
                         days: p.getPrizeDurationDays(),
@@ -655,6 +659,7 @@ export async function getPrizes() {
                 type_id: p.getTypeId(),
                 status: p.getStatus(),
                 statusProgress: p.getStatusProgress(),
+                isRepeat: p.getIsRepeat(),
                 repeatedOn: p.getRepeatedOnList(),
                 prizeDuration: {
                     days: p.getPrizeDurationDays(),
@@ -868,7 +873,7 @@ export async function logLeave(
             const scoreTrail = new ScoreTrail();
             scoreTrail.setTimestamp(gameScore.b[i].timestamp);
             scoreTrail.setScore(gameScore.b[i].score);
-    
+
             scoreTrailArr.push(scoreTrail);
         }
     }
@@ -966,9 +971,8 @@ export async function getWinnersList() {
     let _monthYear = "";
     const winners = [];
     winnerResultList.forEach((e) => {
-        _monthYear = `${
-            monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
-        } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
+        _monthYear = `${monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
+            } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
 
         if (winners.length === 0) {
             winners.push({
@@ -1687,9 +1691,8 @@ export async function getNotifications(user, notiType) {
     const notificationList = [];
     let _monthYear = "";
     data.forEach((e) => {
-        _monthYear = `${
-            monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
-        } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
+        _monthYear = `${monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
+            } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
 
         if (notificationList.length === 0) {
             notificationList.push({
@@ -1799,9 +1802,8 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
     const winnerAnnouncementNotificationList = [];
     let _monthYear = "";
     data.forEach((e) => {
-        _monthYear = `${
-            monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
-        } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
+        _monthYear = `${monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
+            } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
 
         if (winnerAnnouncementNotificationList.length === 0) {
             winnerAnnouncementNotificationList.push({

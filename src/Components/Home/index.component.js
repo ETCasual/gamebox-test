@@ -180,7 +180,7 @@ const Index = () => {
                     n?.list?.forEach((e, idx) => {
                         if (
                             winnerAnnouncementNotificationList.length - 1 ===
-                                nIdx &&
+                            nIdx &&
                             n.list.length - 1 === idx
                         ) {
                             sessionStorage.setItem("showAnnouncement", 0);
@@ -256,7 +256,7 @@ const Index = () => {
             // Before update complete and seen, check if prize is on repeat
             let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
             if (idx > -1) {
-                if (_prizeList[idx].repeatedOn.length === 0) {
+                if (_prizeList[idx].isRepeat === false) {
                     _prizeList[idx].seen = true;
                     _prizeList[idx].completed = true;
                     sessionStorage.setItem(
