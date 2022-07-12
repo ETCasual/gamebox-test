@@ -387,11 +387,15 @@ const Leaderboard = ({
                 )
             );
 
+            setModalStatus((prev) => ({
+                ...prev,
+                isQuitGameBtnDisabled: true,
+            }));
+
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
             setTimeout(() => {
                 setModalStatus((prev) => ({
                     ...prev,
-                    isQuitGameBtnDisabled: false,
                     isGameOver: true,
                     isPlayBtnDisabled: false,
                 }));
