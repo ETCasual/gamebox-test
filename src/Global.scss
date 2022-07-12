@@ -1470,7 +1470,7 @@ html {
             font-size: $fnt-sz-30;
             font-weight: $fnt-wgt-700;
             color: #FDF0F1;
-            @include media-min($md) {
+            @include media-min($xl) {
                 font-size: $fnt-sz-40;
             }
         }
@@ -1524,7 +1524,10 @@ html {
             .you-earned {
             font-size: $fnt-sz-16;
             font-weight: $fnt-wgt-600;
-             @include media-min($xs) {
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+             @include media-min($xl) {
                 font-size: $fnt-sz-20;
             }
             }
@@ -1533,7 +1536,7 @@ html {
                 font-size: $fnt-sz-20;
                 font-weight: $fnt-wgt-700;
                 color: #F7B620;
-                @include media-min($xs) {
+                @include media-min($md) {
                     font-size: $fnt-sz-40;
                 }
             }
