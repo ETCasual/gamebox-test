@@ -153,7 +153,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                     </div>
                                 </div>
                                 <div className="content-min-height">
-                                    {playersHighScoreList < 1 ? (
+                                    {playersHighScoreList.length === 0 ? (
                                         <div className="no-result">
                                             <p className="title mb-1">
                                                 No highscores yet...
