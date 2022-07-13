@@ -41,7 +41,7 @@ const InsufficientBalanceModalPopup = ({
                                 onClick={onBuyClicked}
                             >
                                 <button className="buy-btn d-flex flex-column align-items-center justify-content-center m-auto">
-                                    Get it Now!
+                                    GET IT NOW!
                                 </button>
                             </Link>
                         </div>

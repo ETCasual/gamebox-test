@@ -158,7 +158,7 @@ const OnBoarding = ({ handleOnBoardingClose }) => {
                                                 className="continue mt-2"
                                                 onClick={handleOnBoardingClose}
                                             >
-                                                Go have fun!
+                                                GO HAVE FUN!
                                             </button>
                                         )}
                                     </div>

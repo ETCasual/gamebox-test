@@ -185,7 +185,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     }}
                                     onClick={handleInstructionsCloseBtn}
                                 >
-                                    Start earning tickets
+                                    START EARNING TICKETS
                                 </Link>
                             </div>
                             <div className="line" />

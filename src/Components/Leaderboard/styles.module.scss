@@ -31,7 +31,7 @@
             transform: translate(-50%, 0%);
             height: calc(100% - 86px);
             width: 100%;
-            @media (pointer:none), (pointer:coarse) {
+            @media (pointer: none), (pointer: coarse) {
                 height: 100%;
             }
             @include media-min($md) {
@@ -86,7 +86,7 @@
             position: sticky;
             padding: 15px;
             height: 86px;
-            @media (pointer:none), (pointer:coarse) {
+            @media (pointer: none), (pointer: coarse) {
                 position: fixed;
                 width: 100%;
                 left: 0;
@@ -98,13 +98,14 @@
             button.ready-tournament-button {
                 display: block;
                 margin: 0 auto;
-                background: #cc0767;
+                background: #ff3399;
                 box-shadow: inset 0px 3px 6px #0000000f;
                 border-radius: 10px;
                 text-align: center;
                 font-size: $fnt-sz-14;
+                font-weight: bold;
                 .bold {
-                    font-weight: $fnt-wgt-700;
+                    font-weight: bold;
                 }
                 color: #ffffff;
                 width: 100%;
@@ -123,7 +124,7 @@
                 min-height: unset;
             }
             width: 100%;
-            @media (pointer:none), (pointer:coarse) {
+            @media (pointer: none), (pointer: coarse) {
                 position: fixed;
                 left: 0;
                 right: 0;
@@ -159,7 +160,8 @@
                     }
                     border-radius: 10px;
                     background: #262626;
-                    box-shadow: rgb(0 0 0) 0px 30px 60px -12px inset, rgb(0 0 0 / 76%) 0px 18px 36px -18px inset;
+                    box-shadow: rgb(0 0 0) 0px 30px 60px -12px inset,
+                        rgb(0 0 0 / 76%) 0px 18px 36px -18px inset;
                     border: solid 5px #262626;
                     .boost-tickets {
                         font-size: $fnt-sz-14;

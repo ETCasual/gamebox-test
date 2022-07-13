@@ -150,7 +150,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                                 state: location.pathname,
                                             }}
                                         >
-                                            Start earning tickets
+                                            START EARNING TICKETS
                                         </Link>
                                         <div className="line" />
                                         <p className="instructions-title text-center">

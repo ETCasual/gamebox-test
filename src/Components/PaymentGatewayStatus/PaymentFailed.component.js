@@ -12,7 +12,7 @@ const PaymentFailed = ({ setPaymentFailedModal }) => {
                     className="btn-close"
                     onClick={() => setPaymentFailedModal(false)}
                 >
-                    Close
+                    CLOSE
                 </button>
             </div>
         </div>

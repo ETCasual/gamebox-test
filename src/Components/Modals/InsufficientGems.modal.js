@@ -14,11 +14,11 @@ const InsufficientGemsModal = ({ setOutOfGems }) => {
                         className="col btn-no"
                         onClick={() => setOutOfGems(false)}
                     >
-                        Cancel
+                        CANCEL
                     </button>
                     <button className="col btn-yes">
                         <Link to={"/iap"} className="purchase-gems-button">
-                            Purchase gems
+                            PURCHASE GEMS
                         </Link>
                     </button>
                 </div>

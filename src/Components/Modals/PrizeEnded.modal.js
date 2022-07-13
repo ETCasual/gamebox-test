@@ -15,7 +15,12 @@ const PrizeEndedModalPopup = ({ handleContinueBtn }) => {
                         The prize has ended. Please return to homepage to reveal
                         the winner.
                     </p>
-                    <button className="btn-yes w-100" onClick={handleContinueBtn}>Continue</button>
+                    <button
+                        className="btn-yes w-100"
+                        onClick={handleContinueBtn}
+                    >
+                        CONTINUE
+                    </button>
                 </div>
             </div>
         </div>

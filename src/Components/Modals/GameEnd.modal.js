@@ -33,8 +33,7 @@ const GameEndModal = ({
         clearInterval(timeoutRef);
         timeoutRef = setTimeout(() => {
             const lbId = JSON.parse(sessionStorage.getItem("lbId"));
-            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0)
-            {
+            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0) {
                 dispatch(loadLeaderboardHistory(parseInt(lbId?.cgId)));
                 dispatch(loadLeaderboardRanks(parseInt(lbId.gameId)));
 
@@ -151,7 +150,7 @@ const GameEndModal = ({
                                     className="continue-button d-block text-center mx-auto mt-4 py-3"
                                     onClick={handleContinueButton}
                                 >
-                                    Continue
+                                    CONTINUE
                                 </button>
 
                                 {/* {isShowTournamentEndedText ? 

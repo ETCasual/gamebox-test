@@ -69,7 +69,7 @@ const Header = ({
             let now = nowTimeStamp();
             const output = _earnAdditional.reduce((prev, curr) =>
                 Math.abs(curr?.timestamp - now) <
-                    Math.abs(prev?.timestamp - now)
+                Math.abs(prev?.timestamp - now)
                     ? curr
                     : prev
             );
@@ -237,7 +237,7 @@ const Header = ({
                                     style={{
                                         filter:
                                             notificationNumber.count > 0 &&
-                                                notificationData.length > 0
+                                            notificationData.length > 0
                                                 ? "none"
                                                 : "grayscale(0.9)",
                                     }}
@@ -246,15 +246,16 @@ const Header = ({
                                     alt="bell"
                                 />
                                 <div
-                                    className={`notification-number ${notificationNumber.count > 0 &&
+                                    className={`notification-number ${
+                                        notificationNumber.count > 0 &&
                                         notificationData.length > 0
-                                        ? "d-flex"
-                                        : "d-none"
-                                        } align-items-center justify-content-center`}
+                                            ? "d-flex"
+                                            : "d-none"
+                                    } align-items-center justify-content-center`}
                                 >
                                     <span className="w-100">
                                         {notificationNumber.count > 0 &&
-                                            notificationData.length > 0
+                                        notificationData.length > 0
                                             ? notificationNumber.count
                                             : 0}
                                     </span>
@@ -365,7 +366,7 @@ const Header = ({
                                             onClick={handleWallet}
                                         >
                                             <p className="mb-0">
-                                                Connect Wallet
+                                                CONNECT WALLET
                                             </p>
                                         </div>
                                     )}
@@ -376,7 +377,7 @@ const Header = ({
                                                 onClick={handleWallet}
                                             >
                                                 <p className="mb-0">
-                                                    Wrong Network
+                                                    WRONG NETWORK
                                                 </p>
                                             </div>
                                         )}
@@ -394,15 +395,15 @@ const Header = ({
                                                         </div>
                                                         <div className="wallet-connected-value">
                                                             {user.tokenBalance >=
-                                                                0
+                                                            0
                                                                 ? parseFloat(
-                                                                    user.tokenBalance
-                                                                )
-                                                                    ?.toFixed(
-                                                                        2
-                                                                    )
-                                                                    ?.toLocaleString() +
-                                                                " FROYO"
+                                                                      user.tokenBalance
+                                                                  )
+                                                                      ?.toFixed(
+                                                                          2
+                                                                      )
+                                                                      ?.toLocaleString() +
+                                                                  " FROYO"
                                                                 : "Invalid token"}{" "}
                                                         </div>
                                                     </div>
@@ -412,7 +413,7 @@ const Header = ({
                                                             handleWalletDisconnect
                                                         }
                                                     >
-                                                        Disconnect Wallet
+                                                        DISCONNECT WALLET
                                                     </div>
                                                 </div>
                                             </>
@@ -426,8 +427,7 @@ const Header = ({
                                         to={{
                                             pathname: "/profile",
                                             state: {
-                                                prevPath:
-                                                    location.pathname,
+                                                prevPath: location.pathname,
                                             },
                                         }}
                                     >

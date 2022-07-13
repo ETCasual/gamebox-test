@@ -66,7 +66,7 @@ const Login = ({ setLoginModal }) => {
                         <p className="mb-5 error text-danger">{loginError}</p>
                     )}
                     <button type="submit" className="submit mb-4">
-                        Login
+                        LOGIN
                     </button>
                     <a
                         href="https://staging.froyo.games/forgot-pass"

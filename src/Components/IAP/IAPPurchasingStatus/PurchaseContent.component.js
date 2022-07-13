@@ -24,12 +24,12 @@ const PurchaseContent = ({
         noWallet: {
             title: "Wallet not connected.",
             subTitle: "Please connect your wallet to continue.",
-            button: "Connect wallet",
+            button: "CONNECT WALLET",
         },
         insufficentToken: {
             title: "Insufficient Froyo Tokens.",
             subTitle: "Please purchase Froyo Tokens to continue.",
-            button: "Purchase Froyo Tokens",
+            button: "PURCHASE FROYO TOKENS",
             color: "red",
         },
         beforePurchaseConfirmation: {
@@ -40,7 +40,7 @@ const PurchaseContent = ({
                 "..." +
                 user.walletAddress?.substring(user.walletAddress.length - 4) +
                 ".",
-            button: `Use ${productInfo?.price} froyo tokens`,
+            button: `USE ${productInfo?.price} FROYO TOKENS`,
         },
         processing: {
             title: "",
@@ -49,12 +49,12 @@ const PurchaseContent = ({
         isSuccess: {
             title: "Purchase successful.",
             subTitle: `You have successfully purchased ${productInfo?.quantity} gems.`,
-            button: "Continue",
+            button: "CONTINUE",
         },
         isFail: {
             title: "Purchase unsuccessful.",
             subTitle: "Something went wrong. Please try again later.",
-            button: "Close",
+            button: "CLOSE",
             color: "red",
         },
     };
@@ -96,7 +96,7 @@ const PurchaseContent = ({
                                         className="cancel-button"
                                         onClick={handleModalCloseButton}
                                     >
-                                        Cancel
+                                        CANCEL
                                     </button>
                                 )}
                             <button
@@ -105,7 +105,7 @@ const PurchaseContent = ({
                                         purchasingStatus?.isFail ||
                                         purchasingStatus?.insufficentToken
                                             ? "#c40000"
-                                            : "#d3076a",
+                                            : "#ff3399",
                                 }}
                                 className="confirm-button"
                                 onClick={handleConfirmAction}
