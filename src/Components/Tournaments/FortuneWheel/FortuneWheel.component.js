@@ -71,8 +71,7 @@ const FortuneWheel = ({
         // PREVENT SPAMMING
         if (isClickedSpin) return;
 
-        if (spinner?.freeSpins <= 0)
-        {
+        if (spinner?.freeSpins <= 0) {
             return;
         }
 
@@ -84,8 +83,7 @@ const FortuneWheel = ({
 
         if (spinBuyProcess) setSpinBuyProcess(false);
 
-        if (_spinner.freeSpins >= 0)
-        {
+        if (_spinner.freeSpins >= 0) {
             setWinAmount(_spinner.winAmount);
         }
     }
@@ -113,8 +111,8 @@ const FortuneWheel = ({
                                             onClick={() =>
                                                 !isClickedSpin
                                                     ? setFortuneWheelShown(
-                                                        false
-                                                    )
+                                                          false
+                                                      )
                                                     : null
                                             }
                                             src={`${window.cdn}buttons/button_close.png`}
@@ -193,7 +191,7 @@ const FortuneWheel = ({
 
                             {/* SECOND COLUMN */}
                             <div className="col-12 py-3 d-flex flex-column wrapper-col flex-column align-items-center justify-content-center">
-                                <div className="w-100 d-flex">
+                                <div className="w-100 d-flex mb-3">
                                     {/* SPIN BALANCE */}
                                     {/* <div className="your-balance d-flex flex-column align-items-center justify-content-center mr-auto">
                                         <div className="your-balance-text mb-2">
