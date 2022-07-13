@@ -1058,7 +1058,7 @@ html {
             cursor: pointer;
             width: 100%;
             max-width: 15rem;
-            height: 12rem;
+            height: 13rem;
             background: linear-gradient(90deg, #716c74 0%, #4a454d 100%);
             padding: 0.2rem;
 
@@ -1080,7 +1080,7 @@ html {
 
                 .info-text {
                     width: 100%;
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-18;
                     font-weight: $fnt-wgt-600;
                     letter-spacing: 0.07rem;
                 }
@@ -1088,12 +1088,12 @@ html {
                 .content-tickets {
                     .tickets {
                         color: #f8b61f;
-                        font-size: $fnt-sz-30;
+                        font-size: $fnt-sz-40;
                         font-weight: $fnt-wgt-600;
                     }
 
                     .icon {
-                        width: 2.5rem;
+                        width: 2.7rem;
                     }
                 }
 
@@ -1190,7 +1190,7 @@ html {
             .play-btn {
                 width: 100%;
                 max-width: 15rem;
-                font-size: $fnt-sz-18;
+                font-size: $fnt-sz-16;
                 font-weight: bold;
                 background: #ff3399;
                 color: white;
@@ -1201,7 +1201,7 @@ html {
 
                 .btn-text {
                     color: white;
-                    font-size: $fnt-sz-22;
+                    font-size: $fnt-sz-20;
                     font-weight: $fnt-wgt-600;
                     transition: 0.4s;
                 }
