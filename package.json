@@ -83,6 +83,8 @@
         ]
     },
     "devDependencies": {
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
         "react-error-overlay": "6.0.9",
         "redux-devtools-extension": "^2.13.9",
         "replace": "^1.1.1"
