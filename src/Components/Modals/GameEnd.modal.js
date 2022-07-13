@@ -73,10 +73,10 @@ const GameEndModal = ({
         <>
             {!isSelectedNotificationShown.status && (
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                    <div className="game-result-panel col-12 col-md-10 col-xl-6 position-relative">
+                    <div className="game-result-panel col-12 col-md-4 col-xl-4 position-relative">
                         {/* CARD */}
-                        <div className="row justify-content-center mt-3 mt-sm-3">
-                            <div className="col-10 col-lg-8 mb-3 pl-2 pr-1">
+                        <div className="row justify-content-center mt-3 mt-sm-3 px-0">
+                            <div className="col-10 col-lg-8 mb-4 px-0 ">
                                 {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                                 <p className="text-center panel-title">
                                     GAME RESULT
@@ -93,7 +93,7 @@ const GameEndModal = ({
                                 )}
 
                                 {score && (
-                                    <p className="text-center score-text mt-5 mb-0">
+                                    <p className="text-center score-text mt-4 mb-0">
                                         Score
                                     </p>
                                 )}
@@ -104,8 +104,8 @@ const GameEndModal = ({
                                     </p>
                                 )}
 
-                                {currentGameBoosterInfo.isUseBooster && (
-                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-5">
+                            {currentGameBoosterInfo.isUseBooster ? (
+                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
                                         <p className="pr-2 ticket-rate-text-score">
                                             every{" "}
                                             {
@@ -127,14 +127,18 @@ const GameEndModal = ({
                                             />
                                         </p>
                                     </div>
+                                ):
+                                (
+                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
+                                    </div>
                                 )}
 
                                 {currentGameBoosterInfo.isUseBooster && (
                                     <div className="row text-center mx-auto total-tickets-earned align-items-center">
-                                        <p className=" col py-2 pl-2 pr-2 you-earned d-flex m-auto justify-content-end">
+                                        <p className=" col-7 py-2 pl-0 pr-3 you-earned d-flex mt-3 mb-3 justify-content-end">
                                             You earned
                                         </p>
-                                        <p className="col pr-2 d-flex tickets-amount align-items-center d-flex m-auto">
+                                        <p className="col-5 pl-2 d-flex tickets-amount align-items-center d-flex my-auto">
                                             <span className="mr-2">
                                                 {extraEarning.ticket}
                                             </span>
