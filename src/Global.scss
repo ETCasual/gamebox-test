@@ -1301,160 +1301,228 @@ html {
                 width: 36px;
                 height: 36px;
             }
-            top: -12px;
-            right: -12px;
+            top: 0px;
+            right: 0px;
             cursor: pointer;
-            z-index: 1;
+            z-index: 2;
         }
-        background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
-        box-shadow: 0px 3px 6px #00000029;
-        border-radius: 10px;
-        padding: 0.7em;
-        width: 60rem;
+        width: 15rem;
 
+        @include media-min($md) {
+            width: 23rem;
+        }
+        
         // Check is mobile
         @media (pointer:none), (pointer:coarse) {
             top: 3rem;
         }
 
-        .card-prize {
-            width: 100%;
-            // @include media-min($sm) {
-            //     width: 30rem;
-            // }
-            border-radius: 10px;
-            border: 0.15rem solid #424242;
-            
-            .thumb {
-                max-height: 6rem;
-                max-width: 6rem;
-                @include media-min($sm) {
-                    max-height: 9rem;
-                    max-width: 9rem;
-                }
-                width: 100%;
-                border-radius: 10px;
-                position: relative;
-            }
-            
-            .prize-text {
-                color: white;
+        .swiper {
+            .prize {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                margin: 0 auto;
 
-                .card-title {
-                    font-size: $fnt-sz-14;
-                    @include media-min($sm) {
-                        font-size: $fnt-sz-20;
+                .picture-wrapper {
+                    position: relative;
+                    max-height: 12.5rem;
+
+                    @include media-min($md) {
+                        max-height: 18rem;
                     }
-                    font-weight: $fnt-wgt-600;
+
+                    .thumb-media {
+                        display: block;
+                        position: relative;
+                        top: 1rem;
+                        width: 90%;
+                        object-fit: cover;
+                        border-radius: 10px 10px 0 0;
+                        margin-bottom: 1rem;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
                 }
-                .card-subtitle {
-                    font-size: $fnt-sz-8;
-                    @include media-min($sm) {
+                .winner-wrapper {
+                    position: relative;
+                    width: 100%;
+                    min-height: 12rem;
+                    background: linear-gradient(90deg,#38303d 0%,#1c181f 100%);
+                    box-shadow: 0px 3px 6px #00000029;
+                    border-radius: 10px;
+
+                    @include media-min($md) {
+                        min-height: 15rem;
+                    }
+
+                    .winner-pic {
+                        position: absolute;
+                        top: -7px;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        border: 5px solid #1d1d1d;
+                        background-color: #1d1d1d;
+                        border-radius: 100%;
+                        width: 5rem;
+                        height: 5rem;
+                        object-fit: contain;
+
+                        @include media-min($md) {
+                            border: 7px solid #1d1d1d;
+                            width: 6.438rem;
+                            height: 6.438rem;
+                        }
+                    }
+                    .winner-name {
                         font-size: $fnt-sz-12;
+                        font-weight: $fnt-wgt-600;
+                        color: #f8ba29;
+                        background: #1d1d1d 0% 0%;
+                        box-shadow: inset 0px 3px 6px #0000000f;
+                        border-radius: 5px;
+
+                        margin-top: 1.75rem;
+                        padding: 0.7rem;
+
+                        @include media-min($md) {
+                            font-size: $fnt-sz-14;
+                            margin-top: 2.4rem;
+                            padding: 1rem;
+                        }
                     }
-                }
-                .card-content {
-                    font-size: $fnt-sz-10;
-                    @include media-min($sm) {
+                    .won-text,
+                    .nft-token,
+                    .not-minted {
+                        font-size: $fnt-sz-10;
+                        color: #868686;
+                        @include media-min($md) {
+                            font-size: $fnt-sz-12;
+                        }
+                    }
+                    .not-minted,
+                    .mint-date {
+                        font-size: $fnt-sz-8;
+                        @include media-min($md) {
+                            font-size: $fnt-sz-10;
+                        }
+                    }
+                    .prize-name {
+                        text-align: center;
                         font-size: $fnt-sz-14;
+                        font-weight: $fnt-wgt-600;
+                        @include media-min($md) {
+                            font-size: $fnt-sz-18;
+                            font-weight: $fnt-wgt-700;
+                        }
+                    }
+                    .transfer-nft-text {
+                        width: 40ch;
+                        color: #868686;
+                        font-size: $fnt-sz-8;
+                        span {
+                            font-weight: $fnt-wgt-600;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-10;
+                        }
+                    }
+                    .drawn-details-table {
+                        width: 100%;
+                        color: white;
+                        padding: auto 1rem;
+                        table-layout: fixed;
+
+                        td {
+                            padding-bottom: 3px;
+                        }
+
+                        .title {
+                            font-size: $fnt-sz-10;
+                        }
+                        .value {
+                            text-align: right;
+                            font-size: $fnt-sz-10;
+                            padding-right: 1rem;
+                        }
+                    }
+                    .connect-wallet-btn {
+                        width: 90%;
+                        padding: 0.75em;
+                        margin-bottom: 0.75em;
+                        font-size: $fnt-sz-12;
+                        font-weight: $fnt-wgt-600;
+                        background: #ff3399;
+                        color: white;
+                        box-shadow: inset 0px 3px 6px #0000000f;
+                        border-radius: 7px;
+                        
+                        &:hover {
+                            background: #f20086;
+                        }
+
+                        @include media-min($md) {
+                            padding: 1em;
+                            margin-bottom: 1em;
+                            font-size: $fnt-sz-14;
+                        }
                     }
                 }
             }
-        }
+            .pagination {
+                position: relative;
+                background: linear-gradient(111deg, #302f2f 0%, #0b0b0b 100%);
+                box-shadow: 0px 3px 6px #00000029;
+                border-radius: 10px;
+                width: 100%;
 
-        .countdown {
-            width: 60%;
-            max-width: 18rem;
-            font-size: $fnt-sz-10;
-            font-weight: $fnt-wgt-600;
-            background: #433948;
-            box-shadow: inset 0px 3px 6px #0000000f;
-            border-radius: 10px;
-            padding: 0.7rem;
-
-            @include media-min($sm) {
-                font-size: $fnt-sz-14;
-                padding: 1rem;
+                @include media-min($md) {
+                }
+                .prev,
+                .next {
+                    cursor: pointer;
+                }
+                .next {
+                    transform: rotate(-180deg);
+                }
+                .custom-pagination {
+                    // width: auto !important;
+                    .swiper-pagination-bullet {
+                        width: auto;
+                        height: auto;
+                        margin: 0 0.25rem;
+                        video,
+                        img {
+                            transition: all 0.3s ease-in-out;
+                            width: 50px;
+                            height: 50px;
+                            object-fit: cover;
+                            border-radius: 12px;
+                        }
+                    }
+                }
             }
-
-            .countdown-text {
+            .swiper-button-prev {
                 color: white;
-                font-weight: $fnt-wgt-700;
-            }
-        }
-
-        .tickets-label {
-            font-size: $fnt-sz-12;
-            @include media-min($sm) {
-                font-size: $fnt-sz-14;
-            }
-        }
-
-        .tickets-value {
-            .tickets {
-                font-size: $fnt-sz-22;
-                @include media-min($sm) {
-                    font-size: $fnt-sz-28;
+                left: 10px;
+                @include media-min($md) {
+                    left: 120px;
                 }
-                font-weight: $fnt-wgt-600;
-            }
-
-            .icon {
-                width: 2.5rem;
-                @include media-min($sm) {
-                    width: 3.5rem;
+                @media only screen and (min-width: 1200px) {
+                    left: 300px;
                 }
             }
-        }
-
-        .start-earning-btn {
-            width: 90%;
-            max-width: 25rem;
-            font-size: $fnt-sz-14;
-            font-weight: $fnt-wgt-600;
-            background: #ff3399;
-            color: white;
-            box-shadow: inset 0px 3px 6px #0000000f;
-            border-radius: 10px;
-            padding: 0.6rem;
-
-            @include media-min($sm) {
-                font-size: $fnt-sz-16;
-                padding: 1.2rem;
+            .swiper-button-next {
+                color: white;
+                right: 10px;
+                @include media-min($md) {
+                    right: 120px;
+                }
+                @media only screen and (min-width: 1200px) {
+                    right: 300px;
+                }
             }
-        }
-        .start-earning-btn:hover {
-            background: #f20086;
-        }
-
-        .line {
-            background-color: #433948;
-            width: 2rem;
-            height: 2px;
-            margin: 1rem auto;
-            @include media-min($sm) {
-                margin: 1.5rem auto;
-            }
-        }
-
-        .instructions-title {
-            font-size: $fnt-sz-10;
-            font-weight: $fnt-wgt-600;
-            @include media-min($sm) {
-                font-size: $fnt-sz-12;
-            }
-        }
-
-        .instructions-subtitle,
-        .instructions-tip {
-            font-size: $fnt-sz-8;
-            @include media-min($sm) {
-                font-size: $fnt-sz-10;
-            }
-        }
-
-        .mob-text {
-            color: aqua;
         }
     }
 }

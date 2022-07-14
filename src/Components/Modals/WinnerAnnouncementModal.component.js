@@ -38,8 +38,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
         sessionStorage.setItem("showAnnouncement", 0);
 
         let timeOutRef = null;
-        if (data.length > 0)
-        {
+        if (data.length > 0) {
             clearTimeout(timeOutRef);
             timeOutRef = setTimeout(() => {
                 setPrizeData(data);
@@ -76,10 +75,195 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                 <img
                     className="close-button"
                     onClick={handleBackButton}
-                    width="36"
                     src={`${window.cdn}buttons/button_close.png`}
                     alt="close-btn"
                 />
+
+                {/* SWIPER */}
+                <Swiper
+                    className="swiper"
+                    spaceBetween={50}
+                    pagination={{
+                        el: ".custom-pagination",
+                        clickable: true,
+                        dynamicBullets: true,
+                        renderBullet: (index, className) => {
+                            // TODO: USE STATIC IMG IN SMALL THUMBNAIL
+                            return `<div class="${className} d-flex align-items-center justify-content-center">
+                            <img src="${prizeData[index]?.picture}" alt="prize"/>
+                        </div>`;
+                        },
+                    }}
+                    navigation={{
+                        prevEl: navigationPrevRef.current,
+                        nextEl: navigationNextRef.current,
+                    }}
+                    preloadImages={true}
+                    threshold={30}
+                    initialSlide={1}
+                    slidesPerView={1}
+                    onActiveIndexChange={(active) => {
+                        setActiveSlide(active.realIndex);
+                    }}
+                >
+                    {prizeData.map((e, idx) => (
+                        <SwiperSlide key={idx}>
+                            <div className="prize">
+                                {/* PRIZE INFO */}
+                                <div className="picture-wrapper d-flex flex-column align-items-center text-center">
+                                    {/* THUMBNAIL MEDIA */}
+                                    <ThumbnailMedia
+                                        url={e.picture}
+                                        isPlayVideo={true}
+                                        className="thumb-media"
+                                    />
+                                </div>
+
+                                {/* WINNER INFO */}
+                                <div className="winner-wrapper text-center">
+                                    <img
+                                        className="winner-pic"
+                                        src={e?.winnerAvatarUrl}
+                                        onError={(e) => defaultUserImage(e)}
+                                        alt={e.winner}
+                                    />
+                                    {/* TODO: To change the checking to not use username */}
+                                    {user.username.toLowerCase() ===
+                                        e.winner.toLowerCase() && (
+                                        <>
+                                            <p className="winner-name">
+                                                {e.winner} (You)
+                                            </p>
+                                            <p className="won-text mb-0">
+                                                Won the
+                                            </p>
+                                            <p className="prize-name my-2">
+                                                {e.title}
+                                            </p>
+                                            <p className="nft-token mb-3">
+                                                TokenID:{" "}
+                                                {e.nftContractAddress.substring(
+                                                    0,
+                                                    5
+                                                )}
+                                                ....
+                                                {e.nftContractAddress.substring(
+                                                    e.nftContractAddress
+                                                        .length - 4
+                                                )}
+                                            </p>
+
+                                            {e.canClaimDate > 0 && (
+                                                <>
+                                                    <p className="mb-2 mt-4 not-minted">
+                                                        This NFT is not minted
+                                                        yet. We’ll notify you
+                                                        once it’s out.
+                                                    </p>
+                                                    <p className="mint-date">
+                                                        NFT mint date:{" "}
+                                                        {getMintDate(
+                                                            e.canClaimDate
+                                                        )}
+                                                    </p>
+                                                </>
+                                            )}
+
+                                            {e.canClaimDate <= 0 && (
+                                                <Link to="/profile/rewards">
+                                                    <button className="connect-wallet-btn">
+                                                        View Prize
+                                                    </button>
+                                                </Link>
+                                            )}
+                                        </>
+                                    )}
+                                    {user.username.toLowerCase() !==
+                                        e.winner.toLowerCase() && (
+                                        <>
+                                            <p className="winner-name">
+                                                {e.winner}
+                                            </p>
+                                            <p className="won-text mb-0">
+                                                won the
+                                            </p>
+                                            <p className="prize-name my-2">
+                                                {e.title}
+                                            </p>
+                                            <p className="nft-token mb-2">
+                                                TokenID:{" "}
+                                                {e.nftContractAddress.substring(
+                                                    0,
+                                                    5
+                                                )}
+                                                ....
+                                                {e.nftContractAddress.substring(
+                                                    e.nftContractAddress
+                                                        .length - 4
+                                                )}
+                                            </p>
+                                            {/* TODO: SHOW PLAYER WINNER DETAILS */}
+                                            {/* <table className="drawn-details-table my-auto">
+                                                <tr>
+                                                    <td className="title">
+                                                        Total prize tickets
+                                                    </td>
+                                                    <td className="value">
+                                                        9,999,999
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="title">
+                                                        Player's tickets
+                                                    </td>
+                                                    <td className="value">
+                                                        9,999,999
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="title">
+                                                        Winning chances
+                                                    </td>
+                                                    <td className="value">
+                                                        99.99%
+                                                    </td>
+                                                </tr>
+                                            </table> */}
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    ))}
+
+                    <div
+                        className={`pagination mt-2 p-2 ${
+                            prizeData.length > 1 ? "d-flex" : "d-none"
+                        } align-items-center justify-content-between`}
+                    >
+                        <img
+                            width={32}
+                            className={`prev ${
+                                activeSlide > 0 ? "" : "opacity-0-5"
+                            }`}
+                            ref={navigationPrevRef}
+                            src={`${window.cdn}buttons/button_back.png`}
+                            alt="prev-btn"
+                        />
+                        <div className="custom-pagination d-flex justify-content-center"></div>
+                        <img
+                            width={32}
+                            className={`next ${
+                                activeSlide === prizeData.length - 1
+                                    ? "opacity-0-5"
+                                    : ""
+                            }`}
+                            ref={navigationNextRef}
+                            src={`${window.cdn}buttons/button_back.png`}
+                            alt="next-btn"
+                        />
+                    </div>
+                </Swiper>
             </div>
         </div>
     );
