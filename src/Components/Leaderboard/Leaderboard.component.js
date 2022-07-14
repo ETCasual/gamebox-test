@@ -405,6 +405,7 @@ const Leaderboard = ({
                     ...prev,
                     isGameOver: true,
                     isPlayBtnDisabled: false,
+                    isQuitGameConfirm: false,
                 }));
                 // setIsShowAdditionalBenefitsModal(true);
                 // setIsGameLeaderboardShown(false);
