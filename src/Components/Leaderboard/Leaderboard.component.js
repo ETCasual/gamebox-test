@@ -333,6 +333,13 @@ const Leaderboard = ({
         }));
     };
 
+    window.handleQuitGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isQuitGameConfirm: true,
+        }));
+    };
+
     const handleModalButton = (choice) => {
         if (choice === "yes")
             setModalStatus((prev) => ({
@@ -571,7 +578,6 @@ const Leaderboard = ({
                         }}
                     />
                 )}
-
                 {/* MODAL FOR GAME OVER */}
                 {modalStatus.isGameOver && (
                     <GameEndModal
@@ -593,8 +599,9 @@ const Leaderboard = ({
                         currentGameBoosterInfo={currentGameBoosterInfo}
                     />
                 )}
-
-                {!modalStatus.isQuitGameBtnDisabled && (
+                {/* Comment out because the Front End X button is no longer in
+                used */}
+                {/* {!modalStatus.isQuitGameBtnDisabled && (
                     <img
                         className="ml-1 mt-1 quit-btn"
                         width="36"
@@ -602,13 +609,11 @@ const Leaderboard = ({
                         src={`${window.cdn}buttons/button_close.png`}
                         alt="Close Button"
                     />
-                )}
-
+                )} */}
                 {/* QUIT GAME MODAL */}
                 {modalStatus.isQuitGameConfirm && (
                     <GameQuitModal handleModalButton={handleModalButton} />
                 )}
-
                 {/* GAME IFRAME */}
                 {gameData !== null && (
                     <>
@@ -624,7 +629,14 @@ const Leaderboard = ({
                                 cx3={window.innerWidth > 1200 ? "52%" : "54%"}
                                 cy="15"
                             />
+                            <button
+                                className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
+                                onClick={handleQuitGame}
+                            >
+                                Close
+                            </button>
                         </div>
+
                         <iframe
                             title="game"
                             id="destination"
