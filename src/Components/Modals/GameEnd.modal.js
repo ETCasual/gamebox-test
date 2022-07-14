@@ -74,8 +74,8 @@ const GameEndModal = ({
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
                     <div className="game-result-panel col-12 col-md-10 col-xl-6 position-relative">
                         {/* CARD */}
-                        <div className="row justify-content-center mt-3 mt-sm-3">
-                            <div className="col-10 col-lg-8 mb-3 pl-2 pr-1">
+                        <div className="row justify-content-center my-3 my-sm-3">
+                            <div className="col-10 col-lg-8 mb-2 pl-2 pr-1">
                                 {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                                 <p className="text-center panel-title">
                                     GAME RESULT

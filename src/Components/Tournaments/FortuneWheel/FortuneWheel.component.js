@@ -259,7 +259,7 @@ const FortuneWheel = ({
                                             />
 
                                             {/* SPINS LEFT INFO */}
-                                            <p className="spin-amount-left-wrapper text-center mt-2">
+                                            <p className="spin-amount-left-wrapper text-center mt-2 mb-0">
                                                 <span className="you-have-text">
                                                     You have
                                                 </span>
@@ -275,7 +275,7 @@ const FortuneWheel = ({
                                         </>
                                     )}
                                     {isProbabilityShown && (
-                                        <table className="probability-table mx-auto">
+                                        <table className="probability-table mx-auto mt-3">
                                             <tbody>
                                                 <tr className="probability-row">
                                                     <td className="probability-percentage-caption">

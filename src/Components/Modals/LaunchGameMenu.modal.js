@@ -139,7 +139,7 @@ const LaunchGameMenuModalPopup = ({
                     <div className="d-flex flex-column align-items-center justify-content-center my-4">
                         <div className="col-12 col-md-8 p-2">
                             <div
-                                className={`selections d-flex flex-column my-2 mx-auto ${
+                                className={`selections d-flex flex-column mb-2 mx-auto ${
                                     isActiveBooster ? "checked" : ""
                                 }`}
                                 onClick={() => {

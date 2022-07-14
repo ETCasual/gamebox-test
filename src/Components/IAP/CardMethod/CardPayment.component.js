@@ -267,7 +267,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                             type="submit"
                                             disabled={!stripe}
                                         >
-                                            {`Pay SGD $${
+                                            {`PAY SGD $${
                                                 productInfo?.price?.toFixed(
                                                     2
                                                 ) || 0
