@@ -18,7 +18,7 @@ const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
                     alt="close-btn"
                 />
                 <div className="col-12 p-3">
-                    <h5 className="title">How to win prizes?</h5>
+                    <h5 className="title">HOW TO WIN PRIZES?</h5>
                     <p className="subtitle">Follow these 4 simple steps.</p>
                     <ul className="my-4 list-unstyled">
                         <li className="row">

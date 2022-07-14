@@ -726,7 +726,7 @@ html {
         }
         .title {
             font-size: $fnt-sz-16;
-            font-weight: $fnt-wgt-600;
+            font-weight: bold;
             @include media-min($md) {
                 font-size: $fnt-sz-18;
             }
@@ -866,6 +866,9 @@ html {
             p {
                 font-size: $fnt-sz-12;
             }
+        }
+        .title {
+            font-weight: bold;
         }
     }
     .modal-body-automated-entry {

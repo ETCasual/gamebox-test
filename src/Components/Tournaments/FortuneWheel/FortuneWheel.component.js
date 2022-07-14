@@ -135,7 +135,7 @@ const FortuneWheel = ({
                                                 The Spinner
                                             </p> */}
                                             <p className="earn-more-tickets-text d-block m-auto">
-                                                Spin & earn more rewards here!
+                                                SPIN & EARN MORE REWARDS HERE!
                                             </p>
                                         </div>
                                     </div>

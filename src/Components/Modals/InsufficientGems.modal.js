@@ -4,7 +4,7 @@ const InsufficientGemsModal = ({ setOutOfGems }) => {
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
             <div className="modal-body-small">
-                <p className="pt-4 mb-2 title pl-2">Insufficient gems.</p>
+                <p className="pt-4 mb-2 title pl-2">INSUFFICIENT GEMS.</p>
                 <p className="subtitle pl-2">
                     You are out of gems. Please purchase more gems to continue.
                 </p>

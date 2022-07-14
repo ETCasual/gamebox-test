@@ -24,7 +24,7 @@ const SelectWalletsModalPopup = ({
                     alt="close-btn"
                 />
                 <div className="col-12 p-4 connect-wallet-title-wrapper">
-                    <h5 className="title mb-0">Connect wallet</h5>
+                    <h5 className="title mb-0">CONNECT WALLET</h5>
                 </div>
                 {!connectGuideShow && (
                     <div className="col-12 my-5 connect-wallet-list">
