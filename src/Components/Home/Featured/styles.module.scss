@@ -42,9 +42,7 @@
         .prize-info {
             background: linear-gradient(90deg, #38303d, #231e26);
             border-radius: 10px;
-            @include media-min($md) {
-                border-radius: 17px;
-            }
+
             .prize-img {
                 width: 100%;
                 &::after {
@@ -69,14 +67,11 @@
                 img,
                 video {
                     position: relative;
-                    border-top-left-radius: 10px;
-                    border-top-right-radius: 10px;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
                     width: 100%;
                     @include media-min($sm) {
-                        border-radius: 10px;
-                    }
-                    @include media-min($md) {
-                        border-radius: 17px;
+                        border-radius: 5px;
                     }
                     object-fit: cover;
                 }

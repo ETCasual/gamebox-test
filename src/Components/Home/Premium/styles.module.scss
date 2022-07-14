@@ -3,7 +3,7 @@
     .card-wrapper {
         position: relative;
         background: linear-gradient(90deg, #433849, #2f2833);
-        border-radius: 17px;
+        border-radius: 10px;
         // min-height: clamp(10rem, 30vh, 20rem);
         width: inherit;
 
@@ -30,8 +30,12 @@
                     min-height: 22.5rem;
                 }
                 object-fit: cover;
-                border-top-left-radius: 17px;
-                border-top-right-radius: 17px;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                @include media-min($md) {
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
+                }
             }
         }
         video {
