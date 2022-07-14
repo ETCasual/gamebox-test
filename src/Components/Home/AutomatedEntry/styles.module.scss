@@ -18,6 +18,7 @@
             @include media-min($sm) {
                 border-radius: 17px;
                 height: 7rem;
+                margin-top: 0.625rem;
             }
         }
         .bonus-reward-img-wrapper {
@@ -26,6 +27,7 @@
             @include media-min($sm) {
                 right: unset;
                 position: relative;
+                padding-right: 13px;
             }
         }
     }
@@ -65,15 +67,15 @@
             color: #f7b621;
             font-size: $fnt-sz-20;
             @include media-min($sm) {
-                font-size: $fnt-sz-26;
+                font-size: $fnt-sz-28;
             }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
         }
         .prize-subtitle {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-12;
             @include media-min($sm) {
-                font-size: $fnt-sz-20;
+                font-size: $fnt-sz-14;
             }
         }
         .picture-wrapper {
@@ -110,7 +112,7 @@
                 .icon {
                     width: 30px;
                     @include media-min($md) {
-                        width: 40px;
+                        width: 35px;
                     }
                 }
             }

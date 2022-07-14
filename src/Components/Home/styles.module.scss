@@ -28,15 +28,15 @@
             color: #f7b621;
             font-size: $fnt-sz-20;
             @include media-min($sm) {
-                font-size: $fnt-sz-30;
+                font-size: $fnt-sz-28;
             }
             font-weight: $fnt-wgt-600;
             line-height: 1.5;
         }
         .earn-more-tickets-text {
-            font-size: $fnt-sz-14;
+            font-size: $fnt-sz-12;
             @include media-min($sm) {
-                font-size: $fnt-sz-12;
+                font-size: $fnt-sz-14;
             }
         }
         .earn-more-tickets-img {
@@ -46,6 +46,7 @@
             @include media-min($sm) {
                 border-radius: 17px;
                 height: 7rem;
+                margin-top: 0.625rem;
             }
         }
         .earn-more-tickets-img-wrapper {
@@ -54,6 +55,7 @@
             @include media-min($sm) {
                 right: unset;
                 position: relative;
+                padding-right: 13px;
             }
         }
 
