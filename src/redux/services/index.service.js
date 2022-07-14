@@ -107,7 +107,8 @@ export async function userSignIn() {
         tokenSymbol: null,
         network: null,
     };
-    if (signInResult) {
+    if (signInResult)
+    {
         Object.assign(user, {
             id: signInResult.getId(),
             phone: signInResult.getPhone(),
@@ -165,7 +166,8 @@ export async function compareUserDetails(user, _user) {
         user.firstName !== _user.firstName ||
         user.lastName !== _user.lastName ||
         user.picture !== (_user.imageUrl ?? "")
-    ) {
+    )
+    {
         return updateUserSettings(
             user,
             _user.displayName,
@@ -188,7 +190,8 @@ export async function newUserInvitation(user, inviteCode) {
     const response = await client.addInvite(request, {
         authorization: `Bearer ${token}`,
     });
-    if (response.getResult() > 0) {
+    if (response.getResult() > 0)
+    {
         localStorage.removeItem("inviteCode");
     }
 }
@@ -293,8 +296,10 @@ export async function getPrizes() {
         JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
     let availablePrizeList = [];
+    let oldPrizeList = prizeDetailList.map(d => d.prizeId);
 
-    for (let i = 0; i < prizeList.length; i++) {
+    for (let i = 0; i < prizeList.length; i++)
+    {
         let p = prizeList[i];
 
         // GAME RULES LIST
@@ -308,13 +313,15 @@ export async function getPrizes() {
             useHowManyGems: p.getUseHowManyGems(),
         });
         // ADDING PRIZE LIST TO SESSION STORAGE
-        if (p.getTypeId() === 1 || p.getTypeId() === 2 || p.getTypeId() === 3) {
+        if (p.getTypeId() === 1 || p.getTypeId() === 2 || p.getTypeId() === 3)
+        {
             // PRIZE DETAILS LIST
 
             let index = prizeDetailList.findIndex(
                 (e) => e.prizeId === p.getPrizeId()
             );
-            if (index === -1) {
+            if (index === -1)
+            {
                 prizeDetailList.push({
                     groupId: p.getGroupId(),
                     prizeId: p.getPrizeId(),
@@ -370,7 +377,8 @@ export async function getPrizes() {
                     "prizeDetailList",
                     JSON.stringify(prizeDetailList)
                 );
-            } else {
+            } else
+            {
                 prizeDetailList[index].overTime = p.getOvertime();
                 prizeDetailList[index].gameInfo.splice(0, 1);
                 prizeDetailList[index].gameInfo.push({
@@ -392,6 +400,8 @@ export async function getPrizes() {
                 });
                 prizeDetailList[index] = {
                     ...prizeDetailList[index],
+                    isRepeat: p.getIsRepeat(),
+                    repeatedOn: p.getRepeatedOnList(),
                     seen: prizeDetailList[index].seen,
                     completed: prizeDetailList[index].completed,
                 };
@@ -405,7 +415,8 @@ export async function getPrizes() {
         }
 
         // FEATURE DATA
-        if (p.getTypeId() === 1) {
+        if (p.getTypeId() === 1)
+        {
             let featuredIndex = _featuredData.findIndex(
                 (e) =>
                     e.prizeId === p.getPrizeId() &&
@@ -414,7 +425,8 @@ export async function getPrizes() {
                         (el) => el.endTimeStamp === p.getEndTimestamp()
                     )?.endTimeStamp
             );
-            if (featuredIndex === -1) {
+            if (featuredIndex === -1)
+            {
                 _featuredData.push({
                     groupId: p.getGroupId(),
                     prizeId: p.getPrizeId(),
@@ -464,7 +476,8 @@ export async function getPrizes() {
                     cgId: p.getTsgId(),
                     gemsNeeded: p.getGemsNeeded(),
                 });
-            } else {
+            } else
+            {
                 _featuredData[featuredIndex].gameInfo.push({
                     gameTitle: p.getGameTitle(),
                     gameSubtitle: p.getGameSubtitle(),
@@ -485,7 +498,8 @@ export async function getPrizes() {
             }
         }
         // PREMIUM DATA
-        else if (p.getTypeId() === 2) {
+        else if (p.getTypeId() === 2)
+        {
             let premiumIndex = _premiumData.findIndex(
                 (e) =>
                     e.prizeId === p.getPrizeId() &&
@@ -494,7 +508,8 @@ export async function getPrizes() {
                         (el) => el.endTimeStamp === p.getEndTimestamp()
                     )?.endTimeStamp
             );
-            if (premiumIndex === -1) {
+            if (premiumIndex === -1)
+            {
                 _premiumData.push({
                     groupId: p.getGroupId(),
                     prizeId: p.getPrizeId(),
@@ -544,7 +559,8 @@ export async function getPrizes() {
                     cgId: p.getTsgId(),
                     gemsNeeded: p.getGemsNeeded(),
                 });
-            } else {
+            } else
+            {
                 _premiumData[premiumIndex].gameInfo.push({
                     gameTitle: p.getGameTitle(),
                     gameSubtitle: p.getGameSubtitle(),
@@ -565,7 +581,8 @@ export async function getPrizes() {
             }
         }
         // TIME SENSITIVE DATA
-        else if (p.getTypeId() === 3) {
+        else if (p.getTypeId() === 3)
+        {
             let dailyIndex = _dailyData.findIndex(
                 (e) =>
                     e.prizeId === p.getPrizeId() &&
@@ -574,7 +591,8 @@ export async function getPrizes() {
                         (el) => el.endTimeStamp === p.getEndTimestamp()
                     )?.endTimeStamp
             );
-            if (dailyIndex === -1) {
+            if (dailyIndex === -1)
+            {
                 _dailyData.push({
                     groupId: p.getGroupId(),
                     prizeId: p.getPrizeId(),
@@ -623,7 +641,8 @@ export async function getPrizes() {
                     cgId: p.getTsgId(),
                     gemsNeeded: p.getGemsNeeded(),
                 });
-            } else {
+            } else
+            {
                 _dailyData[dailyIndex].gameInfo.push({
                     gameTitle: p.getGameTitle(),
                     gameSubtitle: p.getGameSubtitle(),
@@ -644,7 +663,8 @@ export async function getPrizes() {
             }
         }
         // AUTOMATED ENTRY DATA
-        else if (p.getTypeId() === 4) {
+        else if (p.getTypeId() === 4)
+        {
             prizes.automatedEntryData.push({
                 prizeId: p.getPrizeId(),
                 prizeTitle: p.getPrizeTitle(),
@@ -671,7 +691,22 @@ export async function getPrizes() {
                 infoUrl: p.getInfoUrl(),
             });
         }
+
+        oldPrizeList = oldPrizeList.filter(prizeId => prizeId !== p.getPrizeId());
     }
+
+    // UPDATE ANY PRIZE THAT IS FINISHED FROM SERVER AND STILL CACHE IN LOCAL LIST
+    oldPrizeList.forEach(prizeId => {
+        let index = prizeDetailList.findIndex(
+            (e) => e.prizeId === prizeId
+        );
+        prizeDetailList[index].isRepeat = false;
+
+        sessionStorage.setItem(
+            "prizeDetailList",
+            JSON.stringify(prizeDetailList)
+        );
+    });
 
     // REMOVE ANY PRIZE FROM THE LOCAL LIST WHICH IS ALREADY FINISHED
     let plList = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
@@ -681,9 +716,11 @@ export async function getPrizes() {
             !availablePrizeList.includes(p?.prizeId) &&
             !p.completed &&
             !p.seen
-        ) {
+        )
+        {
             const idx = _tempArr.findIndex((t) => t?.prizeId === p?.prizeId);
-            if (idx > -1) {
+            if (idx > -1)
+            {
                 _tempArr[idx].completed = true;
                 sessionStorage.setItem(
                     "prizeDetailList",
@@ -803,7 +840,8 @@ export async function getLogGList(user, prizes) {
         let idx = prizeList.findIndex(
             (prize) => e.getPrizeId() === prize.prizeId
         );
-        if (idx > -1) {
+        if (idx > -1)
+        {
             activity.push({
                 prizeId: e.getPrizeId(),
                 prizeType: e.getPrizeTypeId(),
@@ -868,8 +906,10 @@ export async function logLeave(
     request.setUserId(user.id);
     // request.setGameScore(gameScore);
     const scoreTrailArr = [];
-    if (gameScore.b) {
-        for (let i = 0; i < gameScore.b.length; i++) {
+    if (gameScore.b)
+    {
+        for (let i = 0; i < gameScore.b.length; i++)
+        {
             const scoreTrail = new ScoreTrail();
             scoreTrail.setTimestamp(gameScore.b[i].timestamp);
             scoreTrail.setScore(gameScore.b[i].score);
@@ -974,7 +1014,8 @@ export async function getWinnersList() {
         _monthYear = `${monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
             } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
 
-        if (winners.length === 0) {
+        if (winners.length === 0)
+        {
             winners.push({
                 monthYear: _monthYear,
                 list: [
@@ -995,11 +1036,13 @@ export async function getWinnersList() {
                     },
                 ],
             });
-        } else {
+        } else
+        {
             let idx = winners.findIndex(
                 (winner) => winner.monthYear === _monthYear
             );
-            if (idx > -1) {
+            if (idx > -1)
+            {
                 winners[idx].list.push({
                     id: e.getId(),
                     prizeId: e.getPrizeId(),
@@ -1014,7 +1057,8 @@ export async function getWinnersList() {
                     status: e.getStatus(),
                     totalPlayers: e.getTotalPlayer(),
                 });
-            } else {
+            } else
+            {
                 winners.push({
                     monthYear: _monthYear,
                     list: [
@@ -1129,9 +1173,11 @@ export async function getExchangeRate() {
         ?.split(":")?.[0];
 
     // IP INFO API
-    if (ipDetails?.country_name) {
+    if (ipDetails?.country_name)
+    {
         Object.assign(ipInfo, ipDetails);
-    } else {
+    } else
+    {
         const { data: ipAddress } = await axios.get(
             `https://www.cloudflare.com/cdn-cgi/trace`
         );
@@ -1156,7 +1202,8 @@ export async function getExchangeRate() {
         (CETTimeZoneHour > 15 &&
             CETTimeZoneHour < 18 &&
             (date.getDay() !== 6 || date.getDate() !== 7))
-    ) {
+    )
+    {
         const { data: rates } = await axios.get(
             `${process.env.REACT_APP_EXCHANGE_API}?from=SGD`
         );
@@ -1482,7 +1529,8 @@ export async function logSEnter(user, prizeId, spinner) {
         authorization: `Bearer ${token}`,
     });
     const result = response.getResult();
-    if (result) {
+    if (result)
+    {
         spinner = {
             ...spinner,
             enterId: result,
@@ -1506,7 +1554,8 @@ export async function logSLeave(user, enterId, spinner) {
     const response = await client.logSLeave(request, {
         authorization: `Bearer ${token}`,
     });
-    if (response.getWinAmount() > 0) {
+    if (response.getWinAmount() > 0)
+    {
         spinner = {
             ...spinner,
             enterId,
@@ -1517,7 +1566,8 @@ export async function logSLeave(user, enterId, spinner) {
             winType: response.getWinType(),
             winAmount: response.getWinAmount(),
         };
-    } else {
+    } else
+    {
         console.log("Spinner failed! Please reload and try again.");
     }
     return spinner;
@@ -1535,7 +1585,8 @@ export async function logSExtra(user, spinner, isTypeGems) {
         authorization: `Bearer ${token}`,
     });
     const result = response.getResult();
-    if (result > 0) {
+    if (result > 0)
+    {
         spinner = {
             ...spinner,
             enterId: spinner.enterId,
@@ -1573,9 +1624,11 @@ export async function getPlayerDetails(playerId) {
         authorization: `Bearer ${token}`,
     });
     const playerDetails = {};
-    if (!response.getResult()) {
+    if (!response.getResult())
+    {
         console.log(response.getResult());
-    } else {
+    } else
+    {
         const data = response.getResult();
         Object.assign(playerDetails, {
             id: data.getId(),
@@ -1599,9 +1652,11 @@ export async function getPlayerHighScore(playerId) {
         authorization: `Bearer ${token}`,
     });
     const playersHighScore = [];
-    if (!response.getResultList()) {
+    if (!response.getResultList())
+    {
         console.log(response.getResultList());
-    } else {
+    } else
+    {
         const data = response.getResultList();
         data.forEach((e) => {
             playersHighScore.push({
@@ -1628,11 +1683,14 @@ export async function getLeaderboardHistory(cgId) {
         authorization: `Bearer ${token}`,
     });
     const userNotifications = [];
-    if (!response.getResultList()) {
+    if (!response.getResultList())
+    {
         console.log("NO INFO AVAILABLE");
-    } else {
+    } else
+    {
         const data = response.getResultList();
-        if (data.length > 0) {
+        if (data.length > 0)
+        {
             data.forEach((e) => {
                 userNotifications.push({
                     cgId: e.getCgId(),
@@ -1665,9 +1723,11 @@ export async function getNotificationNumber(user, notificationNumber) {
     const response = await client.getNotificationNo(request, {
         authorization: `Bearer ${token}`,
     });
-    if (!response.getResult()) {
+    if (!response.getResult())
+    {
         console.log("No new notification count available!");
-    } else {
+    } else
+    {
         console.log("NOTIFICATION COUNT:", response.getResult());
         notificationNumber.count = response.getResult();
         return notificationNumber;
@@ -1694,7 +1754,8 @@ export async function getNotifications(user, notiType) {
         _monthYear = `${monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
             } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
 
-        if (notificationList.length === 0) {
+        if (notificationList.length === 0)
+        {
             notificationList.push({
                 monthYear: _monthYear,
                 list: [
@@ -1723,11 +1784,13 @@ export async function getNotifications(user, notiType) {
                     },
                 ],
             });
-        } else {
+        } else
+        {
             let idx = notificationList.findIndex(
                 (n) => n.monthYear === _monthYear
             );
-            if (idx > -1) {
+            if (idx > -1)
+            {
                 notificationList[idx].list.push({
                     id: e.getId(),
                     userId: e.getUserId(),
@@ -1751,7 +1814,8 @@ export async function getNotifications(user, notiType) {
                     nftTokenId: e.getNftTokenId(),
                     canClaimDate: e.getCanClaimDate(),
                 });
-            } else {
+            } else
+            {
                 notificationList.push({
                     monthYear: _monthYear,
                     list: [
@@ -1805,7 +1869,8 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
         _monthYear = `${monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
             } ${new Date(e.getCreatedOn() * 1000).getFullYear()}`;
 
-        if (winnerAnnouncementNotificationList.length === 0) {
+        if (winnerAnnouncementNotificationList.length === 0)
+        {
             winnerAnnouncementNotificationList.push({
                 monthYear: _monthYear,
                 list: [
@@ -1834,11 +1899,13 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
                     },
                 ],
             });
-        } else {
+        } else
+        {
             let idx = winnerAnnouncementNotificationList.findIndex(
                 (n) => n.monthYear === _monthYear
             );
-            if (idx > -1) {
+            if (idx > -1)
+            {
                 winnerAnnouncementNotificationList[idx].list.push({
                     id: e.getId(),
                     userId: e.getUserId(),
@@ -1862,7 +1929,8 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
                     nftTokenId: e.getNftTokenId(),
                     canClaimDate: e.getCanClaimDate(),
                 });
-            } else {
+            } else
+            {
                 winnerAnnouncementNotificationList.push({
                     monthYear: _monthYear,
                     list: [

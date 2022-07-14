@@ -1535,8 +1535,8 @@ html {
         .tickets-amount {
             font-size: $fnt-sz-20;
             font-weight: $fnt-wgt-700;
-            color: #f7b620;
-            @include media-min($xs) {
+            color: #FDF0F1;
+            @include media-min($xl) {
                 font-size: $fnt-sz-40;
             }
         }
@@ -1570,11 +1570,88 @@ html {
         @include media-min($md) {
             font-size: $fnt-sz-20;
         }
-    }
+     
+        .total-tickets-earned{
+            width: 60%;
+            max-width: 25rem;
+            font-size: $fnt-sz-16;
+            font-weight: $fnt-wgt-600;
+            background: #433848;
+            color: white;
+            border-radius: 10px;
+            max-height:100px;
+            text-align: center;
+            @include media-min($md) {
+                width: 80%;
+            }
 
-    .opacity-0-5 {
-        opacity: 0.5;
-    }
+            .you-earned {
+            font-size: $fnt-sz-16;
+            font-weight: $fnt-wgt-600;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+             @include media-min($xl) {
+                font-size: $fnt-sz-20;
+            }
+            }
+
+            .tickets-amount {
+                font-size: $fnt-sz-20;
+                font-weight: $fnt-wgt-700;
+                color: #F7B620;
+                @include media-min($md) {
+                    font-size: $fnt-sz-40;
+                }
+            }
+
+            img {
+                width: 35%;
+                vertical-align: middle;
+                @include media-min($xl) {
+                    width: 40%;
+                }
+            }
+          
+        }
+
+        .continue-button{
+            width: 60%;
+            max-width: 25rem;
+            font-weight: $fnt-wgt-700;
+            font-size: $fnt-sz-20;  
+            background: #ff3399;
+            color: white;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 10px;
+            padding: 0.8rem;
+            @include media-min($md) {
+                width: 80%;
+            }
+
+
+        }
+
+        .btn-results{
+            width: 100%;
+            max-width: 25rem;
+            font-weight: $fnt-wgt-700;
+            font-size: $fnt-sz-12;  
+            color: #ff3399;
+            box-shadow: inset 0px 3px 6px #0000000f;
+            border-radius: 10px;
+            padding: 0.8rem;
+            @include media-min($md) {
+                font-size: $fnt-sz-20;
+            }
+        }
+
+        .opacity-0-5 {
+            opacity: 0.5;
+        }
+
+       
+   
 }
 
 @import "./assets/css/all";
