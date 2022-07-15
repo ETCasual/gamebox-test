@@ -35,6 +35,7 @@ import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
+import PauseMenuModal from "Components/Modals/PauseMenuModal";
 
 const Leaderboard = ({
     data,
@@ -334,7 +335,7 @@ const Leaderboard = ({
     };
 
     window.handleQuitGame = () => {
-        handleQuitGame()
+        handleQuitGame();
     };
 
     const handleModalButton = (choice) => {
@@ -597,6 +598,10 @@ const Leaderboard = ({
                         currentGameBoosterInfo={currentGameBoosterInfo}
                     />
                 )}
+
+                {/* MODAL FOR GAME PAUSED */}
+                {<PauseMenuModal />}
+
                 {/* Comment out because the Front End X button is no longer in
                 used */}
                 {/* {!modalStatus.isQuitGameBtnDisabled && (
@@ -635,12 +640,12 @@ const Leaderboard = ({
                             </button>
                         </div>
 
-                        <iframe
+                        {/* <iframe
                             title="game"
                             id="destination"
                             srcDoc={gameData}
                             frameBorder="0"
-                        />
+                        /> */}
                     </>
                 )}
             </div>
