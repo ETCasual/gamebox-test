@@ -1164,7 +1164,7 @@ html {
                     }
                 }
             }
-            &:hover {
+            &:hover:enabled {
                 // outline: 2px solid #719ECE;
                 // outline: none;
                 // border: none;
@@ -1175,7 +1175,7 @@ html {
         .selections.checked {
             // outline: 2px solid #f8b61f;
             box-shadow: 0 0 0 2pt #f8b61f;
-            &:hover {
+            &:hover:enabled {
                 // outline: 2px solid #f8b61f;
                 box-shadow: 0 0 0 2pt #f8b61f;
             }
@@ -1222,7 +1222,7 @@ html {
                     color: black;
                 }
             }
-            .play-btn:hover {
+            .play-btn:hover:enabled {
                 background: #f20086;
             }
         }
@@ -1235,7 +1235,7 @@ html {
                     color: black;
                 }
             }
-            .play-btn:hover {
+            .play-btn:hover:enabled {
                 background: #ffae00;
             }
         }
