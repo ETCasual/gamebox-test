@@ -420,8 +420,8 @@ const Rewards = () => {
                                                                                 ) && (
                                                                                     <div className="claim-btn opacity-0-5 d-inline-block py-2 px-3">
                                                                                         <p className="mb-0">
-                                                                                            Claim
-                                                                                            Reward
+                                                                                            CLAIM
+                                                                                            REWARD
                                                                                             -{" "}
                                                                                             {getRemainingDaysToClaim(
                                                                                                 data.prizeCanClaimDate
@@ -447,8 +447,8 @@ const Rewards = () => {
                                                                                             }
                                                                                         >
                                                                                             <p className="mb-0">
-                                                                                                Claim
-                                                                                                Reward
+                                                                                                CLAIM
+                                                                                                REWARD
                                                                                             </p>
                                                                                         </div>
                                                                                     )}
@@ -467,8 +467,8 @@ const Rewards = () => {
                                                                                             }
                                                                                         >
                                                                                             <p className="mb-0">
-                                                                                                Claim
-                                                                                                Reward
+                                                                                                CLAIM
+                                                                                                REWARD
                                                                                             </p>
                                                                                         </div>
                                                                                     )}

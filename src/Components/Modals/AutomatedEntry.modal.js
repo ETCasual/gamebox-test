@@ -129,7 +129,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
 
                     {/* CARD */}
                     <div className="row justify-content-center mt-3 mt-sm-5">
-                        <div className="col-10 col-md-8 mb-3 pl-2 pr-1">
+                        <div className="col-10 col-md-6 mb-4 pl-2 pr-1">
                             {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                             <div className="card-prize d-flex m-auto">
                                 <div className="p-1 m-auto">
@@ -185,7 +185,7 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     }}
                                     onClick={handleInstructionsCloseBtn}
                                 >
-                                    Start earning tickets
+                                    START EARNING TICKETS
                                 </Link>
                             </div>
                             <div className="line" />

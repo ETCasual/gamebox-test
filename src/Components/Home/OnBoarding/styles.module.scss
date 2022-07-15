@@ -114,13 +114,14 @@
                             }
                         }
                         .continue {
-                            background-color: #cc0767;
+                            background-color: #ff3399;
                             color: white;
                             box-shadow: inset 0px 3px 6px #0000000f;
                             border-radius: 10px;
                             padding: 1rem;
                             min-width: 15.438rem;
                             font-size: $fnt-sz-14;
+                            font-weight: bold;
                         }
                     }
                 }

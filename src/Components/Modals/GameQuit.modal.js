@@ -6,20 +6,22 @@ const GameQuitModal = ({ handleModalButton }) => {
                 <p className="subtitle pl-2 mb-3">
                     You will lose your current game score if you exit now and
                 </p>
-                <p className="pl-2 text-danger">Gems used will not be refunded if you leave the game now.</p>
+                <p className="pl-2 text-danger">
+                    Gems used will not be refunded if you leave the game now.
+                </p>
 
                 <div className="p-0 btn-wrapper d-flex mt-4">
                     <button
                         className="col btn-no"
                         onClick={() => handleModalButton("no")}
                     >
-                        Cancel
+                        CANCEL
                     </button>
                     <button
                         className="col bg-danger text-white"
                         onClick={() => handleModalButton("yes")}
                     >
-                        Yes, quit game.
+                        YES, QUIT GAME.
                     </button>
                 </div>
             </div>

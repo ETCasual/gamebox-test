@@ -39,10 +39,10 @@
             }
             form {
                 margin: 0 auto;
-                width: clamp(17rem, 25vw, 25rem);   
+                width: clamp(17rem, 25vw, 25rem);
                 @include media-min($sm) {
-                    width: clamp(22rem, 25vw, 25rem);   
-                }    
+                    width: clamp(22rem, 25vw, 25rem);
+                }
                 .email,
                 .password {
                     background: #3f3f3f;
@@ -66,14 +66,14 @@
                     box-shadow: inset 0px 3px 6px #0000000f;
                     border-radius: 5px;
                     font-size: $fnt-sz-14;
-                    font-weight: $fnt-wgt-600;
+                    font-weight: bold;
                     color: white;
                     height: 3.25rem;
                     margin: 0 auto;
                     width: clamp(14rem, 21vw, 21rem);
                     @include media-min($sm) {
                         width: clamp(19rem, 21vw, 21rem);
-                    }        
+                    }
                 }
                 .forgot-password {
                     color: #868686;
@@ -101,7 +101,7 @@
         .close-button {
             cursor: pointer;
             width: 30px;
-            height: 30px;  
+            height: 30px;
             @include media-max($md) {
                 width: 36px;
                 height: 36px;
@@ -250,12 +250,14 @@
                         font-weight: $fnt-wgt-600;
                     }
                     .register-now-button {
-                        background: #f20086;
+                        background: #ff3399;
+                        font-weight: bold;
                         color: #ffffff;
                     }
                     .login-button {
-                        border: 1px solid #f20086;
-                        color: #ff027d;
+                        border: 1px solid #ff3399;
+                        font-weight: bold;
+                        color: #ff3399;
                     }
                 }
             }
@@ -298,7 +300,8 @@
                         }
                     }
                     .swiper-slide {
-                        img, video {
+                        img,
+                        video {
                             @include media-max($sm) {
                                 position: relative;
                                 left: 2rem;
@@ -338,8 +341,16 @@
                 margin: auto;
                 object-fit: cover;
 
-                -webkit-mask-image: radial-gradient(closest-side at 60% 55%, #000000CC, #00000000);
-                mask-image: radial-gradient(closest-side at 60% 55%, #000000CC, #00000000);
+                -webkit-mask-image: radial-gradient(
+                    closest-side at 60% 55%,
+                    #000000cc,
+                    #00000000
+                );
+                mask-image: radial-gradient(
+                    closest-side at 60% 55%,
+                    #000000cc,
+                    #00000000
+                );
             }
         }
     }
@@ -501,14 +512,14 @@
             z-index: 1;
         }
         .register-now-button {
-            background: #cc0767;
+            background: #ff3399;
             box-shadow: inset 0px 3px 6px #0000000f;
             color: #ffffff;
             border-radius: 10px;
             font-size: $fnt-sz-14;
             width: 247px;
             height: 46px;
-            font-weight: $fnt-wgt-400;
+            font-weight: bold;
             margin: 0 auto;
             z-index: 1;
         }

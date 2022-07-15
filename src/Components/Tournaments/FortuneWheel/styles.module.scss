@@ -20,9 +20,7 @@
     .wrapper {
         border-radius: 10px;
         // background-color: #2b2b2b;
-        background: linear-gradient(90deg,
-                         #38303d 0%,
-                         #1c181f 100%);
+        background: linear-gradient(90deg, #38303d 0%, #1c181f 100%);
 
         .wrapper-col {
             .the-spinner-text {
@@ -42,11 +40,10 @@
                     font-size: $fnt-sz-24;
                 }
 
-                font-weight: $fnt-wgt-700;
+                font-weight: bold;
             }
 
             .spin-amount-left-wrapper {
-
                 .spins-left-text,
                 .you-have-text {
                     font-size: $fnt-sz-14;
@@ -101,7 +98,7 @@
                 max-width: 70%;
                 width: 15rem;
                 height: 2rem;
-    
+
                 @include media-min($md) {
                     height: 3.75rem;
                 }
@@ -115,7 +112,7 @@
                         font-size: $fnt-sz-24;
                     }
                 }
-    
+
                 .balance-number {
                     font-size: $fnt-sz-16;
                     font-weight: $fnt-wgt-600;
@@ -125,7 +122,7 @@
                         font-size: $fnt-sz-22;
                     }
                 }
-    
+
                 .your-balance-text {
                     font-size: $fnt-sz-12;
                     color: white;
@@ -134,7 +131,7 @@
                         font-size: $fnt-sz-14;
                     }
                 }
-    
+
                 img {
                     width: 20px;
                     margin-left: 8px;
@@ -182,23 +179,23 @@
                     tr:first-child td:first-child {
                         border-top-left-radius: 10px;
                     }
-    
+
                     tr:first-child td:last-child {
                         border-top-right-radius: 10px;
                     }
-    
+
                     tr:last-child td:first-child {
                         border-bottom-left-radius: 10px;
                     }
-    
+
                     tr:last-child td:last-child {
                         border-bottom-right-radius: 10px;
                     }
-    
+
                     tr.probability-row {
                         display: flex;
                         text-align: center;
-    
+
                         td.probability-percentage-caption {
                             font-size: $fnt-sz-12;
                             font-weight: bold;
@@ -212,7 +209,7 @@
                                 line-height: 30px;
                             }
                         }
-    
+
                         td.probability-tickets-text-caption {
                             font-size: $fnt-sz-12;
                             font-weight: bold;
@@ -226,7 +223,7 @@
                                 line-height: 30px;
                             }
                         }
-    
+
                         td.probability-percentage {
                             font-size: $fnt-sz-12;
                             font-weight: $fnt-wgt-600;
@@ -239,7 +236,7 @@
                                 line-height: 30px;
                             }
                         }
-    
+
                         td.probability-tickets-text {
                             font-size: $fnt-sz-12;
                             width: 100px;
@@ -252,7 +249,7 @@
                             }
                         }
                     }
-    
+
                     .icon {
                         width: 18px;
                         @include media-min($md) {
@@ -261,7 +258,6 @@
                     }
                 }
             }
-            
 
             // &:nth-child(1),
             // &:nth-child(2),
@@ -281,74 +277,74 @@
             }
 
             // &:nth-child(2) {
-                // background: linear-gradient(155deg,
-                //         #212121 17%,
-                //         #0b0b0b 110%);
-                
-                // .your-tickets {
-                //     box-shadow: 0px 15px 20px #00000029;
-                //     border: 1px solid #fdc43d;
-                //     border-radius: 10px;
-                //     min-width: 15.313rem;
-                //     max-width: 70%;
-                //     height: 3.75rem;
+            // background: linear-gradient(155deg,
+            //         #212121 17%,
+            //         #0b0b0b 110%);
 
-                //     .your-tickets-text {
-                //         font-size: $fnt-sz-10;
-                //         color: #868686;
-                //     }
+            // .your-tickets {
+            //     box-shadow: 0px 15px 20px #00000029;
+            //     border: 1px solid #fdc43d;
+            //     border-radius: 10px;
+            //     min-width: 15.313rem;
+            //     max-width: 70%;
+            //     height: 3.75rem;
 
-                //     .ticket-number {
-                //         font-size: $fnt-sz-18;
-                //         font-weight: $fnt-wgt-600;
-                //         color: #fdc43d;
-                //     }
-                // }
+            //     .your-tickets-text {
+            //         font-size: $fnt-sz-10;
+            //         color: #868686;
+            //     }
 
-                // .use-gems-button {
-                //     cursor: pointer;
-                //     width: 226px;
-                //     height: 54px;
-                //     background: transparent
-                //         linear-gradient(180deg, #04e4aa 0%, #01b789 100%) 0% 0%
-                //         no-repeat padding-box;
-                //     border-radius: 10px;
-                //     opacity: 1;
-                //     margin-top: 20px;
-                //     display: flex;
-                //     align-items: center;
-                //     flex-direction: column;
-                //     .use-gems-text {
-                //         font-size: $fnt-sz-14;
-                //         font-weight: bold;
-                //         margin-top: 9px;
-                //         margin-bottom: 1px;
-                //     }
-                //     .get-spins-text {
-                //         font-size: $fnt-sz-10;
-                //     }
-                // }
-                // .purchase-gems-button {
-                //     cursor: pointer;
-                //     width: 226px;
-                //     height: 54px;
-                //     background: #ff2c44 0% 0% no-repeat padding-box;
-                //     border-radius: 10px;
-                //     opacity: 1;
-                //     margin-top: 20px;
-                //     display: flex;
-                //     align-items: center;
-                //     flex-direction: column;
-                //     .insufficient-gems-text {
-                //         font-size: $fnt-sz-14;
-                //         font-weight: bold;
-                //         margin-top: 9px;
-                //         margin-bottom: 1px;
-                //     }
-                //     .purchase-text {
-                //         font-size: $fnt-sz-10;
-                //     }
-                // }
+            //     .ticket-number {
+            //         font-size: $fnt-sz-18;
+            //         font-weight: $fnt-wgt-600;
+            //         color: #fdc43d;
+            //     }
+            // }
+
+            // .use-gems-button {
+            //     cursor: pointer;
+            //     width: 226px;
+            //     height: 54px;
+            //     background: transparent
+            //         linear-gradient(180deg, #04e4aa 0%, #01b789 100%) 0% 0%
+            //         no-repeat padding-box;
+            //     border-radius: 10px;
+            //     opacity: 1;
+            //     margin-top: 20px;
+            //     display: flex;
+            //     align-items: center;
+            //     flex-direction: column;
+            //     .use-gems-text {
+            //         font-size: $fnt-sz-14;
+            //         font-weight: bold;
+            //         margin-top: 9px;
+            //         margin-bottom: 1px;
+            //     }
+            //     .get-spins-text {
+            //         font-size: $fnt-sz-10;
+            //     }
+            // }
+            // .purchase-gems-button {
+            //     cursor: pointer;
+            //     width: 226px;
+            //     height: 54px;
+            //     background: #ff2c44 0% 0% no-repeat padding-box;
+            //     border-radius: 10px;
+            //     opacity: 1;
+            //     margin-top: 20px;
+            //     display: flex;
+            //     align-items: center;
+            //     flex-direction: column;
+            //     .insufficient-gems-text {
+            //         font-size: $fnt-sz-14;
+            //         font-weight: bold;
+            //         margin-top: 9px;
+            //         margin-bottom: 1px;
+            //     }
+            //     .purchase-text {
+            //         font-size: $fnt-sz-10;
+            //     }
+            // }
             // }
         }
 
@@ -377,7 +373,7 @@
                 position: absolute;
                 top: 50%;
                 right: 50%;
-                transform: translate(50%,-50%);
+                transform: translate(50%, -50%);
                 width: 38%;
                 height: 38%;
                 border-radius: 100%;
@@ -391,18 +387,16 @@
                 position: absolute;
                 top: 50%;
                 right: 50%;
-                transform: translate(50%,-50%);
+                transform: translate(50%, -50%);
                 width: 30%;
                 height: 30%;
-                border: 3px solid #F4F4F4;
+                border: 3px solid #f4f4f4;
                 border-radius: 100%;
-                background: linear-gradient(180deg,
-                        #fdc43d 0%,
-                        #ff9300 100%);
+                background: linear-gradient(180deg, #fdc43d 0%, #ff9300 100%);
                 cursor: pointer;
 
                 @include media-min($xs) {
-                    border: 5px solid #F4F4F4;
+                    border: 5px solid #f4f4f4;
                 }
 
                 button {
@@ -421,7 +415,7 @@
                         font-size: $fnt-sz-16;
                     }
                 }
-                
+
                 .spins-left-text {
                     font-size: $fnt-sz-16;
                     font-weight: bold;
@@ -498,17 +492,16 @@
     }
 }
 
-.spinner-rules-text
-{
-    font-family: "Open Sans",sans-serif;
+.spinner-rules-text {
+    font-family: "Open Sans", sans-serif;
     @include media-min($xs) {
-        font-size: 1rem;           
+        font-size: 1rem;
     }
-    
+
     @include media-min($xl) {
         font-size: 1.5rem;
     }
-    
+
     @include media-min($xxl) {
         font-size: 2rem;
     }
@@ -547,7 +540,6 @@
                         @include media-min($xxl) {
                             margin-bottom: 1.25rem;
                         }
-
                     }
                 }
             }
