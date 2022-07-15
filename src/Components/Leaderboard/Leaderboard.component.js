@@ -334,10 +334,7 @@ const Leaderboard = ({
     };
 
     window.handleQuitGame = () => {
-        setModalStatus((prev) => ({
-            ...prev,
-            isQuitGameConfirm: true,
-        }));
+        handleQuitGame()
     };
 
     const handleModalButton = (choice) => {
