@@ -191,7 +191,7 @@ const AutomatedEntry = ({ data }) => {
                                         srcSet={data.prizeBG2}
                                     />
                                     <img
-                                        className="bonus-reward-img mt-sm-2"
+                                        className="bonus-reward-img"
                                         src={data.prizeBG}
                                         alt={data.prizeTitle}
                                     />

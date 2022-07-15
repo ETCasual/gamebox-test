@@ -15,8 +15,8 @@ iframe#demo-game {
         width: 100%;
         position: relative;
         z-index: 0;
-        color: #f20086;
-        font-weight: $fnt-wgt-700;
+        color: #ff3399;
+        font-weight: bold;
         font-size: $fnt-sz-40;
         @include media-min($md) {
             font-size: $fnt-sz-50;

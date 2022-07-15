@@ -33,7 +33,7 @@ const DailyBonus = ({ dailyRewardRef, setRegistrationInstructionModal }) => {
                         className="register-now-button"
                         onClick={() => setRegistrationInstructionModal(true)}
                     >
-                        Register now!
+                        REGISTER NOW!
                     </button>
                 </div>
             </div>

@@ -121,7 +121,7 @@ const GameDuration = ({
                     </div>
                 </div>
             </div>
-            <button className="join">Join Tournament</button>
+            <button className="join">JOIN TOURNAMENT</button>
         </div>
     );
 };

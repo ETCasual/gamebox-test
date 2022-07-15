@@ -33,8 +33,7 @@ const GameEndModal = ({
         clearInterval(timeoutRef);
         timeoutRef = setTimeout(() => {
             const lbId = JSON.parse(sessionStorage.getItem("lbId"));
-            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0)
-            {
+            if (parseInt(lbId?.cgId) > 0 && parseInt(lbId.gameId) > 0) {
                 dispatch(loadLeaderboardHistory(parseInt(lbId?.cgId)));
                 dispatch(loadLeaderboardRanks(parseInt(lbId.gameId)));
 
@@ -75,8 +74,8 @@ const GameEndModal = ({
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
                     <div className="game-result-panel col-12 col-md-4 col-xl-4 position-relative">
                         {/* CARD */}
-                        <div className="row justify-content-center mt-3 mt-sm-3 px-0">
-                            <div className="col-10 col-lg-8 mb-4 px-0 ">
+                        <div className="row justify-content-center my-3 my-sm-3">
+                            <div className="col-10 col-lg-8 mb-2 pl-2 pr-1">
                                 {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                                 <p className="text-center panel-title">
                                     GAME RESULT
@@ -104,7 +103,7 @@ const GameEndModal = ({
                                     </p>
                                 )}
 
-                            {currentGameBoosterInfo.isUseBooster ? (
+                                {currentGameBoosterInfo.isUseBooster ? (
                                     <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
                                         <p className="pr-2 ticket-rate-text-score">
                                             every{" "}
@@ -127,10 +126,8 @@ const GameEndModal = ({
                                             />
                                         </p>
                                     </div>
-                                ):
-                                (
-                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
-                                    </div>
+                                ) : (
+                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4"></div>
                                 )}
 
                                 {currentGameBoosterInfo.isUseBooster && (
@@ -155,7 +152,7 @@ const GameEndModal = ({
                                     className="continue-button d-block text-center mx-auto mt-4 py-3"
                                     onClick={handleContinueButton}
                                 >
-                                    Continue
+                                    CONTINUE
                                 </button>
 
                                 {/* {isShowTournamentEndedText ? 

@@ -59,7 +59,7 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
                         {data?.prizeSubtitle}
                     </div>
                     <button className="tap-btn mb-0">
-                        Tap to reveal the winner
+                        TAP TO REVEAL THE WINNER
                     </button>
                 </div>
             )}

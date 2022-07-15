@@ -5,7 +5,6 @@ const SelectWalletsModalPopup = ({
     handleConnectMetamask,
     handleConnectWalletConnect,
 }) => {
-
     const [connectGuideShow, setConnectGuideShow] = useState(false);
 
     useEffect(() => {
@@ -25,7 +24,7 @@ const SelectWalletsModalPopup = ({
                     alt="close-btn"
                 />
                 <div className="col-12 p-4 connect-wallet-title-wrapper">
-                    <h5 className="title">Connect wallet</h5>
+                    <h5 className="title mb-0">CONNECT WALLET</h5>
                 </div>
                 {!connectGuideShow && (
                     <div className="col-12 my-5 connect-wallet-list">
@@ -63,7 +62,10 @@ const SelectWalletsModalPopup = ({
                 )}
                 {connectGuideShow && (
                     <div className="col-12 my-3 px-4 connect-wallet-guide">
-                        <p className="subtitle">Follow this guide to connect your metamask wallet on your mobile.</p>
+                        <p className="subtitle">
+                            Follow this guide to connect your metamask wallet on
+                            your mobile.
+                        </p>
                         <ul className="my-4 list-unstyled">
                             <li className="row mb-2">
                                 <div className="col-2 step">
@@ -90,9 +92,7 @@ const SelectWalletsModalPopup = ({
                                     <p className="mb-0">3.</p>
                                 </div>
                                 <div className="col-9 col-md-10 px-0 instruction">
-                                    <p className="mb-0">
-                                        Tap on Metamask
-                                    </p>
+                                    <p className="mb-0">Tap on Metamask</p>
                                 </div>
                             </li>
                             <li className="row mb-2">
@@ -111,7 +111,8 @@ const SelectWalletsModalPopup = ({
                                 </div>
                                 <div className="col-9 col-md-10 px-0 instruction">
                                     <p className="mb-0">
-                                        Select your wallet network by tapping on the "Wallet" at the top
+                                        Select your wallet network by tapping on
+                                        the "Wallet" at the top
                                     </p>
                                 </div>
                             </li>
@@ -130,9 +131,7 @@ const SelectWalletsModalPopup = ({
                                     <p className="mb-0">7.</p>
                                 </div>
                                 <div className="col-9 col-md-10 px-0 instruction">
-                                    <p className="mb-0">
-                                        Return to GameBox
-                                    </p>
+                                    <p className="mb-0">Return to GameBox</p>
                                 </div>
                             </li>
                         </ul>
@@ -140,7 +139,7 @@ const SelectWalletsModalPopup = ({
                 )}
                 <div className="connect-wallet-guide-btn d-flex text-center justify-content-center">
                     {!connectGuideShow && (
-                        <p 
+                        <p
                             className="p-3 w-100"
                             onClick={() => setConnectGuideShow(true)}
                         >
@@ -148,7 +147,7 @@ const SelectWalletsModalPopup = ({
                         </p>
                     )}
                     {connectGuideShow && (
-                        <p 
+                        <p
                             className="p-3 w-100"
                             onClick={() => setConnectGuideShow(false)}
                         >
