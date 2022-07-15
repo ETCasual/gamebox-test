@@ -181,7 +181,7 @@ const Index = () => {
                             sessionStorage.setItem("showAnnouncement", 0);
                         }
 
-                        if (e.type === "winner" && e.seen) {
+                        if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
