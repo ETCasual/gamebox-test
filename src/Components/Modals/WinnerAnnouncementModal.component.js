@@ -237,7 +237,7 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                     ))}
 
                     <div
-                        className={`pagination mt-2 p-2 ${
+                        className={`pagination mt-2 p-2 mx-auto ${
                             prizeData.length > 1 ? "d-flex" : "d-none"
                         } align-items-center justify-content-between`}
                     >

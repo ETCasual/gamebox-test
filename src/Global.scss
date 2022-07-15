@@ -1297,20 +1297,21 @@ html {
         .close-button {
             width: 30px;
             height: 30px;
+            right: calc(50% - 15px);
+            transform: translateX(22vw);
+
             @include media-min($md) {
                 width: 36px;
                 height: 36px;
+                right: calc(50% - 18px);
+                transform: translateX(150px);
             }
+
             top: 0px;
-            right: 0px;
             cursor: pointer;
             z-index: 2;
         }
-        width: 15rem;
-
-        @include media-min($md) {
-            width: 23rem;
-        }
+        width: 100%;
         
         // Check is mobile
         @media (pointer:none), (pointer:coarse) {
@@ -1319,11 +1320,18 @@ html {
 
         .swiper {
             .prize {
+                width: 50%;
+                min-width: 200px;
+                max-width: 300px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
                 margin: 0 auto;
+
+                @include media-min($md) {
+                    max-width: 350px;
+                }
 
                 .picture-wrapper {
                     position: relative;
@@ -1444,7 +1452,7 @@ html {
                         .value {
                             text-align: right;
                             font-size: $fnt-sz-10;
-                            padding-right: 1rem;
+                            padding-right: 3rem;
                         }
                     }
                     .connect-wallet-btn {
@@ -1475,9 +1483,12 @@ html {
                 background: linear-gradient(111deg, #302f2f 0%, #0b0b0b 100%);
                 box-shadow: 0px 3px 6px #00000029;
                 border-radius: 10px;
-                width: 100%;
+                width: 50%;
+                min-width: 200px;
+                max-width: 300px;
 
                 @include media-min($md) {
+                    max-width: 350px;
                 }
                 .prev,
                 .next {
