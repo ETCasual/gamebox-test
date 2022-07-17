@@ -3,10 +3,12 @@ const PauseMenuModal = ({ handleResumeButton, handleQuitButton }) => {
         <>
             {
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                    <div className="game-pause-panel col-12 col-md-4 col-xl-4 position-relative">
+                    <div className="game-pause-panel col-12 col-md-8 col-xl-6 col-xxl-5 position-relative">
                         {/* CARD */}
                         <div className="row justify-content-center mt-3 mt-sm-3 px-0">
                             <div className="col-10 col-lg-8 mb-4 px-0 ">
+                                {/*EXTRA MARGIN */}
+                                <p className="my-5"></p>
                                 <p className="text-center panel-title">
                                     GAME PAUSED
                                 </p>
@@ -15,38 +17,43 @@ const PauseMenuModal = ({ handleResumeButton, handleQuitButton }) => {
                                     Game time still continue running...
                                 </p>
 
+                                {/*EXTRA MARGIN */}
+                                <p className="mt-2"></p>
+
                                 <button
-                                    className="resume-button d-block text-center mx-auto mt-5 py-3"
+                                    className="resume-button d-block mx-auto text-center  mt-5 py-3"
                                     onClick={handleResumeButton}
                                 >
                                     RESUME
                                 </button>
 
                                 <button
-                                    className="quit-button d-block text-center mx-auto mt-4 py-3"
+                                    className="quit-button d-block text-center mx-auto mt-3 py-3"
                                     onClick={handleQuitButton}
                                 >
                                     QUIT
                                 </button>
-                            </div>
-
-                            <div className="bottom-buttons-container row text-center align-items-center">
-                                <p className="game-tutorial col-6 d-flex align-items-center d-flex my-auto">
-                                    <img
-                                        width="40"
-                                        src={`${window.cdn}buttons/icon_tutorial.png`}
-                                        alt="tickets"
-                                    />
-                                    <span>Game Tutorial</span>
-                                </p>
-                                <p className="audio-control col-6  d-flex align-items-center d-flex my-auto">
-                                    <img
-                                        width="40"
-                                        src={`${window.cdn}buttons/icon_audio_on.png`}
-                                        alt="tickets"
-                                    />
-                                    <span>Turn off audio</span>
-                                </p>
+                                <div className="bottom-buttons-container d-flex flex-row mx-auto row mt-3">
+                                    <p className="col-5 my-auto px-0  d-flex align-items-center justify-content-between">
+                                        <img
+                                            src={`${window.cdn}buttons/icon_tutorial.png`}
+                                            alt="tutorial"
+                                        />
+                                        <span className="pr-2">
+                                            Game Tutorial
+                                        </span>
+                                    </p>
+                                    <p className="col-2 my-auto px-0  d-flex"></p>
+                                    <p className="col-5 my-auto  px-0  d-flex  align-items-center justify-content-between">
+                                        <img
+                                            src={`${window.cdn}buttons/icon_audio_on.png`}
+                                            alt="tutorial"
+                                        />
+                                        <span>Turn off audio</span>
+                                    </p>
+                                </div>
+                                {/*EXTRA MARGIN */}
+                                <p className="my-5"></p>
                             </div>
                         </div>
                     </div>
