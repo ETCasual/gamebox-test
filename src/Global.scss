@@ -1620,8 +1620,8 @@ html {
     .resume-button{
         width: 100%;
         max-width: 25rem;
-        font-weight: $fnt-wgt-700;
-        font-size: $fnt-sz-22;  
+        font-weight: $fnt-wgt-800;
+        font-size: $fnt-sz-26;  
         background: #ff3399;
         color: white;
         box-shadow: inset 0px 3px 6px #0000000f;
@@ -1632,12 +1632,16 @@ html {
     .quit-button{
         width: 100%;
         max-width: 25rem;
-        font-weight: $fnt-wgt-700;
-        font-size: $fnt-sz-22;  
+        font-weight: $fnt-wgt-800;
+        font-size: $fnt-sz-26;  
         background: #101010;
         color: white;
         box-shadow: inset 0px 3px 6px #0000000f;
         border-radius: 10px;
+    }
+
+    .opacity-0-5 {
+        opacity: 0.5;
     }
 
     .bottom-buttons-container{
@@ -1654,7 +1658,9 @@ html {
             @include media-min($xl) {
                 width: 25%;
             }
+            cursor: pointer;
         }
+        
         @include media-min($xs) {
             font-size: $fnt-sz-16;
             
@@ -1664,6 +1670,10 @@ html {
         }
         span{
             text-decoration: underline;
+
+        }
+        span:hover{
+            cursor: pointer;
         }
     }
 }

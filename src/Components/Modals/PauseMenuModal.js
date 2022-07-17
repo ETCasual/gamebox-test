@@ -1,4 +1,4 @@
-const PauseMenuModal = ({ handleResumeButton, handleQuitButton }) => {
+const PauseMenuModal = ({ handleResumeButton, handleQuitButton ,handleAudioButton}) => {
     return (
         <>
             {
@@ -21,14 +21,14 @@ const PauseMenuModal = ({ handleResumeButton, handleQuitButton }) => {
                                 <p className="mt-2"></p>
 
                                 <button
-                                    className="resume-button d-block mx-auto text-center  mt-5 py-3"
+                                    className="resume-button d-block mx-auto text-center  mt-5 py-2"
                                     onClick={handleResumeButton}
                                 >
                                     RESUME
                                 </button>
 
                                 <button
-                                    className="quit-button d-block text-center mx-auto mt-3 py-3"
+                                    className="quit-button d-block text-center mx-auto mt-3 py-2"
                                     onClick={handleQuitButton}
                                 >
                                     QUIT
@@ -44,12 +44,15 @@ const PauseMenuModal = ({ handleResumeButton, handleQuitButton }) => {
                                         </span>
                                     </p>
                                     <p className="col-2 my-auto px-0  d-flex"></p>
-                                    <p className="col-5 my-auto  px-0  d-flex  align-items-center justify-content-between">
+                                    <p className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between">
                                         <img
                                             src={`${window.cdn}buttons/icon_audio_on.png`}
                                             alt="tutorial"
                                         />
-                                        <span>Turn off audio</span>
+                                        <span
+                                            onClick={handleAudioButton}>
+                                            Turn off audio
+                                        </span>
                                     </p>
                                 </div>
                                 {/*EXTRA MARGIN */}
