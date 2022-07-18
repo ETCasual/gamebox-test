@@ -1665,9 +1665,7 @@ html {
             font-size: $fnt-sz-16;
             
         }
-        @include media-min($xl) {
-            font-size: $fnt-sz-18;
-        }
+      
         span{
             text-decoration: underline;
 
