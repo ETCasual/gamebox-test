@@ -1,4 +1,8 @@
-const PauseMenuModal = ({ handleResumeButton, handleQuitButton ,handleAudioButton}) => {
+const PauseMenuModal = ({
+    handleResumeButton,
+    handleQuitButton,
+    handleAudioButton,
+}) => {
     return (
         <>
             {
@@ -44,16 +48,31 @@ const PauseMenuModal = ({ handleResumeButton, handleQuitButton ,handleAudioButto
                                         </span>
                                     </p>
                                     <p className="col-2 my-auto px-0  d-flex"></p>
-                                    <p className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between">
-                                        <img
-                                            src={`${window.cdn}buttons/icon_audio_on.png`}
-                                            alt="tutorial"
-                                        />
-                                        <span
-                                            onClick={handleAudioButton}>
-                                            Turn off audio
-                                        </span>
-                                    </p>
+
+                                    {window.localStorage.getItem("mute") ===
+                                    "true" ? (
+                                        <p
+                                            className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between"
+                                            onClick={handleAudioButton}
+                                        >
+                                            <img
+                                                src={`${window.cdn}buttons/icon_audio_off.png`}
+                                                alt="audio"
+                                            />
+                                            <span>Turn on audio</span>
+                                        </p>
+                                    ) : (
+                                        <p
+                                            className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between"
+                                            onClick={handleAudioButton}
+                                        >
+                                            <img
+                                                src={`${window.cdn}buttons/icon_audio_on.png`}
+                                                alt="audio"
+                                            />
+                                            <span>Turn off audio</span>
+                                        </p>
+                                    )}
                                 </div>
                                 {/*EXTRA MARGIN */}
                                 <p className="my-5"></p>

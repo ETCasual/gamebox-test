@@ -643,6 +643,13 @@ const Leaderboard = ({
                                 isQuitGameConfirm: true,
                             }));
                         }}
+                        handleAudioButton={() => {
+                            let destination =
+                                document.getElementById(
+                                    "destination"
+                                )?.contentWindow;
+                            destination?.toggleAudioOnOff?.();
+                        }}
                     />
                 )}
 
