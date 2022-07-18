@@ -67,7 +67,7 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                                 {data.prizeSubtitle}
                             </p>
                         </div>
-                        <p className="tap-btn mb-0">Tap to reveal the winner</p>
+                        <p className="tap-btn mb-0">TAP TO REVEAL THE WINNER</p>
                     </div>
                 )}
             </div>

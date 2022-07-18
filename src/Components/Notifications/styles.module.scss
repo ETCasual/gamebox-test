@@ -25,7 +25,7 @@
             background: #131313;
             border-radius: 10px 0px 0px 10px;
         }
-        video, 
+        video,
         img:not(.icon) {
             width: 50px;
             z-index: 1;
@@ -41,7 +41,7 @@
         }
         .noti-info {
             font-size: $fnt-sz-16;
-            font-weight: $fnt-wgt-700;
+            font-weight: bold;
             .tickets {
                 color: #f6b622;
             }

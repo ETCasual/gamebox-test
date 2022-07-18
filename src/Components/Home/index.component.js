@@ -187,7 +187,7 @@ const Index = () => {
                     n?.list?.forEach((e, idx) => {
                         if (
                             winnerAnnouncementNotificationList.length - 1 ===
-                            nIdx &&
+                                nIdx &&
                             n.list.length - 1 === idx
                         )
                         {
@@ -393,7 +393,7 @@ const Index = () => {
         <>
             <section id="home">
                 <div className="container-fluid mb-4 bonus">
-                    <div className="row justify-content-center px-1 py-3 pt-sm-4 pb-sm-5">
+                    <div className="row justify-content-center px-1 py-4 py-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">
                                 {/* FORTUNE WHEEL */}
@@ -417,7 +417,7 @@ const Index = () => {
                                                 </div>
                                                 <div className="earn-more-tickets-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
                                                     <img
-                                                        className="earn-more-tickets-img mt-sm-2"
+                                                        className="earn-more-tickets-img"
                                                         src={`${window.cdn}icons/icon_spinner.png`}
                                                         alt="earn-more-tickets"
                                                     />
@@ -448,7 +448,7 @@ const Index = () => {
                                 </div>
 
                                 {/* AUTOMATED */}
-                                <div className="automatedEntry col-12 col-sm-6 px-2 mb-3 mb-sm-0">
+                                <div className="automatedEntry col-12 col-sm-6 px-2">
                                     {/* LOADER */}
                                     {automatedEntryData.length <= 0 && (
                                         <AutomatedEntryLoader />

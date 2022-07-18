@@ -17,7 +17,7 @@ const Navbar = ({ setLoginModal }) => {
                             className="nav-login"
                             onClick={() => setLoginModal(true)}
                         >
-                            Login
+                            LOGIN
                         </button>
                     </div>
                 </div>

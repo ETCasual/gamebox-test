@@ -1,5 +1,9 @@
 // ACTIVITY CARD COMPONENT
-.activity-card {
+.activity-card-wrapper {
+    .activity-card {
+        background: linear-gradient(90deg, #433849, #2f2833);
+        border-radius: 10px;
+    }
     .card-wrapper {
         /* COMMENTED FOLLOWING STYLE, MOVED TO [img] & [video] */
         // min-height: 9rem;
@@ -12,30 +16,30 @@
         // background-size: cover;
         // background-position: top;
         cursor: pointer;
+        width: 200px;
 
-        img, video {
+        img,
+        video {
             width: 100%;
             min-height: 9rem;
             @include media-min($md) {
                 min-height: 11.063rem;
             }
             object-fit: cover;
-            border-radius: 17px 0 0 17px;
+            border-radius: 5px 0 0 5px;
         }
     }
 
     .ticket-info {
-        background: linear-gradient(124deg, #1c1c1c 0%, #101010 100%);
-        border-radius: 0 17px 17px 0;
         min-height: 9rem;
         @include media-min($md) {
             min-height: 11.063rem;
         }
         .prize-info {
             .prize-title {
-                font-size: $fnt-sz-12;
+                font-size: $fnt-sz-14;
                 @include media-min($md) {
-                    font-size: $fnt-sz-14;
+                    font-size: $fnt-sz-20;
                 }
                 font-weight: $fnt-wgt-600;
                 color: white;
@@ -53,27 +57,32 @@
         .ticket-wrapper {
             .your-tickets {
                 .label {
-                    color: #00c1b9;
-                    font-size: $fnt-sz-8;
+                    color: #9d9d9d;
+                    font-size: $fnt-sz-12;
                     @include media-min($md) {
-                        font-size: $fnt-sz-10;
+                        font-size: $fnt-sz-16;
                     }
                     font-weight: $fnt-wgt-600;
                 }
                 .tickets {
-                    color: white;
-                    font-size: $fnt-sz-10;
+                    color: #00c1b9;
+                    font-weight: bold;
+                    font-size: $fnt-sz-14;
                     @include media-min($md) {
-                        font-size: $fnt-sz-12;
+                        font-size: $fnt-sz-18;
                     }
                 }
             }
             .pool-tickets {
-                background-color: #1d1d1d;
-                border-bottom-right-radius: 17px;
                 .required-tickets {
-                    color: #9d9d9d;
+                    color: white;
                     font-size: $fnt-sz-12;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-14;
+                    }
+                }
+                .bold-text {
+                    font-weight: bold;
                 }
             }
         }

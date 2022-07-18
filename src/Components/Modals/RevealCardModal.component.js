@@ -133,7 +133,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                         }
                                                     >
                                                         <button className="connect-wallet-btn p-3">
-                                                            Claim prize
+                                                            CLAIM PRIZE
                                                         </button>
                                                     </Link>
                                                 )}

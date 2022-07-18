@@ -61,7 +61,7 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
                     className="p-3"
                     onClick={() => setBlockedArchivedModal(false)}
                 >
-                    Close
+                    CLOSE
                 </button>
             </div>
         </div>

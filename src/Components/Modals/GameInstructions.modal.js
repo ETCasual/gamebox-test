@@ -18,7 +18,7 @@ const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
                     alt="close-btn"
                 />
                 <div className="col-12 p-3">
-                    <h5 className="title">How to win prizes?</h5>
+                    <h5 className="title">HOW TO WIN PRIZES?</h5>
                     <p className="subtitle">Follow these 4 simple steps.</p>
                     <ul className="my-4 list-unstyled">
                         <li className="row">
@@ -76,10 +76,11 @@ const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
                         will be chosen based on the ticket drawn from the pool
                         randomly.
                     </p>
-                    <p className="subtitle">
-                        If a prize enter's overtime, players can still participate 
-                        in tournaments and win tickets. Consider it as a bonus hour
-                        to earn more tickets before the prize ends.
+                    <p className="subtitle mb-0">
+                        If a prize enter's overtime, players can still
+                        participate in tournaments and win tickets. Consider it
+                        as a bonus hour to earn more tickets before the prize
+                        ends.
                     </p>
                 </div>
             </div>
