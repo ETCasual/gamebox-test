@@ -38,7 +38,7 @@ const PauseMenuModal = ({
                                     QUIT
                                 </button>
                                 <div className="bottom-buttons-container d-flex flex-row mx-auto row mt-3">
-                                    <p className="col-5 my-auto px-0  d-flex align-items-center justify-content-between">
+                                    {/* <p className="col-5 my-auto px-0  d-flex align-items-center justify-content-between">
                                         <img
                                             src={`${window.cdn}buttons/icon_tutorial.png`}
                                             alt="tutorial"
@@ -47,12 +47,12 @@ const PauseMenuModal = ({
                                             Game Tutorial
                                         </span>
                                     </p>
-                                    <p className="col-2 my-auto px-0  d-flex"></p>
+                                    <p className="col-2 my-auto px-0  d-flex"></p> */}
 
                                     {window.localStorage.getItem("mute") ===
                                     "true" ? (
                                         <p
-                                            className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between"
+                                            className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between mx-auto"
                                             onClick={handleAudioButton}
                                         >
                                             <img
@@ -63,7 +63,7 @@ const PauseMenuModal = ({
                                         </p>
                                     ) : (
                                         <p
-                                            className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between"
+                                            className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between mx-auto"
                                             onClick={handleAudioButton}
                                         >
                                             <img
