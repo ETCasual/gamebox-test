@@ -9,9 +9,11 @@ import getDateFormat from "Utils/DateFormat";
 
 const HighScore = ({ handleBackButton }) => {
     const dispatch = useDispatch();
-    const history = useHistory()
+    const history = useHistory();
 
     const { highScore } = useSelector((state) => state.highScore);
+
+    const [highScoreData, setHighScoreData] = useState([]);
     const [noDataLoaded, setNoDataLoaded] = useState(false);
 
     let timeOutRef = useRef(null);
@@ -24,13 +26,18 @@ const HighScore = ({ handleBackButton }) => {
     useEffect(() => {
         clearTimeout(timeOutRef.current);
         timeOutRef.current = setTimeout(() => {
-            if (highScore.length <= 0) setNoDataLoaded(true);
+            if (highScoreData.length <= 0) setNoDataLoaded(true);
+            else setNoDataLoaded(false);
         }, 100);
         return () => {
             clearTimeout(timeOutRef.current);
             timeOutRef.current = null;
         };
-    }, [highScore]);
+    }, [highScoreData]);
+
+    useEffect(() => {
+        setHighScoreData(highScore);
+    }, [highScore, dispatch]);
 
     return (
         <>
@@ -51,22 +58,25 @@ const HighScore = ({ handleBackButton }) => {
                             </div>
                             {/* IF LIST NOT AVAILABLE */}
                             <div className="col-12 mb-4">
-                                <h1 className="main-title my-3 my-md-4">Highscores</h1>
+                                <h1 className="main-title my-3 my-md-4">
+                                    Highscores
+                                </h1>
                                 {noDataLoaded && (
                                     <div className="no-result">
                                         <p className="title mb-1">
                                             No highscores yet...
                                         </p>
                                         <p className="subtitle">
-                                            <Link to="/">Tap here</Link> to check out available Prize’s.
+                                            <Link to="/">Tap here</Link> to
+                                            check out available Prize’s.
                                         </p>
                                     </div>
                                 )}
                             </div>
                             {/* HIGHSCORES LIST */}
-                            {!noDataLoaded &&
+                            {!noDataLoaded && (
                                 <div className="content-min-height pb-5">
-                                    {highScore?.map((card, i) => (
+                                    {highScoreData?.map((card, i) => (
                                         <div
                                             key={`highscore-${i}`}
                                             className="col-12 col-md-9 col-xl-8"
@@ -87,7 +97,7 @@ const HighScore = ({ handleBackButton }) => {
                                                         <p className="score-date mb-0">
                                                             {getDateFormat(
                                                                 card.scoreTimestamp *
-                                                                1000
+                                                                    1000
                                                             )}
                                                         </p>
                                                         <p className="px-0 score mb-0 d-flex align-items-start justify-content-end">
@@ -99,7 +109,7 @@ const HighScore = ({ handleBackButton }) => {
                                         </div>
                                     ))}
                                 </div>
-                            }
+                            )}
                         </div>
                     </div>
                 </div>
