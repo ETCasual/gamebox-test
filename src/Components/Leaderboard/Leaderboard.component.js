@@ -341,7 +341,6 @@ const Leaderboard = ({
     };
 
     window.pauseGame = () => {
-        console.log("mm", modalStatus.isQuitGameConfirm);
         if (modalStatus.isQuitGameConfirm) return;
         if (modalStatus.isGameOver) return;
 
