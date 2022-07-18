@@ -78,6 +78,7 @@ const Leaderboard = ({
     const [isGameAvailable, setIsGameAvailable] = useState(false);
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
+        isGamePaused: false,
         isQuitGameBtnDisabled: false,
         isPlayBtnDisabled: false,
         isQuitGameConfirm: false,
@@ -277,6 +278,7 @@ const Leaderboard = ({
                 const token = getToken();
                 setModalStatus((prev) => ({
                     ...prev,
+                    isGamePaused: false,
                     isGameReady: true,
                     isEarnAdditionalInfoShown: false,
                 }));
@@ -338,6 +340,17 @@ const Leaderboard = ({
         handleQuitGame();
     };
 
+    window.pauseGame = () => {
+        console.log("mm", modalStatus.isQuitGameConfirm);
+        if (modalStatus.isQuitGameConfirm) return;
+        if (modalStatus.isGameOver) return;
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isGamePaused: true,
+        }));
+    };
+
     const handleModalButton = (choice) => {
         if (choice === "yes")
             setModalStatus((prev) => ({
@@ -346,8 +359,15 @@ const Leaderboard = ({
                 isQuitGameConfirm: false,
                 isPlayBtnDisabled: false,
             }));
-        else if (choice === "no")
-            setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
+        else if (choice === "no") {
+            setModalStatus((prev) => ({
+                ...prev,
+                isQuitGameConfirm: false,
+            }));
+            let destination =
+                document.getElementById("destination")?.contentWindow;
+            destination?.resumeGame?.();
+        }
     };
 
     window.playerEnterGame = () => {
@@ -395,6 +415,7 @@ const Leaderboard = ({
             setModalStatus((prev) => ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
+                isGamePaused: false,
             }));
 
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
@@ -404,6 +425,7 @@ const Leaderboard = ({
                     isGameOver: true,
                     isPlayBtnDisabled: false,
                     isQuitGameConfirm: false,
+                    isGamePaused: false,
                 }));
                 // setIsShowAdditionalBenefitsModal(true);
                 // setIsGameLeaderboardShown(false);
@@ -600,7 +622,29 @@ const Leaderboard = ({
                 )}
 
                 {/* MODAL FOR GAME PAUSED */}
-                {<PauseMenuModal />}
+                {modalStatus.isGamePaused && (
+                    <PauseMenuModal
+                        handleResumeButton={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isGamePaused: false,
+                            }));
+                            let destination =
+                                document.getElementById(
+                                    "destination"
+                                )?.contentWindow;
+                            destination?.resumeGame?.();
+                            // setIsGameLeaderboardShown(false);
+                        }}
+                        handleQuitButton={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isGamePaused: false,
+                                isQuitGameConfirm: true,
+                            }));
+                        }}
+                    />
+                )}
 
                 {/* Comment out because the Front End X button is no longer in
                 used */}
@@ -640,12 +684,12 @@ const Leaderboard = ({
                             </button>
                         </div>
 
-                        {/* <iframe
+                        <iframe
                             title="game"
                             id="destination"
                             srcDoc={gameData}
                             frameBorder="0"
-                        /> */}
+                        />
                     </>
                 )}
             </div>
