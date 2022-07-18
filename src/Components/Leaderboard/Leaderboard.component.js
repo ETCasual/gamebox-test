@@ -350,7 +350,7 @@ const Leaderboard = ({
         }));
     };
 
-    const handleModalButton = (choice) => {
+    const handleQuitGameAction = (choice) => {
         if (choice === "yes")
             setModalStatus((prev) => ({
                 ...prev,
@@ -359,16 +359,20 @@ const Leaderboard = ({
                 isPlayBtnDisabled: false,
             }));
         else if (choice === "no") {
-            setModalStatus((prev) => ({
-                ...prev,
-                isQuitGameConfirm: false,
-            }));
-            let destination =
-                document.getElementById("destination")?.contentWindow;
-            destination?.resumeGame?.();
+            resumeGame();
         }
     };
 
+    const resumeGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isQuitGameConfirm: false,
+            isGamePaused: false,
+        }));
+        let destination = document.getElementById("destination")?.contentWindow;
+        destination?.resumeGame?.();
+        destination.focus();
+    };
     window.playerEnterGame = () => {
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -624,15 +628,7 @@ const Leaderboard = ({
                 {modalStatus.isGamePaused && (
                     <PauseMenuModal
                         handleResumeButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGamePaused: false,
-                            }));
-                            let destination =
-                                document.getElementById(
-                                    "destination"
-                                )?.contentWindow;
-                            destination?.resumeGame?.();
+                            resumeGame();
                             // setIsGameLeaderboardShown(false);
                         }}
                         handleQuitButton={() => {
@@ -665,7 +661,7 @@ const Leaderboard = ({
                 )} */}
                 {/* QUIT GAME MODAL */}
                 {modalStatus.isQuitGameConfirm && (
-                    <GameQuitModal handleModalButton={handleModalButton} />
+                    <GameQuitModal onActionCallback={handleQuitGameAction} />
                 )}
                 {/* GAME IFRAME */}
                 {gameData !== null && (

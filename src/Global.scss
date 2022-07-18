@@ -1620,7 +1620,7 @@ html {
     .resume-button{
         width: 100%;
         max-width: 25rem;
-        font-weight: $fnt-wgt-800;
+        font-weight: $fnt-wgt-600;
         font-size: $fnt-sz-26;  
         background: #ff3399;
         color: white;
@@ -1632,7 +1632,7 @@ html {
     .quit-button{
         width: 100%;
         max-width: 25rem;
-        font-weight: $fnt-wgt-800;
+        font-weight: $fnt-wgt-600;
         font-size: $fnt-sz-26;  
         background: #101010;
         color: white;
@@ -1662,10 +1662,13 @@ html {
         }
         
         @include media-min($xs) {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-14;
             
         }
-      
+        @include media-min($md) {
+            font-size: $fnt-sz-16;
+        }
+
         span{
             text-decoration: underline;
 

@@ -1,4 +1,4 @@
-const GameQuitModal = ({ handleModalButton }) => {
+const GameQuitModal = ({ onActionCallback }) => {
     return (
         <>
             {
@@ -28,14 +28,14 @@ const GameQuitModal = ({ handleModalButton }) => {
 
                                 <button
                                     className="yes-button d-block bg-danger mx-auto text-center  mt-5 py-2"
-                                    onClick={() => handleModalButton("yes")}
+                                    onClick={() => onActionCallback("yes")}
                                 >
                                     YES, QUIT
                                 </button>
 
                                 <button
                                     className="cancel-button d-block text-center mx-auto mt-3 py-2"
-                                    onClick={() => handleModalButton("no")}
+                                    onClick={() => onActionCallback("no")}
                                 >
                                     CANCEL
                                 </button>
