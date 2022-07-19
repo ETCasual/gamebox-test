@@ -113,26 +113,21 @@ const Index = ({ match }) => {
                     ? prizeType[idx]?.gameInfo?.[0]?.endTimeStamp * 1000
                     : prizeType[idx]?.scheduledOff * 1000;
 
-            if (prizeType.length > 0 && nowTimeStamp() < (gameEndTime || 0))
-            {
+            if (prizeType.length > 0 && nowTimeStamp() < (gameEndTime || 0)) {
                 // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
-                if (idx > -1)
-                {
+                if (idx > -1) {
                     setCurrentPrize(prizeType[idx]);
 
-                    if (type !== "automated")
-                    {
+                    if (type !== "automated") {
                         const currentGameInfo =
                             JSON.parse(
                                 sessionStorage.getItem("currentGameInfo")
                             ) || null;
-                        if (currentGameInfo !== null)
-                        {
+                        if (currentGameInfo !== null) {
                             const gameIdx = prizeType[idx].gameInfo.findIndex(
                                 (g) => g.gameId === currentGameInfo.gameId
                             );
-                            if (gameIdx === -1)
-                            {
+                            if (gameIdx === -1) {
                                 const _gameInfo = {
                                     gameId: prizeType[idx].gameInfo[0].gameId,
                                     gameIndex:
@@ -169,8 +164,7 @@ const Index = ({ match }) => {
     );
 
     useEffect(() => {
-        if (currentPrize?.gameInfo?.length > 0)
-        {
+        if (currentPrize?.gameInfo?.length > 0) {
             const gameInfo = currentPrize?.gameInfo[0];
 
             dispatch(loadLeaderboard(parseInt(id), gameInfo.gameId));
@@ -204,8 +198,7 @@ const Index = ({ match }) => {
         if (
             performance.getEntriesByType("navigation")[0] &&
             performance.getEntriesByType("navigation")[0].type === "reload"
-        )
-        {
+        ) {
             timeOut = setTimeout(async () => {
                 // PLAYER TICKETS
                 dispatch(loadPlayerTickets(parseInt(id), true));
@@ -218,8 +211,7 @@ const Index = ({ match }) => {
                     )
                 );
             }, 2000);
-        } else
-        {
+        } else {
             // PLAYER TICKETS
             dispatch(loadPlayerTickets(parseInt(id), true));
             // PRIZE TOTAL TICKETS
@@ -355,41 +347,49 @@ const Index = ({ match }) => {
                                                 </div>
                                             </div>
 
-                                            <div className="overtime-and-total-tickets-wrapper">
+                                            <div
+                                                className={`${
+                                                    currentPrize.overTime
+                                                        ? "overtime-and-total-tickets-wrapper col-3"
+                                                        : "total-tickets-wrapper"
+                                                }`}
+                                            >
                                                 {/* OVERTIME TEXT */}
                                                 {currentPrize.overTime && (
-                                                    <p className="overtime-text mb-1 text-right text-danger">
-                                                        Overtime!
+                                                    <p className="overtime-text mb-1 text-center mt-2">
+                                                        BONUS TIME!
                                                     </p>
                                                 )}
                                                 {/* TICKETS & OVERTIME TIMER */}
-                                                <div className="draw-start-holder d-flex align-items-end ms-auto">
+                                                <div className="draw-start-holder d-flex align-items-center ms-auto mb-2 justify-content-center">
                                                     <div className="draw-text mr-0 mr-md-2">
                                                         {`Draw starts in \u00A0`}
                                                     </div>
 
                                                     {/* COUNT DOWN TIME */}
                                                     <span
-                                                        className={`${currentPrize.overTime
-                                                            ? "text-danger tickets-text-end"
-                                                            : "tickets-text"
-                                                            }`}
+                                                        className={`${
+                                                            currentPrize.overTime
+                                                                ? "tickets-text-end"
+                                                                : "tickets-text"
+                                                        }`}
                                                     >
                                                         {currentPrize.overTime
                                                             ? timer
                                                             : getPrizeTicketCollected(
-                                                                prizeTicketCollection,
-                                                                id
-                                                            )?.toLocaleString() ||
-                                                            0}
+                                                                  prizeTicketCollection,
+                                                                  id
+                                                              )?.toLocaleString() ||
+                                                              0}
                                                     </span>
 
                                                     {/* TICKETS REQUIRED NUMBER */}
                                                     {!currentPrize.overTime && (
                                                         <span className="total-tickets-text">
-                                                            {`\u00A0 / ${currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                            {`\u00A0 / ${
+                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
                                                                 0
-                                                                }`}
+                                                            }`}
                                                         </span>
                                                     )}
                                                 </div>
@@ -412,7 +412,13 @@ const Index = ({ match }) => {
                                             )?.toLocaleString() || 0}
                                         </p>
                                     </div>
-                                    <div className="overtime-and-total-tickets-wrapper">
+                                    <div
+                                        className={`${
+                                            currentPrize.overTime
+                                                ? "overtime-and-total-tickets-wrapper col-6"
+                                                : "total-tickets-wrapper"
+                                        }`}
+                                    >
                                         {/* OVERTIME TEXT */}
                                         {
                                             // OverTimeModeChecker(
@@ -421,63 +427,62 @@ const Index = ({ match }) => {
                                             //     prizeTicketCollection
                                             // )
                                             currentPrize.overTime && (
-                                                <p className="overtime-text mb-1 text-right text-danger">
-                                                    Overtime!
+                                                <p className="overtime-text mb-1 text-center mt-2">
+                                                    BONUS TIME!
                                                 </p>
                                             )
                                         }
                                         {/* TICKETS & OVERTIME TIMER */}
-                                        <div className="draw-start-holder">
+                                        <div className="draw-start-holder justify-content-center align-items-center d-flex mb-2">
                                             <p className="draw-text mb-0">
-                                                Draw starts in
+                                                {`Draw starts in \u00A0`}
                                             </p>
 
                                             {/* COUNT DOWN TIME */}
-                                            <p className="mt-2">
-                                                <span
-                                                    className={`${
-                                                        // OverTimeModeChecker(
-                                                        //     currentPrize?.prizeId,
-                                                        //     currentPrize?.ticketsRequired,
-                                                        //     prizeTicketCollection
-                                                        // )
-                                                        currentPrize.overTime
-                                                            ? "text-danger tickets-text-end"
-                                                            : "tickets-text"
-                                                        }`}
-                                                >
-                                                    {
-                                                        // OverTimeModeChecker(
-                                                        //     currentPrize?.prizeId,
-                                                        //     currentPrize?.ticketsRequired,
-                                                        //     prizeTicketCollection
-                                                        // )
-                                                        currentPrize.overTime
-                                                            ? timer
-                                                            : getPrizeTicketCollected(
-                                                                prizeTicketCollection,
-                                                                id
-                                                            )?.toLocaleString() ||
-                                                            0
-                                                    }
-                                                </span>
-
-                                                {/* TICKETS REQUIRED NUMBER */}
-                                                {
-                                                    // !OverTimeModeChecker(
+                                            <span
+                                                className={`${
+                                                    // OverTimeModeChecker(
                                                     //     currentPrize?.prizeId,
                                                     //     currentPrize?.ticketsRequired,
                                                     //     prizeTicketCollection
                                                     // )
-                                                    !currentPrize.overTime && (
-                                                        <span className="total-tickets-text">
-                                                            {`\u00A0 / ${currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                0
-                                                                }`}
-                                                        </span>
-                                                    )
+                                                    currentPrize.overTime
+                                                        ? "tickets-text-end"
+                                                        : "tickets-text"
+                                                }`}
+                                            >
+                                                {
+                                                    // OverTimeModeChecker(
+                                                    //     currentPrize?.prizeId,
+                                                    //     currentPrize?.ticketsRequired,
+                                                    //     prizeTicketCollection
+                                                    // )
+                                                    currentPrize.overTime
+                                                        ? timer
+                                                        : getPrizeTicketCollected(
+                                                              prizeTicketCollection,
+                                                              id
+                                                          )?.toLocaleString() ||
+                                                          0
                                                 }
-                                            </p>
+                                            </span>
+
+                                            {/* TICKETS REQUIRED NUMBER */}
+                                            {
+                                                // !OverTimeModeChecker(
+                                                //     currentPrize?.prizeId,
+                                                //     currentPrize?.ticketsRequired,
+                                                //     prizeTicketCollection
+                                                // )
+                                                !currentPrize.overTime && (
+                                                    <span className="total-tickets-text">
+                                                        {`\u00A0 / ${
+                                                            currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                            0
+                                                        }`}
+                                                    </span>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>

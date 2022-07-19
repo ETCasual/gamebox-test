@@ -8,7 +8,8 @@
         @include media-min($lg) {
             min-height: 10rem;
         }
-        video, img {
+        video,
+        img {
             height: 5rem;
             width: 5rem;
             @include media-min($lg) {
@@ -20,7 +21,7 @@
         }
         .contract-address {
             position: absolute;
-            top: .5rem;
+            top: 0.5rem;
             left: 1.7rem;
         }
         .prize-text-holder {
@@ -53,7 +54,13 @@
         height: 1px;
         margin: 0 0 20px 15px;
     }
+
     .token-and-draw-start-holder {
+        .overtime-and-total-tickets-wrapper {
+            background: linear-gradient(90deg, #433849, #2f2833);
+            border-radius: 10px;
+        }
+
         .your-tokens-text {
             font-size: $fnt-sz-10;
             @include media-min($md) {
@@ -71,7 +78,7 @@
         .draw-text {
             font-size: $fnt-sz-10;
             @include media-min($md) {
-                font-size: $fnt-sz-12;
+                font-size: $fnt-sz-14;
             }
         }
         .total-tickets-text {
@@ -88,18 +95,24 @@
             font-weight: $fnt-wgt-700;
         }
         .tickets-text-end {
-            font-size: $fnt-sz-18;
+            color: #ff3399;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+            font-weight: 500;
         }
         .overtime-text {
+            color: #ff3399;
             font-size: $fnt-sz-18;
             @include media-min($md) {
-                font-size: $fnt-sz-20;
+                font-size: $fnt-sz-26;
             }
             font-weight: $fnt-wgt-700;
         }
     }
     .game-info {
-        background: linear-gradient(134deg, #2A2A2A 0%, #0b0b0b 80%);
+        background: linear-gradient(134deg, #2a2a2a 0%, #0b0b0b 80%);
         border-radius: 10px;
         .join-tournament-wrapper {
             .statement-title {
