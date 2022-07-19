@@ -18,6 +18,8 @@ const LaunchGameMenuModalPopup = ({
     prizeId,
     playCost,
     setEarnAdditionalDisabledStatus,
+    isPlayBtnDisabled,
+    isLoadingGame,
     onCloseClicked,
     onPlayClicked,
     onInsufficientPayment,
@@ -141,8 +143,11 @@ const LaunchGameMenuModalPopup = ({
                             <div
                                 className={`selections d-flex flex-column mb-2 mx-auto ${
                                     isActiveBooster ? "checked" : ""
-                                }`}
+                                }
+                                    ${!isPlayBtnDisabled ? "" : "opacity-0-5"}
+                                `}
                                 onClick={() => {
+                                    if (isPlayBtnDisabled) return;
                                     isActiveBooster
                                         ? onUseBoosterNo()
                                         : onUseBoosterYes();
@@ -199,20 +204,31 @@ const LaunchGameMenuModalPopup = ({
                                 }`}
                             >
                                 <button
-                                    className="play-btn d-flex flex-column align-items-center justify-content-center m-auto"
+                                    className={`play-btn d-flex flex-column align-items-center justify-content-center m-auto ${
+                                        !isPlayBtnDisabled ? "" : "opacity-0-5"
+                                    }`}
+                                    disabled={isPlayBtnDisabled}
                                     onClick={onStartPlay}
                                 >
-                                    START PLAYING
-                                    <div className="d-flex mt-2">
-                                        <span className="btn-text m-auto">
-                                            {startGameCost}
-                                        </span>
-                                        <img
-                                            className="icon ml-2"
-                                            src={`${window.cdn}assets/gem_01.png`}
-                                            alt="gems"
-                                        />
-                                    </div>
+                                    {!isLoadingGame && (
+                                        <>
+                                            START PLAYING
+                                            <div className="d-flex mt-2">
+                                                <span className="btn-text m-auto">
+                                                    {startGameCost}
+                                                </span>
+                                                <img
+                                                    className="icon ml-2"
+                                                    src={`${window.cdn}assets/gem_01.png`}
+                                                    alt="gems"
+                                                />
+                                            </div>
+                                        </>
+                                    )}
+
+                                    {isLoadingGame && (
+                                        <div className="p-3">LOADING...</div>
+                                    )}
                                 </button>
                             </div>
                         </div>
