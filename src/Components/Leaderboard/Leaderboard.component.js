@@ -237,8 +237,8 @@ const Leaderboard = ({
     const handleOnClickPlayButton = async () => {
         setModalStatus((prev) => ({
             ...prev,
+            isGamePaused: false,
             isPlayBtnDisabled: true,
-            isEarnAdditionalInfoShown: false,
         }));
 
         if (!executeRecaptcha) {
@@ -276,12 +276,6 @@ const Leaderboard = ({
         )
             .then(async () => {
                 const token = getToken();
-                setModalStatus((prev) => ({
-                    ...prev,
-                    isGamePaused: false,
-                    isGameReady: true,
-                    isEarnAdditionalInfoShown: false,
-                }));
 
                 if (currentGameDetails.gameId > 0) {
                     try {
@@ -318,6 +312,12 @@ const Leaderboard = ({
                         console.log(error.message);
                     }
                 }
+
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isGameReady: true,
+                    isEarnAdditionalInfoShown: false,
+                }));
 
                 setEarnAdditionalDisabledStatus({
                     gems: false,
@@ -858,10 +858,14 @@ const Leaderboard = ({
                                 >
                                     <button
                                         className={`ready-tournament-button ${
-                                            isGameAvailable ? "" : "opacity-0-5"
+                                            isGameAvailable &&
+                                            !modalStatus.isPlayBtnDisabled
+                                                ? ""
+                                                : "opacity-0-5"
                                         }`}
                                         onClick={
-                                            isGameAvailable
+                                            isGameAvailable &&
+                                            !modalStatus.isPlayBtnDisabled
                                                 ? () => {
                                                       setModalStatus(
                                                           (prev) => ({
@@ -900,6 +904,14 @@ const Leaderboard = ({
                                         playCost={data?.gemsNeeded}
                                         setEarnAdditionalDisabledStatus={
                                             setEarnAdditionalDisabledStatus
+                                        }
+                                        isPlayBtnDisabled={
+                                            !isGameAvailable ||
+                                            modalStatus.isPlayBtnDisabled
+                                        }
+                                        isLoadingGame={
+                                            !modalStatus.isGameReady &&
+                                            modalStatus.isPlayBtnDisabled
                                         }
                                         onCloseClicked={() => {
                                             setModalStatus((prev) => ({
