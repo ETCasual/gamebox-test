@@ -35,6 +35,7 @@ import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
+import PauseMenuModal from "Components/Modals/PauseMenuModal";
 
 const Leaderboard = ({
     data,
@@ -77,6 +78,7 @@ const Leaderboard = ({
     const [isGameAvailable, setIsGameAvailable] = useState(false);
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
+        isGamePaused: false,
         isQuitGameBtnDisabled: false,
         isPlayBtnDisabled: false,
         isQuitGameConfirm: false,
@@ -235,6 +237,7 @@ const Leaderboard = ({
     const handleOnClickPlayButton = async () => {
         setModalStatus((prev) => ({
             ...prev,
+            isGamePaused: false,
             isPlayBtnDisabled: true,
         }));
 
@@ -273,6 +276,7 @@ const Leaderboard = ({
         )
             .then(async () => {
                 const token = getToken();
+
                 if (currentGameDetails.gameId > 0) {
                     try {
                         let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
@@ -332,7 +336,21 @@ const Leaderboard = ({
         }));
     };
 
-    const handleModalButton = (choice) => {
+    window.handleQuitGame = () => {
+        handleQuitGame();
+    };
+
+    window.pauseGame = () => {
+        if (modalStatus.isQuitGameConfirm) return;
+        if (modalStatus.isGameOver) return;
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isGamePaused: true,
+        }));
+    };
+
+    const handleQuitGameAction = (choice) => {
         if (choice === "yes")
             setModalStatus((prev) => ({
                 ...prev,
@@ -340,10 +358,21 @@ const Leaderboard = ({
                 isQuitGameConfirm: false,
                 isPlayBtnDisabled: false,
             }));
-        else if (choice === "no")
-            setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
+        else if (choice === "no") {
+            resumeGame();
+        }
     };
 
+    const resumeGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isQuitGameConfirm: false,
+            isGamePaused: false,
+        }));
+        let destination = document.getElementById("destination")?.contentWindow;
+        destination?.resumeGame?.();
+        destination.focus();
+    };
     window.playerEnterGame = () => {
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -389,6 +418,7 @@ const Leaderboard = ({
             setModalStatus((prev) => ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
+                isGamePaused: false,
             }));
 
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
@@ -397,6 +427,8 @@ const Leaderboard = ({
                     ...prev,
                     isGameOver: true,
                     isPlayBtnDisabled: false,
+                    isQuitGameConfirm: false,
+                    isGamePaused: false,
                 }));
                 // setIsShowAdditionalBenefitsModal(true);
                 // setIsGameLeaderboardShown(false);
@@ -570,7 +602,6 @@ const Leaderboard = ({
                         }}
                     />
                 )}
-
                 {/* MODAL FOR GAME OVER */}
                 {modalStatus.isGameOver && (
                     <GameEndModal
@@ -593,7 +624,33 @@ const Leaderboard = ({
                     />
                 )}
 
-                {!modalStatus.isQuitGameBtnDisabled && (
+                {/* MODAL FOR GAME PAUSED */}
+                {modalStatus.isGamePaused && (
+                    <PauseMenuModal
+                        handleResumeButton={() => {
+                            resumeGame();
+                            // setIsGameLeaderboardShown(false);
+                        }}
+                        handleQuitButton={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isGamePaused: false,
+                                isQuitGameConfirm: true,
+                            }));
+                        }}
+                        handleAudioButton={() => {
+                            let destination =
+                                document.getElementById(
+                                    "destination"
+                                )?.contentWindow;
+                            destination?.toggleAudioOnOff?.();
+                        }}
+                    />
+                )}
+
+                {/* Comment out because the Front End X button is no longer in
+                used */}
+                {/* {!modalStatus.isQuitGameBtnDisabled && (
                     <img
                         className="ml-1 mt-1 quit-btn"
                         width="36"
@@ -601,13 +658,11 @@ const Leaderboard = ({
                         src={`${window.cdn}buttons/button_close.png`}
                         alt="Close Button"
                     />
-                )}
-
+                )} */}
                 {/* QUIT GAME MODAL */}
                 {modalStatus.isQuitGameConfirm && (
-                    <GameQuitModal handleModalButton={handleModalButton} />
+                    <GameQuitModal onActionCallback={handleQuitGameAction} />
                 )}
-
                 {/* GAME IFRAME */}
                 {gameData !== null && (
                     <>
@@ -623,7 +678,14 @@ const Leaderboard = ({
                                 cx3={window.innerWidth > 1200 ? "52%" : "54%"}
                                 cy="15"
                             />
+                            <button
+                                className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
+                                onClick={handleQuitGame}
+                            >
+                                Close
+                            </button>
                         </div>
+
                         <iframe
                             title="game"
                             id="destination"
@@ -802,7 +864,8 @@ const Leaderboard = ({
                                                 : "opacity-0-5"
                                         }`}
                                         onClick={
-                                            isGameAvailable
+                                            isGameAvailable &&
+                                            !modalStatus.isPlayBtnDisabled
                                                 ? () => {
                                                       setModalStatus(
                                                           (prev) => ({
