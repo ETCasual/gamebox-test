@@ -11,16 +11,27 @@ const FortuneWheelRules = ({
     onSpinClicked,
     onFinished = null,
 }) => {
-    const segmentAngleRef = useRef(360 / spinnerRules.length);
+    let shuffleSpinner = [...spinnerRules];
+
+    for (let i = 10; i > 0; i--) {
+        let randNum = Math.floor(Math.random() * i);
+        [shuffleSpinner[i - 1], shuffleSpinner[randNum]] = [
+            shuffleSpinner[randNum],
+            shuffleSpinner[i - 1],
+        ];
+    }
+
+    const segmentAngleRef = useRef(360 / shuffleSpinner.length);
     const numOfSpinsRef = useRef(8);
 
-    const ticketList = useRef(spinnerRules.map((x) => x.tickets));
+    const ticketList = useRef(shuffleSpinner.map((x) => x.tickets));
     const wheelRef = useRef(null);
     const onFinishedRef = useRef(onFinished);
 
     const isAbleToSpin = spinLeft > 0;
 
     useEffect(() => {
+        console.log(ticketList);
         // Add TweenMax into global var
         window.TweenMax = TweenMax;
 
@@ -42,9 +53,9 @@ const FortuneWheelRules = ({
             textFontFamily: "'Open Sans',sans-serif",
             rotationAngle: -segmentAngleRef.current / 2,
             responsive: true,
-            segments: spinnerRules.map((data, idx) => {
+            segments: ticketList.current.map((data) => {
                 return {
-                    text: data.tickets.toString(),
+                    text: data.toString(),
                 };
             }),
             animation: {
@@ -80,8 +91,7 @@ const FortuneWheelRules = ({
 
         const startSpin = () => {
             let winSegments = ticketList.current.reduce((a, e, i) => {
-                if (e === winAmount)
-                {
+                if (e === winAmount) {
                     a.push(i);
                 }
                 return a;
@@ -118,15 +128,13 @@ const FortuneWheelRules = ({
 
                 wheelRef.current.draw();
 
-                if (onFinishedRef.current)
-                {
+                if (onFinishedRef.current) {
                     onFinishedRef.current();
                 }
             }, wheelRef.current.animation.duration * 1000);
         };
 
-        if (isClickedSpin && winAmount !== -1)
-        {
+        if (isClickedSpin && winAmount !== -1) {
             startSpin();
         }
     }, [isClickedSpin, winAmount]);
@@ -195,8 +203,9 @@ const FortuneWheelRules = ({
                 <div className="inner-circle"></div>
                 {/* SPIN BUTTON*/}
                 <div
-                    className={`spin-button ${!isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
-                        }`}
+                    className={`spin-button ${
+                        !isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
+                    }`}
                 >
                     <button
                         disabled={!isAbleToSpin || isClickedSpin ? true : false}
