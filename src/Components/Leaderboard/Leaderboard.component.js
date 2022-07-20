@@ -121,7 +121,6 @@ const Leaderboard = ({
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
         setLeaderboardList([]);
-        setIsGameAvailable(false);
         if (currentGameDetails?.gameId > 0) {
             dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
             dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
