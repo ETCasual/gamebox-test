@@ -36,6 +36,8 @@ const FortuneWheelRules = ({
 
     const isAbleToSpin = spinLeft > 0;
 
+    const [isSpinning, setIsSpinning] = useState(false);
+
     useEffect(() => {
         // Update tickets list
         ticketList.current = shuffleSpinner.map((x) => x.tickets);
@@ -81,6 +83,10 @@ const FortuneWheelRules = ({
             // },
         });
     }, [shuffleSpinner]);
+
+    useEffect(() => {
+        if (!isClickedSpin) setIsSpinning(false);
+    }, [isClickedSpin]);
 
     useEffect(() => {
         const resetWheel = () => {
@@ -142,10 +148,11 @@ const FortuneWheelRules = ({
             }, wheelRef.current.animation.duration * 1000);
         };
 
-        if (isClickedSpin && winAmount !== -1) {
+        if (!isSpinning && isClickedSpin && winAmount !== -1) {
+            setIsSpinning(true);
             startSpin();
         }
-    }, [isClickedSpin, winAmount]);
+    }, [isClickedSpin, winAmount, isSpinning]);
 
     //#region Methods
 
