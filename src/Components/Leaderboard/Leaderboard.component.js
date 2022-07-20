@@ -101,6 +101,7 @@ const Leaderboard = ({
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
     let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
+    const [isMute, setIsMute] = useState(window.localStorage.getItem("mute"));
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -640,12 +641,17 @@ const Leaderboard = ({
                             }));
                         }}
                         handleAudioButton={() => {
+                            isMute === "true"
+                                ? setIsMute("false")
+                                : setIsMute("true");
+
                             let destination =
                                 document.getElementById(
                                     "destination"
                                 )?.contentWindow;
                             destination?.toggleAudioOnOff?.();
                         }}
+                        isMute={isMute}
                     />
                 )}
 
