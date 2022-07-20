@@ -2,6 +2,7 @@ const PauseMenuModal = ({
     handleResumeButton,
     handleQuitButton,
     handleAudioButton,
+    isMute,
 }) => {
     return (
         <>
@@ -49,8 +50,7 @@ const PauseMenuModal = ({
                                     </p>
                                     <p className="col-2 my-auto px-0  d-flex"></p> */}
 
-                                    {window.localStorage.getItem("mute") ===
-                                    "true" ? (
+                                    {isMute === "true" ? (
                                         <p
                                             className="audio-btn col-5 my-auto  px-0  d-flex  align-items-center justify-content-between mx-auto"
                                             onClick={handleAudioButton}
