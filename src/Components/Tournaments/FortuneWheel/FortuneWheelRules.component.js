@@ -1,5 +1,5 @@
 import { delay } from "lodash";
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Winwheel from "winwheel";
 import TweenMax from "gsap/all";
 
@@ -11,27 +11,35 @@ const FortuneWheelRules = ({
     onSpinClicked,
     onFinished = null,
 }) => {
-    let shuffleSpinner = [...spinnerRules];
+    // Pre-Method
+    const getShuffleSpinner = () => {
+        let tempList = [...spinnerRules];
+        // Shuffle the spinner numbers
+        for (let i = 10; i > 0; i--) {
+            let randNum = Math.floor(Math.random() * i);
+            [tempList[i - 1], tempList[randNum]] = [
+                tempList[randNum],
+                tempList[i - 1],
+            ];
+        }
+        return tempList;
+    };
 
-    for (let i = 10; i > 0; i--) {
-        let randNum = Math.floor(Math.random() * i);
-        [shuffleSpinner[i - 1], shuffleSpinner[randNum]] = [
-            shuffleSpinner[randNum],
-            shuffleSpinner[i - 1],
-        ];
-    }
+    const [shuffleSpinner] = useState(getShuffleSpinner());
 
     const segmentAngleRef = useRef(360 / shuffleSpinner.length);
     const numOfSpinsRef = useRef(8);
 
-    const ticketList = useRef(shuffleSpinner.map((x) => x.tickets));
+    const ticketList = useRef([]);
     const wheelRef = useRef(null);
     const onFinishedRef = useRef(onFinished);
 
     const isAbleToSpin = spinLeft > 0;
 
     useEffect(() => {
-        console.log(ticketList);
+        // Update tickets list
+        ticketList.current = shuffleSpinner.map((x) => x.tickets);
+
         // Add TweenMax into global var
         window.TweenMax = TweenMax;
 
@@ -39,7 +47,7 @@ const FortuneWheelRules = ({
         const [fillStyle, strokeStyle] = normalSegmentStyles();
 
         wheelRef.current = new Winwheel({
-            numSegments: spinnerRules.length,
+            numSegments: shuffleSpinner.length,
             outerRadius: 190,
             innerRadius: 130,
             textFontSize: 24,
@@ -72,7 +80,7 @@ const FortuneWheelRules = ({
             //     lineWidth: 3,
             // },
         });
-    }, [spinnerRules]);
+    }, [shuffleSpinner]);
 
     useEffect(() => {
         const resetWheel = () => {
