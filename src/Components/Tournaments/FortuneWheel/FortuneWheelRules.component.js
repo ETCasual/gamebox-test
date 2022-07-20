@@ -11,10 +11,26 @@ const FortuneWheelRules = ({
     onSpinClicked,
     onFinished = null,
 }) => {
-    const segmentAngleRef = useRef(360 / spinnerRules.length);
+    // Pre-Method
+    const getShuffleSpinner = () => {
+        let tempList = [...spinnerRules];
+        // Shuffle the spinner numbers
+        for (let i = 10; i > 0; i--) {
+            let randNum = Math.floor(Math.random() * i);
+            [tempList[i - 1], tempList[randNum]] = [
+                tempList[randNum],
+                tempList[i - 1],
+            ];
+        }
+        return tempList;
+    };
+
+    const [shuffleSpinner] = useState(getShuffleSpinner());
+
+    const segmentAngleRef = useRef(360 / shuffleSpinner.length);
     const numOfSpinsRef = useRef(8);
 
-    const ticketList = useRef(spinnerRules.map((x) => x.tickets));
+    const ticketList = useRef([]);
     const wheelRef = useRef(null);
     const onFinishedRef = useRef(onFinished);
 
@@ -23,6 +39,9 @@ const FortuneWheelRules = ({
     const [isSpinning, setIsSpinning] = useState(false);
 
     useEffect(() => {
+        // Update tickets list
+        ticketList.current = shuffleSpinner.map((x) => x.tickets);
+
         // Add TweenMax into global var
         window.TweenMax = TweenMax;
 
@@ -30,7 +49,7 @@ const FortuneWheelRules = ({
         const [fillStyle, strokeStyle] = normalSegmentStyles();
 
         wheelRef.current = new Winwheel({
-            numSegments: spinnerRules.length,
+            numSegments: shuffleSpinner.length,
             outerRadius: 190,
             innerRadius: 130,
             textFontSize: 24,
@@ -44,9 +63,9 @@ const FortuneWheelRules = ({
             textFontFamily: "'Open Sans',sans-serif",
             rotationAngle: -segmentAngleRef.current / 2,
             responsive: true,
-            segments: spinnerRules.map((data, idx) => {
+            segments: ticketList.current.map((data) => {
                 return {
-                    text: data.tickets.toString(),
+                    text: data.toString(),
                 };
             }),
             animation: {
@@ -63,7 +82,7 @@ const FortuneWheelRules = ({
             //     lineWidth: 3,
             // },
         });
-    }, [spinnerRules]);
+    }, [shuffleSpinner]);
 
     useEffect(() => {
         if (!isClickedSpin) setIsSpinning(false);
