@@ -1,5 +1,5 @@
 import { delay } from "lodash";
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Winwheel from "winwheel";
 import TweenMax from "gsap/all";
 
@@ -19,6 +19,8 @@ const FortuneWheelRules = ({
     const onFinishedRef = useRef(onFinished);
 
     const isAbleToSpin = spinLeft > 0;
+
+    const [isSpinning, setIsSpinning] = useState(false);
 
     useEffect(() => {
         // Add TweenMax into global var
@@ -64,6 +66,10 @@ const FortuneWheelRules = ({
     }, [spinnerRules]);
 
     useEffect(() => {
+        if (!isClickedSpin) setIsSpinning(false);
+    }, [isClickedSpin]);
+
+    useEffect(() => {
         const resetWheel = () => {
             wheelRef.current.stopAnimation(false);
             let winningSegmentNumber =
@@ -80,8 +86,7 @@ const FortuneWheelRules = ({
 
         const startSpin = () => {
             let winSegments = ticketList.current.reduce((a, e, i) => {
-                if (e === winAmount)
-                {
+                if (e === winAmount) {
                     a.push(i);
                 }
                 return a;
@@ -118,18 +123,17 @@ const FortuneWheelRules = ({
 
                 wheelRef.current.draw();
 
-                if (onFinishedRef.current)
-                {
+                if (onFinishedRef.current) {
                     onFinishedRef.current();
                 }
             }, wheelRef.current.animation.duration * 1000);
         };
 
-        if (isClickedSpin && winAmount !== -1)
-        {
+        if (!isSpinning && isClickedSpin && winAmount !== -1) {
+            setIsSpinning(true);
             startSpin();
         }
-    }, [isClickedSpin, winAmount]);
+    }, [isClickedSpin, winAmount, isSpinning]);
 
     //#region Methods
 
@@ -195,8 +199,9 @@ const FortuneWheelRules = ({
                 <div className="inner-circle"></div>
                 {/* SPIN BUTTON*/}
                 <div
-                    className={`spin-button ${!isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
-                        }`}
+                    className={`spin-button ${
+                        !isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
+                    }`}
                 >
                     <button
                         disabled={!isAbleToSpin || isClickedSpin ? true : false}

@@ -89,6 +89,7 @@ const FortuneWheel = ({
     }
     function onSpinFinished() {
         setIsClickedSpin(false);
+        setWinAmount(-1);
 
         dispatch(loadUserDetails());
     }
