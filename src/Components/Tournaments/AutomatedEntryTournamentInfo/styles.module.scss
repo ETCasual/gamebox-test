@@ -1,6 +1,9 @@
 // AUTOMATED GAME MAIN PANEL
 #automatedEntryTournamentInfo {
-    padding-top: 6rem;
+    padding-top: 5rem;
+    @include media-min($xs) {
+        padding-top: 6rem;
+    }
     .wrapper {
         margin: 3rem 0;
         box-shadow: 0px 10px 15px #00000029;
