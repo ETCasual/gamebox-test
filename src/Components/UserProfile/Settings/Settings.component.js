@@ -265,15 +265,16 @@ const Settings = () => {
                                         </div>
                                     </div>
                                 </div>
+                                {/* REMOVED ON 21/7/2022: Due to redundant with Footer. */}
                                 {/* ITEM 4 - STAY CONNECTED */}
-                                <div className="row py-4 py-md-5">
+                                {/* <div className="row py-4 py-md-5">
                                     <div className="col-12 mb-3">
                                         <p className="main-title mb-0">
                                             Stay connected
                                         </p>
                                     </div>
                                     <div className="col-12 social-media d-flex align-items-center">
-                                        {/* FACEBOOK */}
+
                                         <a
                                             target="_blank"
                                             rel="noreferrer"
@@ -293,7 +294,7 @@ const Settings = () => {
                                                 />
                                             </svg>
                                         </a>
-                                        {/* INSTAGRAM */}
+
                                         <a
                                             className="mx-3"
                                             target="_blank"
@@ -333,7 +334,7 @@ const Settings = () => {
                                                 />
                                             </svg>
                                         </a>
-                                        {/* TWITTER */}
+
                                         <a
                                             target="_blank"
                                             rel="noreferrer"
@@ -360,9 +361,9 @@ const Settings = () => {
                                             </svg>
                                         </a>
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* ITEM 5 - MORE INFO */}
-                                <div className="row py-4">
+                                {/* <div className="row py-4">
                                     <div className="col-12 mb-3">
                                         <p className="main-title">
                                             More information
@@ -412,7 +413,7 @@ const Settings = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
