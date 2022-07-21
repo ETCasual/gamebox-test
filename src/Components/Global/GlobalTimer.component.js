@@ -27,6 +27,11 @@ const GlobalTimer = ({ data }) => {
     let userRef = useRef(user);
 
     useEffect(() => {
+        // Update user ref
+        userRef.current = user;
+    }, [user]);
+
+    useEffect(() => {
         // SETTING COUNT DOWN TIMER
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
