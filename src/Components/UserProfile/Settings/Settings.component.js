@@ -247,7 +247,7 @@ const Settings = () => {
                                             <div className="row">
                                                 <div className="col-6 d-flex align-items-center">
                                                     <p className="mb-0">
-                                                        Mute notifications
+                                                        Turn on notifications
                                                     </p>
                                                 </div>
                                                 <div className="col-6 d-flex align-items-center justify-content-end">

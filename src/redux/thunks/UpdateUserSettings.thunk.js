@@ -11,8 +11,14 @@ export default function loadUpdateUserSettings(
 ) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
-
-        return updateUserSettings(user, username, picture, firstname, lastname, isNotifyAllowed)
+        return updateUserSettings(
+            user,
+            username,
+            picture,
+            firstname,
+            lastname,
+            isNotifyAllowed
+        )
             .then((data) => {
                 dispatch({
                     type: SHOW_TOAST,
