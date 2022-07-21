@@ -98,6 +98,9 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+        .pop-up-wrapper {
+            max-height: 450px;
+        }
         .close-button {
             cursor: pointer;
             width: 30px;
@@ -112,6 +115,17 @@
             background: linear-gradient(136deg, #302f2f 0%, #0b0b0b 100%);
             box-shadow: 0px 5px 10px #00000029;
             border-radius: 10px;
+            height: 100%;
+
+            .step-wrapper {
+                overflow-y: scroll;
+                -ms-overflow-style: none; /* Internet Explorer 10+ */
+                scrollbar-width: none; /* Firefox */
+            }
+            .step-wrapper::-webkit-scrollbar {
+                width: 0; /* Safari and Chrome */
+            }
+
             .top {
                 .title {
                     font-size: $fnt-sz-18;
