@@ -149,50 +149,56 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 </div>
                                             </div>
                                             <div className="pool-tickets mt-2">
-                                                <p className="mb-0 label d-none align-items-end d-sm-flex">
-                                                    Draw starts in
-                                                </p>
-                                                <p className="mb-0 label d-flex align-items-end d-sm-none">
-                                                    Prize pool
-                                                </p>
-                                                <div className="col d-flex align-items-center px-0">
-                                                    <p
-                                                        className={`mb-0 d-none d-sm-flex align-items-center ${
-                                                            OverTimeModeChecker(
-                                                                data?.prizeId,
-                                                                data?.ticketsRequired,
-                                                                prizeTicketCollection
-                                                            )
-                                                                ? "text-danger timer"
-                                                                : "current-tickets tickets"
-                                                        }`}
-                                                    >
-                                                        {`\u00A0${
-                                                            OverTimeModeChecker(
-                                                                data?.prizeId,
-                                                                data?.ticketsRequired,
-                                                                prizeTicketCollection
-                                                            )
-                                                                ? timer
-                                                                : getPrizeTicketCollected(
-                                                                      prizeTicketCollection,
-                                                                      data?.prizeId
-                                                                  )?.toLocaleString() ||
-                                                                  0
-                                                        }`}
-                                                    </p>
-                                                    <p className="tickets mb-0 d-none align-items-center d-sm-flex">{`\u00A0/`}</p>
-
-                                                    {!OverTimeModeChecker(
-                                                        data?.prizeId,
-                                                        data?.ticketsRequired,
-                                                        prizeTicketCollection
-                                                    ) && (
-                                                        <p className="tickets mb-0 d-flex align-items-center">
-                                                            {`\u00A0${data?.ticketsRequired?.toLocaleString()}`}
+                                                {/* NO OVERTIME */}
+                                                {!OverTimeModeChecker(
+                                                    data?.prizeId,
+                                                    data?.ticketsRequired,
+                                                    prizeTicketCollection
+                                                ) && (
+                                                    <>
+                                                        <p className="mb-0 label d-none align-items-end d-sm-flex">
+                                                            Draw starts in
                                                         </p>
-                                                    )}
-                                                </div>
+                                                        <p className="mb-0 label d-flex align-items-end d-sm-none">
+                                                            Prize pool
+                                                        </p>
+                                                        <div className="col d-flex align-items-center px-0">
+                                                            <p className="mb-0 d-none d-sm-flex align-items-center current-tickets tickets">
+                                                                {`\u00A0${
+                                                                    getPrizeTicketCollected(
+                                                                        prizeTicketCollection,
+                                                                        data?.prizeId
+                                                                    )?.toLocaleString() ||
+                                                                    0
+                                                                }`}
+                                                            </p>
+
+                                                            <p className="tickets mb-0 d-none align-items-center d-sm-flex">{`\u00A0/`}</p>
+                                                            <p className="tickets mb-0 d-flex align-items-center">
+                                                                {`\u00A0${data?.ticketsRequired?.toLocaleString()}`}
+                                                            </p>
+                                                        </div>
+                                                    </>
+                                                )}
+
+                                                {/* TOURNAMENT OVERTIME */}
+                                                {OverTimeModeChecker(
+                                                    data?.prizeId,
+                                                    data?.ticketsRequired,
+                                                    prizeTicketCollection
+                                                ) && (
+                                                    <>
+                                                        <p className="mb-0 label align-items-end d-sm-flex">
+                                                            Draw starts in
+                                                        </p>
+
+                                                        <div className="col d-flex align-items-center px-0">
+                                                            <p className="mb-0 d-sm-flex align-items-center overtime-text timer">
+                                                                {`\u00A0${timer}`}
+                                                            </p>
+                                                        </div>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

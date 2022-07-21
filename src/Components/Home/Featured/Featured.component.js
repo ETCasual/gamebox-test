@@ -171,7 +171,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                                         data?.ticketsRequired,
                                                                         prizeTicketCollection
                                                                     )
-                                                                        ? "text-danger timer"
+                                                                        ? "overtime-text timer"
                                                                         : "current-tickets tickets"
                                                                 }`}
                                                             >
@@ -233,14 +233,12 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                     </div>
                                 </div>
 
-                                {false && (
+                                {/* {
                                     <div className="tickets-info mb-2 w-100">
-                                        {/* LABEL */}
                                         <p className="ticket-label mb-2">
                                             Your tickets
                                         </p>
                                         <div className="col-12 d-flex align-items-center justify-content-between pl-0">
-                                            {/* YOUR TICKETS */}
                                             <p className="mb-0 your-tickets d-flex align-items-end">
                                                 {getPoolTickets(
                                                     poolTickets,
@@ -299,7 +297,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                             tournaments
                                         </button>
                                     </div>
-                                )}
+                                } */}
                             </Link>
                         </div>
                         {data?.completed && (

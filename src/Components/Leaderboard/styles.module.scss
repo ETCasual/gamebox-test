@@ -50,6 +50,12 @@
                     border-radius: 7px;
                 }
                 .game-details {
+                    .overtime-text {
+                        color: #ff3399;
+                        font-size: $fnt-sz-12;
+                        font-weight: $fnt-wgt-700;
+                    }
+
                     .game-name,
                     .timer-text {
                         font-size: $fnt-sz-14;
