@@ -765,7 +765,7 @@ const Leaderboard = ({
                                                             data?.ticketsRequired,
                                                             prizeTicketCollection
                                                         )
-                                                            ? "text-danger"
+                                                            ? "overtime-text"
                                                             : "timer-text"
                                                     }`}
                                                 >
