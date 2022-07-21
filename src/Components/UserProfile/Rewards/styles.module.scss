@@ -1,6 +1,10 @@
 // REWARDS
 #rewards-panel {
-    padding-top: 6rem;
+    padding-top: 5rem;
+    @include media-min($xs) {
+        padding-top: 6rem;
+    }
+
     .main-title {
         font-weight: $fnt-wgt-700;
         font-size: $fnt-sz-18;

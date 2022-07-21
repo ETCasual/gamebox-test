@@ -1,9 +1,12 @@
 // HIGHSCORE
 #high-score {
     position: relative;
-    padding-top: 6rem;
+    padding-top: 5rem;
+    @include media-min($xs) {
+        padding-top: 6rem;
+    }
 
-    @media (pointer:none), (pointer:coarse) {
+    @media (pointer: none), (pointer: coarse) {
         margin-bottom: 150px;
     }
     .wrapper {

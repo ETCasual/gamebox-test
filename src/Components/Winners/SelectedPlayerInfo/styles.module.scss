@@ -1,7 +1,10 @@
 // SELECTED PLAYER INFO COMPONENT
 #selected-player-info {
     position: relative;
-    margin-top: 6rem;
+    margin-top: 5rem;
+    @include media-min($xs) {
+        margin-top: 6rem;
+    }
     .profile-info {
         img {
             border-radius: 100%;
