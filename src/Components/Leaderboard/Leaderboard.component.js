@@ -103,6 +103,8 @@ const Leaderboard = ({
     let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
     const [isMute, setIsMute] = useState(window.localStorage.getItem("mute"));
 
+    const [tempShow] = useState(false);
+
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
     useEffect(() => {
@@ -586,77 +588,78 @@ const Leaderboard = ({
         return _leaderboardList;
     }
 
-    if (modalStatus.isGameReady) {
-        return (
-            <div className="game-wrapper">
-                {/* ADDITIONAL TICKETS & EXPERIENCE POINTS WIN MODAL */}
-                {modalStatus.isEarnAdditionalWinModalShown && (
-                    <EarnAdditionalBenefitModal
-                        handleContinueButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
-                                isEarnAdditionalWinModalShown: false,
-                                isPlayBtnDisabled: false,
-                            }));
-                        }}
-                    />
-                )}
-                {/* MODAL FOR GAME OVER */}
-                {modalStatus.isGameOver && (
-                    <GameEndModal
-                        handleContinueButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
-                                isGameOver: false,
-                                isTournamentEnded: false,
-                                isPlayBtnDisabled: false,
-                            }));
-                            // setIsGameLeaderboardShown(false);
-                            dispatch({ type: PLAYER_LOG_RESET });
-                        }}
-                        isShowTournamentEndedText={
-                            modalStatus.isTournamentEnded
-                        }
-                        currentGameBoosterInfo={currentGameBoosterInfo}
-                    />
-                )}
+    if (tempShow) {
+        if (modalStatus.isGameReady) {
+            return (
+                <div className="game-wrapper">
+                    {/* ADDITIONAL TICKETS & EXPERIENCE POINTS WIN MODAL */}
+                    {modalStatus.isEarnAdditionalWinModalShown && (
+                        <EarnAdditionalBenefitModal
+                            handleContinueButton={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGameReady: false,
+                                    isQuitGameBtnDisabled: false,
+                                    isEarnAdditionalWinModalShown: false,
+                                    isPlayBtnDisabled: false,
+                                }));
+                            }}
+                        />
+                    )}
+                    {/* MODAL FOR GAME OVER */}
+                    {modalStatus.isGameOver && (
+                        <GameEndModal
+                            handleContinueButton={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGameReady: false,
+                                    isQuitGameBtnDisabled: false,
+                                    isGameOver: false,
+                                    isTournamentEnded: false,
+                                    isPlayBtnDisabled: false,
+                                }));
+                                // setIsGameLeaderboardShown(false);
+                                dispatch({ type: PLAYER_LOG_RESET });
+                            }}
+                            isShowTournamentEndedText={
+                                modalStatus.isTournamentEnded
+                            }
+                            currentGameBoosterInfo={currentGameBoosterInfo}
+                        />
+                    )}
 
-                {/* MODAL FOR GAME PAUSED */}
-                {modalStatus.isGamePaused && (
-                    <PauseMenuModal
-                        handleResumeButton={() => {
-                            resumeGame();
-                            // setIsGameLeaderboardShown(false);
-                        }}
-                        handleQuitButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGamePaused: false,
-                                isQuitGameConfirm: true,
-                            }));
-                        }}
-                        handleAudioButton={() => {
-                            isMute === "true"
-                                ? setIsMute("false")
-                                : setIsMute("true");
+                    {/* MODAL FOR GAME PAUSED */}
+                    {modalStatus.isGamePaused && (
+                        <PauseMenuModal
+                            handleResumeButton={() => {
+                                resumeGame();
+                                // setIsGameLeaderboardShown(false);
+                            }}
+                            handleQuitButton={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGamePaused: false,
+                                    isQuitGameConfirm: true,
+                                }));
+                            }}
+                            handleAudioButton={() => {
+                                isMute === "true"
+                                    ? setIsMute("false")
+                                    : setIsMute("true");
 
-                            let destination =
-                                document.getElementById(
-                                    "destination"
-                                )?.contentWindow;
-                            destination?.toggleAudioOnOff?.();
-                        }}
-                        isMute={isMute}
-                    />
-                )}
+                                let destination =
+                                    document.getElementById(
+                                        "destination"
+                                    )?.contentWindow;
+                                destination?.toggleAudioOnOff?.();
+                            }}
+                            isMute={isMute}
+                        />
+                    )}
 
-                {/* Comment out because the Front End X button is no longer in
+                    {/* Comment out because the Front End X button is no longer in
                 used */}
-                {/* {!modalStatus.isQuitGameBtnDisabled && (
+                    {/* {!modalStatus.isQuitGameBtnDisabled && (
                     <img
                         className="ml-1 mt-1 quit-btn"
                         width="36"
@@ -665,318 +668,340 @@ const Leaderboard = ({
                         alt="Close Button"
                     />
                 )} */}
-                {/* QUIT GAME MODAL */}
-                {modalStatus.isQuitGameConfirm && (
-                    <GameQuitModal onActionCallback={handleQuitGameAction} />
-                )}
-                {/* GAME IFRAME */}
-                {gameData !== null && (
-                    <>
-                        <div className="game-loading">
-                            <p className="mb-2 text-center loading-text">
-                                Loading
-                            </p>
-                            <GenericLoader
-                                height="30"
-                                bg="#FF007C"
-                                cx1={window.innerWidth > 1200 ? "48%" : "46%"}
-                                cx2="50%"
-                                cx3={window.innerWidth > 1200 ? "52%" : "54%"}
-                                cy="15"
-                            />
-                            <button
-                                className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
-                                onClick={handleQuitGame}
-                            >
-                                Close
-                            </button>
-                        </div>
-
-                        <iframe
-                            title="game"
-                            id="destination"
-                            srcDoc={gameData}
-                            frameBorder="0"
+                    {/* QUIT GAME MODAL */}
+                    {modalStatus.isQuitGameConfirm && (
+                        <GameQuitModal
+                            onActionCallback={handleQuitGameAction}
                         />
-                    </>
-                )}
-            </div>
-        );
-    } else {
-        return (
-            <section
-                id="game-leaderboard-screen"
-                // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
-                // onClick={(e) => {
-                //     if (
-                // //         !e.target.closest(".bottom-ready-tournament") &&
-                // //         !e.target.closest(".earn-additional-tickets-container")
-                //     ) {
-                //         setModalStatus((prev) => ({
-                //             ...prev,
-                //             isEarnAdditionalInfoShown: false,
-                //         }));
-                //     }
-                // }}
-            >
-                {/* TICKETS BOOSTER CLOSE LAYER */}
-                {/* {modalStatus.isEarnAdditionalInfoShown && (
+                    )}
+                    {/* GAME IFRAME */}
+                    {gameData !== null && (
+                        <>
+                            <div className="game-loading">
+                                <p className="mb-2 text-center loading-text">
+                                    Loading
+                                </p>
+                                <GenericLoader
+                                    height="30"
+                                    bg="#FF007C"
+                                    cx1={
+                                        window.innerWidth > 1200 ? "48%" : "46%"
+                                    }
+                                    cx2="50%"
+                                    cx3={
+                                        window.innerWidth > 1200 ? "52%" : "54%"
+                                    }
+                                    cy="15"
+                                />
+                                <button
+                                    className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
+                                    onClick={handleQuitGame}
+                                >
+                                    Close
+                                </button>
+                            </div>
+
+                            <iframe
+                                title="game"
+                                id="destination"
+                                srcDoc={gameData}
+                                frameBorder="0"
+                            />
+                        </>
+                    )}
+                </div>
+            );
+        } else {
+            return (
+                <section
+                    id="game-leaderboard-screen"
+                    // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
+                    // onClick={(e) => {
+                    //     if (
+                    // //         !e.target.closest(".bottom-ready-tournament") &&
+                    // //         !e.target.closest(".earn-additional-tickets-container")
+                    //     ) {
+                    //         setModalStatus((prev) => ({
+                    //             ...prev,
+                    //             isEarnAdditionalInfoShown: false,
+                    //         }));
+                    //     }
+                    // }}
+                >
+                    {/* TICKETS BOOSTER CLOSE LAYER */}
+                    {/* {modalStatus.isEarnAdditionalInfoShown && (
                     <div className="leaderboard-tickets-booster-close"></div>
                 )} */}
 
-                <div className="container-fluid">
-                    <div className="row justify-content-center">
-                        <div className="col-12">
-                            {/* BACKGROUND IMAGE */}
-                            <div
-                                className="col-12 px-0 leaderboard-background-wrapper position-relative"
-                                ref={leaderBoardBackgroundRef}
-                            >
-                                <img
-                                    className="leaderboard-background"
-                                    src={currentGameDetails?.gameIcon}
-                                    alt={currentGameDetails?.gameTitle}
-                                />
-                                {/* LEADERBOARD */}
-                                <div className="leaderboard-wrapper">
-                                    {/* GAME INFO & TIMER */}
-                                    <div
-                                        className="leaderboard-game-info d-flex align-items-center justify-content-start"
-                                        ref={leaderBoardGameInfoRef}
-                                    >
-                                        <img
-                                            className="game-icon"
-                                            src={currentGameDetails?.gameIcon}
-                                            alt={currentGameDetails?.gameIcon}
-                                        />
-                                        <div className="game-details w-100 px-3">
-                                            <p className="game-name w-100 mb-2">
-                                                {currentGameDetails?.gameTitle}
-                                            </p>
-
-                                            <div className="w-100 d-flex align-items-center justify-content-between">
-                                                <p className="tournament-end-text mb-0">
-                                                    Tournament ends in
-                                                </p>
-                                                <p
-                                                    className={`mb-0 ${
-                                                        OverTimeModeChecker(
-                                                            data?.prizeId,
-                                                            data?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
-                                                            ? "overtime-text"
-                                                            : "timer-text"
-                                                    }`}
-                                                >
-                                                    {timer || "0d 0h 0m 0s"}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* LEADERBOARD LIST */}
-                                    <div
-                                        ref={leaderboardRef}
-                                        className={`leaderboard ${
-                                            currentUserRank.rank > rankLength ||
-                                            currentUserRank.rank === "-"
-                                                ? ""
-                                                : "leaderboard-rank-layer-without-user"
-                                        }`}
-                                        style={{
-                                            padding: `${
-                                                currentUserRank.rank >
-                                                rankLength
-                                                    ? "0.25rem 0.25rem 5rem 0.25rem"
-                                                    : ""
-                                            }`,
-                                        }}
-                                    >
-                                        {leaderboardList.length > 0
-                                            ? getLeaderboardList()
-                                            : getEmptyLeaderboardList()}
-                                    </div>
-
-                                    {/* CURRENT USER RANK IF IT'S MORE THAN THE RANK LIST LENGTH */}
-                                    {currentUserRank.rank > rankLength ? (
-                                        <div className="leaderboard-user-wrapper w-100">
-                                            <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
-                                                <div className="number-holder">
-                                                    <LeaderRankIndicator
-                                                        index={
-                                                            currentUserRank.rank
-                                                        }
-                                                        type="current"
-                                                    />
-                                                </div>
-                                                <div className="user-avatar">
-                                                    <img
-                                                        className="avatar"
-                                                        onError={(e) =>
-                                                            defaultUserImage(e)
-                                                        }
-                                                        src={
-                                                            user.picture ||
-                                                            `${window.cdn}icons/icon_profile.svg`
-                                                        }
-                                                        alt="player"
-                                                    />
-                                                </div>
-
-                                                <div className="px-2 ml-3">
-                                                    <p className="player-name">
-                                                        {user.username}
-                                                    </p>
-                                                    <p className="points">
-                                                        {leaderboard.find(
-                                                            (e) =>
-                                                                e.userId ===
-                                                                user.id
-                                                        )?.gameScore ||
-                                                            "0"}{" "}
-                                                        pts
-                                                    </p>
-                                                </div>
-                                                <div className="tickets ml-auto d-flex align-items-center justify-content-center">
-                                                    <span>
-                                                        {getRankTickets(
-                                                            currentUserRank.rank -
-                                                                1
-                                                        ) || "0"}{" "}
-                                                        <img
-                                                            className="icon ml-1"
-                                                            src={`${window.cdn}assets/tickets_06.png`}
-                                                            alt="ticket"
-                                                        />
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        ""
-                                    )}
-                                </div>
-
-                                {/* READY TOURNAMENT BUTTON */}
+                    <div className="container-fluid">
+                        <div className="row justify-content-center">
+                            <div className="col-12">
+                                {/* BACKGROUND IMAGE */}
                                 <div
-                                    className="bottom-ready-tournament d-block align-items-center justify-content-center"
-                                    ref={readyTournamentButtonRef}
+                                    className="col-12 px-0 leaderboard-background-wrapper position-relative"
+                                    ref={leaderBoardBackgroundRef}
                                 >
-                                    <button
-                                        className={`ready-tournament-button ${
-                                            isGameAvailable &&
-                                            !modalStatus.isPlayBtnDisabled
-                                                ? ""
-                                                : "opacity-0-5"
-                                        }`}
-                                        onClick={
-                                            isGameAvailable &&
-                                            !modalStatus.isPlayBtnDisabled
-                                                ? () => {
-                                                      setModalStatus(
-                                                          (prev) => ({
-                                                              ...prev,
-                                                              isEarnAdditionalInfoShown: true,
-                                                          })
-                                                      );
-                                                  }
-                                                : null
-                                        }
+                                    <img
+                                        className="leaderboard-background"
+                                        src={currentGameDetails?.gameIcon}
+                                        alt={currentGameDetails?.gameTitle}
+                                    />
+                                    {/* LEADERBOARD */}
+                                    <div className="leaderboard-wrapper">
+                                        {/* GAME INFO & TIMER */}
+                                        <div
+                                            className="leaderboard-game-info d-flex align-items-center justify-content-start"
+                                            ref={leaderBoardGameInfoRef}
+                                        >
+                                            <img
+                                                className="game-icon"
+                                                src={
+                                                    currentGameDetails?.gameIcon
+                                                }
+                                                alt={
+                                                    currentGameDetails?.gameIcon
+                                                }
+                                            />
+                                            <div className="game-details w-100 px-3">
+                                                <p className="game-name w-100 mb-2">
+                                                    {
+                                                        currentGameDetails?.gameTitle
+                                                    }
+                                                </p>
+
+                                                <div className="w-100 d-flex align-items-center justify-content-between">
+                                                    <p className="tournament-end-text mb-0">
+                                                        Tournament ends in
+                                                    </p>
+                                                    <p
+                                                        className={`mb-0 ${
+                                                            OverTimeModeChecker(
+                                                                data?.prizeId,
+                                                                data?.ticketsRequired,
+                                                                prizeTicketCollection
+                                                            )
+                                                                ? "overtime-text"
+                                                                : "timer-text"
+                                                        }`}
+                                                    >
+                                                        {timer || "0d 0h 0m 0s"}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* LEADERBOARD LIST */}
+                                        <div
+                                            ref={leaderboardRef}
+                                            className={`leaderboard ${
+                                                currentUserRank.rank >
+                                                    rankLength ||
+                                                currentUserRank.rank === "-"
+                                                    ? ""
+                                                    : "leaderboard-rank-layer-without-user"
+                                            }`}
+                                            style={{
+                                                padding: `${
+                                                    currentUserRank.rank >
+                                                    rankLength
+                                                        ? "0.25rem 0.25rem 5rem 0.25rem"
+                                                        : ""
+                                                }`,
+                                            }}
+                                        >
+                                            {leaderboardList.length > 0
+                                                ? getLeaderboardList()
+                                                : getEmptyLeaderboardList()}
+                                        </div>
+
+                                        {/* CURRENT USER RANK IF IT'S MORE THAN THE RANK LIST LENGTH */}
+                                        {currentUserRank.rank > rankLength ? (
+                                            <div className="leaderboard-user-wrapper w-100">
+                                                <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
+                                                    <div className="number-holder">
+                                                        <LeaderRankIndicator
+                                                            index={
+                                                                currentUserRank.rank
+                                                            }
+                                                            type="current"
+                                                        />
+                                                    </div>
+                                                    <div className="user-avatar">
+                                                        <img
+                                                            className="avatar"
+                                                            onError={(e) =>
+                                                                defaultUserImage(
+                                                                    e
+                                                                )
+                                                            }
+                                                            src={
+                                                                user.picture ||
+                                                                `${window.cdn}icons/icon_profile.svg`
+                                                            }
+                                                            alt="player"
+                                                        />
+                                                    </div>
+
+                                                    <div className="px-2 ml-3">
+                                                        <p className="player-name">
+                                                            {user.username}
+                                                        </p>
+                                                        <p className="points">
+                                                            {leaderboard.find(
+                                                                (e) =>
+                                                                    e.userId ===
+                                                                    user.id
+                                                            )?.gameScore ||
+                                                                "0"}{" "}
+                                                            pts
+                                                        </p>
+                                                    </div>
+                                                    <div className="tickets ml-auto d-flex align-items-center justify-content-center">
+                                                        <span>
+                                                            {getRankTickets(
+                                                                currentUserRank.rank -
+                                                                    1
+                                                            ) || "0"}{" "}
+                                                            <img
+                                                                className="icon ml-1"
+                                                                src={`${window.cdn}assets/tickets_06.png`}
+                                                                alt="ticket"
+                                                            />
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            ""
+                                        )}
+                                    </div>
+
+                                    {/* READY TOURNAMENT BUTTON */}
+                                    <div
+                                        className="bottom-ready-tournament d-block align-items-center justify-content-center"
+                                        ref={readyTournamentButtonRef}
                                     >
-                                        JOIN TOURNAMENT
-                                        {/* <img
+                                        <button
+                                            className={`ready-tournament-button ${
+                                                isGameAvailable &&
+                                                !modalStatus.isPlayBtnDisabled
+                                                    ? ""
+                                                    : "opacity-0-5"
+                                            }`}
+                                            onClick={
+                                                isGameAvailable &&
+                                                !modalStatus.isPlayBtnDisabled
+                                                    ? () => {
+                                                          setModalStatus(
+                                                              (prev) => ({
+                                                                  ...prev,
+                                                                  isEarnAdditionalInfoShown: true,
+                                                              })
+                                                          );
+                                                      }
+                                                    : null
+                                            }
+                                        >
+                                            JOIN TOURNAMENT
+                                            {/* <img
                                             width={18}
                                             className="icon ml-3 mr-1"
                                             src={`${window.cdn}assets/gem_01.png`}
                                             alt="gems"
                                         />
                                         {data?.gemsNeeded} */}
-                                    </button>
+                                        </button>
+                                    </div>
+
+                                    {isSubscriptionModalShown && (
+                                        <InsufficientBalanceModalPopup
+                                            onCloseClicked={
+                                                onClickSubscriptionCancel
+                                            }
+                                        />
+                                    )}
+
+                                    {/* EARN ADDITIONAL BENEFITS */}
+                                    {modalStatus.isEarnAdditionalInfoShown && (
+                                        <LaunchGameMenuModalPopup
+                                            gameId={currentGameDetails.gameId}
+                                            prizeId={data?.prizeId}
+                                            playCost={data?.gemsNeeded}
+                                            setEarnAdditionalDisabledStatus={
+                                                setEarnAdditionalDisabledStatus
+                                            }
+                                            isPlayBtnDisabled={
+                                                !isGameAvailable ||
+                                                modalStatus.isPlayBtnDisabled
+                                            }
+                                            isLoadingGame={
+                                                !modalStatus.isGameReady &&
+                                                modalStatus.isPlayBtnDisabled
+                                            }
+                                            onCloseClicked={() => {
+                                                setModalStatus((prev) => ({
+                                                    ...prev,
+                                                    isEarnAdditionalInfoShown: false,
+                                                }));
+                                            }}
+                                            onPlayClicked={
+                                                handleOnClickPlayButton
+                                            }
+                                            onInsufficientPayment={() => {
+                                                setModalStatus((prev) => ({
+                                                    ...prev,
+                                                    isEarnAdditionalInfoShown: false,
+                                                }));
+                                                setIsSubscriptionModalShown(
+                                                    true
+                                                );
+                                            }}
+                                        />
+
+                                        // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
+                                        //     <EarnAdditionalTickets
+                                        //         gameId={currentGameDetails.gameId}
+                                        //         prizeId={data?.prizeId}
+                                        //         earnAdditionalDisabledStatus={
+                                        //             earnAdditionalDisabledStatus
+                                        //         }
+                                        //         setEarnAdditionalDisabledStatus={
+                                        //             setEarnAdditionalDisabledStatus
+                                        //         }
+                                        //     />
+                                        //     {/* PLAY BUTTON*/}
+                                        //     <div
+                                        //         className={`play-button-container d-flex justify-content-center ${
+                                        //             isGameAvailable
+                                        //                 ? ""
+                                        //                 : "opacity-0-5"
+                                        //         }`}
+                                        //     >
+                                        //         <button
+                                        //             onClick={
+                                        //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                        //                     ? handleOnClickPlayButton
+                                        //                     : null
+                                        //             }
+                                        //             className={`play-button ${
+                                        //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                        //                     ? ""
+                                        //                     : "opacity-0-5"
+                                        //             }`}
+                                        //         >
+                                        //             Play Tournament!
+                                        //         </button>
+                                        //     </div>
+                                        // </div>
+                                    )}
                                 </div>
-
-                                {isSubscriptionModalShown && (
-                                    <InsufficientBalanceModalPopup
-                                        onCloseClicked={
-                                            onClickSubscriptionCancel
-                                        }
-                                    />
-                                )}
-
-                                {/* EARN ADDITIONAL BENEFITS */}
-                                {modalStatus.isEarnAdditionalInfoShown && (
-                                    <LaunchGameMenuModalPopup
-                                        gameId={currentGameDetails.gameId}
-                                        prizeId={data?.prizeId}
-                                        playCost={data?.gemsNeeded}
-                                        setEarnAdditionalDisabledStatus={
-                                            setEarnAdditionalDisabledStatus
-                                        }
-                                        isPlayBtnDisabled={
-                                            !isGameAvailable ||
-                                            modalStatus.isPlayBtnDisabled
-                                        }
-                                        isLoadingGame={
-                                            !modalStatus.isGameReady &&
-                                            modalStatus.isPlayBtnDisabled
-                                        }
-                                        onCloseClicked={() => {
-                                            setModalStatus((prev) => ({
-                                                ...prev,
-                                                isEarnAdditionalInfoShown: false,
-                                            }));
-                                        }}
-                                        onPlayClicked={handleOnClickPlayButton}
-                                        onInsufficientPayment={() => {
-                                            setModalStatus((prev) => ({
-                                                ...prev,
-                                                isEarnAdditionalInfoShown: false,
-                                            }));
-                                            setIsSubscriptionModalShown(true);
-                                        }}
-                                    />
-
-                                    // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
-                                    //     <EarnAdditionalTickets
-                                    //         gameId={currentGameDetails.gameId}
-                                    //         prizeId={data?.prizeId}
-                                    //         earnAdditionalDisabledStatus={
-                                    //             earnAdditionalDisabledStatus
-                                    //         }
-                                    //         setEarnAdditionalDisabledStatus={
-                                    //             setEarnAdditionalDisabledStatus
-                                    //         }
-                                    //     />
-                                    //     {/* PLAY BUTTON*/}
-                                    //     <div
-                                    //         className={`play-button-container d-flex justify-content-center ${
-                                    //             isGameAvailable
-                                    //                 ? ""
-                                    //                 : "opacity-0-5"
-                                    //         }`}
-                                    //     >
-                                    //         <button
-                                    //             onClick={
-                                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                    //                     ? handleOnClickPlayButton
-                                    //                     : null
-                                    //             }
-                                    //             className={`play-button ${
-                                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                    //                     ? ""
-                                    //                     : "opacity-0-5"
-                                    //             }`}
-                                    //         >
-                                    //             Play Tournament!
-                                    //         </button>
-                                    //     </div>
-                                    // </div>
-                                )}
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        );
+                </section>
+            );
+        }
+    } else {
+        return <></>;
     }
 };
 
