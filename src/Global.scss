@@ -1576,4 +1576,36 @@ html {
     }
 }
 
+.pop-up-panel {
+    background: linear-gradient(90deg, #433849, #2f2833);
+    border-radius: 13px;
+    padding: 0.7em;
+    width: 60rem;
+    .title {
+        font-size: $fnt-sz-24;
+        font-weight: $fnt-wgt-700;
+        color: #fdf0f1;
+        @include media-min($sm) {
+            font-size: $fnt-sz-40;
+        }
+    }
+    .subtitle {
+        font-size: $fnt-sz-14;
+        color: #fdf0f1;
+        @include media-min($sm) {
+            font-size: $fnt-sz-20;
+        }
+    }
+    .btn-yes {
+        background: #ff3399 0% 0% no-repeat padding-box;
+        border-radius: 13px;
+        font-size: $fnt-sz-16;
+        font-weight: $fnt-wgt-700;
+        color: #fdf0f1;
+        @include media-min($sm) {
+            font-size: $fnt-sz-30;
+        }
+    }
+}
+
 @import "./assets/css/all";
