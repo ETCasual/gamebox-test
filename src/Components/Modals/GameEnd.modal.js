@@ -149,7 +149,7 @@ const GameEndModal = ({
                                 )}
 
                                 <button
-                                    className="continue-button d-block text-center mx-auto mt-4 py-3"
+                                    className="continue-button d-block text-center mx-auto mt-4 py-2"
                                     onClick={handleContinueButton}
                                 >
                                     CONTINUE
