@@ -91,20 +91,22 @@ const GameEndModal = ({
                                     </p>
                                 )}
 
-                                {score && (
-                                    <p className="text-center score-text mt-4 mb-0">
-                                        Score
-                                    </p>
-                                )}
+                                <div className="mb-5">
+                                    {score && (
+                                        <p className="text-center score-text mt-4 mb-0">
+                                            Score
+                                        </p>
+                                    )}
 
-                                {score && (
-                                    <p className="text-center score-number ">
-                                        {score}
-                                    </p>
-                                )}
+                                    {score && (
+                                        <p className="text-center score-number">
+                                            {score}
+                                        </p>
+                                    )}
+                                </div>
 
                                 {currentGameBoosterInfo.isUseBooster ? (
-                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
+                                    <div className="d-flex flex-row justify-content-center text-center pt-2 align-items-center mt-4">
                                         <p className="pr-2 ticket-rate-text-score">
                                             every{" "}
                                             {
@@ -149,7 +151,7 @@ const GameEndModal = ({
                                 )}
 
                                 <button
-                                    className="continue-button d-block text-center mx-auto mt-4 py-2"
+                                    className="continue-button d-block text-center mx-auto mt-3 py-2"
                                     onClick={handleContinueButton}
                                 >
                                     CONTINUE
