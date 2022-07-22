@@ -95,7 +95,10 @@
                 min-height: 3.5rem;
             }
             .timer-text {
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-12;
+                @include media-min($md) {
+                    font-size: $fnt-sz-14;
+                }
                 font-weight: $fnt-wgt-700;
             }
             .countdown {
