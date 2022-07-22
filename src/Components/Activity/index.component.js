@@ -66,7 +66,7 @@ const Index = () => {
     return (
         <section id="activity">
             <div className="container-fluid px-0">
-                <div className="col-12 col-md-10 col-lg-8 mx-auto">
+                <div className="col-12 col-md-10 col-lg-8 mx-auto content-min-height">
                     <h1 className="main-title mb-4">Your Activities</h1>
 
                     {noDataLoaded && (
@@ -82,7 +82,7 @@ const Index = () => {
                         </div>
                     )}
                     {!noDataLoaded && (
-                        <div className="content-min-height row">
+                        <div className="row">
                             {activityData.length <= 0 && <ActivityLoader />}
                             {activityData.map((card, index) => (
                                 <ActivityCard
