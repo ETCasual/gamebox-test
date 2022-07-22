@@ -1,6 +1,10 @@
 // SUBSCRIPTION COMPONENT
 #iap-items {
-    padding: 6rem 0;
+    padding: 5rem 0;
+    @include media-min($xs) {
+        padding: 6rem 0;
+    }
+
     .title {
         font-size: $fnt-sz-18;
         font-weight: $fnt-wgt-600;

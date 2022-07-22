@@ -1,6 +1,11 @@
 #home {
-    padding-top: 4.4rem;
+    padding-top: 3.7rem;
     padding-bottom: 6rem;
+
+    @include media-min($xs) {
+        padding-top: 4.4rem;
+        padding-bottom: 6rem;
+    }
 
     .content-min-height {
         min-height: 10vh;

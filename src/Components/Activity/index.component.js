@@ -29,6 +29,7 @@ const Index = () => {
         clearTimeout(timeOutRef.current);
         timeOutRef.current = setTimeout(() => {
             if (activityData.length <= 0) setNoDataLoaded(true);
+            else setNoDataLoaded(false);
         }, 3000);
         return () => {
             clearTimeout(timeOutRef.current);
@@ -65,7 +66,7 @@ const Index = () => {
     return (
         <section id="activity">
             <div className="container-fluid px-0">
-                <div className="col-12 col-md-10 col-lg-9 mx-auto">
+                <div className="col-12 col-md-10 col-lg-8 mx-auto">
                     <h1 className="main-title mb-4">Your Activities</h1>
 
                     {noDataLoaded && (

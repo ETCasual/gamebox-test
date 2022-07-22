@@ -1,5 +1,5 @@
 import { delay } from "lodash";
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Winwheel from "winwheel";
 import TweenMax from "gsap/all";
 
@@ -11,16 +11,37 @@ const FortuneWheelRules = ({
     onSpinClicked,
     onFinished = null,
 }) => {
-    const segmentAngleRef = useRef(360 / spinnerRules.length);
+    // Pre-Method
+    const getShuffleSpinner = () => {
+        let tempList = [...spinnerRules];
+        // Shuffle the spinner numbers
+        for (let i = 10; i > 0; i--) {
+            let randNum = Math.floor(Math.random() * i);
+            [tempList[i - 1], tempList[randNum]] = [
+                tempList[randNum],
+                tempList[i - 1],
+            ];
+        }
+        return tempList;
+    };
+
+    const [shuffleSpinner] = useState(getShuffleSpinner());
+
+    const segmentAngleRef = useRef(360 / shuffleSpinner.length);
     const numOfSpinsRef = useRef(8);
 
-    const ticketList = useRef(spinnerRules.map((x) => x.tickets));
+    const ticketList = useRef([]);
     const wheelRef = useRef(null);
     const onFinishedRef = useRef(onFinished);
 
     const isAbleToSpin = spinLeft > 0;
 
+    const [isSpinning, setIsSpinning] = useState(false);
+
     useEffect(() => {
+        // Update tickets list
+        ticketList.current = shuffleSpinner.map((x) => x.tickets);
+
         // Add TweenMax into global var
         window.TweenMax = TweenMax;
 
@@ -28,7 +49,7 @@ const FortuneWheelRules = ({
         const [fillStyle, strokeStyle] = normalSegmentStyles();
 
         wheelRef.current = new Winwheel({
-            numSegments: spinnerRules.length,
+            numSegments: shuffleSpinner.length,
             outerRadius: 190,
             innerRadius: 130,
             textFontSize: 24,
@@ -42,9 +63,9 @@ const FortuneWheelRules = ({
             textFontFamily: "'Open Sans',sans-serif",
             rotationAngle: -segmentAngleRef.current / 2,
             responsive: true,
-            segments: spinnerRules.map((data, idx) => {
+            segments: ticketList.current.map((data) => {
                 return {
-                    text: data.tickets.toString(),
+                    text: data.toString(),
                 };
             }),
             animation: {
@@ -61,7 +82,11 @@ const FortuneWheelRules = ({
             //     lineWidth: 3,
             // },
         });
-    }, [spinnerRules]);
+    }, [shuffleSpinner]);
+
+    useEffect(() => {
+        if (!isClickedSpin) setIsSpinning(false);
+    }, [isClickedSpin]);
 
     useEffect(() => {
         const resetWheel = () => {
@@ -80,8 +105,7 @@ const FortuneWheelRules = ({
 
         const startSpin = () => {
             let winSegments = ticketList.current.reduce((a, e, i) => {
-                if (e === winAmount)
-                {
+                if (e === winAmount) {
                     a.push(i);
                 }
                 return a;
@@ -118,18 +142,17 @@ const FortuneWheelRules = ({
 
                 wheelRef.current.draw();
 
-                if (onFinishedRef.current)
-                {
+                if (onFinishedRef.current) {
                     onFinishedRef.current();
                 }
             }, wheelRef.current.animation.duration * 1000);
         };
 
-        if (isClickedSpin && winAmount !== -1)
-        {
+        if (!isSpinning && isClickedSpin && winAmount !== -1) {
+            setIsSpinning(true);
             startSpin();
         }
-    }, [isClickedSpin, winAmount]);
+    }, [isClickedSpin, winAmount, isSpinning]);
 
     //#region Methods
 
@@ -195,8 +218,9 @@ const FortuneWheelRules = ({
                 <div className="inner-circle"></div>
                 {/* SPIN BUTTON*/}
                 <div
-                    className={`spin-button ${!isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
-                        }`}
+                    className={`spin-button ${
+                        !isAbleToSpin || isClickedSpin ? "opacity-0-5" : ""
+                    }`}
                 >
                     <button
                         disabled={!isAbleToSpin || isClickedSpin ? true : false}

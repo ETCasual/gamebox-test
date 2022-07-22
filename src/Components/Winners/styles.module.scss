@@ -1,6 +1,9 @@
 // WINNERS COMPONENT
 #winners {
-    padding: 6rem 0;
+    padding: 5rem 0;
+    @include media-min($xs) {
+        padding: 6rem 0;
+    }
     .main-title {
         font-size: $fnt-sz-14;
         @include media-min($md) {
@@ -96,7 +99,8 @@
         margin-top: 5rem;
         position: fixed;
         width: 40%;
-        video, img {
+        video,
+        img {
             min-height: 11.063rem;
             max-width: 11.063rem;
             border-radius: 17px 0 0 17px;

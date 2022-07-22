@@ -50,6 +50,12 @@
                     border-radius: 7px;
                 }
                 .game-details {
+                    .overtime-text {
+                        color: #ff3399;
+                        font-size: $fnt-sz-12;
+                        font-weight: $fnt-wgt-700;
+                    }
+
                     .game-name,
                     .timer-text {
                         font-size: $fnt-sz-14;
@@ -410,6 +416,29 @@
         position: fixed;
         top: 0;
         left: 0;
+    }
+    .loading-quit-btn
+    {   position: fixed;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -10%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 60%;
+        max-width: 25rem;
+        font-weight: $fnt-wgt-700;
+        font-size: $fnt-sz-20;  
+        background: #38303d;
+        color: white;
+        box-shadow: inset 0px 3px 6px #0000000f;
+        border-radius: 10px;
+        padding: 0.8rem;
+        @include media-min($md) {
+            width: 80%;
+        }
     }
     iframe {
         z-index: 3;

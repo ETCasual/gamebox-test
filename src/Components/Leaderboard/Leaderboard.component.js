@@ -35,6 +35,7 @@ import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
+import PauseMenuModal from "Components/Modals/PauseMenuModal";
 
 const Leaderboard = ({
     data,
@@ -77,6 +78,7 @@ const Leaderboard = ({
     const [isGameAvailable, setIsGameAvailable] = useState(false);
     const [modalStatus, setModalStatus] = useState({
         isGameReady: false,
+        isGamePaused: false,
         isQuitGameBtnDisabled: false,
         isPlayBtnDisabled: false,
         isQuitGameConfirm: false,
@@ -99,6 +101,7 @@ const Leaderboard = ({
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
     let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
+    const [isMute, setIsMute] = useState(window.localStorage.getItem("mute"));
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -117,7 +120,7 @@ const Leaderboard = ({
 
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
-        setIsGameAvailable(false);
+        setLeaderboardList([]);
         if (currentGameDetails?.gameId > 0) {
             dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
             dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
@@ -235,8 +238,8 @@ const Leaderboard = ({
     const handleOnClickPlayButton = async () => {
         setModalStatus((prev) => ({
             ...prev,
+            isGamePaused: false,
             isPlayBtnDisabled: true,
-            isEarnAdditionalInfoShown: false,
         }));
 
         if (!executeRecaptcha) {
@@ -274,11 +277,6 @@ const Leaderboard = ({
         )
             .then(async () => {
                 const token = getToken();
-                setModalStatus((prev) => ({
-                    ...prev,
-                    isGameReady: true,
-                    isEarnAdditionalInfoShown: false,
-                }));
 
                 if (currentGameDetails.gameId > 0) {
                     try {
@@ -316,6 +314,12 @@ const Leaderboard = ({
                     }
                 }
 
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isGameReady: true,
+                    isEarnAdditionalInfoShown: false,
+                }));
+
                 setEarnAdditionalDisabledStatus({
                     gems: false,
                     ads: false,
@@ -333,7 +337,21 @@ const Leaderboard = ({
         }));
     };
 
-    const handleModalButton = (choice) => {
+    window.handleQuitGame = () => {
+        handleQuitGame();
+    };
+
+    window.pauseGame = () => {
+        if (modalStatus.isQuitGameConfirm) return;
+        if (modalStatus.isGameOver) return;
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isGamePaused: true,
+        }));
+    };
+
+    const handleQuitGameAction = (choice) => {
         if (choice === "yes")
             setModalStatus((prev) => ({
                 ...prev,
@@ -341,10 +359,21 @@ const Leaderboard = ({
                 isQuitGameConfirm: false,
                 isPlayBtnDisabled: false,
             }));
-        else if (choice === "no")
-            setModalStatus((prev) => ({ ...prev, isQuitGameConfirm: false }));
+        else if (choice === "no") {
+            resumeGame();
+        }
     };
 
+    const resumeGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isQuitGameConfirm: false,
+            isGamePaused: false,
+        }));
+        let destination = document.getElementById("destination")?.contentWindow;
+        destination?.resumeGame?.();
+        destination.focus();
+    };
     window.playerEnterGame = () => {
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -390,6 +419,7 @@ const Leaderboard = ({
             setModalStatus((prev) => ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
+                isGamePaused: false,
             }));
 
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
@@ -398,6 +428,8 @@ const Leaderboard = ({
                     ...prev,
                     isGameOver: true,
                     isPlayBtnDisabled: false,
+                    isQuitGameConfirm: false,
+                    isGamePaused: false,
                 }));
                 // setIsShowAdditionalBenefitsModal(true);
                 // setIsGameLeaderboardShown(false);
@@ -571,7 +603,6 @@ const Leaderboard = ({
                         }}
                     />
                 )}
-
                 {/* MODAL FOR GAME OVER */}
                 {modalStatus.isGameOver && (
                     <GameEndModal
@@ -594,7 +625,38 @@ const Leaderboard = ({
                     />
                 )}
 
-                {!modalStatus.isQuitGameBtnDisabled && (
+                {/* MODAL FOR GAME PAUSED */}
+                {modalStatus.isGamePaused && (
+                    <PauseMenuModal
+                        handleResumeButton={() => {
+                            resumeGame();
+                            // setIsGameLeaderboardShown(false);
+                        }}
+                        handleQuitButton={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isGamePaused: false,
+                                isQuitGameConfirm: true,
+                            }));
+                        }}
+                        handleAudioButton={() => {
+                            isMute === "true"
+                                ? setIsMute("false")
+                                : setIsMute("true");
+
+                            let destination =
+                                document.getElementById(
+                                    "destination"
+                                )?.contentWindow;
+                            destination?.toggleAudioOnOff?.();
+                        }}
+                        isMute={isMute}
+                    />
+                )}
+
+                {/* Comment out because the Front End X button is no longer in
+                used */}
+                {/* {!modalStatus.isQuitGameBtnDisabled && (
                     <img
                         className="ml-1 mt-1 quit-btn"
                         width="36"
@@ -602,13 +664,11 @@ const Leaderboard = ({
                         src={`${window.cdn}buttons/button_close.png`}
                         alt="Close Button"
                     />
-                )}
-
+                )} */}
                 {/* QUIT GAME MODAL */}
                 {modalStatus.isQuitGameConfirm && (
-                    <GameQuitModal handleModalButton={handleModalButton} />
+                    <GameQuitModal onActionCallback={handleQuitGameAction} />
                 )}
-
                 {/* GAME IFRAME */}
                 {gameData !== null && (
                     <>
@@ -624,7 +684,14 @@ const Leaderboard = ({
                                 cx3={window.innerWidth > 1200 ? "52%" : "54%"}
                                 cy="15"
                             />
+                            <button
+                                className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
+                                onClick={handleQuitGame}
+                            >
+                                Close
+                            </button>
                         </div>
+
                         <iframe
                             title="game"
                             id="destination"
@@ -698,7 +765,7 @@ const Leaderboard = ({
                                                             data?.ticketsRequired,
                                                             prizeTicketCollection
                                                         )
-                                                            ? "text-danger"
+                                                            ? "overtime-text"
                                                             : "timer-text"
                                                     }`}
                                                 >
@@ -797,10 +864,14 @@ const Leaderboard = ({
                                 >
                                     <button
                                         className={`ready-tournament-button ${
-                                            isGameAvailable ? "" : "opacity-0-5"
+                                            isGameAvailable &&
+                                            !modalStatus.isPlayBtnDisabled
+                                                ? ""
+                                                : "opacity-0-5"
                                         }`}
                                         onClick={
-                                            isGameAvailable
+                                            isGameAvailable &&
+                                            !modalStatus.isPlayBtnDisabled
                                                 ? () => {
                                                       setModalStatus(
                                                           (prev) => ({
@@ -839,6 +910,14 @@ const Leaderboard = ({
                                         playCost={data?.gemsNeeded}
                                         setEarnAdditionalDisabledStatus={
                                             setEarnAdditionalDisabledStatus
+                                        }
+                                        isPlayBtnDisabled={
+                                            !isGameAvailable ||
+                                            modalStatus.isPlayBtnDisabled
+                                        }
+                                        isLoadingGame={
+                                            !modalStatus.isGameReady &&
+                                            modalStatus.isPlayBtnDisabled
                                         }
                                         onCloseClicked={() => {
                                             setModalStatus((prev) => ({

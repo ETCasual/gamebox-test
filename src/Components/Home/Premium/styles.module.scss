@@ -211,9 +211,17 @@
                 }
             }
             .pool-tickets {
+                .overtime-text {
+                    color: #ff3399;
+                    font-size: $fnt-sz-12;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-16;
+                    }
+                }
+                
                 .current-tickets {
-                    font-size: 20;
-                    @include media-min($xl) {
+                    font-size: $fnt-sz-20;
+                    @include media-min($sm) {
                         font-size: $fnt-sz-16;
                     }
                     color: #00c1b9;
