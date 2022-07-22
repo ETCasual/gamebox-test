@@ -1279,7 +1279,7 @@ html {
             font-size: $fnt-sz-18;
             font-weight: $fnt-wgt-700;
             @include media-min($sm) {
-                font-size: $fnt-sz-20;
+                font-size: $fnt-sz-26;
             }
         }
 
@@ -1294,7 +1294,6 @@ html {
         .buttons {
             .buy-btn {
                 width: 100%;
-                max-width: 15rem;
                 font-size: $fnt-sz-18;
                 font-weight: bold;
                 background: #ff3399;
@@ -1875,6 +1874,9 @@ html {
 
     .panel-title {
         font-size: $fnt-sz-30;
+        @include media-min($md) {
+            font-size: $fnt-sz-40;
+        }
         font-weight: $fnt-wgt-700;
         color: #fdf0f1;
     }
@@ -1892,7 +1894,10 @@ html {
         width: 100%;
         max-width: 25rem;
         font-weight: $fnt-wgt-600;
-        font-size: $fnt-sz-26;
+        font-size: $fnt-sz-20;
+        @include media-min($md) {
+            font-size: $fnt-sz-26;
+        }
         background: #ff3399;
         color: white;
         box-shadow: inset 0px 3px 6px #0000000f;
@@ -1903,7 +1908,10 @@ html {
         width: 100%;
         max-width: 25rem;
         font-weight: $fnt-wgt-600;
-        font-size: $fnt-sz-26;
+        font-size: $fnt-sz-20;
+        @include media-min($md) {
+            font-size: $fnt-sz-26;
+        }
         background: #101010;
         color: white;
         box-shadow: inset 0px 3px 6px #0000000f;
@@ -1956,11 +1964,17 @@ html {
 
     .panel-title {
         font-size: $fnt-sz-30;
+        @include media-min($md) {
+            font-size: $fnt-sz-40;
+        }
         font-weight: $fnt-wgt-700;
     }
 
     .game-warning-text {
-        font-size: $fnt-sz-18;
+        font-size: $fnt-sz-14;
+        @include media-min($md) {
+            font-size: $fnt-sz-18;
+        }
         font-weight: $fnt-wgt-600;
         color: #fdf0f1;
     }
@@ -1968,7 +1982,10 @@ html {
     .yes-button {
         width: 100%;
         font-weight: $fnt-wgt-600;
-        font-size: $fnt-sz-26;
+        font-size: $fnt-sz-20;
+        @include media-min($md) {
+            font-size: $fnt-sz-26;
+        }
         color: white;
         box-shadow: inset 0px 3px 6px #0000000f;
         border-radius: 10px;
@@ -1977,7 +1994,10 @@ html {
     .cancel-button {
         width: 100%;
         font-weight: $fnt-wgt-600;
-        font-size: $fnt-sz-26;
+        font-size: $fnt-sz-20;
+        @include media-min($md) {
+            font-size: $fnt-sz-26;
+        }
         background: #101010;
         color: white;
         box-shadow: inset 0px 3px 6px #0000000f;
