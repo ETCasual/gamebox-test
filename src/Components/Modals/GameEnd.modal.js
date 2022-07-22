@@ -7,12 +7,11 @@ import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
 const GameEndModal = ({
+    score,
     handleContinueButton,
     isShowTournamentEndedText,
     currentGameBoosterInfo,
 }) => {
-    const score = localStorage.getItem("currentGameScore");
-
     const dispatch = useDispatch();
 
     // const { leaderboardHistory } = useSelector(
@@ -72,7 +71,7 @@ const GameEndModal = ({
         <>
             {!isSelectedNotificationShown.status && (
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                    <div className="game-result-panel col-12 col-md-4 col-xl-4 position-relative">
+                    <div className="game-result-panel col-12 col-md-6 col-xl-5 position-relative">
                         {/* CARD */}
                         <div className="row justify-content-center my-3 my-sm-3">
                             <div className="col-10 col-lg-8 mb-2 pl-2 pr-1">
