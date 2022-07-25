@@ -282,11 +282,11 @@ const Index = ({ match }) => {
                                     </div>
                                 </div>
 
-                                <div className="row col-12 px-3 mb-4 mb-md-4">
+                                <div className="col-12 px-3 mb-4 mb-md-4">
                                     {/* TICKETS AND POOL INFO */}
-                                    <div className="prize-info-wrapper col-12 col-md-3 d-flex flex-column flex-md-row">
+                                    <div className="prize-info-wrapper col-12 col-md-3 p-0 d-flex flex-column flex-md-row">
                                         <div className="d-flex flex-row">
-                                            <div className="col-3 p-0">
+                                            <div className="col-4 p-0">
                                                 <ThumbnailMedia
                                                     url={currentPrize?.prizeBG}
                                                     isPlayVideo={true}
@@ -336,7 +336,7 @@ const Index = ({ match }) => {
                                                 )}
                                             </div>
 
-                                            <div className="prize-text-holder col-9">
+                                            <div className="prize-text-holder col-8 pr-0">
                                                 <div className="prize-id mb-lg-1">
                                                     {
                                                         currentPrize?.prizeSubtitle
@@ -353,7 +353,7 @@ const Index = ({ match }) => {
 
                                                 <div className="your-tokens-info d-flex flex-row mt-2">
                                                     <div className="col-4 p-0 mt-auto mx-auto">
-                                                        <div className="your-tokens-text">
+                                                        <div className="your-tokens-title-text">
                                                             Your tickets
                                                         </div>
                                                         <div className="your-tokens-number mt-1">
@@ -365,15 +365,16 @@ const Index = ({ match }) => {
                                                         </div>
                                                     </div>
                                                     <div className="col-8 p-0 mt-auto mx-auto">
-                                                        {true && (
-                                                            <div className="total-tickets-wrapper">
-                                                                <div className="draw-start-holder d-flex align-items-center ms-auto mb-2 justify-content-center">
-                                                                    <div className="draw-text mr-0 mr-md-2">
-                                                                        {`Draw starts in \u00A0`}
-                                                                    </div>
-
-                                                                    {/* COUNT DOWN TIME */}
-                                                                    <span className="tickets-text">
+                                                        {/* CURRENT TICKETS / TOTAL TICKETS */}
+                                                        {!currentPrize.overTime && (
+                                                            <>
+                                                                <div className="your-tokens-title-text mr-0 mr-md-2">
+                                                                    Draw starts
+                                                                    in
+                                                                </div>
+                                                                <div className="mt-1">
+                                                                    {/* CURRENT PRIZE POOL TICKETS */}
+                                                                    <span className="current-tickets-text blue-text">
                                                                         {getPrizeTicketCollected(
                                                                             prizeTicketCollection,
                                                                             id
@@ -381,6 +382,7 @@ const Index = ({ match }) => {
                                                                             0}
                                                                     </span>
 
+                                                                    {/* TOTAL PRIZE POOL TICKETS */}
                                                                     <span className="total-tickets-text">
                                                                         {`\u00A0 / ${
                                                                             currentPrize?.ticketsRequired?.toLocaleString() ||
@@ -388,21 +390,24 @@ const Index = ({ match }) => {
                                                                         }`}
                                                                     </span>
                                                                 </div>
-                                                            </div>
+                                                            </>
                                                         )}
 
-                                                        {false && (
-                                                            <div className="overtime-and-total-tickets-wrapper">
-                                                                <p className="overtime-text mb-1 text-center mt-2">
+                                                        {/* OVERTIMER TIMER */}
+                                                        {currentPrize.overTime && (
+                                                            <div className="overtime-tickets-wrapper">
+                                                                <p className="overtime-title-text mb-1">
                                                                     BONUS TIME!
                                                                 </p>
-                                                                <div className="draw-start-holder d-flex align-items-center ms-auto mb-2 justify-content-center">
-                                                                    <div className="draw-text mr-0 mr-md-2">
-                                                                        {`Draw starts in \u00A0`}
+                                                                <div className="d-flex flex-row align-items-end">
+                                                                    <div className="draw-title-text mr-2 mr-md-2">
+                                                                        Draw
+                                                                        starts
+                                                                        in
                                                                     </div>
 
                                                                     {/* COUNT DOWN TIME */}
-                                                                    <span className="tickets-text-end">
+                                                                    <span className="timer-text">
                                                                         {timer}
                                                                     </span>
                                                                 </div>
@@ -414,12 +419,28 @@ const Index = ({ match }) => {
                                         </div>
 
                                         {/* SEPARATOR */}
-                                        <div className="separator d-block my-2 mx-0 my-md-0 mx-md-2" />
+                                        <div className="separator d-block my-3 mx-0 my-md-0 mx-md-2" />
                                     </div>
 
                                     {/* TORUNAMENT INFO */}
-                                    <div className="tournament-info-wrapper col-12 col-md-9">
-                                        sdad
+                                    <div className="tournament-info-wrapper col-12 col-md-9 p-0">
+                                        <div className="d-flex flex-row">
+                                            <span className="tournament-title">
+                                                JOIN TOURNAMENTS!
+                                            </span>
+                                            <img
+                                                width={20}
+                                                src={`${window.cdn}buttons/button_question_01.png`}
+                                                className="question-mark-img ml-auto"
+                                                alt="question-mark"
+                                                onClick={handleInstructionPanel}
+                                            />
+                                        </div>
+                                        <p className="tournament-subtitle my-2">
+                                            Compete with other players, collect
+                                            tickets and stand a chance to own
+                                            this Prize!
+                                        </p>
                                     </div>
                                 </div>
 

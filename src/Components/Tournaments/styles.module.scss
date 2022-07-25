@@ -100,62 +100,72 @@
 
             .your-tokens-info {
                 min-height: 3rem;
-                .your-tokens-text {
-                    font-size: $fnt-sz-12;
+                .your-tokens-title-text {
+                    font-size: $fnt-sz-10;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-14;
+                    }
                     @include media-min($md) {
-                        font-size: $fnt-sz-12;
+                        font-size: $fnt-sz-16;
                     }
                     color: #999999;
                 }
-                .your-tokens-number {
-                    font-size: $fnt-sz-16;
+                .your-tokens-number,
+                .current-tickets-text,
+                .total-tickets-text {
+                    font-size: $fnt-sz-14;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-16;
+                    }
                     @include media-min($md) {
                         font-size: $fnt-sz-18;
                     }
                     font-weight: $fnt-wgt-700;
+                }
+                .blue-text {
                     color: #00c1b9;
                 }
-                
-                .overtime-and-total-tickets-wrapper {
+
+                .overtime-tickets-wrapper {
                     background: linear-gradient(90deg, #433849, #2f2833);
-                    border-radius: 10px;
-                }
-                .draw-text {
-                    font-size: $fnt-sz-10;
-                    @include media-min($md) {
-                        font-size: $fnt-sz-14;
+                    border-radius: 5px;
+                    padding: 0.5rem;
+
+                    .overtime-title-text {
+                        color: #ff3399;
+                        font-size: $fnt-sz-18;
+                        @include media-min($sm) {
+                            font-size: $fnt-sz-22;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-26;
+                        }
+                        font-weight: $fnt-wgt-700;
                     }
-                }
-                .total-tickets-text {
-                    font-size: $fnt-sz-10;
-                    @include media-min($md) {
+                    .draw-title-text {
+                        font-size: $fnt-sz-10;
+                        @include media-min($sm) {
+                            font-size: $fnt-sz-14;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-14;
+                        }
+                    }
+                    .timer-text {
                         font-size: $fnt-sz-12;
+                        @include media-min($sm) {
+                            font-size: $fnt-sz-18;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-20;
+                        }
+                        font-weight: $fnt-wgt-700;
+                        color: #ff3399;
                     }
-                }
-                .tickets-text {
-                    font-size: $fnt-sz-14;
-                    @include media-min($md) {
-                        font-size: $fnt-sz-18;
-                    }
-                    font-weight: $fnt-wgt-700;
-                }
-                .tickets-text-end {
-                    color: #ff3399;
-                    font-size: $fnt-sz-14;
-                    @include media-min($md) {
-                        font-size: $fnt-sz-18;
-                    }
-                    font-weight: 500;
-                }
-                .overtime-text {
-                    color: #ff3399;
-                    font-size: $fnt-sz-18;
-                    @include media-min($md) {
-                        font-size: $fnt-sz-26;
-                    }
-                    font-weight: $fnt-wgt-700;
                 }
             }
+
+            
         }
     }
     .separator {
@@ -168,10 +178,22 @@
         }
     }
     .tournament-info-wrapper {
-    }
-
-    .token-and-draw-start-holder {
-        
+        .tournament-title {
+            font-size: $fnt-sz-16;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+            font-weight: $fnt-wgt-700;
+        }
+        img.question-mark-img {
+            cursor: pointer;
+        }
+        .tournament-subtitle {
+            font-size: $fnt-sz-10;
+            @include media-min($md) {
+                font-size: $fnt-sz-12;
+            }
+        }
     }
     .game-info {
         background: linear-gradient(134deg, #2a2a2a 0%, #0b0b0b 80%);
