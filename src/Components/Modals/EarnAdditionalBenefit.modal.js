@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 
-const EarnAdditionalBenefitModal = ({ handleContinueButton }) => {
-    const score = localStorage.getItem("currentGameScore");
-
+const EarnAdditionalBenefitModal = ({ handleContinueButton, score }) => {
     const { extraEarning } = useSelector((state) => state.playerTournamentInfo);
 
     return (

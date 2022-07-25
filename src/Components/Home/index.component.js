@@ -387,7 +387,7 @@ const Index = () => {
                                                     <p className="the-spinner-text mb-1">
                                                         FREE GEMS
                                                     </p>
-                                                    <div className="earn-more-tickets-text">
+                                                    <div className="earn-more-tickets-text mb-1">
                                                         Claim your daily free
                                                         gems here!
                                                     </div>

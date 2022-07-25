@@ -10,6 +10,7 @@ import GenericLoader from "Components/Loader/Generic.loader";
 import GameQuitModal from "Components/Modals/GameQuit.modal";
 import GameEndModal from "Components/Modals/GameEnd.modal";
 import EarnAdditionalBenefitModal from "Components/Modals/EarnAdditionalBenefit.modal";
+import RetrySubmitModal from "Components/Modals/RetrySubmit.modal";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
@@ -86,7 +87,10 @@ const Leaderboard = ({
         isGameOver: false,
         isEarnAdditionalWinModalShown: false,
         isEarnAdditionalInfoShown: false,
+        isSubmitScoreFailed: false,
+        isSubmittingScore: false,
     });
+    const [scoreObject, setScoreObject] = useState({});
     const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
         useState(false);
 
@@ -250,8 +254,6 @@ const Leaderboard = ({
         }
         const recaptchaToken = await executeRecaptcha("playGame");
 
-        localStorage.removeItem("currentGameScore");
-
         // TODO
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -401,37 +403,72 @@ const Leaderboard = ({
      * @returns 
      */
     window.playerFinishGame = async (score) => {
-        if (!executeRecaptcha) {
-            console.log("Execute recaptcha not yet available");
-            return;
-        }
+        setScoreObject(score);
 
-        const recaptchaToken = await executeRecaptcha("finishGame");
-        if (currentGameInfo.playerEnterGameId) {
-            localStorage.setItem("currentGameScore", score.a);
+        await submitScore(score);
+    };
 
-            dispatch(loadPlayerLeaveTournamentId(score, recaptchaToken));
-            dispatch(
-                loadCurrentUserRank(
-                    data?.prizeId.toString(),
-                    currentGameDetails?.gameId
-                )
-            );
+    // window.playerQuitGame = () => {
+    //     setModalStatus((prev) => ({
+    //         ...prev,
+    //         isQuitGameBtnDisabled: true,
+    //     }));
 
+    //     if (extraEarning.experience !== 0 || extraEarning.ticket !== 0)
+    //         setModalStatus((prev) => ({
+    //             ...prev,
+    //             isEarnAdditionalWinModalShown: true,
+    //         }));
+    //     else
+    //         setModalStatus((prev) => ({
+    //             ...prev,
+    //             isQuitGameBtnDisabled: false,
+    //             isGameReady: false,
+    //             isTournamentEnded: false,
+    //             isEarnAdditionalWinModalShown: false,
+    //         }));
+    // };
+
+    const submitScore = async (score) => {
+        try {
             setModalStatus((prev) => ({
                 ...prev,
-                isQuitGameBtnDisabled: true,
-                isGamePaused: false,
+                isSubmittingScore: true,
             }));
+
+            if (!executeRecaptcha) {
+                console.log("Execute recaptcha not yet available");
+                return;
+            }
+
+            const recaptchaToken = await executeRecaptcha("finishGame");
+
+            if (currentGameInfo.playerEnterGameId) {
+                await dispatch(
+                    loadPlayerLeaveTournamentId(score, recaptchaToken)
+                ).catch((e) => {
+                    throw e;
+                });
+
+                dispatch(
+                    loadCurrentUserRank(
+                        data?.prizeId.toString(),
+                        currentGameDetails?.gameId
+                    )
+                );
+            }
 
             // CALL USER & LEADERBOARD API & DISPLAY GAME OVER PANEL AFTER 1 SECOND DELAY
             setTimeout(() => {
                 setModalStatus((prev) => ({
                     ...prev,
+                    isQuitGameBtnDisabled: true,
                     isGameOver: true,
                     isPlayBtnDisabled: false,
                     isQuitGameConfirm: false,
                     isGamePaused: false,
+                    isSubmitScoreFailed: false,
+                    isSubmittingScore: false,
                 }));
                 // setIsShowAdditionalBenefitsModal(true);
                 // setIsGameLeaderboardShown(false);
@@ -456,29 +493,16 @@ const Leaderboard = ({
                     dispatch(removeEarnAdditionalBenefitStatus(data?.prizeId));
                 }
             }, 1000);
+        } catch (e) {
+            setModalStatus((prev) => ({
+                ...prev,
+                isQuitGameBtnDisabled: true,
+                isGamePaused: false,
+                isSubmitScoreFailed: true,
+                isSubmittingScore: false,
+            }));
         }
     };
-
-    // window.playerQuitGame = () => {
-    //     setModalStatus((prev) => ({
-    //         ...prev,
-    //         isQuitGameBtnDisabled: true,
-    //     }));
-
-    //     if (extraEarning.experience !== 0 || extraEarning.ticket !== 0)
-    //         setModalStatus((prev) => ({
-    //             ...prev,
-    //             isEarnAdditionalWinModalShown: true,
-    //         }));
-    //     else
-    //         setModalStatus((prev) => ({
-    //             ...prev,
-    //             isQuitGameBtnDisabled: false,
-    //             isGameReady: false,
-    //             isTournamentEnded: false,
-    //             isEarnAdditionalWinModalShown: false,
-    //         }));
-    // };
 
     function getEmptyLeaderboardList() {
         let rankList = [];
@@ -604,11 +628,13 @@ const Leaderboard = ({
                                     isPlayBtnDisabled: false,
                                 }));
                             }}
+                            score={scoreObject.a}
                         />
                     )}
                     {/* MODAL FOR GAME OVER */}
                     {modalStatus.isGameOver && (
                         <GameEndModal
+                            score={scoreObject.a}
                             handleContinueButton={() => {
                                 setModalStatus((prev) => ({
                                     ...prev,
@@ -654,6 +680,40 @@ const Leaderboard = ({
                                 destination?.toggleAudioOnOff?.();
                             }}
                             isMute={isMute}
+                        />
+                    )}
+
+                    {/* MODAL FOR PENDING SUBMIT SCORE */}
+                    {modalStatus.isSubmitScoreFailed && (
+                        <RetrySubmitModal
+                            handleCancel={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGameReady: false,
+                                    isQuitGameBtnDisabled: false,
+                                    isGameOver: false,
+                                    isPlayBtnDisabled: false,
+                                    isQuitGameConfirm: false,
+                                    isGamePaused: false,
+                                    isSubmitScoreFailed: false,
+                                    isSubmittingScore: false,
+                                    isTournamentEnded: false,
+                                }));
+
+                                dispatch({ type: PLAYER_LOG_RESET });
+                            }}
+                            handleRetry={() => {
+                                submitScore(scoreObject);
+                            }}
+                            disableRetry={modalStatus.isSubmittingScore}
+                            title="Error"
+                            subtitle={
+                                <>
+                                    Unable to submit score to the server. <br />
+                                    <br /> Skip: Gems will not be refunded and
+                                    score will not be recorded
+                                </>
+                            }
                         />
                     )}
 

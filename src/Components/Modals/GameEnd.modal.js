@@ -7,12 +7,11 @@ import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 
 const GameEndModal = ({
+    score,
     handleContinueButton,
     isShowTournamentEndedText,
     currentGameBoosterInfo,
 }) => {
-    const score = localStorage.getItem("currentGameScore");
-
     const dispatch = useDispatch();
 
     // const { leaderboardHistory } = useSelector(
@@ -72,7 +71,7 @@ const GameEndModal = ({
         <>
             {!isSelectedNotificationShown.status && (
                 <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-                    <div className="game-result-panel col-12 col-md-4 col-xl-4 position-relative">
+                    <div className="game-result-panel col-12 col-md-6 col-xl-5 position-relative">
                         {/* CARD */}
                         <div className="row justify-content-center my-3 my-sm-3">
                             <div className="col-10 col-lg-8 mb-2 pl-2 pr-1">
@@ -91,20 +90,22 @@ const GameEndModal = ({
                                     </p>
                                 )}
 
-                                {score && (
-                                    <p className="text-center score-text mt-4 mb-0">
-                                        Score
-                                    </p>
-                                )}
+                                <div className="mb-5">
+                                    {score && (
+                                        <p className="text-center score-text mt-4 mb-0">
+                                            Score
+                                        </p>
+                                    )}
 
-                                {score && (
-                                    <p className="text-center score-number ">
-                                        {score}
-                                    </p>
-                                )}
+                                    {score && (
+                                        <p className="text-center score-number">
+                                            {score}
+                                        </p>
+                                    )}
+                                </div>
 
                                 {currentGameBoosterInfo.isUseBooster ? (
-                                    <div className="d-flex flex-row justify-content-center text-center py-0 align-items-center mt-4">
+                                    <div className="d-flex flex-row justify-content-center text-center pt-2 align-items-center mt-4">
                                         <p className="pr-2 ticket-rate-text-score">
                                             every{" "}
                                             {
@@ -149,7 +150,7 @@ const GameEndModal = ({
                                 )}
 
                                 <button
-                                    className="continue-button d-block text-center mx-auto mt-4 py-3"
+                                    className="continue-button d-block text-center mx-auto mt-3 py-2"
                                     onClick={handleContinueButton}
                                 >
                                     CONTINUE

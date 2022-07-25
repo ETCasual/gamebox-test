@@ -7,7 +7,13 @@ export default function loadPlayerLeaveTournamentId(gameScore, recaptchaToken) {
         const { currentGameInfo } = getState()?.playerTournamentInfo;
         const { extraEarning } = getState()?.playerTournamentInfo;
 
-        logLeave(user, currentGameInfo, gameScore, extraEarning, recaptchaToken)
+        return logLeave(
+            user,
+            currentGameInfo,
+            gameScore,
+            extraEarning,
+            recaptchaToken
+        )
             .then((data) => {
                 dispatch({
                     type: PLAYER_LOG_LEAVE,
@@ -26,8 +32,9 @@ export default function loadPlayerLeaveTournamentId(gameScore, recaptchaToken) {
                     });
                 } else if (error.code === 13) {
                     console.log("PLAYER LOG LEAVE THUNK: No Result found!");
+                } else {
+                    throw error;
                 }
-                else console.log(error);
             });
     };
 }
