@@ -99,7 +99,8 @@ const ThumbnailMedia = ({
             {(thumbFileType === "gif" ||
                 thumbFileType === "png" ||
                 thumbFileType === "jpg" ||
-                thumbFileType === "jpeg") &&
+                thumbFileType === "jpeg" ||
+                thumbFileType === "svg") &&
                 renderImageElement}
         </>
     );
