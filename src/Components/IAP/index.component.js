@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -30,6 +30,7 @@ const Index = () => {
         loadStripe(process.env.REACT_APP_STRIPE_KEY)
     );
     const fundAddress = process.env.REACT_APP_FUND_WALLET_ADDRESS;
+    const history = useHistory();
 
     const { user } = useSelector((state) => state.userData);
     const { blockchainNetworks } = useSelector(
@@ -54,6 +55,12 @@ const Index = () => {
         processing: false,
         isSuccess: false,
         isFail: false,
+        processFail: false,
+    });
+    const [purchaseInfo, setPurchaseInfo] = useState({});
+    const purchaseStatusRef = useRef({
+        sendFail: false,
+        receiptReceive: false,
     });
 
     const handleWallet = async () => {
@@ -115,32 +122,35 @@ const Index = () => {
                 user?.walletAddress === null ||
                 user?.walletAddress?.length <= 0
             ) {
-                setPurchasingStatus({
+                setPurchasingStatus((prev) => ({
+                    ...prev,
                     beforePurchaseConfirmation: false,
                     insufficentToken: false,
                     processing: false,
                     isSuccess: false,
                     isFail: false,
                     noWallet: true,
-                });
+                }));
             } else if (user.walletAddress && user.tokenBalance < price) {
-                setPurchasingStatus({
+                setPurchasingStatus((prev) => ({
+                    ...prev,
                     noWallet: false,
                     beforePurchaseConfirmation: false,
                     processing: false,
                     isSuccess: false,
                     isFail: false,
                     insufficentToken: true,
-                });
+                }));
             } else if (user.walletAddress && user.tokenBalance >= price) {
-                setPurchasingStatus({
+                setPurchasingStatus((prev) => ({
+                    ...prev,
                     noWallet: false,
                     insufficentToken: false,
                     processing: false,
                     isSuccess: false,
                     isFail: false,
                     beforePurchaseConfirmation: true,
-                });
+                }));
             }
             setPurchasingStatusModal(true);
         } else if (productInfo.tab === "card") {
@@ -154,14 +164,15 @@ const Index = () => {
 
     const handleModalCloseButton = () => {
         setPurchasingStatusModal(false);
-        setPurchasingStatus({
+        setPurchasingStatus((prev) => ({
+            ...prev,
             noWallet: false,
             beforePurchaseConfirmation: false,
             insufficentToken: false,
             processing: false,
             isSuccess: false,
             isFail: false,
-        });
+        }));
     };
 
     // OPEN METAMASK
@@ -173,7 +184,10 @@ const Index = () => {
             const selectedNetwork = blockchainNetworks.filter(
                 (n) => n.chainId === parseInt(chainId)
             );
-            if (selectedNetwork.length > 0) {
+            if (
+                selectedNetwork.length > 0 &&
+                selectedNetwork[0]?.systemTokenAddress
+            ) {
                 // Smart contract address for USDT in BSC testnet
                 const tokenContract = new web3.eth.Contract(
                     tokenABI,
@@ -196,6 +210,11 @@ const Index = () => {
                             ...prev,
                             processing: true,
                         }));
+                        purchaseStatusRef.current = {
+                            ...purchaseStatusRef.current,
+                            sendFail: false,
+                            receiptReceive: false,
+                        };
                     })
                     .on("sent", function (payload) {
                         console.log("payload", payload);
@@ -203,45 +222,72 @@ const Index = () => {
                     .on("transactionHash", function (hash) {
                         console.log("hash", hash);
 
+                        setPurchaseInfo({
+                            trxHash: hash,
+                            itemTypeId: 201,
+                            itemId: productInfo?.id,
+                            itemPrice: productInfo?.price,
+                            blockchainNetwork: selectedNetwork[0]?.id,
+                        });
+
                         dispatch(
                             loadIAPurchaseRequest(
                                 hash,
                                 201,
                                 productInfo?.id,
-                                productInfo?.details?.price,
+                                productInfo?.price,
                                 selectedNetwork[0]?.id
                             )
-                        );
+                        ).catch((e) => {
+                            setPurchasingStatus((prev) => ({
+                                ...prev,
+                                processing: false,
+                                processFail: true,
+                            }));
+
+                            purchaseStatusRef.current = {
+                                ...purchaseStatusRef.current,
+                                sendFail: true,
+                            };
+                        });
                     })
                     .on("receipt", function (receipt) {
                         console.log("receipt", receipt);
-                        dispatch(loadGemsList());
-                        setPurchasingStatusModal(true);
-                        setPurchasingStatus((prev) => ({
-                            ...prev,
-                            processing: false,
-                            isSuccess: true,
-                        }));
+                        purchaseStatusRef.current = {
+                            ...purchaseStatusRef.current,
+                            receiptReceive: true,
+                        };
 
-                        let timeOutRef = null;
-                        clearTimeout(timeOutRef);
-                        timeOutRef = setTimeout(async () => {
-                            dispatch(loadUserDetails());
+                        // If still processing or fail to send to server
+                        if (!purchaseStatusRef.current.sendFail) {
+                            setPurchasingStatus((prev) => ({
+                                ...prev,
+                                processing: false,
+                                isSuccess: true,
+                            }));
 
-                            const { tokenBalance, symbol } =
-                                await getTokenBalance(user.walletAddress);
-                            const chainId = await web3.eth.getChainId();
-                            if (tokenBalance && chainId)
-                                dispatch(
-                                    loadConnectUserWallet(
-                                        "purchase_gems",
-                                        user.walletAddress,
-                                        parseFloat(tokenBalance),
-                                        chainId,
-                                        symbol
-                                    )
-                                );
-                        }, 1000);
+                            dispatch(loadGemsList());
+
+                            let timeOutRef = null;
+                            clearTimeout(timeOutRef);
+                            timeOutRef = setTimeout(async () => {
+                                dispatch(loadUserDetails());
+
+                                const { tokenBalance, symbol } =
+                                    await getTokenBalance(user.walletAddress);
+                                const chainId = await web3.eth.getChainId();
+                                if (tokenBalance && chainId)
+                                    dispatch(
+                                        loadConnectUserWallet(
+                                            "purchase_gems",
+                                            user.walletAddress,
+                                            parseFloat(tokenBalance),
+                                            chainId,
+                                            symbol
+                                        )
+                                    );
+                            }, 1000);
+                        }
                     })
                     .on("error", function (error) {
                         console.log("error", error);
@@ -281,10 +327,83 @@ const Index = () => {
             }));
         } else if (purchasingStatus.isSuccess) {
             // Do Nothing
+        } else if (purchasingStatus.processFail) {
+            sendPurchaseInfo();
         }
     };
 
-    const history = useHistory();
+    const sendPurchaseInfo = () => {
+        setPurchasingStatusModal(true);
+        setPurchasingStatus((prev) => ({
+            ...prev,
+            processing: true,
+        }));
+
+        dispatch(
+            loadIAPurchaseRequest(
+                purchaseInfo?.trxHash,
+                purchaseInfo?.itemTypeId,
+                purchaseInfo?.itemId,
+                purchaseInfo?.itemPrice,
+                purchaseInfo?.blockchainNetwork
+            )
+        )
+            .then((res) => {
+                setPurchasingStatus((prev) => ({
+                    ...prev,
+                    processFail: false,
+                }));
+                purchaseStatusRef.current = {
+                    ...purchaseStatusRef.current,
+                    sendFail: false,
+                };
+
+                if (purchaseStatusRef.current.receiptReceive) {
+                    setPurchasingStatus((prev) => ({
+                        ...prev,
+                        processing: false,
+                        isSuccess: true,
+                    }));
+
+                    dispatch(loadGemsList());
+
+                    let timeOutRef = null;
+                    clearTimeout(timeOutRef);
+                    timeOutRef = setTimeout(async () => {
+                        const { web3 } = await getWeb3();
+
+                        dispatch(loadUserDetails());
+
+                        const { tokenBalance, symbol } = await getTokenBalance(
+                            user.walletAddress
+                        );
+                        const chainId = await web3.eth.getChainId();
+                        if (tokenBalance && chainId)
+                            dispatch(
+                                loadConnectUserWallet(
+                                    "purchase_gems",
+                                    user.walletAddress,
+                                    parseFloat(tokenBalance),
+                                    chainId,
+                                    symbol
+                                )
+                            );
+                    }, 1000);
+                }
+            })
+            .catch((e) => {
+                setPurchasingStatus((prev) => ({
+                    ...prev,
+                    processFail: true,
+                    processing: false,
+                }));
+
+                purchaseStatusRef.current = {
+                    ...purchaseStatusRef.current,
+                    sendFail: false,
+                };
+            });
+    };
 
     return (
         <>
@@ -462,7 +581,6 @@ const Index = () => {
                     </div>
                 </div>
             </section>
-
             {cardPaymentModal && (
                 <Elements stripe={stripePromise}>
                     <CardPayment
@@ -471,7 +589,6 @@ const Index = () => {
                     />
                 </Elements>
             )}
-
             {/* PURCHASING STATUS MODAL */}
             {purchasingStatusModal && (
                 <PurchaseWrapper>

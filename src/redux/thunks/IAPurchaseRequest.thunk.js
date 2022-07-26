@@ -11,7 +11,14 @@ export default function loadIAPurchaseRequest(
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
 
-        return purchaseProcess(user, itemTypeId, itemId, paymentId, price, networkId)
+        return purchaseProcess(
+            user,
+            itemTypeId,
+            itemId,
+            paymentId,
+            price,
+            networkId
+        )
             .then(() => {
                 dispatch({
                     type: IA_PURCHASE_REQUEST,
@@ -27,9 +34,11 @@ export default function loadIAPurchaseRequest(
                             message: "Session Expired! Please login again.",
                         },
                     });
-                } else if (error.code === 13)
+                } else if (error.code === 13) {
                     console.log("IA PURCHASE REQUEST THUNK: No Result found!");
-                else console.log(error);
+                } else {
+                    throw error;
+                }
             });
     };
 }
