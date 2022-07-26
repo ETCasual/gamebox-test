@@ -74,22 +74,29 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                                 <p className="mb-1 price">{`SGD $${gem?.price?.toFixed(
                                     2
                                 )}`}</p>
-                                {ipInfo?.currency && (
-                                    <p className="mb-0 estimation">
-                                        Estimated price{" "}
-                                        <span className="estimation-value">
-                                            {`${
-                                                ipInfo?.currency === "MYR"
-                                                    ? "RM"
-                                                    : ipInfo?.currency
-                                            }${(
-                                                exchangeRate?.rates[
-                                                    ipInfo?.currency
-                                                ] * gem?.price
-                                            ).toFixed(2)}`}
-                                        </span>
-                                    </p>
-                                )}
+                                {ipInfo?.currency &&
+                                    ipInfo?.currency !== "SGD" && (
+                                        <p className="mb-0 estimation">
+                                            Estimated price{" "}
+                                            {exchangeRate?.rates[
+                                                ipInfo?.currency
+                                            ] && (
+                                                <span className="estimation-value">
+                                                    {`${
+                                                        ipInfo?.currency ===
+                                                        "MYR"
+                                                            ? "RM"
+                                                            : ipInfo?.currency
+                                                    }
+                                                    ${(
+                                                        exchangeRate?.rates[
+                                                            ipInfo?.currency
+                                                        ] * gem?.price
+                                                    ).toFixed(2)}`}
+                                                </span>
+                                            )}
+                                        </p>
+                                    )}
                             </div>
                         </div>
                     </div>
