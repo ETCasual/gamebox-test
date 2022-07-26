@@ -27,16 +27,17 @@
         // margin-top: 6rem;
         position: relative;
         z-index: 1;
-        cursor: pointer;
         border-radius: 10px;
         min-height: auto;
         width: inherit;
 
         .enabled {
             pointer-events: auto;
+            cursor: pointer;
         }
         .disabled {
             pointer-events: none;
+            cursor: auto;
         }
 
         .prize-info {
@@ -275,6 +276,134 @@
             }
             .play-icon {
                 display: none;
+            }
+        }
+    }
+
+    .winner-card-wrapper {
+        position: relative;
+        z-index: 1;
+        border-radius: 10px;
+        min-height: auto;
+        width: inherit;
+
+        .enabled {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .disabled {
+            pointer-events: none;
+            cursor: auto;
+        }
+
+        .prize-info {
+            background: linear-gradient(90deg, #38303d, #231e26);
+            border-radius: 10px;
+
+            .prize-img {
+                width: 100%;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border-radius: 10px;
+                    @include media-min($md) {
+                        border-radius: 17px;
+                    }
+                    height: 100%;
+                    z-index: 0;
+                    background: linear-gradient(
+                        180deg,
+                        #02020200 60%,
+                        #0b0b0b80 100%
+                    );
+                    pointer-events: none;
+                }
+                img,
+                video {
+                    position: relative;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
+                    width: 100%;
+                    @include media-min($sm) {
+                        border-radius: 5px;
+                    }
+                    object-fit: cover;
+                }
+            }
+            .info-wrapper {
+                bottom: 0;
+                z-index: 2;
+                .congratz-subtitle {
+                    font-size: $fnt-sz-20;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-26;
+                    }
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-30;
+                    }
+                    font-weight: $fnt-wgt-600;
+                    text-transform:uppercase;
+                }
+                .thumb-media {
+                    display: block;
+                    position: relative;
+                    width: 90%;
+                    max-width: 100px;
+                    object-fit: cover;
+                    border-radius: 100%;
+                    background-color: #f8ba29;
+                    border: 5px solid #f8ba29;
+                }
+                .winner-name {
+                    width: 100%;
+                    max-width: 300px;
+                    font-size: $fnt-sz-20;
+                    font-weight: $fnt-wgt-600;
+                    color: #f8ba29;
+                    background: #1d1d1d 0% 0%;
+                    box-shadow: inset 0px 0px 6px #00000066;
+                    border-radius: 5px;
+                    padding: 0.7rem;
+
+                    @include media-min($md) {
+                        font-size: $fnt-sz-30;
+                        padding: 0.5rem;
+                    }
+                }
+                .winner-subtitle {
+                    font-size: $fnt-sz-14;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-18;
+                    }
+                }
+                .prize-title {
+                    font-size: $fnt-sz-24;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-30;
+                    }
+                    @include media-min($xl) {
+                        font-size: $fnt-sz-40;
+                    }
+                    font-weight: $fnt-wgt-600;
+                    text-transform: uppercase;
+                }
+                .prize-drawn-title {
+                    font-size: $fnt-sz-14;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-14;
+                    }
+                    line-height: 1.3;
+                    color: #868686;
+                }
+                .prize-drawn-text {
+                    font-size: $fnt-sz-16;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-20;
+                    }
+                }
             }
         }
     }

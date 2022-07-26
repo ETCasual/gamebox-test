@@ -363,7 +363,7 @@ const Settings = () => {
                                     </div>
                                 </div> */}
                                 {/* ITEM 5 - MORE INFO */}
-                                {/* <div className="row py-4">
+                                <div className="row py-4">
                                     <div className="col-12 mb-3">
                                         <p className="main-title">
                                             More information
@@ -371,7 +371,7 @@ const Settings = () => {
                                     </div>
                                     <div className="col-12 d-flex info-links">
                                         <ul className="p-0 w-100">
-                                            <li>
+                                            {/* <li>
                                                 <Link to="/privacy-policy">
                                                     Privacy Policy
                                                 </Link>
@@ -394,14 +394,14 @@ const Settings = () => {
                                                 >
                                                     Contact us
                                                 </a>
-                                            </li>
+                                            </li> */}
                                             <li className="d-flex align-items-center justify-content-between">
                                                 <a
                                                     href="mailto:support@froyo.games"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    Bug report
+                                                    Contact us
                                                 </a>
                                                 <span className="app-version">
                                                     Version:{" "}
@@ -413,7 +413,7 @@ const Settings = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>

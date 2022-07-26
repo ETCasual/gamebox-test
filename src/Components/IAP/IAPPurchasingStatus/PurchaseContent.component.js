@@ -57,6 +57,12 @@ const PurchaseContent = ({
             button: "CLOSE",
             color: "red",
         },
+        processFail: {
+            title: "Error",
+            subTitle: "Unable to update payment to server. Please try again",
+            button: "RETRY",
+            color: "red",
+        },
     };
 
     return (

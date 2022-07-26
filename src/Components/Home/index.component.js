@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 // COMPONENTS
 import OnBoarding from "Components/Home/OnBoarding/OnBoarding.component";
 import Featured from "Components/Home/Featured/Featured.component";
+import FeaturedWinner from "Components/Home/Featured/FeaturedWinner.component";
 import AutomatedEntry from "Components/Home/AutomatedEntry/AutomatedEntry.component";
 import Premium from "Components/Home/Premium/Premium.component";
 import WinnerAnnouncementModal from "Components/Modals/WinnerAnnouncementModal.component";
@@ -54,6 +55,8 @@ const Index = () => {
 
     let watcherRef = useRef(null);
     const [timer, setTimer] = useState("0d 0h 0m 0s");
+
+    const [featureWinnerPrize] = useState();
 
     // ONBOARDING
     useEffect(() => {
@@ -470,11 +473,12 @@ const Index = () => {
                                             </h2>
                                         </div>
                                         {/* LOADER */}
-                                        {FeaturedData?.length <= 0 && (
+                                        {false && FeaturedData?.length <= 0 && (
                                             <FeaturedLoader />
                                         )}
 
-                                        {!noDataLoaded.feature && (
+                                        {/* HIDE ON 26/7/2022: Due to no more featured prize, and showing winner on featured area */}
+                                        {false && !noDataLoaded.feature && (
                                             <>
                                                 {/* FEATURED CARD */}
                                                 {FeaturedData?.map(
@@ -495,6 +499,20 @@ const Index = () => {
                                                 )}
                                             </>
                                         )}
+
+                                        <React.Fragment
+                                            key={`featuredPrize-winner`}
+                                        >
+                                            <FeaturedWinner
+                                                prizeId={36}
+                                                prizeDrawnTimestamp={
+                                                    1658782800000
+                                                }
+                                                prizeUrl={
+                                                    "https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/rewards/froyotoken/img/froyo_01_won.jpg"
+                                                }
+                                            />
+                                        </React.Fragment>
                                     </div>
                                 </div>
                             </div>
