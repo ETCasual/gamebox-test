@@ -400,7 +400,7 @@ const Index = () => {
 
                 purchaseStatusRef.current = {
                     ...purchaseStatusRef.current,
-                    sendFail: false,
+                    sendFail: true,
                 };
             });
     };
