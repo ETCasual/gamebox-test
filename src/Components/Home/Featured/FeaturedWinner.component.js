@@ -58,36 +58,40 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                                 setIsPlayVideo={setIsPlayVideo}
                             />
                         </div>
-                        <div className="d-flex flex-column justify-content-between col-12 col-sm-6 px-sm-4 px-1">
-                            <div className="info-wrapper pt-3 d-flex flex-column text-center">
-                                <div className="congratz-subtitle mb-4">
-                                    Congratulations!
+                        <div className="col-12 col-sm-6 px-sm-4 px-1">
+                            <div className="info-wrapper d-flex flex-column justify-content-between text-center pt-3">
+                                <div className="align-items-start">
+                                    <div className="congratz-subtitle">
+                                        Congratulations!
+                                    </div>
                                 </div>
-                                <div className="mx-auto">
+                                <div className="align-items-center mt-4 mb-2">
                                     <img
                                         onError={(e) => defaultUserImage(e)}
-                                        className="thumb-media"
+                                        className="thumb-media mx-auto"
                                         src={
                                             prizeWon?.userAvatarUrl ||
                                             `${window.cdn}icons/icon_profile.svg`
                                         }
                                         alt="profile"
                                     />
+                                    <div className="winner-name my-2 mx-auto">
+                                        {prizeWon?.userNickName || "..."}
+                                    </div>
+                                    <div className="winner-subtitle mt-3">
+                                        won the
+                                    </div>
+                                    <div className="prize-title mt-2 mb-4">
+                                        {prizeWon?.prizeTitle || "REWARDS"}
+                                    </div>
                                 </div>
-                                <div className="winner-name my-2 mx-auto">
-                                    {prizeWon?.userNickName || "..."}
-                                </div>
-                                <div className="winner-subtitle mt-3">
-                                    won the
-                                </div>
-                                <div className="prize-title mt-2 mb-4">
-                                    {prizeWon?.prizeTitle || "REWARDS"}
-                                </div>
-                                <div className="prize-drawn-title my-1">
-                                    Prize drawn on
-                                </div>
-                                <div className="prize-drawn-text my-1">
-                                    {timer}
+                                <div className="align-items-end">
+                                    <div className="prize-drawn-title my-1">
+                                        Prize drawn on
+                                    </div>
+                                    <div className="prize-drawn-text my-1">
+                                        {timer}
+                                    </div>
                                 </div>
                             </div>
                         </div>
