@@ -238,8 +238,6 @@ const Index = ({ match }) => {
                 (e) => e.prizeId === parseInt(id)
             )?.isGemsSelected;
     }
-    // INSTRUCTION POPUP MODAL
-    const handleInstructionPanel = () => setIsInstructionShown(true);
 
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);
@@ -336,22 +334,24 @@ const Index = ({ match }) => {
                                                 )}
                                             </div>
 
-                                            <div className="prize-text-holder col-8 pr-0">
-                                                <div className="prize-id mb-lg-1">
-                                                    {
-                                                        currentPrize?.prizeSubtitle
-                                                    }
-                                                </div>
-                                                <div className="prize-title my-2 mb-lg-3">
-                                                    {currentPrize?.prizeTitle ||
-                                                        "-"}
-                                                </div>
-                                                <div className="prize-description">
-                                                    {currentPrize?.prizeContent ||
-                                                        "-"}
+                                            <div className="prize-text-holder col-8 d-flex flex-column justify-content-between pr-0">
+                                                <div className="align-items-start">
+                                                    <div className="prize-id mb-lg-1">
+                                                        {
+                                                            currentPrize?.prizeSubtitle
+                                                        }
+                                                    </div>
+                                                    <div className="prize-title my-2 mb-lg-3">
+                                                        {currentPrize?.prizeTitle ||
+                                                            "-"}
+                                                    </div>
+                                                    <div className="prize-description">
+                                                        {currentPrize?.prizeContent ||
+                                                            "-"}
+                                                    </div>
                                                 </div>
 
-                                                <div className="your-tokens-info d-flex flex-row mt-2">
+                                                <div className="your-tokens-info d-flex flex-row align-items-end mt-2">
                                                     <div className="col-4 p-0 mt-auto mx-auto">
                                                         <div className="your-tokens-title-text">
                                                             Your tickets
@@ -364,7 +364,7 @@ const Index = ({ match }) => {
                                                                 0}
                                                         </div>
                                                     </div>
-                                                    <div className="col-8 p-0 mt-auto mx-auto">
+                                                    <div className="col-8 p-0 mt-auto mx-auto text-right">
                                                         {/* CURRENT TICKETS / TOTAL TICKETS */}
                                                         {!currentPrize.overTime && (
                                                             <>
@@ -395,21 +395,21 @@ const Index = ({ match }) => {
 
                                                         {/* OVERTIMER TIMER */}
                                                         {currentPrize.overTime && (
-                                                            <div className="overtime-tickets-wrapper">
+                                                            <div className="overtime-tickets-wrapper text-left">
                                                                 <p className="overtime-title-text mb-1">
                                                                     BONUS TIME!
                                                                 </p>
                                                                 <div className="d-flex flex-row align-items-end">
-                                                                    <div className="draw-title-text mr-2 mr-md-2">
+                                                                    <div className="draw-title-text w-100 mr-2 mr-md-2">
                                                                         Draw
                                                                         starts
                                                                         in
                                                                     </div>
 
                                                                     {/* COUNT DOWN TIME */}
-                                                                    <span className="timer-text">
+                                                                    <div className="timer-text w-100 text-right">
                                                                         {timer}
-                                                                    </span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         )}
@@ -422,26 +422,43 @@ const Index = ({ match }) => {
                                         <div className="separator d-block my-3 mx-0 my-md-0 mx-md-2" />
                                     </div>
 
-                                    {/* TORUNAMENT INFO */}
-                                    <div className="tournament-info-wrapper col-12 col-md-9 p-0">
-                                        <div className="d-flex flex-row">
-                                            <span className="tournament-title">
-                                                JOIN TOURNAMENTS!
-                                            </span>
-                                            <img
-                                                width={20}
-                                                src={`${window.cdn}buttons/button_question_01.png`}
-                                                className="question-mark-img ml-auto"
-                                                alt="question-mark"
-                                                onClick={handleInstructionPanel}
-                                            />
-                                        </div>
-                                        <p className="tournament-subtitle my-2">
-                                            Compete with other players, collect
-                                            tickets and stand a chance to own
-                                            this Prize!
-                                        </p>
-                                    </div>
+                                    {/* TORUNAMENT LEADERBOARD */}
+                                    <Leaderboard
+                                        data={currentPrize}
+                                        // handleBackButton={
+                                        //     onClickGameLeaderBackButton
+                                        // }
+                                        // setIsGameLeaderboardShown={
+                                        //     setIsGameLeaderboardShown
+                                        // }
+                                        timer={timer}
+                                        setTimer={setTimer}
+                                        earnAdditionalDisabledStatus={
+                                            earnAdditionalDisabledStatus
+                                        }
+                                        setEarnAdditionalDisabledStatus={
+                                            setEarnAdditionalDisabledStatus
+                                        }
+                                        setIsInstructionShown={
+                                            setIsInstructionShown
+                                        }
+                                    />
+
+                                    {/* RECAPTCHA MESSAGES */}
+                                    <p className="recaptcha-text">
+                                        This site is protected by reCAPTCHA and
+                                        the Google
+                                        {""}{" "}
+                                        <a href="https://policies.google.com/privacy">
+                                            Privacy Policy
+                                        </a>{" "}
+                                        and
+                                        {""}{" "}
+                                        <a href="https://policies.google.com/terms">
+                                            Terms of Service
+                                        </a>{" "}
+                                        apply.
+                                    </p>
                                 </div>
 
                                 {false && (
@@ -678,9 +695,9 @@ const Index = ({ match }) => {
                                                             src={`${window.cdn}buttons/button_question_01.png`}
                                                             className="question-mark-img"
                                                             alt="question-mark"
-                                                            onClick={
-                                                                handleInstructionPanel
-                                                            }
+                                                            onClick={setIsInstructionShown(
+                                                                true
+                                                            )}
                                                         />
                                                     </div>
                                                     <p className="statement-subtitle mb-0">
@@ -709,6 +726,9 @@ const Index = ({ match }) => {
                                                     }
                                                     setEarnAdditionalDisabledStatus={
                                                         setEarnAdditionalDisabledStatus
+                                                    }
+                                                    setIsInstructionShown={
+                                                        setIsInstructionShown
                                                     }
                                                 />
                                                 {/* PRIZE FINISHED */}

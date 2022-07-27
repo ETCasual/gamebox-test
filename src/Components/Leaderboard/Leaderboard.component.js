@@ -46,6 +46,7 @@ const Leaderboard = ({
     setTimer,
     earnAdditionalDisabledStatus,
     setEarnAdditionalDisabledStatus,
+    setIsInstructionShown,
 }) => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userData);
@@ -611,6 +612,112 @@ const Leaderboard = ({
         }
         return _leaderboardList;
     }
+
+    return (
+        <section id="game-leaderboard-screen">
+            {/* TORUNAMENT INFO */}
+            <div className="tournament-info-wrapper col-12 col-md-9 p-0">
+                <div className="d-flex flex-row">
+                    <span className="tournament-title">JOIN TOURNAMENTS!</span>
+                    <img
+                        width={20}
+                        src={`${window.cdn}buttons/button_question_01.png`}
+                        className="question-mark-img ml-auto"
+                        alt="question-mark"
+                        onClick={() => setIsInstructionShown(true)}
+                    />
+                </div>
+                <p className="tournament-subtitle mt-2 mb-3">
+                    Compete with other players, collect tickets and stand a
+                    chance to own this Prize!
+                </p>
+            </div>
+
+            {/* LEADERBOARD */}
+            <div className="tournament-leaderboard">
+                <div className="d-flex flex-column p-0 h-100">
+                    <div className="leaderboard-game-info d-flex">
+                        <img
+                            className="game-icon"
+                            src={currentGameDetails?.gameIcon}
+                            alt={currentGameDetails?.gameIcon}
+                        />
+                        <div className="game-details w-100 p-3">
+                            <p className="game-name">
+                                {currentGameDetails?.gameTitle}
+                            </p>
+                            <div className="d-flex align-items-center justify-content-between">
+                                <p className="tournament-end-text mb-0">
+                                    Tournament ends in
+                                </p>
+                                <p
+                                    className={`mb-0 text-right ${
+                                        OverTimeModeChecker(
+                                            data?.prizeId,
+                                            data?.ticketsRequired,
+                                            prizeTicketCollection
+                                        )
+                                            ? "overtime-text"
+                                            : "timer-text"
+                                    }`}
+                                >
+                                    {timer || "0d 0h 0m 0s"}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="leaderboard">
+                        {leaderboardList.length > 0
+                            ? getLeaderboardList()
+                            : getEmptyLeaderboardList()}
+                    </div>
+                </div>
+
+                {/* PLAYER-SELF RANK (SHOWING WHEN PLAYER RANK IS NOT VISIBLE IN VIEWPORT) */}
+                <div className="leaderboard-user-wrapper">
+                    <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
+                        <div className="number-holder">
+                            <LeaderRankIndicator
+                                index={currentUserRank.rank}
+                                type="current"
+                            />
+                        </div>
+                        <div className="user-avatar">
+                            <img
+                                className="avatar"
+                                onError={(e) => defaultUserImage(e)}
+                                src={
+                                    user.picture ||
+                                    `${window.cdn}icons/icon_profile.svg`
+                                }
+                                alt="player"
+                            />
+                        </div>
+
+                        <div className="px-2 ml-3">
+                            <p className="player-name">{user.username}</p>
+                            <p className="points">
+                                {leaderboard.find((e) => e.userId === user.id)
+                                    ?.gameScore || "0"}{" "}
+                                pts
+                            </p>
+                        </div>
+                        <div className="tickets ml-auto d-flex align-items-center justify-content-center">
+                            <span>
+                                {getRankTickets(currentUserRank.rank - 1) ||
+                                    "0"}{" "}
+                                <img
+                                    className="icon ml-1"
+                                    src={`${window.cdn}assets/tickets_06.png`}
+                                    alt="ticket"
+                                />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 
     if (tempShow) {
         if (modalStatus.isGameReady) {

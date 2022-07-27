@@ -1,6 +1,528 @@
 // GAME LEADERBOARD COMPONENT
+// #game-leaderboard-screen {
+//     width: 100%;
+//     .leaderboard-tickets-booster-close {
+//         position: fixed;
+//         width: 100vw;
+//         height: 100vh;
+//         top: 0;
+//         left: 0;
+//     }
+//     .leaderboard-background-wrapper {
+//         height: 50vh;
+//         overflow: hidden;
+//         border-radius: 10px;
+//         @include media-min($xl) {
+//             height: 50vh;
+//         }
+//         .leaderboard-background {
+//             width: 100%;
+//             height: 100%;
+//             object-fit: cover;
+//             filter: blur(15px);
+//             -webkit-filter: blur(15px);
+//         }
+//         .leaderboard-wrapper {
+//             display: flex;
+//             flex-direction: column;
+//             position: absolute;
+//             top: 0;
+//             left: 50%;
+//             transform: translate(-50%, 0%);
+//             height: calc(100% - 86px);
+//             width: 100%;
+//             @media (pointer: none), (pointer: coarse) {
+//                 height: 100%;
+//             }
+//             @include media-min($md) {
+//                 width: 28rem;
+//             }
+//             @include media-min($xl) {
+//                 width: 30rem;
+//             }
+//             background: linear-gradient(114deg, #1c1c1c 0%, #0b0b0b 100%);
+//             .leaderboard-game-info {
+//                 padding: 0.8rem;
+//                 .game-icon {
+//                     width: 4.063rem;
+//                     height: 4.063rem;
+//                     object-fit: contain;
+//                     border-radius: 7px;
+//                 }
+//                 .game-details {
+//                     .overtime-text {
+//                         color: #ff3399;
+//                         font-size: $fnt-sz-12;
+//                         font-weight: $fnt-wgt-700;
+//                     }
+
+//                     .game-name,
+//                     .timer-text {
+//                         font-size: $fnt-sz-14;
+//                         font-weight: $fnt-wgt-700;
+//                     }
+//                     .tournament-end-text {
+//                         font-size: $fnt-sz-10;
+//                         @include media-min($md) {
+//                             font-size: $fnt-sz-12;
+//                         }
+//                     }
+//                     .timer-text {
+//                         color: #00c1b9;
+//                     }
+//                 }
+//             }
+//             .leaderboard {
+//                 height: inherit;
+//                 overflow-y: scroll;
+//                 -ms-overflow-style: none; /* Internet Explorer 10+ */
+//                 scrollbar-width: none; /* Firefox */
+//                 padding-bottom: 50px;
+//                 .individual-rank {
+//                     margin-bottom: 1.5px;
+//                     height: 61px;
+//                 }
+//             }
+//             .leaderboard::-webkit-scrollbar {
+//                 width: 0; /* Safari and Chrome */
+//             }
+//         }
+//         .bottom-ready-tournament {
+//             bottom: 0;
+//             position: sticky;
+//             padding: 15px;
+//             height: 86px;
+//             @media (pointer: none), (pointer: coarse) {
+//                 position: fixed;
+//                 width: 100%;
+//                 left: 0;
+//                 right: 0;
+//             }
+//             background: linear-gradient(101deg, #1c1c1c 0%, #0b0b0b 100%);
+//             border-radius: 0px 0px 10px 10px;
+//             z-index: 1;
+//             button.ready-tournament-button {
+//                 display: block;
+//                 margin: 0 auto;
+//                 background: #ff3399;
+//                 box-shadow: inset 0px 3px 6px #0000000f;
+//                 border-radius: 10px;
+//                 text-align: center;
+//                 font-size: $fnt-sz-14;
+//                 font-weight: bold;
+//                 .bold {
+//                     font-weight: bold;
+//                 }
+//                 color: #ffffff;
+//                 width: 100%;
+//                 @include media-min($md) {
+//                     width: 18rem;
+//                 }
+//                 height: 2.875rem;
+//             }
+//         }
+//         .earn-additional-tickets-container {
+//             position: sticky;
+//             bottom: 0;
+//             min-height: 30rem;
+//             @include media-min($md) {
+//                 height: 26.25rem;
+//                 min-height: unset;
+//             }
+//             width: 100%;
+//             @media (pointer: none), (pointer: coarse) {
+//                 position: fixed;
+//                 left: 0;
+//                 right: 0;
+//             }
+//             background: linear-gradient(133deg, #1c1c1c 0%, #0b0b0b 100%);
+//             border-radius: 0px 0px 10px 10px;
+//             .increase-earning-text {
+//                 font-size: $fnt-sz-14;
+//                 @include media-min($md) {
+//                     font-size: $fnt-sz-18;
+//                 }
+//                 font-weight: $fnt-wgt-700;
+//             }
+//             .select-one-option-text {
+//                 margin-top: 5px;
+//                 font-size: $fnt-sz-10;
+//                 @include media-min($md) {
+//                     font-size: $fnt-sz-12;
+//                 }
+//                 color: #9b9b9b;
+//             }
+//             .option-buttons-container {
+//                 margin-top: 20px;
+//                 @include media-min($md) {
+//                     margin-top: 30px;
+//                 }
+//                 .button-flex-container {
+//                     width: 13rem;
+//                     height: auto;
+//                     @include media-min($md) {
+//                         width: 16.25rem;
+//                         height: 11.5rem;
+//                     }
+//                     border-radius: 10px;
+//                     background: #262626;
+//                     box-shadow: rgb(0 0 0) 0px 30px 60px -12px inset,
+//                         rgb(0 0 0 / 76%) 0px 18px 36px -18px inset;
+//                     border: solid 5px #262626;
+//                     .boost-tickets {
+//                         font-size: $fnt-sz-14;
+//                         font-weight: $fnt-wgt-600;
+//                     }
+//                     .earn-type-text {
+//                         font-size: $fnt-sz-14;
+//                         @include media-min($md) {
+//                             font-size: $fnt-sz-16;
+//                         }
+//                         font-weight: $fnt-wgt-700;
+//                         color: #fcc239;
+//                     }
+//                     .ticket-holder {
+//                         background: #1414145e;
+//                         border-radius: 6px;
+//                         // width: fit-content;
+//                         height: 4.313rem;
+//                         z-index: 1;
+//                         position: relative;
+//                         backdrop-filter: blur(5px);
+//                         -webkit-backdrop-filter: blur(5px);
+//                         @include media-min($md) {
+//                             width: fit-content;
+//                         }
+//                         .ticket-amount {
+//                             font-size: $fnt-sz-14;
+//                             @include media-min($md) {
+//                                 font-size: $fnt-sz-20;
+//                             }
+//                             font-weight: $fnt-wgt-600;
+//                             color: #fcc239;
+//                         }
+//                         .score-condition {
+//                             font-size: $fnt-sz-10;
+//                             @include media-min($md) {
+//                                 font-size: $fnt-sz-12;
+//                             }
+//                             span {
+//                                 font-weight: $fnt-wgt-600;
+//                             }
+//                         }
+//                     }
+//                     .earn-type-img {
+//                         width: 7.5rem;
+//                         height: 7.438rem;
+//                         @include media-min($md) {
+//                             position: absolute;
+//                             top: 0;
+//                             right: 0;
+//                             z-index: 0;
+//                         }
+//                     }
+//                 }
+//                 .button-selected {
+//                     border: solid 5px #fcc239;
+//                 }
+//                 .cursor-pointer {
+//                     cursor: pointer;
+//                 }
+//             }
+//             .play-immediately-text-container {
+//                 margin: 32px 0;
+//                 width: 18.75rem;
+//                 .line {
+//                     height: 1px;
+//                     width: 35%;
+//                     background: #282828;
+//                     @include media-min($md) {
+//                         background: white;
+//                     }
+//                 }
+//                 .play-immediately-text {
+//                     font-size: $fnt-sz-10;
+//                     @include media-min($md) {
+//                         font-size: $fnt-sz-12;
+//                     }
+//                     width: inherit;
+//                 }
+//             }
+//             .play-button-container {
+//                 width: 100%;
+//                 button.play-button {
+//                     width: 90%;
+//                     @include media-min($md) {
+//                         width: 18rem;
+//                     }
+//                     height: 2.875rem;
+//                     background: #07cc9f;
+//                     box-shadow: inset 0px 3px 6px #0000000f;
+//                     border-radius: 10px;
+//                     font-size: $fnt-sz-14;
+//                     font-weight: $fnt-wgt-800;
+//                     color: #ffffff;
+//                 }
+//             }
+//         }
+//     }
+//     .leaderboard-rank-layer-without-user {
+//         // max-height: 300px;
+//     }
+//     .leaderboard-user-wrapper {
+//         position: absolute;
+//         bottom: 0;
+//         border-radius: 0 0 20px 20px;
+//         box-shadow: 0px 18px 26px #00000029;
+//     }
+//     .leader-player-card {
+//         background-color: #0e0e0e;
+//         min-height: 3.5em;
+//         height: inherit;
+//         padding: 1.25rem;
+//         .user-avatar {
+//             position: relative;
+//             margin-left: 24px;
+//             .avatar {
+//                 border-radius: 100%;
+//                 object-fit: contain;
+//                 width: 40px;
+//                 height: 40px;
+//             }
+//         }
+//         p {
+//             margin: 0;
+//             font-size: 14px;
+//         }
+//         .player-name {
+//             width: 12ch;
+//             color: #f7f7f7;
+//             font-size: $fnt-sz-12;
+//             font-weight: bold;
+//             @include media-min($md) {
+//                 width: 25ch;
+//             }
+//             white-space: nowrap;
+//             overflow: hidden;
+//             display: inline-block;
+//             text-overflow: ellipsis;
+//         }
+//         .points {
+//             color: #f7f7f7;
+//             font-size: $fnt-sz-10;
+//             flex-wrap: nowrap;
+//             white-space: nowrap;
+//         }
+//         .tickets {
+//             height: 100%;
+//             span {
+//                 font-size: $fnt-sz-14;
+//                 font-weight: bold;
+//                 color: #f8ba29;
+
+//                 .icon {
+//                     width: 30px;
+//                 }
+//             }
+//         }
+//         .number-holder {
+//             margin-left: 0.5px;
+//             width: 6.88px;
+//             .rank-number {
+//                 font-size: $fnt-sz-12;
+//                 font-weight: $fnt-wgt-700;
+//                 text-align: center;
+//             }
+//         }
+//     }
+//     .leader-curr-player-card,
+//     .you {
+//         background: #fdc43d;
+//         .player-name,
+//         .points,
+//         .number-holder,
+//         .tickets {
+//             color: #000000;
+//             .rank-number {
+//                 color: #000000;
+//             }
+//             span {
+//                 color: #000000;
+
+//                 .icon {
+//                     width: 30px;
+//                     -webkit-filter: drop-shadow(0px 1px 2px #222);
+//                     filter: drop-shadow(0px 1px 2px #222);
+//                 }
+//             }
+//         }
+//     }
+// }
+
 #game-leaderboard-screen {
-    width: 100%;
+    .tournament-info-wrapper {
+        .tournament-title {
+            font-size: $fnt-sz-16;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+            font-weight: $fnt-wgt-700;
+        }
+        img.question-mark-img {
+            cursor: pointer;
+        }
+        .tournament-subtitle {
+            font-size: $fnt-sz-10;
+            @include media-min($md) {
+                font-size: $fnt-sz-12;
+            }
+        }
+    }
+
+    .tournament-leaderboard {
+        height: 50vh;
+        min-height: 25rem;
+        background: black;
+        border-radius: 5px;
+        border: solid 5px #312a35;
+
+        .leaderboard-game-info {
+            background: linear-gradient(90deg, #1c1c1c 0%, #0b0b0b 100%);;
+            padding: 0.8rem;
+            height: 100px;
+
+            .game-icon {
+                height: 100%;
+                min-height: 60px;
+                object-fit: contain;
+                border-radius: 7px;
+            }
+            .game-details {
+                .game-name,
+                .timer-text {
+                    font-size: $fnt-sz-16;
+                    font-weight: $fnt-wgt-700;
+                }
+                
+                .tournament-end-text {
+                    font-size: $fnt-sz-12;
+                    @include media-min($md) {
+                        font-size: $fnt-sz-14;
+                    }
+                }
+                .timer-text {
+                    color: #00c1b9;
+                }
+                .overtime-text {
+                    font-size: $fnt-sz-16;
+                    font-weight: $fnt-wgt-700;
+                    color: #ff3399;
+                }
+            }
+        }
+        .leaderboard {
+            height: inherit;
+            overflow-y: scroll;
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+            scrollbar-width: none; /* Firefox */
+            padding-bottom: 50px;
+            .individual-rank {
+                margin-bottom: 1.5px;
+                height: 61px;
+            }
+        }
+        .leaderboard::-webkit-scrollbar {
+            width: 0; /* Safari and Chrome */
+        }
+        .leaderboard-user-wrapper {
+            position: relative;
+            bottom: 50px;
+            height: 50px;
+        }
+        .leader-player-card {
+            background-color: #0e0e0e;
+            min-height: 3.5em;
+            height: inherit;
+            padding: 1.25rem;
+            .user-avatar {
+                position: relative;
+                margin-left: 24px;
+                .avatar {
+                    border-radius: 100%;
+                    object-fit: contain;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            p {
+                margin: 0;
+                font-size: 14px;
+            }
+            .player-name {
+                width: 12ch;
+                color: #f7f7f7;
+                font-size: $fnt-sz-12;
+                font-weight: bold;
+                @include media-min($md) {
+                    width: 25ch;
+                }
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
+            .points {
+                color: #f7f7f7;
+                font-size: $fnt-sz-10;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+            }
+            .tickets {
+                height: 100%;
+                span {
+                    font-size: $fnt-sz-14;
+                    font-weight: bold;
+                    color: #f8ba29;
+    
+                    .icon {
+                        width: 30px;
+                    }
+                }
+            }
+            .number-holder {
+                margin-left: 0.5px;
+                width: 6.88px;
+                .rank-number {
+                    font-size: $fnt-sz-12;
+                    font-weight: $fnt-wgt-700;
+                    text-align: center;
+                }
+            }
+        }
+        .leader-curr-player-card,
+        .you {
+            background: #fdc43d;
+            .player-name,
+            .points,
+            .number-holder,
+            .tickets {
+                color: #000000;
+                .rank-number {
+                    color: #000000;
+                }
+                span {
+                    color: #000000;
+    
+                    .icon {
+                        width: 30px;
+                        -webkit-filter: drop-shadow(0px 1px 2px #222);
+                        filter: drop-shadow(0px 1px 2px #222);
+                    }
+                }
+            }
+        }
+    }
+
     .leaderboard-tickets-booster-close {
         position: fixed;
         width: 100vw;
@@ -262,97 +784,6 @@
                     font-size: $fnt-sz-14;
                     font-weight: $fnt-wgt-800;
                     color: #ffffff;
-                }
-            }
-        }
-    }
-    .leaderboard-rank-layer-without-user {
-        // max-height: 300px;
-    }
-    .leaderboard-user-wrapper {
-        position: absolute;
-        bottom: 0;
-        border-radius: 0 0 20px 20px;
-        box-shadow: 0px 18px 26px #00000029;
-    }
-    .leader-player-card {
-        background-color: #0e0e0e;
-        min-height: 3.5em;
-        height: inherit;
-        padding: 1.25rem;
-        .user-avatar {
-            position: relative;
-            margin-left: 24px;
-            .avatar {
-                border-radius: 100%;
-                object-fit: contain;
-                width: 40px;
-                height: 40px;
-            }
-        }
-        p {
-            margin: 0;
-            font-size: 14px;
-        }
-        .player-name {
-            width: 12ch;
-            color: #f7f7f7;
-            font-size: $fnt-sz-12;
-            font-weight: bold;
-            @include media-min($md) {
-                width: 25ch;
-            }
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            text-overflow: ellipsis;
-        }
-        .points {
-            color: #f7f7f7;
-            font-size: $fnt-sz-10;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-        }
-        .tickets {
-            height: 100%;
-            span {
-                font-size: $fnt-sz-14;
-                font-weight: bold;
-                color: #f8ba29;
-
-                .icon {
-                    width: 30px;
-                }
-            }
-        }
-        .number-holder {
-            margin-left: 0.5px;
-            width: 6.88px;
-            .rank-number {
-                font-size: $fnt-sz-12;
-                font-weight: $fnt-wgt-700;
-                text-align: center;
-            }
-        }
-    }
-    .leader-curr-player-card,
-    .you {
-        background: #fdc43d;
-        .player-name,
-        .points,
-        .number-holder,
-        .tickets {
-            color: #000000;
-            .rank-number {
-                color: #000000;
-            }
-            span {
-                color: #000000;
-
-                .icon {
-                    width: 30px;
-                    -webkit-filter: drop-shadow(0px 1px 2px #222);
-                    filter: drop-shadow(0px 1px 2px #222);
                 }
             }
         }
