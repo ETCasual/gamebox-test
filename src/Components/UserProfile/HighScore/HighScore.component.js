@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import loadHighScore from "redux/thunks/HighScore.thunk";
 
 // HELPER FUNCTIONS
-import getDateFormat from "Utils/DateFormat";
+import { getDateFormat } from "Utils/DateFormat";
 
 const HighScore = ({ handleBackButton }) => {
     const dispatch = useDispatch();

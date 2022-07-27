@@ -10,6 +10,7 @@ import loadWinners from "redux/thunks/Winners.thunk";
 
 // HELPER
 import { defaultUserImage } from "Utils/DefaultImage";
+import { getDateOrdinalFormat } from "Utils/DateFormat";
 
 const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
     const dispatch = useDispatch();
@@ -23,12 +24,8 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
 
     // CALCULATE THE PRIZR DRAWN TIME
     useEffect(() => {
-        const endDate = new Date(prizeDrawnTimestamp);
-        let finalTimeRef = `${endDate.getDate()}-${
-            endDate.getMonth() + 1
-        }-${endDate.getFullYear()}`;
-
-        setTimer(finalTimeRef);
+        const endDate = getDateOrdinalFormat(prizeDrawnTimestamp);
+        setTimer(endDate);
     }, [config, prizeDrawnTimestamp]);
 
     // LOAD WINNERS

@@ -15,7 +15,7 @@ import loadPlayerHighScore from "redux/thunks/PlayerHighScore.thunk";
 
 // HELPER FUNCTIONS
 import { defaultUserImage } from "Utils/DefaultImage";
-import getDateFormat from "Utils/DateFormat";
+import { getDateFormat } from "Utils/DateFormat";
 
 const Index = () => {
     const dispatch = useDispatch();

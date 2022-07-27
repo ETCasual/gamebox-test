@@ -9,7 +9,7 @@ import {
     getCurrentLevel,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-import getDateFormat from "Utils/DateFormat";
+import { getDateFormat } from "Utils/DateFormat";
 import { defaultUserImage } from "Utils/DefaultImage";
 
 const SelectedPlayerInfo = ({ handleBackButton }) => {
