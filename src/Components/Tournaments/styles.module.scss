@@ -1,69 +1,16 @@
 // TOURNAMENT PANEL COMPONENT
 #game-screen {
     position: relative;
-    padding: 5rem 0;
+    padding-top: 5rem;
 
     @include media-min($xs) {
-        padding: 6rem 0;
+        padding-top: 6rem;
     }
 
-    // .prize-info-wrapper {
-    //     min-height: 5rem;
-    //     @include media-min($lg) {
-    //         min-height: 10rem;
-    //     }
-    //     video,
-    //     img {
-    //         height: 5rem;
-    //         width: 5rem;
-    //         @include media-min($lg) {
-    //             height: 9.875rem;
-    //             width: 9.875rem;
-    //         }
-    //         border-radius: 10px;
-    //         object-fit: cover;
-    //     }
-    //     .contract-address {
-    //         position: absolute;
-    //         top: 0.5rem;
-    //         left: 1.7rem;
-    //     }
-    //     .prize-text-holder {
-    //         min-height: inherit;
-    //         .prize-id {
-    //             font-size: $fnt-sz-8;
-    //             @include media-min($md) {
-    //                 font-size: $fnt-sz-10;
-    //             }
-    //         }
-    //         .prize-title {
-    //             font-size: $fnt-sz-14;
-    //             @include media-min($md) {
-    //                 font-size: $fnt-sz-18;
-    //             }
-    //             font-weight: $fnt-wgt-700;
-    //         }
-    //         .prize-description {
-    //             font-size: $fnt-sz-10;
-    //             @include media-min($md) {
-    //                 font-size: $fnt-sz-12;
-    //             }
-    //             color: white;
-    //         }
-    //     }
-    // }
     .prize-info-wrapper {
         min-height: 10rem;
-        // @include media-min($lg) {
-        //     min-height: 10rem;
-        // }
         .thumb {
-            // height: 50%;
             width: 100%;
-            @include media-min($md) {
-                height: 9.875rem;
-                width: 9.875rem;
-            }
             border-radius: 10px;
             object-fit: cover;
         }
@@ -219,35 +166,37 @@
             cursor: grabbing;
         }
     }
-    .fortune-wheel-btn {
-        position: relative;
-        min-height: 5rem;
-        width: 100%;
-        cursor: pointer;
-        background: linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%);
-        border-radius: 12px;
-        .the-spinner-text {
-            font-size: $fnt-sz-10;
-            color: #00c1b9;
-        }
-        .earn-more-tickets-text {
-            font-weight: $fnt-wgt-600;
-            font-size: $fnt-sz-12;
-            margin-bottom: 3px;
-            @include media-max($xl) {
-                width: 10ch;
-            }
-        }
-        .earn-more-tickets-img {
-            align-self: center;
-            justify-self: center;
-            width: 100%;
-            @include media-max($xl) {
-                position: absolute;
-                top: 1rem;
-                right: 0.5rem;
-                width: 3rem;
-            }
-        }
-    }
+
+    // COMMENTED DUE TO SPINNER NO LONGER INSIDE TOURNAMENT
+    // .fortune-wheel-btn {
+    //     position: relative;
+    //     min-height: 5rem;
+    //     width: 100%;
+    //     cursor: pointer;
+    //     background: linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%);
+    //     border-radius: 12px;
+    //     .the-spinner-text {
+    //         font-size: $fnt-sz-10;
+    //         color: #00c1b9;
+    //     }
+    //     .earn-more-tickets-text {
+    //         font-weight: $fnt-wgt-600;
+    //         font-size: $fnt-sz-12;
+    //         margin-bottom: 3px;
+    //         @include media-max($xl) {
+    //             width: 10ch;
+    //         }
+    //     }
+    //     .earn-more-tickets-img {
+    //         align-self: center;
+    //         justify-self: center;
+    //         width: 100%;
+    //         @include media-max($xl) {
+    //             position: absolute;
+    //             top: 1rem;
+    //             right: 0.5rem;
+    //             width: 3rem;
+    //         }
+    //     }
+    // }
 }

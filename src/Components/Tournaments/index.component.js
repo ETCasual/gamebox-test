@@ -264,7 +264,7 @@ const Index = ({ match }) => {
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-10 col-lg-8 px-0 full-wrapper">
                                 {/* BACK BUTTON */}
-                                <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
+                                <div className="d-flex align-items-center back-button mx-3">
                                     <div
                                         className="d-flex align-items-center"
                                         onClick={() => {
@@ -280,11 +280,12 @@ const Index = ({ match }) => {
                                     </div>
                                 </div>
 
-                                <div className="col-12 px-3 mb-4 mb-md-4">
+                                <div className="row m-3">
+                                    {/* <div className="row col-12"> */}
                                     {/* TICKETS AND POOL INFO */}
-                                    <div className="prize-info-wrapper col-12 col-md-3 p-0 d-flex flex-column flex-md-row">
-                                        <div className="d-flex flex-row">
-                                            <div className="col-4 p-0">
+                                    <div className="prize-info-wrapper col-12 col-md-4 p-0 d-flex flex-column flex-md-row">
+                                        <div className="d-flex flex-row flex-md-column">
+                                            <div className="col-4 p-0 col-md-12 flex-md-fill ">
                                                 <ThumbnailMedia
                                                     url={currentPrize?.prizeBG}
                                                     isPlayVideo={true}
@@ -334,8 +335,8 @@ const Index = ({ match }) => {
                                                 )}
                                             </div>
 
-                                            <div className="prize-text-holder col-8 d-flex flex-column justify-content-between pr-0">
-                                                <div className="align-items-start">
+                                            <div className="prize-text-holder col-8 col-md-12 d-flex flex-column justify-content-between justify-content-md-start pr-0 pl-md-0">
+                                                <div className="align-items-start my-md-3">
                                                     <div className="prize-id mb-lg-1">
                                                         {
                                                             currentPrize?.prizeSubtitle
@@ -351,8 +352,8 @@ const Index = ({ match }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className="your-tokens-info d-flex flex-row align-items-end mt-2">
-                                                    <div className="col-4 p-0 mt-auto mx-auto">
+                                                <div className="your-tokens-info d-flex flex-row flex-md-column align-items-end mt-2">
+                                                    <div className="col-4 col-md-auto p-0 mt-auto mx-auto ml-md-0">
                                                         <div className="your-tokens-title-text">
                                                             Your tickets
                                                         </div>
@@ -364,7 +365,7 @@ const Index = ({ match }) => {
                                                                 0}
                                                         </div>
                                                     </div>
-                                                    <div className="col-8 p-0 mt-auto mx-auto text-right">
+                                                    <div className="col-8 col-md-auto p-0 mt-auto mt-md-3 mx-auto ml-md-0 text-right text-md-left">
                                                         {/* CURRENT TICKETS / TOTAL TICKETS */}
                                                         {!currentPrize.overTime && (
                                                             <>
@@ -419,7 +420,7 @@ const Index = ({ match }) => {
                                         </div>
 
                                         {/* SEPARATOR */}
-                                        <div className="separator d-block my-3 mx-0 my-md-0 mx-md-2" />
+                                        <div className="separator d-block my-3 mx-0 my-md-0 mx-md-4" />
                                     </div>
 
                                     {/* TORUNAMENT LEADERBOARD */}
@@ -443,22 +444,7 @@ const Index = ({ match }) => {
                                             setIsInstructionShown
                                         }
                                     />
-
-                                    {/* RECAPTCHA MESSAGES */}
-                                    <p className="recaptcha-text">
-                                        This site is protected by reCAPTCHA and
-                                        the Google
-                                        {""}{" "}
-                                        <a href="https://policies.google.com/privacy">
-                                            Privacy Policy
-                                        </a>{" "}
-                                        and
-                                        {""}{" "}
-                                        <a href="https://policies.google.com/terms">
-                                            Terms of Service
-                                        </a>{" "}
-                                        apply.
-                                    </p>
+                                    {/* </div> */}
                                 </div>
 
                                 {false && (

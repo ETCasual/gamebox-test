@@ -37,6 +37,7 @@ import getToken from "Utils/GetToken";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
 import PauseMenuModal from "Components/Modals/PauseMenuModal";
+import { isMobile } from "react-device-detect";
 
 const Leaderboard = ({
     data,
@@ -98,17 +99,11 @@ const Leaderboard = ({
     const { executeRecaptcha } = useGoogleReCaptcha();
 
     let watcherRef = useRef(null);
-    let leaderBoardBackgroundRef = useRef(null);
-    let leaderBoardGameInfoRef = useRef(null);
-    let leaderboardRef = useRef(null);
-    let readyTournamentButtonRef = useRef(null);
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
     let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
     const [isMute, setIsMute] = useState(window.localStorage.getItem("mute"));
-
-    const [tempShow] = useState(false);
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -614,114 +609,247 @@ const Leaderboard = ({
     }
 
     return (
-        <section id="game-leaderboard-screen">
-            {/* TORUNAMENT INFO */}
-            <div className="tournament-info-wrapper col-12 col-md-9 p-0">
-                <div className="d-flex flex-row">
-                    <span className="tournament-title">JOIN TOURNAMENTS!</span>
-                    <img
-                        width={20}
-                        src={`${window.cdn}buttons/button_question_01.png`}
-                        className="question-mark-img ml-auto"
-                        alt="question-mark"
-                        onClick={() => setIsInstructionShown(true)}
-                    />
-                </div>
-                <p className="tournament-subtitle mt-2 mb-3">
-                    Compete with other players, collect tickets and stand a
-                    chance to own this Prize!
-                </p>
-            </div>
-
-            {/* LEADERBOARD */}
-            <div className="tournament-leaderboard">
-                <div className="d-flex flex-column p-0 h-100">
-                    <div className="leaderboard-game-info d-flex">
+        <>
+            <section
+                id="game-leaderboard-screen"
+                className="col-12 col-md-8 px-0 py-2 px-md-auto py-md-0"
+            >
+                {/* TORUNAMENT INFO */}
+                <div className="tournament-info-wrapper col-12 p-0">
+                    <div className="d-flex flex-row">
+                        <span className="tournament-title">
+                            JOIN TOURNAMENTS!
+                        </span>
                         <img
-                            className="game-icon"
-                            src={currentGameDetails?.gameIcon}
-                            alt={currentGameDetails?.gameIcon}
+                            width={20}
+                            src={`${window.cdn}buttons/button_question_01.png`}
+                            className="question-mark-img ml-auto"
+                            alt="question-mark"
+                            onClick={() => setIsInstructionShown(true)}
                         />
-                        <div className="game-details w-100 p-3">
-                            <p className="game-name">
-                                {currentGameDetails?.gameTitle}
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between">
-                                <p className="tournament-end-text mb-0">
-                                    Tournament ends in
+                    </div>
+                    <p className="tournament-subtitle mt-2 mb-3">
+                        Compete with other players, collect tickets and stand a
+                        chance to own this Prize!
+                    </p>
+                </div>
+
+                {/* LEADERBOARD */}
+                <div className="tournament-leaderboard">
+                    <div className="d-flex flex-column p-0 h-100">
+                        <div className="leaderboard-game-info d-flex">
+                            <img
+                                className="game-icon"
+                                src={currentGameDetails?.gameIcon}
+                                alt={currentGameDetails?.gameIcon}
+                            />
+                            <div className="game-details w-100 p-3">
+                                <p className="game-name">
+                                    {currentGameDetails?.gameTitle}
                                 </p>
-                                <p
-                                    className={`mb-0 text-right ${
-                                        OverTimeModeChecker(
-                                            data?.prizeId,
-                                            data?.ticketsRequired,
-                                            prizeTicketCollection
-                                        )
-                                            ? "overtime-text"
-                                            : "timer-text"
-                                    }`}
-                                >
-                                    {timer || "0d 0h 0m 0s"}
-                                </p>
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <p className="tournament-end-text mb-0">
+                                        Tournament ends in
+                                    </p>
+                                    <p
+                                        className={`mb-0 text-right ${
+                                            OverTimeModeChecker(
+                                                data?.prizeId,
+                                                data?.ticketsRequired,
+                                                prizeTicketCollection
+                                            )
+                                                ? "overtime-text"
+                                                : "timer-text"
+                                        }`}
+                                    >
+                                        {timer || "0d 0h 0m 0s"}
+                                    </p>
+                                </div>
                             </div>
                         </div>
+                        <div className="leaderboard">
+                            {leaderboardList.length > 0
+                                ? getLeaderboardList()
+                                : getEmptyLeaderboardList()}
+                        </div>
                     </div>
-                    <div className="leaderboard">
-                        {leaderboardList.length > 0
-                            ? getLeaderboardList()
-                            : getEmptyLeaderboardList()}
-                    </div>
+
+                    {/* PLAYER-SELF RANK (SHOWING WHEN PLAYER RANK IS NOT VISIBLE IN VIEWPORT) */}
+                    {false && (
+                        <div className="leaderboard-user-wrapper">
+                            <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
+                                <div className="number-holder">
+                                    <LeaderRankIndicator
+                                        index={currentUserRank.rank}
+                                        type="current"
+                                    />
+                                </div>
+                                <div className="user-avatar">
+                                    <img
+                                        className="avatar"
+                                        onError={(e) => defaultUserImage(e)}
+                                        src={
+                                            user.picture ||
+                                            `${window.cdn}icons/icon_profile.svg`
+                                        }
+                                        alt="player"
+                                    />
+                                </div>
+
+                                <div className="px-2 ml-3">
+                                    <p className="player-name">
+                                        {user.username}
+                                    </p>
+                                    <p className="points">
+                                        {leaderboard.find(
+                                            (e) => e.userId === user.id
+                                        )?.gameScore || "0"}{" "}
+                                        pts
+                                    </p>
+                                </div>
+                                <div className="tickets ml-auto d-flex align-items-center justify-content-center">
+                                    <span>
+                                        {getRankTickets(
+                                            currentUserRank.rank - 1
+                                        ) || "0"}{" "}
+                                        <img
+                                            className="icon ml-1"
+                                            src={`${window.cdn}assets/tickets_06.png`}
+                                            alt="ticket"
+                                        />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
-                {/* PLAYER-SELF RANK (SHOWING WHEN PLAYER RANK IS NOT VISIBLE IN VIEWPORT) */}
-                <div className="leaderboard-user-wrapper">
-                    <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
-                        <div className="number-holder">
-                            <LeaderRankIndicator
-                                index={currentUserRank.rank}
-                                type="current"
-                            />
-                        </div>
-                        <div className="user-avatar">
-                            <img
-                                className="avatar"
-                                onError={(e) => defaultUserImage(e)}
-                                src={
-                                    user.picture ||
-                                    `${window.cdn}icons/icon_profile.svg`
-                                }
-                                alt="player"
-                            />
-                        </div>
-
-                        <div className="px-2 ml-3">
-                            <p className="player-name">{user.username}</p>
-                            <p className="points">
-                                {leaderboard.find((e) => e.userId === user.id)
-                                    ?.gameScore || "0"}{" "}
-                                pts
-                            </p>
-                        </div>
-                        <div className="tickets ml-auto d-flex align-items-center justify-content-center">
-                            <span>
-                                {getRankTickets(currentUserRank.rank - 1) ||
-                                    "0"}{" "}
-                                <img
-                                    className="icon ml-1"
-                                    src={`${window.cdn}assets/tickets_06.png`}
-                                    alt="ticket"
-                                />
-                            </span>
-                        </div>
-                    </div>
+                {/* READY TOURNAMENT BUTTON */}
+                <div
+                    className={`bottom-ready-tournament d-block ${
+                        isMobile ? "mobile" : ""
+                    }`}
+                >
+                    <button
+                        className={`ready-tournament-button ${
+                            isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                ? ""
+                                : "opacity-0-5"
+                        }`}
+                        onClick={
+                            isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                ? () => {
+                                      setModalStatus((prev) => ({
+                                          ...prev,
+                                          isEarnAdditionalInfoShown: true,
+                                      }));
+                                  }
+                                : null
+                        }
+                    >
+                        JOIN TOURNAMENT
+                        {/* <img
+                            width={18}
+                            className="icon ml-3 mr-1"
+                            src={`${window.cdn}assets/gem_01.png`}
+                            alt="gems"
+                        />
+                        {data?.gemsNeeded} */}
+                    </button>
                 </div>
-            </div>
-        </section>
-    );
 
-    if (tempShow) {
-        if (modalStatus.isGameReady) {
-            return (
+                {/* RECAPTCHA MESSAGES */}
+                <p className="recaptcha-text my-1 my-md-auto">
+                    This site is protected by reCAPTCHA and the Google
+                    {""}{" "}
+                    <a href="https://policies.google.com/privacy">
+                        Privacy Policy
+                    </a>{" "}
+                    and
+                    {""}{" "}
+                    <a href="https://policies.google.com/terms">
+                        Terms of Service
+                    </a>{" "}
+                    apply.
+                </p>
+
+                {isSubscriptionModalShown && (
+                    <InsufficientBalanceModalPopup
+                        onCloseClicked={onClickSubscriptionCancel}
+                    />
+                )}
+
+                {/* EARN ADDITIONAL BENEFITS */}
+                {modalStatus.isEarnAdditionalInfoShown && (
+                    <LaunchGameMenuModalPopup
+                        gameId={currentGameDetails.gameId}
+                        prizeId={data?.prizeId}
+                        playCost={data?.gemsNeeded}
+                        setEarnAdditionalDisabledStatus={
+                            setEarnAdditionalDisabledStatus
+                        }
+                        isPlayBtnDisabled={
+                            !isGameAvailable || modalStatus.isPlayBtnDisabled
+                        }
+                        isLoadingGame={
+                            !modalStatus.isGameReady &&
+                            modalStatus.isPlayBtnDisabled
+                        }
+                        onCloseClicked={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isEarnAdditionalInfoShown: false,
+                            }));
+                        }}
+                        onPlayClicked={handleOnClickPlayButton}
+                        onInsufficientPayment={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isEarnAdditionalInfoShown: false,
+                            }));
+                            setIsSubscriptionModalShown(true);
+                        }}
+                    />
+
+                    // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
+                    //     <EarnAdditionalTickets
+                    //         gameId={currentGameDetails.gameId}
+                    //         prizeId={data?.prizeId}
+                    //         earnAdditionalDisabledStatus={
+                    //             earnAdditionalDisabledStatus
+                    //         }
+                    //         setEarnAdditionalDisabledStatus={
+                    //             setEarnAdditionalDisabledStatus
+                    //         }
+                    //     />
+                    //     {/* PLAY BUTTON*/}
+                    //     <div
+                    //         className={`play-button-container d-flex justify-content-center ${
+                    //             isGameAvailable
+                    //                 ? ""
+                    //                 : "opacity-0-5"
+                    //         }`}
+                    //     >
+                    //         <button
+                    //             onClick={
+                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                    //                     ? handleOnClickPlayButton
+                    //                     : null
+                    //             }
+                    //             className={`play-button ${
+                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                    //                     ? ""
+                    //                     : "opacity-0-5"
+                    //             }`}
+                    //         >
+                    //             Play Tournament!
+                    //         </button>
+                    //     </div>
+                    // </div>
+                )}
+            </section>
+
+            {modalStatus.isGameReady && (
                 <div className="game-wrapper">
                     {/* ADDITIONAL TICKETS & EXPERIENCE POINTS WIN MODAL */}
                     {modalStatus.isEarnAdditionalWinModalShown && (
@@ -877,299 +1005,9 @@ const Leaderboard = ({
                         </>
                     )}
                 </div>
-            );
-        } else {
-            return (
-                <section
-                    id="game-leaderboard-screen"
-                    // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
-                    // onClick={(e) => {
-                    //     if (
-                    // //         !e.target.closest(".bottom-ready-tournament") &&
-                    // //         !e.target.closest(".earn-additional-tickets-container")
-                    //     ) {
-                    //         setModalStatus((prev) => ({
-                    //             ...prev,
-                    //             isEarnAdditionalInfoShown: false,
-                    //         }));
-                    //     }
-                    // }}
-                >
-                    {/* TICKETS BOOSTER CLOSE LAYER */}
-                    {/* {modalStatus.isEarnAdditionalInfoShown && (
-                    <div className="leaderboard-tickets-booster-close"></div>
-                )} */}
-
-                    <div className="container-fluid">
-                        <div className="row justify-content-center">
-                            <div className="col-12">
-                                {/* BACKGROUND IMAGE */}
-                                <div
-                                    className="col-12 px-0 leaderboard-background-wrapper position-relative"
-                                    ref={leaderBoardBackgroundRef}
-                                >
-                                    <img
-                                        className="leaderboard-background"
-                                        src={currentGameDetails?.gameIcon}
-                                        alt={currentGameDetails?.gameTitle}
-                                    />
-                                    {/* LEADERBOARD */}
-                                    <div className="leaderboard-wrapper">
-                                        {/* GAME INFO & TIMER */}
-                                        <div
-                                            className="leaderboard-game-info d-flex align-items-center justify-content-start"
-                                            ref={leaderBoardGameInfoRef}
-                                        >
-                                            <img
-                                                className="game-icon"
-                                                src={
-                                                    currentGameDetails?.gameIcon
-                                                }
-                                                alt={
-                                                    currentGameDetails?.gameIcon
-                                                }
-                                            />
-                                            <div className="game-details w-100 px-3">
-                                                <p className="game-name w-100 mb-2">
-                                                    {
-                                                        currentGameDetails?.gameTitle
-                                                    }
-                                                </p>
-
-                                                <div className="w-100 d-flex align-items-center justify-content-between">
-                                                    <p className="tournament-end-text mb-0">
-                                                        Tournament ends in
-                                                    </p>
-                                                    <p
-                                                        className={`mb-0 ${
-                                                            OverTimeModeChecker(
-                                                                data?.prizeId,
-                                                                data?.ticketsRequired,
-                                                                prizeTicketCollection
-                                                            )
-                                                                ? "overtime-text"
-                                                                : "timer-text"
-                                                        }`}
-                                                    >
-                                                        {timer || "0d 0h 0m 0s"}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* LEADERBOARD LIST */}
-                                        <div
-                                            ref={leaderboardRef}
-                                            className={`leaderboard ${
-                                                currentUserRank.rank >
-                                                    rankLength ||
-                                                currentUserRank.rank === "-"
-                                                    ? ""
-                                                    : "leaderboard-rank-layer-without-user"
-                                            }`}
-                                            style={{
-                                                padding: `${
-                                                    currentUserRank.rank >
-                                                    rankLength
-                                                        ? "0.25rem 0.25rem 5rem 0.25rem"
-                                                        : ""
-                                                }`,
-                                            }}
-                                        >
-                                            {leaderboardList.length > 0
-                                                ? getLeaderboardList()
-                                                : getEmptyLeaderboardList()}
-                                        </div>
-
-                                        {/* CURRENT USER RANK IF IT'S MORE THAN THE RANK LIST LENGTH */}
-                                        {currentUserRank.rank > rankLength ? (
-                                            <div className="leaderboard-user-wrapper w-100">
-                                                <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
-                                                    <div className="number-holder">
-                                                        <LeaderRankIndicator
-                                                            index={
-                                                                currentUserRank.rank
-                                                            }
-                                                            type="current"
-                                                        />
-                                                    </div>
-                                                    <div className="user-avatar">
-                                                        <img
-                                                            className="avatar"
-                                                            onError={(e) =>
-                                                                defaultUserImage(
-                                                                    e
-                                                                )
-                                                            }
-                                                            src={
-                                                                user.picture ||
-                                                                `${window.cdn}icons/icon_profile.svg`
-                                                            }
-                                                            alt="player"
-                                                        />
-                                                    </div>
-
-                                                    <div className="px-2 ml-3">
-                                                        <p className="player-name">
-                                                            {user.username}
-                                                        </p>
-                                                        <p className="points">
-                                                            {leaderboard.find(
-                                                                (e) =>
-                                                                    e.userId ===
-                                                                    user.id
-                                                            )?.gameScore ||
-                                                                "0"}{" "}
-                                                            pts
-                                                        </p>
-                                                    </div>
-                                                    <div className="tickets ml-auto d-flex align-items-center justify-content-center">
-                                                        <span>
-                                                            {getRankTickets(
-                                                                currentUserRank.rank -
-                                                                    1
-                                                            ) || "0"}{" "}
-                                                            <img
-                                                                className="icon ml-1"
-                                                                src={`${window.cdn}assets/tickets_06.png`}
-                                                                alt="ticket"
-                                                            />
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-
-                                    {/* READY TOURNAMENT BUTTON */}
-                                    <div
-                                        className="bottom-ready-tournament d-block align-items-center justify-content-center"
-                                        ref={readyTournamentButtonRef}
-                                    >
-                                        <button
-                                            className={`ready-tournament-button ${
-                                                isGameAvailable &&
-                                                !modalStatus.isPlayBtnDisabled
-                                                    ? ""
-                                                    : "opacity-0-5"
-                                            }`}
-                                            onClick={
-                                                isGameAvailable &&
-                                                !modalStatus.isPlayBtnDisabled
-                                                    ? () => {
-                                                          setModalStatus(
-                                                              (prev) => ({
-                                                                  ...prev,
-                                                                  isEarnAdditionalInfoShown: true,
-                                                              })
-                                                          );
-                                                      }
-                                                    : null
-                                            }
-                                        >
-                                            JOIN TOURNAMENT
-                                            {/* <img
-                                            width={18}
-                                            className="icon ml-3 mr-1"
-                                            src={`${window.cdn}assets/gem_01.png`}
-                                            alt="gems"
-                                        />
-                                        {data?.gemsNeeded} */}
-                                        </button>
-                                    </div>
-
-                                    {isSubscriptionModalShown && (
-                                        <InsufficientBalanceModalPopup
-                                            onCloseClicked={
-                                                onClickSubscriptionCancel
-                                            }
-                                        />
-                                    )}
-
-                                    {/* EARN ADDITIONAL BENEFITS */}
-                                    {modalStatus.isEarnAdditionalInfoShown && (
-                                        <LaunchGameMenuModalPopup
-                                            gameId={currentGameDetails.gameId}
-                                            prizeId={data?.prizeId}
-                                            playCost={data?.gemsNeeded}
-                                            setEarnAdditionalDisabledStatus={
-                                                setEarnAdditionalDisabledStatus
-                                            }
-                                            isPlayBtnDisabled={
-                                                !isGameAvailable ||
-                                                modalStatus.isPlayBtnDisabled
-                                            }
-                                            isLoadingGame={
-                                                !modalStatus.isGameReady &&
-                                                modalStatus.isPlayBtnDisabled
-                                            }
-                                            onCloseClicked={() => {
-                                                setModalStatus((prev) => ({
-                                                    ...prev,
-                                                    isEarnAdditionalInfoShown: false,
-                                                }));
-                                            }}
-                                            onPlayClicked={
-                                                handleOnClickPlayButton
-                                            }
-                                            onInsufficientPayment={() => {
-                                                setModalStatus((prev) => ({
-                                                    ...prev,
-                                                    isEarnAdditionalInfoShown: false,
-                                                }));
-                                                setIsSubscriptionModalShown(
-                                                    true
-                                                );
-                                            }}
-                                        />
-
-                                        // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
-                                        //     <EarnAdditionalTickets
-                                        //         gameId={currentGameDetails.gameId}
-                                        //         prizeId={data?.prizeId}
-                                        //         earnAdditionalDisabledStatus={
-                                        //             earnAdditionalDisabledStatus
-                                        //         }
-                                        //         setEarnAdditionalDisabledStatus={
-                                        //             setEarnAdditionalDisabledStatus
-                                        //         }
-                                        //     />
-                                        //     {/* PLAY BUTTON*/}
-                                        //     <div
-                                        //         className={`play-button-container d-flex justify-content-center ${
-                                        //             isGameAvailable
-                                        //                 ? ""
-                                        //                 : "opacity-0-5"
-                                        //         }`}
-                                        //     >
-                                        //         <button
-                                        //             onClick={
-                                        //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                        //                     ? handleOnClickPlayButton
-                                        //                     : null
-                                        //             }
-                                        //             className={`play-button ${
-                                        //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                        //                     ? ""
-                                        //                     : "opacity-0-5"
-                                        //             }`}
-                                        //         >
-                                        //             Play Tournament!
-                                        //         </button>
-                                        //     </div>
-                                        // </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-    } else {
-        return <></>;
-    }
+            )}
+        </>
+    );
 };
 
 export default Leaderboard;
