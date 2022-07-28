@@ -130,7 +130,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
                                 {/* TICKET INFO */}
                                 <div className="col-12 d-flex align-items-center ticket-info px-2 px-sm-3 py-0 py-sm-2">
-                                    <div className="col px-0">
+                                    <div className="col col-8 px-0">
                                         <div className="py-2 ticket-wrapper d-block">
                                             <div className="your-tickets">
                                                 <p className="mb-0 label d-flex align-items-center">
@@ -202,7 +202,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative pb-4 pb-sm-5 pr-1">
+                                    <div className="game-icon-wrapper d-flex flex-column justify-content-center position-relative pb-4 pb-sm-5 pr-1">
                                         <div className="game-icon position-relative">
                                             {data.gameInfo.map((e, i) => (
                                                 <React.Fragment
