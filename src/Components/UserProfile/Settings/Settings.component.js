@@ -4,15 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Toggle from "react-toggle";
 
 import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
-import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
+import ConnectWallet from "Components/Global/ConnectWallet.component";
 
 import { defaultUserImage } from "Utils/DefaultImage";
-import {
-    disconnectWallet,
-    handleConnectWallet,
-    handleMetamask,
-    handleWalletConnect,
-} from "Utils/ConnectWallet";
+import { disconnectWallet } from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
 
 const Settings = () => {
@@ -21,6 +16,8 @@ const Settings = () => {
 
     // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
+    const [invalidWalletModalShown, setInvalidWalletModalShown] =
+        useState(false);
 
     // useEffect(() => {
     //     window.addEventListener("resize", handleResize);
@@ -70,32 +67,6 @@ const Settings = () => {
                 network: null,
             },
         });
-    };
-
-    const handleConnectMetamask = async () => {
-        try {
-            await handleMetamask(dispatch);
-            await handleConnectWallet(dispatch);
-
-            setSelectWalletModalShown(false);
-        } catch (err) {
-            if (err.code === 4903) {
-                setSelectWalletModalShown(false);
-            } else {
-                console.log(err);
-            }
-        }
-    };
-
-    const handleConnectWalletConnect = async () => {
-        try {
-            await handleWalletConnect(dispatch);
-            await handleConnectWallet(dispatch);
-
-            setSelectWalletModalShown(false);
-        } catch (err) {
-            console.log(err);
-        }
     };
 
     return (
@@ -419,15 +390,13 @@ const Settings = () => {
                     </div>
                 </div>
             </div>
-            {selectWalletModalShown && (
-                <SelectWalletsModal
-                    handleInstructionsCloseBtn={() => {
-                        setSelectWalletModalShown(false);
-                    }}
-                    handleConnectMetamask={handleConnectMetamask}
-                    handleConnectWalletConnect={handleConnectWalletConnect}
-                />
-            )}
+
+            <ConnectWallet
+                selectWalletModalShown={selectWalletModalShown}
+                setSelectWalletModalShown={setSelectWalletModalShown}
+                invalidWalletModalShown={invalidWalletModalShown}
+                setInvalidWalletModalShown={setInvalidWalletModalShown}
+            />
         </section>
     );
 };

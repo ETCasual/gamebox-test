@@ -11,8 +11,10 @@ import {
     addUser,
     compareUserDetails,
     getUserAccountInfoFroyo,
+    getUserWalletInfoFroyo,
     loginUser,
     userSignIn,
+    updateWalletAddress,
 } from "redux/services/index.service";
 import { handleConnectWallet } from "Utils/ConnectWallet";
 import inviteFriendsReward from "Utils/InviteFriends";
@@ -36,6 +38,14 @@ export function loadLoginUserWithToken() {
                         payload: await compareUserDetails(user, _user),
                     });
                 }
+
+                const wallet = await getUserWalletInfoFroyo();
+                if (
+                    wallet.address &&
+                    wallet.address !== user.bindWalletAddress
+                ) {
+                    await updateWalletAddress(wallet.address, user.id);
+                }
             } else {
                 const _user = await getUserAccountInfoFroyo();
                 if (_user.id) {
@@ -50,6 +60,14 @@ export function loadLoginUserWithToken() {
                                 type: LOGIN_SUCCESS,
                                 payload: user,
                             });
+                        }
+
+                        const wallet = await getUserWalletInfoFroyo();
+                        if (
+                            wallet.address &&
+                            wallet.address !== user.bindWalletAddress
+                        ) {
+                            await updateWalletAddress(wallet.address, user.id);
                         }
                     }
                 }
@@ -120,6 +138,14 @@ export function loadLogin(payload, setLoginError, history) {
                             payload: await compareUserDetails(user, _user),
                         });
                     }
+
+                    const wallet = await getUserWalletInfoFroyo();
+                    if (
+                        wallet.address &&
+                        wallet.address !== user.bindWalletAddress
+                    ) {
+                        await updateWalletAddress(wallet.address, user.id);
+                    }
                     // TODO: KIV why we redirect root last time
                     // history.push("/");
                 } else {
@@ -136,6 +162,17 @@ export function loadLogin(payload, setLoginError, history) {
                                 type: LOGIN_SUCCESS,
                                 payload: user,
                             });
+
+                            const wallet = await getUserWalletInfoFroyo();
+                            if (
+                                wallet.address &&
+                                wallet.address !== user.bindWalletAddress
+                            ) {
+                                await updateWalletAddress(
+                                    wallet.address,
+                                    user.id
+                                );
+                            }
                             // TODO: KIV why we redirect root last time
                             // history.push("/");
                         }
@@ -213,7 +250,12 @@ export function loadConnectUserWallet(
             dispatch({
                 type: SHOW_TOAST,
                 payload: { message: "Please connect your wallet" },
-            })
+            });
+        } else if (toastType === "wrong_wallet") {
+            dispatch({
+                type: SHOW_TOAST,
+                payload: { message: "Invalid wallet connected" },
+            });
         }
     };
 }

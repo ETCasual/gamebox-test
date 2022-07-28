@@ -23,6 +23,7 @@ const INITIAL_STATE = {
         tokenBalance: null,
         tokenSymbol: null,
         network: null,
+        bindWalletAddress: null,
     },
     loginStatus: {
         loading: false,

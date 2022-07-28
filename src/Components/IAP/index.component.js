@@ -18,12 +18,7 @@ import loadGemsList from "redux/thunks/GemsList.thunk";
 import tokenABI from "Utils/TokenABI";
 import { getTokenBalance, getWeb3 } from "Utils/ConnectWallet";
 
-import {
-    handleConnectWallet,
-    handleMetamask,
-    handleWalletConnect,
-} from "Utils/ConnectWallet";
-import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
+import ConnectWallet from "Components/Global/ConnectWallet.component";
 
 const Index = () => {
     const [stripePromise] = useState(
@@ -37,6 +32,8 @@ const Index = () => {
         (state) => state.blockchainNetworks
     );
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
+    const [invalidWalletModalShown, setInvalidWalletModalShown] =
+        useState(false);
     const dispatch = useDispatch();
 
     const [productInfo, setProductInfo] = useState({
@@ -67,46 +64,6 @@ const Index = () => {
         setSelectWalletModalShown(true);
         // await handleConnectWallet(dispatch, blockchainNetworks);
     };
-
-    const handleConnectMetamask = async () => {
-        try {
-            await handleMetamask(dispatch);
-            await handleConnectWallet(dispatch);
-
-            setSelectWalletModalShown(false);
-        } catch (err) {
-            if (err.code === 4903) {
-                setSelectWalletModalShown(false);
-            } else {
-                console.log(err);
-            }
-        }
-    };
-
-    const handleConnectWalletConnect = async () => {
-        try {
-            await handleWalletConnect(dispatch);
-            await handleConnectWallet(dispatch);
-
-            setSelectWalletModalShown(false);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-    // useEffect(() => {
-    //     window.addEventListener("resize", handleResize);
-
-    //     function handleResize() {
-    //         setHideGemsOnMobile(
-    //             window.innerWidth > 767 && window.ethereum ? false : true
-    //         );
-    //     }
-    //     handleResize();
-
-    //     return () => {
-    //         window.removeEventListener("resize", handleResize);
-    //     };
-    // }, []);
 
     // SET SELECTED TAB
     const handleSelectedTab = (tab) => {
@@ -601,15 +558,12 @@ const Index = () => {
                     />
                 </PurchaseWrapper>
             )}
-            {selectWalletModalShown && (
-                <SelectWalletsModal
-                    handleInstructionsCloseBtn={() => {
-                        setSelectWalletModalShown(false);
-                    }}
-                    handleConnectMetamask={handleConnectMetamask}
-                    handleConnectWalletConnect={handleConnectWalletConnect}
-                />
-            )}
+            <ConnectWallet
+                selectWalletModalShown={selectWalletModalShown}
+                setSelectWalletModalShown={setSelectWalletModalShown}
+                invalidWalletModalShown={invalidWalletModalShown}
+                setInvalidWalletModalShown={setInvalidWalletModalShown}
+            />
         </>
     );
 };

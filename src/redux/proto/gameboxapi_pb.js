@@ -166,6 +166,8 @@ goog.exportSymbol('proto.api.gamebox.UpdateUserSettingsRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.UpdateUserSettingsResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.UpdateUserStatusRequest', null, global);
 goog.exportSymbol('proto.api.gamebox.UpdateUserStatusResponse', null, global);
+goog.exportSymbol('proto.api.gamebox.UpdateWalletAddressRequest', null, global);
+goog.exportSymbol('proto.api.gamebox.UpdateWalletAddressResponse', null, global);
 goog.exportSymbol('proto.api.gamebox.UserDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.WinTypeDetail', null, global);
 goog.exportSymbol('proto.api.gamebox.WinnerDetail', null, global);
@@ -4673,6 +4675,317 @@ proto.api.gamebox.UpdateUserSettingsResponse.prototype.setResult = function(valu
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.gamebox.UpdateWalletAddressRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.UpdateWalletAddressRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.UpdateWalletAddressRequest.displayName = 'proto.api.gamebox.UpdateWalletAddressRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.UpdateWalletAddressRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.UpdateWalletAddressRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    walletAddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.UpdateWalletAddressRequest}
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.UpdateWalletAddressRequest;
+  return proto.api.gamebox.UpdateWalletAddressRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.UpdateWalletAddressRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.UpdateWalletAddressRequest}
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setId(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWalletAddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.UpdateWalletAddressRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.UpdateWalletAddressRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+  f = message.getWalletAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional int64 id = 1;
+ * @return {number}
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.api.gamebox.UpdateWalletAddressRequest.prototype.setId = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string wallet_address = 2;
+ * @return {string}
+ */
+proto.api.gamebox.UpdateWalletAddressRequest.prototype.getWalletAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.UpdateWalletAddressRequest.prototype.setWalletAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.gamebox.UpdateWalletAddressResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.gamebox.UpdateWalletAddressResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.api.gamebox.UpdateWalletAddressResponse.displayName = 'proto.api.gamebox.UpdateWalletAddressResponse';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.gamebox.UpdateWalletAddressResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.gamebox.UpdateWalletAddressResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    result: jspb.Message.getFieldWithDefault(msg, 1, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.gamebox.UpdateWalletAddressResponse}
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.gamebox.UpdateWalletAddressResponse;
+  return proto.api.gamebox.UpdateWalletAddressResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.gamebox.UpdateWalletAddressResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.gamebox.UpdateWalletAddressResponse}
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setResult(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.gamebox.UpdateWalletAddressResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.gamebox.UpdateWalletAddressResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getResult();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string result = 1;
+ * @return {string}
+ */
+proto.api.gamebox.UpdateWalletAddressResponse.prototype.getResult = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.UpdateWalletAddressResponse.prototype.setResult = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.gamebox.ChangePasswordRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -5077,7 +5390,8 @@ proto.api.gamebox.UserDetail.toObject = function(includeInstance, msg) {
     msgToken: jspb.Message.getFieldWithDefault(msg, 28, ""),
     subscriptionId: jspb.Message.getFieldWithDefault(msg, 29, 0),
     stripeSubId: jspb.Message.getFieldWithDefault(msg, 30, ""),
-    stripeExpiryDate: jspb.Message.getFieldWithDefault(msg, 31, "")
+    stripeExpiryDate: jspb.Message.getFieldWithDefault(msg, 31, ""),
+    walletAddress: jspb.Message.getFieldWithDefault(msg, 32, "")
   };
 
   if (includeInstance) {
@@ -5237,6 +5551,10 @@ proto.api.gamebox.UserDetail.deserializeBinaryFromReader = function(msg, reader)
     case 31:
       var value = /** @type {string} */ (reader.readString());
       msg.setStripeExpiryDate(value);
+      break;
+    case 32:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setWalletAddress(value);
       break;
     default:
       reader.skipField();
@@ -5481,6 +5799,13 @@ proto.api.gamebox.UserDetail.serializeBinaryToWriter = function(message, writer)
   if (f.length > 0) {
     writer.writeString(
       31,
+      f
+    );
+  }
+  f = message.getWalletAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      32,
       f
     );
   }
@@ -5957,6 +6282,21 @@ proto.api.gamebox.UserDetail.prototype.getStripeExpiryDate = function() {
 /** @param {string} value */
 proto.api.gamebox.UserDetail.prototype.setStripeExpiryDate = function(value) {
   jspb.Message.setProto3StringField(this, 31, value);
+};
+
+
+/**
+ * optional string wallet_address = 32;
+ * @return {string}
+ */
+proto.api.gamebox.UserDetail.prototype.getWalletAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 32, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.UserDetail.prototype.setWalletAddress = function(value) {
+  jspb.Message.setProto3StringField(this, 32, value);
 };
 
 

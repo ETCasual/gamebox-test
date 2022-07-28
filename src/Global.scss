@@ -882,6 +882,33 @@ html {
             font-weight: bold;
         }
     }
+    .modal-body-invalid-wallet {
+        background: linear-gradient(90deg, #38303d 0%, #1c181f 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 33.375rem;
+
+        // Check is mobile
+        @media (pointer: none), (pointer: coarse) {
+            top: 3rem;
+        }
+
+        .close-button {
+            top: -12px;
+            right: -12px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        p {
+            font-size: $fnt-sz-16;
+        }
+
+        .title {
+            font-weight: bold;
+        }
+    }
     .modal-body-automated-entry {
         .close-button {
             width: 30px;
