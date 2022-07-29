@@ -261,9 +261,9 @@ export function loadConnectUserWallet(
 }
 
 // AUTO CONNET WALLET ON LOAD
-export function loadConnectWalletAuto(blockchainNetworks) {
+export function loadConnectWalletAuto(bindWalletAddress) {
     return async (dispatch) => {
-        await handleConnectWallet(dispatch, blockchainNetworks);
+        await handleConnectWallet(dispatch, bindWalletAddress);
     };
 }
 
