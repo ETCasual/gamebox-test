@@ -1,6 +1,7 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { isMobile } from "react-device-detect";
 import axios from "axios";
 import _ from "lodash";
 
@@ -11,6 +12,7 @@ import GameQuitModal from "Components/Modals/GameQuit.modal";
 import GameEndModal from "Components/Modals/GameEnd.modal";
 import EarnAdditionalBenefitModal from "Components/Modals/EarnAdditionalBenefit.modal";
 import RetrySubmitModal from "Components/Modals/RetrySubmit.modal";
+import PauseMenuModal from "Components/Modals/PauseMenuModal";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
@@ -34,10 +36,9 @@ import showAdsBeforeGame from "Utils/showAdsBeforeGame";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
+import { isScrolledIntoView } from "Utils/ScrollHelper";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
-import PauseMenuModal from "Components/Modals/PauseMenuModal";
-import { isMobile } from "react-device-detect";
 
 const Leaderboard = ({
     data,
@@ -95,10 +96,12 @@ const Leaderboard = ({
     const [scoreObject, setScoreObject] = useState({});
     const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
         useState(false);
+    const [isYourRankVisible, setIsYourRankVisible] = useState(false);
 
     const { executeRecaptcha } = useGoogleReCaptcha();
 
     let watcherRef = useRef(null);
+    let yourRankEleRef = useRef(null);
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
@@ -123,6 +126,8 @@ const Leaderboard = ({
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
         setLeaderboardList([]);
+        setIsYourRankVisible(false);
+
         if (currentGameDetails?.gameId > 0) {
             dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
             dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
@@ -222,6 +227,21 @@ const Leaderboard = ({
         }
         setIsGameAvailable(!isDisabled);
     }, [timer]);
+
+    useEffect(() => {
+        console.log(currentUserRank);
+    }, [dispatch]);
+
+    const onLeaderboardScrolling = (evt) => {
+        let isInsideElement = false;
+        if (yourRankEleRef.current) {
+            isInsideElement = isScrolledIntoView(
+                evt.target,
+                yourRankEleRef.current
+            );
+        }
+        setIsYourRankVisible(!isInsideElement);
+    };
 
     const isCurrentUser = (id) => {
         if (id > 0 && user.id === id) return true;
@@ -553,6 +573,11 @@ const Leaderboard = ({
                                 ? "you"
                                 : ""
                         }`}
+                        ref={
+                            isCurrentUser(leaderboardList[i]?.userId)
+                                ? yourRankEleRef
+                                : null
+                        }
                     >
                         <div className="number-holder">
                             <LeaderRankIndicator index={i} type="lb" />
@@ -667,7 +692,10 @@ const Leaderboard = ({
                                 </div>
                             </div>
                         </div>
-                        <div className="leaderboard">
+                        <div
+                            className="leaderboard"
+                            onScroll={onLeaderboardScrolling}
+                        >
                             {leaderboardList.length > 0
                                 ? getLeaderboardList()
                                 : getEmptyLeaderboardList()}
@@ -675,7 +703,7 @@ const Leaderboard = ({
                     </div>
 
                     {/* PLAYER-SELF RANK (SHOWING WHEN PLAYER RANK IS NOT VISIBLE IN VIEWPORT) */}
-                    {false && (
+                    {isYourRankVisible && (
                         <div className="leaderboard-user-wrapper">
                             <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
                                 <div className="number-holder">

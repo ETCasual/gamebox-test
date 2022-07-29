@@ -302,7 +302,10 @@ const Index = ({ match }) => {
                                                         target="_blank"
                                                         rel="noreferrer"
                                                     >
-                                                        {currentPrize?.nftContractAddress?.substring(
+                                                        {
+                                                            currentPrize?.nftContractAddress
+                                                        }
+                                                        {/* {currentPrize?.nftContractAddress?.substring(
                                                             0,
                                                             4
                                                         )}
@@ -314,7 +317,7 @@ const Index = ({ match }) => {
                                                             currentPrize
                                                                 ?.nftContractAddress
                                                                 .length - 1
-                                                        )}
+                                                        )} */}
                                                     </a>
                                                 ) : (
                                                     <div className="contract-address">
