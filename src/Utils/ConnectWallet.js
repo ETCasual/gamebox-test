@@ -167,7 +167,11 @@ export async function handleConnectWallet(dispatch, bindWalletAddress) {
             dispatch(
                 loadConnectUserWallet("wallet_disconnected", null, null, null)
             );
-        else {
+        else if (
+            accounts[0].toLowerCase() !== bindWalletAddress.toLowerCase()
+        ) {
+            dispatch(loadConnectUserWallet("wrong_wallet", null, null, null));
+        } else {
             const { tokenBalance, symbol } = await getTokenBalance(accounts[0]);
             const chainId = await web3.eth.getChainId();
 

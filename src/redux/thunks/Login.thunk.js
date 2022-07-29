@@ -262,8 +262,22 @@ export function loadConnectUserWallet(
 
 // AUTO CONNET WALLET ON LOAD
 export function loadConnectWalletAuto(bindWalletAddress) {
-    return async (dispatch) => {
-        await handleConnectWallet(dispatch, bindWalletAddress);
+    return async (dispatch, getState) => {
+        try {
+            await handleConnectWallet(dispatch, bindWalletAddress);
+        } catch (e) {
+            const { user } = getState()?.userData;
+            dispatch({
+                type: UPDATE_USER_WALLET,
+                payload: {
+                    ...user,
+                    walletAddress: null,
+                    tokenBalance: null,
+                    tokenSymbol: null,
+                    network: null,
+                },
+            });
+        }
     };
 }
 
