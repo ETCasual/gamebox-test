@@ -18,8 +18,10 @@ const StayTune = () => {
 
     const handlePlayDemoGame = async (id) => {
         const token = getToken();
-        if (id > 0) {
-            try {
+        if (id > 0)
+        {
+            try
+            {
                 let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${id}&user_id=${user.id}`;
                 let options = {
                     headers: {
@@ -29,10 +31,12 @@ const StayTune = () => {
                     },
                 };
                 let response = await axios.get(url, options);
-                if (response.data) {
+                if (response.data)
+                {
                     setGameData(response.data);
                 }
-            } catch (error) {
+            } catch (error)
+            {
                 console.log(error.message);
             }
         }
@@ -68,10 +72,11 @@ const StayTune = () => {
                         <p className="mb-1 subtitle-1 text-center">
                             We'll be back with more rewards for you.
                         </p>
-                        <p className="mb-4 subtitle-2 text-center">
+                        {/* TEMP REMOVE DUE TO GAME UNABLE TO RETURN BACK TO HOME PAGE */}
+                        {false && (<p className="mb-4 subtitle-2 text-center">
                             Here're some games for you while you wait.
-                        </p>
-                        <div className="row justify-content-md-center">
+                        </p>)}
+                        {false && (<div className="row justify-content-md-center">
                             {gamesList.map((e, idx) => (
                                 <div
                                     className="col-4 col-md-3 mb-4 px-0 d-flex align-items-center justify-content-center game-icon"
@@ -87,7 +92,7 @@ const StayTune = () => {
                                     />
                                 </div>
                             ))}
-                        </div>
+                        </div>)}
                     </div>
                 </div>
             </div>
