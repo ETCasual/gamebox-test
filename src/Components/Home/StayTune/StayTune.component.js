@@ -169,6 +169,7 @@ const StayTune = () => {
                     {modalStatus.isPendingQuitGameConfirmation && (
                         <GameQuitModal
                             onActionCallback={handleQuitGameAction}
+                            isShowWarningMessage={false}
                         />
                     )}
                 </div>

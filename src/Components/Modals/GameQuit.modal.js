@@ -1,4 +1,4 @@
-const GameQuitModal = ({ onActionCallback }) => {
+const GameQuitModal = ({ onActionCallback, isShowWarningMessage = true }) => {
     return (
         <>
             {
@@ -13,15 +13,16 @@ const GameQuitModal = ({ onActionCallback }) => {
                                     QUIT GAME?
                                 </p>
 
-                                <p className="game-warning-text text-center  mb-0">
-                                    You will lose your current game score if you
-                                    exit now and{" "}
-                                    <span className="text-danger">
-                                        Gems will not be refunded
-                                    </span>
-                                    .
-                                </p>
-                            
+                                {isShowWarningMessage && (
+                                    <p className="game-warning-text text-center  mb-0">
+                                        You will lose your current game score if
+                                        you exit now and{" "}
+                                        <span className="text-danger">
+                                            Gems will not be refunded
+                                        </span>
+                                        .
+                                    </p>
+                                )}
 
                                 {/*EXTRA MARGIN */}
                                 <p className="mt-2"></p>
