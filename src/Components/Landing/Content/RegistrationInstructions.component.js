@@ -14,7 +14,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
         >
             <div className="container position-relative">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-8 col-xl-7 px-md-0">
+                    <div className="pop-up-wrapper col-12 col-md-8 col-xl-7 px-md-0">
                         {/* CLOSE BUTTON */}
                         <img
                             onClick={() =>
@@ -38,8 +38,8 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                     </p>
                                 </div>
                             </div>
-                            <div className="d-flex flex-column flex-lg-row mt-3 w-100">
-                                <div className="col-12 col-lg-4 px-2 mb-3 mb-lg-0">
+                            <div className="step-wrapper d-flex flex-column flex-lg-row mt-3 w-100">
+                                <div className="col-lg-4 px-2 mb-3 mb-lg-0">
                                     <div className="center">
                                         <div className="number d-flex align-items-center justify-content-center mb-3">
                                             1
@@ -56,7 +56,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="col-12 col-lg-4 px-2 mb-3 mb-lg-0">
+                                <div className="col-lg-4 px-2 mb-3 mb-lg-0">
                                     <div className="center">
                                         <div className="number d-flex align-items-center justify-content-center mb-3">
                                             2
@@ -70,7 +70,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="col-12 col-lg-4 px-2 mb-3 mb-lg-0">
+                                <div className="col-lg-4 px-2 mb-3 mb-lg-0">
                                     <div className="center">
                                         <div className="number d-flex align-items-center justify-content-center mb-3">
                                             3
@@ -101,7 +101,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                         <p className="mb-0">
                                             Click here to{" "}
                                             <span>
-                                               {`www.froyo.games/registration`}
+                                                {`www.froyo.games/registration`}
                                             </span>{" "}
                                             to start registering.
                                         </p>
