@@ -113,7 +113,7 @@ const StayTune = () => {
     return (
         <>
             {gameData && (
-                <div class="game-wrapper">
+                <div className="game-wrapper">
                     <iframe
                         title="game"
                         id="demo-game"
