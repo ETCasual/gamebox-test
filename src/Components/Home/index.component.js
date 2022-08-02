@@ -35,7 +35,6 @@ const Index = () => {
     const dispatch = useDispatch();
 
     let timeOutRef1 = useRef(null);
-
     const [noDataLoaded, setNoDataLoaded] = useState({
         feature: true,
         premium: true,
@@ -56,8 +55,6 @@ const Index = () => {
     let watcherRef = useRef(null);
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
-    const [featureWinnerPrize] = useState();
-
     // ONBOARDING
     useEffect(() => {
         const isNewUser = Boolean(localStorage.getItem("isNewUser")) || false;
@@ -76,6 +73,7 @@ const Index = () => {
             )
                 setNoDataLoaded((prev) => ({ ...prev, all: true }));
         }, 3000);
+
         setNoDataLoaded((prev) => ({
             ...prev,
             feature: FeaturedData.length <= 0 ? true : false,
@@ -107,26 +105,21 @@ const Index = () => {
             if (
                 prizes.featuredData.length > 0 ||
                 prizes.premiumData.length > 0
-            )
-            {
+            ) {
                 let _fData = [];
                 let _pData = [];
                 const prizeList =
                     JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
-                for (let i = 0; i < prizeList.length; i++)
-                {
+                for (let i = 0; i < prizeList.length; i++) {
                     const element = prizeList[i];
-                    if (element.seen && !element.isRepeat)
-                    {
+                    if (element.seen && !element.isRepeat) {
                         continue;
                     }
 
-                    if (element.type === 1)
-                    {
+                    if (element.type === 1) {
                         _fData.push(element);
-                        if (diff <= 15000)
-                        {
+                        if (diff <= 15000) {
                             dispatch(loadPlayerTickets(element.prizeId, true));
                             dispatch(
                                 loadPrizePoolTickets(
@@ -136,11 +129,9 @@ const Index = () => {
                                 )
                             );
                         }
-                    } else if (element.type === 2)
-                    {
+                    } else if (element.type === 2) {
                         _pData.push(element);
-                        if (diff <= 15000)
-                        {
+                        if (diff <= 15000) {
                             dispatch(loadPlayerTickets(element.prizeId, true));
                             dispatch(
                                 loadPrizePoolTickets(
@@ -179,22 +170,19 @@ const Index = () => {
             let showAnnouncement = JSON.parse(
                 sessionStorage.getItem("showAnnouncement") || null
             );
-            if (showAnnouncement === null)
-            {
+            if (showAnnouncement === null) {
                 let _arr = [];
                 winnerAnnouncementNotificationList.forEach((n, nIdx) => {
                     n?.list?.forEach((e, idx) => {
                         if (
                             winnerAnnouncementNotificationList.length - 1 ===
-                            nIdx &&
+                                nIdx &&
                             n.list.length - 1 === idx
-                        )
-                        {
+                        ) {
                             sessionStorage.setItem("showAnnouncement", 0);
                         }
 
-                        if (e.type === "winner" && !e.seen)
-                        {
+                        if (e.type === "winner" && !e.seen) {
                             _arr.push(e);
                             setWinnerAnnouncementData(_arr);
                             setIsWinnerAnnouncementShown(true);
@@ -221,12 +209,10 @@ const Index = () => {
         sessionStorage.setItem("showAnnouncement", 0);
         const pl = JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
         let idx = pl.findIndex((p) => p.prizeId === prizeId);
-        if (idx > -1)
-        {
+        if (idx > -1) {
             pl.splice(idx, 1);
             sessionStorage.setItem("prizeDetailList", JSON.stringify(pl));
-        } else
-        {
+        } else {
             console.log(
                 "Possible prize detail list matching failure point prizeId: ",
                 prizeId
@@ -238,8 +224,7 @@ const Index = () => {
     function handleWinnerRevealCard(prizeId) {
         let _arr = [];
         let winnerList = [];
-        if (winnerAnnouncementNotificationList?.length > 0)
-        {
+        if (winnerAnnouncementNotificationList?.length > 0) {
             winnerList = winnerAnnouncementNotificationList[0];
             _arr = winnerList?.list?.filter(
                 (l) => l.prizeId === prizeId && l.type === "winner"
@@ -247,14 +232,12 @@ const Index = () => {
             const _prizeList =
                 JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
-            if (_arr.length > 0)
-            {
+            if (_arr.length > 0) {
                 // ONLY SHOW LATEST WINNER
                 setRevealCardModalData([_arr[0]]);
 
                 setIsRevealCardModalShown(true);
-            } else
-            {
+            } else {
                 // Broken prizes
                 let featureArr = _prizeList.filter(
                     (p) => p.type === 1 && p.prizeId !== prizeId
@@ -268,18 +251,15 @@ const Index = () => {
             // UPDATE LOCALSTORAGE
             // Before update complete and seen, check if prize is on repeat
             let idx = _prizeList.findIndex((e) => e.prizeId === prizeId);
-            if (idx > -1)
-            {
-                if (!_prizeList[idx].isRepeat)
-                {
+            if (idx > -1) {
+                if (!_prizeList[idx].isRepeat) {
                     _prizeList[idx].seen = true;
                     _prizeList[idx].completed = true;
                     sessionStorage.setItem(
                         "prizeDetailList",
                         JSON.stringify(_prizeList)
                     );
-                } else
-                {
+                } else {
                     _prizeList[idx].seen = false;
                     _prizeList[idx].completed = false;
                     sessionStorage.setItem(
@@ -363,8 +343,7 @@ const Index = () => {
         var endDatetime = new Date();
         endDatetime.setUTCHours(0, 0, 0, 0);
 
-        if (endDatetime < nowDate)
-        {
+        if (endDatetime < nowDate) {
             endDatetime.setDate(endDatetime.getDate() + 1);
         }
 
@@ -391,19 +370,19 @@ const Index = () => {
     return (
         <>
             <section id="home">
-                {false && (<div className="container-fluid mb-4 bonus">
+                <div className="container-fluid mb-4 bonus">
                     <div className="row justify-content-center px-1 py-4 py-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row">
                                 {/* FORTUNE WHEEL */}
-                                <div className="col-12 col-sm-6 d-flex flex-column px-2 mb-3 mb-sm-0">
-                                    <div className="spinner d-flex flex-column justify-content-between h-100">
-                                        <div
-                                            className="card-wrapper h-100  pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3"
-                                            onClick={() =>
-                                                setFortuneWheelShown(true)
-                                            }
-                                        >
+                                <div className="col-sm d-flex flex-column px-2 mb-3 mb-sm-0">
+                                    <div
+                                        className="spinner d-flex flex-column justify-content-between h-100"
+                                        onClick={() =>
+                                            setFortuneWheelShown(true)
+                                        }
+                                    >
+                                        <div className="card-wrapper h-100  pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
                                             <div className="row">
                                                 <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                                                     <p className="the-spinner-text mb-1">
@@ -446,41 +425,32 @@ const Index = () => {
                                     )}
                                 </div>
 
-                                {/* AUTOMATED */}
-                                <div className="automatedEntry col-12 col-sm-6 px-2">
-                                    {/* LOADER */}
-                                    {automatedEntryData.length <= 0 && (
-                                        <AutomatedEntryLoader />
-                                    )}
-
-                                    {!noDataLoaded.automated && (
-                                        <>
-                                            {/* AUTOMATED CARD */}
-                                            {automatedEntryData?.map(
-                                                (prize, index) => (
-                                                    <React.Fragment
-                                                        key={`automatedEntry-${index}`}
-                                                    >
-                                                        <AutomatedEntry
-                                                            data={prize}
-                                                        />
-                                                    </React.Fragment>
-                                                )
-                                            )}
-                                        </>
-                                    )}
-                                </div>
+                                {/* AUTOMATED CARD */}
+                                {!noDataLoaded.automated && (
+                                    <div className="col-sm d-flex flex-column px-2 mb-3 mb-sm-0">
+                                        {automatedEntryData?.map(
+                                            (prize, index) => (
+                                                <React.Fragment
+                                                    key={`automatedEntry-${index}`}
+                                                >
+                                                    <AutomatedEntry
+                                                        data={prize}
+                                                    />
+                                                </React.Fragment>
+                                            )
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
-                </div>)}
+                </div>
 
                 {/* STAY TUNE & PLAY GAMES */}
-                {<StayTune />}
+                {noDataLoaded.all && <StayTune />}
 
                 {/* IF PRIZE AVAILABLE */}
-                {/* !noDataLoaded.all */}
-                {false && (
+                {!noDataLoaded.all && (
                     <div className="content-min-height">
                         {/* FEATURED CONTENT LOADER */}
                         <div className="container-fluid mb-5 featured">
