@@ -298,6 +298,9 @@ const Leaderboard = ({
                                 JSON.stringify({
                                     cgId: data.cgId,
                                     gameId: currentGameDetails.gameId,
+                                    gameDuration: 180, //in seconds
+                                    tournamentEndTime:
+                                        data?.gameInfo[0]?.endTimeStamp,
                                 })
                             );
                             setGameData(response.data);
