@@ -405,8 +405,6 @@ const Leaderboard = ({
     };
 
     window.showReloadAssetsPopUp = (errorCode) => {
-        console.log(errorCode);
-
         switch (errorCode) {
             case 12: //Asset Failed to Load because not found due to incorrect link (defined by phaser)
                 setLoadErrorDetails(() => ({
