@@ -401,7 +401,6 @@ const Leaderboard = ({
             c: this.gameStartTime, // gameStartTime
             d: this.gameOverTime, // gameOverTime
             e: this.sTick, // sTick} score 
-            f: this.gamePlayDuration, // The duration of when the timer starts until it stops by game over or tournament end in milliseconds
      * @returns 
      */
     window.playerFinishGame = async (score) => {
