@@ -89,6 +89,7 @@ const Leaderboard = ({
         isEarnAdditionalInfoShown: false,
         isSubmitScoreFailed: false,
         isSubmittingScore: false,
+        isShowIframe: false,
     });
     const [scoreObject, setScoreObject] = useState({});
     const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
@@ -145,7 +146,16 @@ const Leaderboard = ({
         let destination = document.getElementById("destination")?.contentWindow;
         if (destination) {
             // END BY TIMER
-            destination?.endGameByTimer?.();
+
+            if (typeof destination.endGameByTimer() === "function") {
+                destination.endGameByTimer();
+            } else {
+                setModalStatus((prev) => ({
+                    ...prev,
+                    isGameOver: true,
+                    isTournamentEnded: true,
+                }));
+            }
 
             setEarnAdditionalDisabledStatus({
                 gems: false,
@@ -379,6 +389,14 @@ const Leaderboard = ({
         destination?.resumeGame?.();
         destination.focus();
     };
+
+    window.showGameIframe = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isShowIframe: true,
+        }));
+    };
+
     window.playerEnterGame = () => {
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -756,6 +774,11 @@ const Leaderboard = ({
                         </div>
 
                         <iframe
+                            className={
+                                modalStatus.isShowIframe
+                                    ? "shown-iframe"
+                                    : "hidden-iframe"
+                            }
                             title="game"
                             id="destination"
                             srcDoc={gameData}
@@ -940,6 +963,7 @@ const Leaderboard = ({
                                                           (prev) => ({
                                                               ...prev,
                                                               isEarnAdditionalInfoShown: true,
+                                                              isShowIframe: false,
                                                           })
                                                       );
                                                   }
