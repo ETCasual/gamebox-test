@@ -89,6 +89,7 @@ const Leaderboard = ({
         isEarnAdditionalInfoShown: false,
         isSubmitScoreFailed: false,
         isSubmittingScore: false,
+        isLoadGameFailed: false,
     });
     const [scoreObject, setScoreObject] = useState({});
     const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
@@ -106,6 +107,16 @@ const Leaderboard = ({
 
     let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
     const [isMute, setIsMute] = useState(window.localStorage.getItem("mute"));
+    const [loadErrorDetails, setLoadErrorDetails] = useState({
+        title: "",
+        message_1: "",
+        message_2: "",
+        errorCode: "",
+        closeButtonText: "",
+        okButtonText: "",
+        okButtonHandling: "",
+        closeButtonHandling: "",
+    });
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -393,6 +404,40 @@ const Leaderboard = ({
         return enterGameConfig;
     };
 
+    window.showReloadAssetsPopUp = (errorCode) => {
+        switch (errorCode) {
+            case 12: //Asset Failed to Load because not found due to incorrect link (defined by phaser)
+                setLoadErrorDetails(() => ({
+                    title: "Error",
+                    message_1: "Oops, something went wrong.",
+                    message_2: "Please contact support for further assistance.",
+                    errorCode: `12-${data?.prizeId}-${currentGameDetails?.gameId}`,
+                    okButtonText: "CLOSE",
+                    okButtonHandling: "closeGame",
+                    closeButtonText: "",
+                    closeButtonHandling: "",
+                }));
+                break;
+            default: //Asset Failed to Load due to internet connection
+                setLoadErrorDetails(() => ({
+                    title: "Error",
+                    message_1:
+                        "Game failed to load. Please check your internet connection and try again.",
+                    message_2: "Skip: Gems will not be refunded",
+                    errorCode: `200-${data?.prizeId}-${currentGameDetails?.gameId}`,
+                    okButtonText: "RETRY",
+                    okButtonHandling: "reloadGame",
+                    closeButtonText: "SKIP",
+                    closeButtonHandling: "closeGame",
+                    okButtonText: "RETRY",
+                }));
+        }
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isLoadGameFailed: true,
+        }));
+    };
     /**
      * Whenever a game is finished should call this function to submiting the score object
      * @param {
@@ -409,6 +454,31 @@ const Leaderboard = ({
         await submitScore(score);
     };
 
+    const reloadGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isLoadGameFailed: false,
+        }));
+        document.getElementById("destination")?.contentWindow?.reloadAssets?.();
+    };
+
+    const closeGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isGameReady: false,
+            isQuitGameBtnDisabled: false,
+            isGameOver: false,
+            isPlayBtnDisabled: false,
+            isQuitGameConfirm: false,
+            isGamePaused: false,
+            isSubmitScoreFailed: false,
+            isSubmittingScore: false,
+            isTournamentEnded: false,
+            isLoadGameFailed: false,
+        }));
+
+        dispatch({ type: PLAYER_LOG_RESET });
+    };
     // window.playerQuitGame = () => {
     //     setModalStatus((prev) => ({
     //         ...prev,
@@ -686,23 +756,10 @@ const Leaderboard = ({
                 {/* MODAL FOR PENDING SUBMIT SCORE */}
                 {modalStatus.isSubmitScoreFailed && (
                     <RetrySubmitModal
-                        handleCancel={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
-                                isGameOver: false,
-                                isPlayBtnDisabled: false,
-                                isQuitGameConfirm: false,
-                                isGamePaused: false,
-                                isSubmitScoreFailed: false,
-                                isSubmittingScore: false,
-                                isTournamentEnded: false,
-                            }));
-
-                            dispatch({ type: PLAYER_LOG_RESET });
-                        }}
-                        handleRetry={() => {
+                        closeButtonText="SKIP"
+                        handleClose={closeGame}
+                        okButtonText="RETRY"
+                        handleOk={() => {
                             submitScore(scoreObject);
                         }}
                         disableRetry={modalStatus.isSubmittingScore}
@@ -712,6 +769,40 @@ const Leaderboard = ({
                                 Unable to submit score to the server. <br />
                                 <br /> Skip: Gems will not be refunded and score
                                 will not be recorded
+                            </>
+                        }
+                    />
+                )}
+
+                {/* MODAL FOR RELOADING GAME IF LOAD FAIL */}
+                {modalStatus.isLoadGameFailed && (
+                    <RetrySubmitModal
+                        okButtonText={loadErrorDetails.okButtonText}
+                        handleOk={() => {
+                            switch (loadErrorDetails.okButtonHandling) {
+                                case "closeGame":
+                                    closeGame();
+                                    break;
+                                case "reloadGame":
+                                    reloadGame();
+                                    break;
+                            }
+                        }}
+                        closeButtonText={loadErrorDetails.closeButtonText}
+                        handleClose={
+                            loadErrorDetails.closeButtonHandling === "closeGame"
+                                ? closeGame
+                                : null
+                        }
+                        disableRetry={false}
+                        title={loadErrorDetails.title}
+                        subtitle={
+                            <>
+                                {loadErrorDetails.message_1}
+                                <br />
+                                {`(Code: ${loadErrorDetails.errorCode})`}
+                                <br />
+                                <br /> {loadErrorDetails.message_2}
                             </>
                         }
                     />
