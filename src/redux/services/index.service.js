@@ -168,7 +168,7 @@ export async function getUserWalletInfoFroyo() {
     const { data } = await axios.post(
         `${process.env.REACT_APP_FROYO_API_ENDPOINT}get-player-wallet-connect`,
         {
-            chainId: 56,
+            chainId: process.env.REACT_APP_FROYO_CHAIN_ID,
         },
         {
             headers: {
