@@ -16,8 +16,12 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
     const dispatch = useDispatch();
 
     const { config } = useSelector((state) => state.config);
-    const { winners } = useSelector((state) => state.winners);
-    const [prizeWon, setPrizeWon] = useState();
+    // const { winners } = useSelector((state) => state.winners);
+    const [prizeWon, setPrizeWon] = useState({
+        userAvatarUrl: `${window.cdn}assets/icons/icon_profile.svg`,
+        userNickName: "yoyo",
+        prizeTitle: "40,000 $FROYO",
+    });
 
     const [timer, setTimer] = useState("");
     const [isPlayVideo, setIsPlayVideo] = useState(false);
@@ -34,13 +38,13 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
     }, [dispatch]);
 
     // GET PRIZR WON INFO
-    useEffect(() => {
-        let prizeWon = null;
-        winners.forEach((data) => {
-            prizeWon = data.list.find((x) => x.prizeId === prizeId);
-        });
-        setPrizeWon(prizeWon);
-    }, [winners, prizeId]);
+    // useEffect(() => {
+    //     let prizeWon = null;
+    //     winners.forEach((data) => {
+    //         prizeWon = data.list.find((x) => x.prizeId === prizeId);
+    //     });
+    //     setPrizeWon(prizeWon);
+    // }, [winners, prizeId]);
 
     return (
         <>
@@ -65,7 +69,7 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                                 <div className="align-items-center mt-4 mb-2">
                                     <img
                                         onError={(e) => defaultUserImage(e)}
-                                        className="thumb-media mx-auto"
+                                        className="thumb-media mx-auto my-4"
                                         src={
                                             prizeWon?.userAvatarUrl ||
                                             `${window.cdn}icons/icon_profile.svg`

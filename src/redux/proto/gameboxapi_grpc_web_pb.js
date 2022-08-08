@@ -806,6 +806,67 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.getPlayer =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.UpdateWalletAddressRequest,
+ *   !proto.api.gamebox.UpdateWalletAddressResponse>}
+ */
+const methodDescriptor_GameboxApi_UpdateWalletAddress = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/UpdateWalletAddress',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.UpdateWalletAddressRequest,
+  proto.api.gamebox.UpdateWalletAddressResponse,
+  /**
+   * @param {!proto.api.gamebox.UpdateWalletAddressRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.UpdateWalletAddressResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.UpdateWalletAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.UpdateWalletAddressResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.UpdateWalletAddressResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.updateWalletAddress =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/UpdateWalletAddress',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_UpdateWalletAddress,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.UpdateWalletAddressRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.UpdateWalletAddressResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.updateWalletAddress =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/UpdateWalletAddress',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_UpdateWalletAddress);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.api.gamebox.GetConfigRequest,
  *   !proto.api.gamebox.GetConfigResponse>}
  */

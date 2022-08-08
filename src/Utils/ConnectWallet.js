@@ -8,7 +8,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { SHOW_TOAST } from "redux/types";
 import _ from "lodash";
 // Check if any wallet is connected then connect
-export async function handleConnectWallet(dispatch) {
+export async function handleConnectWallet(dispatch, bindWalletAddress) {
     const { web3, provider } = await getWeb3();
     if (!web3) return;
 
@@ -20,8 +20,12 @@ export async function handleConnectWallet(dispatch) {
         (n) => n.chainId === parseInt(chainId)
     );
     try {
-        if (isIncluded === -1) {
-            if (accounts.length > 0) {
+        // IF WALLET ADDRESS IS AVAILABLE AND SAME AS BIND WALLET ADDRESS
+        if (
+            accounts.length > 0 &&
+            accounts[0].toLowerCase() === bindWalletAddress.toLowerCase()
+        ) {
+            if (isIncluded === -1) {
                 dispatch(
                     loadConnectUserWallet(
                         "wrong_network",
@@ -30,15 +34,12 @@ export async function handleConnectWallet(dispatch) {
                         "Wrong Network!"
                     )
                 );
-            }
-            const error = {
-                code: 4903,
-                message: "Connected network not supported",
-            };
-            throw error;
-        } else {
-            // IF WALLET ADDRESS IS AVAILABLE
-            if (accounts.length > 0) {
+                const error = {
+                    code: 4903,
+                    message: "Connected network not supported",
+                };
+                throw error;
+            } else {
                 // GET TOKEN BALANCE
                 const { tokenBalance, symbol } = await getTokenBalance(
                     accounts[0]
@@ -55,10 +56,28 @@ export async function handleConnectWallet(dispatch) {
                         )
                     );
             }
+        } else {
+            dispatch(
+                loadConnectUserWallet(
+                    "wrong_wallet",
+                    accounts[0],
+                    null,
+                    "Wrong Wallet!"
+                )
+            );
+
+            // Self defined error code
+            const error = {
+                code: 1001,
+                message: "Wrong wallet connected",
+                walletAddress: accounts[0],
+            };
+            throw error;
         }
     } catch (error) {
         if (error.code === -32002 || error.code === 4001)
             dispatch(loadConnectWalletAutoError(error));
+        if (error.code === 1001) throw error;
         if (error.code === 4903) {
             const networks =
                 JSON.parse(sessionStorage.getItem("networks")) || [];
@@ -148,7 +167,11 @@ export async function handleConnectWallet(dispatch) {
             dispatch(
                 loadConnectUserWallet("wallet_disconnected", null, null, null)
             );
-        else {
+        else if (
+            accounts[0].toLowerCase() !== bindWalletAddress.toLowerCase()
+        ) {
+            dispatch(loadConnectUserWallet("wrong_wallet", null, null, null));
+        } else {
             const { tokenBalance, symbol } = await getTokenBalance(accounts[0]);
             const chainId = await web3.eth.getChainId();
 

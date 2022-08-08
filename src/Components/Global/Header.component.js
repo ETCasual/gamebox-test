@@ -5,18 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import Notification from "Components/Global/Notifications.component";
 
 import loadPrizes from "redux/thunks/Prizes.thunk";
-import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
 
 import { defaultUserImage } from "Utils/DefaultImage";
-import {
-    handleConnectWallet,
-    disconnectWallet,
-    handleMetamask,
-    handleWalletConnect,
-} from "Utils/ConnectWallet";
+import { handleConnectWallet, disconnectWallet } from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
 
 import { handleSignOut } from "Utils/SignOut";
+import ConnectWallet from "./ConnectWallet.component";
 
 const Header = ({
     userImage,
@@ -39,28 +34,14 @@ const Header = ({
     // const [hideGemsOnMobile, setHideGemsOnMobile] = useState(false);
     const [onHoverWallet, setOnWalletHover] = useState(false);
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
+    const [invalidWalletModalShown, setInvalidWalletModalShown] =
+        useState(false);
     const [mobileProfileWallet, setMobileProfileWallet] = useState(false);
 
     const dispatch = useDispatch();
-
     const location = useLocation();
 
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
-
-    // useEffect(() => {
-    //     window.addEventListener("resize", handleResize);
-
-    //     function handleResize() {
-    //         setHideGemsOnMobile(
-    //             window.innerWidth > 767
-    //         );
-    //     }
-    //     handleResize();
-
-    //     return () => {
-    //         window.removeEventListener("resize", handleResize);
-    //     };
-    // }, []);
 
     // GETTING GEMS
     const getGems = () => {
@@ -84,16 +65,17 @@ const Header = ({
     };
 
     const handleWallet = async () => {
+        setMobileProfileWallet(false);
+
         if (user.walletAddress) {
             if (user.network === "Wrong Network!") {
-                handleConnectWallet(dispatch);
+                await handleConnectWallet(dispatch, user.bindWalletAddress);
             } else {
                 handleWalletDropDown();
             }
         } else {
             setSelectWalletModalShown(true);
         }
-        // await handleConnectWallet(dispatch, blockchainNetworks);
     };
 
     const handleWalletDropDown = () => {
@@ -113,32 +95,6 @@ const Header = ({
                 network: null,
             },
         });
-    };
-
-    const handleConnectMetamask = async () => {
-        try {
-            await handleMetamask(dispatch);
-            await handleConnectWallet(dispatch);
-
-            setSelectWalletModalShown(false);
-        } catch (err) {
-            if (err.code === 4903) {
-                setSelectWalletModalShown(false);
-            } else {
-                console.log(err);
-            }
-        }
-    };
-
-    const handleConnectWalletConnect = async () => {
-        try {
-            await handleWalletConnect(dispatch);
-            await handleConnectWallet(dispatch);
-
-            setSelectWalletModalShown(false);
-        } catch (err) {
-            console.log(err);
-        }
     };
 
     return (
@@ -338,15 +294,15 @@ const Header = ({
                                             <div className="profile-name ml-3 mb-1">
                                                 {user.username}
                                             </div>
-                                            {user.walletAddress && (
+                                            {user.bindWalletAddress && (
                                                 <div className="profile-wallet ml-3 py-1 px-2">
-                                                    {user.walletAddress?.substring(
+                                                    {user.bindWalletAddress?.substring(
                                                         0,
                                                         5
                                                     )}
                                                     ....
-                                                    {user.walletAddress?.substring(
-                                                        user.walletAddress
+                                                    {user.bindWalletAddress?.substring(
+                                                        user.bindWalletAddress
                                                             .length - 4
                                                     )}
                                                 </div>
@@ -448,15 +404,12 @@ const Header = ({
                     )}
                 </div>
             </div>
-            {selectWalletModalShown && (
-                <SelectWalletsModal
-                    handleInstructionsCloseBtn={() => {
-                        setSelectWalletModalShown(false);
-                    }}
-                    handleConnectMetamask={handleConnectMetamask}
-                    handleConnectWalletConnect={handleConnectWalletConnect}
-                />
-            )}
+            <ConnectWallet
+                selectWalletModalShown={selectWalletModalShown}
+                setSelectWalletModalShown={setSelectWalletModalShown}
+                invalidWalletModalShown={invalidWalletModalShown}
+                setInvalidWalletModalShown={setInvalidWalletModalShown}
+            />
         </>
     );
 };

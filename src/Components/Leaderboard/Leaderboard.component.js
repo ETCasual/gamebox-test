@@ -128,8 +128,7 @@ const Leaderboard = ({
         setLeaderboardList([]);
         setYourRankData((prev) => ({ ...prev, visible: false }));
 
-        if (currentGameDetails?.gameId > 0)
-        {
+        if (currentGameDetails?.gameId > 0) {
             dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
             dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
         }
@@ -137,16 +136,16 @@ const Leaderboard = ({
 
     // SORTING LEADERBOARD
     useEffect(() => {
-        const rankIndex = leaderboard.findIndex(data => data.userId > 0 && data.userId === user.id);
-        if (rankIndex >= 0)
-        {
+        const rankIndex = leaderboard.findIndex(
+            (data) => data.userId > 0 && data.userId === user.id
+        );
+        if (rankIndex >= 0) {
             setYourRankData((prev) => ({
                 ...prev,
                 ...leaderboard[rankIndex],
                 rank: rankIndex + 1,
             }));
-        } else
-        {
+        } else {
             setYourRankData((prev) => ({
                 ...prev,
                 rank: "-",
@@ -163,8 +162,7 @@ const Leaderboard = ({
 
         // To notify the players that stayed in games tournament ended when they left the window
         let destination = document.getElementById("destination")?.contentWindow;
-        if (destination)
-        {
+        if (destination) {
             // END BY TIMER
             destination?.endGameByTimer?.();
 
@@ -199,8 +197,7 @@ const Leaderboard = ({
             let destination =
                 document.getElementById("destination")?.contentWindow;
 
-            if (destination)
-            {
+            if (destination) {
                 // END BY TIMER
                 destination?.endGameByTimer?.();
                 setModalStatus((prev) => ({
@@ -235,8 +232,7 @@ const Leaderboard = ({
 
     useEffect(() => {
         let isDisabled = false;
-        switch (timer)
-        {
+        switch (timer) {
             case "Calculating":
             case "Ended":
             case "0d 0h 0m 0s":
@@ -250,15 +246,17 @@ const Leaderboard = ({
 
     const onLeaderboardScrolling = (evt) => {
         let isInsideElement = false;
-        if (yourRankEleRef.current)
-        {
+        if (yourRankEleRef.current) {
             isInsideElement = isScrolledIntoView(
                 evt.target,
                 yourRankEleRef.current
             );
         }
 
-        setYourRankData((prev) => ({ ...prev, visible: parseInt(prev.rank) > 0 && !isInsideElement }));
+        setYourRankData((prev) => ({
+            ...prev,
+            visible: parseInt(prev.rank) > 0 && !isInsideElement,
+        }));
     };
 
     const isCurrentUser = (id) => {
@@ -282,8 +280,7 @@ const Leaderboard = ({
             isPlayBtnDisabled: true,
         }));
 
-        if (!executeRecaptcha)
-        {
+        if (!executeRecaptcha) {
             console.log("Execute recaptcha not yet available");
             return;
         }
@@ -317,10 +314,8 @@ const Leaderboard = ({
             .then(async () => {
                 const token = getToken();
 
-                if (currentGameDetails.gameId > 0)
-                {
-                    try
-                    {
+                if (currentGameDetails.gameId > 0) {
+                    try {
                         let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
                         let options = {
                             headers: {
@@ -331,8 +326,7 @@ const Leaderboard = ({
                             },
                         };
                         let response = await axios.get(url, options);
-                        if (response.data)
-                        {
+                        if (response.data) {
                             sessionStorage.setItem(
                                 "lbId",
                                 JSON.stringify({
@@ -344,16 +338,14 @@ const Leaderboard = ({
                             let gameCount =
                                 parseInt(localStorage.getItem("gameCount")) ||
                                 0;
-                            if (gameCount <= config.adsPerGame)
-                            {
+                            if (gameCount <= config.adsPerGame) {
                                 gameCount = gameCount + 1;
                                 localStorage.setItem("gameCount", gameCount);
                             }
 
                             showAdsBeforeGame(config);
                         }
-                    } catch (error)
-                    {
+                    } catch (error) {
                         console.log(error.message);
                     }
                 }
@@ -403,8 +395,7 @@ const Leaderboard = ({
                 isQuitGameConfirm: false,
                 isPlayBtnDisabled: false,
             }));
-        else if (choice === "no")
-        {
+        else if (choice === "no") {
             resumeGame();
         }
     };
@@ -471,23 +462,20 @@ const Leaderboard = ({
     // };
 
     const submitScore = async (score) => {
-        try
-        {
+        try {
             setModalStatus((prev) => ({
                 ...prev,
                 isSubmittingScore: true,
             }));
 
-            if (!executeRecaptcha)
-            {
+            if (!executeRecaptcha) {
                 console.log("Execute recaptcha not yet available");
                 return;
             }
 
             const recaptchaToken = await executeRecaptcha("finishGame");
 
-            if (currentGameInfo.playerEnterGameId)
-            {
+            if (currentGameInfo.playerEnterGameId) {
                 await dispatch(
                     loadPlayerLeaveTournamentId(score, recaptchaToken)
                 ).catch((e) => {
@@ -523,8 +511,7 @@ const Leaderboard = ({
                 );
 
                 // CALLING TICKETS API TO GET LATEST NUMBERS
-                if (earnAdditionalBenefitStatus.length > 0)
-                {
+                if (earnAdditionalBenefitStatus.length > 0) {
                     // PLAYER TICKETS
                     dispatch(loadPlayerTickets(data?.prizeId, true));
                     // PRIZE TOTAL TICKETS
@@ -539,8 +526,7 @@ const Leaderboard = ({
                     dispatch(removeEarnAdditionalBenefitStatus(data?.prizeId));
                 }
             }, 1000);
-        } catch (e)
-        {
+        } catch (e) {
             setModalStatus((prev) => ({
                 ...prev,
                 isQuitGameBtnDisabled: true,
@@ -553,8 +539,7 @@ const Leaderboard = ({
 
     function getEmptyLeaderboardList() {
         let rankList = [];
-        for (let x = 0; x < rankLength; x++)
-        {
+        for (let x = 0; x < rankLength; x++) {
             rankList.push(
                 <div key={`leaderboard-${x}`} className="individual-rank">
                     <div className="leader-player-card d-flex align-items-center">
@@ -596,15 +581,15 @@ const Leaderboard = ({
     function getLeaderboardList() {
         let _leaderboardList = [];
 
-        for (let i = 0; i < rankLength; i++)
-        {
+        for (let i = 0; i < rankLength; i++) {
             _leaderboardList.push(
                 <div key={`leaderboard-${i}`} className="individual-rank">
                     <div
-                        className={`leader-player-card d-flex align-items-center ${isCurrentUser(leaderboardList[i]?.userId)
-                            ? "you"
-                            : ""
-                            }`}
+                        className={`leader-player-card d-flex align-items-center ${
+                            isCurrentUser(leaderboardList[i]?.userId)
+                                ? "you"
+                                : ""
+                        }`}
                         ref={
                             isCurrentUser(leaderboardList[i]?.userId)
                                 ? yourRankEleRef
@@ -631,12 +616,13 @@ const Leaderboard = ({
                             <p className="player-name">
                                 {leaderboardList[i]?.userId
                                     ? isCurrentUser(leaderboardList[i]?.userId)
-                                        ? `${leaderboardList[i]?.nickName ||
-                                        user.username ||
-                                        "Player"
-                                        } (You)`
+                                        ? `${
+                                              leaderboardList[i]?.nickName ||
+                                              user.username ||
+                                              "Player"
+                                          } (You)`
                                         : leaderboardList[i]?.nickName ||
-                                        `Player ${leaderboardList[i]?.userId}`
+                                          `Player ${leaderboardList[i]?.userId}`
                                     : "-"}
                             </p>
                             <p className="points">
@@ -708,14 +694,15 @@ const Leaderboard = ({
                                         Tournament ends in
                                     </p>
                                     <p
-                                        className={`mb-0 text-right ${OverTimeModeChecker(
-                                            data?.prizeId,
-                                            data?.ticketsRequired,
-                                            prizeTicketCollection
-                                        )
-                                            ? "overtime-text"
-                                            : "timer-text"
-                                            }`}
+                                        className={`mb-0 text-right ${
+                                            OverTimeModeChecker(
+                                                data?.prizeId,
+                                                data?.ticketsRequired,
+                                                prizeTicketCollection
+                                            )
+                                                ? "overtime-text"
+                                                : "timer-text"
+                                        }`}
                                     >
                                         {timer || "0d 0h 0m 0s"}
                                     </p>
@@ -759,8 +746,7 @@ const Leaderboard = ({
                                         {yourRankData.nickName}
                                     </p>
                                     <p className="points">
-                                        {yourRankData.gameScore || "0"}{" "}
-                                        pts
+                                        {yourRankData.gameScore || "0"} pts
                                     </p>
                                 </div>
                                 <div className="tickets ml-auto d-flex align-items-center justify-content-center">
@@ -782,22 +768,24 @@ const Leaderboard = ({
 
                 {/* READY TOURNAMENT BUTTON */}
                 <div
-                    className={`bottom-ready-tournament d-block ${isMobile ? "mobile" : ""
-                        }`}
+                    className={`bottom-ready-tournament d-block ${
+                        isMobile ? "mobile" : ""
+                    }`}
                 >
                     <button
-                        className={`ready-tournament-button ${isGameAvailable && !modalStatus.isPlayBtnDisabled
-                            ? ""
-                            : "opacity-0-5"
-                            }`}
+                        className={`ready-tournament-button ${
+                            isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                ? ""
+                                : "opacity-0-5"
+                        }`}
                         onClick={
                             isGameAvailable && !modalStatus.isPlayBtnDisabled
                                 ? () => {
-                                    setModalStatus((prev) => ({
-                                        ...prev,
-                                        isEarnAdditionalInfoShown: true,
-                                    }));
-                                }
+                                      setModalStatus((prev) => ({
+                                          ...prev,
+                                          isEarnAdditionalInfoShown: true,
+                                      }));
+                                  }
                                 : null
                         }
                     >

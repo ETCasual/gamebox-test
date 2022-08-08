@@ -35,13 +35,13 @@ const Index = () => {
     const dispatch = useDispatch();
 
     let timeOutRef1 = useRef(null);
-
     const [noDataLoaded, setNoDataLoaded] = useState({
         feature: true,
         premium: true,
         automated: true,
         all: false,
     });
+    const [isLoadingDone, setIsLoadingDone] = useState(false);
     const [FeaturedData, setFeaturedData] = useState([]);
     const [PremiumData, setPremiumData] = useState([]);
     const [automatedEntryData, setAutomatedEntryData] = useState([]);
@@ -56,8 +56,6 @@ const Index = () => {
     let watcherRef = useRef(null);
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
-    const [featureWinnerPrize] = useState();
-
     // ONBOARDING
     useEffect(() => {
         const isNewUser = Boolean(localStorage.getItem("isNewUser")) || false;
@@ -69,18 +67,28 @@ const Index = () => {
         let timeOutRef = null;
         clearTimeout(timeOutRef);
         timeOutRef = setTimeout(() => {
+            let isAll = false;
             if (
                 prizes.featuredData.length <= 0 &&
                 prizes.premiumData.length <= 0 &&
                 prizes.automatedEntryData.length <= 0
-            )
-                setNoDataLoaded((prev) => ({ ...prev, all: true }));
+            ) {
+                isAll = true;
+            }
+            setNoDataLoaded((prev) => ({
+                ...prev,
+                feature: prizes.featuredData.length <= 0 ? true : false,
+                premium: prizes.premiumData.length <= 0 ? true : false,
+                automated: prizes.automatedEntryData.length <= 0 ? true : false,
+                all: isAll,
+            }));
+            setIsLoadingDone(true);
         }, 3000);
+
         setNoDataLoaded((prev) => ({
             ...prev,
             feature: FeaturedData.length <= 0 ? true : false,
             premium: PremiumData.length <= 0 ? true : false,
-            automated: prizes.automatedEntryData.length <= 0 ? true : false,
         }));
 
         return () => clearTimeout(timeOutRef);
@@ -375,16 +383,16 @@ const Index = () => {
                 <div className="container-fluid mb-4 bonus">
                     <div className="row justify-content-center px-1 py-4 py-sm-5">
                         <div className="col-12 col-md-10 col-lg-8">
-                            <div className="row">
+                            <div className="row d-flex">
                                 {/* FORTUNE WHEEL */}
-                                <div className="col-12 col-sm-6 d-flex flex-column px-2 mb-3 mb-sm-0">
-                                    <div className="spinner d-flex flex-column justify-content-between h-100">
-                                        <div
-                                            className="card-wrapper h-100  pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3"
-                                            onClick={() =>
-                                                setFortuneWheelShown(true)
-                                            }
-                                        >
+                                <div className="col-sm d-flex flex-column px-2 mb-3 mb-sm-0">
+                                    <div
+                                        className="spinner d-flex flex-column justify-content-between h-100"
+                                        onClick={() =>
+                                            setFortuneWheelShown(true)
+                                        }
+                                    >
+                                        <div className="card-wrapper h-100  pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
                                             <div className="row">
                                                 <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                                                     <p className="the-spinner-text mb-1">
@@ -427,37 +435,36 @@ const Index = () => {
                                     )}
                                 </div>
 
-                                {/* AUTOMATED */}
-                                <div className="automatedEntry col-12 col-sm-6 px-2">
-                                    {/* LOADER */}
-                                    {automatedEntryData.length <= 0 && (
+                                {/* AUTOMATED LOADER */}
+                                {!isLoadingDone && (
+                                    <div className="col-sm d-flex flex-column px-2 mb-3 mb-sm-0">
                                         <AutomatedEntryLoader />
-                                    )}
+                                    </div>
+                                )}
 
-                                    {!noDataLoaded.automated && (
-                                        <>
-                                            {/* AUTOMATED CARD */}
-                                            {automatedEntryData?.map(
-                                                (prize, index) => (
-                                                    <React.Fragment
-                                                        key={`automatedEntry-${index}`}
-                                                    >
-                                                        <AutomatedEntry
-                                                            data={prize}
-                                                        />
-                                                    </React.Fragment>
-                                                )
-                                            )}
-                                        </>
-                                    )}
-                                </div>
+                                {/* AUTOMATED CARD */}
+                                {isLoadingDone && !noDataLoaded.automated && (
+                                    <div className="col-sm d-flex flex-column px-2 mb-3 mb-sm-0">
+                                        {automatedEntryData?.map(
+                                            (prize, index) => (
+                                                <React.Fragment
+                                                    key={`automatedEntry-${index}`}
+                                                >
+                                                    <AutomatedEntry
+                                                        data={prize}
+                                                    />
+                                                </React.Fragment>
+                                            )
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* STAY TUNE & PLAY GAMES */}
-                {noDataLoaded.all && <StayTune />}
+                {isLoadingDone && noDataLoaded.all && <StayTune />}
 
                 {/* IF PRIZE AVAILABLE */}
                 {!noDataLoaded.all && (
@@ -473,34 +480,35 @@ const Index = () => {
                                             </h2>
                                         </div>
                                         {/* LOADER */}
-                                        {false && FeaturedData?.length <= 0 && (
-                                            <FeaturedLoader />
-                                        )}
+                                        {!isLoadingDone && <FeaturedLoader />}
 
                                         {/* HIDE ON 26/7/2022: Due to no more featured prize, and showing winner on featured area */}
-                                        {false && !noDataLoaded.feature && (
-                                            <>
-                                                {/* FEATURED CARD */}
-                                                {FeaturedData?.map(
-                                                    (prize, index) => {
-                                                        return (
-                                                            <React.Fragment
-                                                                key={`featuredPrize-${index}`}
-                                                            >
-                                                                <Featured
-                                                                    data={prize}
-                                                                    handleWinnerRevealCard={
-                                                                        handleWinnerRevealCard
-                                                                    }
-                                                                />
-                                                            </React.Fragment>
-                                                        );
-                                                    }
-                                                )}
-                                            </>
-                                        )}
+                                        {isLoadingDone &&
+                                            !noDataLoaded.feature && (
+                                                <>
+                                                    {/* FEATURED CARD */}
+                                                    {FeaturedData?.map(
+                                                        (prize, index) => {
+                                                            return (
+                                                                <React.Fragment
+                                                                    key={`featuredPrize-${index}`}
+                                                                >
+                                                                    <Featured
+                                                                        data={
+                                                                            prize
+                                                                        }
+                                                                        handleWinnerRevealCard={
+                                                                            handleWinnerRevealCard
+                                                                        }
+                                                                    />
+                                                                </React.Fragment>
+                                                            );
+                                                        }
+                                                    )}
+                                                </>
+                                            )}
 
-                                        <React.Fragment
+                                        {/* <React.Fragment
                                             key={`featuredPrize-winner`}
                                         >
                                             <FeaturedWinner
@@ -512,7 +520,7 @@ const Index = () => {
                                                     "https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/rewards/froyotoken/img/froyo_01_won.jpg"
                                                 }
                                             />
-                                        </React.Fragment>
+                                        </React.Fragment> */}
                                     </div>
                                 </div>
                             </div>
@@ -529,31 +537,32 @@ const Index = () => {
                                             </h2>
                                         </div>
                                         {/* LOADER */}
-                                        {PremiumData.length <= 0 && (
-                                            <PremiumLoader />
-                                        )}
+                                        {!isLoadingDone && <PremiumLoader />}
 
-                                        {!noDataLoaded.premium && (
-                                            <>
-                                                {/* PREMIUM CARD */}
-                                                {PremiumData?.map(
-                                                    (prize, index) => {
-                                                        return (
-                                                            <React.Fragment
-                                                                key={`premiumPrize-${index}`}
-                                                            >
-                                                                <Premium
-                                                                    data={prize}
-                                                                    handleWinnerRevealCard={
-                                                                        handleWinnerRevealCard
-                                                                    }
-                                                                />
-                                                            </React.Fragment>
-                                                        );
-                                                    }
-                                                )}
-                                            </>
-                                        )}
+                                        {isLoadingDone &&
+                                            !noDataLoaded.premium && (
+                                                <>
+                                                    {/* PREMIUM CARD */}
+                                                    {PremiumData?.map(
+                                                        (prize, index) => {
+                                                            return (
+                                                                <React.Fragment
+                                                                    key={`premiumPrize-${index}`}
+                                                                >
+                                                                    <Premium
+                                                                        data={
+                                                                            prize
+                                                                        }
+                                                                        handleWinnerRevealCard={
+                                                                            handleWinnerRevealCard
+                                                                        }
+                                                                    />
+                                                                </React.Fragment>
+                                                            );
+                                                        }
+                                                    )}
+                                                </>
+                                            )}
                                     </div>
                                 </div>
                             </div>

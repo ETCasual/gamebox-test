@@ -27,6 +27,8 @@ const GameEndModal = ({
             type: "tour",
         });
 
+    const [displayedScore, setDisplayedScore] = useState(score > 0 ? score : 0);
+
     useEffect(() => {
         let timeoutRef = null;
         clearInterval(timeoutRef);
@@ -91,17 +93,12 @@ const GameEndModal = ({
                                 )}
 
                                 <div className="mb-5">
-                                    {score && (
-                                        <p className="text-center score-text mt-4 mb-0">
-                                            Score
-                                        </p>
-                                    )}
-
-                                    {score && (
-                                        <p className="text-center score-number">
-                                            {score}
-                                        </p>
-                                    )}
+                                    <p className="text-center score-text mt-4 mb-0">
+                                        Score
+                                    </p>
+                                    <p className="text-center score-number">
+                                        {displayedScore}
+                                    </p>
                                 </div>
 
                                 {currentGameBoosterInfo.isUseBooster ? (
