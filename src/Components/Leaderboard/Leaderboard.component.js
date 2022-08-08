@@ -50,6 +50,10 @@ const Leaderboard = ({
     setEarnAdditionalDisabledStatus,
     setIsInstructionShown,
 }) => {
+    const LOAD_ERROR_CODES = {
+        BROKEN_LINK: 12, //Asset Failed to Load because not found due to incorrect link (defined by phaser)
+        LOG_G_ENTER_FAIL: 1,
+    };
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userData);
     const { poolTickets } = useSelector((state) => state.playerTickets);
@@ -107,6 +111,16 @@ const Leaderboard = ({
 
     let onClickSubscriptionCancel = () => setIsSubscriptionModalShown(false);
     const [isMute, setIsMute] = useState(window.localStorage.getItem("mute"));
+    const [loadErrorDetails, setLoadErrorDetails] = useState({
+        title: "",
+        message_1: "",
+        message_2: "",
+        errorCode: "",
+        closeButtonText: "",
+        okButtonText: "",
+        okButtonHandling: "",
+        closeButtonHandling: "",
+    });
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -273,36 +287,26 @@ const Leaderboard = ({
         return value;
     };
 
-    const handleOnClickPlayButton = async () => {
-        setModalStatus((prev) => ({
-            ...prev,
-            isGamePaused: false,
-            isPlayBtnDisabled: true,
-        }));
+    window.sendLogGEnter = async () => {
+        let _earnAdditional = [...earnAdditionalBenefitStatus];
+
+        let index = _earnAdditional.findIndex(
+            (e) => e.prizeId === data?.prizeId
+        );
 
         if (!executeRecaptcha) {
             console.log("Execute recaptcha not yet available");
             return;
         }
+
         const recaptchaToken = await executeRecaptcha("playGame");
 
-        // TODO
-        let _earnAdditional = [...earnAdditionalBenefitStatus];
-        let index = _earnAdditional.findIndex(
-            (e) => e.prizeId === data?.prizeId
-        );
         let isAdWatched =
             index > -1 ? _earnAdditional[index]?.isAdsSelected : false;
         let isGemUsed =
             index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
 
-        setCurrentGameBoosterInfo(() => ({
-            isUseBooster: isGemUsed,
-            extraTickets: currentGameRules.useGemTickets,
-            scoreNeededPerExtraTickets: currentGameRules.score,
-        }));
-
-        dispatch(
+        return await dispatch(
             loadPlayerEnterTournamentId(
                 data?.prizeId,
                 currentGameDetails?.gameId,
@@ -311,59 +315,84 @@ const Leaderboard = ({
                 recaptchaToken
             )
         )
-            .then(async () => {
-                const token = getToken();
-
-                if (currentGameDetails.gameId > 0) {
-                    try {
-                        let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
-                        let options = {
-                            headers: {
-                                "Access-Control-Allow-Origin": "*",
-                                "Access-Control-Allow-Methods":
-                                    "POST, GET, OPTIONS",
-                                Authorization: `Bearer ${token}`,
-                            },
-                        };
-                        let response = await axios.get(url, options);
-                        if (response.data) {
-                            sessionStorage.setItem(
-                                "lbId",
-                                JSON.stringify({
-                                    cgId: data.cgId,
-                                    gameId: currentGameDetails.gameId,
-                                })
-                            );
-                            setGameData(response.data);
-                            let gameCount =
-                                parseInt(localStorage.getItem("gameCount")) ||
-                                0;
-                            if (gameCount <= config.adsPerGame) {
-                                gameCount = gameCount + 1;
-                                localStorage.setItem("gameCount", gameCount);
-                            }
-
-                            showAdsBeforeGame(config);
-                        }
-                    } catch (error) {
-                        console.log(error.message);
-                    }
-                }
-
-                setModalStatus((prev) => ({
-                    ...prev,
-                    isGameReady: true,
-                    isEarnAdditionalInfoShown: false,
-                }));
-
-                setEarnAdditionalDisabledStatus({
-                    gems: false,
-                    ads: false,
-                });
-            })
+            .then(() => true)
             .catch((err) => {
-                setIsSubscriptionModalShown(true);
+                window.showLoadErrorPopUp(LOAD_ERROR_CODES.LOG_G_ENTER_FAIL);
+                return false;
+                // setIsSubscriptionModalShown(true);
             });
+    };
+
+    const handleOnClickPlayButton = async () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isGamePaused: false,
+            isPlayBtnDisabled: true,
+        }));
+
+        // TODO
+        let _earnAdditional = [...earnAdditionalBenefitStatus];
+        let index = _earnAdditional.findIndex(
+            (e) => e.prizeId === data?.prizeId
+        );
+
+        let isGemUsed =
+            index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
+
+        const token = getToken();
+
+        if (currentGameDetails.gameId > 0) {
+            try {
+                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
+                let options = {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+                let response = await axios.get(url, options);
+                if (response.data) {
+                    sessionStorage.setItem(
+                        "lbId",
+                        JSON.stringify({
+                            cgId: data.cgId,
+                            gameId: currentGameDetails.gameId,
+                            gameDuration: 180, //in seconds
+                            tournamentEndTime: data?.gameInfo[0]?.endTimeStamp,
+                        })
+                    );
+                    setGameData(response.data);
+                    let gameCount =
+                        parseInt(localStorage.getItem("gameCount")) || 0;
+                    if (gameCount <= config.adsPerGame) {
+                        gameCount = gameCount + 1;
+                        localStorage.setItem("gameCount", gameCount);
+                    }
+
+                    showAdsBeforeGame(config);
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isGameReady: true,
+            isEarnAdditionalInfoShown: false,
+        }));
+
+        setEarnAdditionalDisabledStatus({
+            gems: false,
+            ads: false,
+        });
+
+        setCurrentGameBoosterInfo(() => ({
+            isUseBooster: isGemUsed,
+            extraTickets: currentGameRules.useGemTickets,
+            scoreNeededPerExtraTickets: currentGameRules.score,
+        }));
     };
 
     const handleQuitGame = () => {
@@ -410,6 +439,14 @@ const Leaderboard = ({
         destination?.resumeGame?.();
         destination.focus();
     };
+
+    window.showGameIframe = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isShowIframe: true,
+        }));
+    };
+
     window.playerEnterGame = () => {
         let _earnAdditional = [...earnAdditionalBenefitStatus];
         let index = _earnAdditional.findIndex(
@@ -422,6 +459,54 @@ const Leaderboard = ({
             spinTicket: getPoolTickets(poolTickets, data?.prizeId),
         };
         return enterGameConfig;
+    };
+
+    window.showLoadErrorPopUp = (errorCode) => {
+        switch (errorCode) {
+            case LOAD_ERROR_CODES.BROKEN_LINK:
+                setLoadErrorDetails(() => ({
+                    title: "Error",
+                    message_1: "Oops, something went wrong.",
+                    message_2: "Please contact support for further assistance.",
+                    errorCode: `12-${data?.prizeId}-${currentGameDetails?.gameId}`,
+                    okButtonText: "CLOSE",
+                    okButtonHandling: "closeGame",
+                    closeButtonText: "",
+                    closeButtonHandling: "",
+                }));
+                break;
+            case LOAD_ERROR_CODES.LOG_G_ENTER_FAIL:
+                setLoadErrorDetails(() => ({
+                    title: "Error",
+                    message_1: "Unable to connect to server.",
+                    message_2:
+                        "Please check your internet connection and try again.",
+                    errorCode: `1-${data?.prizeId}-${currentGameDetails?.gameId}`,
+                    closeButtonText: "CLOSE",
+                    closeButtonHandling: "closeGame",
+                    okButtonText: "RETRY",
+                    okButtonHandling: "resendLogGEnter",
+                }));
+                break;
+            default: //Asset Failed to Load due to internet connection
+                setLoadErrorDetails(() => ({
+                    title: "Error",
+                    message_1:
+                        "Game failed to load. Please check your internet connection and try again.",
+                    message_2: "Skip: Gems will not be refunded",
+                    errorCode: `200-${data?.prizeId}-${currentGameDetails?.gameId}`,
+                    okButtonText: "RETRY",
+                    okButtonHandling: "reloadGame",
+                    closeButtonText: "SKIP",
+                    closeButtonHandling: "closeGame",
+                    okButtonText: "RETRY",
+                }));
+        }
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isLoadGameFailed: true,
+        }));
     };
 
     /**
@@ -438,6 +523,42 @@ const Leaderboard = ({
         setScoreObject(score);
 
         await submitScore(score);
+    };
+
+    const reloadGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isLoadGameFailed: false,
+        }));
+        document.getElementById("destination")?.contentWindow?.reloadAssets?.();
+    };
+
+    const resendLogGEnter = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isLoadGameFailed: false,
+        }));
+        document
+            .getElementById("destination")
+            ?.contentWindow?.trySendLogGEnter?.();
+    };
+
+    const closeGame = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isGameReady: false,
+            isQuitGameBtnDisabled: false,
+            isGameOver: false,
+            isPlayBtnDisabled: false,
+            isQuitGameConfirm: false,
+            isGamePaused: false,
+            isSubmitScoreFailed: false,
+            isSubmittingScore: false,
+            isTournamentEnded: false,
+            isLoadGameFailed: false,
+        }));
+
+        dispatch({ type: PLAYER_LOG_RESET });
     };
 
     // window.playerQuitGame = () => {
@@ -784,6 +905,7 @@ const Leaderboard = ({
                                       setModalStatus((prev) => ({
                                           ...prev,
                                           isEarnAdditionalInfoShown: true,
+                                          isShowIframe: false,
                                       }));
                                   }
                                 : null
@@ -963,23 +1085,10 @@ const Leaderboard = ({
                     {/* MODAL FOR PENDING SUBMIT SCORE */}
                     {modalStatus.isSubmitScoreFailed && (
                         <RetrySubmitModal
-                            handleCancel={() => {
-                                setModalStatus((prev) => ({
-                                    ...prev,
-                                    isGameReady: false,
-                                    isQuitGameBtnDisabled: false,
-                                    isGameOver: false,
-                                    isPlayBtnDisabled: false,
-                                    isQuitGameConfirm: false,
-                                    isGamePaused: false,
-                                    isSubmitScoreFailed: false,
-                                    isSubmittingScore: false,
-                                    isTournamentEnded: false,
-                                }));
-
-                                dispatch({ type: PLAYER_LOG_RESET });
-                            }}
-                            handleRetry={() => {
+                            closeButtonText="SKIP"
+                            handleClose={closeGame}
+                            okButtonText="RETRY"
+                            handleOk={() => {
                                 submitScore(scoreObject);
                             }}
                             disableRetry={modalStatus.isSubmittingScore}
@@ -994,6 +1103,43 @@ const Leaderboard = ({
                         />
                     )}
 
+                    {/* MODAL FOR RELOADING GAME IF LOAD FAIL */}
+                    {modalStatus.isLoadGameFailed && (
+                        <RetrySubmitModal
+                            okButtonText={loadErrorDetails.okButtonText}
+                            handleOk={() => {
+                                switch (loadErrorDetails.okButtonHandling) {
+                                    case "closeGame":
+                                        closeGame();
+                                        break;
+                                    case "reloadGame":
+                                        reloadGame();
+                                        break;
+                                    case "resendLogGEnter":
+                                        resendLogGEnter();
+                                        break;
+                                }
+                            }}
+                            closeButtonText={loadErrorDetails.closeButtonText}
+                            handleClose={
+                                loadErrorDetails.closeButtonHandling ===
+                                "closeGame"
+                                    ? closeGame
+                                    : null
+                            }
+                            disableRetry={false}
+                            title={loadErrorDetails.title}
+                            subtitle={
+                                <>
+                                    {loadErrorDetails.message_1}
+                                    <br />
+                                    {`(Code: ${loadErrorDetails.errorCode})`}
+                                    <br />
+                                    <br /> {loadErrorDetails.message_2}
+                                </>
+                            }
+                        />
+                    )}
                     {/* Comment out because the Front End X button is no longer in
                 used */}
                     {/* {!modalStatus.isQuitGameBtnDisabled && (
@@ -1037,8 +1183,12 @@ const Leaderboard = ({
                                     Close
                                 </button>
                             </div>
-
                             <iframe
+                                className={
+                                    modalStatus.isShowIframe
+                                        ? "shown-iframe"
+                                        : "hidden-iframe"
+                                }
                                 title="game"
                                 id="destination"
                                 srcDoc={gameData}
