@@ -67,14 +67,18 @@
                 text-overflow: ellipsis;
             }
             img {
+                border: 2px solid #393939;
                 border-radius: 100%;
-                width: 44px;
-                height: 44px;
+                width: 50px;
+                height: 50px;
                 object-fit: contain;
                 @include media-min($md) {
-                    width: 48px;
-                    height: 48px;
+                    width: 54px;
+                    height: 54px;
                 }
+            }
+            .vip-frame {
+                border: 2px solid #ff3399;
             }
             &:not(:last-child):after {
                 content: "";

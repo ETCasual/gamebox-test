@@ -432,6 +432,9 @@ html {
         height: 100vh;
         z-index: 2;
     }
+    .vip-frame {
+        border: 2px solid #ff3399 !important;
+    }
 }
 // TICKET VALUE PANEL - TOURNAMENT & LEADERBOARD COMPONENT
 .ticket-values {

@@ -17,6 +17,9 @@
             object-fit: contain;
             border: 6px solid #2a2a2a;
         }
+        .vip-frame {
+            border: 6px solid #ff3399;
+        }
         h2 {
             font-size: $fnt-sz-14;
             @include media-min($md) {
@@ -33,6 +36,7 @@
             color: #868686;
         }
     }
+    
     .multiplier {
         background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
         border-radius: 10px;

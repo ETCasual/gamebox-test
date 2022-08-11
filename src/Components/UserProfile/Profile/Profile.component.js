@@ -81,6 +81,9 @@ const Profile = ({
                             <div className="col-12 text-center mb-4 mb-md-5">
                                 <div className={`profile-info`}>
                                     <img
+                                        className={`${
+                                            user.isVip ? "vip-frame" : ""
+                                        }`}
                                         onError={(e) => defaultUserImage(e)}
                                         src={
                                             user
@@ -167,7 +170,7 @@ const Profile = ({
                                 </div>
                             )} */}
                             {/* MULTIPLIER */}
-                            { enableLevel && (
+                            {enableLevel && (
                                 <div className="col-12 multiplier-holder mt-4">
                                     <div
                                         className="multiplier p-3 p-md-4 d-flex flex-column align-items-start"
@@ -197,13 +200,17 @@ const Profile = ({
                                                 <div className="mb-0 d-flex align-items-center exp">
                                                     <span className="player-exp">
                                                         {user.exp >
-                                                        ranks[ranks.length - 1]?.exp
+                                                        ranks[ranks.length - 1]
+                                                            ?.exp
                                                             ? ranks[
-                                                                ranks.length - 1
-                                                            ]?.exp?.toLocaleString()
+                                                                  ranks.length -
+                                                                      1
+                                                              ]?.exp?.toLocaleString()
                                                             : user.exp?.toLocaleString()}
                                                     </span>
-                                                    <span className="px-1">/</span>
+                                                    <span className="px-1">
+                                                        /
+                                                    </span>
                                                     <span className="current-multiplier-total">
                                                         {getCurrentLevelExp(
                                                             user,
@@ -239,9 +246,9 @@ const Profile = ({
                                                             ) >= 100
                                                                 ? 100
                                                                 : getLevelProgress(
-                                                                    user,
-                                                                    ranks
-                                                                )
+                                                                      user,
+                                                                      ranks
+                                                                  )
                                                         }%`,
                                                     }}
                                                     aria-valuemin="0"
@@ -270,12 +277,16 @@ const Profile = ({
                                         </p>
                                         <p className="mb-1 share-text">
                                             {`Share your referral code with
-                                                your friends and get ${config.gemsPerInvite} Gems on
+                                                your friends and get ${
+                                                    config.gemsPerInvite
+                                                } Gems on
                                                 us (for you and your friend)
                                                 when your friend 
-                                                ${config.rewardInvitesRank <= 0 
-                                                    ? "join Gamebox." 
-                                                    : `reaches level ${config.rewardInvitesRank} 
+                                                ${
+                                                    config.rewardInvitesRank <=
+                                                    0
+                                                        ? "join Gamebox."
+                                                        : `reaches level ${config.rewardInvitesRank} 
                                                     in GameBox.`
                                                 }`}
                                         </p>
@@ -297,20 +308,21 @@ const Profile = ({
                             {/* HIGHSCORE & REWARDS */}
                             <div className="col-12 mt-4">
                                 <div className="row">
-                                    <div
-                                        className="col-6 col-md-6 pr-1 pr-md-3 mb-4 mb-md-0"
-                                    >
+                                    <div className="col-6 col-md-6 pr-1 pr-md-3 mb-4 mb-md-0">
                                         <Link
                                             to={{
                                                 pathname: "/profile/highscore",
                                                 state: {
                                                     prevPath:
-                                                        history.location.pathname,
+                                                        history.location
+                                                            .pathname,
                                                 },
                                             }}
                                         >
                                             <div className="highscore d-flex align-items-center justify-content-center">
-                                                <p className="mb-0">Highscores</p>
+                                                <p className="mb-0">
+                                                    Highscores
+                                                </p>
                                             </div>
                                         </Link>
                                     </div>

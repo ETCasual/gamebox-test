@@ -123,6 +123,8 @@ export async function userSignIn() {
             exp: signInResult.getExp(),
             status: "active",
             bindWalletAddress: signInResult.getWalletAddress(),
+            // TODO: Add "isVip" in server API
+            isVip: true,
         });
     }
     return user;
@@ -1011,6 +1013,7 @@ export async function getWinnersList() {
 
     let _monthYear = "";
     const winners = [];
+    const _tempIsVip = true;
     winnerResultList.forEach((e) => {
         _monthYear = `${
             monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
@@ -1034,6 +1037,8 @@ export async function getWinnersList() {
                         claimedOn: e.getClaimedOn(),
                         status: e.getStatus(),
                         totalPlayers: e.getTotalPlayer(),
+                        // TODO: Add "isVip" in server API
+                        isVip: _tempIsVip,
                     },
                 ],
             });
@@ -1055,6 +1060,8 @@ export async function getWinnersList() {
                     claimedOn: e.getClaimedOn(),
                     status: e.getStatus(),
                     totalPlayers: e.getTotalPlayer(),
+                    // TODO: Add "isVip" in server API
+                    isVip: _tempIsVip,
                 });
             } else {
                 winners.push({
@@ -1073,6 +1080,8 @@ export async function getWinnersList() {
                             claimedOn: e.getClaimedOn(),
                             status: e.getStatus(),
                             totalPlayers: e.getTotalPlayer(),
+                            // TODO: Add "isVip" in server API
+                            isVip: _tempIsVip,
                         },
                     ],
                 });
@@ -1640,6 +1649,8 @@ export async function getPlayerDetails(playerId) {
             name: data.getNickName(),
             picture: data.getAvatarUrl(),
             exp: data.getExp(),
+            // TODO: Add "isVip" in server API
+            isVip: true,
         });
     }
     return playerDetails;

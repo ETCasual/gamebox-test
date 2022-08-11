@@ -225,7 +225,7 @@ const Header = ({
                             >
                                 <img
                                     onError={(e) => defaultUserImage(e)}
-                                    className=""
+                                    className={user.isVip ? "vip-frame" : ""}
                                     src={
                                         userImage ||
                                         `${window.cdn}icons/icon_profile.svg`
@@ -282,7 +282,11 @@ const Header = ({
                                                 onError={(e) =>
                                                     defaultUserImage(e)
                                                 }
-                                                className="img-fluid"
+                                                className={`img-fluid ${
+                                                    user.isVip
+                                                        ? "vip-frame"
+                                                        : ""
+                                                }`}
                                                 src={
                                                     user.picture ||
                                                     `${window.cdn}icons/icon_profile.svg`

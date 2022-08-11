@@ -107,8 +107,8 @@ const Index = () => {
                                     </p>
                                 </div>
                             )}
-                            <div className="content-min-height row">
-                                <div className="col-12 col-xl-6 pl-2">
+                            <div className="content-min-height row mx-0">
+                                <div className="col-12 col-xl-6 pl-0">
                                     {!noDataLoaded &&
                                         winnerData.length <= 0 && (
                                             <WinnerLoader />
@@ -148,12 +148,16 @@ const Index = () => {
                                                         {/* WINNER IMAGE */}
                                                         <div className="col-auto px-0 text-center text-md-left">
                                                             <img
+                                                                className={
+                                                                    item.isVip
+                                                                        ? "vip-frame"
+                                                                        : ""
+                                                                }
                                                                 onError={(e) =>
                                                                     defaultUserImage(
                                                                         e
                                                                     )
                                                                 }
-                                                                width="56"
                                                                 src={
                                                                     item.userAvatarUrl
                                                                 }

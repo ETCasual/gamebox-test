@@ -62,6 +62,11 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                     <div className="col-12 text-center">
                                         <div className="profile-info">
                                             <img
+                                                className={`${
+                                                    playerDetailsData.isVip
+                                                        ? "vip-frame"
+                                                        : ""
+                                                }`}
                                                 onError={(e) =>
                                                     defaultUserImage(e)
                                                 }
