@@ -27,7 +27,7 @@ const GameEndModal = ({
             type: "tour",
         });
 
-    const [displayedScore, setDisplayedScore] = useState(score > 0 ? score : 0);
+    const [displayedScore] = useState(score > 0 ? score : 0);
 
     useEffect(() => {
         let timeoutRef = null;

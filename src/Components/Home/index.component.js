@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 // COMPONENTS
 import OnBoarding from "Components/Home/OnBoarding/OnBoarding.component";
 import Featured from "Components/Home/Featured/Featured.component";
-import FeaturedWinner from "Components/Home/Featured/FeaturedWinner.component";
+// import FeaturedWinner from "Components/Home/Featured/FeaturedWinner.component";
 import AutomatedEntry from "Components/Home/AutomatedEntry/AutomatedEntry.component";
 import Premium from "Components/Home/Premium/Premium.component";
 import WinnerAnnouncementModal from "Components/Modals/WinnerAnnouncementModal.component";

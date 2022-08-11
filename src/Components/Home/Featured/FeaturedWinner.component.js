@@ -1,5 +1,5 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // COMPONENTS
@@ -17,7 +17,7 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
 
     const { config } = useSelector((state) => state.config);
     // const { winners } = useSelector((state) => state.winners);
-    const [prizeWon, setPrizeWon] = useState({
+    const [prizeWon] = useState({
         userAvatarUrl: `${window.cdn}assets/icons/icon_profile.svg`,
         userNickName: "yoyo",
         prizeTitle: "40,000 $FROYO",

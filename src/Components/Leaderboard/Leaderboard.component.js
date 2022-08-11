@@ -69,7 +69,7 @@ const Leaderboard = ({
     const { currentGameInfo } = useSelector(
         (state) => state.playerTournamentInfo
     );
-    const { currentUserRank } = useSelector((state) => state.currentUserRank);
+    // const { currentUserRank } = useSelector((state) => state.currentUserRank);
     const { config } = useSelector((state) => state.config);
     const { prizeTicketCollection } = useSelector(
         (state) => state.prizePoolTickets
@@ -499,7 +499,6 @@ const Leaderboard = ({
                     okButtonHandling: "reloadGame",
                     closeButtonText: "SKIP",
                     closeButtonHandling: "closeGame",
-                    okButtonText: "RETRY",
                 }));
         }
 
@@ -1109,14 +1108,15 @@ const Leaderboard = ({
                             okButtonText={loadErrorDetails.okButtonText}
                             handleOk={() => {
                                 switch (loadErrorDetails.okButtonHandling) {
-                                    case "closeGame":
-                                        closeGame();
-                                        break;
                                     case "reloadGame":
                                         reloadGame();
                                         break;
                                     case "resendLogGEnter":
                                         resendLogGEnter();
+                                        break;
+                                    case "closeGame":
+                                    default:
+                                        closeGame();
                                         break;
                                 }
                             }}
