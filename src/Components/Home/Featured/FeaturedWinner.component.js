@@ -61,7 +61,7 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                         </div>
                         <div className="col-12 col-sm-6 px-sm-4 px-1">
                             <div className="info-wrapper d-flex flex-column justify-content-between text-center pt-3">
-                                <div className="align-items-start">
+                                <div className="align-items-start mt-4">
                                     <div className="congratz-subtitle">
                                         Congratulations!
                                     </div>
@@ -86,7 +86,7 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                                         {prizeWon?.prizeTitle || "REWARDS"}
                                     </div>
                                 </div>
-                                <div className="align-items-end">
+                                <div className="align-items-end mb-4">
                                     <div className="prize-drawn-title my-1">
                                         Prize drawn on
                                     </div>
