@@ -1,6 +1,7 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { isMobile } from "react-device-detect";
 import axios from "axios";
 import _ from "lodash";
 
@@ -11,6 +12,7 @@ import GameQuitModal from "Components/Modals/GameQuit.modal";
 import GameEndModal from "Components/Modals/GameEnd.modal";
 import EarnAdditionalBenefitModal from "Components/Modals/EarnAdditionalBenefit.modal";
 import RetrySubmitModal from "Components/Modals/RetrySubmit.modal";
+import PauseMenuModal from "Components/Modals/PauseMenuModal";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
@@ -34,9 +36,9 @@ import showAdsBeforeGame from "Utils/showAdsBeforeGame";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import getToken from "Utils/GetToken";
+import { isScrolledIntoView } from "Utils/ScrollHelper";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
-import PauseMenuModal from "Components/Modals/PauseMenuModal";
 
 const Leaderboard = ({
     data,
@@ -46,7 +48,12 @@ const Leaderboard = ({
     setTimer,
     earnAdditionalDisabledStatus,
     setEarnAdditionalDisabledStatus,
+    setIsInstructionShown,
 }) => {
+    const LOAD_ERROR_CODES = {
+        BROKEN_LINK: 12, //Asset Failed to Load because not found due to incorrect link (defined by phaser)
+        LOG_G_ENTER_FAIL: 1,
+    };
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.userData);
     const { poolTickets } = useSelector((state) => state.playerTickets);
@@ -89,20 +96,16 @@ const Leaderboard = ({
         isEarnAdditionalInfoShown: false,
         isSubmitScoreFailed: false,
         isSubmittingScore: false,
-        isShowIframe: false,
-        isLoadGameFailed: false,
     });
     const [scoreObject, setScoreObject] = useState({});
     const [isSubscriptionModalShown, setIsSubscriptionModalShown] =
         useState(false);
+    const [yourRankData, setYourRankData] = useState({ visible: false });
 
     const { executeRecaptcha } = useGoogleReCaptcha();
 
     let watcherRef = useRef(null);
-    let leaderBoardBackgroundRef = useRef(null);
-    let leaderBoardGameInfoRef = useRef(null);
-    let leaderboardRef = useRef(null);
-    let readyTournamentButtonRef = useRef(null);
+    let yourRankEleRef = useRef(null);
 
     let rankLength = _.maxBy(leaderRuleRanks, "rankTo")?.rankTo;
 
@@ -137,6 +140,8 @@ const Leaderboard = ({
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
         setLeaderboardList([]);
+        setYourRankData((prev) => ({ ...prev, visible: false }));
+
         if (currentGameDetails?.gameId > 0) {
             dispatch(loadLeaderboardRanks(currentGameDetails?.gameId));
             dispatch(loadCurrentGameRules(currentGameDetails?.gameId));
@@ -145,8 +150,24 @@ const Leaderboard = ({
 
     // SORTING LEADERBOARD
     useEffect(() => {
+        const rankIndex = leaderboard.findIndex(
+            (data) => data.userId > 0 && data.userId === user.id
+        );
+        if (rankIndex >= 0) {
+            setYourRankData((prev) => ({
+                ...prev,
+                ...leaderboard[rankIndex],
+                rank: rankIndex + 1,
+            }));
+        } else {
+            setYourRankData((prev) => ({
+                ...prev,
+                rank: "-",
+            }));
+        }
+
         setLeaderboardList(leaderboard);
-    }, [leaderboard]);
+    }, [leaderboard, user]);
 
     // LEADERBOARD RANK & ADDITIONAL TICKETS RULES
     useEffect(() => {
@@ -157,16 +178,7 @@ const Leaderboard = ({
         let destination = document.getElementById("destination")?.contentWindow;
         if (destination) {
             // END BY TIMER
-
-            if (typeof destination.endGameByTimer() === "function") {
-                destination.endGameByTimer();
-            } else {
-                setModalStatus((prev) => ({
-                    ...prev,
-                    isGameOver: true,
-                    isTournamentEnded: true,
-                }));
-            }
+            destination?.endGameByTimer?.();
 
             setEarnAdditionalDisabledStatus({
                 gems: false,
@@ -246,6 +258,21 @@ const Leaderboard = ({
         setIsGameAvailable(!isDisabled);
     }, [timer]);
 
+    const onLeaderboardScrolling = (evt) => {
+        let isInsideElement = false;
+        if (yourRankEleRef.current) {
+            isInsideElement = isScrolledIntoView(
+                evt.target,
+                yourRankEleRef.current
+            );
+        }
+
+        setYourRankData((prev) => ({
+            ...prev,
+            visible: parseInt(prev.rank) > 0 && !isInsideElement,
+        }));
+    };
+
     const isCurrentUser = (id) => {
         if (id > 0 && user.id === id) return true;
         return false;
@@ -260,36 +287,26 @@ const Leaderboard = ({
         return value;
     };
 
-    const handleOnClickPlayButton = async () => {
-        setModalStatus((prev) => ({
-            ...prev,
-            isGamePaused: false,
-            isPlayBtnDisabled: true,
-        }));
+    window.sendLogGEnter = async () => {
+        let _earnAdditional = [...earnAdditionalBenefitStatus];
+
+        let index = _earnAdditional.findIndex(
+            (e) => e.prizeId === data?.prizeId
+        );
 
         if (!executeRecaptcha) {
             console.log("Execute recaptcha not yet available");
             return;
         }
+
         const recaptchaToken = await executeRecaptcha("playGame");
 
-        // TODO
-        let _earnAdditional = [...earnAdditionalBenefitStatus];
-        let index = _earnAdditional.findIndex(
-            (e) => e.prizeId === data?.prizeId
-        );
         let isAdWatched =
             index > -1 ? _earnAdditional[index]?.isAdsSelected : false;
         let isGemUsed =
             index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
 
-        setCurrentGameBoosterInfo(() => ({
-            isUseBooster: isGemUsed,
-            extraTickets: currentGameRules.useGemTickets,
-            scoreNeededPerExtraTickets: currentGameRules.score,
-        }));
-
-        dispatch(
+        return await dispatch(
             loadPlayerEnterTournamentId(
                 data?.prizeId,
                 currentGameDetails?.gameId,
@@ -298,62 +315,84 @@ const Leaderboard = ({
                 recaptchaToken
             )
         )
-            .then(async () => {
-                const token = getToken();
-
-                if (currentGameDetails.gameId > 0) {
-                    try {
-                        let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
-                        let options = {
-                            headers: {
-                                "Access-Control-Allow-Origin": "*",
-                                "Access-Control-Allow-Methods":
-                                    "POST, GET, OPTIONS",
-                                Authorization: `Bearer ${token}`,
-                            },
-                        };
-                        let response = await axios.get(url, options);
-                        if (response.data) {
-                            sessionStorage.setItem(
-                                "lbId",
-                                JSON.stringify({
-                                    cgId: data.cgId,
-                                    gameId: currentGameDetails.gameId,
-                                    gameDuration: 180, //in seconds
-                                    tournamentEndTime:
-                                        data?.gameInfo[0]?.endTimeStamp,
-                                })
-                            );
-                            setGameData(response.data);
-                            let gameCount =
-                                parseInt(localStorage.getItem("gameCount")) ||
-                                0;
-                            if (gameCount <= config.adsPerGame) {
-                                gameCount = gameCount + 1;
-                                localStorage.setItem("gameCount", gameCount);
-                            }
-
-                            showAdsBeforeGame(config);
-                        }
-                    } catch (error) {
-                        console.log(error.message);
-                    }
-                }
-
-                setModalStatus((prev) => ({
-                    ...prev,
-                    isGameReady: true,
-                    isEarnAdditionalInfoShown: false,
-                }));
-
-                setEarnAdditionalDisabledStatus({
-                    gems: false,
-                    ads: false,
-                });
-            })
+            .then(() => true)
             .catch((err) => {
-                setIsSubscriptionModalShown(true);
+                window.showLoadErrorPopUp(LOAD_ERROR_CODES.LOG_G_ENTER_FAIL);
+                return false;
+                // setIsSubscriptionModalShown(true);
             });
+    };
+
+    const handleOnClickPlayButton = async () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isGamePaused: false,
+            isPlayBtnDisabled: true,
+        }));
+
+        // TODO
+        let _earnAdditional = [...earnAdditionalBenefitStatus];
+        let index = _earnAdditional.findIndex(
+            (e) => e.prizeId === data?.prizeId
+        );
+
+        let isGemUsed =
+            index > -1 ? _earnAdditional[index]?.isGemsSelected : false;
+
+        const token = getToken();
+
+        if (currentGameDetails.gameId > 0) {
+            try {
+                let url = `${process.env.REACT_APP_GLOADER_ENDPOINT}/sloader?game_id=${currentGameDetails.gameId}&user_id=${user.id}`;
+                let options = {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+                let response = await axios.get(url, options);
+                if (response.data) {
+                    sessionStorage.setItem(
+                        "lbId",
+                        JSON.stringify({
+                            cgId: data.cgId,
+                            gameId: currentGameDetails.gameId,
+                            gameDuration: 180, //in seconds
+                            tournamentEndTime: data?.gameInfo[0]?.endTimeStamp,
+                        })
+                    );
+                    setGameData(response.data);
+                    let gameCount =
+                        parseInt(localStorage.getItem("gameCount")) || 0;
+                    if (gameCount <= config.adsPerGame) {
+                        gameCount = gameCount + 1;
+                        localStorage.setItem("gameCount", gameCount);
+                    }
+
+                    showAdsBeforeGame(config);
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+        setModalStatus((prev) => ({
+            ...prev,
+            isGameReady: true,
+            isEarnAdditionalInfoShown: false,
+        }));
+
+        setEarnAdditionalDisabledStatus({
+            gems: false,
+            ads: false,
+        });
+
+        setCurrentGameBoosterInfo(() => ({
+            isUseBooster: isGemUsed,
+            extraTickets: currentGameRules.useGemTickets,
+            scoreNeededPerExtraTickets: currentGameRules.score,
+        }));
     };
 
     const handleQuitGame = () => {
@@ -422,9 +461,9 @@ const Leaderboard = ({
         return enterGameConfig;
     };
 
-    window.showReloadAssetsPopUp = (errorCode) => {
+    window.showLoadErrorPopUp = (errorCode) => {
         switch (errorCode) {
-            case 12: //Asset Failed to Load because not found due to incorrect link (defined by phaser)
+            case LOAD_ERROR_CODES.BROKEN_LINK:
                 setLoadErrorDetails(() => ({
                     title: "Error",
                     message_1: "Oops, something went wrong.",
@@ -434,6 +473,19 @@ const Leaderboard = ({
                     okButtonHandling: "closeGame",
                     closeButtonText: "",
                     closeButtonHandling: "",
+                }));
+                break;
+            case LOAD_ERROR_CODES.LOG_G_ENTER_FAIL:
+                setLoadErrorDetails(() => ({
+                    title: "Error",
+                    message_1: "Unable to connect to server.",
+                    message_2:
+                        "Please check your internet connection and try again.",
+                    errorCode: `1-${data?.prizeId}-${currentGameDetails?.gameId}`,
+                    closeButtonText: "CLOSE",
+                    closeButtonHandling: "closeGame",
+                    okButtonText: "RETRY",
+                    okButtonHandling: "resendLogGEnter",
                 }));
                 break;
             default: //Asset Failed to Load due to internet connection
@@ -456,6 +508,7 @@ const Leaderboard = ({
             isLoadGameFailed: true,
         }));
     };
+
     /**
      * Whenever a game is finished should call this function to submiting the score object
      * @param {
@@ -480,6 +533,16 @@ const Leaderboard = ({
         document.getElementById("destination")?.contentWindow?.reloadAssets?.();
     };
 
+    const resendLogGEnter = () => {
+        setModalStatus((prev) => ({
+            ...prev,
+            isLoadGameFailed: false,
+        }));
+        document
+            .getElementById("destination")
+            ?.contentWindow?.trySendLogGEnter?.();
+    };
+
     const closeGame = () => {
         setModalStatus((prev) => ({
             ...prev,
@@ -497,6 +560,7 @@ const Leaderboard = ({
 
         dispatch({ type: PLAYER_LOG_RESET });
     };
+
     // window.playerQuitGame = () => {
     //     setModalStatus((prev) => ({
     //         ...prev,
@@ -566,6 +630,7 @@ const Leaderboard = ({
                 dispatch(
                     loadLeaderboard(data?.prizeId, currentGameDetails?.gameId)
                 );
+
                 // CALLING TICKETS API TO GET LATEST NUMBERS
                 if (earnAdditionalBenefitStatus.length > 0) {
                     // PLAYER TICKETS
@@ -646,6 +711,11 @@ const Leaderboard = ({
                                 ? "you"
                                 : ""
                         }`}
+                        ref={
+                            isCurrentUser(leaderboardList[i]?.userId)
+                                ? yourRankEleRef
+                                : null
+                        }
                     >
                         <div className="number-holder">
                             <LeaderRankIndicator index={i} type="lb" />
@@ -701,134 +771,378 @@ const Leaderboard = ({
         return _leaderboardList;
     }
 
-    if (modalStatus.isGameReady) {
-        return (
-            <div className="game-wrapper">
-                {/* ADDITIONAL TICKETS & EXPERIENCE POINTS WIN MODAL */}
-                {modalStatus.isEarnAdditionalWinModalShown && (
-                    <EarnAdditionalBenefitModal
-                        handleContinueButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
-                                isEarnAdditionalWinModalShown: false,
-                                isPlayBtnDisabled: false,
-                            }));
-                        }}
-                        score={scoreObject.a}
-                    />
-                )}
-                {/* MODAL FOR GAME OVER */}
-                {modalStatus.isGameOver && (
-                    <GameEndModal
-                        score={scoreObject.a}
-                        handleContinueButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGameReady: false,
-                                isQuitGameBtnDisabled: false,
-                                isGameOver: false,
-                                isTournamentEnded: false,
-                                isPlayBtnDisabled: false,
-                            }));
-                            // setIsGameLeaderboardShown(false);
-                            dispatch({ type: PLAYER_LOG_RESET });
-                        }}
-                        isShowTournamentEndedText={
-                            modalStatus.isTournamentEnded
-                        }
-                        currentGameBoosterInfo={currentGameBoosterInfo}
-                    />
-                )}
+    return (
+        <>
+            <section
+                id="game-leaderboard-screen"
+                className="col-12 col-md-8 px-0 py-2 px-md-auto py-md-0"
+            >
+                {/* TORUNAMENT INFO */}
+                <div className="tournament-info-wrapper col-12 p-0">
+                    <div className="d-flex flex-row">
+                        <span className="tournament-title">
+                            JOIN TOURNAMENTS!
+                        </span>
+                        <img
+                            width={20}
+                            src={`${window.cdn}buttons/button_question_01.png`}
+                            className="question-mark-img ml-auto"
+                            alt="question-mark"
+                            onClick={() => setIsInstructionShown(true)}
+                        />
+                    </div>
+                    <p className="tournament-subtitle mt-2 mb-3">
+                        Compete with other players, collect tickets and stand a
+                        chance to own this Prize!
+                    </p>
+                </div>
 
-                {/* MODAL FOR GAME PAUSED */}
-                {modalStatus.isGamePaused && (
-                    <PauseMenuModal
-                        handleResumeButton={() => {
-                            resumeGame();
-                            // setIsGameLeaderboardShown(false);
-                        }}
-                        handleQuitButton={() => {
-                            setModalStatus((prev) => ({
-                                ...prev,
-                                isGamePaused: false,
-                                isQuitGameConfirm: true,
-                            }));
-                        }}
-                        handleAudioButton={() => {
-                            isMute === "true"
-                                ? setIsMute("false")
-                                : setIsMute("true");
+                {/* LEADERBOARD */}
+                <div className="tournament-leaderboard">
+                    <div className="d-flex flex-column p-0 h-100">
+                        <div className="leaderboard-game-info d-flex">
+                            <img
+                                className="game-icon"
+                                src={currentGameDetails?.gameIcon}
+                                alt={currentGameDetails?.gameIcon}
+                            />
+                            <div className="game-details w-100 p-3">
+                                <p className="game-name">
+                                    {currentGameDetails?.gameTitle}
+                                </p>
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <p className="tournament-end-text mb-0">
+                                        Tournament ends in
+                                    </p>
+                                    <p
+                                        className={`mb-0 text-right ${
+                                            OverTimeModeChecker(
+                                                data?.prizeId,
+                                                data?.ticketsRequired,
+                                                prizeTicketCollection
+                                            )
+                                                ? "overtime-text"
+                                                : "timer-text"
+                                        }`}
+                                    >
+                                        {timer || "0d 0h 0m 0s"}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            className="leaderboard"
+                            onScroll={onLeaderboardScrolling}
+                        >
+                            {leaderboardList.length > 0
+                                ? getLeaderboardList()
+                                : getEmptyLeaderboardList()}
+                        </div>
+                    </div>
 
-                            let destination =
-                                document.getElementById(
-                                    "destination"
-                                )?.contentWindow;
-                            destination?.toggleAudioOnOff?.();
-                        }}
-                        isMute={isMute}
-                    />
-                )}
+                    {/* PLAYER-SELF RANK (SHOWING WHEN PLAYER RANK IS NOT VISIBLE IN VIEWPORT) */}
+                    {yourRankData.visible && (
+                        <div className="leaderboard-user-wrapper">
+                            <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
+                                <div className="number-holder">
+                                    <LeaderRankIndicator
+                                        index={yourRankData.rank}
+                                        type="current"
+                                    />
+                                </div>
+                                <div className="user-avatar">
+                                    <img
+                                        className="avatar"
+                                        onError={(e) => defaultUserImage(e)}
+                                        src={
+                                            yourRankData.avatarUrl ||
+                                            `${window.cdn}icons/icon_profile.svg`
+                                        }
+                                        alt="player"
+                                    />
+                                </div>
 
-                {/* MODAL FOR PENDING SUBMIT SCORE */}
-                {modalStatus.isSubmitScoreFailed && (
-                    <RetrySubmitModal
-                        closeButtonText="SKIP"
-                        handleClose={closeGame}
-                        okButtonText="RETRY"
-                        handleOk={() => {
-                            submitScore(scoreObject);
-                        }}
-                        disableRetry={modalStatus.isSubmittingScore}
-                        title="Error"
-                        subtitle={
-                            <>
-                                Unable to submit score to the server. <br />
-                                <br /> Skip: Gems will not be refunded and score
-                                will not be recorded
-                            </>
-                        }
-                    />
-                )}
+                                <div className="px-2 ml-3">
+                                    <p className="player-name">
+                                        {yourRankData.nickName}
+                                    </p>
+                                    <p className="points">
+                                        {yourRankData.gameScore || "0"} pts
+                                    </p>
+                                </div>
+                                <div className="tickets ml-auto d-flex align-items-center justify-content-center">
+                                    <span>
+                                        {getRankTickets(
+                                            yourRankData.rank - 1
+                                        ) || "0"}{" "}
+                                        <img
+                                            className="icon ml-1"
+                                            src={`${window.cdn}assets/tickets_06.png`}
+                                            alt="ticket"
+                                        />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
-                {/* MODAL FOR RELOADING GAME IF LOAD FAIL */}
-                {modalStatus.isLoadGameFailed && (
-                    <RetrySubmitModal
-                        okButtonText={loadErrorDetails.okButtonText}
-                        handleOk={() => {
-                            switch (loadErrorDetails.okButtonHandling) {
-                                case "closeGame":
-                                    closeGame();
-                                    break;
-                                case "reloadGame":
-                                    reloadGame();
-                                    break;
-                            }
-                        }}
-                        closeButtonText={loadErrorDetails.closeButtonText}
-                        handleClose={
-                            loadErrorDetails.closeButtonHandling === "closeGame"
-                                ? closeGame
+                {/* READY TOURNAMENT BUTTON */}
+                <div
+                    className={`bottom-ready-tournament d-block ${
+                        isMobile ? "mobile" : ""
+                    }`}
+                >
+                    <button
+                        className={`ready-tournament-button ${
+                            isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                ? ""
+                                : "opacity-0-5"
+                        }`}
+                        onClick={
+                            isGameAvailable && !modalStatus.isPlayBtnDisabled
+                                ? () => {
+                                      setModalStatus((prev) => ({
+                                          ...prev,
+                                          isEarnAdditionalInfoShown: true,
+                                          isShowIframe: false,
+                                      }));
+                                  }
                                 : null
                         }
-                        disableRetry={false}
-                        title={loadErrorDetails.title}
-                        subtitle={
-                            <>
-                                {loadErrorDetails.message_1}
-                                <br />
-                                {`(Code: ${loadErrorDetails.errorCode})`}
-                                <br />
-                                <br /> {loadErrorDetails.message_2}
-                            </>
-                        }
+                    >
+                        JOIN TOURNAMENT
+                        {/* <img
+                            width={18}
+                            className="icon ml-3 mr-1"
+                            src={`${window.cdn}assets/gem_01.png`}
+                            alt="gems"
+                        />
+                        {data?.gemsNeeded} */}
+                    </button>
+                </div>
+
+                {/* RECAPTCHA MESSAGES */}
+                <p className="recaptcha-text my-1 my-md-auto">
+                    This site is protected by reCAPTCHA and the Google
+                    {""}{" "}
+                    <a href="https://policies.google.com/privacy">
+                        Privacy Policy
+                    </a>{" "}
+                    and
+                    {""}{" "}
+                    <a href="https://policies.google.com/terms">
+                        Terms of Service
+                    </a>{" "}
+                    apply.
+                </p>
+
+                {isSubscriptionModalShown && (
+                    <InsufficientBalanceModalPopup
+                        onCloseClicked={onClickSubscriptionCancel}
                     />
                 )}
 
-                {/* Comment out because the Front End X button is no longer in
+                {/* EARN ADDITIONAL BENEFITS */}
+                {modalStatus.isEarnAdditionalInfoShown && (
+                    <LaunchGameMenuModalPopup
+                        gameId={currentGameDetails.gameId}
+                        prizeId={data?.prizeId}
+                        playCost={data?.gemsNeeded}
+                        setEarnAdditionalDisabledStatus={
+                            setEarnAdditionalDisabledStatus
+                        }
+                        isPlayBtnDisabled={
+                            !isGameAvailable || modalStatus.isPlayBtnDisabled
+                        }
+                        isLoadingGame={
+                            !modalStatus.isGameReady &&
+                            modalStatus.isPlayBtnDisabled
+                        }
+                        onCloseClicked={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isEarnAdditionalInfoShown: false,
+                            }));
+                        }}
+                        onPlayClicked={handleOnClickPlayButton}
+                        onInsufficientPayment={() => {
+                            setModalStatus((prev) => ({
+                                ...prev,
+                                isEarnAdditionalInfoShown: false,
+                            }));
+                            setIsSubscriptionModalShown(true);
+                        }}
+                    />
+
+                    // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
+                    //     <EarnAdditionalTickets
+                    //         gameId={currentGameDetails.gameId}
+                    //         prizeId={data?.prizeId}
+                    //         earnAdditionalDisabledStatus={
+                    //             earnAdditionalDisabledStatus
+                    //         }
+                    //         setEarnAdditionalDisabledStatus={
+                    //             setEarnAdditionalDisabledStatus
+                    //         }
+                    //     />
+                    //     {/* PLAY BUTTON*/}
+                    //     <div
+                    //         className={`play-button-container d-flex justify-content-center ${
+                    //             isGameAvailable
+                    //                 ? ""
+                    //                 : "opacity-0-5"
+                    //         }`}
+                    //     >
+                    //         <button
+                    //             onClick={
+                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                    //                     ? handleOnClickPlayButton
+                    //                     : null
+                    //             }
+                    //             className={`play-button ${
+                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
+                    //                     ? ""
+                    //                     : "opacity-0-5"
+                    //             }`}
+                    //         >
+                    //             Play Tournament!
+                    //         </button>
+                    //     </div>
+                    // </div>
+                )}
+            </section>
+
+            {modalStatus.isGameReady && (
+                <div className="game-wrapper">
+                    {/* ADDITIONAL TICKETS & EXPERIENCE POINTS WIN MODAL */}
+                    {modalStatus.isEarnAdditionalWinModalShown && (
+                        <EarnAdditionalBenefitModal
+                            handleContinueButton={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGameReady: false,
+                                    isQuitGameBtnDisabled: false,
+                                    isEarnAdditionalWinModalShown: false,
+                                    isPlayBtnDisabled: false,
+                                }));
+                            }}
+                            score={scoreObject.a}
+                        />
+                    )}
+                    {/* MODAL FOR GAME OVER */}
+                    {modalStatus.isGameOver && (
+                        <GameEndModal
+                            score={scoreObject.a}
+                            handleContinueButton={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGameReady: false,
+                                    isQuitGameBtnDisabled: false,
+                                    isGameOver: false,
+                                    isTournamentEnded: false,
+                                    isPlayBtnDisabled: false,
+                                }));
+                                // setIsGameLeaderboardShown(false);
+                                dispatch({ type: PLAYER_LOG_RESET });
+                            }}
+                            isShowTournamentEndedText={
+                                modalStatus.isTournamentEnded
+                            }
+                            currentGameBoosterInfo={currentGameBoosterInfo}
+                        />
+                    )}
+
+                    {/* MODAL FOR GAME PAUSED */}
+                    {modalStatus.isGamePaused && (
+                        <PauseMenuModal
+                            handleResumeButton={() => {
+                                resumeGame();
+                                // setIsGameLeaderboardShown(false);
+                            }}
+                            handleQuitButton={() => {
+                                setModalStatus((prev) => ({
+                                    ...prev,
+                                    isGamePaused: false,
+                                    isQuitGameConfirm: true,
+                                }));
+                            }}
+                            handleAudioButton={() => {
+                                isMute === "true"
+                                    ? setIsMute("false")
+                                    : setIsMute("true");
+
+                                let destination =
+                                    document.getElementById(
+                                        "destination"
+                                    )?.contentWindow;
+                                destination?.toggleAudioOnOff?.();
+                            }}
+                            isMute={isMute}
+                        />
+                    )}
+
+                    {/* MODAL FOR PENDING SUBMIT SCORE */}
+                    {modalStatus.isSubmitScoreFailed && (
+                        <RetrySubmitModal
+                            closeButtonText="SKIP"
+                            handleClose={closeGame}
+                            okButtonText="RETRY"
+                            handleOk={() => {
+                                submitScore(scoreObject);
+                            }}
+                            disableRetry={modalStatus.isSubmittingScore}
+                            title="Error"
+                            subtitle={
+                                <>
+                                    Unable to submit score to the server. <br />
+                                    <br /> Skip: Gems will not be refunded and
+                                    score will not be recorded
+                                </>
+                            }
+                        />
+                    )}
+
+                    {/* MODAL FOR RELOADING GAME IF LOAD FAIL */}
+                    {modalStatus.isLoadGameFailed && (
+                        <RetrySubmitModal
+                            okButtonText={loadErrorDetails.okButtonText}
+                            handleOk={() => {
+                                switch (loadErrorDetails.okButtonHandling) {
+                                    case "closeGame":
+                                        closeGame();
+                                        break;
+                                    case "reloadGame":
+                                        reloadGame();
+                                        break;
+                                    case "resendLogGEnter":
+                                        resendLogGEnter();
+                                        break;
+                                }
+                            }}
+                            closeButtonText={loadErrorDetails.closeButtonText}
+                            handleClose={
+                                loadErrorDetails.closeButtonHandling ===
+                                "closeGame"
+                                    ? closeGame
+                                    : null
+                            }
+                            disableRetry={false}
+                            title={loadErrorDetails.title}
+                            subtitle={
+                                <>
+                                    {loadErrorDetails.message_1}
+                                    <br />
+                                    {`(Code: ${loadErrorDetails.errorCode})`}
+                                    <br />
+                                    <br /> {loadErrorDetails.message_2}
+                                </>
+                            }
+                        />
+                    )}
+                    {/* Comment out because the Front End X button is no longer in
                 used */}
-                {/* {!modalStatus.isQuitGameBtnDisabled && (
+                    {/* {!modalStatus.isQuitGameBtnDisabled && (
                     <img
                         className="ml-1 mt-1 quit-btn"
                         width="36"
@@ -837,325 +1151,55 @@ const Leaderboard = ({
                         alt="Close Button"
                     />
                 )} */}
-                {/* QUIT GAME MODAL */}
-                {modalStatus.isQuitGameConfirm && (
-                    <GameQuitModal onActionCallback={handleQuitGameAction} />
-                )}
-                {/* GAME IFRAME */}
-                {gameData !== null && (
-                    <>
-                        <div className="game-loading">
-                            <p className="mb-2 text-center loading-text">
-                                Loading
-                            </p>
-                            <GenericLoader
-                                height="30"
-                                bg="#FF007C"
-                                cx1={window.innerWidth > 1200 ? "48%" : "46%"}
-                                cx2="50%"
-                                cx3={window.innerWidth > 1200 ? "52%" : "54%"}
-                                cy="15"
-                            />
-                            <button
-                                className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
-                                onClick={handleQuitGame}
-                            >
-                                Close
-                            </button>
-                        </div>
-
-                        <iframe
-                            className={
-                                modalStatus.isShowIframe
-                                    ? "shown-iframe"
-                                    : "hidden-iframe"
-                            }
-                            title="game"
-                            id="destination"
-                            srcDoc={gameData}
-                            frameBorder="0"
+                    {/* QUIT GAME MODAL */}
+                    {modalStatus.isQuitGameConfirm && (
+                        <GameQuitModal
+                            onActionCallback={handleQuitGameAction}
                         />
-                    </>
-                )}
-            </div>
-        );
-    } else {
-        return (
-            <section
-                id="game-leaderboard-screen"
-                // REASON OF COMMENTED: Disable tap outside to close the LaunchGameMenu popup
-                // onClick={(e) => {
-                //     if (
-                // //         !e.target.closest(".bottom-ready-tournament") &&
-                // //         !e.target.closest(".earn-additional-tickets-container")
-                //     ) {
-                //         setModalStatus((prev) => ({
-                //             ...prev,
-                //             isEarnAdditionalInfoShown: false,
-                //         }));
-                //     }
-                // }}
-            >
-                {/* TICKETS BOOSTER CLOSE LAYER */}
-                {/* {modalStatus.isEarnAdditionalInfoShown && (
-                    <div className="leaderboard-tickets-booster-close"></div>
-                )} */}
-
-                <div className="container-fluid">
-                    <div className="row justify-content-center">
-                        <div className="col-12">
-                            {/* BACKGROUND IMAGE */}
-                            <div
-                                className="col-12 px-0 leaderboard-background-wrapper position-relative"
-                                ref={leaderBoardBackgroundRef}
-                            >
-                                <img
-                                    className="leaderboard-background"
-                                    src={currentGameDetails?.gameIcon}
-                                    alt={currentGameDetails?.gameTitle}
+                    )}
+                    {/* GAME IFRAME */}
+                    {gameData !== null && (
+                        <>
+                            <div className="game-loading">
+                                <p className="mb-2 text-center loading-text">
+                                    Loading
+                                </p>
+                                <GenericLoader
+                                    height="30"
+                                    bg="#FF007C"
+                                    cx1={
+                                        window.innerWidth > 1200 ? "48%" : "46%"
+                                    }
+                                    cx2="50%"
+                                    cx3={
+                                        window.innerWidth > 1200 ? "52%" : "54%"
+                                    }
+                                    cy="15"
                                 />
-                                {/* LEADERBOARD */}
-                                <div className="leaderboard-wrapper">
-                                    {/* GAME INFO & TIMER */}
-                                    <div
-                                        className="leaderboard-game-info d-flex align-items-center justify-content-start"
-                                        ref={leaderBoardGameInfoRef}
-                                    >
-                                        <img
-                                            className="game-icon"
-                                            src={currentGameDetails?.gameIcon}
-                                            alt={currentGameDetails?.gameIcon}
-                                        />
-                                        <div className="game-details w-100 px-3">
-                                            <p className="game-name w-100 mb-2">
-                                                {currentGameDetails?.gameTitle}
-                                            </p>
-
-                                            <div className="w-100 d-flex align-items-center justify-content-between">
-                                                <p className="tournament-end-text mb-0">
-                                                    Tournament ends in
-                                                </p>
-                                                <p
-                                                    className={`mb-0 ${
-                                                        OverTimeModeChecker(
-                                                            data?.prizeId,
-                                                            data?.ticketsRequired,
-                                                            prizeTicketCollection
-                                                        )
-                                                            ? "overtime-text"
-                                                            : "timer-text"
-                                                    }`}
-                                                >
-                                                    {timer || "0d 0h 0m 0s"}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* LEADERBOARD LIST */}
-                                    <div
-                                        ref={leaderboardRef}
-                                        className={`leaderboard ${
-                                            currentUserRank.rank > rankLength ||
-                                            currentUserRank.rank === "-"
-                                                ? ""
-                                                : "leaderboard-rank-layer-without-user"
-                                        }`}
-                                        style={{
-                                            padding: `${
-                                                currentUserRank.rank >
-                                                rankLength
-                                                    ? "0.25rem 0.25rem 5rem 0.25rem"
-                                                    : ""
-                                            }`,
-                                        }}
-                                    >
-                                        {leaderboardList.length > 0
-                                            ? getLeaderboardList()
-                                            : getEmptyLeaderboardList()}
-                                    </div>
-
-                                    {/* CURRENT USER RANK IF IT'S MORE THAN THE RANK LIST LENGTH */}
-                                    {currentUserRank.rank > rankLength ? (
-                                        <div className="leaderboard-user-wrapper w-100">
-                                            <div className="leader-player-card px-2 d-flex align-items-center leader-curr-player-card">
-                                                <div className="number-holder">
-                                                    <LeaderRankIndicator
-                                                        index={
-                                                            currentUserRank.rank
-                                                        }
-                                                        type="current"
-                                                    />
-                                                </div>
-                                                <div className="user-avatar">
-                                                    <img
-                                                        className="avatar"
-                                                        onError={(e) =>
-                                                            defaultUserImage(e)
-                                                        }
-                                                        src={
-                                                            user.picture ||
-                                                            `${window.cdn}icons/icon_profile.svg`
-                                                        }
-                                                        alt="player"
-                                                    />
-                                                </div>
-
-                                                <div className="px-2 ml-3">
-                                                    <p className="player-name">
-                                                        {user.username}
-                                                    </p>
-                                                    <p className="points">
-                                                        {leaderboard.find(
-                                                            (e) =>
-                                                                e.userId ===
-                                                                user.id
-                                                        )?.gameScore ||
-                                                            "0"}{" "}
-                                                        pts
-                                                    </p>
-                                                </div>
-                                                <div className="tickets ml-auto d-flex align-items-center justify-content-center">
-                                                    <span>
-                                                        {getRankTickets(
-                                                            currentUserRank.rank -
-                                                                1
-                                                        ) || "0"}{" "}
-                                                        <img
-                                                            className="icon ml-1"
-                                                            src={`${window.cdn}assets/tickets_06.png`}
-                                                            alt="ticket"
-                                                        />
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        ""
-                                    )}
-                                </div>
-
-                                {/* READY TOURNAMENT BUTTON */}
-                                <div
-                                    className="bottom-ready-tournament d-block align-items-center justify-content-center"
-                                    ref={readyTournamentButtonRef}
+                                <button
+                                    className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
+                                    onClick={handleQuitGame}
                                 >
-                                    <button
-                                        className={`ready-tournament-button ${
-                                            isGameAvailable &&
-                                            !modalStatus.isPlayBtnDisabled
-                                                ? ""
-                                                : "opacity-0-5"
-                                        }`}
-                                        onClick={
-                                            isGameAvailable &&
-                                            !modalStatus.isPlayBtnDisabled
-                                                ? () => {
-                                                      setModalStatus(
-                                                          (prev) => ({
-                                                              ...prev,
-                                                              isEarnAdditionalInfoShown: true,
-                                                              isShowIframe: false,
-                                                          })
-                                                      );
-                                                  }
-                                                : null
-                                        }
-                                    >
-                                        JOIN TOURNAMENT
-                                        {/* <img
-                                            width={18}
-                                            className="icon ml-3 mr-1"
-                                            src={`${window.cdn}assets/gem_01.png`}
-                                            alt="gems"
-                                        />
-                                        {data?.gemsNeeded} */}
-                                    </button>
-                                </div>
-
-                                {isSubscriptionModalShown && (
-                                    <InsufficientBalanceModalPopup
-                                        onCloseClicked={
-                                            onClickSubscriptionCancel
-                                        }
-                                    />
-                                )}
-
-                                {/* EARN ADDITIONAL BENEFITS */}
-                                {modalStatus.isEarnAdditionalInfoShown && (
-                                    <LaunchGameMenuModalPopup
-                                        gameId={currentGameDetails.gameId}
-                                        prizeId={data?.prizeId}
-                                        playCost={data?.gemsNeeded}
-                                        setEarnAdditionalDisabledStatus={
-                                            setEarnAdditionalDisabledStatus
-                                        }
-                                        isPlayBtnDisabled={
-                                            !isGameAvailable ||
-                                            modalStatus.isPlayBtnDisabled
-                                        }
-                                        isLoadingGame={
-                                            !modalStatus.isGameReady &&
-                                            modalStatus.isPlayBtnDisabled
-                                        }
-                                        onCloseClicked={() => {
-                                            setModalStatus((prev) => ({
-                                                ...prev,
-                                                isEarnAdditionalInfoShown: false,
-                                            }));
-                                        }}
-                                        onPlayClicked={handleOnClickPlayButton}
-                                        onInsufficientPayment={() => {
-                                            setModalStatus((prev) => ({
-                                                ...prev,
-                                                isEarnAdditionalInfoShown: false,
-                                            }));
-                                            setIsSubscriptionModalShown(true);
-                                        }}
-                                    />
-
-                                    // <div className="earn-additional-tickets-container d-flex flex-column align-items-center justify-content-center">
-                                    //     <EarnAdditionalTickets
-                                    //         gameId={currentGameDetails.gameId}
-                                    //         prizeId={data?.prizeId}
-                                    //         earnAdditionalDisabledStatus={
-                                    //             earnAdditionalDisabledStatus
-                                    //         }
-                                    //         setEarnAdditionalDisabledStatus={
-                                    //             setEarnAdditionalDisabledStatus
-                                    //         }
-                                    //     />
-                                    //     {/* PLAY BUTTON*/}
-                                    //     <div
-                                    //         className={`play-button-container d-flex justify-content-center ${
-                                    //             isGameAvailable
-                                    //                 ? ""
-                                    //                 : "opacity-0-5"
-                                    //         }`}
-                                    //     >
-                                    //         <button
-                                    //             onClick={
-                                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                    //                     ? handleOnClickPlayButton
-                                    //                     : null
-                                    //             }
-                                    //             className={`play-button ${
-                                    //                 isGameAvailable && !modalStatus.isPlayBtnDisabled
-                                    //                     ? ""
-                                    //                     : "opacity-0-5"
-                                    //             }`}
-                                    //         >
-                                    //             Play Tournament!
-                                    //         </button>
-                                    //     </div>
-                                    // </div>
-                                )}
+                                    Close
+                                </button>
                             </div>
-                        </div>
-                    </div>
+                            <iframe
+                                className={
+                                    modalStatus.isShowIframe
+                                        ? "shown-iframe"
+                                        : "hidden-iframe"
+                                }
+                                title="game"
+                                id="destination"
+                                srcDoc={gameData}
+                                frameBorder="0"
+                            />
+                        </>
+                    )}
                 </div>
-            </section>
-        );
-    }
+            )}
+        </>
+    );
 };
 
 export default Leaderboard;

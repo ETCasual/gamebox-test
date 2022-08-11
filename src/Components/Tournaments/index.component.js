@@ -238,8 +238,6 @@ const Index = ({ match }) => {
                 (e) => e.prizeId === parseInt(id)
             )?.isGemsSelected;
     }
-    // INSTRUCTION POPUP MODAL
-    const handleInstructionPanel = () => setIsInstructionShown(true);
 
     // BACK BUTTONS
     const onClickInstructionBackButton = () => setIsInstructionShown(false);
@@ -266,7 +264,7 @@ const Index = ({ match }) => {
                         <div className="row justify-content-center">
                             <div className="col-12 col-md-10 col-lg-8 px-0 full-wrapper">
                                 {/* BACK BUTTON */}
-                                <div className="d-flex align-items-center back-button mb-3 mb-md-4 px-3">
+                                <div className="d-flex align-items-center back-button mx-3">
                                     <div
                                         className="d-flex align-items-center"
                                         onClick={() => {
@@ -281,284 +279,175 @@ const Index = ({ match }) => {
                                         <span className="ml-2">Back</span>
                                     </div>
                                 </div>
-                                {/* TICKETS AND POOL INFO */}
-                                <div className="col-12 px-3 position-relative d-flex align-items-start justify-content-start prize-info-wrapper mb-4 mb-md-4">
-                                    {/* THUMBNAIL MEDIA */}
-                                    <ThumbnailMedia
-                                        url={currentPrize?.prizeBG}
-                                        isPlayVideo={true}
-                                    />
 
-                                    {currentPrize?.infoUrl ? (
-                                        <a
-                                            className="contract-address"
-                                            href={currentPrize?.infoUrl || "#"}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            {currentPrize?.nftContractAddress?.substring(
-                                                0,
-                                                4
-                                            )}
-                                            ....
-                                            {currentPrize?.nftContractAddress?.substring(
-                                                currentPrize?.nftContractAddress
-                                                    .length - 5,
-                                                currentPrize?.nftContractAddress
-                                                    .length - 1
-                                            )}
-                                        </a>
-                                    ) : (
-                                        <div className="contract-address">
-                                            {currentPrize?.nftContractAddress?.substring(
-                                                0,
-                                                4
-                                            )}
-                                            ....
-                                            {currentPrize?.nftContractAddress?.substring(
-                                                currentPrize?.nftContractAddress
-                                                    .length - 5,
-                                                currentPrize?.nftContractAddress
-                                                    .length - 1
-                                            )}
-                                        </div>
-                                    )}
-                                    <div className="prize-text-holder d-flex flex-column align-items-start justify-content-between w-100 ml-3">
-                                        <div className="prize-id mb-lg-1 mt-2">
-                                            {currentPrize?.prizeSubtitle}
-                                        </div>
-                                        <div className="prize-title mb-lg-3">
-                                            {currentPrize?.prizeTitle || "-"}
-                                        </div>
-                                        <div className="prize-description">
-                                            {currentPrize?.prizeContent || "-"}
-                                        </div>
-                                        {/* DESKTOP - TICKETS, TIMER & OVERTIME */}
-                                        <div className="token-and-draw-start-holder mt-auto mb-1 d-none d-lg-flex align-items-end justify-content-between w-100">
-                                            <div className="token-text-holder d-flex align-items-end justify-content-start">
-                                                <div className="your-tokens-text">
-                                                    Your tickets
-                                                </div>
-                                                <div className="your-tokens-number ml-0 ml-md-2">
-                                                    {getPoolTickets(
-                                                        poolTickets,
-                                                        id
-                                                    )?.toLocaleString() || 0}
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                className={`${
-                                                    currentPrize.overTime
-                                                        ? "overtime-and-total-tickets-wrapper col-3"
-                                                        : "total-tickets-wrapper"
-                                                }`}
-                                            >
-                                                {/* OVERTIME TEXT */}
-                                                {currentPrize.overTime && (
-                                                    <p className="overtime-text mb-1 text-center mt-2">
-                                                        BONUS TIME!
-                                                    </p>
-                                                )}
-                                                {/* TICKETS & OVERTIME TIMER */}
-                                                <div className="draw-start-holder d-flex align-items-center ms-auto mb-2 justify-content-center">
-                                                    <div className="draw-text mr-0 mr-md-2">
-                                                        {`Draw starts in \u00A0`}
-                                                    </div>
-
-                                                    {/* COUNT DOWN TIME */}
-                                                    <span
-                                                        className={`${
-                                                            currentPrize.overTime
-                                                                ? "tickets-text-end"
-                                                                : "tickets-text"
-                                                        }`}
-                                                    >
-                                                        {currentPrize.overTime
-                                                            ? timer
-                                                            : getPrizeTicketCollected(
-                                                                  prizeTicketCollection,
-                                                                  id
-                                                              )?.toLocaleString() ||
-                                                              0}
-                                                    </span>
-
-                                                    {/* TICKETS REQUIRED NUMBER */}
-                                                    {!currentPrize.overTime && (
-                                                        <span className="total-tickets-text">
-                                                            {`\u00A0 / ${
-                                                                currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                                0
-                                                            }`}
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* MOBILE - SEPARATOR */}
-                                <div className="separator d-block d-lg-none px-3" />
-                                {/* MOBILE - TICKETS, TIMER & OVERTIME */}
-                                <div className="token-and-draw-start-holder px-3 mt-auto mb-1 d-flex d-lg-none align-items-end justify-content-between w-100">
-                                    <div className="token-text-holder">
-                                        <p className="your-tokens-text mb-0">
-                                            Your tickets
-                                        </p>
-                                        <p className="your-tokens-number mt-2">
-                                            {getPoolTickets(
-                                                poolTickets,
-                                                id
-                                            )?.toLocaleString() || 0}
-                                        </p>
-                                    </div>
-                                    <div
-                                        className={`${
-                                            currentPrize.overTime
-                                                ? "overtime-and-total-tickets-wrapper col-6"
-                                                : "total-tickets-wrapper"
-                                        }`}
-                                    >
-                                        {/* OVERTIME TEXT */}
-                                        {
-                                            // OverTimeModeChecker(
-                                            //     currentPrize?.prizeId,
-                                            //     currentPrize?.ticketsRequired,
-                                            //     prizeTicketCollection
-                                            // )
-                                            currentPrize.overTime && (
-                                                <p className="overtime-text mb-1 text-center mt-2">
-                                                    BONUS TIME!
-                                                </p>
-                                            )
-                                        }
-                                        {/* TICKETS & OVERTIME TIMER */}
-                                        <div className="draw-start-holder justify-content-center align-items-center d-flex mb-2">
-                                            <p className="draw-text mb-0">
-                                                {`Draw starts in \u00A0`}
-                                            </p>
-
-                                            {/* COUNT DOWN TIME */}
-                                            <span
-                                                className={`${
-                                                    // OverTimeModeChecker(
-                                                    //     currentPrize?.prizeId,
-                                                    //     currentPrize?.ticketsRequired,
-                                                    //     prizeTicketCollection
-                                                    // )
-                                                    currentPrize.overTime
-                                                        ? "tickets-text-end"
-                                                        : "tickets-text"
-                                                }`}
-                                            >
-                                                {
-                                                    // OverTimeModeChecker(
-                                                    //     currentPrize?.prizeId,
-                                                    //     currentPrize?.ticketsRequired,
-                                                    //     prizeTicketCollection
-                                                    // )
-                                                    currentPrize.overTime
-                                                        ? timer
-                                                        : getPrizeTicketCollected(
-                                                              prizeTicketCollection,
-                                                              id
-                                                          )?.toLocaleString() ||
-                                                          0
-                                                }
-                                            </span>
-
-                                            {/* TICKETS REQUIRED NUMBER */}
-                                            {
-                                                // !OverTimeModeChecker(
-                                                //     currentPrize?.prizeId,
-                                                //     currentPrize?.ticketsRequired,
-                                                //     prizeTicketCollection
-                                                // )
-                                                !currentPrize.overTime && (
-                                                    <span className="total-tickets-text">
-                                                        {`\u00A0 / ${
-                                                            currentPrize?.ticketsRequired?.toLocaleString() ||
-                                                            0
-                                                        }`}
-                                                    </span>
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* GAME INFO */}
-                                <div className="d-flex align-items-end px-3 px-md-3">
-                                    {/* JOIN TITLE & STATEMENT */}
-                                    <div className="col-12 col-xl-12 game-info px-3 pt-3">
-                                        <div className="row">
-                                            <div className="col-12 mb-4">
-                                                <div className="join-tournament-wrapper d-flex align-items-center justify-content-between mb-2">
-                                                    <p className="statement-title algin mb-0">
-                                                        Tournament - {gameName}
-                                                    </p>
-                                                    <img
-                                                        width={20}
-                                                        src={`${window.cdn}buttons/button_question_01.png`}
-                                                        className="question-mark-img"
-                                                        alt="question-mark"
-                                                        onClick={
-                                                            handleInstructionPanel
-                                                        }
-                                                    />
-                                                </div>
-                                                <p className="statement-subtitle mb-0">
-                                                    Compete with other players,
-                                                    collect tickets and stand a
-                                                    chance to own this Prize!
-                                                </p>
-                                            </div>
-                                        </div>
-                                        {/* GAME INFO CARDS */}
-                                        <div className="row">
-                                            {/* TOURNAMENT LEADBOARD */}
-                                            <Leaderboard
-                                                data={currentPrize}
-                                                // handleBackButton={
-                                                //     onClickGameLeaderBackButton
-                                                // }
-                                                // setIsGameLeaderboardShown={
-                                                //     setIsGameLeaderboardShown
-                                                // }
-                                                timer={timer}
-                                                setTimer={setTimer}
-                                                earnAdditionalDisabledStatus={
-                                                    earnAdditionalDisabledStatus
-                                                }
-                                                setEarnAdditionalDisabledStatus={
-                                                    setEarnAdditionalDisabledStatus
-                                                }
-                                            />
-                                            {/* PRIZE FINISHED */}
-                                            {prizeEnded && (
-                                                <PrizeEndedModalPopup
-                                                    handleContinueBtn={
-                                                        handlePrizeEndedModalContinueBtn
-                                                    }
+                                <div className="row m-3">
+                                    {/* <div className="row col-12"> */}
+                                    {/* TICKETS AND POOL INFO */}
+                                    <div className="prize-info-wrapper col-12 col-md-4 p-0 d-flex flex-column flex-md-row">
+                                        <div className="d-flex flex-row flex-md-column">
+                                            <div className="col-4 p-0 col-md-12 flex-md-fill ">
+                                                <ThumbnailMedia
+                                                    url={currentPrize?.prizeBG}
+                                                    isPlayVideo={true}
+                                                    className="thumb"
                                                 />
-                                            )}
+
+                                                {currentPrize?.infoUrl ? (
+                                                    <a
+                                                        className="contract-address"
+                                                        href={
+                                                            currentPrize?.infoUrl ||
+                                                            "#"
+                                                        }
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                    >
+                                                        {
+                                                            currentPrize?.nftContractAddress
+                                                        }
+                                                        {/* {currentPrize?.nftContractAddress?.substring(
+                                                            0,
+                                                            4
+                                                        )}
+                                                        ....
+                                                        {currentPrize?.nftContractAddress?.substring(
+                                                            currentPrize
+                                                                ?.nftContractAddress
+                                                                .length - 5,
+                                                            currentPrize
+                                                                ?.nftContractAddress
+                                                                .length - 1
+                                                        )} */}
+                                                    </a>
+                                                ) : (
+                                                    <div className="contract-address">
+                                                        {currentPrize?.nftContractAddress?.substring(
+                                                            0,
+                                                            4
+                                                        )}
+                                                        ....
+                                                        {currentPrize?.nftContractAddress?.substring(
+                                                            currentPrize
+                                                                ?.nftContractAddress
+                                                                .length - 5,
+                                                            currentPrize
+                                                                ?.nftContractAddress
+                                                                .length - 1
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="prize-text-holder col-8 col-md-12 d-flex flex-column justify-content-between justify-content-md-start pr-0 pl-md-0">
+                                                <div className="align-items-start my-md-3">
+                                                    <div className="prize-id mb-lg-1">
+                                                        {
+                                                            currentPrize?.prizeSubtitle
+                                                        }
+                                                    </div>
+                                                    <div className="prize-title my-2 mb-lg-3">
+                                                        {currentPrize?.prizeTitle ||
+                                                            "-"}
+                                                    </div>
+                                                    <div className="prize-description">
+                                                        {currentPrize?.prizeContent ||
+                                                            "-"}
+                                                    </div>
+                                                </div>
+
+                                                <div className="your-tokens-info d-flex flex-row flex-md-column align-items-end mt-2">
+                                                    <div className="col-4 col-md-auto p-0 mt-auto mx-auto ml-md-0">
+                                                        <div className="your-tokens-title-text">
+                                                            Your tickets
+                                                        </div>
+                                                        <div className="your-tokens-number mt-1">
+                                                            {getPoolTickets(
+                                                                poolTickets,
+                                                                id
+                                                            )?.toLocaleString() ||
+                                                                0}
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-8 col-md-12 p-0 mt-auto mt-md-3 mx-auto ml-md-0 text-right text-md-left">
+                                                        {/* CURRENT TICKETS / TOTAL TICKETS */}
+                                                        {!currentPrize.overTime && (
+                                                            <>
+                                                                <div className="your-tokens-title-text mr-0 mr-md-2">
+                                                                    Draw starts
+                                                                    in
+                                                                </div>
+                                                                <div className="mt-1">
+                                                                    {/* CURRENT PRIZE POOL TICKETS */}
+                                                                    <span className="current-tickets-text blue-text">
+                                                                        {getPrizeTicketCollected(
+                                                                            prizeTicketCollection,
+                                                                            id
+                                                                        )?.toLocaleString() ||
+                                                                            0}
+                                                                    </span>
+
+                                                                    {/* TOTAL PRIZE POOL TICKETS */}
+                                                                    <span className="total-tickets-text">
+                                                                        {`\u00A0 / ${
+                                                                            currentPrize?.ticketsRequired?.toLocaleString() ||
+                                                                            0
+                                                                        }`}
+                                                                    </span>
+                                                                </div>
+                                                            </>
+                                                        )}
+
+                                                        {/* OVERTIMER TIMER */}
+                                                        {currentPrize.overTime && (
+                                                            <div className="overtime-tickets-wrapper text-left">
+                                                                <p className="overtime-title-text mb-1">
+                                                                    BONUS TIME!
+                                                                </p>
+                                                                <div className="d-flex flex-row align-items-end">
+                                                                    <div className="draw-title-text w-100 mr-2 mr-md-2">
+                                                                        Draw
+                                                                        starts
+                                                                        in
+                                                                    </div>
+
+                                                                    {/* COUNT DOWN TIME */}
+                                                                    <div className="timer-text w-100 text-right">
+                                                                        {timer}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        {/* RECAPTCHA MESSAGES */}
-                                        <p className="recaptcha-text">
-                                            This site is protected by reCAPTCHA
-                                            and the Google
-                                            {""}{" "}
-                                            <a href="https://policies.google.com/privacy">
-                                                Privacy Policy
-                                            </a>{" "}
-                                            and
-                                            {""}{" "}
-                                            <a href="https://policies.google.com/terms">
-                                                Terms of Service
-                                            </a>{" "}
-                                            apply.
-                                        </p>
+                                        {/* SEPARATOR */}
+                                        <div className="separator d-block my-3 mx-0 my-md-0 mx-md-4" />
                                     </div>
+
+                                    {/* TORUNAMENT LEADERBOARD */}
+                                    <Leaderboard
+                                        data={currentPrize}
+                                        // handleBackButton={
+                                        //     onClickGameLeaderBackButton
+                                        // }
+                                        // setIsGameLeaderboardShown={
+                                        //     setIsGameLeaderboardShown
+                                        // }
+                                        timer={timer}
+                                        setTimer={setTimer}
+                                        earnAdditionalDisabledStatus={
+                                            earnAdditionalDisabledStatus
+                                        }
+                                        setEarnAdditionalDisabledStatus={
+                                            setEarnAdditionalDisabledStatus
+                                        }
+                                        setIsInstructionShown={
+                                            setIsInstructionShown
+                                        }
+                                    />
+                                    {/* </div> */}
                                 </div>
                             </div>
                         </div>

@@ -150,13 +150,11 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                             Your tickets
                                                         </p>
                                                         <p className="mb-0 tickets d-flex align-items-center">
-                                                            {`\u00A0${
-                                                                getPoolTickets(
-                                                                    poolTickets,
-                                                                    data?.prizeId
-                                                                )?.toLocaleString() ||
-                                                                0
-                                                            }`}
+                                                            {getPoolTickets(
+                                                                poolTickets,
+                                                                data?.prizeId
+                                                            )?.toLocaleString() ||
+                                                                0}
                                                         </p>
                                                     </div>
                                                     <div className="pool-tickets mt-3">
@@ -175,19 +173,17 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                                         : "current-tickets tickets"
                                                                 }`}
                                                             >
-                                                                {`\u00A0${
-                                                                    OverTimeModeChecker(
-                                                                        data?.prizeId,
-                                                                        data?.ticketsRequired,
-                                                                        prizeTicketCollection
-                                                                    )
-                                                                        ? timer
-                                                                        : getPrizeTicketCollected(
-                                                                              prizeTicketCollection,
-                                                                              data?.prizeId
-                                                                          )?.toLocaleString() ||
-                                                                          0
-                                                                }`}
+                                                                {OverTimeModeChecker(
+                                                                    data?.prizeId,
+                                                                    data?.ticketsRequired,
+                                                                    prizeTicketCollection
+                                                                )
+                                                                    ? timer
+                                                                    : getPrizeTicketCollected(
+                                                                          prizeTicketCollection,
+                                                                          data?.prizeId
+                                                                      )?.toLocaleString() ||
+                                                                      0}
                                                             </p>
                                                             {!OverTimeModeChecker(
                                                                 data?.prizeId,

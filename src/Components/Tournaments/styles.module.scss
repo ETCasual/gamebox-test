@@ -1,120 +1,133 @@
 // TOURNAMENT PANEL COMPONENT
 #game-screen {
     position: relative;
-    padding: 5rem 0;
+    padding-top: 5rem;
 
     @include media-min($xs) {
-        padding: 6rem 0;
+        padding-top: 6rem;
     }
 
     .prize-info-wrapper {
-        min-height: 5rem;
-        @include media-min($lg) {
-            min-height: 10rem;
-        }
-        video,
-        img {
-            height: 5rem;
-            width: 5rem;
-            @include media-min($lg) {
-                height: 9.875rem;
-                width: 9.875rem;
-            }
+        min-height: 10rem;
+        .thumb {
+            width: 100%;
             border-radius: 10px;
             object-fit: cover;
         }
         .contract-address {
             position: absolute;
-            top: 0.5rem;
-            left: 1.7rem;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            padding: 0.5rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
         .prize-text-holder {
             min-height: inherit;
             .prize-id {
-                font-size: $fnt-sz-8;
+                font-size: $fnt-sz-12;
                 @include media-min($md) {
                     font-size: $fnt-sz-10;
                 }
             }
             .prize-title {
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-18;
                 @include media-min($md) {
                     font-size: $fnt-sz-18;
                 }
                 font-weight: $fnt-wgt-700;
             }
             .prize-description {
-                font-size: $fnt-sz-10;
+                font-size: $fnt-sz-12;
                 @include media-min($md) {
                     font-size: $fnt-sz-12;
                 }
                 color: white;
             }
+
+            .your-tokens-info {
+                min-height: 3rem;
+                .your-tokens-title-text {
+                    font-size: $fnt-sz-10;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-14;
+                    }
+                    @include media-min($md) {
+                        font-size: $fnt-sz-16;
+                    }
+                    color: #999999;
+                }
+                .your-tokens-number,
+                .current-tickets-text,
+                .total-tickets-text {
+                    font-size: $fnt-sz-14;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-16;
+                    }
+                    @include media-min($md) {
+                        font-size: $fnt-sz-18;
+                    }
+                    font-weight: $fnt-wgt-700;
+                }
+                .blue-text {
+                    color: #00c1b9;
+                }
+
+                .overtime-tickets-wrapper {
+                    background: linear-gradient(90deg, #433849, #2f2833);
+                    border-radius: 5px;
+                    padding: 0.5rem;
+
+                    .overtime-title-text {
+                        color: #ff3399;
+                        font-size: $fnt-sz-18;
+                        @include media-min($sm) {
+                            font-size: $fnt-sz-22;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-26;
+                        }
+                        font-weight: $fnt-wgt-700;
+                    }
+                    .draw-title-text {
+                        font-size: $fnt-sz-10;
+                        @include media-min($sm) {
+                            font-size: $fnt-sz-14;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-14;
+                        }
+                    }
+                    .timer-text {
+                        font-size: $fnt-sz-12;
+                        @include media-min($sm) {
+                            font-size: $fnt-sz-18;
+                        }
+                        @include media-min($md) {
+                            font-size: $fnt-sz-20;
+                        }
+                        font-weight: $fnt-wgt-700;
+                        color: #ff3399;
+                    }
+                }
+            }
+
+            
         }
     }
     .separator {
         background-color: #343434;
-        width: 3rem;
+        width: 100%;
         height: 1px;
-        margin: 0 0 20px 15px;
-    }
-
-    .token-and-draw-start-holder {
-        .overtime-and-total-tickets-wrapper {
-            background: linear-gradient(90deg, #433849, #2f2833);
-            border-radius: 10px;
-        }
-
-        .your-tokens-text {
-            font-size: $fnt-sz-10;
-            @include media-min($md) {
-                font-size: $fnt-sz-12;
-            }
-            color: #00c1b9;
-        }
-        .your-tokens-number {
-            font-size: $fnt-sz-14;
-            @include media-min($md) {
-                font-size: $fnt-sz-18;
-            }
-            font-weight: $fnt-wgt-700;
-        }
-        .draw-text {
-            font-size: $fnt-sz-10;
-            @include media-min($md) {
-                font-size: $fnt-sz-14;
-            }
-        }
-        .total-tickets-text {
-            font-size: $fnt-sz-10;
-            @include media-min($md) {
-                font-size: $fnt-sz-12;
-            }
-        }
-        .tickets-text {
-            font-size: $fnt-sz-14;
-            @include media-min($md) {
-                font-size: $fnt-sz-18;
-            }
-            font-weight: $fnt-wgt-700;
-        }
-        .tickets-text-end {
-            color: #ff3399;
-            font-size: $fnt-sz-14;
-            @include media-min($md) {
-                font-size: $fnt-sz-18;
-            }
-            font-weight: 500;
-        }
-        .overtime-text {
-            color: #ff3399;
-            font-size: $fnt-sz-18;
-            @include media-min($md) {
-                font-size: $fnt-sz-26;
-            }
-            font-weight: $fnt-wgt-700;
+        @include media-min($md) {
+            width: 1px;
+            height: 100%;
         }
     }
+    
     .game-info {
         background: linear-gradient(134deg, #2a2a2a 0%, #0b0b0b 80%);
         border-radius: 10px;
@@ -156,35 +169,37 @@
             cursor: grabbing;
         }
     }
-    .fortune-wheel-btn {
-        position: relative;
-        min-height: 5rem;
-        width: 100%;
-        cursor: pointer;
-        background: linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%);
-        border-radius: 12px;
-        .the-spinner-text {
-            font-size: $fnt-sz-10;
-            color: #00c1b9;
-        }
-        .earn-more-tickets-text {
-            font-weight: $fnt-wgt-600;
-            font-size: $fnt-sz-12;
-            margin-bottom: 3px;
-            @include media-max($xl) {
-                width: 10ch;
-            }
-        }
-        .earn-more-tickets-img {
-            align-self: center;
-            justify-self: center;
-            width: 100%;
-            @include media-max($xl) {
-                position: absolute;
-                top: 1rem;
-                right: 0.5rem;
-                width: 3rem;
-            }
-        }
-    }
+
+    // COMMENTED DUE TO SPINNER NO LONGER INSIDE TOURNAMENT
+    // .fortune-wheel-btn {
+    //     position: relative;
+    //     min-height: 5rem;
+    //     width: 100%;
+    //     cursor: pointer;
+    //     background: linear-gradient(134deg, #1c1c1c 0%, #0b0b0b 100%);
+    //     border-radius: 12px;
+    //     .the-spinner-text {
+    //         font-size: $fnt-sz-10;
+    //         color: #00c1b9;
+    //     }
+    //     .earn-more-tickets-text {
+    //         font-weight: $fnt-wgt-600;
+    //         font-size: $fnt-sz-12;
+    //         margin-bottom: 3px;
+    //         @include media-max($xl) {
+    //             width: 10ch;
+    //         }
+    //     }
+    //     .earn-more-tickets-img {
+    //         align-self: center;
+    //         justify-self: center;
+    //         width: 100%;
+    //         @include media-max($xl) {
+    //             position: absolute;
+    //             top: 1rem;
+    //             right: 0.5rem;
+    //             width: 3rem;
+    //         }
+    //     }
+    // }
 }

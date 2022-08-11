@@ -130,7 +130,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
                                 {/* TICKET INFO */}
                                 <div className="col-12 d-flex align-items-center ticket-info px-2 px-sm-3 py-0 py-sm-2">
-                                    <div className="col px-0">
+                                    <div className="col col-8 px-0">
                                         <div className="py-2 ticket-wrapper d-block">
                                             <div className="your-tickets">
                                                 <p className="mb-0 label d-flex align-items-center">
@@ -138,13 +138,11 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 </p>
                                                 <div className="col d-flex flex-row align-items-center px-0">
                                                     <p className="mb-0 tickets d-flex align-items-center">
-                                                        {`\u00A0${
-                                                            getPoolTickets(
-                                                                poolTickets,
-                                                                data?.prizeId
-                                                            )?.toLocaleString() ||
-                                                            0
-                                                        }`}
+                                                        {getPoolTickets(
+                                                            poolTickets,
+                                                            data?.prizeId
+                                                        )?.toLocaleString() ||
+                                                            0}
                                                     </p>
                                                 </div>
                                             </div>
@@ -164,13 +162,11 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                         </p>
                                                         <div className="col d-flex align-items-center px-0">
                                                             <p className="mb-0 d-none d-sm-flex align-items-center current-tickets tickets">
-                                                                {`\u00A0${
-                                                                    getPrizeTicketCollected(
-                                                                        prizeTicketCollection,
-                                                                        data?.prizeId
-                                                                    )?.toLocaleString() ||
-                                                                    0
-                                                                }`}
+                                                                {getPrizeTicketCollected(
+                                                                    prizeTicketCollection,
+                                                                    data?.prizeId
+                                                                )?.toLocaleString() ||
+                                                                    0}
                                                             </p>
 
                                                             <p className="tickets mb-0 d-none align-items-center d-sm-flex">{`\u00A0/`}</p>
@@ -202,7 +198,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="ml-2 game-icon-wrapper d-flex flex-column justify-content-center position-relative pb-4 pb-sm-5 pr-1">
+                                    <div className="game-icon-wrapper d-flex flex-column justify-content-center position-relative pb-4 pb-sm-5 pr-1">
                                         <div className="game-icon position-relative">
                                             {data.gameInfo.map((e, i) => (
                                                 <React.Fragment
