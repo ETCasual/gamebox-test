@@ -722,7 +722,9 @@ const Leaderboard = ({
 
                         <div className="user-avatar">
                             <img
-                                className="avatar"
+                                className={`avatar ${
+                                    leaderboardList[i]?.isVip ? "vip-frame" : ""
+                                }`}
                                 onError={(e) => defaultUserImage(e)}
                                 src={
                                     leaderboardList[i]?.avatarUrl ||
@@ -851,7 +853,11 @@ const Leaderboard = ({
                                 </div>
                                 <div className="user-avatar">
                                     <img
-                                        className="avatar"
+                                        className={`avatar ${
+                                            yourRankData.isVip
+                                                ? "vip-frame"
+                                                : ""
+                                        }`}
                                         onError={(e) => defaultUserImage(e)}
                                         src={
                                             yourRankData.avatarUrl ||

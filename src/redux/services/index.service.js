@@ -969,6 +969,8 @@ export async function getLeaderboardResult(prizeId, gameId) {
             exp: e.getExp(),
             gameScore: e.getGameScore(),
             leaveTimeStamp: e.getLeaveTimestamp(),
+            // TODO: Add "isVip" in server API
+            isVip: true,
         });
     });
     return leaderboard;
@@ -1262,7 +1264,9 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 e?.gameId === rank.getGameId() &&
                 e?.rankFrom === rank.getRankFrom() &&
                 e?.rankTo === rank.getRankTo() &&
-                e?.tickets === rank.getTickets()
+                e?.tickets === rank.getTickets() &&
+                // TODO: Add "isVip" in server API
+                e?.isVip === true
         );
         if (idx === -1)
             leaderRuleRanks.push({
@@ -1271,6 +1275,8 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 rankTo: rank.getRankTo(),
                 tickets: rank.getTickets(),
                 exp: rank.getExp(),
+                // TODO: Add "isVip" in server API
+                isVip: true,
             });
     });
 
