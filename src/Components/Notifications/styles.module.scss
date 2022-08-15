@@ -1,7 +1,13 @@
 #notification {
-    padding: 6rem 0;
+    padding: 5rem 0;
+    @include media-min($xs) {
+        padding: 6rem 0;
+    }
     .main-title {
-        font-size: $fnt-sz-18;
+        font-size: $fnt-sz-14;
+        @include media-min($md) {
+            font-size: $fnt-sz-18;
+        }
         font-weight: $fnt-wgt-700;
     }
     .month-year {
