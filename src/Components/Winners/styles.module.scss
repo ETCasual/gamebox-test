@@ -91,11 +91,22 @@
                 display: inline-block;
                 text-overflow: ellipsis;
             }
-            .prize-total-players {
+            .prize-subtitle {
                 color: white;
                 font-size: $fnt-sz-10;
                 @include media-min($md) {
                     font-size: $fnt-sz-12;
+                }
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
+            .prize-total-players {
+                color: #868686;
+                font-size: $fnt-sz-8;
+                @include media-min($md) {
+                    font-size: $fnt-sz-10;
                 }
             }
         }

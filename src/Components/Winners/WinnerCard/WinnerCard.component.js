@@ -56,9 +56,10 @@ const WinnerCard = ({ data, onWinnerDetails }) => {
                     onError={(e) => defaultGameImage(e)}
                 />
 
-                <div className="col justify-content-center ">
+                <div className="col d-flex flex-column">
                     <p className="prize-id my-0">{`#${data.prizeId}`}</p>
-                    <p className="prize-title">{data.prizeTitle}</p>
+                    <p className="prize-title my-auto">{data.prizeTitle}</p>
+                    <p className="prize-subtitle my-1">{data.prizeSubtitle}</p>
                     <p className="prize-total-players mb-0">{`Total players: ${data.totalPlayers}`}</p>
                 </div>
             </div>
