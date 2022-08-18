@@ -1205,20 +1205,20 @@ html {
                     }
                 }
             }
-            &:hover:enabled {
+            &:hover {
                 // outline: 2px solid #719ECE;
                 // outline: none;
                 // border: none;
                 // border-radius: 2pt;
-                box-shadow: 0 0 0 2pt #ff3399;
+                box-shadow: 0 0 10px 2pt #ff3399;
             }
         }
         .selections.checked {
             // outline: 2px solid #f8b61f;
             box-shadow: 0 0 0 2pt #f8b61f;
-            &:hover:enabled {
+            &:hover {
                 // outline: 2px solid #f8b61f;
-                box-shadow: 0 0 0 2pt #f8b61f;
+                box-shadow: 0 0 10px 2pt #f8b61f;
             }
         }
 

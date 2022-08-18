@@ -122,14 +122,19 @@ const Index = () => {
                                             >
                                                 {winner?.monthYear}
                                             </p>
-                                            {winner.list.map((item) => (
-                                                <WinnerCard
-                                                    data={item}
-                                                    onWinnerDetails={
-                                                        handleWinnerDetails
-                                                    }
-                                                />
-                                            ))}
+                                            <div className="row row-cols-1 row-cols-md-2">
+                                                {winner.list.map(
+                                                    (item, index) => (
+                                                        <WinnerCard
+                                                            data={item}
+                                                            index={index}
+                                                            onWinnerDetails={
+                                                                handleWinnerDetails
+                                                            }
+                                                        />
+                                                    )
+                                                )}
+                                            </div>
                                         </React.Fragment>
                                     ))}
                                 </>

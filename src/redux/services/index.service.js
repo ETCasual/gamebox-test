@@ -1985,7 +1985,6 @@ export async function UpdateNotificationSeen(id, userId) {
     const response = await client.updateNotificationSeen(request, {
         authorization: `Bearer ${token}`,
     });
-    console.log(response.getResult());
     return response.getResult();
 }
 

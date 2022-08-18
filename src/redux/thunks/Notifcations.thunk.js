@@ -57,11 +57,14 @@ export function loadInitNotifications() {
                             dispatch({
                                 type: SHOW_TOAST,
                                 payload: {
-                                    message: "Session Expired! Please login again.",
+                                    message:
+                                        "Session Expired! Please login again.",
                                 },
                             });
                         } else if (error.code === 13)
-                            console.log("NOTIFICATIONS THUNK: No Result found!");
+                            console.log(
+                                "NOTIFICATIONS THUNK: No Result found!"
+                            );
                         else console.log(error);
                     });
             })
@@ -81,8 +84,6 @@ export function loadInitNotifications() {
                     );
                 else console.log(error);
             });
-
-
     };
 }
 
@@ -122,7 +123,7 @@ export function loadUpdateNotificationSeen(id) {
 
         return UpdateNotificationSeen(id, user?.id)
             .then((data) => {
-                console.log(data);
+                // console.log(data);
             })
             .catch((error) => {
                 if (error.code === 7) {

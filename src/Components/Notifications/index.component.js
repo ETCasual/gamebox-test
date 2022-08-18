@@ -86,8 +86,8 @@ const Index = () => {
     };
 
     return (
-        <section>
-            <div className="container-fluid px-0" id="notification">
+        <section id="notification">
+            <div className="container-fluid px-0">
                 {/* NOTIFICATIONS */}
                 <div className="col-12 col-md-10 col-lg-8 mx-auto content-min-height">
                     <h1 className="main-title mb-0">Notifications</h1>
