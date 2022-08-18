@@ -23,10 +23,10 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
             }`}
             onClick={() => onWinnerDetails(data)}
         >
-            <div className="wrapper row align-items-center mx-0">
-                <div className="winner-info col">
-                    <div className="row align-items-center mx-0 pr-0">
-                        <div className="col-auto d-flex px-0">
+            <div className="wrapper row align-items-center justify-content-between mx-0 py-3">
+                <div className="col winner-info">
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-auto d-flex pr-0 mt-2">
                             <img
                                 className={`profile ${
                                     data.isVip ? "vip-frame" : ""
@@ -37,7 +37,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                             />
                         </div>
 
-                        <div className="col px-0 ml-2">
+                        <div className="col-6 px-0 ml-2 mt-2 text-center">
                             <p className="date mb-2">
                                 {getDateFormat(data.createdOn * 1000)}
                             </p>
@@ -58,9 +58,9 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                 {/* SEPARATOR */}
                 <div className="separator d-block" />
 
-                <div className="prize-info col">
-                    <div className="row row-cols-2 align-items-center mx-0 pr-0">
-                        <div className="col-auto d-flex px-0">
+                <div className="col prize-info">
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-auto d-flex pr-0">
                             <ThumbnailMedia
                                 className="prize-thumb"
                                 url={data?.prizeImageUrl}
@@ -69,19 +69,31 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                             />
                         </div>
 
-                        <div className="col px-0 ml-2">
-                            <div className="row row-cols-2">
-                                <div className="col-auto px-0 text-left">
-                                    <p className="prize-id my-0">{`#${data.prizeId}`}</p>
+                        <div className="col pl-2">
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="row align-items-center">
+                                        <div className="col-3">
+                                            <p className="prize-id my-0">{`#${data.prizeId}`}</p>
+                                        </div>
+                                        <div className="col-9 pl-0">
+                                            <p className="prize-title my-0">
+                                                {data.prizeTitle}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-9 pl-2 pr-0">
-                                    <p className="prize-title my-auto">
-                                        {data.prizeTitle}
-                                    </p>
-                                    <p className="prize-subtitle my-1">
-                                        {data.prizeSubtitle}
-                                    </p>
-                                    <p className="prize-total-players mb-0">{`Total players: ${data.totalPlayers}`}</p>
+
+                                <div className="col-12">
+                                    <div className="row">
+                                        <div className="col-3"></div>
+                                        <div className="col-9 pl-0">
+                                            <p className="prize-subtitle my-1">
+                                                {data.prizeSubtitle}
+                                            </p>
+                                            <p className="prize-total-players mb-0">{`Total players: ${data.totalPlayers}`}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
