@@ -74,12 +74,12 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                         <div className="col pl-2">
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="row align-items-center">
+                                    <div className="row align-items-center mt-1">
                                         <div className="col-3">
-                                            <p className="prize-id my-0">{`#${data.prizeId}`}</p>
+                                            <p className="prize-id mb-2 mb-md-1">{`#${data.prizeId}`}</p>
                                         </div>
                                         <div className="col-9 pl-0">
-                                            <p className="prize-title my-0">
+                                            <p className="prize-title mb-2 mb-md-1">
                                                 {data.prizeTitle}
                                             </p>
                                         </div>
@@ -90,7 +90,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                                     <div className="row">
                                         <div className="col-3"></div>
                                         <div className="col-9 pl-0">
-                                            <p className="prize-subtitle my-1">
+                                            <p className="prize-subtitle my-0">
                                                 {data.prizeSubtitle}
                                             </p>
                                             <p className="prize-total-players mb-0">{`Total players: ${data.totalPlayers}`}</p>
