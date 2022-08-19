@@ -6,7 +6,7 @@ import VisibilitySensor from "react-visibility-sensor";
 
 // COMPONENTS
 import FeaturedCompleted from "Components/Home/FeaturedCompleted/FeaturedCompleted.component";
-import GenericLoader from "Components/Loader/Generic.loader";
+// import GenericLoader from "Components/Loader/Generic.loader";
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // REDUX

@@ -69,7 +69,7 @@ const Leaderboard = ({
     const { currentGameInfo } = useSelector(
         (state) => state.playerTournamentInfo
     );
-    const { currentUserRank } = useSelector((state) => state.currentUserRank);
+    // const { currentUserRank } = useSelector((state) => state.currentUserRank);
     const { config } = useSelector((state) => state.config);
     const { prizeTicketCollection } = useSelector(
         (state) => state.prizePoolTickets
@@ -499,7 +499,6 @@ const Leaderboard = ({
                     okButtonHandling: "reloadGame",
                     closeButtonText: "SKIP",
                     closeButtonHandling: "closeGame",
-                    okButtonText: "RETRY",
                 }));
         }
 
@@ -723,7 +722,9 @@ const Leaderboard = ({
 
                         <div className="user-avatar">
                             <img
-                                className="avatar"
+                                className={`avatar ${
+                                    leaderboardList[i]?.isVip ? "vip-frame" : ""
+                                }`}
                                 onError={(e) => defaultUserImage(e)}
                                 src={
                                     leaderboardList[i]?.avatarUrl ||
@@ -852,7 +853,11 @@ const Leaderboard = ({
                                 </div>
                                 <div className="user-avatar">
                                     <img
-                                        className="avatar"
+                                        className={`avatar ${
+                                            yourRankData.isVip
+                                                ? "vip-frame"
+                                                : ""
+                                        }`}
                                         onError={(e) => defaultUserImage(e)}
                                         src={
                                             yourRankData.avatarUrl ||
@@ -1109,14 +1114,15 @@ const Leaderboard = ({
                             okButtonText={loadErrorDetails.okButtonText}
                             handleOk={() => {
                                 switch (loadErrorDetails.okButtonHandling) {
-                                    case "closeGame":
-                                        closeGame();
-                                        break;
                                     case "reloadGame":
                                         reloadGame();
                                         break;
                                     case "resendLogGEnter":
                                         resendLogGEnter();
+                                        break;
+                                    case "closeGame":
+                                    default:
+                                        closeGame();
                                         break;
                                 }
                             }}

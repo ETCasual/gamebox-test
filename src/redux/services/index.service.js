@@ -123,6 +123,8 @@ export async function userSignIn() {
             exp: signInResult.getExp(),
             status: "active",
             bindWalletAddress: signInResult.getWalletAddress(),
+            // TODO: Add "isVip" in server API
+            isVip: true,
         });
     }
     return user;
@@ -967,6 +969,8 @@ export async function getLeaderboardResult(prizeId, gameId) {
             exp: e.getExp(),
             gameScore: e.getGameScore(),
             leaveTimeStamp: e.getLeaveTimestamp(),
+            // TODO: Add "isVip" in server API
+            isVip: true,
         });
     });
     return leaderboard;
@@ -1011,6 +1015,7 @@ export async function getWinnersList() {
 
     let _monthYear = "";
     const winners = [];
+    const _tempIsVip = true;
     winnerResultList.forEach((e) => {
         _monthYear = `${
             monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
@@ -1034,6 +1039,8 @@ export async function getWinnersList() {
                         claimedOn: e.getClaimedOn(),
                         status: e.getStatus(),
                         totalPlayers: e.getTotalPlayer(),
+                        // TODO: Add "isVip" in server API
+                        isVip: _tempIsVip,
                     },
                 ],
             });
@@ -1046,6 +1053,7 @@ export async function getWinnersList() {
                     id: e.getId(),
                     prizeId: e.getPrizeId(),
                     prizeTitle: e.getPrizeTitle(),
+                    prizeSubtitle: e.getPrizeSubtitle(),
                     prizeType: e.getPrizeTypeId(),
                     prizeImageUrl: e.getPrizeImgUrl(),
                     userNickName: e.getUserNickName(),
@@ -1055,6 +1063,8 @@ export async function getWinnersList() {
                     claimedOn: e.getClaimedOn(),
                     status: e.getStatus(),
                     totalPlayers: e.getTotalPlayer(),
+                    // TODO: Add "isVip" in server API
+                    isVip: _tempIsVip,
                 });
             } else {
                 winners.push({
@@ -1064,6 +1074,7 @@ export async function getWinnersList() {
                             id: e.getId(),
                             prizeId: e.getPrizeId(),
                             prizeTitle: e.getPrizeTitle(),
+                            prizeSubtitle: e.getPrizeSubtitle(),
                             prizeType: e.getPrizeTypeId(),
                             prizeImageUrl: e.getPrizeImgUrl(),
                             userNickName: e.getUserNickName(),
@@ -1073,6 +1084,8 @@ export async function getWinnersList() {
                             claimedOn: e.getClaimedOn(),
                             status: e.getStatus(),
                             totalPlayers: e.getTotalPlayer(),
+                            // TODO: Add "isVip" in server API
+                            isVip: _tempIsVip,
                         },
                     ],
                 });
@@ -1253,7 +1266,9 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 e?.gameId === rank.getGameId() &&
                 e?.rankFrom === rank.getRankFrom() &&
                 e?.rankTo === rank.getRankTo() &&
-                e?.tickets === rank.getTickets()
+                e?.tickets === rank.getTickets() &&
+                // TODO: Add "isVip" in server API
+                e?.isVip === true
         );
         if (idx === -1)
             leaderRuleRanks.push({
@@ -1262,6 +1277,8 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 rankTo: rank.getRankTo(),
                 tickets: rank.getTickets(),
                 exp: rank.getExp(),
+                // TODO: Add "isVip" in server API
+                isVip: true,
             });
     });
 
@@ -1640,6 +1657,8 @@ export async function getPlayerDetails(playerId) {
             name: data.getNickName(),
             picture: data.getAvatarUrl(),
             exp: data.getExp(),
+            // TODO: Add "isVip" in server API
+            isVip: true,
         });
     }
     return playerDetails;
@@ -1966,7 +1985,6 @@ export async function UpdateNotificationSeen(id, userId) {
     const response = await client.updateNotificationSeen(request, {
         authorization: `Bearer ${token}`,
     });
-    console.log(response.getResult());
     return response.getResult();
 }
 

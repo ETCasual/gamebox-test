@@ -62,7 +62,7 @@ const Index = ({ match }) => {
             ads: checkIsAdOrGemsUsed("ads"),
         });
     const [timer, setTimer] = useState("Calculating");
-    const [gameName, setGameName] = useState("");
+    // const [gameName, setGameName] = useState("");
 
     // LOAD PRIZES WHEN TIMER END WITH 2 SECOND DELAY
     // useEffect(() => {
@@ -188,7 +188,7 @@ const Index = ({ match }) => {
             );
             // setIsGameLeaderboardShown(true);
 
-            setGameName(currentPrize?.gameInfo[0].gameTitle);
+            // setGameName(currentPrize?.gameInfo[0].gameTitle);
         }
     }, [currentPrize, id, user, currentGameInfo, currentUserRank, dispatch]);
 

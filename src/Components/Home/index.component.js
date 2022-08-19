@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 // COMPONENTS
 import OnBoarding from "Components/Home/OnBoarding/OnBoarding.component";
 import Featured from "Components/Home/Featured/Featured.component";
-import FeaturedWinner from "Components/Home/Featured/FeaturedWinner.component";
+// import FeaturedWinner from "Components/Home/Featured/FeaturedWinner.component";
 import AutomatedEntry from "Components/Home/AutomatedEntry/AutomatedEntry.component";
 import Premium from "Components/Home/Premium/Premium.component";
 import WinnerAnnouncementModal from "Components/Modals/WinnerAnnouncementModal.component";
@@ -34,7 +34,6 @@ const Index = () => {
 
     const dispatch = useDispatch();
 
-    let timeOutRef1 = useRef(null);
     const [noDataLoaded, setNoDataLoaded] = useState({
         feature: true,
         premium: true,
@@ -62,43 +61,41 @@ const Index = () => {
         if (isNewUser) setIsOnBoardingShown(true);
     }, [setIsOnBoardingShown]);
 
-    // STAY TUNED
+    // SETUP PRIZES FROM CACHE
     useEffect(() => {
-        let timeOutRef = null;
-        clearTimeout(timeOutRef);
-        timeOutRef = setTimeout(() => {
-            let isAll = false;
-            if (
-                prizes.featuredData.length <= 0 &&
-                prizes.premiumData.length <= 0 &&
-                prizes.automatedEntryData.length <= 0
-            ) {
-                isAll = true;
-            }
-            setNoDataLoaded((prev) => ({
-                ...prev,
-                feature: prizes.featuredData.length <= 0 ? true : false,
-                premium: prizes.premiumData.length <= 0 ? true : false,
-                automated: prizes.automatedEntryData.length <= 0 ? true : false,
-                all: isAll,
-            }));
-            setIsLoadingDone(true);
-        }, 3000);
-
         setNoDataLoaded((prev) => ({
             ...prev,
             feature: FeaturedData.length <= 0 ? true : false,
             premium: PremiumData.length <= 0 ? true : false,
         }));
+    }, [FeaturedData, PremiumData]);
 
-        return () => clearTimeout(timeOutRef);
-    }, [
-        prizes.featuredData,
-        prizes.premiumData,
-        prizes.automatedEntryData,
-        FeaturedData,
-        PremiumData,
-    ]);
+    // UPDATE PRIZE FROM SERVER
+    useEffect(() => {
+        let isAll = false;
+        if (
+            prizes.featuredData.length <= 0 &&
+            prizes.premiumData.length <= 0 &&
+            prizes.automatedEntryData.length <= 0
+        ) {
+            isAll = true;
+        }
+        setNoDataLoaded((prev) => ({
+            ...prev,
+            feature: prizes.featuredData.length <= 0 ? true : false,
+            premium: prizes.premiumData.length <= 0 ? true : false,
+            automated: prizes.automatedEntryData.length <= 0 ? true : false,
+            all: isAll,
+        }));
+
+        let timer = null;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            setIsLoadingDone(true);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [prizes.featuredData, prizes.premiumData, prizes.automatedEntryData]);
 
     // SETTING PRIZES (FEATURE & PREMIUM) TO STATE
     useEffect(() => {
@@ -110,58 +107,47 @@ const Index = () => {
         const diff = nowTimeStamp() - sessionTimeStamp;
         // if (diff <= 15000) console.log("HOME PAGE TIMER CALLING TICKETS", diff);
 
-        clearTimeout(timeOutRef1.current);
-        timeOutRef1.current = setTimeout(() => {
-            if (
-                prizes.featuredData.length > 0 ||
-                prizes.premiumData.length > 0
-            ) {
-                let _fData = [];
-                let _pData = [];
-                const prizeList =
-                    JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
+        if (prizes.featuredData.length > 0 || prizes.premiumData.length > 0) {
+            let _fData = [];
+            let _pData = [];
+            const prizeList =
+                JSON.parse(sessionStorage.getItem("prizeDetailList")) || [];
 
-                for (let i = 0; i < prizeList.length; i++) {
-                    const element = prizeList[i];
-                    if (element.seen && !element.isRepeat) {
-                        continue;
+            for (let i = 0; i < prizeList.length; i++) {
+                const element = prizeList[i];
+                if (element.seen && !element.isRepeat) {
+                    continue;
+                }
+
+                if (element.type === 1) {
+                    _fData.push(element);
+                    if (diff <= 15000) {
+                        dispatch(loadPlayerTickets(element.prizeId, true));
+                        dispatch(
+                            loadPrizePoolTickets(
+                                element.prizeId,
+                                true,
+                                element.ticketsRequired
+                            )
+                        );
                     }
-
-                    if (element.type === 1) {
-                        _fData.push(element);
-                        if (diff <= 15000) {
-                            dispatch(loadPlayerTickets(element.prizeId, true));
-                            dispatch(
-                                loadPrizePoolTickets(
-                                    element.prizeId,
-                                    true,
-                                    element.ticketsRequired
-                                )
-                            );
-                        }
-                    } else if (element.type === 2) {
-                        _pData.push(element);
-                        if (diff <= 15000) {
-                            dispatch(loadPlayerTickets(element.prizeId, true));
-                            dispatch(
-                                loadPrizePoolTickets(
-                                    element.prizeId,
-                                    true,
-                                    element.ticketsRequired
-                                )
-                            );
-                        }
+                } else if (element.type === 2) {
+                    _pData.push(element);
+                    if (diff <= 15000) {
+                        dispatch(loadPlayerTickets(element.prizeId, true));
+                        dispatch(
+                            loadPrizePoolTickets(
+                                element.prizeId,
+                                true,
+                                element.ticketsRequired
+                            )
+                        );
                     }
                 }
-                setFeaturedData(_fData);
-                setPremiumData(_pData);
             }
-        }, 500);
-
-        return () => {
-            clearTimeout(timeOutRef1.current);
-            timeOutRef1.current = null;
-        };
+            setFeaturedData(_fData);
+            setPremiumData(_pData);
+        }
     }, [
         dispatch,
         prizes.featuredData,
@@ -381,7 +367,7 @@ const Index = () => {
         <>
             <section id="home">
                 <div className="container-fluid mb-4 bonus">
-                    <div className="row justify-content-center px-1 py-4 py-sm-5">
+                    <div className="row justify-content-center px-1 py-4">
                         <div className="col-12 col-md-10 col-lg-8">
                             <div className="row d-flex">
                                 {/* FORTUNE WHEEL */}
@@ -470,45 +456,43 @@ const Index = () => {
                 {!noDataLoaded.all && (
                     <div className="content-min-height">
                         {/* FEATURED CONTENT LOADER */}
-                        <div className="container-fluid mb-5 featured">
-                            <div className="row justify-content-center">
-                                <div className="col-12 col-md-10 col-lg-8 mx-lg-auto px-2">
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <h2 className="section-title mb-3">
-                                                Featured Rewards
-                                            </h2>
-                                        </div>
-                                        {/* LOADER */}
-                                        {!isLoadingDone && <FeaturedLoader />}
 
-                                        {/* HIDE ON 26/7/2022: Due to no more featured prize, and showing winner on featured area */}
-                                        {isLoadingDone &&
-                                            !noDataLoaded.feature && (
-                                                <>
-                                                    {/* FEATURED CARD */}
-                                                    {FeaturedData?.map(
-                                                        (prize, index) => {
-                                                            return (
-                                                                <React.Fragment
-                                                                    key={`featuredPrize-${index}`}
-                                                                >
-                                                                    <Featured
-                                                                        data={
-                                                                            prize
-                                                                        }
-                                                                        handleWinnerRevealCard={
-                                                                            handleWinnerRevealCard
-                                                                        }
-                                                                    />
-                                                                </React.Fragment>
-                                                            );
-                                                        }
-                                                    )}
-                                                </>
+                        {!noDataLoaded.feature && (
+                            <div className="container-fluid mb-5 featured">
+                                <div className="row justify-content-center">
+                                    <div className="col-12 col-md-10 col-lg-8 mx-lg-auto px-2">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <h2 className="section-title mb-3">
+                                                    Featured Rewards
+                                                </h2>
+                                            </div>
+
+                                            {/* LOADER */}
+                                            {!isLoadingDone && (
+                                                <FeaturedLoader />
                                             )}
 
-                                        {/* <React.Fragment
+                                            {/* FEATURED CARD */}
+                                            {isLoadingDone &&
+                                                FeaturedData?.map(
+                                                    (prize, index) => {
+                                                        return (
+                                                            <React.Fragment
+                                                                key={`featuredPrize-${index}`}
+                                                            >
+                                                                <Featured
+                                                                    data={prize}
+                                                                    handleWinnerRevealCard={
+                                                                        handleWinnerRevealCard
+                                                                    }
+                                                                />
+                                                            </React.Fragment>
+                                                        );
+                                                    }
+                                                )}
+
+                                            {/* <React.Fragment
                                             key={`featuredPrize-winner`}
                                         >
                                             <FeaturedWinner
@@ -521,52 +505,51 @@ const Index = () => {
                                                 }
                                             />
                                         </React.Fragment> */}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* PREMIUM & PREMIUM COMPLETED*/}
-                        <div className="container-fluid premium pb-5">
-                            <div className="row justify-content-center">
-                                <div className="col-12 col-md-10 col-lg-8 mx-lg-auto">
-                                    <div className="row">
-                                        <div className="col-12 description">
-                                            <h2 className="section-title mb-3">
-                                                Play and Win Rewards
-                                            </h2>
-                                        </div>
-                                        {/* LOADER */}
-                                        {!isLoadingDone && <PremiumLoader />}
-
-                                        {isLoadingDone &&
-                                            !noDataLoaded.premium && (
-                                                <>
-                                                    {/* PREMIUM CARD */}
-                                                    {PremiumData?.map(
-                                                        (prize, index) => {
-                                                            return (
-                                                                <React.Fragment
-                                                                    key={`premiumPrize-${index}`}
-                                                                >
-                                                                    <Premium
-                                                                        data={
-                                                                            prize
-                                                                        }
-                                                                        handleWinnerRevealCard={
-                                                                            handleWinnerRevealCard
-                                                                        }
-                                                                    />
-                                                                </React.Fragment>
-                                                            );
-                                                        }
-                                                    )}
-                                                </>
+                        {!noDataLoaded.premium && (
+                            <div className="container-fluid premium">
+                                <div className="row justify-content-center">
+                                    <div className="col-12 col-md-10 col-lg-8 mx-lg-auto">
+                                        <div className="row">
+                                            <div className="col-12 description">
+                                                <h2 className="section-title mb-3">
+                                                    Play and Win Rewards
+                                                </h2>
+                                            </div>
+                                            {/* LOADER */}
+                                            {!isLoadingDone && (
+                                                <PremiumLoader />
                                             )}
+
+                                            {/* PREMIUM CARD */}
+                                            {isLoadingDone &&
+                                                PremiumData?.map(
+                                                    (prize, index) => {
+                                                        return (
+                                                            <React.Fragment
+                                                                key={`premiumPrize-${index}`}
+                                                            >
+                                                                <Premium
+                                                                    data={prize}
+                                                                    handleWinnerRevealCard={
+                                                                        handleWinnerRevealCard
+                                                                    }
+                                                                />
+                                                            </React.Fragment>
+                                                        );
+                                                    }
+                                                )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 )}
             </section>
