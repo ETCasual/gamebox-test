@@ -18,15 +18,17 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
     return (
         <div
             key={`winner-card-${data.id}`}
-            className={`winner-card col ${
-                index % 2 === 0 ? "pr-md-2" : "pl-md-2"
-            }`}
+            className="winner-card col-12 col-md-6"
             onClick={() => onWinnerDetails(data)}
         >
-            <div className="wrapper row align-items-center justify-content-between mx-0 py-3">
+            <div
+                className={`wrapper row align-items-center justify-content-between ${
+                    index % 2 === 0 ? "gap-right" : "gap-left"
+                }`}
+            >
                 <div className="col winner-info">
-                    <div className="row align-items-center justify-content-center">
-                        <div className="col-auto d-flex pr-0">
+                    <div className="row align-items-center">
+                        <div className="col-4">
                             <img
                                 className={`profile ${
                                     data.isVip ? "vip-frame" : ""
@@ -37,12 +39,12 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                             />
                         </div>
 
-                        <div className="col-6 px-0 ml-2 mt-2 text-center text-sm-left">
-                            <p className="date mb-2">
+                        <div className="col-8 text-left">
+                            <p className="date my-2">
                                 {getDateFormat(data.createdOn * 1000)}
                             </p>
                             <p
-                                className={`player-name mb-2 ${
+                                className={`player-name my-2 ${
                                     isCurrentUser(data) ? "my-name" : ""
                                 } `}
                             >
