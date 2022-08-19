@@ -26,7 +26,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
             <div className="wrapper row align-items-center justify-content-between mx-0 py-3">
                 <div className="col winner-info">
                     <div className="row align-items-center justify-content-center">
-                        <div className="col-auto d-flex pr-0 mt-2">
+                        <div className="col-auto d-flex pr-0">
                             <img
                                 className={`profile ${
                                     data.isVip ? "vip-frame" : ""
@@ -37,7 +37,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                             />
                         </div>
 
-                        <div className="col-6 px-0 ml-2 mt-2 text-center">
+                        <div className="col-6 px-0 ml-2 mt-2 text-center text-sm-left">
                             <p className="date mb-2">
                                 {getDateFormat(data.createdOn * 1000)}
                             </p>
