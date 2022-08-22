@@ -79,57 +79,107 @@ const Profile = ({
                         <div className="row">
                             {/* PROFILE INFO */}
                             <div className="col-12 text-center mb-4 mb-md-5">
-                                <div className={`profile-info`}>
-                                    <img
-                                        className={`${
-                                            user.isVip ? "vip-frame" : ""
-                                        }`}
-                                        onError={(e) => defaultUserImage(e)}
-                                        src={
-                                            user
-                                                ? user.picture
-                                                : `${window.cdn}icons/icon_profile.svg`
-                                        }
-                                        alt="avatar"
-                                    />
-                                    <h3 className="user-name mt-4">
-                                        {user.username || `Player ${user.id}`}
-                                    </h3>
-                                    <p className="email-text">
-                                        {user ? user.email : "..."}
-                                    </p>
+                                <div className="row justify-content-between">
+                                    <div className="col-12 col-md-6">
+                                        <div className="row profile-info">
+                                            <div className="col-auto">
+                                                <img
+                                                    className={`${
+                                                        user.isVip
+                                                            ? "vip-frame"
+                                                            : ""
+                                                    }`}
+                                                    onError={(e) =>
+                                                        defaultUserImage(e)
+                                                    }
+                                                    src={
+                                                        user
+                                                            ? user.picture
+                                                            : `${window.cdn}icons/icon_profile.svg`
+                                                    }
+                                                    alt="avatar"
+                                                />
+                                            </div>
+                                            <div className="col">
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <h3 className="user-name mt-4">
+                                                            {user.username ||
+                                                                `Player ${user.id}`}
+                                                        </h3>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <p className="email-text">
+                                                            {user
+                                                                ? user.email
+                                                                : "..."}
+                                                        </p>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <Link
+                                                            to={{
+                                                                pathname:
+                                                                    "/profile/settings",
+                                                                state: {
+                                                                    prevPath:
+                                                                        history
+                                                                            .location
+                                                                            .pathname,
+                                                                },
+                                                            }}
+                                                        >
+                                                            <div className="settings-button d-flex align-items-center justify-content-center">
+                                                                <p className="mb-0">
+                                                                    SETTINGS
+                                                                </p>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-md-auto d-flex align-items-end">
+                                        <div className="row gem-balance align-items-center">
+                                            {/* GEMS BALANCE */}
+                                            <div className="col">
+                                                <p className="gem-balance-text mb-0 mb-md-2">
+                                                    Gems balance
+                                                </p>
+                                            </div>
+                                            <div className="col align-items-center justify-content-between">
+                                                <Link
+                                                    to={{
+                                                        pathname: "/iap",
+                                                        state: {
+                                                            prevPath:
+                                                                history.location
+                                                                    .pathname,
+                                                        },
+                                                    }}
+                                                >
+                                                    <div className="gem-wrapper">
+                                                        <img
+                                                            width="24"
+                                                            src={`${window.cdn}assets/gem_01.png`}
+                                                            alt="gems"
+                                                        />
+                                                        <span className="gems">
+                                                            {user.gems}
+                                                        </span>
+                                                        <img
+                                                            width="22"
+                                                            src={`${window.cdn}buttons/button_plus.png`}
+                                                            alt="add-gems"
+                                                        />
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            {/* GEMS BALANCE */}
-                            <div className="col-12 gem-balance d-flex align-items-center justify-content-between">
-                                <p className="gem-balance-text mb-0 mb-md-2">
-                                    Gems balance
-                                </p>
-                                <Link
-                                    to={{
-                                        pathname: "/iap",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
-                                    }}
-                                >
-                                    <div className="gem-wrapper">
-                                        <img
-                                            width="24"
-                                            src={`${window.cdn}assets/gem_01.png`}
-                                            alt="gems"
-                                        />
-                                        <span className="gems">
-                                            {user.gems}
-                                        </span>
-                                        <img
-                                            width="22"
-                                            src={`${window.cdn}buttons/button_plus.png`}
-                                            alt="add-gems"
-                                        />
-                                    </div>
-                                </Link>
-                            </div>
+
                             {/* TOKEN BALANCE */}
                             {/* {!hideGemsOnMobile && (
                                 <div className="col-12 mt-3 token-balance d-flex align-items-center justify-content-between">

@@ -38,6 +38,22 @@
             }
         }
     }
+    .settings-button {
+        cursor: pointer;
+        background: transparent;
+        font-weight: $fnt-wgt-700;
+        font-size: $fnt-sz-14;
+        min-height: 3rem;
+        outline: #ff3399 solid 2px;
+        border-radius: 10px;
+        @include media-min($md) {
+            font-size: $fnt-sz-18;
+            outline: #ff3399 solid 3px;
+        }
+        p {
+            color: #ff3399;
+        }
+    }
     .gem-balance,
     .token-balance {
         cursor: default;
@@ -275,8 +291,7 @@
         }
     }
     .highscore,
-    .rewards,
-    .settings {
+    .rewards {
         cursor: pointer;
         background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
         font-weight: $fnt-wgt-600;
