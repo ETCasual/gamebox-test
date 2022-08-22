@@ -78,11 +78,11 @@ const Profile = ({
                     <div className="col-12 col-md-10 col-lg-9">
                         <div className="row">
                             {/* PROFILE INFO */}
-                            <div className="col-12 text-center mb-4 mb-md-5">
+                            <div className="col-12 text-center my-2">
                                 <div className="row justify-content-between">
-                                    <div className="col-12 col-md-6">
-                                        <div className="row profile-info">
-                                            <div className="col-auto">
+                                    <div className="col-12 col-md-6 mb-4 mb-md-0">
+                                        <div className="row profile-info justify-content-center justify-content-md-between">
+                                            <div className="col-12 col-md">
                                                 <img
                                                     className={`${
                                                         user.isVip
@@ -100,10 +100,10 @@ const Profile = ({
                                                     alt="avatar"
                                                 />
                                             </div>
-                                            <div className="col">
+                                            <div className="col-12 col-md">
                                                 <div className="row">
                                                     <div className="col-12">
-                                                        <h3 className="user-name mt-4">
+                                                        <h3 className="user-name mt-2">
                                                             {user.username ||
                                                                 `Player ${user.id}`}
                                                         </h3>
@@ -117,6 +117,7 @@ const Profile = ({
                                                     </div>
                                                     <div className="col-12">
                                                         <Link
+                                                            className="settings-btn"
                                                             to={{
                                                                 pathname:
                                                                     "/profile/settings",
@@ -128,7 +129,7 @@ const Profile = ({
                                                                 },
                                                             }}
                                                         >
-                                                            <div className="settings-button d-flex align-items-center justify-content-center">
+                                                            <div className="m-auto d-flex align-items-center justify-content-center">
                                                                 <p className="mb-0">
                                                                     SETTINGS
                                                                 </p>
@@ -139,7 +140,7 @@ const Profile = ({
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12 col-md-auto d-flex align-items-end">
+                                    <div className="col-12 col-md-auto d-flex justify-content-center align-items-end">
                                         <div className="row gem-balance align-items-center">
                                             {/* GEMS BALANCE */}
                                             <div className="col">
@@ -219,6 +220,7 @@ const Profile = ({
                                     </div>
                                 </div>
                             )} */}
+
                             {/* MULTIPLIER */}
                             {enableLevel && (
                                 <div className="col-12 multiplier-holder mt-4">
@@ -311,11 +313,8 @@ const Profile = ({
                             )}
                             {/* INVITE FRIENDS */}
                             <div className="col-12 invite-friends-holder mt-4">
-                                <div
-                                    className="team d-flex align-items-center justify-content-between p-3 p-md-4"
-                                    onClick={handleTeamPanel}
-                                >
-                                    <div className="col-7 col-md-6 p-0 pb-4">
+                                <div className="team d-flex align-items-center justify-content-between p-3 px-md-4 py-md-2">
+                                    <div className="col-7 col-md-6 p-md-2">
                                         <p className="team-title">
                                             Invite Friends
                                         </p>
@@ -325,7 +324,7 @@ const Profile = ({
                                                 {config.gemsPerInvite} gems
                                             </span>
                                         </p>
-                                        <p className="mb-1 share-text">
+                                        <p className="mb-4 share-text">
                                             {`Share your referral code with
                                                 your friends and get ${
                                                     config.gemsPerInvite
@@ -340,6 +339,12 @@ const Profile = ({
                                                     in GameBox.`
                                                 }`}
                                         </p>
+                                        <div
+                                            className="invite-btn d-flex align-items-center justify-content-center"
+                                            onClick={handleTeamPanel}
+                                        >
+                                            <p className="mb-0">GET CODE</p>
+                                        </div>
                                     </div>
                                     <div className="col-4 col-md-6 px-0 d-flex align-items-end justify-content-end">
                                         <img
