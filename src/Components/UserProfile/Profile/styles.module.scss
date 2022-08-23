@@ -22,7 +22,7 @@
         h3 {
             text-transform: capitalize;
             font-weight: $fnt-wgt-600;
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-20;
             @include media-min($md) {
                 font-size: $fnt-sz-22;
             }
@@ -34,7 +34,7 @@
             color: #868686;
             font-size: $fnt-sz-14;
             @include media-min($md) {
-                font-size: $fnt-sz-16;
+                font-size: $fnt-sz-20;
             }
         }
     }
@@ -65,7 +65,7 @@
     .token-balance {
         cursor: default;
         .gem-balance-text {
-            color: #868686;
+            color: white;
             font-size: $fnt-sz-12;
             @include media-min($md) {
                 font-size: $fnt-sz-14;
@@ -145,7 +145,7 @@
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-20;
                 }
                 span {
                     color: #00c1b9;
@@ -232,7 +232,7 @@
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-20;
                 }
             }
             .refer-text {
@@ -241,13 +241,13 @@
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-20;
                 }
                 span {
                     color: #f8ba29;
                     font-size: $fnt-sz-12;
                     @include media-min($md) {
-                        font-size: $fnt-sz-16;
+                        font-size: $fnt-sz-20;
                     }
                 }
             }
@@ -284,7 +284,7 @@
                 @include media-min($md) {
                     width: 10rem;
                     min-height: 2.25rem;
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-18;
                 }
                 p {
                     color: white;
@@ -322,18 +322,37 @@
         font-size: $fnt-sz-12;
         min-height: 2.875rem;
         @include media-min($md) {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-20;
             min-height: 4.625rem;
         }
         box-shadow: 0px 10px 15px #0000000d;
         border-radius: 10px;
     }
+    .vip-pass {
+        .connect-btn {
+            cursor: pointer;
+            background: #ff3399;
+            width: 20rem;
+            min-height: 2rem;
+            border-radius: 10px;
+            font-weight: $fnt-wgt-600;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                width: 20rem;
+                min-height: 2.25rem;
+                font-size: $fnt-sz-18;
+            }
+            p {
+                color: white;
+            }
+        }
+    }
     .logout {
-        color: #ff2c44;
-        font-weight: $fnt-wgt-600;
+        color: #ff3399;
+        font-weight: $fnt-wgt-700;
         font-size: $fnt-sz-12;
         @include media-min($md) {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-20;
         }
     }
 }

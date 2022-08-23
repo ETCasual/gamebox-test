@@ -13,7 +13,7 @@ import {
     getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-// import { handleConnectWallet } from "Utils/ConnectWallet";
+import { handleConnectWallet } from "Utils/ConnectWallet";
 // import { UPDATE_USER_WALLET } from "redux/types";
 
 const Profile = ({
@@ -24,9 +24,9 @@ const Profile = ({
     const { user } = useSelector((state) => state.userData);
     const { ranks } = useSelector((state) => state.ranks);
     const { config } = useSelector((state) => state.config);
-    // const { blockchainNetworks } = useSelector(
-    //     (state) => state.blockchainNetworks
-    // );
+    const { blockchainNetworks } = useSelector(
+        (state) => state.blockchainNetworks
+    );
 
     const dispatch = useDispatch();
 
@@ -51,11 +51,12 @@ const Profile = ({
     //     };
     // }, []);
 
-    // const handleWallet = async () => {
-    //     if (user.walletAddress) return;
+    const handleWallet = async () => {
+        console.log(user, blockchainNetworks);
+        if (user.walletAddress) return;
 
-    //     await handleConnectWallet(dispatch, blockchainNetworks);
-    // };
+        await handleConnectWallet(dispatch, user.bindWalletAddress);
+    };
 
     // const handleDisconnectWallet = () => {
     //     dispatch({
@@ -75,14 +76,14 @@ const Profile = ({
             <div className="container-fluid">
                 {/* PROFILE */}
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-9">
+                    <div className="col-12 col-md-10 col-lg-8">
                         <div className="row">
                             {/* PROFILE INFO */}
                             <div className="col-12 text-center my-2">
                                 <div className="row justify-content-between">
                                     <div className="col-12 col-md-6 mb-4 mb-md-0">
-                                        <div className="row profile-info justify-content-center justify-content-md-between">
-                                            <div className="col-12 col-md">
+                                        <div className="profile-info d-md-flex justify-content-md-start">
+                                            <div>
                                                 <img
                                                     className={`${
                                                         user.isVip
@@ -100,10 +101,10 @@ const Profile = ({
                                                     alt="avatar"
                                                 />
                                             </div>
-                                            <div className="col-12 col-md">
-                                                <div className="row">
+                                            <div className="mx-4 my-2">
+                                                <div className="d-inline-md-flex flex-md-column">
                                                     <div className="col-12">
-                                                        <h3 className="user-name mt-2">
+                                                        <h3 className="user-name">
                                                             {user.username ||
                                                                 `Player ${user.id}`}
                                                         </h3>
@@ -399,8 +400,21 @@ const Profile = ({
                                     </div>
                                 </div>
                             </div>
+
+                            {/* VIP PASS */}
+                            {
+                                <div className="vip-pass col-12 mt-0 mt-md-4 mb-5">
+                                    <div
+                                        className="connect-btn d-flex align-items-center justify-content-center m-auto"
+                                        onClick={handleWallet}
+                                    >
+                                        <p className="mb-0">CONNECT WALLLET</p>
+                                    </div>
+                                </div>
+                            }
+
                             {/* SETTINGS */}
-                            <div className="col-12 mt-0 mt-md-4 mb-5">
+                            {/* <div className="col-12 mt-0 mt-md-4 mb-5">
                                 <Link
                                     to={{
                                         pathname: "/profile/settings",
@@ -413,14 +427,15 @@ const Profile = ({
                                         <p className="mb-0">Settings</p>
                                     </div>
                                 </Link>
-                            </div>
+                            </div> */}
+
                             {/* LOGOUT */}
-                            <div className="col-12 text-center mb-3">
+                            <div className="col-12 text-center my-4">
                                 <button
                                     className="logout"
                                     onClick={() => handleSignOut(dispatch)}
                                 >
-                                    Sign out
+                                    LOG OUT
                                 </button>
                             </div>
                         </div>
