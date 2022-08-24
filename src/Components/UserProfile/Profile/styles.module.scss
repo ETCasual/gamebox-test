@@ -328,22 +328,45 @@
         box-shadow: 0px 10px 15px #0000000d;
         border-radius: 10px;
     }
-    .vip-pass {
+    .vip-pass-holder {
+        background: linear-gradient(90deg, #38303d, #231e26);
+        border-radius: 10px;
+        box-shadow: 0px 10px 15px #0000000d;
+
         .connect-btn {
             cursor: pointer;
             background: #ff3399;
             width: 20rem;
-            min-height: 2rem;
+            min-height: 2.25rem;
             border-radius: 10px;
             font-weight: $fnt-wgt-600;
             font-size: $fnt-sz-14;
             @include media-min($md) {
-                width: 20rem;
-                min-height: 2.25rem;
+                width: 15rem;
+                min-height: 2.5rem;
                 font-size: $fnt-sz-18;
             }
             p {
                 color: white;
+            }
+        }
+        .vip-pass-info {
+            .vip-pass-thumb {
+                width: 15rem;
+                min-width: 5rem;
+                max-width: 15rem;
+                @include media-min($md) {
+                    min-height: 11.063rem;
+                }
+                object-fit: cover;
+                border-radius: 5px 0 0 5px;
+            }
+            .vip-pass-quantity {
+                font-weight: $fnt-wgt-600;
+                font-size: $fnt-sz-14;
+                @include media-min($md) {
+                    font-size: $fnt-sz-18;
+                }
             }
         }
     }

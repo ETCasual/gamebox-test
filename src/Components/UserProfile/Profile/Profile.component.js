@@ -1,12 +1,15 @@
 // REACT & REDUX
-import React from "react";
-// import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+// COMPONENT FUNCTIONS
+import ConnectWallet from "Components/Global/ConnectWallet.component";
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
 // HELPER FUNCTIONS
 import { handleSignOut } from "Utils/SignOut";
-import { defaultUserImage } from "Utils/DefaultImage";
+import { defaultUserImage, defaultGameImage } from "Utils/DefaultImage";
 import {
     getCurrentLevelExp,
     getCurrentLevel,
@@ -15,6 +18,7 @@ import {
 } from "Utils/CurrentLevel";
 import { handleConnectWallet } from "Utils/ConnectWallet";
 // import { UPDATE_USER_WALLET } from "redux/types";
+import { useEffect } from "react";
 
 const Profile = ({
     handlePlayerLevelPanel,
@@ -27,6 +31,10 @@ const Profile = ({
     const { blockchainNetworks } = useSelector(
         (state) => state.blockchainNetworks
     );
+    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
+    const [invalidWalletModalShown, setInvalidWalletModalShown] =
+        useState(false);
 
     const dispatch = useDispatch();
 
@@ -51,11 +59,14 @@ const Profile = ({
     //     };
     // }, []);
 
-    const handleWallet = async () => {
-        console.log(user, blockchainNetworks);
-        if (user.walletAddress) return;
+    useEffect(() => {
+        setIsWalletConnected(
+            user.walletAddress && user.network !== "Wrong Network!"
+        );
+    }, [user]);
 
-        await handleConnectWallet(dispatch, user.bindWalletAddress);
+    const handleConnectWallet = async () => {
+        setSelectWalletModalShown(true);
     };
 
     // const handleDisconnectWallet = () => {
@@ -403,12 +414,38 @@ const Profile = ({
 
                             {/* VIP PASS */}
                             {
-                                <div className="vip-pass col-12 mt-0 mt-md-4 mb-5">
-                                    <div
-                                        className="connect-btn d-flex align-items-center justify-content-center m-auto"
-                                        onClick={handleWallet}
-                                    >
-                                        <p className="mb-0">CONNECT WALLLET</p>
+                                <div className="col-12 mt-0 mt-md-4 mb-5">
+                                    <div className="vip-pass-holder">
+                                        {!isWalletConnected && (
+                                            <div
+                                                className="connect-btn d-flex align-items-center justify-content-center m-auto"
+                                                onClick={handleConnectWallet}
+                                            >
+                                                <p className="mb-0">
+                                                    CONNECT WALLLET
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        {isWalletConnected && (
+                                            <div className="vip-pass-info row py-4">
+                                                <div className="col d-flex">
+                                                    <ThumbnailMedia
+                                                        className="vip-pass-thumb mx-auto"
+                                                        url="https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
+                                                        isPlayVideo={true}
+                                                        onError={(e) =>
+                                                            defaultGameImage(e)
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="col-12 mt-3 text-center">
+                                                    <p className="vip-pass-quantity">
+                                                        x1
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             }
@@ -442,6 +479,13 @@ const Profile = ({
                     </div>
                 </div>
             </div>
+
+            <ConnectWallet
+                selectWalletModalShown={selectWalletModalShown}
+                setSelectWalletModalShown={setSelectWalletModalShown}
+                invalidWalletModalShown={invalidWalletModalShown}
+                setInvalidWalletModalShown={setInvalidWalletModalShown}
+            />
         </section>
     );
 };

@@ -126,6 +126,7 @@ const Index = () => {
                                                 {winner.list.map(
                                                     (item, index) => (
                                                         <WinnerCard
+                                                            key={`winner-card-${item.id}`}
                                                             data={item}
                                                             index={index}
                                                             onWinnerDetails={
