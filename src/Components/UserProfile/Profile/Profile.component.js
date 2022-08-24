@@ -16,7 +16,7 @@ import {
     getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-import { handleConnectWallet } from "Utils/ConnectWallet";
+// import { handleConnectWallet } from "Utils/ConnectWallet";
 // import { UPDATE_USER_WALLET } from "redux/types";
 import { useEffect } from "react";
 
@@ -28,9 +28,7 @@ const Profile = ({
     const { user } = useSelector((state) => state.userData);
     const { ranks } = useSelector((state) => state.ranks);
     const { config } = useSelector((state) => state.config);
-    const { blockchainNetworks } = useSelector(
-        (state) => state.blockchainNetworks
-    );
+
     const [isWalletConnected, setIsWalletConnected] = useState(false);
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
     const [invalidWalletModalShown, setInvalidWalletModalShown] =
@@ -415,7 +413,7 @@ const Profile = ({
                             {/* VIP PASS */}
                             {
                                 <div className="col-12 mt-0 mt-md-4 mb-5">
-                                    <div className="vip-pass-holder">
+                                    <div className="vip-pass-holder py-4">
                                         {!isWalletConnected && (
                                             <div
                                                 className="connect-btn d-flex align-items-center justify-content-center m-auto"
@@ -428,7 +426,7 @@ const Profile = ({
                                         )}
 
                                         {isWalletConnected && (
-                                            <div className="vip-pass-info row py-4">
+                                            <div className="vip-pass-info row">
                                                 <div className="col d-flex">
                                                     <ThumbnailMedia
                                                         className="vip-pass-thumb mx-auto"

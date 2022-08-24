@@ -15,11 +15,13 @@ import PremiumLoader from "Components/Loader/Premium.loader";
 import StayTune from "Components/Home/StayTune/StayTune.component";
 import RevealCardModal from "Components/Modals/RevealCardModal.component";
 import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
+import VipPassRedemption from "Components/Home/VipPass/VipPassRedemption.component";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
+import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
@@ -31,6 +33,7 @@ const Index = () => {
     const { winnerAnnouncementNotificationList } = useSelector(
         (state) => state.notifications
     );
+    const { unClaimedPrizes } = useSelector((state) => state.unClaimedPrizes);
 
     const dispatch = useDispatch();
 
@@ -52,6 +55,10 @@ const Index = () => {
     const [isOnBoardingShown, setIsOnBoardingShown] = useState(false);
     const [fortuneWheelShown, setFortuneWheelShown] = useState(false);
 
+    //VIP PASS
+    const [isVipPassRedeemable, setIsVipPassRedeemable] = useState(false);
+    const [vipPassData, setVipPassData] = useState(null);
+
     let watcherRef = useRef(null);
     const [timer, setTimer] = useState("0d 0h 0m 0s");
 
@@ -60,6 +67,20 @@ const Index = () => {
         const isNewUser = Boolean(localStorage.getItem("isNewUser")) || false;
         if (isNewUser) setIsOnBoardingShown(true);
     }, [setIsOnBoardingShown]);
+
+    // FETCH VIP PASS FROM REWARDS API
+    useEffect(() => {
+        setVipPassData(null);
+        if (user.id) {
+            dispatch(loadUnClaimedPrizes());
+        }
+    }, [user.id, dispatch]);
+
+    useEffect(() => {
+        console.log("unclaim: ", unClaimedPrizes);
+        setIsVipPassRedeemable(true);
+        // setVipPassData();
+    }, [unClaimedPrizes]);
 
     // SETUP PRIZES FROM CACHE
     useEffect(() => {
@@ -366,6 +387,7 @@ const Index = () => {
     return (
         <>
             <section id="home">
+                {/* TOP BANNERS */}
                 <div className="container-fluid mb-4 bonus">
                     <div className="row justify-content-center px-1 py-4">
                         <div className="col-12 col-md-10 col-lg-8">
@@ -451,6 +473,25 @@ const Index = () => {
 
                 {/* STAY TUNE & PLAY GAMES */}
                 {isLoadingDone && noDataLoaded.all && <StayTune />}
+
+                {/* VIP PASS REDEMPTION */}
+                {isVipPassRedeemable && (
+                    <div className="container-fluid mb-5 vip-pass">
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-10 col-lg-8 mx-lg-auto px-2">
+                                <div className="row">
+                                    <div className="col-12">
+                                        {/* <h2 className="section-title mb-3">
+                                            VIP Pass Give Away
+                                        </h2> */}
+                                    </div>
+
+                                    <VipPassRedemption data={vipPassData} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* IF PRIZE AVAILABLE */}
                 {!noDataLoaded.all && (
