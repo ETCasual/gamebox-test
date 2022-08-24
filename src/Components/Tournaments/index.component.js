@@ -108,14 +108,17 @@ const Index = ({ match }) => {
 
             let prizeType = prizes[PRIZE_TYPE[type]] || [];
             let idx = prizeType?.findIndex((e) => e.prizeId === parseInt(id));
-            let gameEndTime =
-                type !== "automated"
-                    ? prizeType[idx]?.gameInfo?.[0]?.endTimeStamp * 1000
-                    : prizeType[idx]?.scheduledOff * 1000;
 
-            if (prizeType.length > 0 && nowTimeStamp() < (gameEndTime || 0)) {
-                // console.log("GOT THE PRIZE WITH TIMER:", prizeType[idx]);
-                if (idx > -1) {
+            if (idx > -1) {
+                let gameEndTime =
+                    type !== "automated"
+                        ? prizeType[idx]?.gameInfo?.[0]?.endTimeStamp * 1000
+                        : prizeType[idx]?.scheduledOff * 1000;
+
+                if (
+                    prizeType.length > 0 &&
+                    nowTimeStamp() < (gameEndTime || 0)
+                ) {
                     setCurrentPrize(prizeType[idx]);
 
                     if (type !== "automated") {
@@ -157,7 +160,11 @@ const Index = ({ match }) => {
                         }
                     }
                 }
-            } else dispatch(loadPrizes());
+            } else {
+                // To redirect to home page if no prize at id
+                // dispatch(loadPrizes());
+                history.push("/");
+            }
         },
         // eslint-disable-next-line
         [prizes, id, type, dispatch]

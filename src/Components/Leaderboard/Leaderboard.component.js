@@ -194,7 +194,9 @@ const Leaderboard = ({
         clearInterval(watcherRef.current);
         watcherRef.current = setInterval(() => {
             let finalTimeRef = convertSecondsToHours(
-                data?.gameInfo[0]?.endTimeStamp * 1000,
+                data?.gameInfo?.length > 0
+                    ? data?.gameInfo[0]?.endTimeStamp * 1000
+                    : 0,
                 config.offsetTimestamp ? config.offsetTimestamp : 0
             );
 
