@@ -26,9 +26,10 @@
         picture {
             img {
                 width: 100%;
-                @include media-min($md) {
-                    min-height: 22.5rem;
-                }
+                // COMMENTED DUE TO THIS WOULD MAKE THE PRIZE IMG CROPPED
+                // @include media-min($md) {
+                //     min-height: 22.5rem;
+                // }
                 object-fit: cover;
                 border-top-left-radius: 3px;
                 border-top-right-radius: 3px;

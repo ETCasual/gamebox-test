@@ -148,7 +148,7 @@ const AutomatedEntry = ({ data }) => {
     };
 
     return (
-        <>
+        <div className="automatedEntry">
             <div
                 className="bonus-card"
                 onClick={() => setBonusRewardShown(true)}
@@ -216,7 +216,7 @@ const AutomatedEntry = ({ data }) => {
                     }
                 />
             )}
-        </>
+        </div>
     );
 };
 
