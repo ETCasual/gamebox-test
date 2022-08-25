@@ -64,12 +64,12 @@
                     }
                 }
                 .desc {
-                    font-size: $fnt-sz-14;
+                    font-size: $fnt-sz-12;
                     @include media-min($md) {
-                        font-size: $fnt-sz-18;
+                        font-size: $fnt-sz-12;
                     }
-                    line-height: 1.5;
-                    color: #868686;
+                    line-height: 1.25;
+                    color: white;
                 }
                 .claim-btn {
                     cursor: pointer;

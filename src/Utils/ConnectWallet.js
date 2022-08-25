@@ -259,7 +259,7 @@ export async function getNFTBalance(address) {
         // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
         const tokenContract = new web3.eth.Contract(
             nft721ABI,
-            "0x3a600d7A568F86B8288D86525Cb42812Beddeb6D"
+            process.env.REACT_APP_GAMEBOX_VIP_NFT_CONTRACT_ADDRESS
         );
         // GET NFT BALANCE
         const nftBalance = await tokenContract.methods
@@ -269,6 +269,41 @@ export async function getNFTBalance(address) {
         return { nftBalance, symbol };
     }
     return {};
+}
+
+export async function getNFTTokenIdList(address) {
+    const { web3 } = await getWeb3();
+
+    const chainId = await web3.eth.getChainId();
+
+    const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
+    const idx = networks.findIndex((n) => n.chainId === parseInt(chainId));
+
+    let list = [];
+    if (networks[idx]?.systemTokenAddress) {
+        // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
+        const tokenContract = new web3.eth.Contract(
+            nft721ABI,
+            process.env.REACT_APP_GAMEBOX_VIP_NFT_CONTRACT_ADDRESS
+        );
+        // GET NFT BALANCE
+        const nftBalance = await tokenContract.methods
+            .balanceOf(address)
+            .call();
+
+        if (nftBalance > 0) {
+            for (let i = 1; i <= nftBalance; i++) {
+                const nftTokenId = await tokenContract.methods
+                    .tokenOfOwnerByIndex(address, i)
+                    .call();
+
+                if (nftTokenId) {
+                    list.push(nftTokenId);
+                }
+            }
+        }
+    }
+    return list;
 }
 
 export async function getNFTMetadata(tokenId) {
@@ -283,9 +318,9 @@ export async function getNFTMetadata(tokenId) {
         // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
         const tokenContract = new web3.eth.Contract(
             nft721ABI,
-            "0x3a600d7A568F86B8288D86525Cb42812Beddeb6D"
+            process.env.REACT_APP_GAMEBOX_VIP_NFT_CONTRACT_ADDRESS
         );
-        // GET NFT BALANCE
+        // GET NFT METADATA
         const nftMetadata = await tokenContract.methods
             .tokenURI(tokenId)
             .call();

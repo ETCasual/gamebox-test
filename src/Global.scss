@@ -418,8 +418,14 @@ html {
         }
         .submenu-wrapper {
             font-size: $fnt-sz-14;
+
+            .submenu-profile {
+                color: #ff3399;
+                cursor: pointer;
+            }
+
             .submenu-sign-out {
-                color: #c40000;
+                color: white;
                 cursor: pointer;
             }
         }

@@ -391,7 +391,9 @@ const Header = ({
                                             },
                                         }}
                                     >
-                                        Gamebox profile
+                                        <p className="submenu-profile">
+                                            GameBox Profile
+                                        </p>
                                     </Link>
                                     <p
                                         className="submenu-sign-out mt-2 mb-0"
@@ -400,7 +402,7 @@ const Header = ({
                                             handleSignOut(dispatch);
                                         }}
                                     >
-                                        Logout
+                                        Log Out
                                     </p>
                                 </div>
                             </div>

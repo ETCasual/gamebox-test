@@ -35,7 +35,6 @@ const Profile = ({
     const [vipPassData, setVipPassData] = useState({
         symbol: "",
         quantity: 0,
-        metadata: null,
     });
 
     const dispatch = useDispatch();
@@ -73,13 +72,9 @@ const Profile = ({
 
     const handleCheckNFTBalance = async () => {
         const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
-        const nftMetadata = await getNFTMetadata(11);
-        console.log(nftBalance, symbol);
-        console.warn(nftMetadata);
         setVipPassData({
             symbol: symbol,
             quantity: nftBalance,
-            metadata: null,
         });
     };
 
@@ -110,11 +105,6 @@ const Profile = ({
                                         <div className="profile-info d-md-flex justify-content-md-start">
                                             <div>
                                                 <img
-                                                    className={`${
-                                                        user.isVip
-                                                            ? "vip-frame"
-                                                            : ""
-                                                    }`}
                                                     onError={(e) =>
                                                         defaultUserImage(e)
                                                     }
@@ -124,7 +114,13 @@ const Profile = ({
                                                             : `${window.cdn}icons/icon_profile.svg`
                                                     }
                                                     alt="avatar"
-                                                />
+                                                >
+                                                    <img
+                                                        className="vip-frame"
+                                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                        alt="vip-frame"
+                                                    />
+                                                </img>
                                             </div>
                                             <div className="mx-4 my-2">
                                                 <div className="d-inline-md-flex flex-md-column">
@@ -434,7 +430,10 @@ const Profile = ({
 
                             {/* VIP PASS */}
                             {
-                                <div className="col-12 mt-0 mt-md-4 mb-5">
+                                <div className="col-12 mt-0 mt-md-4 mb-4">
+                                    <div className="vip-pass-title mb-3">
+                                        VIP Pass
+                                    </div>
                                     <div className="vip-pass-holder py-4">
                                         {!isWalletConnected && (
                                             <div
@@ -447,25 +446,40 @@ const Profile = ({
                                             </div>
                                         )}
 
-                                        {isWalletConnected && (
-                                            <div className="vip-pass-info row">
-                                                <div className="col d-flex">
-                                                    <ThumbnailMedia
-                                                        className="vip-pass-thumb mx-auto"
-                                                        url="https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
-                                                        isPlayVideo={true}
-                                                        onError={(e) =>
-                                                            defaultGameImage(e)
-                                                        }
-                                                    />
-                                                </div>
-                                                <div className="col-12 mt-3 text-center">
-                                                    <p className="vip-pass-quantity">
-                                                        x1
+                                        {isWalletConnected &&
+                                            vipPassData.quantity <= 0 && (
+                                                <div className="text-center mt-2">
+                                                    <p className="vip-pass-empty">
+                                                        List is empty
                                                     </p>
                                                 </div>
-                                            </div>
-                                        )}
+                                            )}
+
+                                        {isWalletConnected &&
+                                            vipPassData.quantity > 0 && (
+                                                <div className="vip-pass-info row">
+                                                    <div className="col d-flex">
+                                                        <ThumbnailMedia
+                                                            className="vip-pass-thumb mx-auto"
+                                                            url="https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
+                                                            isPlayVideo={true}
+                                                            onError={(e) =>
+                                                                defaultGameImage(
+                                                                    e
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                    {vipPassData.quantity >
+                                                        1 && (
+                                                        <div className="col-12 mt-3 text-center">
+                                                            <p className="vip-pass-quantity">
+                                                                {`x${vipPassData.quantity}`}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
                                     </div>
                                 </div>
                             }

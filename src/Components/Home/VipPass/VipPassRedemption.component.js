@@ -40,7 +40,7 @@ const VipPassRedemption = ({ data }) => {
                 <div className="vip-pass-wrapper">
                     {/* PRIZE TITLE, DESCRIPTION & ID */}
                     <div className="pass-info position-relative d-flex flex-wrap p-2 pb-3 p-sm-3">
-                        <div className="pass-img p-0 col-12 col-sm-6 position-relative">
+                        <div className="pass-img p-0 col-12 col-sm-6 col-xl-5 position-relative">
                             <ThumbnailMedia
                                 url={
                                     "https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
@@ -49,41 +49,50 @@ const VipPassRedemption = ({ data }) => {
                                 onError={(e) => defaultGameImage(e)}
                             />
                         </div>
-                        <div className="col-12 col-sm-6 px-sm-4 px-1">
+                        <div className="d-flex flex-column justify-content-between col-12 col-sm-6 col-xl-7 px-sm-4 px-1">
                             <div className="info-wrapper row h-100">
-                                <div className="col-12 my-3">
-                                    <p className="title text-center">
-                                        GAMEBOX VIP PASS
-                                    </p>
-                                </div>
+                                {/* <div className="row justify-content-between"> */}
                                 <div className="col-12">
-                                    <p className="desc text-center">
-                                        The Gamebox VIP Pass is a privilege
-                                        membership pass in Gamebox.
-                                    </p>
-                                </div>
-                                <div className="col-12">
-                                    <p className="desc text-justify">
-                                        The Gamebox VIP Pass NFT grants players
-                                        special utilities, such as increased
-                                        daily spins and future utilities. This
-                                        gives players additional free gems daily
-                                        to participate and win prizes on
-                                        Gamebox.
-                                    </p>
-                                </div>
-                                <div className="col-12">
-                                    <div
-                                        className={`claim-btn d-flex align-items-center justify-content-center mx-auto ${
-                                            loader.id === data?.id
-                                                ? "disabled opacity-0-5"
-                                                : "enabled"
-                                        }`}
-                                        onClick={handleRedeem}
-                                    >
-                                        <p className="mb-0">CLAIM VIP PASS</p>
+                                    <div className="my-3">
+                                        <p className="title text-center">
+                                            GAMEBOX VIP PASS
+                                        </p>
+                                    </div>
+                                    <div className="">
+                                        <p className="desc text-left">
+                                            The Gamebox VIP Pass is a privilege
+                                            membership pass in Gamebox.
+                                        </p>
+                                    </div>
+                                    <div className="">
+                                        <p className="desc text-left">
+                                            The Gamebox VIP Pass NFT grants
+                                            players special utilities, such as
+                                            increased daily spins and future
+                                            utilities. This gives players
+                                            additional free gems daily to
+                                            participate and win prizes on
+                                            Gamebox.
+                                        </p>
                                     </div>
                                 </div>
+                                <div className="col-12 align-self-end my-3">
+                                    <div className="">
+                                        <div
+                                            className={`claim-btn d-flex ml-auto ${
+                                                loader.id === data?.id
+                                                    ? "disabled opacity-0-5"
+                                                    : "enabled"
+                                            }`}
+                                            onClick={handleRedeem}
+                                        >
+                                            <p className="m-auto">
+                                                CLAIM VIP PASS
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>

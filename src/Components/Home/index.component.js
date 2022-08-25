@@ -25,6 +25,7 @@ import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
+import FeaturedWinner from "./Featured/FeaturedWinner.component";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -485,9 +486,9 @@ const Index = () => {
                             <div className="col-12 col-md-10 col-lg-8 mx-lg-auto px-2">
                                 <div className="row">
                                     <div className="col-12">
-                                        {/* <h2 className="section-title mb-3">
-                                            VIP Pass Give Away
-                                        </h2> */}
+                                        <h2 className="section-title mb-3">
+                                            Limited-Time Reward
+                                        </h2>
                                     </div>
 
                                     <VipPassRedemption data={vipPassData} />
