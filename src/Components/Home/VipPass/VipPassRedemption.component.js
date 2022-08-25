@@ -1,17 +1,38 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // COMPONENTS
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 
 // REDUX
+import { loadNFTClaim } from "redux/thunks/UnClaimedPrizes.thunk";
 
 // HELPER
 import { defaultGameImage } from "Utils/DefaultImage";
 
 const VipPassRedemption = ({ data }) => {
     const dispatch = useDispatch();
+
+    const [loader, setLoader] = useState({
+        id: null,
+        status: false,
+    });
+
+    const handleRedeem = () => {
+        if (loader.status) return;
+
+        setLoader({ status: true, id: data.winnerId });
+
+        dispatch(
+            loadNFTClaim(
+                data.winnerId,
+                data.prizeBlockchainNetwork,
+                data.prizeContractType,
+                setLoader
+            )
+        );
+    };
 
     return (
         <>
@@ -36,13 +57,13 @@ const VipPassRedemption = ({ data }) => {
                                     </p>
                                 </div>
                                 <div className="col-12">
-                                    <p>
+                                    <p className="desc text-center">
                                         The Gamebox VIP Pass is a privilege
                                         membership pass in Gamebox.
                                     </p>
                                 </div>
                                 <div className="col-12">
-                                    <p>
+                                    <p className="desc text-justify">
                                         The Gamebox VIP Pass NFT grants players
                                         special utilities, such as increased
                                         daily spins and future utilities. This
@@ -53,8 +74,12 @@ const VipPassRedemption = ({ data }) => {
                                 </div>
                                 <div className="col-12">
                                     <div
-                                        className="claim-btn d-flex align-items-center justify-content-center mx-auto"
-                                        onClick={null}
+                                        className={`claim-btn d-flex align-items-center justify-content-center mx-auto ${
+                                            loader.id === data?.id
+                                                ? "disabled opacity-0-5"
+                                                : "enabled"
+                                        }`}
+                                        onClick={handleRedeem}
                                     >
                                         <p className="mb-0">CLAIM VIP PASS</p>
                                     </div>

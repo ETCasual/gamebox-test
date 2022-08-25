@@ -1,5 +1,5 @@
 // REACT & REDUX
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,9 +16,8 @@ import {
     getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-// import { handleConnectWallet } from "Utils/ConnectWallet";
+import { getNFTBalance, getNFTMetadata, getWeb3 } from "Utils/ConnectWallet";
 // import { UPDATE_USER_WALLET } from "redux/types";
-import { useEffect } from "react";
 
 const Profile = ({
     handlePlayerLevelPanel,
@@ -33,6 +32,11 @@ const Profile = ({
     const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
     const [invalidWalletModalShown, setInvalidWalletModalShown] =
         useState(false);
+    const [vipPassData, setVipPassData] = useState({
+        symbol: "",
+        quantity: 0,
+        metadata: null,
+    });
 
     const dispatch = useDispatch();
 
@@ -65,6 +69,18 @@ const Profile = ({
 
     const handleConnectWallet = async () => {
         setSelectWalletModalShown(true);
+    };
+
+    const handleCheckNFTBalance = async () => {
+        const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
+        const nftMetadata = await getNFTMetadata(11);
+        console.log(nftBalance, symbol);
+        console.warn(nftMetadata);
+        setVipPassData({
+            symbol: symbol,
+            quantity: nftBalance,
+            metadata: null,
+        });
     };
 
     // const handleDisconnectWallet = () => {
@@ -330,9 +346,14 @@ const Profile = ({
                                         </p>
                                         <p className="pt-2 mb-2 d-flex align-items-center refer-text">
                                             Refer and get{" "}
-                                            <span className="px-1">
-                                                {config.gemsPerInvite} gems
+                                            <span className="px-2">
+                                                {config.gemsPerInvite}
                                             </span>
+                                            <img
+                                                width="24"
+                                                src={`${window.cdn}assets/gem_01.png`}
+                                                alt="gems"
+                                            />
                                         </p>
                                         <p className="mb-4 share-text">
                                             {`Share your referral code with
@@ -351,7 +372,8 @@ const Profile = ({
                                         </p>
                                         <div
                                             className="invite-btn d-flex align-items-center justify-content-center"
-                                            onClick={handleTeamPanel}
+                                            onClick={handleCheckNFTBalance}
+                                            // onClick={handleTeamPanel}
                                         >
                                             <p className="mb-0">GET CODE</p>
                                         </div>

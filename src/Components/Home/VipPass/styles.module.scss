@@ -51,23 +51,24 @@
                     @include media-min($sm) {
                         border-radius: 5px;
                     }
-                    object-fit: cover;
+                    object-fit: contain;
                     object-position: left;
                 }
             }
             .info-wrapper {
                 .title {
-                    font-size: $fnt-sz-14;
+                    font-weight: $fnt-wgt-600;
+                    font-size: $fnt-sz-20;
                     @include media-min($md) {
-                        font-size: $fnt-sz-18;
+                        font-size: $fnt-sz-24;
                     }
                 }
                 .desc {
                     font-size: $fnt-sz-14;
                     @include media-min($md) {
-                        font-size: $fnt-sz-14;
+                        font-size: $fnt-sz-18;
                     }
-                    line-height: 1.3;
+                    line-height: 1.5;
                     color: #868686;
                 }
                 .claim-btn {

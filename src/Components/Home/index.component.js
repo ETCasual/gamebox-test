@@ -79,7 +79,11 @@ const Index = () => {
     useEffect(() => {
         console.log("unclaim: ", unClaimedPrizes);
         setIsVipPassRedeemable(true);
-        // setVipPassData();
+        // setVipPassData({
+        //     winnerId: ,
+        //     prizeBlockchainNetwork:
+        //     prizeContractType:
+        // });
     }, [unClaimedPrizes]);
 
     // SETUP PRIZES FROM CACHE

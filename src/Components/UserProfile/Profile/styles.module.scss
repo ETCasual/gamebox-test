@@ -65,6 +65,7 @@
     .token-balance {
         cursor: default;
         .gem-balance-text {
+            white-space: nowrap;
             color: white;
             font-size: $fnt-sz-12;
             @include media-min($md) {
