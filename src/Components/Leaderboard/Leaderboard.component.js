@@ -514,10 +514,10 @@ const Leaderboard = ({
      * Whenever a game is finished should call this function to submiting the score object
      * @param {
             a: this.currentScore, // score
-            b: scoreObject, // scoreObject { timestamp: number, score: number }
+            b: [scoreObject], // scoreObject { d: data, f: frame, s: score }
             c: this.gameStartTime, // gameStartTime
             d: this.gameOverTime, // gameOverTime
-            e: this.sTick, // sTick} score 
+            e: seedObject, // { start: [seed], end: [seed] }
      * @returns 
      */
     window.playerFinishGame = async (score) => {

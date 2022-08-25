@@ -914,8 +914,9 @@ export async function logLeave(
     if (gameScore.b) {
         for (let i = 0; i < gameScore.b.length; i++) {
             const scoreTrail = new ScoreTrail();
-            scoreTrail.setTimestamp(gameScore.b[i].timestamp);
-            scoreTrail.setScore(gameScore.b[i].score);
+            scoreTrail.setFrame(gameScore.b[i].f);
+            scoreTrail.setScore(gameScore.b[i].s);
+            scoreTrail.setData(JSON.stringify(gameScore.b[i].d));
 
             scoreTrailArr.push(scoreTrail);
         }
@@ -925,7 +926,8 @@ export async function logLeave(
     gameScoreObject.setScoreObjectList(scoreTrailArr);
     gameScoreObject.setGameStartTime(gameScore.c);
     gameScoreObject.setGameOverTime(gameScore.d);
-    gameScoreObject.setSTickList(gameScore.e);
+    gameScoreObject.setGameStartSeed(gameScore.e.start?.[0]);
+    gameScoreObject.setGameEndSeed(gameScore.e?.end?.[0]);
 
     request.setGameScoreObject(gameScoreObject);
     request.setRecaptchaToken(recaptchaToken);

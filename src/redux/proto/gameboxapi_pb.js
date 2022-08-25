@@ -11818,7 +11818,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.api.gamebox.LogGameplayDetail.repeatedFields_ = [2,5];
+proto.api.gamebox.LogGameplayDetail.repeatedFields_ = [2];
 
 
 
@@ -11854,7 +11854,8 @@ proto.api.gamebox.LogGameplayDetail.toObject = function(includeInstance, msg) {
     proto.api.gamebox.ScoreTrail.toObject, includeInstance),
     gameStartTime: jspb.Message.getFieldWithDefault(msg, 3, 0),
     gameOverTime: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    sTickList: jspb.Message.getRepeatedField(msg, 5)
+    gameStartSeed: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    gameEndSeed: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -11909,8 +11910,12 @@ proto.api.gamebox.LogGameplayDetail.deserializeBinaryFromReader = function(msg, 
       msg.setGameOverTime(value);
       break;
     case 5:
-      var value = /** @type {!Array<number>} */ (reader.readPackedInt32());
-      msg.setSTickList(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGameStartSeed(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGameEndSeed(value);
       break;
     default:
       reader.skipField();
@@ -11970,10 +11975,17 @@ proto.api.gamebox.LogGameplayDetail.serializeBinaryToWriter = function(message, 
       f
     );
   }
-  f = message.getSTickList();
+  f = message.getGameStartSeed();
   if (f.length > 0) {
-    writer.writePackedInt32(
+    writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getGameEndSeed();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -12057,31 +12069,32 @@ proto.api.gamebox.LogGameplayDetail.prototype.setGameOverTime = function(value) 
 
 
 /**
- * repeated int32 s_tick = 5;
- * @return {!Array<number>}
+ * optional string game_start_seed = 5;
+ * @return {string}
  */
-proto.api.gamebox.LogGameplayDetail.prototype.getSTickList = function() {
-  return /** @type {!Array<number>} */ (jspb.Message.getRepeatedField(this, 5));
+proto.api.gamebox.LogGameplayDetail.prototype.getGameStartSeed = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
-/** @param {!Array<number>} value */
-proto.api.gamebox.LogGameplayDetail.prototype.setSTickList = function(value) {
-  jspb.Message.setField(this, 5, value || []);
+/** @param {string} value */
+proto.api.gamebox.LogGameplayDetail.prototype.setGameStartSeed = function(value) {
+  jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * @param {!number} value
- * @param {number=} opt_index
+ * optional string game_end_seed = 6;
+ * @return {string}
  */
-proto.api.gamebox.LogGameplayDetail.prototype.addSTick = function(value, opt_index) {
-  jspb.Message.addToRepeatedField(this, 5, value, opt_index);
+proto.api.gamebox.LogGameplayDetail.prototype.getGameEndSeed = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
-proto.api.gamebox.LogGameplayDetail.prototype.clearSTickList = function() {
-  this.setSTickList([]);
+/** @param {string} value */
+proto.api.gamebox.LogGameplayDetail.prototype.setGameEndSeed = function(value) {
+  jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -12132,8 +12145,9 @@ proto.api.gamebox.ScoreTrail.prototype.toObject = function(opt_includeInstance) 
  */
 proto.api.gamebox.ScoreTrail.toObject = function(includeInstance, msg) {
   var f, obj = {
-    timestamp: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    score: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    frame: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    score: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    data: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -12172,11 +12186,15 @@ proto.api.gamebox.ScoreTrail.deserializeBinaryFromReader = function(msg, reader)
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt64());
-      msg.setTimestamp(value);
+      msg.setFrame(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setScore(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setData(value);
       break;
     default:
       reader.skipField();
@@ -12207,7 +12225,7 @@ proto.api.gamebox.ScoreTrail.prototype.serializeBinary = function() {
  */
 proto.api.gamebox.ScoreTrail.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getTimestamp();
+  f = message.getFrame();
   if (f !== 0) {
     writer.writeInt64(
       1,
@@ -12221,20 +12239,27 @@ proto.api.gamebox.ScoreTrail.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
+  f = message.getData();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
 /**
- * optional int64 timestamp = 1;
+ * optional int64 frame = 1;
  * @return {number}
  */
-proto.api.gamebox.ScoreTrail.prototype.getTimestamp = function() {
+proto.api.gamebox.ScoreTrail.prototype.getFrame = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /** @param {number} value */
-proto.api.gamebox.ScoreTrail.prototype.setTimestamp = function(value) {
+proto.api.gamebox.ScoreTrail.prototype.setFrame = function(value) {
   jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -12251,6 +12276,21 @@ proto.api.gamebox.ScoreTrail.prototype.getScore = function() {
 /** @param {number} value */
 proto.api.gamebox.ScoreTrail.prototype.setScore = function(value) {
   jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional string data = 3;
+ * @return {string}
+ */
+proto.api.gamebox.ScoreTrail.prototype.getData = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.api.gamebox.ScoreTrail.prototype.setData = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
