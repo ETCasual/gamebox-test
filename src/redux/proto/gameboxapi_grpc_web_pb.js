@@ -3612,6 +3612,67 @@ proto.api.gamebox.GameboxApiPromiseClient.prototype.claimPrize =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.api.gamebox.CheckGiveawayRequest,
+ *   !proto.api.gamebox.CheckGiveawayResponse>}
+ */
+const methodDescriptor_GameboxApi_CheckGiveaway = new grpc.web.MethodDescriptor(
+  '/api.gamebox.GameboxApi/CheckGiveaway',
+  grpc.web.MethodType.UNARY,
+  proto.api.gamebox.CheckGiveawayRequest,
+  proto.api.gamebox.CheckGiveawayResponse,
+  /**
+   * @param {!proto.api.gamebox.CheckGiveawayRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.api.gamebox.CheckGiveawayResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.api.gamebox.CheckGiveawayRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.RpcError, ?proto.api.gamebox.CheckGiveawayResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.api.gamebox.CheckGiveawayResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.api.gamebox.GameboxApiClient.prototype.checkGiveaway =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/CheckGiveaway',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_CheckGiveaway,
+      callback);
+};
+
+
+/**
+ * @param {!proto.api.gamebox.CheckGiveawayRequest} request The
+ *     request proto
+ * @param {?Object<string, string>=} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.api.gamebox.CheckGiveawayResponse>}
+ *     Promise that resolves to the response
+ */
+proto.api.gamebox.GameboxApiPromiseClient.prototype.checkGiveaway =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/api.gamebox.GameboxApi/CheckGiveaway',
+      request,
+      metadata || {},
+      methodDescriptor_GameboxApi_CheckGiveaway);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.api.gamebox.ListNotificationRequest,
  *   !proto.api.gamebox.ListNotificationResponse>}
  */

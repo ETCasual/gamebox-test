@@ -40,6 +40,7 @@ import {
     ClaimPrizeRequest,
     CreateIntentRequest,
     UpdateWalletAddressRequest,
+    CheckGiveawayRequest,
 } from "../proto/gameboxapi_pb";
 import axios from "axios";
 import _ from "lodash";
@@ -1471,6 +1472,20 @@ export async function processClaim(winnerId, userId, hash, walletAddress) {
         authorization: `Bearer ${token}`,
     });
     return res.getResult();
+}
+
+//
+//     CHECK FOR GIVEAWAY
+//
+export async function checkGiveaway(userId) {
+    const token = getToken();
+    const request = new CheckGiveawayRequest();
+    request.setUserId(userId);
+
+    // Notify server to check for giveaway
+    await client.checkGiveaway(request, {
+        authorization: `Bearer ${token}`,
+    });
 }
 
 //

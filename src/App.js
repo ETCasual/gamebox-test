@@ -44,6 +44,7 @@ import { getExchangeRate } from "redux/services/index.service";
 import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
 import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
+import loadCheckGiveaway from "redux/thunks/Giveaway.thunk";
 // import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 import Footer from "Components/Landing/Footer/Footer.component";
@@ -118,6 +119,8 @@ const App = () => {
             dispatch(loadConfig());
             dispatch(loadGemsList());
             dispatch(loadGamesList());
+
+            dispatch(loadCheckGiveaway(user.id));
 
             // FOR FUTURE PURPOSE
             // dispatch({ type: "LIST_PURCHASE_HISTORY" });
