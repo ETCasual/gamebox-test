@@ -138,7 +138,7 @@ const Settings = () => {
                                 <div className="row py-4 py-md-5">
                                     <div className="col-12 connect-wallet">
                                         <p className="main-title mb-3 mb-md-4">
-                                            Connected wallet
+                                            Wallet connected
                                         </p>
                                         <div className="col-12 px-0 mb-2">
                                             <div className="row">

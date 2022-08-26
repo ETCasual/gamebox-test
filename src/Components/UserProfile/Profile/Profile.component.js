@@ -353,11 +353,9 @@ const Profile = ({
                                         </p>
                                         <p className="mb-4 share-text">
                                             {`Share your referral code with
-                                                your friends and get ${
+                                                your friends to receive ${
                                                     config.gemsPerInvite
-                                                } Gems on
-                                                us (for you and your friend)
-                                                when your friend 
+                                                } Gems (for you and your friend) when they 
                                                 ${
                                                     config.rewardInvitesRank <=
                                                     0
