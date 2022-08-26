@@ -8,7 +8,9 @@ const DailyBonus = ({ dailyRewardRef, setRegistrationInstructionModal }) => {
                 ref={dailyRewardRef}
             >
                 <h1 className="title">That's not all!</h1>
-                <p className="subtitle">FREE NFT’s for you every week.</p>
+                <p className="subtitle">
+                    Every week, you will receive FREE NFTs.
+                </p>
 
                 <div className="col-12 position-relative content-wrapper text-center p-3 d-flex flex-column align-items-center justify-content-center">
                     <img
@@ -26,8 +28,8 @@ const DailyBonus = ({ dailyRewardRef, setRegistrationInstructionModal }) => {
                         Get premium NFT’s every week!
                     </h2>
                     <p className="subtitle-text mb-4">
-                        Collect tickets automatically for weekly NFT reward when
-                        you win in any tournaments!
+                        You will automatically receive tickets for weekly NFT
+                        rewards when you win any tournament!
                     </p>
                     <button
                         className="register-now-button"
