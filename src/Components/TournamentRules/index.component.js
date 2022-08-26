@@ -47,9 +47,8 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">General</p>
                                 <p className="description">
-                                    To win prizes in GameBox, there is no
-                                    purchase or payment of any kind required to
-                                    enter the tournaments for the prizes.
+                                    No purchase or payment is required to enter
+                                    the tournaments for the prizes in Gamebox.
                                 </p>
                                 <p className="description">
                                     By entering the tournaments, all entrants
@@ -73,15 +72,8 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">Participants</p>
                                 <p className="description">
-                                    The prizes and tournaments is open to all
-                                    registered users of GameBox and Froyo.Games,
-                                    who have reached the age of 18 or the
-                                    applicable age of the majority (which is
-                                    higher) at the time of entry
-                                    ("Participants") and where local regulations
-                                    do not prevent in any other way
-                                    participation in free tournaments with NFT’s
-                                    or Tokens as the prize.
+                                    The prizes and tournaments are open to all
+                                    GameBox and Froyo registered users.
                                 </p>
                             </div>
                             {/* PRIZE / REWARD / TOURNAMENT PERIOD */}
@@ -101,19 +93,19 @@ const Index = () => {
                                     prize.
                                 </p>
                                 <p className="description">
-                                    The bonus prize duration is shown in the
+                                    The bonus prize duration is shown on the
                                     GameBox platform as a countdown that
                                     displays the time until the bonus prize ends
                                     and a winner is chosen.
                                 </p>
                                 <p className="description">
-                                    The tournament duration is shown in the
+                                    The tournament duration is shown on the
                                     GameBox platform as a countdown that
                                     displays the time until the next Tournament.
                                 </p>
                                 <p className="description">
                                     It is GameBox's sole discretion to announce
-                                    a new prize and/or tournament or cancel
+                                    a new prize and/or tournament or cancel an
                                     upcoming prize and/or tournament, at any
                                     time, without any reason whatsoever.
                                 </p>
@@ -122,24 +114,25 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">Participation</p>
                                 <p className="description">
-                                    To enter a Prize/Tournament, user needs to:
+                                    To enter a Prize/Tournament, the user needs
+                                    to:
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
                                         Register by opening an account with
-                                        www.froyo.games. In order to register,
-                                        Participants need to accept and agree to
+                                        www.froyo.games. To register,
+                                        participants must accept and agree to
                                         the Privacy Policy, Terms and Conditions
                                         and the Prize and Tournament Rules and
                                         be at least 18 years of age.
                                     </li>
                                     <li>
-                                        Use GameBox platform to earn tickets
+                                        Use the GameBox platform to earn tickets
                                         ("Tickets") that are each worth one (1)
-                                        entry into the prize played. Tickets can
+                                        entry into the Prize played. Tickets can
                                         be earned in various ways, including (i)
                                         participating in tournaments, (ii) using
-                                        the spinner, (iii) other defined
+                                        the spinner, and (iii) other defined
                                         activities in the application. Tickets
                                         have no cash value.
                                     </li>
@@ -149,11 +142,10 @@ const Index = () => {
                                         will be considered to have been
                                         submitted by the Registered Owner of the
                                         email address associated with the entry.
-                                        "Registered Owner" is defined as the
-                                        natural person who is assigned an email
-                                        address by an Internet access provider,
-                                        on-line service provider or other
-                                        organisation/individual that is
+                                        "Registered Owner" is the natural person
+                                        assigned an email address by an Internet
+                                        access provider, online service provider
+                                        or other organisation/individual
                                         responsible for assigning email
                                         addresses for the domain associated with
                                         the submitted email address.
@@ -206,37 +198,36 @@ const Index = () => {
                                         Prize Draw.
                                     </li>
                                     <li>
-                                        Odds of winning the Prize depends upon
-                                        the number of eligible entries received
-                                        by the Prize Sponsor during the Prize
-                                        and Tournament Period.
+                                        The odds of winning the Prize depend
+                                        upon the number of eligible entries
+                                        received by the Prize Sponsor during the
+                                        Prize and Tournament Period.
                                     </li>
                                 </ul>
 
                                 <p className="title">Bonus Prize</p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
-                                        Bonus participation prize is offered as
-                                        long as participants enter and win
-                                        tickets from any tournament or via the
-                                        spinner or via the additional tickets
-                                        with ads or gems in the GameBox
-                                        platform.
+                                        The bonus participation prize is offered
+                                        as long as participants enter and win
+                                        tickets from any tournament via the
+                                        spinner or the additional tickets with
+                                        ads or gems on the GameBox platform.
                                     </li>
                                     <li>
                                         Bonus prizes are offered in the form of
-                                        NFT’s or Tokens.
+                                        NFTs or Tokens.
                                     </li>
                                     <li>
-                                        Winner of the bonus prize / reward is
+                                        The bonus prize/reward winner is
                                         randomly selected from all participating
                                         participants when the countdown timer
                                         ends.
                                     </li>
                                     <li>
-                                        Prize sponsor reserves the right to
-                                        change the prize and/or duration of the
-                                        prize at its own discretion.
+                                        The prize sponsor reserves the right to
+                                        change the Prize and/or duration of the
+                                        Prize at its own discretion.
                                     </li>
                                     <li>
                                         Being granted the prize requires no
@@ -255,9 +246,9 @@ const Index = () => {
                                         Winner for the Prize to be transferred.
                                     </li>
                                     <li>
-                                        The Transaction Fee (Gas Fee) when
-                                        claiming Prize will be borne by the
-                                        Prize Winner.
+                                        When claiming the Prize, the Transaction
+                                        Fee (Gas Fee) will be borne by the Prize
+                                        Winner.
                                     </li>
                                     <li>
                                         Unminted Prizes and/or Prizes under
@@ -265,12 +256,12 @@ const Index = () => {
                                         by Prize Winners immediately unless
                                         stated by Prize Sponsor. Prize Winners
                                         will need to wait for the Prize to be
-                                        minted and/or promotional campaign to
-                                        end before the Prize can be claimed. It
-                                        is the Prize Sponsor’s sole discretion
-                                        to determine the duration of when the
-                                        Prize will be minted and/or promotional
-                                        campaign ends.
+                                        minted and/or the promotional campaign
+                                        to end before the Prize can be claimed.
+                                        It is the Prize Sponsor's sole
+                                        discretion to determine the duration of
+                                        when the Prize will be minted and/or the
+                                        promotional campaign ends.
                                     </li>
                                     <li>
                                         The Prize Sponsor will not be
@@ -315,7 +306,7 @@ const Index = () => {
                                         age and jurisdiction of residence prior
                                         to awarding the Prize. If an entrant’s
                                         name is drawn and they are unqualified,
-                                        the Prize may be forfeited in the Prize
+                                        the Prize may be forfeited at the Prize
                                         Sponsor’s sole discretion.
                                     </li>
                                     <li>
@@ -324,11 +315,10 @@ const Index = () => {
                                     </li>
                                     <li>
                                         The Prize Sponsor may interfere with the
-                                        claim in the case of any doubt or
-                                        failing to comply with the rules. In
-                                        case the Prize Sponsor decides to cancel
-                                        the claim, the prize will be deemed
-                                        invalid.
+                                        claim in the case of doubt or failure to
+                                        comply with the rules. If the Prize
+                                        Sponsor cancels the claim, the Prize
+                                        will be deemed invalid.
                                     </li>
                                     <li>
                                         Expiration period - all prizes expire
@@ -439,22 +429,22 @@ const Index = () => {
                                 </p>
                                 <p className="description">
                                     Each Participant agrees to participate, at
-                                    GameBox’s request, in publicity (including
+                                    GameBox's request, in publicity (including
                                     interviews) and further agrees that GameBox
                                     owns all Intellectual Property Rights in,
-                                    and may use at GameBox’s absolute
-                                    discretion, such publicity/interviews.
-                                    GameBox may refer to the Participant’s
-                                    association with the prize and/or tournament
-                                    in all publicity, marketing and materials.
+                                    and may use at GameBox's absolute
+                                    discretion, such publicity/interviews. In
+                                    addition, GameBox may refer to the
+                                    Participant's association with the Prize
+                                    and/or Tournament in all publicity,
+                                    marketing and materials.
                                 </p>
                                 <p className="description">
-                                    The Participant shall not publicise his or
-                                    her involvement in the prize and/or
-                                    tournament or the fact that the Participant
-                                    has won any prize (including giving
-                                    interviews) except with GameBox’s prior
-                                    written consent.
+                                    The Participant shall not publicise their
+                                    involvement in the Prize and/or Tournament
+                                    or that the Participant has won any prize
+                                    (including giving interviews) except with
+                                    GameBox's prior written consent.
                                 </p>
                                 <p className="description">
                                     By entering a Tournament or submitting a
@@ -502,8 +492,8 @@ const Index = () => {
                                     For the avoidance of doubt, all rights
                                     relating to the Prize and/or Tournament
                                     (including the name, title and format of the
-                                    Prize and/or Tournament ) will vest
-                                    exclusively in GameBox for our own use (in
+                                    Prize and/or Tournament) will vest
+                                    exclusively in GameBox for our own use (at
                                     our absolute discretion). Unless otherwise
                                     stated, prize and/or tournament entries will
                                     not be returned to you.
@@ -517,7 +507,7 @@ const Index = () => {
                                 <p className="description">
                                     No liability or responsibility is assumed by
                                     the Prize and/or Tournament Parties
-                                    resulting from participant's participation
+                                    resulting from Participant's participation
                                     in or attempt to participate in the Prize
                                     and/or Tournament, ability or inability to
                                     upload or download any information in
@@ -562,19 +552,19 @@ const Index = () => {
                                     Tickets or entries, or in any Prize and/or
                                     Tournament-related materials. Use of the
                                     Prize and/or Tournament Platform is at the
-                                    user's own risk. The Prize and/orTournament
+                                    user's own risk. The Prize and/or tournament
                                     Parties are not responsible for any personal
-                                    injury or property damage or losses of any
-                                    kind which may be sustained to user's or any
-                                    other person's computer equipment resulting
-                                    from participation in the Prize and/or
-                                    Tournament. By participating in the Prize
-                                    and/or Tournament, entrants agree: (i) to
-                                    release, hold harmless and indemnify the
-                                    Prize and/or Tournament Parties, and
+                                    injury or property damage, or losses of any
+                                    kind which may be sustained to the user's or
+                                    any other person's computer equipment
+                                    resulting from participation in the Prize
+                                    and/or Tournament. By participating in the
+                                    Prize and/or Tournament, entrants agree: (i)
+                                    to release, hold harmless and indemnify the
+                                    Prize and/or Tournament Parties and
                                     Froyo.Games from any and all claims, damages
                                     or liabilities arising from or relating to
-                                    such participant's participation in the
+                                    such Participant's participation in the
                                     Prize and/or Tournaments; (ii) all causes of
                                     action arising out of or connected with this
                                     Prize and/or Tournament, or any Prize
@@ -584,8 +574,8 @@ const Index = () => {
                                     awards shall be limited to actual
                                     out-of-pocket costs incurred, excluding
                                     legal fees and court costs. By accepting a
-                                    Prize, winner agrees that the Prize and/or
-                                    Tournament Sponsor, its parent,
+                                    Prize, the winner agrees that the Prize
+                                    and/or Tournament Sponsor, its parent,
                                     subsidiaries, related or affiliated
                                     companies or, if applicable, any of their
                                     respective advertising or promotion
@@ -594,7 +584,7 @@ const Index = () => {
                                     services related to this Prize and/or
                                     Tournament and their officers, directors,
                                     employees, representatives and agents will
-                                    have no liability whatsoever for, and shall
+                                    have no liability whatsoever for and shall
                                     be held harmless by winner against, any
                                     liability for injuries, losses or damages of
                                     any kind to persons or property resulting in
@@ -686,8 +676,8 @@ const Index = () => {
                                     Prize Sponsor does not constitute a general
                                     waiver of any obligation to entrants. The
                                     Prize Sponsor reserves the right to update
-                                    or modify these Rules at any time, and
-                                    without prior notice to you.
+                                    or modify these Rules at any time, without
+                                    prior notice.
                                 </p>
 
                                 <p className="description">
