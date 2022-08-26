@@ -77,13 +77,17 @@ const Index = () => {
     }, [user.id, dispatch]);
 
     useEffect(() => {
-        console.log("unclaim: ", unClaimedPrizes);
-        setIsVipPassRedeemable(true);
-        // setVipPassData({
-        //     winnerId: ,
-        //     prizeBlockchainNetwork:
-        //     prizeContractType:
-        // });
+        if (unClaimedPrizes) {
+            const vipPassPrizes = unClaimedPrizes.filter(
+                (unclaimPrize) => unclaimPrize.prizeType === 6
+            );
+            setIsVipPassRedeemable(vipPassPrizes.length > 0);
+            if (vipPassPrizes.length > 0) {
+                setVipPassData(vipPassPrizes[0]);
+            }
+        } else {
+            setIsVipPassRedeemable(false);
+        }
     }, [unClaimedPrizes]);
 
     // SETUP PRIZES FROM CACHE

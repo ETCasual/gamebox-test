@@ -14,7 +14,6 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log(data);
         let timer = null;
 
         if (notificationList.length > 0) {
