@@ -46,7 +46,7 @@ const Index = () => {
                                     primary access points to our games service
                                     which may be updated from time to time. You
                                     are advised to consult this policy regularly
-                                    for any changes.
+                                    for any changes
                                 </p>
                             </div>
                             {/* INFO COLLECTION */}
@@ -61,23 +61,22 @@ const Index = () => {
                                     Personally Identifiable Information
                                 </p>
                                 <p className="description">
-                                    In the course of using our services, you may
-                                    provide us with personally identifiable
-                                    information. This refers to information
-                                    about you that can be used to contact or
-                                    identify you (“Personal Information”).
-                                    Personal Information includes, but is not
-                                    limited to, your name and email address. We
-                                    use your Personal Information mainly to
-                                    provide our services and administer your
-                                    inquiries.
+                                    While using our services, you may provide us
+                                    with personally identifiable information.
+                                    This refers to information about you that
+                                    can be used to contact or identify you
+                                    ("Personal Information"). Personal
+                                    information includes, but is not limited to,
+                                    your name and email address. We primarily
+                                    use your Personal Information to provide our
+                                    services and respond to your inquiries.
                                 </p>
                                 <p className="description">
-                                    We use your Personal Information (in some
-                                    cases, in conjunction with your
-                                    Non-Identifying Information) mainly to
-                                    provide our games services, complete your
-                                    transactions and administer your inquiries.
+                                    We primarily use your Personal Information
+                                    (in some cases in conjunction with your
+                                    Non-Identifying Information) to provide our
+                                    games services, complete your transactions,
+                                    and administer your inquiries.
                                 </p>
                             </div>
                             {/* DATA PROVIDED BY YOU */}
@@ -127,7 +126,7 @@ const Index = () => {
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
-                                        Data received by linking with a
+                                        Data obtained through a link with a
                                         third-party tool provided by a service
                                         (such as but not limited to Facebook,
                                         Google Play Game Service or Game Centre)
@@ -171,8 +170,8 @@ const Index = () => {
                                 </ul>
 
                                 <p className="description">
-                                    To improve our service for our players such
-                                    as :
+                                    To improve our service to our players, we
+                                    have implemented the following measures:
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>Updates and improvements</li>
@@ -200,8 +199,8 @@ const Index = () => {
 
                                 <p className="description">
                                     To display personalised advertisements
-                                    within the game along with other websites
-                                    and services by :
+                                    within the game as well as other websites
+                                    and services by:
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
@@ -273,19 +272,19 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">Children</p>
                                 <p className="description">
-                                    WWe do not knowingly collect, market or
-                                    solicit personal data about or direct or
-                                    target interest-based advertising to anyone
-                                    under the age of 13 or knowingly allow such
-                                    persons to use our Services. If you are
-                                    under 13, please do not send any data about
-                                    yourself to us, including your name,
-                                    address, telephone number, or email address.
-                                    No one under the age of 13 may provide any
-                                    personal data. If a parent or guardian
-                                    becomes aware that his or her child has
-                                    provided us with information without their
-                                    consent, please contact us at{" "}
+                                    We do not knowingly collect, market, or
+                                    solicit personal data about anyone under the
+                                    age of 13, nor do we knowingly allow such
+                                    individuals to use our Services. If you are
+                                    under the age of 13, please do not send us
+                                    any information about yourself, such as your
+                                    name, address, phone number, or email
+                                    address. Anyone under the age of 13 is not
+                                    permitted to provide any personal
+                                    information. If a parent or guardian
+                                    discovers that his or her child has given us
+                                    information without their permission, please
+                                    contact us at{" "}
                                     <a
                                         className="email"
                                         target="_blank"

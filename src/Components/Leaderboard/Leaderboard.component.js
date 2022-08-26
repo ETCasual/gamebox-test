@@ -795,8 +795,8 @@ const Leaderboard = ({
                         />
                     </div>
                     <p className="tournament-subtitle mt-2 mb-3">
-                        Compete with other players, collect tickets and stand a
-                        chance to own this Prize!
+                        Compete against other players, collect tickets, and you
+                        could win this Prize!
                     </p>
                 </div>
 
@@ -931,7 +931,7 @@ const Leaderboard = ({
 
                 {/* RECAPTCHA MESSAGES */}
                 <p className="recaptcha-text my-1 my-md-auto">
-                    This site is protected by reCAPTCHA and the Google
+                    This website is reCAPTCHA-protected, and the Google
                     {""}{" "}
                     <a href="https://policies.google.com/privacy">
                         Privacy Policy

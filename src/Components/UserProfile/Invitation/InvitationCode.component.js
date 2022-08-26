@@ -52,12 +52,13 @@ const Invitation = ({ handleBackButton }) => {
                                         Add Friends {"&"} Get Gems
                                     </p>
                                     <p className="subtitle mb-1">
-                                        {`Share your referral code with your 
-                                        friends and get ${config.gemsPerInvite} Gems on
-                                        us (for you and your friend) when your friend 
-                                        ${config.rewardInvitesRank <= 0 
-                                            ? "join Gamebox." 
-                                            : `reaches level ${config.rewardInvitesRank} 
+                                        {`Share your referral code with your friends to receive ${
+                                            config.gemsPerInvite
+                                        } Gems (for you and your friend) when they
+                                        ${
+                                            config.rewardInvitesRank <= 0
+                                                ? "join Gamebox."
+                                                : `reaches level ${config.rewardInvitesRank} 
                                             in GameBox.`
                                         }`}
                                     </p>

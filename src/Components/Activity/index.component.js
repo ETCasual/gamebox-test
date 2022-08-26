@@ -71,13 +71,16 @@ const Index = () => {
 
                     {noDataLoaded && (
                         <div className="no-result">
-                            <p className="title mb-2">No activity found yet!</p>
+                            <p className="title mb-2">
+                                No activity has been found yet!
+                            </p>
                             <p className="subtitle mt-1 mb-0">
-                                Looks like you've not played for any prizes yet.{" "}
+                                It appears that you have not yet competed for
+                                any prizes.{" "}
                             </p>
                             <p className="subtitle">
-                                <Link to="/">Click here</Link> to look for one
-                                you like.
+                                <Link to="/">Click here</Link> to select one
+                                that appeals to you.
                             </p>
                         </div>
                     )}

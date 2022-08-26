@@ -11,7 +11,9 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                 <h1 className="title">HOW DOES IT WORK?</h1>
 
                 {/* FOLLOW STEPS */}
-                <p className="subtitle">Just follow these 3 simple steps.</p>
+                <p className="subtitle">
+                    Simply follow these three simple steps.
+                </p>
 
                 {/* STEP 1 2 3*/}
                 <div className="col-12 mt-3 px-0">
@@ -36,8 +38,8 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                                         Discover NFTs
                                     </div>
                                     <div className="description">
-                                        A wide collection of NFTs waiting just
-                                        to be discovered.
+                                        A diverse set of NFTs is waiting to be
+                                        discovered.
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +64,9 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                                         Compete in tournaments
                                     </div>
                                     <div className="description">
-                                        Compete with players around the world
-                                        and get the highest score to win.
+                                        Compete against players from around the
+                                        world to see who can get the highest
+                                        score.
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +90,8 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                                     <div className="step-text mb-2">STEP 3</div>
                                     <div className="title mb-2">Win NFTs</div>
                                     <div className="description">
-                                        Collect tickets and stand a chance to
-                                        win the NFT of your choice.
+                                        Collect tickets to be eligible to win an
+                                        NFT of your choice.
                                     </div>
                                 </div>
                             </div>

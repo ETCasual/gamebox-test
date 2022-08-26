@@ -218,11 +218,11 @@ const Rewards = () => {
                                 claimedPrizes.length === 0 ? (
                                     <div className="no-result">
                                         <p className="title mb-1">
-                                            No Rewards found yet!
+                                            No rewards have yet been discovered!
                                         </p>
                                         <p className="subtitle mt-1 mb-0">
-                                            Looks like you've not claimed for
-                                            any prizes yet.{" "}
+                                            It appears that you have yet to
+                                            claim any prizes.{" "}
                                         </p>
                                     </div>
                                 ) : (
@@ -325,15 +325,18 @@ const Rewards = () => {
                             ) : unClaimedPrizes.length === 0 ? (
                                 <div className="no-result">
                                     <p className="title mb-1">
-                                        No Rewards found yet!
+                                        No rewards have yet been discovered!
                                     </p>
                                     <p className="subtitle mt-1 mb-0">
                                         Looks like you've not played for any
                                         prizes yet.{" "}
                                     </p>
                                     <p className="subtitle">
-                                        <Link to="/">Click here</Link> to look
-                                        for one you like.
+                                        <Link to="/">
+                                            You don't appear to have won any
+                                            prizes yet. Click here
+                                        </Link>{" "}
+                                        to look for one that appeals to you.
                                     </p>
                                 </div>
                             ) : (
