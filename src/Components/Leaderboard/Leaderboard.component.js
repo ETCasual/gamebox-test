@@ -671,12 +671,17 @@ const Leaderboard = ({
 
                         <div className="user-avatar">
                             <div className="rank-star"></div>
-                            <img
-                                className="avatar"
-                                onError={(e) => defaultUserImage(e)}
-                                src={`${window.cdn}icons/icon_profile.svg`}
-                                alt="player"
-                            />
+                            {/* PROFILE IMG */}
+                            <div className="profile-img d-inline-flex ml-3">
+                                <span>
+                                    <img
+                                        className="img-holder"
+                                        onError={(e) => defaultUserImage(e)}
+                                        src={`${window.cdn}icons/icon_profile.svg`}
+                                        alt="avatar"
+                                    />
+                                </span>
+                            </div>
                         </div>
 
                         <div className="px-2 ml-3">
@@ -723,17 +728,33 @@ const Leaderboard = ({
                         </div>
 
                         <div className="user-avatar">
-                            <img
-                                className={`avatar ${
-                                    leaderboardList[i]?.isVip ? "vip-frame" : ""
+                            {/* PROFILE IMG */}
+                            <div
+                                className={`profile-img d-inline-flex ml-3 ${
+                                    leaderboardList[i]?.isVip ? "is-vip" : ""
                                 }`}
-                                onError={(e) => defaultUserImage(e)}
-                                src={
-                                    leaderboardList[i]?.avatarUrl ||
-                                    `${window.cdn}icons/icon_profile.svg`
-                                }
-                                alt="player"
-                            />
+                            >
+                                <span>
+                                    <img
+                                        className="img-holder"
+                                        onError={(e) => defaultUserImage(e)}
+                                        src={
+                                            leaderboardList[i]?.avatarUrl ||
+                                            `${window.cdn}icons/icon_profile.svg`
+                                        }
+                                        alt="avatar"
+                                    />
+                                </span>
+                                <span className="img-frame">
+                                    {leaderboardList[i]?.isVip && (
+                                        <img
+                                            className="vip-frame"
+                                            src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                            alt="vip-frame"
+                                        />
+                                    )}
+                                </span>
+                            </div>
                         </div>
 
                         <div className="px-2 ml-3">
@@ -854,19 +875,35 @@ const Leaderboard = ({
                                     />
                                 </div>
                                 <div className="user-avatar">
-                                    <img
-                                        className={`avatar ${
-                                            yourRankData.isVip
-                                                ? "vip-frame"
-                                                : ""
+                                    {/* PROFILE IMG */}
+                                    <div
+                                        className={`profile-img d-inline-flex ml-3 ${
+                                            yourRankData.isVip ? "is-vip" : ""
                                         }`}
-                                        onError={(e) => defaultUserImage(e)}
-                                        src={
-                                            yourRankData.avatarUrl ||
-                                            `${window.cdn}icons/icon_profile.svg`
-                                        }
-                                        alt="player"
-                                    />
+                                    >
+                                        <span>
+                                            <img
+                                                className="img-holder"
+                                                onError={(e) =>
+                                                    defaultUserImage(e)
+                                                }
+                                                src={
+                                                    yourRankData.avatarUrl ||
+                                                    `${window.cdn}icons/icon_profile.svg`
+                                                }
+                                                alt="avatar"
+                                            />
+                                        </span>
+                                        <span className="img-frame">
+                                            {yourRankData.isVip && (
+                                                <img
+                                                    className="vip-frame"
+                                                    src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                    alt="vip-frame"
+                                                />
+                                            )}
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <div className="px-2 ml-3">

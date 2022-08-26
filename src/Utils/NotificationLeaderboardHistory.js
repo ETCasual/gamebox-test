@@ -82,6 +82,7 @@ export function getLeaderboardList(
     _leaderboardHistory = leaderboardHistoryData.filter(
         (e) => e.cgId === parseInt(id)
     );
+
     for (let x = 0; x < rankLength; x++) {
         _data.push(
             <div
@@ -97,18 +98,37 @@ export function getLeaderboardList(
                     {/* RANK INDICATOR & AVATAR */}
                     <div className="rank-and-avatar d-flex align-items-center">
                         <LeaderRankIndicator index={x} type="lb" />
-                        <img
-                            className="avatar ml-3"
-                            onError={(e) => defaultUserImage(e)}
-                            src={
-                                _leaderboardHistory[x]?.avatarUrl ||
-                                `${window.cdn}icons/icon_profile.svg`
-                            }
-                            alt="player"
-                        />
+
+                        {/* PROFILE IMG */}
+                        <div
+                            className={`profile-img d-inline-flex ml-3 ${
+                                _leaderboardHistory[x]?.isVip ? "is-vip" : ""
+                            }`}
+                        >
+                            <span>
+                                <img
+                                    className="img-holder"
+                                    onError={(e) => defaultUserImage(e)}
+                                    src={
+                                        _leaderboardHistory[x]?.avatarUrl ||
+                                        `${window.cdn}icons/icon_profile.svg`
+                                    }
+                                    alt="avatar"
+                                />
+                            </span>
+                            <span className="img-frame">
+                                {_leaderboardHistory[x]?.isVip && (
+                                    <img
+                                        className="vip-frame"
+                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                        alt="vip-frame"
+                                    />
+                                )}
+                            </span>
+                        </div>
                     </div>
                     {/* PLAYER NAME & POINTS */}
-                    <div className="details ml-1 ml-md-3">
+                    <div className="details ml-3">
                         <p className="player-name mb-0">
                             {_leaderboardHistory[x]?.nickName?.split(" ")[0] ||
                                 "-"}{" "}
@@ -117,9 +137,7 @@ export function getLeaderboardList(
                                 : ""}
                         </p>
                         <p className="points mb-0">
-                            {`${
-                                _leaderboardHistory[x]?.gameScore || "-"
-                            } points`}
+                            {`${_leaderboardHistory[x]?.gameScore || "-"} pts`}
                         </p>
                     </div>
                 </div>

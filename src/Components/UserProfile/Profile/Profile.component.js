@@ -63,21 +63,27 @@ const Profile = ({
     // }, []);
 
     useEffect(() => {
-        setIsWalletConnected(
-            user.walletAddress && user.network !== "Wrong Network!"
-        );
+        const handleCheckNFTBalance = async () => {
+            const { nftBalance, symbol } = await getNFTBalance(
+                user.walletAddress
+            );
+            setVipPassData({
+                symbol: symbol,
+                quantity: nftBalance,
+            });
+        };
+
+        const isWalletConnected =
+            user.walletAddress && user.network !== "Wrong Network!";
+        setIsWalletConnected(isWalletConnected);
+
+        if (isWalletConnected) {
+            handleCheckNFTBalance();
+        }
     }, [user]);
 
     const handleConnectWallet = async () => {
         setSelectWalletModalShown(true);
-    };
-
-    const handleCheckNFTBalance = async () => {
-        const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
-        setVipPassData({
-            symbol: symbol,
-            quantity: nftBalance,
-        });
     };
 
     // const handleDisconnectWallet = () => {
@@ -380,8 +386,8 @@ const Profile = ({
                                         </p>
                                         <div
                                             className="invite-btn d-flex align-items-center justify-content-center"
-                                            onClick={handleCheckNFTBalance}
-                                            // onClick={handleTeamPanel}
+                                            // onClick={handleCheckNFTBalance}
+                                            onClick={handleTeamPanel}
                                         >
                                             <p className="mb-0">GET CODE</p>
                                         </div>

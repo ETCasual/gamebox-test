@@ -1,3 +1,9 @@
+// COMPONENTS
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
+// HELPER
+import { defaultGameImage } from "Utils/DefaultImage";
+
 const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
     const date = new Date(data.claimedOn * 1000);
     const dateMonthYear = date.toLocaleString("default", {
@@ -21,11 +27,13 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                 alt="close-btn"
                             />
                             {/* CONTENT */}
-                            <div className="prize-img m-auto">
-                                <img
+                            <div className="prize-img mx-auto">
+                                <ThumbnailMedia
+                                    key={data.id}
                                     className="img-fluid"
-                                    src={data.prizeImageUrl}
-                                    alt="prize"
+                                    url={data?.prizeImageUrl}
+                                    isPlayVideo={true}
+                                    onError={(e) => defaultGameImage(e)}
                                 />
                             </div>
                             <div className="claim-info p-3 text-center">

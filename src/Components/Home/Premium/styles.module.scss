@@ -49,6 +49,14 @@
             border-top-right-radius: 17px;
         }
         .prize-info {
+            .prize-id {
+                font-size: $fnt-sz-12;
+                width: 18ch;
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
             .prize-title {
                 font-size: $fnt-sz-14;
                 font-weight: $fnt-wgt-600;

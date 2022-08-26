@@ -226,17 +226,37 @@ html {
         }
     }
     .profile {
-        img {
-            border: 2px solid #393939;
-            border-radius: 100%;
-            width: 30px;
-            height: 30px;
-            @include media-min($xs) {
-                width: 40px;
-                height: 40px;
+        .profile-img {
+            display: block;
+            .img-holder {
+                position: relative;
+                width: 30px;
+                height: 30px;
+                border-radius: 100%;
+                object-fit: contain;
+
+                @include media-min($lg) {
+                    width: 40px;
+                    height: 40px;
+                }
             }
-            object-fit: contain;
+            .img-frame {
+                position: absolute;
+                width: 36px;
+                height: 36px;
+                @include media-min($lg) {
+                    width: 46px;
+                    height: 46px;
+                }
+
+                .vip-frame {
+                    width: 100%;
+                    height: 100%;
+                    margin-left: -3px;
+                }
+            }
         }
+
         &:hover {
             cursor: pointer;
         }
@@ -360,16 +380,52 @@ html {
         font-size: $fnt-sz-12;
 
         .profile-avatar {
-            img {
-                border: 2px solid #393939;
-                border-radius: 100%;
+            // img {
+            //     border: 2px solid #393939;
+            //     border-radius: 100%;
+            //     width: 54px;
+            //     height: 54px;
+            //     @include media-min($lg) {
+            //         width: 60px;
+            //         height: 60px;
+            //     }
+            //     object-fit: contain;
+            // }
+        }
+        .profile-img {
+            display: block;
+            .img-holder {
+                position: relative;
                 width: 54px;
                 height: 54px;
+                border: 2px solid #2a2a2a;
+                border-radius: 100%;
+                object-fit: contain;
+
                 @include media-min($lg) {
                     width: 60px;
                     height: 60px;
                 }
-                object-fit: contain;
+            }
+            .img-frame {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                @include media-min($lg) {
+                    width: 66px;
+                    height: 66px;
+                }
+
+                .vip-frame {
+                    width: 100%;
+                    height: 100%;
+                    margin-left: -3px;
+                }
+            }
+        }
+        .is-vip {
+            .img-holder {
+                border: 0px;
             }
         }
         .profile-name {
@@ -437,9 +493,6 @@ html {
         width: 100vw;
         height: 100vh;
         z-index: 2;
-    }
-    .vip-frame {
-        border: 2px solid #ff3399 !important;
     }
 }
 // TICKET VALUE PANEL - TOURNAMENT & LEADERBOARD COMPONENT

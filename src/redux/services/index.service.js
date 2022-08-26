@@ -1743,6 +1743,8 @@ export async function getLeaderboardHistory(cgId) {
                     vipMultiplier: e.getVipMultiplier(),
                     totalTickets: e.getTotalTickets(),
                     createdOn: e.getCreatedOn(),
+                    // TODO: Add "isVip" in server API
+                    isVip: true,
                 });
             });
         }
