@@ -3,7 +3,7 @@ const defaultUserImage = (e) => {
 };
 
 const defaultGameImage = (e) => {
-    e.target.src = "https://images-na.ssl-images-amazon.com/images/I/418V46UrfUL._SX258_BO1,204,203,200_.jpg";
+    e.target.src = `${window.cdn}logo/logo_gamebox_mobile.png`;
 };
 
 export { defaultUserImage, defaultGameImage };

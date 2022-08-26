@@ -56,7 +56,12 @@ const ThumbnailMedia = ({
                     e.target.play();
                 }
             }}
-            onError={(e) => (onError ? onError(e) : null)}
+            onError={(e) => {
+                if (onError) {
+                    onError(e);
+                }
+                setThumbFileType(getFileType(e.target.src));
+            }}
             className={className}
         >
             <source src={url} type="video/mp4" />
@@ -69,7 +74,12 @@ const ThumbnailMedia = ({
             <img
                 src={url}
                 alt={url}
-                onError={(e) => (onError ? onError(e) : null)}
+                onError={(e) => {
+                    if (onError) {
+                        onError(e);
+                    }
+                    setThumbFileType(getFileType(e.target.src));
+                }}
                 className={className}
             />
         </picture>

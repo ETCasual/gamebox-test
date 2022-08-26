@@ -173,7 +173,7 @@ const AutomatedEntry = ({ data }) => {
                                     <p className="mb-0 ticket-label d-flex align-items-center mr-3">
                                         My tickets
                                     </p>
-                                    <p className="mb-0 ticket-value">
+                                    <p className="mb-0 ticket-value d-inline-flex align-items-center">
                                         {getTickets()?.toLocaleString() || "-"}
                                         <img
                                             className="icon ml-1"

@@ -4,6 +4,7 @@ import {
 } from "redux/thunks/Login.thunk";
 import Web3 from "web3";
 import tokenABI from "./TokenABI";
+import nft721ABI from "./NFT721ABI";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { SHOW_TOAST } from "redux/types";
 import _ from "lodash";
@@ -242,6 +243,88 @@ export async function getTokenBalance(address) {
         );
         const symbol = await tokenContract.methods.symbol().call();
         return { tokenBalance, symbol };
+    }
+    return {};
+}
+
+export async function getNFTBalance(address) {
+    const { web3 } = await getWeb3();
+
+    const chainId = await web3.eth.getChainId();
+
+    const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
+    const idx = networks.findIndex((n) => n.chainId === parseInt(chainId));
+
+    if (networks[idx]?.systemTokenAddress) {
+        // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
+        const tokenContract = new web3.eth.Contract(
+            nft721ABI,
+            process.env.REACT_APP_GAMEBOX_VIP_NFT_CONTRACT_ADDRESS
+        );
+        // GET NFT BALANCE
+        const nftBalance = await tokenContract.methods
+            .balanceOf(address)
+            .call();
+        const symbol = await tokenContract.methods.symbol().call();
+        return { nftBalance, symbol };
+    }
+    return {};
+}
+
+export async function getNFTTokenIdList(address) {
+    const { web3 } = await getWeb3();
+
+    const chainId = await web3.eth.getChainId();
+
+    const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
+    const idx = networks.findIndex((n) => n.chainId === parseInt(chainId));
+
+    let list = [];
+    if (networks[idx]?.systemTokenAddress) {
+        // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
+        const tokenContract = new web3.eth.Contract(
+            nft721ABI,
+            process.env.REACT_APP_GAMEBOX_VIP_NFT_CONTRACT_ADDRESS
+        );
+        // GET NFT BALANCE
+        const nftBalance = await tokenContract.methods
+            .balanceOf(address)
+            .call();
+
+        if (nftBalance > 0) {
+            for (let i = 1; i <= nftBalance; i++) {
+                const nftTokenId = await tokenContract.methods
+                    .tokenOfOwnerByIndex(address, i)
+                    .call();
+
+                if (nftTokenId) {
+                    list.push(nftTokenId);
+                }
+            }
+        }
+    }
+    return list;
+}
+
+export async function getNFTMetadata(tokenId) {
+    const { web3 } = await getWeb3();
+
+    const chainId = await web3.eth.getChainId();
+
+    const networks = JSON.parse(sessionStorage.getItem("networks")) || [];
+    const idx = networks.findIndex((n) => n.chainId === parseInt(chainId));
+
+    if (networks[idx]?.systemTokenAddress) {
+        // IF CORRECT NETWORK ID THEN CONNECT TO CONTRACT
+        const tokenContract = new web3.eth.Contract(
+            nft721ABI,
+            process.env.REACT_APP_GAMEBOX_VIP_NFT_CONTRACT_ADDRESS
+        );
+        // GET NFT METADATA
+        const nftMetadata = await tokenContract.methods
+            .tokenURI(tokenId)
+            .call();
+        return nftMetadata;
     }
     return {};
 }

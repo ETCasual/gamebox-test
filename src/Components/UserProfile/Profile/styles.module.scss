@@ -22,9 +22,9 @@
         h3 {
             text-transform: capitalize;
             font-weight: $fnt-wgt-600;
-            font-size: $fnt-sz-14;
+            font-size: $fnt-sz-20;
             @include media-min($md) {
-                font-size: $fnt-sz-18;
+                font-size: $fnt-sz-22;
             }
         }
         p {
@@ -32,17 +32,41 @@
         }
         .email-text {
             color: #868686;
-            font-size: $fnt-sz-10;
+            font-size: $fnt-sz-14;
             @include media-min($md) {
-                font-size: $fnt-sz-14;
+                font-size: $fnt-sz-20;
             }
+        }
+    }
+    .settings-btn {
+        cursor: pointer;
+        display: inline-block;
+
+        div {
+            background: transparent;
+            width: 8rem;
+            min-height: 2rem;
+            outline: #ff3399 solid 2px;
+            border-radius: 10px;
+            font-weight: $fnt-wgt-700;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                width: 10rem;
+                min-height: 2.75rem;
+                font-size: $fnt-sz-18;
+                outline: #ff3399 solid 2px;
+            }
+        }
+        p {
+            color: #ff3399;
         }
     }
     .gem-balance,
     .token-balance {
         cursor: default;
         .gem-balance-text {
-            color: #868686;
+            white-space: nowrap;
+            color: white;
             font-size: $fnt-sz-12;
             @include media-min($md) {
                 font-size: $fnt-sz-14;
@@ -106,8 +130,7 @@
     }
     .multiplier-holder {
         .multiplier {
-            background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%) 0% 0%
-                no-repeat padding-box;
+            background: linear-gradient(90deg, #38303d, #231e26);
             position: relative;
             box-shadow: 0px 10px 15px #0000000d;
             @include media-min($md) {
@@ -123,7 +146,7 @@
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-20;
                 }
                 span {
                     color: #00c1b9;
@@ -197,11 +220,11 @@
     .invite-friends-holder {
         .team {
             position: relative;
-            cursor: pointer;
+            // cursor: pointer;
             @include media-min($md) {
                 min-height: 15.375em;
             }
-            background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
+            background: linear-gradient(90deg, #38303d, #231e26);
             border-radius: 10px;
             box-shadow: 0px 10px 15px #0000000d;
             .team-title {
@@ -210,7 +233,7 @@
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-20;
                 }
             }
             .refer-text {
@@ -219,13 +242,13 @@
                 font-weight: $fnt-wgt-600;
                 font-size: $fnt-sz-12;
                 @include media-min($md) {
-                    font-size: $fnt-sz-16;
+                    font-size: $fnt-sz-20;
                 }
                 span {
-                    color: #00c1b9;
+                    color: #f8ba29;
                     font-size: $fnt-sz-12;
                     @include media-min($md) {
-                        font-size: $fnt-sz-16;
+                        font-size: $fnt-sz-20;
                     }
                 }
             }
@@ -250,51 +273,127 @@
                 object-fit: cover;
                 object-position: top;
             }
-        }
-        .invite-btn {
-            display: none;
-            @include media-min($md) {
-                display: unset;
-                position: relative;
-                z-index: 1;
-                position: absolute;
-                top: 59%;
-                left: 50%;
-                transform: translate(-50%, 50%);
-                z-index: 1;
-                background: transparent
-                    linear-gradient(180deg, #04e4aa 0%, #01b789 100%) 0% 0%
-                    no-repeat padding-box;
-                box-shadow: 0px 18px 20px #00000029;
-                border-radius: 12px;
-                font-size: 14px;
-                color: white;
-                min-height: 3.5em;
-                min-width: 14.3em;
+
+            .invite-btn {
+                cursor: pointer;
+                background: #ff3399;
+                width: 10rem;
+                min-height: 2rem;
+                border-radius: 10px;
+                font-weight: $fnt-wgt-600;
+                font-size: $fnt-sz-14;
+                @include media-min($md) {
+                    width: 10rem;
+                    min-height: 2.25rem;
+                    font-size: $fnt-sz-18;
+                }
+                p {
+                    color: white;
+                }
             }
         }
+        // .invite-btn {
+        //     display: none;
+        //     @include media-min($md) {
+        //         display: unset;
+        //         position: relative;
+        //         z-index: 1;
+        //         position: absolute;
+        //         top: 59%;
+        //         left: 50%;
+        //         transform: translate(-50%, 50%);
+        //         z-index: 1;
+        //         background: transparent
+        //             linear-gradient(180deg, #04e4aa 0%, #01b789 100%) 0% 0%
+        //             no-repeat padding-box;
+        //         box-shadow: 0px 18px 20px #00000029;
+        //         border-radius: 12px;
+        //         font-size: 14px;
+        //         color: white;
+        //         min-height: 3.5em;
+        //         min-width: 14.3em;
+        //     }
+        // }
     }
     .highscore,
-    .rewards,
-    .settings {
+    .rewards {
         cursor: pointer;
-        background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
+        background: linear-gradient(90deg, #38303d, #231e26);
         font-weight: $fnt-wgt-600;
         font-size: $fnt-sz-12;
         min-height: 2.875rem;
         @include media-min($md) {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-20;
             min-height: 4.625rem;
         }
         box-shadow: 0px 10px 15px #0000000d;
         border-radius: 10px;
     }
+    .vip-pass-title {
+        font-size: $fnt-sz-18;
+        font-weight: $fnt-wgt-700;
+        @include media-min($md) {
+        }
+    }
+    .vip-pass-holder {
+        background: linear-gradient(90deg, #38303d, #231e26);
+        border-radius: 10px;
+        box-shadow: 0px 10px 15px #0000000d;
+
+        .connect-btn {
+            cursor: pointer;
+            background: #ff3399;
+            width: 80%;
+            max-width: 15rem;
+            height: 2.25rem;
+            border-radius: 10px;
+            font-weight: $fnt-wgt-600;
+            font-size: $fnt-sz-14;
+            @include media-min($md) {
+                width: 15rem;
+                height: 2.5rem;
+                font-size: $fnt-sz-18;
+            }
+            p {
+                color: white;
+            }
+        }
+        .vip-pass-empty {
+            position: relative;
+            color: #868686;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
+            line-height: 1.7;
+            width: auto;
+        }
+        .vip-pass-info {
+            .vip-pass-thumb {
+                width: 15rem;
+                min-width: 5rem;
+                max-width: 15rem;
+                @include media-min($md) {
+                    min-height: 11.063rem;
+                }
+                object-fit: cover;
+                border-radius: 5px 0 0 5px;
+            }
+            .vip-pass-quantity {
+                font-weight: $fnt-wgt-600;
+                font-size: $fnt-sz-14;
+                @include media-min($md) {
+                    font-size: $fnt-sz-18;
+                }
+            }
+        }
+    }
     .logout {
-        color: #ff2c44;
-        font-weight: $fnt-wgt-600;
+        color: #ff3399;
+        font-weight: $fnt-wgt-700;
         font-size: $fnt-sz-12;
         @include media-min($md) {
-            font-size: $fnt-sz-16;
+            font-size: $fnt-sz-20;
         }
     }
 }

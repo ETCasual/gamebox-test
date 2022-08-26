@@ -67,14 +67,17 @@
                 }
                 img,
                 video {
+                    left: 0;
                     position: relative;
                     border-top-left-radius: 5px;
                     border-top-right-radius: 5px;
                     width: 100%;
+                    height: 100%;
                     @include media-min($sm) {
                         border-radius: 5px;
                     }
-                    object-fit: cover;
+                    object-fit: contain;
+                    object-position: left;
                 }
             }
             // video {
@@ -348,7 +351,7 @@
                         font-size: $fnt-sz-30;
                     }
                     font-weight: $fnt-wgt-600;
-                    text-transform:uppercase;
+                    text-transform: uppercase;
                 }
                 .thumb-media {
                     display: block;

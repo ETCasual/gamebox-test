@@ -1,4 +1,5 @@
 // REACT & REDUX
+import React from "react";
 import { useSelector } from "react-redux";
 
 // COMPONENTS
@@ -17,7 +18,6 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
 
     return (
         <div
-            key={`winner-card-${data.id}`}
             className="winner-card col-12 col-md-6"
             onClick={() => onWinnerDetails(data)}
         >
@@ -64,6 +64,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                     <div className="row align-items-center justify-content-center">
                         <div className="col-auto d-flex pr-0">
                             <ThumbnailMedia
+                                key={data.id}
                                 className="prize-thumb"
                                 url={data?.prizeImageUrl}
                                 isPlayVideo={true}

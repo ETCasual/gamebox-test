@@ -1,19 +1,22 @@
 // REACT & REDUX
-import React from "react";
-// import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+// COMPONENT FUNCTIONS
+import ConnectWallet from "Components/Global/ConnectWallet.component";
+import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+
 // HELPER FUNCTIONS
 import { handleSignOut } from "Utils/SignOut";
-import { defaultUserImage } from "Utils/DefaultImage";
+import { defaultUserImage, defaultGameImage } from "Utils/DefaultImage";
 import {
     getCurrentLevelExp,
     getCurrentLevel,
     getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-// import { handleConnectWallet } from "Utils/ConnectWallet";
+import { getNFTBalance, getNFTMetadata, getWeb3 } from "Utils/ConnectWallet";
 // import { UPDATE_USER_WALLET } from "redux/types";
 
 const Profile = ({
@@ -24,9 +27,15 @@ const Profile = ({
     const { user } = useSelector((state) => state.userData);
     const { ranks } = useSelector((state) => state.ranks);
     const { config } = useSelector((state) => state.config);
-    // const { blockchainNetworks } = useSelector(
-    //     (state) => state.blockchainNetworks
-    // );
+
+    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [selectWalletModalShown, setSelectWalletModalShown] = useState(false);
+    const [invalidWalletModalShown, setInvalidWalletModalShown] =
+        useState(false);
+    const [vipPassData, setVipPassData] = useState({
+        symbol: "",
+        quantity: 0,
+    });
 
     const dispatch = useDispatch();
 
@@ -51,11 +60,23 @@ const Profile = ({
     //     };
     // }, []);
 
-    // const handleWallet = async () => {
-    //     if (user.walletAddress) return;
+    useEffect(() => {
+        setIsWalletConnected(
+            user.walletAddress && user.network !== "Wrong Network!"
+        );
+    }, [user]);
 
-    //     await handleConnectWallet(dispatch, blockchainNetworks);
-    // };
+    const handleConnectWallet = async () => {
+        setSelectWalletModalShown(true);
+    };
+
+    const handleCheckNFTBalance = async () => {
+        const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
+        setVipPassData({
+            symbol: symbol,
+            quantity: nftBalance,
+        });
+    };
 
     // const handleDisconnectWallet = () => {
     //     dispatch({
@@ -75,61 +96,113 @@ const Profile = ({
             <div className="container-fluid">
                 {/* PROFILE */}
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-9">
+                    <div className="col-12 col-md-10 col-lg-8">
                         <div className="row">
                             {/* PROFILE INFO */}
-                            <div className="col-12 text-center mb-4 mb-md-5">
-                                <div className={`profile-info`}>
-                                    <img
-                                        className={`${
-                                            user.isVip ? "vip-frame" : ""
-                                        }`}
-                                        onError={(e) => defaultUserImage(e)}
-                                        src={
-                                            user
-                                                ? user.picture
-                                                : `${window.cdn}icons/icon_profile.svg`
-                                        }
-                                        alt="avatar"
-                                    />
-                                    <h3 className="user-name mt-4">
-                                        {user.username || `Player ${user.id}`}
-                                    </h3>
-                                    <p className="email-text">
-                                        {user ? user.email : "..."}
-                                    </p>
+                            <div className="col-12 text-center my-2">
+                                <div className="row justify-content-between">
+                                    <div className="col-12 col-md-6 mb-4 mb-md-0">
+                                        <div className="profile-info d-md-flex justify-content-md-start">
+                                            <div>
+                                                <img
+                                                    onError={(e) =>
+                                                        defaultUserImage(e)
+                                                    }
+                                                    src={
+                                                        user
+                                                            ? user.picture
+                                                            : `${window.cdn}icons/icon_profile.svg`
+                                                    }
+                                                    alt="avatar"
+                                                >
+                                                    <img
+                                                        className="vip-frame"
+                                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                        alt="vip-frame"
+                                                    />
+                                                </img>
+                                            </div>
+                                            <div className="mx-4 my-2">
+                                                <div className="d-inline-md-flex flex-md-column">
+                                                    <div className="col-12">
+                                                        <h3 className="user-name">
+                                                            {user.username ||
+                                                                `Player ${user.id}`}
+                                                        </h3>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <p className="email-text">
+                                                            {user
+                                                                ? user.email
+                                                                : "..."}
+                                                        </p>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <Link
+                                                            className="settings-btn"
+                                                            to={{
+                                                                pathname:
+                                                                    "/profile/settings",
+                                                                state: {
+                                                                    prevPath:
+                                                                        history
+                                                                            .location
+                                                                            .pathname,
+                                                                },
+                                                            }}
+                                                        >
+                                                            <div className="m-auto d-flex align-items-center justify-content-center">
+                                                                <p className="mb-0">
+                                                                    SETTINGS
+                                                                </p>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-md-auto d-flex justify-content-center align-items-end">
+                                        <div className="row gem-balance align-items-center">
+                                            {/* GEMS BALANCE */}
+                                            <div className="col">
+                                                <p className="gem-balance-text mb-0 mb-md-2">
+                                                    Gems balance
+                                                </p>
+                                            </div>
+                                            <div className="col align-items-center justify-content-between">
+                                                <Link
+                                                    to={{
+                                                        pathname: "/iap",
+                                                        state: {
+                                                            prevPath:
+                                                                history.location
+                                                                    .pathname,
+                                                        },
+                                                    }}
+                                                >
+                                                    <div className="gem-wrapper">
+                                                        <img
+                                                            width="24"
+                                                            src={`${window.cdn}assets/gem_01.png`}
+                                                            alt="gems"
+                                                        />
+                                                        <span className="gems">
+                                                            {user.gems}
+                                                        </span>
+                                                        <img
+                                                            width="22"
+                                                            src={`${window.cdn}buttons/button_plus.png`}
+                                                            alt="add-gems"
+                                                        />
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            {/* GEMS BALANCE */}
-                            <div className="col-12 gem-balance d-flex align-items-center justify-content-between">
-                                <p className="gem-balance-text mb-0 mb-md-2">
-                                    Gems balance
-                                </p>
-                                <Link
-                                    to={{
-                                        pathname: "/iap",
-                                        state: {
-                                            prevPath: history.location.pathname,
-                                        },
-                                    }}
-                                >
-                                    <div className="gem-wrapper">
-                                        <img
-                                            width="24"
-                                            src={`${window.cdn}assets/gem_01.png`}
-                                            alt="gems"
-                                        />
-                                        <span className="gems">
-                                            {user.gems}
-                                        </span>
-                                        <img
-                                            width="22"
-                                            src={`${window.cdn}buttons/button_plus.png`}
-                                            alt="add-gems"
-                                        />
-                                    </div>
-                                </Link>
-                            </div>
+
                             {/* TOKEN BALANCE */}
                             {/* {!hideGemsOnMobile && (
                                 <div className="col-12 mt-3 token-balance d-flex align-items-center justify-content-between">
@@ -169,6 +242,7 @@ const Profile = ({
                                     </div>
                                 </div>
                             )} */}
+
                             {/* MULTIPLIER */}
                             {enableLevel && (
                                 <div className="col-12 multiplier-holder mt-4">
@@ -261,21 +335,23 @@ const Profile = ({
                             )}
                             {/* INVITE FRIENDS */}
                             <div className="col-12 invite-friends-holder mt-4">
-                                <div
-                                    className="team d-flex align-items-center justify-content-between p-3 p-md-4"
-                                    onClick={handleTeamPanel}
-                                >
-                                    <div className="col-7 col-md-6 p-0 pb-4">
+                                <div className="team d-flex align-items-center justify-content-between p-3 px-md-4 py-md-2">
+                                    <div className="col-7 col-md-6 p-md-2">
                                         <p className="team-title">
                                             Invite Friends
                                         </p>
                                         <p className="pt-2 mb-2 d-flex align-items-center refer-text">
                                             Refer and get{" "}
-                                            <span className="px-1">
-                                                {config.gemsPerInvite} gems
+                                            <span className="px-2">
+                                                {config.gemsPerInvite}
                                             </span>
+                                            <img
+                                                width="24"
+                                                src={`${window.cdn}assets/gem_01.png`}
+                                                alt="gems"
+                                            />
                                         </p>
-                                        <p className="mb-1 share-text">
+                                        <p className="mb-4 share-text">
                                             {`Share your referral code with
                                                 your friends and get ${
                                                     config.gemsPerInvite
@@ -290,6 +366,13 @@ const Profile = ({
                                                     in GameBox.`
                                                 }`}
                                         </p>
+                                        <div
+                                            className="invite-btn d-flex align-items-center justify-content-center"
+                                            onClick={handleCheckNFTBalance}
+                                            // onClick={handleTeamPanel}
+                                        >
+                                            <p className="mb-0">GET CODE</p>
+                                        </div>
                                     </div>
                                     <div className="col-4 col-md-6 px-0 d-flex align-items-end justify-content-end">
                                         <img
@@ -344,8 +427,65 @@ const Profile = ({
                                     </div>
                                 </div>
                             </div>
+
+                            {/* VIP PASS */}
+                            {
+                                <div className="col-12 mt-0 mt-md-4 mb-4">
+                                    <div className="vip-pass-title mb-3">
+                                        VIP Pass
+                                    </div>
+                                    <div className="vip-pass-holder py-4">
+                                        {!isWalletConnected && (
+                                            <div
+                                                className="connect-btn d-flex align-items-center justify-content-center m-auto"
+                                                onClick={handleConnectWallet}
+                                            >
+                                                <p className="mb-0">
+                                                    CONNECT WALLLET
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        {isWalletConnected &&
+                                            vipPassData.quantity <= 0 && (
+                                                <div className="text-center mt-2">
+                                                    <p className="vip-pass-empty">
+                                                        List is empty
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                        {isWalletConnected &&
+                                            vipPassData.quantity > 0 && (
+                                                <div className="vip-pass-info row">
+                                                    <div className="col d-flex">
+                                                        <ThumbnailMedia
+                                                            className="vip-pass-thumb mx-auto"
+                                                            url="https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
+                                                            isPlayVideo={true}
+                                                            onError={(e) =>
+                                                                defaultGameImage(
+                                                                    e
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                    {vipPassData.quantity >
+                                                        1 && (
+                                                        <div className="col-12 mt-3 text-center">
+                                                            <p className="vip-pass-quantity">
+                                                                {`x${vipPassData.quantity}`}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                    </div>
+                                </div>
+                            }
+
                             {/* SETTINGS */}
-                            <div className="col-12 mt-0 mt-md-4 mb-5">
+                            {/* <div className="col-12 mt-0 mt-md-4 mb-5">
                                 <Link
                                     to={{
                                         pathname: "/profile/settings",
@@ -358,20 +498,28 @@ const Profile = ({
                                         <p className="mb-0">Settings</p>
                                     </div>
                                 </Link>
-                            </div>
+                            </div> */}
+
                             {/* LOGOUT */}
-                            <div className="col-12 text-center mb-3">
+                            <div className="col-12 text-center my-4">
                                 <button
                                     className="logout"
                                     onClick={() => handleSignOut(dispatch)}
                                 >
-                                    Sign out
+                                    LOG OUT
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <ConnectWallet
+                selectWalletModalShown={selectWalletModalShown}
+                setSelectWalletModalShown={setSelectWalletModalShown}
+                invalidWalletModalShown={invalidWalletModalShown}
+                setInvalidWalletModalShown={setInvalidWalletModalShown}
+            />
         </section>
     );
 };
