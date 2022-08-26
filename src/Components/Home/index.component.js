@@ -25,7 +25,6 @@ import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
-import FeaturedWinner from "./Featured/FeaturedWinner.component";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);

@@ -26,6 +26,14 @@
                 }
             }
             .content {
+                .prize-id {
+                    font-size: $fnt-sz-10;
+                    font-weight: $fnt-wgt-700;
+                    color: #868686;
+                    @include media-min($sm) {
+                        font-size: $fnt-sz-14;
+                    }
+                }
                 .title,
                 .tap-btn {
                     font-size: $fnt-sz-10;
