@@ -29,14 +29,33 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                 <div className="col winner-info">
                     <div className="row align-items-center">
                         <div className="col-4">
-                            <img
-                                className={`profile ${
-                                    data.isVip ? "vip-frame" : ""
+                            <div
+                                className={`profile-img d-inline-flex ${
+                                    user?.isVip ? "is-vip" : ""
                                 }`}
-                                onError={(e) => defaultUserImage(e)}
-                                src={data.userAvatarUrl}
-                                alt="player"
-                            />
+                            >
+                                <span>
+                                    <img
+                                        className="img-holder"
+                                        onError={(e) => defaultUserImage(e)}
+                                        src={
+                                            user
+                                                ? data.userAvatarUrl
+                                                : `${window.cdn}icons/icon_profile.svg`
+                                        }
+                                        alt="avatar"
+                                    />
+                                </span>
+                                <span className="img-frame">
+                                    {user?.isVip && (
+                                        <img
+                                            className="vip-frame"
+                                            src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                            alt="vip-frame"
+                                        />
+                                    )}
+                                </span>
+                            </div>
                         </div>
 
                         <div className="col-8 text-left">

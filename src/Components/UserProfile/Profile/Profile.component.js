@@ -72,13 +72,13 @@ const Profile = ({
         setSelectWalletModalShown(true);
     };
 
-    const handleCheckNFTBalance = async () => {
-        const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
-        setVipPassData({
-            symbol: symbol,
-            quantity: nftBalance,
-        });
-    };
+    // const handleCheckNFTBalance = async () => {
+    //     const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
+    //     setVipPassData({
+    //         symbol: symbol,
+    //         quantity: nftBalance,
+    //     });
+    // };
 
     // const handleDisconnectWallet = () => {
     //     dispatch({
@@ -382,8 +382,8 @@ const Profile = ({
                                         </p>
                                         <div
                                             className="invite-btn d-flex align-items-center justify-content-center"
-                                            onClick={handleCheckNFTBalance}
-                                            // onClick={handleTeamPanel}
+                                            // onClick={handleCheckNFTBalance}
+                                            onClick={handleTeamPanel}
                                         >
                                             <p className="mb-0">GET CODE</p>
                                         </div>

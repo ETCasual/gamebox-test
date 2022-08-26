@@ -223,15 +223,29 @@ const Header = ({
                                 className="d-flex"
                                 onClick={() => setMobileProfileWallet(true)}
                             >
-                                <img
-                                    onError={(e) => defaultUserImage(e)}
-                                    className={user.isVip ? "vip-frame" : ""}
-                                    src={
-                                        userImage ||
-                                        `${window.cdn}icons/icon_profile.svg`
-                                    }
-                                    alt="profile"
-                                />
+                                <div className="profile-img d-inline-flex">
+                                    <span>
+                                        <img
+                                            className="img-holder"
+                                            onError={(e) => defaultUserImage(e)}
+                                            src={
+                                                user
+                                                    ? userImage
+                                                    : `${window.cdn}icons/icon_profile.svg`
+                                            }
+                                            alt="avatar"
+                                        />
+                                    </span>
+                                    <span className="img-frame">
+                                        {user.isVip && (
+                                            <img
+                                                className="vip-frame"
+                                                src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                alt="vip-frame"
+                                            />
+                                        )}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -277,7 +291,7 @@ const Header = ({
                                     href={`${process.env.REACT_APP_FROYO_WEB_URL}/my-profile`}
                                 >
                                     <div className="profile-wrapper d-flex align-items-center mb-3">
-                                        <div className="profile-avatar">
+                                        {/* <div className="profile-avatar">
                                             <img
                                                 onError={(e) =>
                                                     defaultUserImage(e)
@@ -293,6 +307,35 @@ const Header = ({
                                                 }
                                                 alt="profile"
                                             />
+                                        </div> */}
+                                        <div
+                                            className={`profile-img d-inline-flex ${
+                                                user.isVip ? "is-vip" : ""
+                                            }`}
+                                        >
+                                            <span>
+                                                <img
+                                                    className="img-holder"
+                                                    onError={(e) =>
+                                                        defaultUserImage(e)
+                                                    }
+                                                    src={
+                                                        user
+                                                            ? userImage
+                                                            : `${window.cdn}icons/icon_profile.svg`
+                                                    }
+                                                    alt="avatar"
+                                                />
+                                            </span>
+                                            <span className="img-frame">
+                                                {user.isVip && (
+                                                    <img
+                                                        className="vip-frame"
+                                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                        alt="vip-frame"
+                                                    />
+                                                )}
+                                            </span>
                                         </div>
                                         <div>
                                             <div className="profile-name ml-3 mb-1">
