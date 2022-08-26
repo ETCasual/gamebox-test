@@ -63,22 +63,28 @@ const Profile = ({
     // }, []);
 
     useEffect(() => {
-        setIsWalletConnected(
-            user.walletAddress && user.network !== "Wrong Network!"
-        );
+        const handleCheckNFTBalance = async () => {
+            const { nftBalance, symbol } = await getNFTBalance(
+                user.walletAddress
+            );
+            setVipPassData({
+                symbol: symbol,
+                quantity: nftBalance,
+            });
+        };
+
+        const isWalletConnected =
+            user.walletAddress && user.network !== "Wrong Network!";
+        setIsWalletConnected(isWalletConnected);
+
+        if (isWalletConnected) {
+            handleCheckNFTBalance();
+        }
     }, [user]);
 
     const handleConnectWallet = async () => {
         setSelectWalletModalShown(true);
     };
-
-    // const handleCheckNFTBalance = async () => {
-    //     const { nftBalance, symbol } = await getNFTBalance(user.walletAddress);
-    //     setVipPassData({
-    //         symbol: symbol,
-    //         quantity: nftBalance,
-    //     });
-    // };
 
     // const handleDisconnectWallet = () => {
     //     dispatch({
