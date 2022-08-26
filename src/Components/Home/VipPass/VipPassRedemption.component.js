@@ -22,11 +22,11 @@ const VipPassRedemption = ({ data }) => {
     const handleRedeem = () => {
         if (loader.status) return;
 
-        setLoader({ status: true, id: data.winnerId });
+        setLoader({ status: true, id: data.id });
 
         dispatch(
             loadNFTClaim(
-                data.winnerId,
+                data.id,
                 data.prizeBlockchainNetwork,
                 data.prizeContractType,
                 setLoader
@@ -84,9 +84,7 @@ const VipPassRedemption = ({ data }) => {
                                             }`}
                                             onClick={handleRedeem}
                                         >
-                                            <p className="m-auto">
-                                                CLAIM VIP PASS
-                                            </p>
+                                            <p className="m-auto">CLAIM</p>
                                         </div>
                                     </div>
                                 </div>
