@@ -5,20 +5,43 @@
         padding: 6rem 0;
     }
     .profile-info {
-        img {
-            border: 6px solid #2a2a2a;
-            border-radius: 100%;
-            object-fit: contain;
-            width: 6.813rem;
-            height: 6.813rem;
-            @include media-min($md) {
-                width: 14.125em;
-                height: 14.125em;
+        .profile-img {
+            display: block;
+            .img-holder {
+                position: relative;
+                width: 6.813rem;
+                height: 6.813rem;
+                border: 6px solid #2a2a2a;
+                border-radius: 100%;
+                object-fit: contain;
+
+                @include media-min($md) {
+                    width: 14.125em;
+                    height: 14.125em;
+                }
+            }
+            .img-frame {
+                position: absolute;
+                width: 6.813rem;
+                height: 6.813rem;
+                @include media-min($md) {
+                    width: 14.125em;
+                    height: 14.125em;
+                }
+
+                .vip-frame {
+                    width: 110%;
+                    height: 110%;
+                    margin-left: -6px;
+                }
             }
         }
-        .vip-frame {
-            border: 6px solid #ff3399;
+        .is-vip {
+            .img-holder {
+                border: 0px;
+            }
         }
+
         h3 {
             text-transform: capitalize;
             font-weight: $fnt-wgt-600;
