@@ -16,7 +16,7 @@ import {
     getCurrentMultiplier,
     getLevelProgress,
 } from "Utils/CurrentLevel";
-import { getNFTBalance, getNFTMetadata, getWeb3 } from "Utils/ConnectWallet";
+import { getNFTBalance } from "Utils/ConnectWallet";
 // import { UPDATE_USER_WALLET } from "redux/types";
 
 const Profile = ({
@@ -36,6 +36,8 @@ const Profile = ({
         symbol: "",
         quantity: 0,
     });
+    const vipPassMediaUrl =
+        "https://gamebox-froyo.s3.ap-southeast-1.amazonaws.com/app/rewards/vippass/mp4/vip_pass_01.mp4";
 
     const dispatch = useDispatch();
 
@@ -103,26 +105,38 @@ const Profile = ({
                                 <div className="row justify-content-between">
                                     <div className="col-12 col-md-6 mb-4 mb-md-0">
                                         <div className="profile-info d-md-flex justify-content-md-start">
-                                            <div>
-                                                <img
-                                                    onError={(e) =>
-                                                        defaultUserImage(e)
-                                                    }
-                                                    src={
-                                                        user
-                                                            ? user.picture
-                                                            : `${window.cdn}icons/icon_profile.svg`
-                                                    }
-                                                    alt="avatar"
-                                                >
+                                            {/* PROFILE IMG */}
+                                            <div
+                                                className={`profile-img d-inline-flex ${
+                                                    user?.isVip ? "is-vip" : ""
+                                                }`}
+                                            >
+                                                <span>
                                                     <img
-                                                        className="vip-frame"
-                                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
-                                                        alt="vip-frame"
+                                                        className="img-holder"
+                                                        onError={(e) =>
+                                                            defaultUserImage(e)
+                                                        }
+                                                        src={
+                                                            user
+                                                                ? user.picture
+                                                                : `${window.cdn}icons/icon_profile.svg`
+                                                        }
+                                                        alt="avatar"
                                                     />
-                                                </img>
+                                                </span>
+                                                <span className="img-frame">
+                                                    {user?.isVip && (
+                                                        <img
+                                                            className="vip-frame"
+                                                            src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                            alt="vip-frame"
+                                                        />
+                                                    )}
+                                                </span>
                                             </div>
-                                            <div className="mx-4 my-2">
+
+                                            <div className="mx-4 my-3">
                                                 <div className="d-inline-md-flex flex-md-column">
                                                     <div className="col-12">
                                                         <h3 className="user-name">
@@ -461,7 +475,9 @@ const Profile = ({
                                                     <div className="col d-flex">
                                                         <ThumbnailMedia
                                                             className="vip-pass-thumb mx-auto"
-                                                            url="https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
+                                                            url={
+                                                                vipPassMediaUrl
+                                                            }
                                                             isPlayVideo={true}
                                                             onError={(e) =>
                                                                 defaultGameImage(

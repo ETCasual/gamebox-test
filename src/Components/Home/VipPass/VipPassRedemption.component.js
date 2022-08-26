@@ -42,9 +42,7 @@ const VipPassRedemption = ({ data }) => {
                     <div className="pass-info position-relative d-flex flex-wrap p-2 pb-3 p-sm-3">
                         <div className="pass-img p-0 col-12 col-sm-6 col-xl-5 position-relative">
                             <ThumbnailMedia
-                                url={
-                                    "https://openseauserdata.com/files/7675eb2656eaa8be2f5fc1790713282d.mp4"
-                                }
+                                url={data?.prizeImageUrl}
                                 isPlayVideo={true}
                                 onError={(e) => defaultGameImage(e)}
                             />

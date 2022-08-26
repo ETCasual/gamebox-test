@@ -14,6 +14,7 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        console.log(data);
         let timer = null;
 
         if (notificationList.length > 0) {
@@ -60,12 +61,19 @@ const PremiumCompleted = ({ data, handleWinnerRevealCard }) => {
                 {!loading && (
                     <div className="content text-center d-flex flex-column align-items-center justify-content-end">
                         <div className="prize-info p-1 p-sm-3 w-100">
-                            <p className="title mb-1 mb-sm-2 px-3">
-                                {data.prizeTitle}
-                            </p>
-                            <p className="subtitle mb-0 px-3">
-                                {data.prizeSubtitle}
-                            </p>
+                            <div className="row">
+                                <p className="col-4 col-xl-3 prize-id mb-1 mb-sm-2 px-3 text-right">
+                                    {`#${data.prizeId}`}
+                                </p>
+                                <p className="col-8 col-xl-9 title mb-1 mb-sm-2 px-3 text-left">
+                                    {data.prizeTitle}
+                                </p>
+                            </div>
+                            <div className="row">
+                                <p className="col-8 offset-4 col-xl-9 offset-xl-3 subtitle mb-0 px-3 text-left">
+                                    {data.prizeSubtitle}
+                                </p>
+                            </div>
                         </div>
                         <p className="tap-btn mb-0">TAP TO REVEAL THE WINNER</p>
                     </div>

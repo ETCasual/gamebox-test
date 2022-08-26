@@ -62,17 +62,17 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
 
                 <div className="col prize-info">
                     <div className="row align-items-center justify-content-center">
-                        <div className="col-auto d-flex pr-0">
+                        <div className="col-4 pr-0">
                             <ThumbnailMedia
                                 key={data.id}
-                                className="prize-thumb"
+                                className="prize-thumb float-right"
                                 url={data?.prizeImageUrl}
                                 isPlayVideo={true}
                                 onError={(e) => defaultGameImage(e)}
                             />
                         </div>
 
-                        <div className="col pl-2">
+                        <div className="col-8 pl-2">
                             <div className="row">
                                 <div className="col-12">
                                     <div className="row align-items-center mt-1">
@@ -89,8 +89,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
 
                                 <div className="col-12">
                                     <div className="row">
-                                        <div className="col-3"></div>
-                                        <div className="col-9 pl-0">
+                                        <div className="col-9 offset-3 pl-0">
                                             <p className="prize-subtitle my-0">
                                                 {data.prizeSubtitle}
                                             </p>
