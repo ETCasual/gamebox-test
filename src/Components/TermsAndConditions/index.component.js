@@ -134,23 +134,23 @@ const Index = () => {
                                 <p className="title">Consequences</p>
                                 <p className="description">
                                     Violations of any of these rules will be
-                                    reviewed on a case-by-case basis and the
-                                    appropriate action will be taken when deemed
+                                    reviewed on an individual basis, and
+                                    appropriate action will be taken if
                                     necessary. Repeat offenses and severity will
-                                    be taken into consideration prior to bans or
-                                    any other actions taken for the respective
-                                    accounts on each game.
+                                    be considered before bans or other measures
+                                    are taken against the respective accounts on
+                                    each game.
                                 </p>
                                 <p className="description">
-                                    Accounts that have been banned may lose the
-                                    rights to the game account, items and
-                                    digital currencies and other items that have
-                                    been either earned or purchased.
+                                    Accounts that have been banned may lose
+                                    access to the game account, items, digital
+                                    currencies, and other items earned or
+                                    purchased.
                                 </p>
                                 <p className="description">
-                                    Supporting each other will lead to more fun,
-                                    joy and excitement so let’s work on building
-                                    a positive environment together!
+                                    Supporting one another will result in more
+                                    fun, joy, and excitement, so let's work
+                                    together to create a positive environment!
                                 </p>
                             </div>
                             {/* AUTO-RENEWABLE SUBSCRIPTION */}
@@ -186,9 +186,9 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">Data Deletion Request</p>
                                 <p className="description">
-                                    If you’d like us to delete User Provided
-                                    Data that you have provided via the Service,
-                                    please contact us at{" "}
+                                    If you would like us to delete User Provided
+                                    Data that you have provided through the
+                                    Service, please contact us at{" "}
                                     <a
                                         className="email"
                                         target="_blank"
@@ -197,9 +197,9 @@ const Index = () => {
                                     >
                                         support@froyo.games
                                     </a>
-                                    . Please note that some or all of the
-                                    User-Provided Data may be required in order
-                                    for our Service to function properly.
+                                    . Please keep in mind that some or all of
+                                    the User Provided Data may be required for
+                                    our Service to function properly.
                                 </p>
                             </div>
                         </div>
