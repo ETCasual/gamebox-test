@@ -10,11 +10,11 @@ import AutomatedEntry from "Components/Home/AutomatedEntry/AutomatedEntry.compon
 import Premium from "Components/Home/Premium/Premium.component";
 import WinnerAnnouncementModal from "Components/Modals/WinnerAnnouncementModal.component";
 import FeaturedLoader from "Components/Loader/Featured.loader";
+import SpinnerEntry from "./SpinnerEntry/SpinnerEntry.component";
 import AutomatedEntryLoader from "Components/Loader/AutomatedEntry.loader";
 import PremiumLoader from "Components/Loader/Premium.loader";
 import StayTune from "Components/Home/StayTune/StayTune.component";
 import RevealCardModal from "Components/Modals/RevealCardModal.component";
-import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.component";
 import VipPassRedemption from "Components/Home/VipPass/VipPassRedemption.component";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
@@ -22,9 +22,6 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
-
-// HELPER FUNCTIONS
-import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -53,14 +50,10 @@ const Index = () => {
     const [revealCardModalData, setRevealCardModalData] = useState([]);
     const [isRevealCardModalShown, setIsRevealCardModalShown] = useState(false);
     const [isOnBoardingShown, setIsOnBoardingShown] = useState(false);
-    const [fortuneWheelShown, setFortuneWheelShown] = useState(false);
 
     //VIP PASS
     const [isVipPassRedeemable, setIsVipPassRedeemable] = useState(false);
     const [vipPassData, setVipPassData] = useState(null);
-
-    let watcherRef = useRef(null);
-    const [timer, setTimer] = useState("0d 0h 0m 0s");
 
     // ONBOARDING
     useEffect(() => {
@@ -360,38 +353,6 @@ const Index = () => {
         setIsRevealCardModalShown(false);
     };
 
-    // COUNT DOWN TIMER
-    useEffect(() => {
-        const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
-        const nowDate = new Date(nowTimeStamp());
-
-        var endDatetime = new Date();
-        endDatetime.setUTCHours(0, 0, 0, 0);
-
-        if (endDatetime < nowDate) {
-            endDatetime.setDate(endDatetime.getDate() + 1);
-        }
-
-        // COUNTDOWN TIMER INTERVAL
-        clearInterval(watcherRef.current);
-        watcherRef.current = setInterval(() => {
-            let finalTimeRef = convertSecondsToHours(
-                endDatetime.valueOf(),
-                config.offsetTimestamp ? config.offsetTimestamp : 0
-            );
-            setTimer(finalTimeRef);
-            if (finalTimeRef === "Ended") countDownTimerEnded();
-        }, 1000);
-
-        // END COUNTDOWN TIMER
-        function countDownTimerEnded() {
-            clearInterval(watcherRef.current);
-            watcherRef.current = null;
-        }
-
-        return countDownTimerEnded;
-    }, [config.offsetTimestamp]);
-
     return (
         <>
             <section id="home">
@@ -402,53 +363,7 @@ const Index = () => {
                             <div className="row d-flex">
                                 {/* FORTUNE WHEEL */}
                                 <div className="col-sm d-flex flex-column px-2 mb-3 mb-sm-0">
-                                    <div
-                                        className="spinner d-flex flex-column justify-content-between h-100"
-                                        onClick={() =>
-                                            setFortuneWheelShown(true)
-                                        }
-                                    >
-                                        <div className="card-wrapper h-100  pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
-                                            <div className="row">
-                                                <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
-                                                    <p className="the-spinner-text mb-1">
-                                                        FREE GEMS
-                                                    </p>
-                                                    <div className="earn-more-tickets-text mb-1">
-                                                        Claim your daily free
-                                                        gems here!
-                                                    </div>
-                                                </div>
-                                                <div className="earn-more-tickets-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
-                                                    <img
-                                                        className="earn-more-tickets-img"
-                                                        src={`${window.cdn}icons/icon_spinner.png`}
-                                                        alt="earn-more-tickets"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* TIMER */}
-                                        <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
-                                            <p className="timer-text mb-0">
-                                                Refresh in
-                                            </p>
-                                            <p className="countdown mb-0">
-                                                {`\u00A0 ${timer} `}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {fortuneWheelShown && (
-                                        <FortuneWheel
-                                            prizeId={0}
-                                            setIsTicketsUpdated={false}
-                                            ticketsRequired={0}
-                                            setFortuneWheelShown={
-                                                setFortuneWheelShown
-                                            }
-                                        />
-                                    )}
+                                    <SpinnerEntry />
                                 </div>
 
                                 {/* AUTOMATED LOADER */}

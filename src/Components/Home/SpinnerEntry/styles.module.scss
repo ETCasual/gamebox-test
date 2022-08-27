@@ -1,0 +1,84 @@
+.spinner {
+    position: relative;
+    cursor: pointer;
+    background: linear-gradient(90deg, #844770, #692049);
+    border-radius: 10px;
+
+    .card-wrapper {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-left: solid 2px transparent;
+        border-top: solid 2px transparent;
+        border-right: solid 2px transparent;
+
+        .title-text {
+            color: #f7b621;
+            font-size: $fnt-sz-20;
+            @include media-min($sm) {
+                font-size: $fnt-sz-28;
+            }
+            font-weight: $fnt-wgt-600;
+        }
+        .desc-text {
+            font-size: $fnt-sz-12;
+            @include media-min($sm) {
+                font-size: $fnt-sz-14;
+            }
+        }
+
+        .card-img-wrapper {
+            right: -10px;
+            position: absolute;
+            @include media-min($sm) {
+                right: unset;
+                position: relative;
+                padding-right: 13px;
+            }
+            .thumb-img {
+                object-fit: cover;
+                height: 5.5rem;
+                border-radius: 7px;
+                @include media-min($sm) {
+                    border-radius: 17px;
+                    height: 7rem;
+                    margin-top: 0.625rem;
+                }
+            }
+        }
+    }
+    .timer {
+        background: #151116;
+        box-shadow: inset 0px 3px 6px #0000000f;
+        border-radius: 0px 0px 10px 10px;
+        border-left: solid 2px transparent;
+        border-bottom: solid 2px transparent;
+        border-right: solid 2px transparent;
+        min-height: 2.5rem;
+        @include media-min($md) {
+            min-height: 3.5rem;
+        }
+        .timer-text {
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
+            font-weight: $fnt-wgt-700;
+        }
+        .countdown {
+            color: #00c1b9;
+            font-size: $fnt-sz-12;
+            @include media-min($md) {
+                font-size: $fnt-sz-14;
+            }
+            font-weight: $fnt-wgt-700;
+        }
+    }
+    &:hover {
+        .card-wrapper {
+            box-shadow: 0 0 10px 2pt #ff3399;
+        }
+        .timer {
+            box-shadow: 0 4px 10px 1pt #ff3399;
+        }
+    }
+}

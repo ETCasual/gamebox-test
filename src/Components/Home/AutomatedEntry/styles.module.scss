@@ -1,101 +1,31 @@
-// AUTOMATED ENTRY COMPONENT
-.automatedEntry {
-    .bonus-card {
-        position: relative;
-        cursor: pointer;
-        background: #693151;
-        border-radius: 12px;
-    }
+.automated {
+    position: relative;
+    cursor: pointer;
+    background: linear-gradient(90deg, #844770, #692049);
+    border-radius: 10px;
 
-    .auto {
-        background: linear-gradient(90deg, #844770, #692049);
-        border-radius: 10px;
-
-        .bonus-reward-img {
-            object-fit: cover;
-            height: 5.5rem;
-            border-radius: 7px;
-            @include media-min($sm) {
-                border-radius: 17px;
-                height: 7rem;
-                margin-top: 0.625rem;
-            }
-        }
-        .bonus-reward-img-wrapper {
-            right: -10px;
-            position: absolute;
-            @include media-min($sm) {
-                right: unset;
-                position: relative;
-                padding-right: 13px;
-            }
-        }
-    }
-
-    &:hover {
-        .card-wrapper {
-            border-left: solid 2px #ff3399;
-            border-top: solid 2px #ff3399;
-            border-right: solid 2px #ff3399;
-        }
-        .timer {
-            border-left: solid 2px #ff3399;
-            border-bottom: solid 2px #ff3399;
-            border-right: solid 2px #ff3399;
-        }
-    }
     .card-wrapper {
-        position: relative;
-        cursor: pointer;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         border-left: solid 2px transparent;
         border-top: solid 2px transparent;
         border-right: solid 2px transparent;
-        .prize-id {
-            position: absolute;
-            top: 0.6rem;
-            left: 0.6rem;
-            font-size: $fnt-sz-8;
-            @include media-min($md) {
-                top: 1rem;
-                left: 1rem;
-                font-size: $fnt-sz-10;
-            }
-        }
-        .prize-title {
+
+        .title-text {
             color: #f7b621;
             font-size: $fnt-sz-20;
             @include media-min($sm) {
                 font-size: $fnt-sz-28;
             }
             font-weight: $fnt-wgt-600;
-            line-height: 1.5;
         }
-        .prize-subtitle {
+        .desc-text {
             font-size: $fnt-sz-12;
             @include media-min($sm) {
                 font-size: $fnt-sz-14;
             }
         }
-        .picture-wrapper {
-            right: -10px;
-            position: absolute;
-            @include media-min($sm) {
-                right: unset;
-                position: relative;
-            }
-        }
-        picture {
-            img {
-                height: 4.25rem;
-                object-fit: cover;
-                border-radius: 7px;
-                @include media-min($sm) {
-                    border-radius: 17px;
-                }
-            }
-        }
+
         .total-ticket-info {
             border-radius: 5px;
             min-width: 7rem;
@@ -117,6 +47,26 @@
                     @include media-min($md) {
                         width: 35px;
                     }
+                }
+            }
+        }
+
+        .card-img-wrapper {
+            right: -10px;
+            position: absolute;
+            @include media-min($sm) {
+                right: unset;
+                position: relative;
+                padding-right: 13px;
+            }
+            .thumb-img {
+                object-fit: cover;
+                height: 5.5rem;
+                border-radius: 7px;
+                @include media-min($sm) {
+                    border-radius: 17px;
+                    height: 7rem;
+                    margin-top: 0.625rem;
                 }
             }
         }
@@ -148,4 +98,167 @@
             font-weight: $fnt-wgt-700;
         }
     }
+    &:hover {
+        .card-wrapper {
+            box-shadow: 0 0 10px 2pt #ff3399;
+        }
+        .timer {
+            box-shadow: 0 4px 10px 1pt #ff3399;
+        }
+    }
 }
+// .automatedEntry {
+//     background: linear-gradient(90deg, #844770, #692049);
+//     border-radius: 10px;
+
+//     .bonus-card {
+//         position: relative;
+//         cursor: pointer;
+//         background: #693151;
+//         border-radius: 12px;
+//     }
+
+//     .auto {
+//         background: linear-gradient(90deg, #844770, #692049);
+//         border-radius: 10px;
+
+//         .bonus-reward-img {
+//             object-fit: cover;
+//             height: 5.5rem;
+//             border-radius: 7px;
+//             @include media-min($sm) {
+//                 border-radius: 17px;
+//                 height: 7rem;
+//                 margin-top: 0.625rem;
+//             }
+//         }
+//         .bonus-reward-img-wrapper {
+//             right: -10px;
+//             position: absolute;
+//             @include media-min($sm) {
+//                 right: unset;
+//                 position: relative;
+//                 padding-right: 13px;
+//             }
+//         }
+//     }
+
+//     &:hover {
+//         .card-wrapper {
+//             // border-left: solid 2px #ff3399;
+//             // border-top: solid 2px #ff3399;
+//             // border-right: solid 2px #ff3399;
+//             box-shadow: 0 0 10px 2pt #ff3399;
+//         }
+//         .timer {
+//             // border-left: solid 2px #ff3399;
+//             // border-bottom: solid 2px #ff3399;
+//             // border-right: solid 2px #ff3399;
+//             box-shadow: 0 4px 10px 1pt #ff3399;
+//         }
+//     }
+//     .card-wrapper {
+//         position: relative;
+//         cursor: pointer;
+//         border-top-left-radius: 10px;
+//         border-top-right-radius: 10px;
+//         border-left: solid 2px transparent;
+//         border-top: solid 2px transparent;
+//         border-right: solid 2px transparent;
+//         .prize-id {
+//             position: absolute;
+//             top: 0.6rem;
+//             left: 0.6rem;
+//             font-size: $fnt-sz-8;
+//             @include media-min($md) {
+//                 top: 1rem;
+//                 left: 1rem;
+//                 font-size: $fnt-sz-10;
+//             }
+//         }
+//         .prize-title {
+//             color: #f7b621;
+//             font-size: $fnt-sz-20;
+//             @include media-min($sm) {
+//                 font-size: $fnt-sz-28;
+//             }
+//             font-weight: $fnt-wgt-600;
+//             line-height: 1.5;
+//         }
+//         .prize-subtitle {
+//             font-size: $fnt-sz-12;
+//             @include media-min($sm) {
+//                 font-size: $fnt-sz-14;
+//             }
+//         }
+//         .picture-wrapper {
+//             right: -10px;
+//             position: absolute;
+//             @include media-min($sm) {
+//                 right: unset;
+//                 position: relative;
+//             }
+//         }
+//         picture {
+//             img {
+//                 height: 4.25rem;
+//                 object-fit: cover;
+//                 border-radius: 7px;
+//                 @include media-min($sm) {
+//                     border-radius: 17px;
+//                 }
+//             }
+//         }
+//         .total-ticket-info {
+//             border-radius: 5px;
+//             min-width: 7rem;
+//             .ticket-label {
+//                 font-size: $fnt-sz-10;
+//                 @include media-min($sm) {
+//                     font-size: $fnt-sz-12;
+//                 }
+//             }
+//             .ticket-value {
+//                 color: #00c1b9;
+//                 font-size: $fnt-sz-14;
+//                 font-weight: $fnt-wgt-500;
+//                 @include media-min($sm) {
+//                     font-size: $fnt-sz-16;
+//                 }
+//                 .icon {
+//                     width: 26px;
+//                     @include media-min($md) {
+//                         width: 35px;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     .timer {
+//         background: #151116;
+//         box-shadow: inset 0px 3px 6px #0000000f;
+//         border-radius: 0px 0px 10px 10px;
+//         border-left: solid 2px transparent;
+//         border-bottom: solid 2px transparent;
+//         border-right: solid 2px transparent;
+//         min-height: 2.5rem;
+//         @include media-min($md) {
+//             min-height: 3.5rem;
+//         }
+//         .timer-text {
+//             font-size: $fnt-sz-12;
+//             @include media-min($md) {
+//                 font-size: $fnt-sz-14;
+//             }
+//             font-weight: $fnt-wgt-700;
+//         }
+//         .countdown {
+//             color: #00c1b9;
+//             font-size: $fnt-sz-12;
+//             @include media-min($md) {
+//                 font-size: $fnt-sz-14;
+//             }
+//             font-weight: $fnt-wgt-700;
+//         }
+//     }
+// }

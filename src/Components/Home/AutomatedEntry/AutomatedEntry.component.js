@@ -148,62 +148,50 @@ const AutomatedEntry = ({ data }) => {
     };
 
     return (
-        <div className="automatedEntry">
+        <>
             <div
-                className="bonus-card"
+                className="automated d-flex flex-column justify-content-between h-100"
                 onClick={() => setBonusRewardShown(true)}
             >
-                <div className="auto">
-                    <div className="card-wrapper pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
-                        <div className="row">
-                            {/* PRIZE INFO */}
-                            <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
-                                <div>
-                                    {/* PRIZE NAME */}
-                                    <div className="prize-title mb-1">
-                                        BONUS REWARD
-                                    </div>
-                                    {/* PRIZE DETAILED CONTENT */}
-                                    <div className="prize-subtitle d-sm-flex">
-                                        {data.prizeTitle}
-                                    </div>
-                                </div>
-                                {/* TICKETS */}
-                                <div className="total-ticket-info d-flex mt-2 mt-sm-4">
-                                    <p className="mb-0 ticket-label d-flex align-items-center mr-3">
-                                        My tickets
-                                    </p>
-                                    <p className="mb-0 ticket-value d-inline-flex align-items-center">
-                                        {getTickets()?.toLocaleString() || "-"}
-                                        <img
-                                            className="icon ml-1"
-                                            src={`${window.cdn}assets/tickets_06.png`}
-                                            alt="ticket"
-                                        />
-                                    </p>
+                <div className="card-wrapper h-100 pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
+                    <div className="row">
+                        {/* PRIZE INFO */}
+                        <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
+                            <div>
+                                <p className="title-text mb-1">BONUS REWARD</p>
+                                <div className="desc-text mb-1">
+                                    {data.prizeTitle}
                                 </div>
                             </div>
-                            {/* PRIZE PICTURE */}
-                            <div className="bonus-reward-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
-                                <picture>
-                                    <source
-                                        media="(max-width:768px)"
-                                        srcSet={data.prizeBG2}
-                                    />
+                            {/* TICKETS */}
+                            <div className="total-ticket-info d-flex mt-2 mt-sm-4">
+                                <p className="mb-0 ticket-label d-flex align-items-center mr-3">
+                                    My tickets
+                                </p>
+                                <p className="mb-0 ticket-value d-inline-flex align-items-center">
+                                    {getTickets()?.toLocaleString() || "-"}
                                     <img
-                                        className="bonus-reward-img"
-                                        src={data.prizeBG}
-                                        alt={data.prizeTitle}
+                                        className="icon ml-1"
+                                        src={`${window.cdn}assets/tickets_06.png`}
+                                        alt="ticket"
                                     />
-                                </picture>
+                                </p>
                             </div>
                         </div>
+                        {/* PRIZE PICTURE */}
+                        <div className="card-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
+                            <img
+                                className="thumb-img"
+                                src={data.prizeBG}
+                                alt="thumb-img"
+                            />
+                        </div>
                     </div>
-                    {/* TIMER */}
-                    <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
-                        <p className="timer-text mb-0">Draw starts in</p>
-                        <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
-                    </div>
+                </div>
+                {/* TIMER */}
+                <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
+                    <p className="timer-text mb-0">Draw starts in</p>
+                    <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
                 </div>
             </div>
 
@@ -216,8 +204,80 @@ const AutomatedEntry = ({ data }) => {
                     }
                 />
             )}
-        </div>
+        </>
     );
+
+    // return (
+    //     <div className="automated">
+    //         <div
+    //             className="bonus-card"
+    //             onClick={() => setBonusRewardShown(true)}
+    //         >
+    //             <div className="auto">
+    //                 <div className="card-wrapper pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
+    //                     <div className="row">
+    //                         {/* PRIZE INFO */}
+    //                         <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
+    //                             <div>
+    //                                 {/* PRIZE NAME */}
+    //                                 <div className="prize-title mb-1">
+    //                                     BONUS REWARD
+    //                                 </div>
+    //                                 {/* PRIZE DETAILED CONTENT */}
+    //                                 <div className="prize-subtitle d-sm-flex">
+    //                                     {data.prizeTitle}
+    //                                 </div>
+    //                             </div>
+    //                             {/* TICKETS */}
+    //                             <div className="total-ticket-info d-flex mt-2 mt-sm-4">
+    //                                 <p className="mb-0 ticket-label d-flex align-items-center mr-3">
+    //                                     My tickets
+    //                                 </p>
+    //                                 <p className="mb-0 ticket-value d-inline-flex align-items-center">
+    //                                     {getTickets()?.toLocaleString() || "-"}
+    //                                     <img
+    //                                         className="icon ml-1"
+    //                                         src={`${window.cdn}assets/tickets_06.png`}
+    //                                         alt="ticket"
+    //                                     />
+    //                                 </p>
+    //                             </div>
+    //                         </div>
+    //                         {/* PRIZE PICTURE */}
+    //                         <div className="bonus-reward-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
+    //                             <picture>
+    //                                 <source
+    //                                     media="(max-width:768px)"
+    //                                     srcSet={data.prizeBG2}
+    //                                 />
+    //                                 <img
+    //                                     className="bonus-reward-img"
+    //                                     src={data.prizeBG}
+    //                                     alt={data.prizeTitle}
+    //                                 />
+    //                             </picture>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //                 {/* TIMER */}
+    //                 <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
+    //                     <p className="timer-text mb-0">Draw starts in</p>
+    //                     <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
+    //                 </div>
+    //             </div>
+    //         </div>
+
+    //         {/* BONUS REWARDS */}
+    //         {bonusRewardShown && (
+    //             <AutomatedEntryModalPopup
+    //                 data={data}
+    //                 handleInstructionsCloseBtn={() =>
+    //                     setBonusRewardShown(false)
+    //                 }
+    //             />
+    //         )}
+    //     </div>
+    // );
 };
 
 export default AutomatedEntry;
