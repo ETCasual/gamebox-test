@@ -36,11 +36,9 @@ const SelectWalletsModalPopup = ({
                         </span>
                     </p>
                     <p className="subtitle">
-                        Your Froyo Games account bound to a wallet address
-                        previously. Please use the same wallet address to
-                        connect. If you using MetaMask and is encountering this
-                        error repeatly, please try this few steps that may
-                        resolves your issues:
+                        Your Froyo Games account was previously bound to another
+                        wallet address. Please use the same wallet address when
+                        connecting.
                     </p>
                     <ul className="my-4 list-unstyled">
                         <li className="row mb-2">
@@ -49,8 +47,9 @@ const SelectWalletsModalPopup = ({
                             </div>
                             <div className="col-10 col-md-10 px-0 instruction">
                                 <p className="mb-0">
-                                    Please disconnect all accounts from the
-                                    MetaMask app.
+                                    Disconnect all accounts on Metamask (click
+                                    the "Connected" button on the top left of
+                                    the Metamask wallet)
                                 </p>
                             </div>
                         </li>
@@ -60,8 +59,8 @@ const SelectWalletsModalPopup = ({
                             </div>
                             <div className="col-10 col-md-10 px-0 instruction">
                                 <p className="mb-0">
-                                    Please choose the correct account from the
-                                    MetaMask app.
+                                    Select the correct account when connecting
+                                    to Metamask
                                 </p>
                             </div>
                         </li>

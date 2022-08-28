@@ -143,7 +143,7 @@ const Profile = ({
                                             </div>
 
                                             <div className="mx-4 my-3">
-                                                <div className="d-inline-md-flex flex-md-column">
+                                                <div className="d-inline-md-flex flex-md-column text-center text-md-left">
                                                     <div className="col-12">
                                                         <h3 className="user-name">
                                                             {user.username ||
