@@ -119,11 +119,11 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                     />
 
                                     <div className="info-wrapper p-1 p-sm-3">
-                                        <div className="prize-id">
-                                            {`#${data?.prizeId}`}
-                                        </div>
                                         <div className="prize-subtitle">
-                                            {data?.prizeSubtitle}
+                                            <p className="mb-0">
+                                                {`#${data?.prizeId}`}
+                                            </p>
+                                            {`${data?.prizeSubtitle}`}
                                         </div>
                                         <div className="prize-title mt-2 mb-2">
                                             {data?.prizeTitle}

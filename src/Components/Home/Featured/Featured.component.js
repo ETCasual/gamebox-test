@@ -130,8 +130,11 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                         </div>
                                     </div>
                                     <div className="d-flex flex-column justify-content-between col-12 col-sm-6 col-xl-7 px-sm-4 px-1">
-                                        <div className="info-wrapper pt-3">
+                                        <div className="info-wrapper pt-2">
                                             <div className="prize-subtitle d-none d-sm-block">
+                                                <p className="mb-0">
+                                                    {`#${data?.prizeId}`}
+                                                </p>
                                                 {data?.prizeSubtitle}
                                             </div>
                                             <div className="prize-title mt-2 d-none d-sm-block">

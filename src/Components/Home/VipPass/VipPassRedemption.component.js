@@ -56,13 +56,13 @@ const VipPassRedemption = ({ data }) => {
                                             GAMEBOX VIP PASS
                                         </p>
                                     </div>
-                                    <div className="">
+                                    <div>
                                         <p className="desc text-left">
                                             The Gamebox VIP Pass is a privilege
                                             membership pass in Gamebox.
                                         </p>
                                     </div>
-                                    <div className="">
+                                    <div>
                                         <p className="desc text-left">
                                             The Gamebox VIP Pass NFT grants
                                             players special utilities, such as

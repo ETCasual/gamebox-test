@@ -348,6 +348,9 @@ const Index = ({ match }) => {
                                             <div className="prize-text-holder col-8 col-md-12 d-flex flex-column justify-content-between justify-content-md-start pr-0 pl-md-0">
                                                 <div className="align-items-start my-md-3">
                                                     <div className="prize-id mb-lg-1">
+                                                        <p className="mb-0">
+                                                            {`#${currentPrize?.prizeId}`}
+                                                        </p>
                                                         {
                                                             currentPrize?.prizeSubtitle
                                                         }

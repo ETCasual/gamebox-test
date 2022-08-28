@@ -392,9 +392,14 @@
             width: auto;
         }
         .vip-pass-info {
+            .vip-pass-card {
+                background: #231e26;
+                border-radius: 10px;
+                box-shadow: 0px 0px 15px 0px #747474;
+                padding: 0.5rem;
+            }
             .vip-pass-thumb {
-                width: 15rem;
-                min-width: 5rem;
+                width: 100%;
                 max-width: 15rem;
                 @include media-min($md) {
                     min-height: 11.063rem;

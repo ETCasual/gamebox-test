@@ -476,28 +476,34 @@ const Profile = ({
                                         {isWalletConnected &&
                                             vipPassData.quantity > 0 && (
                                                 <div className="vip-pass-info row">
-                                                    <div className="col d-flex">
-                                                        <ThumbnailMedia
-                                                            className="vip-pass-thumb mx-auto"
-                                                            url={
-                                                                vipPassMediaUrl
-                                                            }
-                                                            isPlayVideo={true}
-                                                            onError={(e) =>
-                                                                defaultGameImage(
-                                                                    e
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                    {vipPassData.quantity >
-                                                        1 && (
-                                                        <div className="col-12 mt-3 text-center">
-                                                            <p className="vip-pass-quantity">
-                                                                {`x${vipPassData.quantity}`}
-                                                            </p>
+                                                    <div className="col-auto mx-auto">
+                                                        <div className="vip-pass-card mx-3">
+                                                            <ThumbnailMedia
+                                                                className="vip-pass-thumb"
+                                                                url={
+                                                                    vipPassMediaUrl
+                                                                }
+                                                                isPlayVideo={
+                                                                    true
+                                                                }
+                                                                onError={(e) =>
+                                                                    defaultGameImage(
+                                                                        e
+                                                                    )
+                                                                }
+                                                            />
+                                                            <div className="col-12 mt-3 text-center">
+                                                                <p className="vip-pass-quantity">
+                                                                    {`GameBox VIP Pass${
+                                                                        vipPassData.quantity >
+                                                                        1
+                                                                            ? ` (x${vipPassData.quantity})`
+                                                                            : ""
+                                                                    }`}
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    )}
+                                                    </div>
                                                 </div>
                                             )}
                                     </div>
