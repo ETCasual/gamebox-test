@@ -51,6 +51,7 @@ const ThumbnailMedia = ({
             playsInline
             preload="metadata"
             muted // For autoplay
+            autoPlay={isPlayVideo}
             onCanPlayThrough={(e) => {
                 if (isPlayVideo) {
                     e.target.play();

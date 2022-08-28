@@ -468,7 +468,7 @@ const Profile = ({
                                             vipPassData.quantity <= 0 && (
                                                 <div className="text-center mt-2">
                                                     <p className="vip-pass-empty">
-                                                        List is empty
+                                                        No VIP Pass
                                                     </p>
                                                 </div>
                                             )}
