@@ -103,12 +103,7 @@ const Settings = () => {
                                     <a
                                         target="_blank"
                                         rel="noreferrer"
-                                        href={
-                                            process.env.REACT_APP_NODE_ENV ===
-                                            "development"
-                                                ? "https://staging.froyo.games/my-profile"
-                                                : "https://froyo.games/my-profile"
-                                        }
+                                        href={`${process.env.REACT_APP_FROYO_WEB_URL}/my-profile`}
                                         className="col-12 d-flex align-items-center profile-info"
                                     >
                                         <img

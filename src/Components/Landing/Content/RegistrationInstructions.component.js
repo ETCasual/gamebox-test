@@ -91,12 +91,7 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                     <a
                                         target="_blank"
                                         rel="noreferrer"
-                                        href={
-                                            process.env.REACT_APP_NODE_ENV ===
-                                            "development"
-                                                ? "https://staging.froyo.games/registration"
-                                                : "https://froyo.games/registration"
-                                        }
+                                        href={`${process.env.REACT_APP_FROYO_WEB_URL}/registration`}
                                     >
                                         <p className="mb-0">
                                             Click here to{" "}
