@@ -69,7 +69,7 @@ const Login = ({ setLoginModal }) => {
                         LOGIN
                     </button>
                     <a
-                        href="https://staging.froyo.games/forgot-pass"
+                        href={`${process.env.REACT_APP_FROYO_WEB_URL}/forgot-pass`}
                         target="_blank"
                         rel="noreferrer"
                     >
