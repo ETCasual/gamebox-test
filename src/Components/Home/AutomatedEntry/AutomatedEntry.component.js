@@ -158,7 +158,7 @@ const AutomatedEntry = ({ data }) => {
                         {/* PRIZE INFO */}
                         <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                             <div>
-                                <p className="title-text mb-1">BONUS REWARD</p>
+                                <p className="title-text mb-1">DAILY REWARD</p>
                                 <div className="desc-text mb-1">
                                     {data.prizeTitle}
                                 </div>
