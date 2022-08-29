@@ -162,7 +162,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             throughout the platform before the
                                             timer runs out. Tickets won from the
                                             tournaments will automatically be
-                                            added into the Bonus Draw pool. It’s
+                                            added into the Daily Draw pool. It’s
                                             that easy.
                                         </p>
                                         <p className="instructions-tip text-center mb-5">

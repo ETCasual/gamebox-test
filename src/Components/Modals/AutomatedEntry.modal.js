@@ -190,14 +190,14 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                             </div>
                             <div className="line" />
                             <p className="instructions-title text-center mb-1 mb-sm-3">
-                                How to win tickets for the Bonus Draw?
+                                How to win tickets for the Daily Draw?
                             </p>
                             <p className="instructions-subtitle text-center mb-2 mb-sm-3">
                                 Participate in any tournament throughout the
                                 platform before the timer runs out.
                                 <br />
                                 Tickets won from the tournaments will
-                                automatically be added into the Bonus Draw pool.
+                                automatically be added into the Daily Draw pool.
                                 It’s that easy.
                             </p>
                             <p className="instructions-tip text-center mb-0 mb-sm-4">
