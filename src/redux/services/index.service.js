@@ -125,7 +125,7 @@ export async function userSignIn() {
             status: "active",
             bindWalletAddress: signInResult.getWalletAddress(),
             // TODO: Add "isVip" in server API
-            isVip: true,
+            isVip: false,
         });
     }
     return user;
@@ -973,7 +973,7 @@ export async function getLeaderboardResult(prizeId, gameId) {
             gameScore: e.getGameScore(),
             leaveTimeStamp: e.getLeaveTimestamp(),
             // TODO: Add "isVip" in server API
-            isVip: true,
+            isVip: false,
         });
     });
     return leaderboard;
@@ -1018,7 +1018,6 @@ export async function getWinnersList() {
 
     let _monthYear = "";
     const winners = [];
-    const _tempIsVip = true;
     winnerResultList.forEach((e) => {
         _monthYear = `${
             monthYearDict[new Date(e.getCreatedOn() * 1000).getMonth()]
@@ -1043,7 +1042,7 @@ export async function getWinnersList() {
                         status: e.getStatus(),
                         totalPlayers: e.getTotalPlayer(),
                         // TODO: Add "isVip" in server API
-                        isVip: _tempIsVip,
+                        isVip: false,
                     },
                 ],
             });
@@ -1067,7 +1066,7 @@ export async function getWinnersList() {
                     status: e.getStatus(),
                     totalPlayers: e.getTotalPlayer(),
                     // TODO: Add "isVip" in server API
-                    isVip: _tempIsVip,
+                    isVip: false,
                 });
             } else {
                 winners.push({
@@ -1088,7 +1087,7 @@ export async function getWinnersList() {
                             status: e.getStatus(),
                             totalPlayers: e.getTotalPlayer(),
                             // TODO: Add "isVip" in server API
-                            isVip: _tempIsVip,
+                            isVip: false,
                         },
                     ],
                 });
@@ -1281,7 +1280,7 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 tickets: rank.getTickets(),
                 exp: rank.getExp(),
                 // TODO: Add "isVip" in server API
-                isVip: true,
+                isVip: false,
             });
     });
 
@@ -1675,7 +1674,7 @@ export async function getPlayerDetails(playerId) {
             picture: data.getAvatarUrl(),
             exp: data.getExp(),
             // TODO: Add "isVip" in server API
-            isVip: true,
+            isVip: false,
         });
     }
     return playerDetails;
@@ -1744,7 +1743,7 @@ export async function getLeaderboardHistory(cgId) {
                     totalTickets: e.getTotalTickets(),
                     createdOn: e.getCreatedOn(),
                     // TODO: Add "isVip" in server API
-                    isVip: true,
+                    isVip: false,
                 });
             });
         }
