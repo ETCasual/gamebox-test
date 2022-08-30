@@ -9,6 +9,7 @@ import ConnectWallet from "Components/Global/ConnectWallet.component";
 import { defaultUserImage } from "Utils/DefaultImage";
 import { disconnectWallet } from "Utils/ConnectWallet";
 import { UPDATE_USER_WALLET } from "redux/types";
+import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const Settings = () => {
     const { user } = useSelector((state) => state.userData);
@@ -354,20 +355,20 @@ const Settings = () => {
                                             </li>
                                             <li>
                                                 <a
-                                                    href="mailto:support@froyo.games"
+                                                    href={getFroyoGamesContactUrl()}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    Contact us
+                                                    Contact Support
                                                 </a>
                                             </li> */}
                                             <li className="d-flex align-items-center justify-content-between">
                                                 <a
-                                                    href="mailto:support@froyo.games"
+                                                    href={getFroyoGamesContactUrl()}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    Contact us
+                                                    Contact Support
                                                 </a>
                                                 <span className="app-version">
                                                     Version:{" "}

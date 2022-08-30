@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const Index = () => {
     const history = useHistory();
@@ -193,9 +194,9 @@ const Index = () => {
                                         className="email"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href="mailto:support@froyo.games"
+                                        href={getFroyoGamesContactUrl()}
                                     >
-                                        support@froyo.games
+                                        Froyo Games
                                     </a>
                                     . Please keep in mind that some or all of
                                     the User Provided Data may be required for

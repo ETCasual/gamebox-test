@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const BlockedUserModal = ({ setBlockedArchivedModal }) => {
     const getAccountErrorType = () => {
@@ -52,9 +53,7 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
                 <p className="mb-3">
                     For more information, please contact support at{" "}
                     <span>
-                        <a href="mailto:support@froyo.games">
-                            support@froyo.games
-                        </a>
+                        <a href={getFroyoGamesContactUrl()}>Froyo Games</a>
                     </span>
                 </p>
                 <button

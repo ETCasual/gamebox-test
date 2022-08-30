@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const Footer = () => {
     const socialList = [
@@ -86,11 +87,11 @@ const Footer = () => {
                         <div className="title-text mb-2">HELP</div>
                         <div className="subtitle-text">
                             <a
-                                href="mailto:support@froyo.games"
+                                href={getFroyoGamesContactUrl()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Contact us
+                                Contact Support
                             </a>
                         </div>
                     </div>
