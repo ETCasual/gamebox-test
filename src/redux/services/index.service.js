@@ -124,8 +124,7 @@ export async function userSignIn() {
             exp: signInResult.getExp(),
             status: "active",
             bindWalletAddress: signInResult.getWalletAddress(),
-            // TODO: Add "isVip" in server API
-            isVip: false,
+            isVip: signInResult.getIsVip(),
         });
     }
     return user;
@@ -972,8 +971,7 @@ export async function getLeaderboardResult(prizeId, gameId) {
             exp: e.getExp(),
             gameScore: e.getGameScore(),
             leaveTimeStamp: e.getLeaveTimestamp(),
-            // TODO: Add "isVip" in server API
-            isVip: false,
+            isVip: e.getIsVip(),
         });
     });
     return leaderboard;
@@ -1041,8 +1039,7 @@ export async function getWinnersList() {
                         claimedOn: e.getClaimedOn(),
                         status: e.getStatus(),
                         totalPlayers: e.getTotalPlayer(),
-                        // TODO: Add "isVip" in server API
-                        isVip: false,
+                        isVip: e.getIsVip(),
                     },
                 ],
             });
@@ -1065,8 +1062,7 @@ export async function getWinnersList() {
                     claimedOn: e.getClaimedOn(),
                     status: e.getStatus(),
                     totalPlayers: e.getTotalPlayer(),
-                    // TODO: Add "isVip" in server API
-                    isVip: false,
+                    isVip: e.getIsVip(),
                 });
             } else {
                 winners.push({
@@ -1086,8 +1082,7 @@ export async function getWinnersList() {
                             claimedOn: e.getClaimedOn(),
                             status: e.getStatus(),
                             totalPlayers: e.getTotalPlayer(),
-                            // TODO: Add "isVip" in server API
-                            isVip: false,
+                            isVip: e.getIsVip(),
                         },
                     ],
                 });
@@ -1268,9 +1263,7 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 e?.gameId === rank.getGameId() &&
                 e?.rankFrom === rank.getRankFrom() &&
                 e?.rankTo === rank.getRankTo() &&
-                e?.tickets === rank.getTickets() &&
-                // TODO: Add "isVip" in server API
-                e?.isVip === true
+                e?.tickets === rank.getTickets()
         );
         if (idx === -1)
             leaderRuleRanks.push({
@@ -1279,8 +1272,6 @@ export async function getLeaderboardRank(gameId, leaderRuleRanks) {
                 rankTo: rank.getRankTo(),
                 tickets: rank.getTickets(),
                 exp: rank.getExp(),
-                // TODO: Add "isVip" in server API
-                isVip: false,
             });
     });
 
@@ -1673,8 +1664,7 @@ export async function getPlayerDetails(playerId) {
             name: data.getNickName(),
             picture: data.getAvatarUrl(),
             exp: data.getExp(),
-            // TODO: Add "isVip" in server API
-            isVip: false,
+            isVip: data.getIsVip(),
         });
     }
     return playerDetails;
@@ -1742,8 +1732,7 @@ export async function getLeaderboardHistory(cgId) {
                     vipMultiplier: e.getVipMultiplier(),
                     totalTickets: e.getTotalTickets(),
                     createdOn: e.getCreatedOn(),
-                    // TODO: Add "isVip" in server API
-                    isVip: false,
+                    isVip: e.getIsVip(),
                 });
             });
         }
