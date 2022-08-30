@@ -11,21 +11,20 @@
     top: 50%;
     left: 50%;
 
-    @media (max-height: 700px) {
-        transform: translate(-50%, -50%) scale(0.75, 0.75);
-        top: 50%;
-        left: 50%;
-    }
-    @media (max-height: 700px) {
-        transform: translate(-50%, -50%) scale(0.5, 0.5);
-        top: 50%;
-        left: 50%;
-    }
-
     .fortune-wheel-container {
         margin-top: 4rem;
         @include media-min($md) {
             margin-top: 4rem;
+        }
+
+        @media (max-height: 900px) {
+            transform: scale(0.8);
+        }
+        @media (max-height: 700px) {
+            transform: scale(0.6);
+        }
+        @media (max-height: 600px) {
+            transform: scale(0.5);
         }
     }
 
