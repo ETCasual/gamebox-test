@@ -13,6 +13,7 @@ import {
 // Modal
 import SelectWalletsModal from "Components/Modals/SelectWallets.modal";
 import InvalidWalletModal from "Components/Modals/InvalidWallet.modal";
+import BindWalletGuideModalPopup from "../Modals/BindWalletGuide.modal";
 
 const ConnectWallet = ({
     selectWalletModalShown,
@@ -83,11 +84,17 @@ const ConnectWallet = ({
                     handleConnectWalletConnect={handleConnectWalletConnect}
                 />
             )}
-            {invalidWalletModalShown && (
+            {invalidWalletModalShown && user.bindWalletAddress && (
                 <InvalidWalletModal
                     handleCloseBtn={() => setInvalidWalletModalShown(false)}
                     walletAddress={invalidWalletAddress}
                     bindWalletAddress={user.bindWalletAddress}
+                />
+            )}
+
+            {invalidWalletModalShown && !user.bindWalletAddress && (
+                <BindWalletGuideModalPopup
+                    handleCloseBtn={() => setInvalidWalletModalShown(false)}
                 />
             )}
         </>

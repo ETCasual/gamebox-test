@@ -1,4 +1,5 @@
 import { Link, useHistory } from "react-router-dom";
+import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const ClaimPrizeModalSuccess = ({
     unClaimedPrizes,
@@ -39,9 +40,9 @@ const ClaimPrizeModalSuccess = ({
                                 className="email"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                href="mailto:support@froyo.games"
+                                href={getFroyoGamesContactUrl()}
                             >
-                                support@froyo.games
+                                Froyo Games
                             </a>
                         </p>
                         <div className="p-0 btn-wrapper d-flex mt-4">
@@ -71,9 +72,9 @@ const ClaimPrizeModalSuccess = ({
                                 className="email"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                href="mailto:support@froyo.games"
+                                href={getFroyoGamesContactUrl()}
                             >
-                                support@froyo.games
+                                Froyo Games
                             </a>
                         </p>
                         <div className="p-0 btn-wrapper d-flex flex-column mt-4">

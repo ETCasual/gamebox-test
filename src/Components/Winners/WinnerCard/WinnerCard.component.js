@@ -31,7 +31,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                         <div className="col-4">
                             <div
                                 className={`profile-img d-inline-flex ${
-                                    user?.isVip ? "is-vip" : ""
+                                    data?.isVip ? "is-vip" : ""
                                 }`}
                             >
                                 <span>
@@ -39,7 +39,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                                         className="img-holder"
                                         onError={(e) => defaultUserImage(e)}
                                         src={
-                                            user
+                                            data
                                                 ? data.userAvatarUrl
                                                 : `${window.cdn}icons/icon_profile.svg`
                                         }
@@ -47,7 +47,7 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                                     />
                                 </span>
                                 <span className="img-frame">
-                                    {user?.isVip && (
+                                    {data?.isVip && (
                                         <img
                                             className="vip-frame"
                                             src={`${window.cdn}icons/icon_vip_frame_01.png`}

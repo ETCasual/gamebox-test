@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const Index = () => {
     const history = useHistory();
@@ -259,9 +260,9 @@ const Index = () => {
                                         className="email"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href="mailto:support@froyo.games"
+                                        href={getFroyoGamesContactUrl()}
                                     >
-                                        support@froyo.games
+                                        Froyo Games
                                     </a>
                                     . Please note that some or all of the
                                     User-Provided Data may be required in order
@@ -289,9 +290,9 @@ const Index = () => {
                                         className="email"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href="mailto:support@froyo.games"
+                                        href={getFroyoGamesContactUrl()}
                                     >
-                                        support@froyo.games
+                                        Froyo Games
                                     </a>
                                     . We will remove such information within a
                                     reasonable time.
@@ -337,14 +338,14 @@ const Index = () => {
                                 <p className="description">
                                     If you have any questions regarding our
                                     privacy policy or our practices, please
-                                    contact us via email at{" "}
+                                    contact us at{" "}
                                     <a
                                         className="email"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        href="mailto:support@froyo.games"
+                                        href={getFroyoGamesContactUrl()}
                                     >
-                                        support@froyo.games
+                                        Froyo Games
                                     </a>
                                     .
                                 </p>
