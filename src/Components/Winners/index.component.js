@@ -33,6 +33,7 @@ const Index = () => {
             if (winnerData.length <= 0) setNoDataLoaded(true);
             else setNoDataLoaded(false);
         }, 3000);
+
         return () => {
             clearTimeout(timeOutRef.current);
             timeOutRef.current = null;
