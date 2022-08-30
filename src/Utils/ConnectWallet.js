@@ -306,7 +306,7 @@ export async function getNFTTokenIdList(address) {
     return list;
 }
 
-export async function getNFTMetadata(tokenId) {
+export async function getVIPPassNFTMetadata(tokenId) {
     const { web3 } = await getWeb3();
 
     const chainId = await web3.eth.getChainId();
