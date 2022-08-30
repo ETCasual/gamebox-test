@@ -3,12 +3,24 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 4;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+
+    @media (max-height: 700px) {
+        transform: translate(-50%, -50%) scale(0.75, 0.75);
+        top: 50%;
+        left: 50%;
+    }
+    @media (max-height: 700px) {
+        transform: translate(-50%, -50%) scale(0.5, 0.5);
+        top: 50%;
+        left: 50%;
+    }
 
     .fortune-wheel-container {
         margin-top: 4rem;
