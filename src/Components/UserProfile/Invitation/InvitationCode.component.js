@@ -52,7 +52,7 @@ const Invitation = ({ handleBackButton }) => {
                                         Add Friends {"&"} Get Gems
                                     </p>
                                     <p className="subtitle mb-1">
-                                        {`Share your referral code with your friends to receive ${
+                                        {`Share your referral link with your friends to receive ${
                                             config.gemsPerInvite
                                         } Gems (for you and your friend) when they
                                         ${

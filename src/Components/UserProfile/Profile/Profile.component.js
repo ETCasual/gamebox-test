@@ -372,7 +372,7 @@ const Profile = ({
                                             />
                                         </p>
                                         <p className="mb-4 share-text">
-                                            {`Share your referral code with
+                                            {`Share your referral link with
                                                 your friends to receive ${
                                                     config.gemsPerInvite
                                                 } Gems (for you and your friend) when they 

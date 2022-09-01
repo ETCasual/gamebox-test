@@ -71,14 +71,13 @@ const NotificationFriendInvitation = ({
                             {user.id === getInvitationInfo("inviteeId") && (
                                 <>
                                     <p className="title">
-                                        {config.rewardInvitesRank <= 1 
+                                        {config.rewardInvitesRank <= 1
                                             ? "Welcome to GameBox"
-                                            : `You have reached level ${config.rewardInvitesRank}.`
-                                        }
+                                            : `You have reached level ${config.rewardInvitesRank}.`}
                                     </p>
                                     <p className="subtitle">
-                                        Here's a rewards for
-                                        using referral code.
+                                        Here's a rewards for using referral
+                                        link.
                                     </p>
                                 </>
                             )}
@@ -93,10 +92,10 @@ const NotificationFriendInvitation = ({
                                             {getInvitationInfo("inviteeName")}
                                         </span>{" "}
                                         has
-                                        {config.rewardInvitesRank <= 1 
-                                            ? " joined" 
-                                            : ` reached level ${config.rewardInvitesRank}`
-                                        } with your referral code. 
+                                        {config.rewardInvitesRank <= 1
+                                            ? " joined"
+                                            : ` reached level ${config.rewardInvitesRank}`}{" "}
+                                        with your referral link.
                                     </p>
                                 </>
                             )}
