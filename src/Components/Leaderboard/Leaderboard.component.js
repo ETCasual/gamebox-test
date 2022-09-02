@@ -967,6 +967,12 @@ const Leaderboard = ({
                 </div>
 
                 {/* RECAPTCHA MESSAGES */}
+                <p className="abuse-text my-1 my-md-auto">
+                    Players who attempt to cheat or utilise exploits that can
+                    impact gameplay may be banned.
+                </p>
+
+                {/* RECAPTCHA MESSAGES */}
                 <p className="recaptcha-text my-1 my-md-auto">
                     This website is reCAPTCHA-protected, and the Google
                     {""}{" "}

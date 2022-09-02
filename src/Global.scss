@@ -1846,6 +1846,7 @@ html {
 .recaptcha-text {
     padding-top: 0.5em;
     font-size: $fnt-sz-10;
+    color: #999999;
     @media (pointer: none), (pointer: coarse) {
         margin-bottom: 100px;
     }
@@ -1854,6 +1855,18 @@ html {
     }
     a {
         color: #f20086 !important;
+    }
+}
+
+.abuse-text {
+    padding-top: 0.5em;
+    font-size: $fnt-sz-10;
+    color: #999999;
+    @media (pointer: none), (pointer: coarse) {
+        margin-bottom: 100px;
+    }
+    @include media-min($md) {
+        font-size: $fnt-sz-12;
     }
 }
 
