@@ -26,6 +26,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
         clearTimeout(timeOutRef);
         timeOutRef = setTimeout(() => {
             setPrizeData(data);
+            console.log(data);
         }, 500);
 
         return () => clearTimeout(timeOutRef);
@@ -76,12 +77,31 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                         />
                                     </div>
                                     <div className="w-100 p-3 text-center winner-wrapper">
-                                        <img
-                                            className="winner-pic"
-                                            src={e?.winnerAvatarUrl}
-                                            onError={(e) => defaultUserImage(e)}
-                                            alt={e?.winner}
-                                        />
+                                        <div
+                                            className={`profile-img d-inline-flex ${
+                                                e?.isVip ? "is-vip" : ""
+                                            }`}
+                                        >
+                                            <span>
+                                                <img
+                                                    className="img-holder"
+                                                    onError={(err) =>
+                                                        defaultUserImage(err)
+                                                    }
+                                                    src={e?.winnerAvatarUrl}
+                                                    alt="avatar"
+                                                />
+                                            </span>
+                                            <span className="img-frame">
+                                                {e?.isVip && (
+                                                    <img
+                                                        className="vip-frame"
+                                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                        alt="vip-frame"
+                                                    />
+                                                )}
+                                            </span>
+                                        </div>
                                         {user?.username?.toLowerCase() ===
                                             e?.winner?.toLowerCase() && (
                                             <>

@@ -120,12 +120,37 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
 
                                 {/* WINNER INFO */}
                                 <div className="winner-wrapper text-center">
-                                    <img
+                                    {/* <img
                                         className="winner-pic"
                                         src={e?.winnerAvatarUrl}
                                         onError={(e) => defaultUserImage(e)}
                                         alt={e.winner}
-                                    />
+                                    /> */}
+                                    <div
+                                        className={`profile-img d-inline-flex mt-3 ${
+                                            e?.isVip ? "is-vip" : ""
+                                        }`}
+                                    >
+                                        <span>
+                                            <img
+                                                className="img-holder"
+                                                onError={(err) =>
+                                                    defaultUserImage(err)
+                                                }
+                                                src={e?.winnerAvatarUrl}
+                                                alt="avatar"
+                                            />
+                                        </span>
+                                        <span className="img-frame">
+                                            {e?.isVip && (
+                                                <img
+                                                    className="vip-frame"
+                                                    src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                    alt="vip-frame"
+                                                />
+                                            )}
+                                        </span>
+                                    </div>
                                     {/* TODO: To change the checking to not use username */}
                                     {user.username.toLowerCase() ===
                                         e.winner.toLowerCase() && (

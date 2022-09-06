@@ -82,17 +82,42 @@
                 background: linear-gradient(144deg, #302f2f 0%, #0b0b0b 100%);
                 box-shadow: 0px 3px 6px #00000029;
                 border-radius: 10px;
-                .winner-pic {
-                    position: absolute;
-                    top: -7px;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    border: 7px solid #282828;
-                    background-color: #282828;
-                    border-radius: 100%;
-                    width: 6.438rem;
-                    height: 6.438rem;
-                    object-fit: contain;
+                
+                .profile-img {
+                    display: block;
+                    .img-holder {
+                        position: relative;
+                        width: 80px;
+                        height: 80px;
+                        border: 2px solid #2a2a2a;
+                        border-radius: 100%;
+                        object-fit: contain;
+            
+                        @include media-min($md) {
+                            width: 100px;
+                            height: 100px;
+                        }
+                    }
+                    .img-frame {
+                        position: absolute;
+                        width: 86px;
+                        height: 86px;
+                        @include media-min($md) {
+                            width: 106px;
+                            height: 106px;
+                        }
+            
+                        .vip-frame {
+                            width: 100%;
+                            height: 100%;
+                            margin-left: -6px;
+                        }
+                    }
+                }
+                .is-vip {
+                    .img-holder {
+                        border: 0px;
+                    }
                 }
                 .winner-name {
                     font-size: $fnt-sz-14;

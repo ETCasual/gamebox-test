@@ -5,38 +5,53 @@
     @include media-min($xs) {
         margin-top: 6rem;
     }
-    .profile-info {
-        img {
+
+    .profile-img {
+        display: block;
+        .img-holder {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #2a2a2a;
             border-radius: 100%;
-            width: 6.813rem;
-            height: 6.813rem;
-            @include media-min($md) {
-                width: 9.375rem;
-                height: 9.375rem;
-            }
             object-fit: contain;
-            border: 6px solid #2a2a2a;
-        }
-        .vip-frame {
-            border: 6px solid #ff3399;
-        }
-        h2 {
-            font-size: $fnt-sz-14;
+
             @include media-min($md) {
-                font-size: $fnt-sz-18;
+                width: 100px;
+                height: 100px;
             }
-            font-weight: $fnt-wgt-600;
-            text-transform: capitalize;
         }
-        p {
-            font-size: $fnt-sz-12;
+        .img-frame {
+            position: absolute;
+            width: 86px;
+            height: 86px;
             @include media-min($md) {
-                font-size: $fnt-sz-14;
+                width: 106px;
+                height: 106px;
             }
-            color: #868686;
+
+            .vip-frame {
+                width: 100%;
+                height: 100%;
+                margin-left: -3px;
+            }
         }
     }
-    
+    .is-vip {
+        .img-holder {
+            border: 0px;
+        }
+    }
+
+    .player-name {
+        font-size: $fnt-sz-18;
+        font-weight: $fnt-wgt-600;
+        @include media-min($md) {
+            font-size: $fnt-sz-20;
+            
+        }
+    }
+
     .multiplier {
         background: linear-gradient(120deg, #302f2f 0%, #0b0b0b 100%);
         border-radius: 10px;
