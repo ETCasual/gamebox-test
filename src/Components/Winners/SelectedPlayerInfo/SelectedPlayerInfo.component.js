@@ -58,8 +58,44 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                             {/* PLAYER, LEVEL, EXP & MULTIPLIER */}
                             <div className="col-12 mb-2 mb-md-0">
                                 <div className="row">
+                                    <div
+                                        className={`profile-img d-inline-flex m-auto ${
+                                            playerDetailsData?.isVip
+                                                ? "is-vip"
+                                                : ""
+                                        }`}
+                                    >
+                                        <span>
+                                            <img
+                                                className="img-holder"
+                                                onError={(e) =>
+                                                    defaultUserImage(e)
+                                                }
+                                                src={
+                                                    playerDetailsData
+                                                        ? playerDetailsData.picture
+                                                        : `${window.cdn}icons/icon_profile.svg`
+                                                }
+                                                alt="avatar"
+                                            />
+                                        </span>
+                                        <span className="img-frame">
+                                            {playerDetailsData?.isVip && (
+                                                <img
+                                                    className="vip-frame"
+                                                    src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                    alt="vip-frame"
+                                                />
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div className="col-12 player-name">
+                                        <p className="text-center mt-3 mb-1">
+                                            {playerDetailsData.name}
+                                        </p>
+                                    </div>
                                     {/* PLAYER INFO */}
-                                    <div className="col-12 text-center">
+                                    {/* <div className="col-12 text-center">
                                         <div className="profile-info">
                                             <img
                                                 className={`${
@@ -77,7 +113,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                 {playerDetailsData.name}
                                             </h2>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     {/* PLAYER MULTIPLIER */}
                                     {enableLevel && (
                                         <div className="col-12 mt-3">
