@@ -26,7 +26,6 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
         clearTimeout(timeOutRef);
         timeOutRef = setTimeout(() => {
             setPrizeData(data);
-            console.log(data);
         }, 500);
 
         return () => clearTimeout(timeOutRef);
