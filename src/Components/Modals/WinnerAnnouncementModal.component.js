@@ -88,9 +88,8 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                         clickable: true,
                         dynamicBullets: true,
                         renderBullet: (index, className) => {
-                            // TODO: USE STATIC IMG IN SMALL THUMBNAIL
                             return `<div class="${className} d-flex align-items-center justify-content-center">
-                            <img src="${prizeData[index]?.picture}" alt="prize"/>
+                            <img src="${prizeData[index]?.picture2}" alt="prize"/>
                         </div>`;
                         },
                     }}
