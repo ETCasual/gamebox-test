@@ -42,7 +42,6 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
             clearTimeout(timeOutRef);
             timeOutRef = setTimeout(() => {
                 setPrizeData(data);
-                console.warn(data);
             }, 500);
         }
 
