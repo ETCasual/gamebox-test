@@ -108,6 +108,10 @@ const Rewards = () => {
     };
 
     const validClaimDate = (claimDate) => {
+        // 'claimDate' 0 = no claim date is specific
+        if (claimDate <= 0) {
+            return false;
+        }
         const today = new Date(nowTimeStamp()).toLocaleDateString();
         const _claimDated = new Date(claimDate * 1000).toLocaleDateString();
         if (today < _claimDated) return true;
