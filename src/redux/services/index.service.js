@@ -1989,7 +1989,6 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
             }
         }
     });
-    console.warn(winnerAnnouncementNotificationList);
     return winnerAnnouncementNotificationList;
 }
 
