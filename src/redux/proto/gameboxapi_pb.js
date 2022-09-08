@@ -32329,7 +32329,8 @@ proto.api.gamebox.Notification.toObject = function(includeInstance, msg) {
     canClaimDate: jspb.Message.getFieldWithDefault(msg, 19, 0),
     gameId: jspb.Message.getFieldWithDefault(msg, 20, 0),
     seen: jspb.Message.getFieldWithDefault(msg, 21, false),
-    createdOn: jspb.Message.getFieldWithDefault(msg, 22, 0)
+    createdOn: jspb.Message.getFieldWithDefault(msg, 22, 0),
+    isVip: jspb.Message.getFieldWithDefault(msg, 23, false)
   };
 
   if (includeInstance) {
@@ -32453,6 +32454,10 @@ proto.api.gamebox.Notification.deserializeBinaryFromReader = function(msg, reade
     case 22:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setCreatedOn(value);
+      break;
+    case 23:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsVip(value);
       break;
     default:
       reader.skipField();
@@ -32634,6 +32639,13 @@ proto.api.gamebox.Notification.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeInt64(
       22,
+      f
+    );
+  }
+  f = message.getIsVip();
+  if (f) {
+    writer.writeBool(
+      23,
       f
     );
   }
@@ -32969,6 +32981,23 @@ proto.api.gamebox.Notification.prototype.getCreatedOn = function() {
 /** @param {number} value */
 proto.api.gamebox.Notification.prototype.setCreatedOn = function(value) {
   jspb.Message.setProto3IntField(this, 22, value);
+};
+
+
+/**
+ * optional bool is_vip = 23;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.api.gamebox.Notification.prototype.getIsVip = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 23, false));
+};
+
+
+/** @param {boolean} value */
+proto.api.gamebox.Notification.prototype.setIsVip = function(value) {
+  jspb.Message.setProto3BooleanField(this, 23, value);
 };
 
 
