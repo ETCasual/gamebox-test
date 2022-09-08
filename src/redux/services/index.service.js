@@ -1921,8 +1921,7 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
                         nftContractAddress: e.getNftContractAddress(),
                         nftTokenId: e.getNftTokenId(),
                         canClaimDate: e.getCanClaimDate(),
-                        // TODO: replace with e.getIsVIP()
-                        isVip: true,
+                        isVip: e.getIsVip(),
                     },
                 ],
             });
@@ -1954,8 +1953,7 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
                     nftContractAddress: e.getNftContractAddress(),
                     nftTokenId: e.getNftTokenId(),
                     canClaimDate: e.getCanClaimDate(),
-                    // TODO: replace with e.getIsVIP()
-                    isVip: true,
+                    isVip: e.getIsVip(),
                 });
             } else {
                 winnerAnnouncementNotificationList.push({
@@ -1984,14 +1982,14 @@ export async function getWinnerAnnouncementNotifications(user, notiType) {
                             nftContractAddress: e.getNftContractAddress(),
                             nftTokenId: e.getNftTokenId(),
                             canClaimDate: e.getCanClaimDate(),
-                            // TODO: replace with e.getIsVIP()
-                            isVip: true,
+                            isVip: e.getIsVip(),
                         },
                     ],
                 });
             }
         }
     });
+    console.warn(winnerAnnouncementNotificationList);
     return winnerAnnouncementNotificationList;
 }
 
