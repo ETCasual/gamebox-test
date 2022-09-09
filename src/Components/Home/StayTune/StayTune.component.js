@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import getToken from "Utils/GetToken";
+import { getToken } from "Utils/GetToken";
 import GameEndModal from "Components/Modals/GameEnd.modal";
 import PauseMenuModal from "Components/Modals/PauseMenuModal";
 import GameQuitModal from "Components/Modals/GameQuit.modal";

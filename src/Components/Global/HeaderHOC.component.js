@@ -11,7 +11,7 @@ import loadResetNotificationNumber from "redux/thunks/RestNotificationNumber.thu
 import loadLeaderboardHistory from "redux/thunks/LeaderboardHistory.thunk";
 import { loadNotifications } from "redux/thunks/Notifcations.thunk";
 
-import getToken from "Utils/GetToken";
+import { getToken } from "Utils/GetToken";
 import { useHistory } from "react-router-dom";
 
 const HeaderHOC = () => {
@@ -67,9 +67,7 @@ const HeaderHOC = () => {
             setNotificationData(
                 filteredData?.slice(
                     0,
-                    notificationNumber.count <= 0
-                        ? 5
-                        : notificationNumber.count
+                    notificationNumber.count <= 0 ? 5 : notificationNumber.count
                 )
             );
             setIsNotificationShown(true);

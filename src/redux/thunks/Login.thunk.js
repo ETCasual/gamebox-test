@@ -15,6 +15,7 @@ import {
     loginUser,
     userSignIn,
     updateWalletAddress,
+    refreshUserToken,
 } from "redux/services/index.service";
 import { handleConnectWallet } from "Utils/ConnectWallet";
 import inviteFriendsReward from "Utils/InviteFriends";
@@ -23,6 +24,28 @@ import inviteFriendsReward from "Utils/InviteFriends";
 export function loadLoginUserWithToken() {
     return async (dispatch) => {
         try {
+            // Check is token is cached
+            const token = localStorage
+                .getItem("froyo-authenticationtoken")
+                ?.replaceAll('"', "");
+            if (!token) {
+                throw new Error({ code: 7, message: "Token not found" });
+            }
+
+            const { id_token, refresh_token } = await refreshUserToken();
+            if (id_token) {
+                localStorage.setItem(
+                    "froyo-authenticationtoken",
+                    `"${id_token}"`
+                );
+                localStorage.setItem(
+                    "froyo-refreshtoken",
+                    `"${refresh_token}"`
+                );
+            } else {
+                throw new Error({ code: 7, message: "Invalid token" });
+            }
+
             const user = await userSignIn();
             if (user.id) {
                 sessionStorage.removeItem("errorType");
@@ -116,12 +139,16 @@ export function loadLoginUserWithToken() {
 export function loadLogin(payload, setLoginError, history) {
     return async (dispatch) => {
         try {
-            const { id_token } = await loginUser(payload);
+            const { id_token, refresh_token } = await loginUser(payload);
             if (id_token) {
                 setLoginError("");
                 localStorage.setItem(
                     "froyo-authenticationtoken",
                     `"${id_token}"`
+                );
+                localStorage.setItem(
+                    "froyo-refreshtoken",
+                    `"${refresh_token}"`
                 );
                 const user = await userSignIn();
                 if (user.id) {
@@ -191,6 +218,104 @@ export function loadLogin(payload, setLoginError, history) {
                         : "Oops! Something went wrong. Please try again."
                 );
             }
+        }
+    };
+}
+
+export function loadRefreshUserToken() {
+    // Check is token is cached
+    const token = localStorage
+        .getItem("froyo-authenticationtoken")
+        ?.replaceAll('"', "");
+    if (!token) return;
+
+    return async (dispatch) => {
+        try {
+            const user = await refreshUserToken();
+            if (user.id) {
+                sessionStorage.removeItem("errorType");
+                dispatch({
+                    type: LOGIN_SUCCESS,
+                    payload: user,
+                });
+
+                const _user = await getUserAccountInfoFroyo();
+                if (_user.id) {
+                    dispatch({
+                        type: UPDATE_USER_SETTINGS,
+                        payload: await compareUserDetails(user, _user),
+                    });
+                }
+
+                const wallet = await getUserWalletInfoFroyo();
+                if (
+                    wallet.address &&
+                    wallet.address !== user.bindWalletAddress
+                ) {
+                    await updateWalletAddress(wallet.address, user.id);
+                }
+            } else {
+                const _user = await getUserAccountInfoFroyo();
+                if (_user.id) {
+                    const id = await addUser(_user);
+                    if (id !== "-1") {
+                        localStorage.setItem("isNewUser", true);
+                        const user = await userSignIn();
+                        if (user.id) {
+                            sessionStorage.removeItem("errorType");
+                            inviteFriendsReward(user, dispatch);
+                            dispatch({
+                                type: LOGIN_SUCCESS,
+                                payload: user,
+                            });
+                        }
+
+                        const wallet = await getUserWalletInfoFroyo();
+                        if (
+                            wallet.address &&
+                            wallet.address !== user.bindWalletAddress
+                        ) {
+                            await updateWalletAddress(wallet.address, user.id);
+                        }
+                    }
+                }
+            }
+        } catch (error) {
+            localStorage.removeItem("froyo-authenticationtoken");
+            dispatch({
+                type: LOG_OUT,
+            });
+            if (error.code === 7) {
+                console.log(error.message);
+                dispatch({
+                    type: LOGIN_STATUS,
+                    payload: {
+                        loading: false,
+                        ready: false,
+                        noAuth: true,
+                    },
+                });
+                dispatch({
+                    type: SHOW_TOAST,
+                    payload: {
+                        message: "Session Expired! Please login again.",
+                    },
+                });
+            } else if (error.code === 3) {
+                console.log(error.code, error.message);
+                dispatch({
+                    type: LOGIN_ERROR,
+                    payload: {
+                        dispatch,
+                        errorType: error.message,
+                    },
+                });
+            } else if (error.code === 13)
+                console.log(
+                    "LOGIN USER THUNK: No Result found!",
+                    error.message
+                );
+            else console.log(error.message);
         }
     };
 }
