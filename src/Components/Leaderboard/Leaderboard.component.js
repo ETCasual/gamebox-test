@@ -35,7 +35,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import showAdsBeforeGame from "Utils/showAdsBeforeGame";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
-import getToken from "Utils/GetToken";
+import { getToken } from "Utils/GetToken";
 import { isScrolledIntoView } from "Utils/ScrollHelper";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";

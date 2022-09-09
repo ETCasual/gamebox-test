@@ -46,7 +46,7 @@ import axios from "axios";
 import _ from "lodash";
 import { monthYearDict, PRIZE_CATEGORY_NAME } from "Utils/Enums";
 import { saveCookie, getCookie } from "Utils/ManageCookies";
-import getToken from "Utils/GetToken";
+import { getToken, getRefreshToken } from "Utils/GetToken";
 
 const {
     GameboxApiPromiseClient,
@@ -171,6 +171,27 @@ export async function getUserWalletInfoFroyo() {
         `${process.env.REACT_APP_FROYO_API_ENDPOINT}get-player-wallet-connect`,
         {
             chainId: process.env.REACT_APP_FROYO_CHAIN_ID,
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+    return data;
+}
+
+//
+//      FROYO API - REFRESH USER TOKEN
+//
+export async function refreshUserToken() {
+    const token = getToken();
+    const refreshToken = getRefreshToken();
+
+    const { data } = await axios.post(
+        `${process.env.REACT_APP_FROYO_API_ENDPOINT}token-refresh`,
+        {
+            refresh_token: refreshToken,
         },
         {
             headers: {

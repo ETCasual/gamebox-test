@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import Navigation from "Components/Global/Navigation.component";
 
-import getToken from "Utils/GetToken";
+import { getToken } from "Utils/GetToken";
 
 const NavigationHOC = withRouter(({ location }) => {
     const { user } = useSelector((state) => state.userData);

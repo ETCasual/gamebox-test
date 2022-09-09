@@ -41,7 +41,10 @@ import loadNotificationNumber from "redux/thunks/NotifcationNumber.thunk";
 import { loadInitNotifications } from "redux/thunks/Notifcations.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
 import { getExchangeRate } from "redux/services/index.service";
-import { loadConnectWalletAuto } from "redux/thunks/Login.thunk";
+import {
+    loadConnectWalletAuto,
+    loadLoginUserWithToken,
+} from "redux/thunks/Login.thunk";
 import loadBlockChainNetworks from "redux/thunks/BlockChainNetworks.thunk";
 import loadAvailableSpins from "redux/thunks/AvailableSpins.thunk";
 import loadCheckGiveaway from "redux/thunks/Giveaway.thunk";
@@ -92,9 +95,11 @@ const App = () => {
     useEffect(() => {
         document.addEventListener("visibilitychange", handleLoadPrize);
 
-        function handleLoadPrize() {
-            if (document.visibilityState === "visible" && user.id)
+        async function handleLoadPrize() {
+            if (document.visibilityState === "visible" && user.id) {
+                await dispatch(loadLoginUserWithToken());
                 dispatch(loadPrizes());
+            }
         }
 
         // if (process.env.REACT_APP_NODE_ENV === "production" && consoleOpen) {

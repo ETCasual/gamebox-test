@@ -6,7 +6,7 @@ import Password from "Pages/Password.page";
 
 import { loadLoginStatus } from "redux/thunks/Login.thunk";
 
-import getToken from "Utils/GetToken";
+import { getToken } from "Utils/GetToken";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
     const { user, loginStatus } = useSelector((state) => state.userData);
