@@ -33,7 +33,10 @@ import LaunchGameMenuModalPopup from "Components/Modals/LaunchGameMenu.modal";
 import { defaultUserImage } from "Utils/DefaultImage";
 import getPoolTickets from "Utils/PoolTickets";
 import showAdsBeforeGame from "Utils/showAdsBeforeGame";
-import { convertSecondsToHours } from "Utils/TimeConversion";
+import {
+    convertSecondsToHours,
+    convertSecondsForCalculation,
+} from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import { getToken } from "Utils/GetToken";
 import { isScrolledIntoView } from "Utils/ScrollHelper";
@@ -123,6 +126,8 @@ const Leaderboard = ({
         closeButtonHandling: "",
     });
 
+    const [isDisableButton, setIsDisableButton] = useState(false);
+
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
     useEffect(() => {
@@ -203,6 +208,19 @@ const Leaderboard = ({
 
             setTimer(finalTimeRef);
 
+            if (
+                convertSecondsForCalculation(
+                    data?.gameInfo?.length > 0
+                        ? data?.gameInfo[0]?.endTimeStamp * 1000
+                        : 0,
+                    config.offsetTimestamp ? config.offsetTimestamp : 0
+                ) <= BUFFER_END_TIME
+            ) {
+                setIsDisableButton(true);
+            } else {
+                setIsDisableButton(false);
+            }
+
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
 
@@ -249,25 +267,13 @@ const Leaderboard = ({
 
     useEffect(() => {
         let isDisabled = false;
-        let timeRemaining = timer.split(" ");
-        if (
-            timeRemaining[timeRemaining.length - 2] === "0m" &&
-            (timeRemaining[timeRemaining.length - 3] === "0h" ||
-                timeRemaining[timeRemaining.length - 3] === "")
-        ) {
-            if (
-                timeRemaining[timeRemaining.length - 1].length === 2 &&
-                timeRemaining[timeRemaining.length - 1] <= `${BUFFER_END_TIME}s`
-            ) {
-                isDisabled = true;
-            }
-        } else if (timer === "Calculating" || timer === "Ended") {
+        if (timer === "Calculating" || timer === "Ended" || isDisableButton) {
             isDisabled = true;
         } else {
             isDisabled = false;
         }
         setIsGameAvailable(!isDisabled);
-    }, [timer]);
+    }, [timer, isDisableButton]);
 
     const onLeaderboardScrolling = (evt) => {
         let isInsideElement = false;
