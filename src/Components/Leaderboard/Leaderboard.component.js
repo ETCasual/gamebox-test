@@ -39,6 +39,7 @@ import { getToken } from "Utils/GetToken";
 import { isScrolledIntoView } from "Utils/ScrollHelper";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
+import { BUFFER_END_TIME } from "Utils/TournamentEndTime";
 
 const Leaderboard = ({
     data,
@@ -248,14 +249,22 @@ const Leaderboard = ({
 
     useEffect(() => {
         let isDisabled = false;
-        switch (timer) {
-            case "Calculating":
-            case "Ended":
-            case "0d 0h 0m 0s":
+        let timeRemaining = timer.split(" ");
+        if (
+            timeRemaining[timeRemaining.length - 2] === "0m" &&
+            (timeRemaining[timeRemaining.length - 3] === "0h" ||
+                timeRemaining[timeRemaining.length - 3] === "")
+        ) {
+            if (
+                timeRemaining[timeRemaining.length - 1].length === 2 &&
+                timeRemaining[timeRemaining.length - 1] <= `${BUFFER_END_TIME}s`
+            ) {
                 isDisabled = true;
-                break;
-            default:
-                isDisabled = false;
+            }
+        } else if (timer === "Calculating" || timer === "Ended") {
+            isDisabled = true;
+        } else {
+            isDisabled = false;
         }
         setIsGameAvailable(!isDisabled);
     }, [timer]);
@@ -361,7 +370,9 @@ const Leaderboard = ({
                             cgId: data.cgId,
                             gameId: currentGameDetails.gameId,
                             gameDuration: 180, //in seconds
-                            tournamentEndTime: data?.gameInfo[0]?.endTimeStamp,
+                            tournamentEndTime:
+                                data?.gameInfo[0]?.endTimeStamp -
+                                BUFFER_END_TIME,
                         })
                     );
                     setGameData(response.data);
