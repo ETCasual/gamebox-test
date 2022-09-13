@@ -9,6 +9,8 @@ import store from "redux/store";
 import App from "./App";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
+import "./i18n";
+
 // import * as serviceWorker from "./serviceWorker";
 const recaptchaSiteKey = process.env.REACT_APP_RECAPTCHA_SITEKEY;
 
@@ -19,7 +21,9 @@ ReactDOM.render(
     // REDUX STORE PROVIDER
     <Provider store={store}>
         <GoogleReCaptchaProvider reCaptchaKey={recaptchaSiteKey}>
-            <App />
+            <React.Suspense fallback="loading">
+                <App />
+            </React.Suspense>
         </GoogleReCaptchaProvider>
     </Provider>,
     document.getElementById("root")

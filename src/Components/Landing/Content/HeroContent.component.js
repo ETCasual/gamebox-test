@@ -1,9 +1,14 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HeroContent = ({ setLoginModal, setRegistrationInstructionModal }) => {
+    const { t } = useTranslation();
+
     return (
         <>
-            <p className="intro-text mb-2">Hello and welcome!</p>
+            <p className="intro-text mb-2">{t("hero_content.welcome")}</p>
+
+            {/* <p className="intro-text mb-2">Hello and welcome!</p> */}
             <h1 className="title-text">Discover, Explore, and Collect NFTs!</h1>
             <p className="subtitle-text mt-2 mb-5">
                 Discover a wide selection of available NFTs. Now is your chance
