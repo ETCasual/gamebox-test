@@ -64,4 +64,17 @@ const convertSecondsTo24HoursBase = (endTimestamp, offsetInMs) => {
     }
 };
 
-export { convertSecondsToHours, convertSecondsTo24HoursBase };
+const convertSecondsForCalculation = (endTimestamp, offsetInMs) => {
+    const date_future = new Date(endTimestamp);
+    const date_now = Date.now() + offsetInMs;
+
+    let seconds = Math.floor((date_future - date_now) / 1000);
+
+    return seconds;
+};
+
+export {
+    convertSecondsToHours,
+    convertSecondsTo24HoursBase,
+    convertSecondsForCalculation,
+};

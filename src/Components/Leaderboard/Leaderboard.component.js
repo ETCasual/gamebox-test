@@ -33,12 +33,16 @@ import LaunchGameMenuModalPopup from "Components/Modals/LaunchGameMenu.modal";
 import { defaultUserImage } from "Utils/DefaultImage";
 import getPoolTickets from "Utils/PoolTickets";
 import showAdsBeforeGame from "Utils/showAdsBeforeGame";
-import { convertSecondsToHours } from "Utils/TimeConversion";
+import {
+    convertSecondsToHours,
+    convertSecondsForCalculation,
+} from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import { getToken } from "Utils/GetToken";
 import { isScrolledIntoView } from "Utils/ScrollHelper";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
+import { BUFFER_END_TIME } from "Utils/TournamentEndTime";
 
 const Leaderboard = ({
     data,
@@ -122,6 +126,8 @@ const Leaderboard = ({
         closeButtonHandling: "",
     });
 
+    const [isDisableButton, setIsDisableButton] = useState(false);
+
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
     useEffect(() => {
@@ -202,6 +208,19 @@ const Leaderboard = ({
 
             setTimer(finalTimeRef);
 
+            if (
+                convertSecondsForCalculation(
+                    data?.gameInfo?.length > 0
+                        ? data?.gameInfo[0]?.endTimeStamp * 1000
+                        : 0,
+                    config.offsetTimestamp ? config.offsetTimestamp : 0
+                ) <= BUFFER_END_TIME
+            ) {
+                setIsDisableButton(true);
+            } else {
+                setIsDisableButton(false);
+            }
+
             if (finalTimeRef === "Ended") countDownTimerEnded();
         }, 1000);
 
@@ -248,17 +267,13 @@ const Leaderboard = ({
 
     useEffect(() => {
         let isDisabled = false;
-        switch (timer) {
-            case "Calculating":
-            case "Ended":
-            case "0d 0h 0m 0s":
-                isDisabled = true;
-                break;
-            default:
-                isDisabled = false;
+        if (timer === "Calculating" || timer === "Ended" || isDisableButton) {
+            isDisabled = true;
+        } else {
+            isDisabled = false;
         }
         setIsGameAvailable(!isDisabled);
-    }, [timer]);
+    }, [timer, isDisableButton]);
 
     const onLeaderboardScrolling = (evt) => {
         let isInsideElement = false;
@@ -361,7 +376,9 @@ const Leaderboard = ({
                             cgId: data.cgId,
                             gameId: currentGameDetails.gameId,
                             gameDuration: 180, //in seconds
-                            tournamentEndTime: data?.gameInfo[0]?.endTimeStamp,
+                            tournamentEndTime:
+                                data?.gameInfo[0]?.endTimeStamp -
+                                BUFFER_END_TIME,
                         })
                     );
                     setGameData(response.data);
