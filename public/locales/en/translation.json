@@ -1,9 +1,14 @@
 {
     "hero_content": {
-        "welcome": "Hello and welcome!"
+        "welcome": "Hello and welcome!",
+        "title": "Discover, Explore, and Collect NFTs!",
+        "subtitle": "Discover a wide selection of available NFTs. Now is your chance to explore and collect them while they are still available.",
+        "btn": {
+            "register": "REGISTER NOW!"
+        }
     },
-    "description": {
-        "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
-        "part2": "Switch language between english and german using buttons above."
+    "how_it_works": {
+        "title": "HOW DOES IT WORK?",
+        "subtitle": "Simply follow these three simple steps."
     }
 }

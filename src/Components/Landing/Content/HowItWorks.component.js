@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HowItWorks = ({ workRef, workCardRef }) => {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid" id="how-it-works">
             <div
@@ -8,12 +11,10 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                 ref={workRef}
             >
                 {/* HOW DOES IT WORK */}
-                <h1 className="title">HOW DOES IT WORK?</h1>
+                {/* <h1 className="title">{t("how_it_works.title")}</h1> */}
 
                 {/* FOLLOW STEPS */}
-                <p className="subtitle">
-                    Simply follow these three simple steps.
-                </p>
+                {/* <p className="subtitle">{t("how_it_works.subtitle")}</p> */}
 
                 {/* STEP 1 2 3*/}
                 <div className="col-12 mt-3 px-0">
