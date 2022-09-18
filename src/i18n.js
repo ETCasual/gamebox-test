@@ -7,7 +7,7 @@ i18n.use(I18NextHttpBackend)
     .use(initReactI18next)
     .init({
         fallbackLng: "en",
-        debug: true,
+        debug: process.env.REACT_APP_NODE_ENV !== "production",
         interpolation: {
             escapeValue: false,
         },

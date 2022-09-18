@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
             <div className="modal-body-bind-wallet position-relative p-4">
@@ -15,9 +18,7 @@ const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
                 {/* <h5 className="title mb-4">Please Bind Your Wallet</h5> */}
                 <div className="col-12 my-3 px-0">
                     <p className="subtitle">
-                        Your Froyo Account is not currently bound to a wallet.
-                        Please follow these simple steps to successfully connect
-                        your wallet to Gamebox.
+                        {t("connect_wallet.bind_wallet_guide.subtitle")}
                     </p>
                     <ul className="my-4 list-unstyled">
                         <li className="row mb-2">
@@ -26,17 +27,23 @@ const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    Please log in to your account on{" "}
-                                    <a
-                                        className="highlight-url"
-                                        href={
-                                            process.env.REACT_APP_FROYO_WEB_URL
-                                        }
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {process.env.REACT_APP_FROYO_WEB_URL}
-                                    </a>
+                                    <Trans i18nKey="connect_wallet.bind_wallet_guide.step_1">
+                                        Please log in to your account on
+                                        <a
+                                            className="highlight-url"
+                                            href={
+                                                process.env
+                                                    .REACT_APP_FROYO_WEB_URL
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {{
+                                                url: process.env
+                                                    .REACT_APP_FROYO_WEB_URL,
+                                            }}
+                                        </a>
+                                    </Trans>
                                 </p>
                             </div>
                         </li>
@@ -47,9 +54,9 @@ const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    Ensure you have the Metamask browser
-                                    extension installed and set up. You can also
-                                    use any WalletConnect-compatible wallet.
+                                    {t(
+                                        "connect_wallet.bind_wallet_guide.step_2"
+                                    )}
                                 </p>
                             </div>
                         </li>
@@ -60,8 +67,9 @@ const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    Bind your wallet to your Froyo Games account
-                                    by signing a message with your wallet.
+                                    {t(
+                                        "connect_wallet.bind_wallet_guide.step_3"
+                                    )}
                                 </p>
                             </div>
                         </li>
@@ -72,9 +80,9 @@ const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    Once successfully bound, your wallet should
-                                    be connected to your account when accessing
-                                    the Gamebox platform.
+                                    {t(
+                                        "connect_wallet.bind_wallet_guide.step_4"
+                                    )}
                                 </p>
                             </div>
                         </li>

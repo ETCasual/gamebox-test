@@ -11,10 +11,10 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                 ref={workRef}
             >
                 {/* HOW DOES IT WORK */}
-                {/* <h1 className="title">{t("how_it_works.title")}</h1> */}
+                <h1 className="title">{t("landing.how_it_works.title")}</h1>
 
                 {/* FOLLOW STEPS */}
-                {/* <p className="subtitle">{t("how_it_works.subtitle")}</p> */}
+                <p className="subtitle">{t("landing.how_it_works.subtitle")}</p>
 
                 {/* STEP 1 2 3*/}
                 <div className="col-12 mt-3 px-0">
@@ -34,13 +34,14 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                                     />
                                 </div>
                                 <div className="w-100 text-left">
-                                    <div className="step-text mb-2">STEP 1</div>
+                                    <div className="step-text mb-2">
+                                        {t("landing.how_it_works.step_1.step")}
+                                    </div>
                                     <div className="title mb-2">
-                                        Discover NFTs
+                                        {t("landing.how_it_works.step_1.title")}
                                     </div>
                                     <div className="description">
-                                        A diverse set of NFTs is waiting to be
-                                        discovered.
+                                        {t("landing.how_it_works.step_1.desc")}
                                     </div>
                                 </div>
                             </div>
@@ -60,14 +61,14 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                                     />
                                 </div>
                                 <div className="w-100 text-left text-wrapper">
-                                    <div className="step-text mb-2">STEP 2</div>
+                                    <div className="step-text mb-2">
+                                        {t("landing.how_it_works.step_2.step")}
+                                    </div>
                                     <div className="title mb-2">
-                                        Compete in tournaments
+                                        {t("landing.how_it_works.step_2.title")}
                                     </div>
                                     <div className="description">
-                                        Compete against players from around the
-                                        world to see who can get the highest
-                                        score.
+                                        {t("landing.how_it_works.step_2.desc")}
                                     </div>
                                 </div>
                             </div>
@@ -88,11 +89,14 @@ const HowItWorks = ({ workRef, workCardRef }) => {
                                     />
                                 </div>
                                 <div className="w-100 text-left text-wrapper">
-                                    <div className="step-text mb-2">STEP 3</div>
-                                    <div className="title mb-2">Win NFTs</div>
+                                    <div className="step-text mb-2">
+                                        {t("landing.how_it_works.step_3.step")}
+                                    </div>
+                                    <div className="title mb-2">
+                                        {t("landing.how_it_works.step_3.title")}
+                                    </div>
                                     <div className="description">
-                                        Collect tickets to be eligible to win an
-                                        NFT of your choice.
+                                        {t("landing.how_it_works.step_3.desc")}
                                     </div>
                                 </div>
                             </div>

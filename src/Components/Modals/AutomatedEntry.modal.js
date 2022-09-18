@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import _ from "lodash";
 
 // COMPONENTS
@@ -11,6 +12,8 @@ import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 
 const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
+    const { t } = useTranslation();
+
     const location = useLocation();
 
     const { automatedEntryTicket } = useSelector(
@@ -143,7 +146,10 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                 <div className="w-100 p-2 d-flex flex-column">
                                     <div className="prize-text mb-auto">
                                         <p className="card-subtitle m-auto pb-1 pb-sm-2">
-                                            Token ID: {data?.prizeSubtitle}
+                                            {t(
+                                                "automated_entry_modal.token_id",
+                                                { value: data?.prizeSubtitle }
+                                            )}
                                         </p>
                                         <p className="card-title m-auto pb-1 pb-sm-3">
                                             {data?.prizeTitle}
@@ -156,14 +162,16 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                             </div>
                             <div className="countdown d-flex flex-row align-items-center justify-content-center my-2 my-sm-4 mx-auto">
                                 <p className="countdown-text mb-0 mr-2">
-                                    Draw starts in
+                                    {t("automated_entry_modal.draw_start_in")}
                                 </p>
                                 <p className="mob-text mb-0">{timer}</p>
                             </div>
 
                             <div className="text-center my-2 my-sm-4">
                                 <p className="tickets-label mb-1 mb-sm-2">
-                                    Tickets you have collected
+                                    {t(
+                                        "automated_entry_modal.tickets_collected"
+                                    )}
                                 </p>
                                 <p className="tickets-value d-flex flex-row align-items-center justify-content-center mx-auto">
                                     <span className="tickets mob-text mr-2">
@@ -185,24 +193,20 @@ const AutomatedEntryModalPopup = ({ data, handleInstructionsCloseBtn }) => {
                                     }}
                                     onClick={handleInstructionsCloseBtn}
                                 >
-                                    START EARNING TICKETS
+                                    {t("automated_entry_modal.btn.start_earn")}
                                 </Link>
                             </div>
                             <div className="line" />
                             <p className="instructions-title text-center mb-1 mb-sm-3">
-                                How to win tickets for the Daily Draw?
+                                {t("automated_entry_modal.instruction_title")}
                             </p>
                             <p className="instructions-subtitle text-center mb-2 mb-sm-3">
-                                Participate in any tournament throughout the
-                                platform before the timer runs out.
-                                <br />
-                                Tickets won from the tournaments will
-                                automatically be added into the Daily Draw pool.
-                                It’s that easy.
+                                {t(
+                                    "automated_entry_modal.instruction_subtitle"
+                                )}
                             </p>
                             <p className="instructions-tip text-center mb-0 mb-sm-4">
-                                Tip: Earn more tickets by “spent gems” to
-                                increase your ticket count.
+                                {t("automated_entry_modal.instruction_tip")}
                             </p>
                         </div>
                     </div>

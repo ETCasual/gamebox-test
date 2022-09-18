@@ -172,11 +172,12 @@
             .bottom {
                 p {
                     font-size: $fnt-sz-12;
-                    span {
-                        color: #f53297;
-                        font-weight: $fnt-wgt-700;
-                    }
                 }
+            }
+            .link {
+                font-size: $fnt-sz-12 !important;
+                color: #ff3399 !important;
+                font-weight: $fnt-wgt-700 !important;
             }
         }
     }

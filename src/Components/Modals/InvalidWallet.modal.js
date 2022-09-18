@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation, Trans } from "react-i18next";
 import getFroyoGamesContactUrl from "../../Utils/GetFroyoGamesContact";
 
 const SelectWalletsModalPopup = ({
@@ -6,6 +7,8 @@ const SelectWalletsModalPopup = ({
     walletAddress,
     bindWalletAddress,
 }) => {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
             <div className="modal-body-invalid-wallet position-relative p-4">
@@ -17,12 +20,16 @@ const SelectWalletsModalPopup = ({
                     alt="close-btn"
                 />
 
-                <h5 className="title mb-4">Invalid Wallet</h5>
+                <h5 className="title mb-4">
+                    {t("connect_wallet.invalid_wallet.title")}
+                </h5>
                 <div className="col-12 my-3 px-0">
                     <p>
-                        Current wallet address:{" "}
+                        {t("connect_wallet.invalid_wallet.current_wallet")}
                         {!walletAddress && (
-                            <span className="highlight-address">[Empty]</span>
+                            <span className="highlight-address">
+                                {t("connect_wallet.invalid_wallet.empty")}
+                            </span>
                         )}
                         {walletAddress && (
                             <span className="highlight-address">
@@ -35,9 +42,11 @@ const SelectWalletsModalPopup = ({
                         )}
                     </p>
                     <p>
-                        Bound wallet address:{" "}
+                        {t("connect_wallet.invalid_wallet.bound_wallet")}
                         {!bindWalletAddress && (
-                            <span className="highlight-address">[Empty]</span>
+                            <span className="highlight-address">
+                                {t("connect_wallet.invalid_wallet.empty")}
+                            </span>
                         )}
                         {bindWalletAddress && (
                             <span className="highlight-address">
@@ -50,13 +59,10 @@ const SelectWalletsModalPopup = ({
                         )}
                     </p>
                     <p className="subtitle">
-                        Your Froyo Games account was previously bound to another
-                        wallet address. Please use the same wallet address when
-                        connecting.
+                        {t("connect_wallet.invalid_wallet.desc_1")}
                     </p>
                     <p className="subtitle">
-                        If you are using Metamask and are frequently
-                        encountering this error, please try the following steps:
+                        {t("connect_wallet.invalid_wallet.desc_2")}
                     </p>
                     <ul className="my-4 list-unstyled">
                         <li className="row mb-2">
@@ -65,13 +71,15 @@ const SelectWalletsModalPopup = ({
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    Disconnect all accounts on Metamask (click
-                                    the
-                                    <span className="highlight-tips">
-                                        "Connected"
-                                    </span>
-                                    button on the top left of the Metamask
-                                    wallet)
+                                    <Trans i18nKey="connect_wallet.invalid_wallet.step_1">
+                                        Disconnect all accounts on Metamask
+                                        (click the
+                                        <span className="highlight-tips">
+                                            "Connected"
+                                        </span>
+                                        button on the top left of the Metamask
+                                        wallet)
+                                    </Trans>
                                 </p>
                             </div>
                         </li>
@@ -81,8 +89,7 @@ const SelectWalletsModalPopup = ({
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    Select the correct account when connecting
-                                    to Metamask
+                                    {t("connect_wallet.invalid_wallet.step_2")}
                                 </p>
                             </div>
                         </li>
@@ -92,17 +99,19 @@ const SelectWalletsModalPopup = ({
                             </div>
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
-                                    To unbind this wallet from your Froyo Games
-                                    Account, please{" "}
-                                    <a
-                                        className="highlight-url"
-                                        href={getFroyoGamesContactUrl()}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        click here
-                                    </a>{" "}
-                                    to contact support
+                                    <Trans i18nKey="connect_wallet.invalid_wallet.step_3">
+                                        To unbind this wallet from your Froyo
+                                        Games Account, please
+                                        <a
+                                            className="highlight-url"
+                                            href={getFroyoGamesContactUrl()}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            click here
+                                        </a>
+                                        to contact support
+                                    </Trans>
                                 </p>
                             </div>
                         </li>

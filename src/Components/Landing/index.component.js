@@ -35,111 +35,116 @@ const Index = () => {
     // SCROLL TRIGGER ANIMATIONS
     useEffect(() => {
         let g1, g2, g3;
-        if (
-            heroRef.current &&
-            workRef.current &&
-            workCardRef.current &&
-            workCardRef.current[0] !== null &&
-            workCardRef.current[1] !== null &&
-            workCardRef.current[2] !== null &&
-            workCardRef.current[0] !== "" &&
-            workCardRef.current[1] !== "" &&
-            workCardRef.current[2] !== "" &&
-            dailyRewardRef.current
-        ) {
-            // HERO
-            g1 = ScrollTrigger.create({
-                trigger: heroRef.current,
-                start: "top bottom",
-                onEnter: () => {
-                    if (gsap) {
-                        const tl = gsap.timeline();
-                        tl.to(
-                            heroRef.current,
-                            {
-                                duration: 1,
-                                autoAlpha: 1,
-                                y: 0,
-                                ease: "power4.out",
-                            },
-                            0
-                        ).to(
-                            [
-                                workRef.current.childNodes[0],
-                                workRef.current.childNodes[1],
-                            ],
-                            {
-                                duration: 0.6,
-                                autoAlpha: 1,
-                                y: 0,
-                                ease: "power4.out",
-                                stagger: 0.2,
-                            },
-                            0
-                        );
-                    }
-                },
-            });
+        function playFadeIn() {
+            if (
+                heroRef.current &&
+                workRef.current &&
+                workCardRef.current &&
+                workCardRef.current[0] !== null &&
+                workCardRef.current[1] !== null &&
+                workCardRef.current[2] !== null &&
+                workCardRef.current[0] !== "" &&
+                workCardRef.current[1] !== "" &&
+                workCardRef.current[2] !== "" &&
+                dailyRewardRef.current
+            ) {
+                // HERO
+                g1 = ScrollTrigger.create({
+                    trigger: heroRef.current,
+                    start: "top bottom",
+                    onEnter: () => {
+                        if (gsap) {
+                            const tl = gsap.timeline();
+                            tl.to(
+                                heroRef.current,
+                                {
+                                    duration: 1,
+                                    autoAlpha: 1,
+                                    y: 0,
+                                    ease: "power4.out",
+                                },
+                                0
+                            ).to(
+                                [
+                                    workRef.current.childNodes[0],
+                                    workRef.current.childNodes[1],
+                                ],
+                                {
+                                    duration: 0.6,
+                                    autoAlpha: 1,
+                                    y: 0,
+                                    ease: "power4.out",
+                                    stagger: 0.2,
+                                },
+                                0
+                            );
+                        }
+                    },
+                });
 
-            // WORK
-            g2 = ScrollTrigger.create({
-                trigger: workCardRef.current,
-                start: "10% bottom",
-                onEnter: () => {
-                    if (
-                        gsap &&
-                        workCardRef.current &&
-                        workCardRef.current[0] !== null &&
-                        workCardRef.current[1] !== null &&
-                        workCardRef.current[2] !== null &&
-                        workCardRef.current[0] !== "" &&
-                        workCardRef.current[1] !== "" &&
-                        workCardRef.current[2] !== ""
-                    ) {
-                        const tl = gsap.timeline();
-                        tl.to(
-                            workCardRef.current,
-                            {
-                                duration: 1,
-                                autoAlpha: 1,
-                                y: 0,
-                                ease: "power2.out",
-                                stagger: 0.2,
-                            },
-                            0
-                        );
-                    }
-                },
-            });
+                // WORK
+                g2 = ScrollTrigger.create({
+                    trigger: workCardRef.current,
+                    start: "10% bottom",
+                    onEnter: () => {
+                        if (
+                            gsap &&
+                            workCardRef.current &&
+                            workCardRef.current[0] !== null &&
+                            workCardRef.current[1] !== null &&
+                            workCardRef.current[2] !== null &&
+                            workCardRef.current[0] !== "" &&
+                            workCardRef.current[1] !== "" &&
+                            workCardRef.current[2] !== ""
+                        ) {
+                            const tl = gsap.timeline();
+                            tl.to(
+                                workCardRef.current,
+                                {
+                                    duration: 1,
+                                    autoAlpha: 1,
+                                    y: 0,
+                                    ease: "power2.out",
+                                    stagger: 0.2,
+                                },
+                                0
+                            );
+                        }
+                    },
+                });
 
-            // DAILY REWARD
-            g3 = ScrollTrigger.create({
-                trigger: dailyRewardRef.current,
-                start: "100px bottom",
-                onEnter: () => {
-                    if (gsap && dailyRewardRef.current) {
-                        const tl = gsap.timeline();
-                        tl.to(
-                            [
-                                dailyRewardRef.current.childNodes[0],
-                                dailyRewardRef.current.childNodes[1],
-                                dailyRewardRef.current.childNodes[2],
-                            ],
-                            {
-                                duration: 0.6,
-                                autoAlpha: 1,
-                                y: 0,
-                                ease: "power4.out",
-                                stagger: 0.2,
-                            },
-                            0
-                        );
-                    }
-                },
-            });
+                // DAILY REWARD
+                g3 = ScrollTrigger.create({
+                    trigger: dailyRewardRef.current,
+                    start: "100px bottom",
+                    onEnter: () => {
+                        if (gsap && dailyRewardRef.current) {
+                            const tl = gsap.timeline();
+                            tl.to(
+                                [
+                                    dailyRewardRef.current.childNodes[0],
+                                    dailyRewardRef.current.childNodes[1],
+                                    dailyRewardRef.current.childNodes[2],
+                                ],
+                                {
+                                    duration: 0.6,
+                                    autoAlpha: 1,
+                                    y: 0,
+                                    ease: "power4.out",
+                                    stagger: 0.2,
+                                },
+                                0
+                            );
+                        }
+                    },
+                });
+            }
         }
 
+        let delayId = setTimeout(playFadeIn, 500);
+
         return () => {
+            clearTimeout(delayId);
             g1?.kill?.();
             g2?.kill?.();
             g3?.kill?.();

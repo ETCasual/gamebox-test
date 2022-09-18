@@ -1,14 +1,175 @@
 {
-    "hero_content": {
-        "welcome": "Hello and welcome!",
-        "title": "Discover, Explore, and Collect NFTs!",
-        "subtitle": "Discover a wide selection of available NFTs. Now is your chance to explore and collect them while they are still available.",
+    "loading": {
+        "loading_user": "Loading user details...",
+        "loaded_user": "User details loaded!"
+    },
+    "blocked_user_modal": {
+        "blocked": {
+            "title": "Your account has been Blocked.",
+            "desc": "We’ve detected unusual activity on your account and have blocked your account as a security precaution."
+        },
+        "archived": {
+            "title": "Your account has been Archived.",
+            "desc": "We’ve detected unusual activity on your account and have blocked your account as a security precaution."
+        },
+        "unusual": {
+            "title": "Unusual Activity!",
+            "desc": "We noticed unusual activity in your GameBox account and have logged you out."
+        },
+        "support": "For more information, please contact support at ",
+        "foryo_games": "Froyo Games",
         "btn": {
-            "register": "REGISTER NOW!"
+            "close": "CLOSE"
         }
     },
-    "how_it_works": {
-        "title": "HOW DOES IT WORK?",
-        "subtitle": "Simply follow these three simple steps."
+    "automated_entry_modal": {
+        "token_id": "Token ID: {{value}}",
+        "draw_start_in": "Draw starts in",
+        "tickets_collected": "Tickets you have collected",
+        "instruction_title": "Tickets you have collected",
+        "instruction_subtitle": "Participate in any tournament throughout the platform before the timer runs out.\nTickets won from the tournaments will automatically be added into the Daily Draw pool. It’s that easy.",
+        "instruction_tip": "Tip: Earn more tickets by “spent gems” to increase your ticket count.",
+        "btn": {
+            "start_earn": "START EARNING TICKETS"
+        }
+    },
+    "header": {
+        "disconnect": "Disconnect",
+        "tab": {
+            "home": "Home",
+            "activities": "Activities",
+            "winners": "Winners"
+        },
+        "profile": {
+            "connect_wallet": "CONNECT WALLET",
+            "disconnect_wallet": "DISCONNECT WALLET",
+            "wrong_network": "WRONG NETWORK",
+            "invalid_token": "Invalid token",
+            "gamebox_profile": "GameBox Profile",
+            "logout": "Logout"
+        },
+        "notification": {
+            "title": "Notifications",
+            "view_more": "View more",
+            "no_notification_subtitle": "No notifications found yet!",
+            "no_notification_desc": "Looks like you've not played for any prizes yet."
+        }
+    },
+    "footer": {
+        "about": "ABOUT",
+        "foryo_games": "Froyo Games",
+        "help": "HELP",
+        "contact_support": "Contact Support",
+        "froyo_token": "FROYO TOKEN",
+        "get_froyo": "Get $FROYO",
+        "join_community": "JOIN OUR COMMUNITY",
+        "copyright": "© {{year}} GameBox ",
+        "tnc": "Terms and Conditions",
+        "privacy_policy": "Privacy Policy",
+        "tournament_rules": "Tournament Rules"
+    },
+    "connect_wallet": {
+        "select_wallets": {
+            "connect_wallet": "CONNECT WALLET",
+            "provider": {
+                "metamask": "Metamask",
+                "wallet_connect": "WalletConnect"
+            },
+            "guide": {
+                "subtitle": "Follow this guide to connect your metamask wallet on your mobile.",
+                "step_1": "Click on \"WalletConnect\"",
+                "step_2": "Connect to WalletConnect",
+                "step_3": "Tap on Metamask",
+                "step_4": "Sign in to your metamask account",
+                "step_5": "Select your wallet network by tapping on the \"Wallet\" at the top",
+                "step_6": "Tap on \"Binance Smart Chain\"",
+                "step_7": "Return to GameBox",
+                "mobile_guide": "Guide to connect to wallet on mobile"
+            },
+            "btn": {
+                "back": "Back"
+            }
+        },
+        "invalid_wallet": {
+            "title": "Invalid Wallet",
+            "current_wallet": "Current wallet address: ",
+            "bound_wallet": "Bound wallet address: ",
+            "empty": "[Empty]",
+            "desc_1": "Your Froyo Games account was previously bound to another wallet address. Please use the same wallet address when connecting.",
+            "desc_2": "If you are using Metamask and are frequently encountering this error, please try the following steps:",
+            "step_1": "Disconnect all accounts on Metamask (click the <1>\"Connected\"</1>button on the top left of the Metamask wallet)",
+            "step_2": "Select the correct account when connecting to Metamask",
+            "step_3": "To unbind this wallet from your Froyo Games Account, please <1>click here</1> to contact support"
+        },
+        "bind_wallet_guide": {
+            "subtitle": "Your Froyo Account is not currently bound to a wallet. Please follow these simple steps to successfully connect your wallet to Gamebox.",
+            "step_1": "Please log in to your account on <1>{{url}}</1>",
+            "step_2": "Ensure you have the Metamask browser extension installed and set up. You can also use any WalletConnect-compatible wallet.",
+            "step_3": "Bind your wallet to your Froyo Games account by signing a message with your wallet.",
+            "step_4": "Once successfully bound, your wallet should be connected to your account when accessing the Gamebox platform."
+        }
+    },
+    "landing": {
+        "register": {
+            "title": "How to register",
+            "subtitle": "Here’s a simple guide for you on how to register with us.",
+            "register_url": "Click <1>here</1> to start registering.",
+            "step_1": {
+                "title": "Register with www.froyo.games",
+                "desc": "Head over to <1>froyo.games/registration</1> and create an account."
+            },
+            "step_2": {
+                "title": "Verify your email address",
+                "desc": "Verify your email address once your account has been created."
+            },
+            "step_3": {
+                "title": "Return to GameBox to login",
+                "desc": "Close all tabs and return to <1>froyo.games/gamebox</1> to continue with your login."
+            }
+        },
+        "login": {
+            "welcome": "Welcome back!",
+            "subtitle": "Login with your froyo.games account.",
+            "email": "Email Address",
+            "password": "Password",
+            "forgot_password": "Forgot your password?",
+            "btn": {
+                "login": "LOGIN"
+            }
+        },
+        "hero_content": {
+            "welcome": "Hello and welcome!",
+            "title": "Discover, Explore, and Collect NFTs!",
+            "subtitle": "Discover a wide selection of available NFTs. Now is your chance to explore and collect them while they are still available."
+        },
+        "how_it_works": {
+            "title": "HOW DOES IT WORK?",
+            "subtitle": "Simply follow these three simple steps.",
+            "step_1": {
+                "step": "STEP 1",
+                "title": "Discover NFTs",
+                "desc": "A diverse set of NFTs is waiting to be discovered."
+            },
+            "step_2": {
+                "step": "STEP 2",
+                "title": "Compete in tournaments",
+                "desc": "Compete against players from around the world to see who can get the highest score."
+            },
+            "step_3": {
+                "step": "STEP 3",
+                "title": "Win NFTs",
+                "desc": "Collect tickets to be eligible to win an NFT of your choice."
+            }
+        },
+        "daily_rewards": {
+            "title": "That's not all!",
+            "subtitle": "Every week, you will receive FREE NFTs.",
+            "desc_1": "Get premium NFT’s every week!",
+            "desc_2": "You will automatically receive tickets for weekly NFT rewards when you win any tournament!"
+        },
+        "btn": {
+            "login": "LOGIN",
+            "register": "REGISTER NOW!"
+        }
     }
 }

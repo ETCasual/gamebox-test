@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 function Loading() {
+    const { t } = useTranslation();
     const { loginStatus } = useSelector((state) => state.userData);
 
     useEffect(() => {
@@ -19,10 +21,10 @@ function Loading() {
             />
 
             {loginStatus.loading && !loginStatus.ready && (
-                <p className="loading-text">Loading user details...</p>
+                <p className="loading-text">{t("loading.loading_user")}</p>
             )}
             {loginStatus.ready && (
-                <p className="redirect-text">User details loaded!</p>
+                <p className="redirect-text">{t("loading.loaded_user")}</p>
             )}
         </div>
     );

@@ -1,6 +1,7 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // COMPONENTS
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
@@ -14,6 +15,8 @@ const Notification = ({
     handleBackButton,
     handleNotificationLeaderboardHistory,
 }) => {
+    const { t } = useTranslation();
+
     const history = useHistory();
 
     return (
@@ -22,7 +25,7 @@ const Notification = ({
             <div id="notification-panel">
                 {/* NOTIFICATIONS */}
                 <div className="ui-wrapper d-flex align-items-center justify-content-between mb-2">
-                    <p className="mb-0">Notifications</p>
+                    <p className="mb-0">{t("header.notification.title")}</p>
                     <Link
                         onClick={handleBackButton}
                         to={{
@@ -32,14 +35,16 @@ const Notification = ({
                             },
                         }}
                     >
-                        <button>View more</button>
+                        <button>{t("header.notification.view_more")}</button>
                     </Link>
                 </div>
                 {notificationData.length <= 0 && (
                     <div className="all-seen d-flex flex-column align-items-center justify-content-center">
-                        <p className="mb-1">No notifications found yet!</p>
+                        <p className="mb-1">
+                            {t("header.notification.no_notification_subtitle")}
+                        </p>
                         <small>
-                            Looks like you've not played for any prizes yet.
+                            {t("header.notification.no_notification_desc")}
                         </small>
                     </div>
                 )}
@@ -51,10 +56,11 @@ const Notification = ({
                                 n.type !== "winner" && (
                                     <div
                                         key={`notification-${i}`}
-                                        className={`col-12 notification-card px-0 ${notificationData.length - 1 !== i
+                                        className={`col-12 notification-card px-0 ${
+                                            notificationData.length - 1 !== i
                                                 ? "mb-4"
                                                 : ""
-                                            }`}
+                                        }`}
                                         onClick={() =>
                                             handleNotificationLeaderboardHistory(
                                                 n
@@ -68,8 +74,8 @@ const Notification = ({
                                                     n?.picture
                                                         ? n.picture
                                                         : n.type === "rankup"
-                                                            ? `${window.cdn}assets/notification_level_01.jpg`
-                                                            : `${window.cdn}assets/notification_friends_01.jpg`
+                                                        ? `${window.cdn}assets/notification_level_01.jpg`
+                                                        : `${window.cdn}assets/notification_friends_01.jpg`
                                                 }
                                                 isPlayVideo={true}
                                                 onError={(e) =>
@@ -106,20 +112,21 @@ const Notification = ({
                                                         {n?.description}
                                                     </p>
                                                     <p
-                                                        className={`mb-0 d-flex align-items-center ${n?.type ===
-                                                                "winprize"
+                                                        className={`mb-0 d-flex align-items-center ${
+                                                            n?.type ===
+                                                            "winprize"
                                                                 ? "prize"
                                                                 : n?.type ===
-                                                                    "tour"
-                                                                    ? "tickets"
-                                                                    : "gems"
-                                                            }`}
+                                                                  "tour"
+                                                                ? "tickets"
+                                                                : "gems"
+                                                        }`}
                                                     >
                                                         {n?.type === "winprize"
                                                             ? `You've won`
                                                             : n?.type === "tour"
-                                                                ? `+${n?.tickets}`
-                                                                : `+${n?.gem} gems`}
+                                                            ? `+${n?.tickets}`
+                                                            : `+${n?.gem} gems`}
 
                                                         {n?.type === "tour" ? (
                                                             <img

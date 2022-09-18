@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
+import { useTranslation } from "react-i18next";
 
 const BlockedUserModal = ({ setBlockedArchivedModal }) => {
+    const { t } = useTranslation();
+
     const getAccountErrorType = () => {
         const type = sessionStorage.getItem("errorType") || null;
         if (type !== null && type === "Blocked") return "Blocked";
@@ -24,43 +27,42 @@ const BlockedUserModal = ({ setBlockedArchivedModal }) => {
             <div className="wrapper p-4 d-flex flex-column align-items-start justify-content-start">
                 {getAccountErrorType() === "Blocked" && (
                     <>
-                        <h3>Your account has been Blocked.</h3>
+                        <h3>{t("blocked_user_modal.blocked.title")}</h3>
                         <p className="mb-3">
-                            We’ve detected unusual activity on your account and
-                            have blocked your account as a security precaution.
+                            {t("blocked_user_modal.blocked.desc")}
                         </p>
                     </>
                 )}
                 {getAccountErrorType() === "Archived" && (
                     <>
-                        <h3>Your account has been Archived.</h3>
+                        <h3>{t("blocked_user_modal.archived.title")}</h3>
                         <p className="mb-3">
-                            We’ve detected unusual activity on your account and
-                            have blocked your account as a security precaution.
+                            {t("blocked_user_modal.archived.desc")}
                         </p>
                     </>
                 )}
                 {getAccountErrorType() === "Unusual" && (
                     <>
-                        <h3>Unusual Activity!</h3>
+                        <h3>{t("blocked_user_modal.unusual.title")}</h3>
                         <p className="mb-3">
-                            We noticed unusual activity in your GameBox account
-                            and have logged you out.
+                            {t("blocked_user_modal.unusual.desc")}
                         </p>
                     </>
                 )}
 
                 <p className="mb-3">
-                    For more information, please contact support at{" "}
+                    {t("blocked_user_modal.support")}
                     <span>
-                        <a href={getFroyoGamesContactUrl()}>Froyo Games</a>
+                        <a href={getFroyoGamesContactUrl()}>
+                            {t("blocked_user_modal.foryo_games")}
+                        </a>
                     </span>
                 </p>
                 <button
                     className="p-3"
                     onClick={() => setBlockedArchivedModal(false)}
                 >
-                    CLOSE
+                    {t("blocked_user_modal.btn.close")}
                 </button>
             </div>
         </div>
