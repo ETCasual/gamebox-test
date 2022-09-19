@@ -1,0 +1,37 @@
+#not_found_page {
+    padding: 5rem 0;
+    @include media-min($xs) {
+        padding: 6rem 0;
+    }
+
+    .main-wrapper {
+        margin: 0;
+
+        @include media-min($md) {
+            margin: 3rem 0;
+        }
+
+        @include media-min($xl) {
+            margin: 4rem 0;
+        }
+    }
+
+    img {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .title {
+        color: #ff3399;
+        font-size: $fnt-sz-20;
+        font-weight: $fnt-wgt-700;
+
+        @include media-min($md) {
+            font-size: $fnt-sz-30;
+        }
+    }
+
+    p {
+        font-size: $fnt-sz-14;
+    }
+}

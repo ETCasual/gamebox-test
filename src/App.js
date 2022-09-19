@@ -28,6 +28,7 @@ import TermsAndConditions from "Pages/TermsAndConditions.page";
 import PrivacyPolicy from "Pages/PrivacyPolicy.page";
 import TournamentRules from "Pages/TournamentRules.page";
 import LaunchingSoon from "Pages/LaunchingSoon.page";
+import NotFound from "Pages/NotFound.page";
 
 import loadPrizes from "redux/thunks/Prizes.thunk";
 import loadExchangeRate from "redux/thunks/ExchangeRate.thunk";
@@ -277,6 +278,7 @@ const App = () => {
                         path="/tournament-rules"
                         component={TournamentRules}
                     />
+                    <Route path="*" component={NotFound} />
                 </Switch>
                 <Footer />
                 <NavigationHOC />
