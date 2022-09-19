@@ -3,6 +3,34 @@
         "loading_user": "Loading user details...",
         "loaded_user": "User details loaded!"
     },
+    "input": {
+        "placeholder": {
+            "password": "Password"
+        }
+    },
+    "rankUp": {
+        "title": "Reward",
+        "subtitle": "Here's a rewards for you.",
+        "gemCount": "+ %{count} gems",
+        "multiplier": "+ %{multiplier} ticket multiplier."
+    },
+    "invite": {
+        "invitee": {
+            "title1": "Welcome to GameBox",
+            "title2": "You have reached level",
+            "subtitle": "Here's a rewards for using referral link."
+        },
+        "invited": {
+            "title": "Say hi to your friend",
+            "subtitle": {
+                "yourFriend": "Your friend",
+                "action": "has %{action} with your referral link."
+            }
+        },
+        "reward": {
+            "title": "Reward"
+        }
+    },
     "activity": {
         "header": "Your Activities",
         "noData": {

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const NotificationFriendInvitation = ({
@@ -41,6 +42,8 @@ const NotificationFriendInvitation = ({
         }
     };
 
+    const { t } = useTranslation();
+
     return (
         <div id="friend-invitation">
             <div className="col-12 wrapper">
@@ -72,35 +75,43 @@ const NotificationFriendInvitation = ({
                                 <>
                                     <p className="title">
                                         {config.rewardInvitesRank <= 1
-                                            ? "Welcome to GameBox"
-                                            : `You have reached level ${config.rewardInvitesRank}.`}
+                                            ? t("invite.invitee.title1")
+                                            : `${t(
+                                                  "invite.invitee.title2"
+                                              )} ${config.rewardInvitesRank
+                                                  .toString()
+                                                  .concat(".")}`}
                                     </p>
                                     <p className="subtitle">
-                                        Here's a rewards for using referral
-                                        link.
+                                        {t("invite.invitee.subtitle")}
                                     </p>
                                 </>
                             )}
                             {user.id !== getInvitationInfo("inviteeId") && (
                                 <>
                                     <p className="title">
-                                        Say hi to your friend
+                                        {t("invite.invited.title")}
                                     </p>
                                     <p className="subtitle">
-                                        Your friend{" "}
+                                        {t(
+                                            "invite.invited.subtitle.yourFriend"
+                                        )}
                                         <span className="friend-username">
                                             {getInvitationInfo("inviteeName")}
                                         </span>{" "}
-                                        has
-                                        {config.rewardInvitesRank <= 1
-                                            ? " joined"
-                                            : ` reached level ${config.rewardInvitesRank}`}{" "}
-                                        with your referral link.
+                                        {t("invite.invited.subtitle.action", {
+                                            action:
+                                                config.rewardInvitesRank <= 1
+                                                    ? " joined"
+                                                    : ` reached level ${config.rewardInvitesRank}`,
+                                        })}{" "}
                                     </p>
                                 </>
                             )}
                             <div className="reward p-3 p-md-4 mb-3 mb-md-4 d-flex flex-column align-items-start justify-content-around">
-                                <p className="mb-3 title">Reward</p>
+                                <p className="mb-3 title">
+                                    {t("invite.reward.title")}
+                                </p>
                                 <p className="gems mb-0">
                                     {`+ ${
                                         getInvitationInfo("gem") || "0"

@@ -2,6 +2,8 @@ import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import getFroyoGamesContactUrl from "../../Utils/GetFroyoGamesContact";
 
+//TODO: Check The i18n localization
+
 const SelectWalletsModalPopup = ({
     handleCloseBtn,
     walletAddress,

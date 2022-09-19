@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const NotificationRankUp = ({
@@ -14,12 +15,16 @@ const NotificationRankUp = ({
     }, []);
 
     const getTicketMultiplier = () => {
-        const idx = ranks.findIndex((r) => 
-            isSelectedNotificationShown?.description.substring(12) === r.title
+        const idx = ranks.findIndex(
+            (r) =>
+                isSelectedNotificationShown?.description.substring(12) ===
+                r.title
         );
         if (idx > -1) return ranks[idx]?.multiplier * 100;
         return false;
     };
+
+    const { t } = useTranslation();
 
     return (
         <div id="rank-up">
@@ -51,18 +56,22 @@ const NotificationRankUp = ({
                             <p className="title">
                                 {isSelectedNotificationShown?.description}
                             </p>
-                            <p className="subtitle">
-                                Here's a rewards for you.
-                            </p>
+                            <p className="subtitle">{t("rankUp.subtitle")}</p>
                             <div className="reward p-3 p-md-4 mb-3 mb-md-4 d-flex flex-column align-items-start justify-content-around">
-                                <p className="mb-3 title">Reward</p>
+                                <p className="mb-3 title">
+                                    {t("rankUp.title")}
+                                </p>
                                 <p className="gems mb-0">
-                                    {`+ ${
-                                        isSelectedNotificationShown?.gem || "0"
-                                    } gems`}
+                                    {t("rankUp.gemCount", {
+                                        count:
+                                            isSelectedNotificationShown?.gem ||
+                                            "0",
+                                    })}
                                 </p>
                                 <p className="gems mt-2 mb-0">
-                                    {`+ ${getTicketMultiplier()}% ticket multiplier`}
+                                    {t("rankUp.multiplier", {
+                                        multiplier: getTicketMultiplier(),
+                                    })}
                                 </p>
                             </div>
                         </div>

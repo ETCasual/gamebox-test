@@ -21,6 +21,8 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
 
+    // TODO: Do this when u have VIP
+
     return (
         <div id="leaderboard-history">
             <div className="col-12 wrapper">
