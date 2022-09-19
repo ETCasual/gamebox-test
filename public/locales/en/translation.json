@@ -3,6 +3,15 @@
         "loading_user": "Loading user details...",
         "loaded_user": "User details loaded!"
     },
+    "activity": {
+        "header": "Your Activities",
+        "noData": {
+            "title": "No activity has been found yet!",
+            "desc": "It appears that you have not yet competed for any prizes.",
+            "btn": "Click Here",
+            "btnCont": " to select one that appeals to you."
+        }
+    },
     "blocked_user_modal": {
         "blocked": {
             "title": "Your account has been Blocked.",

@@ -11,6 +11,7 @@ import loadActivity from "redux/thunks/Activity.thunk";
 
 // COMPONENTS
 import ActivityCard from "Components/Activity/ActivityCard/ActivityCard.component";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
     const dispatch = useDispatch();
@@ -23,6 +24,8 @@ const Index = () => {
 
     const [activityData, setActivityData] = useState([]);
     const [noDataLoaded, setNoDataLoaded] = useState(false);
+
+    const { t } = useTranslation();
 
     // STAY TUNED
     useEffect(() => {
@@ -67,20 +70,19 @@ const Index = () => {
         <section id="activity">
             <div className="container-fluid px-0">
                 <div className="col-12 col-md-10 col-lg-8 mx-auto content-min-height">
-                    <h1 className="main-title mb-4">Your Activities</h1>
+                    <h1 className="main-title mb-4">{t("activity.header")}</h1>
 
                     {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">
-                                No activity has been found yet!
+                                {t("activity.noData.title")}
                             </p>
                             <p className="subtitle mt-1 mb-0">
-                                It appears that you have not yet competed for
-                                any prizes.{" "}
+                                {t("activity.noData.desc")}
                             </p>
                             <p className="subtitle">
-                                <Link to="/">Click here</Link> to select one
-                                that appeals to you.
+                                <Link to="/">{t("activity.noData.btn")}</Link>
+                                {t("activity.noData.btnCont")}
                             </p>
                         </div>
                     )}

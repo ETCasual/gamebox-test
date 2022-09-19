@@ -12,6 +12,7 @@
 html,
 #root {
     overflow-x: hidden;
+
 }
 body {
     width: 100vw;
@@ -1201,6 +1202,7 @@ html {
 
         .instructions-subtitle,
         .instructions-tip {
+            white-space: pre-line;
             font-size: $fnt-sz-8;
             @include media-min($sm) {
                 font-size: $fnt-sz-10;
