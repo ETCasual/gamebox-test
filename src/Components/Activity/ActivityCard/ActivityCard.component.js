@@ -7,6 +7,7 @@ import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 // HELPER FUNCTIONS
 import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
+import { useTranslation } from "react-i18next";
 
 const ActivityCard = ({ card }) => {
     const { poolTickets } = useSelector((state) => state.playerTickets);
@@ -21,6 +22,8 @@ const ActivityCard = ({ card }) => {
     const getPrizeType = (type) => {
         return type === 1 ? "Featured" : type === 2 ? "Premium" : "Daily";
     };
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -71,7 +74,7 @@ const ActivityCard = ({ card }) => {
                                 <div className="your-tickets px-3 mb-1 mb-sm-2 d-flex flex-column align-items-md-start justify-content-start">
                                     <div>
                                         <p className="label mb-0 mb-md-1">
-                                            Your tickets
+                                            {t("activity.card.ticketTitle")}
                                         </p>
                                     </div>
                                     <div>
@@ -87,17 +90,16 @@ const ActivityCard = ({ card }) => {
                                 </div>
                                 {/* POOL TICKETS */}
                                 <div className="pool-tickets px-3 py-2 d-flex align-items-start justify-content-start">
-                                    <p className="mb-0 required-tickets bold-text">
-                                        {`${(
+                                    <p className="mb-0 required-tickets">
+                                        <span className="bold-text">{`${(
                                             card?.ticketsRequired -
                                                 getPrizeTicketCollected(
                                                     prizeTicketCollection,
                                                     card?.prizeId
                                                 ) || 0
-                                        ).toLocaleString()}`}{" "}
-                                    </p>
-                                    <p className="mb-0 required-tickets">
-                                        {`\u00A0tickets remaining`}
+                                        ).toLocaleString()}`}</span>
+
+                                        {t("activity.card.remaining")}
                                     </p>
                                 </div>
                             </div>

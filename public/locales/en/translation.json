@@ -10,6 +10,10 @@
             "desc": "It appears that you have not yet competed for any prizes.",
             "btn": "Click Here",
             "btnCont": " to select one that appeals to you."
+        },
+        "card": {
+            "ticketTitle": "Your Tickets",
+            "remaining": " tickets remaining"
         }
     },
     "blocked_user_modal": {
