@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import RevealWinnerLoader from "Components/Loader/RevealWinner.loader";
+import { useTranslation } from "react-i18next";
 
 const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -30,6 +31,8 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
         return () => clearTimeout(timer);
     }, [data.prizeId, notificationList, dispatch]);
 
+    const { t } = useTranslation();
+
     return (
         <div className="complete-overlay justify-content-end p-3">
             {/* PRIZE TYPE */}
@@ -41,7 +44,9 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
             {/* TICKETS INFO */}
             {loading && (
                 <div className="drawing-winner d-flex flex-column align-items-center justify-content-center">
-                    <p className="mb-0">Drawing winner</p>
+                    <p className="mb-0">
+                        {t("featuredCompleted.drawingWinner")}
+                    </p>
                     <RevealWinnerLoader
                         cx1={"43%"}
                         cx2={"48%"}
@@ -59,7 +64,7 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
                         {data?.prizeSubtitle}
                     </div>
                     <button className="tap-btn mb-0">
-                        TAP TO REVEAL THE WINNER
+                        {t("featuredCompleted.tapToReveal")}
                     </button>
                 </div>
             )}

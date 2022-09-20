@@ -4,6 +4,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import getPoolTickets from "Utils/PoolTickets";
 import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
+import { useTranslation } from "react-i18next";
 
 const DailyBonus = ({ data, handleGamePanel }) => {
     const dispatch = useDispatch();
@@ -95,6 +96,8 @@ const DailyBonus = ({ data, handleGamePanel }) => {
         };
     }, [data]);
 
+    const { t } = useTranslation();
+
     if (timer === "0d 0h 0m 0s" || timer === "0d 0h 0m 0s") {
         return "";
     } else
@@ -125,7 +128,9 @@ const DailyBonus = ({ data, handleGamePanel }) => {
                                 <div className="overlay"></div>
                                 <div className="content">
                                     <div className="col-12 top-content">
-                                        <div className="badges mb-1">Daily</div>
+                                        <div className="badges mb-1">
+                                            {t("daily.title")}
+                                        </div>
                                         <div className="card-title">
                                             {data.prizeTitle}
                                         </div>
@@ -134,7 +139,7 @@ const DailyBonus = ({ data, handleGamePanel }) => {
                                         <div className="bottom-wrapper d-flex align-items-center justify-content-between">
                                             <div className="tickets-grid">
                                                 <div className="tickets">
-                                                    <p>Your tickets</p>
+                                                    <p>{t("daily.tickets")}</p>
                                                     <p>
                                                         {getPoolTickets(
                                                             esmData.poolTickets,
@@ -143,7 +148,7 @@ const DailyBonus = ({ data, handleGamePanel }) => {
                                                     </p>
                                                 </div>
                                                 <div className="tickets-pool">
-                                                    <p>Draw starts in</p>
+                                                    <p>{t("ae.drawStarts")}</p>
                                                     <p>{timer}</p>
                                                 </div>
                                             </div>

@@ -212,5 +212,37 @@
             "login": "LOGIN",
             "register": "REGISTER NOW!"
         }
+    },
+    "nav": {
+        "home": "Home",
+        "activity": "Activity",
+        "winner": "Winner"
+    },
+    "winprize": {
+        "won": "You've won",
+        "gem": "gem"
+    },
+    "ae": {
+        "dailyReward": "DAILY REWARD",
+        "tickets": "My tickets",
+        "drawStarts": "Draw starts in"
+    },
+    "featured": {
+        "ticket": "Your tickets",
+        "play": "PLAY"
+    },
+    "featuredCompleted": {
+        "drawingWinner": "Drawing winner",
+        "tapToReveal": "TAP TO REVEAL THE WINNER"
+    },
+    "featuredWinner": {
+        "congratulations": "Congratulations!",
+        "won": "won the",
+        "rewards": "REWARDS",
+        "drawnOn": "Prize drawn on"
+    },
+    "daily": {
+        "title": "Daily",
+        "tickets": "Your tickets"
     }
 }

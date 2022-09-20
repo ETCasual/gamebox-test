@@ -18,6 +18,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
+import { useTranslation } from "react-i18next";
 
 const Featured = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
 
     const [timer, setTimer] = useState("0d 0h 0m 0s");
     const [isPlayVideo, setIsPlayVideo] = useState(false);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(loadPlayerTickets(data?.prizeId, true));
@@ -150,7 +153,9 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                 <div className="ticket-wrapper align-items-sm-center">
                                                     <div className="your-tickets">
                                                         <p className="mb-0 label d-flex align-self-center">
-                                                            Your tickets
+                                                            {t(
+                                                                "featured.ticket"
+                                                            )}
                                                         </p>
                                                         <p className="mb-0 tickets d-flex align-items-center">
                                                             {getPoolTickets(
@@ -162,7 +167,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                     </div>
                                                     <div className="pool-tickets mt-3">
                                                         <p className="mb-0 pr-md-2 label d-flex align-items-end">
-                                                            Draw starts in
+                                                            {t("ae.drawStarts")}
                                                         </p>
                                                         <div className="d-flex">
                                                             <p
@@ -225,7 +230,7 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                     )}
                                                 </div>
                                                 <div className="play-text text-center px-2 py-1">
-                                                    PLAY
+                                                    {t("featured.play")}
                                                 </div>
                                             </div>
                                         </div>
