@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import convertSecondsToHours from "Utlis/TimeConversion";
 
@@ -29,6 +30,8 @@ const WeeklyRewards = ({ weeklyRewardsData, usertickets }) => {
         };
     }, [weeklyRewardsData]);
 
+    const { t } = useTranslation();
+
     return (
         <div className="col-12 col-lg-6 pr-lg-2" id="weekly">
             <div className="row">
@@ -49,7 +52,7 @@ const WeeklyRewards = ({ weeklyRewardsData, usertickets }) => {
                                 <div className="content">
                                     <div className="col-12 top-content">
                                         <div className="badges mb-1">
-                                            Weekly
+                                            {t("weekly.title")}
                                         </div>
                                         <div className="card-title">
                                             {card.title}
@@ -59,11 +62,13 @@ const WeeklyRewards = ({ weeklyRewardsData, usertickets }) => {
                                         <div className="bottom-wrapper d-flex align-items-center justify-content-between">
                                             <div className="tickets-grid">
                                                 <div className="tickets">
-                                                    <p>Your tickets</p>
+                                                    <p>
+                                                        {t("featured.ticket")}
+                                                    </p>
                                                     <p>{usertickets}</p>
                                                 </div>
                                                 <div className="tickets-pool">
-                                                    <p>Draw starts in</p>
+                                                    <p>{t("ae.drawStarts")}</p>
                                                     <p>{timer}</p>
                                                 </div>
                                             </div>

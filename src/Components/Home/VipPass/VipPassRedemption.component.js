@@ -10,6 +10,7 @@ import { loadNFTClaim } from "redux/thunks/UnClaimedPrizes.thunk";
 
 // HELPER
 import { defaultGameImage } from "Utils/DefaultImage";
+import { useTranslation } from "react-i18next";
 
 const VipPassRedemption = ({ data }) => {
     const dispatch = useDispatch();
@@ -34,6 +35,8 @@ const VipPassRedemption = ({ data }) => {
         );
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="col-12 d-flex align-items-center justify-content-center">
@@ -53,24 +56,17 @@ const VipPassRedemption = ({ data }) => {
                                 <div className="col-12">
                                     <div className="my-3">
                                         <p className="title text-center">
-                                            GAMEBOX VIP PASS
+                                            {t("VIPPass.title")}
                                         </p>
                                     </div>
                                     <div>
                                         <p className="desc text-left">
-                                            The Gamebox VIP Pass is a privilege
-                                            membership pass in Gamebox.
+                                            {t("VIPPass.subtitle")}
                                         </p>
                                     </div>
                                     <div>
                                         <p className="desc text-left">
-                                            The Gamebox VIP Pass NFT grants
-                                            players special utilities, such as
-                                            increased daily spins and future
-                                            utilities. This gives players
-                                            additional free gems daily to
-                                            participate and win prizes on
-                                            Gamebox.
+                                            {t("VIPPass.desc")}
                                         </p>
                                     </div>
                                 </div>
@@ -84,7 +80,9 @@ const VipPassRedemption = ({ data }) => {
                                             }`}
                                             onClick={handleRedeem}
                                         >
-                                            <p className="m-auto">CLAIM</p>
+                                            <p className="m-auto">
+                                                {t("VIPPass.claim")}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

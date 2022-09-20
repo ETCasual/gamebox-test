@@ -8,6 +8,7 @@ import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 
 // HELPER FUNCTION
 import { convertSecondsToHours } from "Utils/TimeConversion";
+import { useTranslation } from "react-i18next";
 
 const GameDuration = ({
     game,
@@ -95,6 +96,8 @@ const GameDuration = ({
         } else return null;
     };
 
+    const { t } = useTranslation();
+
     return (
         <div
             className={`col-8 col-md-6 col-lg-5 col-xl-5 mb-3 ${
@@ -113,7 +116,7 @@ const GameDuration = ({
                     <div className="game-title mb-1">{game.gameTitle}</div>
                     <div className="d-flex align-items-center justify-content-between">
                         <div className="tournament-end-in-text">
-                            Tournament ends in
+                            {t("tournament.endsIn")}
                         </div>
                         <div className="game-duration">
                             {timer || "0d 0h 0m 0s"}
@@ -121,7 +124,7 @@ const GameDuration = ({
                     </div>
                 </div>
             </div>
-            <button className="join">JOIN TOURNAMENT</button>
+            <button className="join">{t("tournament.join")}</button>
         </div>
     );
 };

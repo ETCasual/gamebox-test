@@ -227,6 +227,31 @@
         "tickets": "My tickets",
         "drawStarts": "Draw starts in"
     },
+    "onboarding": {
+        "havefun": "Have fun!",
+        "prizePool": "Prize pool"
+    },
+    "spinner": {
+        "freegems": "FREE GEMS",
+        "claim": "Claim your daily free gems here!",
+        "refresh": "Refresh in",
+        "fortuneWheel": {
+            "earn": "SPIN & EARN MORE REWARDS HERE!",
+            "yourgems": "YOUR GEMS",
+            "rewardsInfo": "Rewards Information",
+            "youHave": "You have",
+            "spinsLeft": "spins left",
+            "chance": "CHANCES",
+            "reward": "REWARDS",
+            "spin": "spin",
+            "win": "win"
+        }
+    },
+    "tournament": {
+        "endsIn": "Tournament ends in",
+        "join": "JOIN TOURNAMENT",
+        "bonustime": "BONUS TIME!"
+    },
     "featured": {
         "ticket": "Your tickets",
         "play": "PLAY"
@@ -244,5 +269,27 @@
     "daily": {
         "title": "Daily",
         "tickets": "Your tickets"
+    },
+    "stayTuned": {
+        "title": "Stay Tuned!",
+        "subtitle1": "We'll be back with more rewards for you.",
+        "subtitle2": "Here're some games for you while you wait."
+    },
+    "VIPPass": {
+        "title": "GAMEBOX VIP PASS",
+        "subtitle": "The Gamebox VIP Pass is a privilege membership pass in Gamebox.",
+        "desc": "The Gamebox VIP Pass NFT grants players special utilities, such as increased daily spins and future utilities. This gives players additional free gems daily to participate and win prizes on Gamebox.",
+        "claim": "CLAIM"
+    },
+    "homePage": {
+        "limitedTimeReward": "Limited-Time Reward",
+        "featuredReward": "Featured Rewards",
+        "premium": "Play and Win Rewards"
+    },
+    "weekly": {
+        "title": "Weekly"
+    },
+    "btn": {
+        "back": "Back"
     }
 }
