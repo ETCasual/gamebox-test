@@ -217,6 +217,10 @@
             "color": "red"
         }
     },
+    "sorry": {
+        "title": "SORRY",
+        "subtitle": "GameBox is not available in your country yet."
+    },
     "landing": {
         "register": {
             "title": "How to register",
