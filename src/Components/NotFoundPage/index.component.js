@@ -18,7 +18,7 @@ const Index = () => {
                         <div className="row-col justify-content-center text-center">
                             <div className="col">
                                 <img
-                                    src="https://www.froyo.games/assets/img/error.png"
+                                    src={`${window.cdn}assets/error404.png`}
                                     alt="error"
                                 />
                             </div>
