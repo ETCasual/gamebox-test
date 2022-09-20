@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GenericLoader from "Components/Loader/Generic.loader";
+import { useTranslation } from "react-i18next";
 
 const PurchaseContent = ({
     type,
@@ -20,48 +21,63 @@ const PurchaseContent = ({
         setCurrentStatus(key);
     }, [purchasingStatus]);
 
+    const { t } = useTranslation();
+
     const content = {
         noWallet: {
-            title: "Wallet not connected.",
-            subTitle: "Please connect your wallet to continue.",
-            button: "CONNECT WALLET",
+            title: t("purchaseContentWallet.noWallet.title"),
+            subTitle: t("purchaseContentWallet.noWallet.subTitle"),
+            button: t("purchaseContentWallet.noWallet.button"),
         },
         insufficentToken: {
-            title: "Insufficient Froyo Tokens.",
-            subTitle: "Please purchase Froyo Tokens to continue.",
-            button: "PURCHASE FROYO TOKENS",
-            color: "red",
+            title: t("purchaseContentWallet.insufficentToken.title"),
+            subTitle: t("purchaseContentWallet.insufficentToken.subTitle"),
+            button: t("purchaseContentWallet.insufficentToken.button"),
+            color: t("purchaseContentWallet.insufficentToken.color"),
         },
         beforePurchaseConfirmation: {
-            title: `Purchase ${productInfo?.quantity} gems with ${productInfo?.price} froyo tokens`,
-            subTitle:
-                "Froyo Tokens will be deducted from your wallet " +
-                user.walletAddress?.substring(0, 5) +
-                "..." +
-                user.walletAddress?.substring(user.walletAddress.length - 4) +
-                ".",
-            button: `USE ${productInfo?.price} FROYO TOKENS`,
+            title: t("purchaseContentWallet.beforePurchaseConfirmation.title", {
+                quantity: productInfo?.quantity,
+                price: productInfo?.price,
+            }),
+            subTitle: t(
+                "purchaseContentWallet.beforePurchaseConfirmation.subTitle",
+                {
+                    first: user.walletAddress?.substring(0, 5),
+                    last: user.walletAddress?.substring(
+                        user.walletAddress.length - 4
+                    ),
+                }
+            ),
+            button: t(
+                "purchaseContentWallet.beforePurchaseConfirmation.button",
+                {
+                    price: productInfo?.price,
+                }
+            ),
         },
         processing: {
-            title: "",
-            subTitle: "Processing your purchase",
+            title: t("purchaseContentWallet.processing.title"),
+            subTitle: t("purchaseContentWallet.processing.subTitle"),
         },
         isSuccess: {
-            title: "Purchase successful.",
-            subTitle: `You have successfully purchased ${productInfo?.quantity} gems.`,
-            button: "CONTINUE",
+            title: t("purchaseContentWallet.isSuccess.title"),
+            subTitle: t("purchaseContentWallet.isSuccess.subTitle", {
+                quantity: productInfo?.quantity,
+            }),
+            button: t("purchaseContentWallet.isSuccess.button"),
         },
         isFail: {
-            title: "Purchase unsuccessful.",
-            subTitle: "Something went wrong. Please try again later.",
-            button: "CLOSE",
-            color: "red",
+            title: t("purchaseContentWallet.isFail.title"),
+            subTitle: t("purchaseContentWallet.isFail.subTitle"),
+            button: t("purchaseContentWallet.isFail.button"),
+            color: t("purchaseContentWallet.isFail.color"),
         },
         processFail: {
-            title: "Error",
-            subTitle: "Unable to update payment to server. Please try again",
-            button: "RETRY",
-            color: "red",
+            title: t("purchaseContentWallet.processFail.title"),
+            subTitle: t("purchaseContentWallet.processFail.subTitle"),
+            button: t("purchaseContentWallet.processFail.button"),
+            color: t("purchaseContentWallet.processFail.color"),
         },
     };
 

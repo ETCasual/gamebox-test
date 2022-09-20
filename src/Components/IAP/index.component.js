@@ -19,6 +19,7 @@ import tokenABI from "Utils/TokenABI";
 import { getTokenBalance, getWeb3 } from "Utils/ConnectWallet";
 
 import ConnectWallet from "Components/Global/ConnectWallet.component";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
     const [stripePromise] = useState(
@@ -362,6 +363,8 @@ const Index = () => {
             });
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             <section id="iap-items">
@@ -384,18 +387,22 @@ const Index = () => {
                                             src={`${window.cdn}buttons/button_back.png`}
                                             alt="back-btn"
                                         />
-                                        <span className="ml-2">Back</span>
+                                        <span className="ml-2">
+                                            {t("btn.back")}
+                                        </span>
                                     </div>
                                 </div>
                             )}
                             <p className="title mb-4 d-flex align-items-center">
-                                <span className="w-100">Purchase Gems</span>
+                                <span className="w-100">
+                                    {t("iap.purchase.title")}
+                                </span>
                             </p>
                             {/* BUY FROYO */}
                             <div className="right-items w-100 d-flex align-items-center justify-content-end float-lg-right">
                                 <ul className="list-unstyled mb-0 d-flex align-items-center providers">
                                     <li className="text-white-50 pl-2">
-                                        Buy $FROYO:
+                                        {t("iap.purchase.cta")}
                                     </li>
                                     <li>
                                         <a
@@ -487,7 +494,7 @@ const Index = () => {
                                             handleSelectedTab("froyo")
                                         }
                                     >
-                                        Pay using Froyo Tokens
+                                        {t("iap.purchase.payWithToken")}
                                     </li>
                                     <li
                                         className={`${
@@ -499,7 +506,7 @@ const Index = () => {
                                             handleSelectedTab("card")
                                         }
                                     >
-                                        Pay using Credit Card
+                                        {t("iap.purchase.payWithCard")}
                                     </li>
                                 </ul>
                                 <div className="gems-wrapper px-3 pt-3">

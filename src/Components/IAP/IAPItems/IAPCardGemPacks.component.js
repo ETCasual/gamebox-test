@@ -5,6 +5,7 @@ import _ from "lodash";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadGemsList from "redux/thunks/GemsList.thunk";
+import { useTranslation } from "react-i18next";
 
 const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
     const { user } = useSelector((state) => state.userData);
@@ -31,6 +32,8 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
         );
         setGemList(_.orderBy(creditCardGemPacks, ["id"], ["asc"]));
     }, [gemsList]);
+
+    const { t } = useTranslation();
 
     return (
         <div className="col-12">
@@ -62,7 +65,9 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                                     {gem.title}
                                 </p>
                                 <p className="mb-1 quantity">
-                                    {gem.quantity?.toLocaleString()} GEMS
+                                    {t("iap.cards.gemCount", {
+                                        count: gem.quantity?.toLocaleString(),
+                                    })}
                                 </p>
                                 <img
                                     className="img-fluid"
@@ -71,13 +76,15 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                                 />
                             </div>
                             <div className="price-wrapper mb-0 d-flex flex-column align-items-center justify-content-center">
-                                <p className="mb-1 price">{`SGD $${gem?.price?.toFixed(
-                                    2
-                                )}`}</p>
+                                <p className="mb-1 price">
+                                    {t("iap.payment.currency", {
+                                        price: gem?.price?.toFixed(2),
+                                    })}
+                                </p>
                                 {ipInfo?.currency &&
                                     ipInfo?.currency !== "SGD" && (
                                         <p className="mb-0 estimation">
-                                            Estimated price{" "}
+                                            {t("iap.payment.estimatedPrice")}
                                             {exchangeRate?.rates[
                                                 ipInfo?.currency
                                             ] && (

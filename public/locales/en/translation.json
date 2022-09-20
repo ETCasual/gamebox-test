@@ -8,11 +8,39 @@
             "password": "Password"
         }
     },
+    "iap": {
+        "payment": {
+            "summary": "Payment Summary",
+            "title": "Total Payment",
+            "gemCount": "{{count}} gems",
+            "currency": "SGD ${{price}}",
+            "estimatedPrice": "Estimated Price ",
+            "details": {
+                "title": "Payment Details",
+                "card": {
+                    "name": "Name on card",
+                    "info": "Card Information"
+                },
+                "email": "Email Address"
+            },
+            "confirm": "PAY SGD ${{price}}",
+            "tnc": "By clicking \"pay\", you are agreeing to our terms and conditions, privacy policy and tournament rules"
+        },
+        "cards": {
+            "gemCount": "{{count}} GEMS"
+        },
+        "purchase": {
+            "title": "Purchase Gems",
+            "cta": "Buy $FROYO:",
+            "payWithToken": "Pay using Froyo Tokens",
+            "payWithCard": "Pay using Credit Card"
+        }
+    },
     "rankUp": {
         "title": "Reward",
         "subtitle": "Here's a rewards for you.",
-        "gemCount": "+ %{count} gems",
-        "multiplier": "+ %{multiplier} ticket multiplier."
+        "gemCount": "+ {{count}} gems",
+        "multiplier": "+ {{multiplier}} ticket multiplier."
     },
     "invite": {
         "invitee": {
@@ -24,7 +52,7 @@
             "title": "Say hi to your friend",
             "subtitle": {
                 "yourFriend": "Your friend",
-                "action": "has %{action} with your referral link."
+                "action": "has {{action}} with your referral link."
             }
         },
         "reward": {
@@ -148,6 +176,45 @@
             "step_2": "Ensure you have the Metamask browser extension installed and set up. You can also use any WalletConnect-compatible wallet.",
             "step_3": "Bind your wallet to your Froyo Games account by signing a message with your wallet.",
             "step_4": "Once successfully bound, your wallet should be connected to your account when accessing the Gamebox platform."
+        }
+    },
+    "purchaseContentWallet": {
+        "noWallet": {
+            "title": "Wallet not connected.",
+            "subTitle": "Please connect your wallet to continue.",
+            "button": "CONNECT WALLET"
+        },
+        "insufficentToken": {
+            "title": "Insufficient Froyo Tokens.",
+            "subTitle": "Please purchase Froyo Tokens to continue.",
+            "button": "PURCHASE FROYO TOKENS",
+            "color": "red"
+        },
+        "beforePurchaseConfirmation": {
+            "title": "Purchase {{quantity}} gems with {{price}} froyo tokens",
+            "subTitle": "Froyo Tokens will be deducted from your wallet {{first}}...{{last}}.",
+            "button": "USE {{price}} FROYO TOKENS"
+        },
+        "processing": {
+            "title": "",
+            "subTitle": "Processing your purchase"
+        },
+        "isSuccess": {
+            "title": "Purchase successful.",
+            "subTitle": "You have successfully purchased {{quantity}} gems.",
+            "button": "CONTINUE"
+        },
+        "isFail": {
+            "title": "Purchase unsuccessful.",
+            "subTitle": "Something went wrong. Please try again later.",
+            "button": "CLOSE",
+            "color": "red"
+        },
+        "processFail": {
+            "title": "Error",
+            "subTitle": "Unable to update payment to server. Please try again",
+            "button": "RETRY",
+            "color": "red"
         }
     },
     "landing": {
@@ -283,7 +350,7 @@
     },
     "homePage": {
         "limitedTimeReward": "Limited-Time Reward",
-        "featuredReward": "Featured Rewards",
+        "featuredRewards": "Featured Rewards",
         "premium": "Play and Win Rewards"
     },
     "weekly": {

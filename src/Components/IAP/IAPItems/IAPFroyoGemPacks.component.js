@@ -5,6 +5,7 @@ import _ from "lodash";
 
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadGemsList from "redux/thunks/GemsList.thunk";
+import { useTranslation } from "react-i18next";
 
 const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
     const { user } = useSelector((state) => state.userData);
@@ -28,6 +29,8 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
         const froyoGemPacks = gemsList.filter((g) => g.paymentTypeId === 2);
         setGemList(_.orderBy(froyoGemPacks, ["id"], ["asc"]));
     }, [gemsList]);
+
+    const { t } = useTranslation();
 
     // TODO:: DISBALED PACKS ON PURCHASE
     return (
@@ -60,7 +63,9 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                                     {gem.title}
                                 </p>
                                 <p className="mb-1 quantity">
-                                    {gem.quantity?.toLocaleString()} GEMS
+                                    {t("iap.cards.gemCount", {
+                                        count: gem.quantity?.toLocaleString(),
+                                    })}
                                 </p>
                                 <div>
                                     <img

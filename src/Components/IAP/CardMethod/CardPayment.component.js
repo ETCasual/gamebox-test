@@ -19,6 +19,7 @@ import loadUserDetails from "redux/thunks/UserDetails.thunk";
 import { getPaymentIntent } from "redux/services/index.service";
 import loadGemsList from "redux/thunks/GemsList.thunk";
 import { SHOW_TOAST } from "redux/types";
+import { useTranslation } from "react-i18next";
 
 const CardPayment = ({ productInfo, handleBackButton }) => {
     const { ipInfo, exchangeRate } = useSelector((state) => state.exchangeRate);
@@ -112,6 +113,8 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
         setPaymentProcessModal(false);
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="container-fluid" id="payment-panel">
@@ -127,7 +130,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                     src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
-                                <span className="ml-2">Back</span>
+                                <span className="ml-2">{t("btn.back")}</span>
                             </div>
                             <img
                                 width={160}
@@ -139,22 +142,30 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                         <div className="row mt-5">
                             <div className="col-12 col-lg-5 mb-4 mb-lg-0">
                                 <h4 className="mb-3 mb-lg-5">
-                                    Payment Summary
+                                    {t("iap.payment.summary")}
                                 </h4>
-                                <p className="total-title">Total Payment</p>
+                                <p className="total-title">
+                                    {t("iap.payment.title")}
+                                </p>
                                 <div className="product mb-3 p-3 d-flex align-items-center justify-content-between">
                                     <p className="product-title mb-0">
-                                        {productInfo?.quantity?.toLocaleString() ||
-                                            0}{" "}
-                                        gems
+                                        {t("iap.payment.gemCount", {
+                                            count:
+                                                productInfo?.quantity?.toLocaleString() ||
+                                                0,
+                                        })}
                                     </p>
                                     <p className="product-price mb-0">
-                                        SGD $
-                                        {productInfo?.price?.toFixed(2) || 0}
+                                        {t("iap.payment.currency", {
+                                            price:
+                                                productInfo?.price?.toFixed(
+                                                    2
+                                                ) || 0,
+                                        })}
                                     </p>
                                 </div>
                                 <p className="estimation text-right">
-                                    Estimated Price{" "}
+                                    {t("iap.payment.estimatedPrice")}
                                     <span>
                                         {ipInfo?.currency === "MYR"
                                             ? "RM"
@@ -172,12 +183,18 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                             </div>
                             <div className="col-12 col-lg-6">
                                 <div className="payment-wrapper">
-                                    <h4 className="mb-5">Payment Details</h4>
+                                    <h4 className="mb-5">
+                                        {t("iap.payment.details.title")}
+                                    </h4>
                                     {/* PAYMENT */}
                                     <form onSubmit={handleSubmit}>
                                         {/* NAME */}
                                         <div className="form-group">
-                                            <label>Name on card</label>
+                                            <label>
+                                                {t(
+                                                    "iap.payment.details.card.name"
+                                                )}
+                                            </label>
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -192,7 +209,9 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                         </div>
                                         {/* EMAIL */}
                                         <div className="form-group">
-                                            <label>Email Address</label>
+                                            <label>
+                                                {t("iap.payment.details.email")}
+                                            </label>
                                             <input
                                                 type="email"
                                                 className="form-control"
@@ -207,7 +226,11 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                         </div>
                                         {/* CARD DETAILS */}
                                         <div className="form-group">
-                                            <label>Card Information</label>
+                                            <label>
+                                                {t(
+                                                    "iap.payment.details.card.info"
+                                                )}
+                                            </label>
                                             <div className="col px-0 card-number position-relative">
                                                 <CardNumberElement
                                                     onChange={(e) =>
@@ -267,17 +290,16 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                             type="submit"
                                             disabled={!stripe}
                                         >
-                                            {`PAY SGD $${
-                                                productInfo?.price?.toFixed(
-                                                    2
-                                                ) || 0
-                                            }`}
+                                            {t("iap.payment.confirm", {
+                                                price:
+                                                    productInfo?.price?.toFixed(
+                                                        2
+                                                    ) || 0,
+                                            })}
                                         </button>
                                     </form>
                                     <p className="mt-3 mt-lg-4 mb-2 agreement">
-                                        By clicking "pay", you are agreeing to
-                                        our terms and conditions, privacy policy
-                                        and tournament rules
+                                        {t("iap.payment.tnc")}
                                     </p>
                                 </div>
                             </div>
