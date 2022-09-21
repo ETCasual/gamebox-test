@@ -1,5 +1,6 @@
 // COMPONENTS
 import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
+import { useTranslation } from "react-i18next";
 
 // HELPER
 import { defaultGameImage } from "Utils/DefaultImage";
@@ -11,6 +12,8 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
         month: "long",
         year: "numeric",
     });
+
+    const { t } = useTranslation();
 
     return (
         <div className="claim-prize-detail-modal">
@@ -40,7 +43,9 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                 <div className="prize-info">
                                     <div className="prize-text m-2 p-3">
                                         <div className="content">
-                                            Token ID: {data?.prizeSubtitle}
+                                            {t("prize.tokenId", {
+                                                id: data?.prizeSubtitle,
+                                            })}
                                         </div>
                                         <p className="title my-2">
                                             {data.prizeTitle}
@@ -54,14 +59,18 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                 {/*  RECEIVER INFO */}
                                 <div className="delivery-address mt-4">
                                     <p className="title mb-2">
-                                        Prize delivered to wallet address
+                                        {t("prize.delivered")}
                                     </p>
                                     <p className="wallet-address">
-                                        {data.walletAddress?.substring(0, 5)}
-                                        ....
-                                        {data.walletAddress?.substring(
-                                            data.walletAddress.length - 4
-                                        )}
+                                        {t("prize.walletAdd", {
+                                            first: data.walletAddress?.substring(
+                                                0,
+                                                5
+                                            ),
+                                            last: data.walletAddress?.substring(
+                                                data.walletAddress.length - 4
+                                            ),
+                                        })}
                                     </p>
                                 </div>
 

@@ -388,7 +388,8 @@
         "title": "Weekly"
     },
     "btn": {
-        "back": "Back"
+        "back": "Back",
+        "continue": "Continue"
     },
     "error": {
         "brokenLink": {
@@ -431,6 +432,45 @@
         "warning": {
             "title": "Players who attempt to cheat or utilise exploits that can impact gameplay may be banned.",
             "subtitle": "This website is reCAPTCHA-protected, and the Google <1>Privacy Policy</1> and <3>Terms of Service</3> apply."
+        }
+    },
+    "prize": {
+        "tokenId": "Token ID: {{id}}",
+        "delivered": "Prize delivered to wallet address",
+        "walletAdd": "{{first}}...{{last}}"
+    },
+    "additionalBenefit": {
+        "ticket": "Additional tickets earned",
+        "ticketExp": "Additional tickets and experience points earned",
+        "point": "You scored {{pts}} points.",
+        "extraTicket": "{{count}} tickets",
+        "extraExp": "{{expts}} exp"
+    },
+    "gameEnd": {
+        "title": "GAME RESULT",
+        "tournamentEnd": "(The tournament has ended)",
+        "score": {
+            "title": "Score",
+            "scoreNeededPerExtraTickets": "every {{count}} score",
+            "ticketCount": "+ {{count}}",
+            "totalEarned": "You earned"
+        }
+    },
+    "instructions": {
+        "prize": {
+            "title": "HOW TO WIN PRIZES?",
+            "subtitle": "Follow these 4 simple steps.",
+            "step": "Step",
+            "1": "Select the prize you would like to win.",
+            "2": "Participate in the tournament.",
+            "3": "Win and earn tickets at the end of tournament.",
+            "4": "Enter new tournaments to collect more tickets.",
+            "footer": {
+                "tip": "Pro tip: The more tickets you have, the higher chance to win the prize.",
+                "title": "How it works?",
+                "subtitle1": "When the total amount of tickets (global tickets) reaches the allocated number, your tickets (along with other players' tickets) will enter a pool. The winner will be chosen based on the ticket drawn from the pool randomly.",
+                "subtitle2": "If a prize enter's overtime, players can still participate in tournaments and win tickets. Consider it as a bonus hour to earn more tickets before the prize ends."
+            }
         }
     }
 }

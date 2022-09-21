@@ -1264,7 +1264,7 @@ const Leaderboard = ({
                                     className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
                                     onClick={handleQuitGame}
                                 >
-                                    {t("tournament.loading.close")}
+                                    {t("tournament.loading.closeButton")}
                                 </button>
                             </div>
                             <iframe
