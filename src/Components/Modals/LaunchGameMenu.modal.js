@@ -1,5 +1,6 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
@@ -125,6 +126,8 @@ const LaunchGameMenuModalPopup = ({
         onPlayClicked();
     }
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
@@ -154,15 +157,19 @@ const LaunchGameMenuModalPopup = ({
                                 }}
                             >
                                 <div className="title p-1 text-center">
-                                    BOOSTER
+                                    {t("gameMenu.booster.title")}
                                 </div>
                                 <div className="content d-flex flex-column py-4">
                                     <div className="info-text text-center">
-                                        Every {currentGameRules.score} Score
+                                        {t("gameMenu.booster.subtitle", {
+                                            count: currentGameRules.score,
+                                        })}
                                     </div>
                                     <div className="content-tickets d-flex align-items-center justify-content-center">
                                         <span className="tickets my-1">
-                                            +{currentGameRules.useGemTickets}
+                                            {t("gameMenu.booster.boostBy", {
+                                                count: currentGameRules.useGemTickets,
+                                            })}
                                         </span>
                                         <img
                                             className="icon ml-3"
@@ -212,7 +219,7 @@ const LaunchGameMenuModalPopup = ({
                                 >
                                     {!isLoadingGame && (
                                         <>
-                                            START PLAYING
+                                            {t("gameMenu.start")}
                                             <div className="d-flex mt-2">
                                                 <span className="btn-text m-auto">
                                                     {startGameCost}

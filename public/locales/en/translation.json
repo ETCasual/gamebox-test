@@ -166,7 +166,7 @@
             "empty": "[Empty]",
             "desc_1": "Your Froyo Games account was previously bound to another wallet address. Please use the same wallet address when connecting.",
             "desc_2": "If you are using Metamask and are frequently encountering this error, please try the following steps:",
-            "step_1": "Disconnect all accounts on Metamask (click the <1>\"Connected\"</1>button on the top left of the Metamask wallet)",
+            "step_1": "Disconnect all accounts on Metamask (click the <1>\"Connected\"</1> button on the top left of the Metamask wallet)",
             "step_2": "Select the correct account when connecting to Metamask",
             "step_3": "To unbind this wallet from your Froyo Games Account, please <1>click here</1> to contact support"
         },
@@ -472,5 +472,29 @@
                 "subtitle2": "If a prize enter's overtime, players can still participate in tournaments and win tickets. Consider it as a bonus hour to earn more tickets before the prize ends."
             }
         }
+    },
+    "quitModal": {
+        "title": "QUIT GAME?",
+        "subtitle": "You will lose your current game score if you exit now and <1>Gems will not be refunded</1>.",
+        "confirm": "YES, QUIT",
+        "cancel": "CANCEL"
+    },
+    "insufficientGems": {
+        "title": "INSUFFICIENT GEMS",
+        "subtitle": "You are out of gems. Please purchase more gems to continue.",
+        "cta": "GET IT NOW!"
+    },
+    "gameMenu": {
+        "booster": {
+            "title": "BOOSTER",
+            "subtitle": "Every {{count}} score",
+            "boostBy": "+ {{count}}"
+        },
+        "start": "START PLAYING"
+    },
+    "noAds": {
+        "title": "No Ads are available at the moment!",
+        "subtitle": "You are still able to get additional tickets.",
+        "continue": "Continue"
     }
 }

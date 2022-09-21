@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link, useHistory } from "react-router-dom";
 
 const InsufficientBalanceModalPopup = ({
@@ -5,6 +6,8 @@ const InsufficientBalanceModalPopup = ({
     onBuyClicked = () => {},
 }) => {
     const history = useHistory();
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -22,12 +25,11 @@ const InsufficientBalanceModalPopup = ({
                     <div className="d-flex flex-column align-items-center justify-content-center my-4">
                         <div className="col-12 col-md-8 p-2">
                             <p className="title text-center">
-                                INSUFFICIENT GEMS
+                                {t("insufficientGems.title")}
                             </p>
 
                             <p className="subtitle text-center my-4">
-                                You are out of gems. Please purchase more gems
-                                to continue.
+                                {t("insufficientGems.subtitle")}
                             </p>
 
                             <Link
@@ -41,7 +43,7 @@ const InsufficientBalanceModalPopup = ({
                                 onClick={onBuyClicked}
                             >
                                 <button className="buy-btn d-flex flex-column align-items-center justify-content-center m-auto">
-                                    GET IT NOW!
+                                    {t("insufficientGems.cta")}
                                 </button>
                             </Link>
                         </div>
