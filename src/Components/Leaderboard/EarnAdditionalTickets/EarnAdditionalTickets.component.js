@@ -11,6 +11,7 @@ import NoAdsAvailableModal from "Components/Modals/NoAdsAvailable.modal";
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadConsumeUserGemsTickets from "redux/thunks/ConsumeUserGemsTickets.thunk";
 import { loadEarnAdditionalBenefitStatus } from "redux/thunks/EarnAdditionalTickets.thunk";
+import { useTranslation } from "react-i18next";
 
 const EarnAdditionalTickets = ({
     gameId,
@@ -101,18 +102,20 @@ const EarnAdditionalTickets = ({
     const handleNoAdAvailable = () => setNoAdAvailable(false);
     const nowTimeStamp = () => Date.now() + (config?.offsetTimestamp || 0);
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="increase-earning-text">
-                Increase your ticket earnings
+                {t("additionalTicket.title")}
             </div>
 
             <div className="select-one-option-text">
                 {earnAdditionalDisabledStatus.ads
-                    ? "You have chosen to watch ads to boost your ticket earnings"
+                    ? t("additionalTicket.ads")
                     : ""}
                 {earnAdditionalDisabledStatus.gems
-                    ? "You have chosen to use gems to boost your ticket earnings"
+                    ? t("additionalTicket.gems")
                     : ""}
                 {!earnAdditionalDisabledStatus.ads &&
                 !earnAdditionalDisabledStatus.gems
@@ -179,18 +182,22 @@ const EarnAdditionalTickets = ({
                         alt="use gems"
                     />
                     <p className="boost-tickets mb-1 mb-md-2">
-                        Boost Tickets by
+                        {t("additionalTicket.boostBy")}
                     </p>
                     <p className="earn-type-text">
-                        {currentGameRules.useHowManyGems} Gems
+                        {currentGameRules.useHowManyGems}{" "}
+                        {t("additionalTicket.gemsCount")}
                     </p>
                     <div className="ticket-holder p-3 d-flex flex-column alig-gn-self-center justify-content-center">
                         <p className="ticket-amount mb-1">
-                            +{currentGameRules.useGemTickets} tickets
+                            {t("additionalTicket.ticketsCount", {
+                                quantity: currentGameRules.useGemTickets,
+                            })}
                         </p>
                         <p className="score-condition mb-0">
-                            every{" "}
-                            <span>{currentGameRules.score} score points</span>
+                            {t("additionalTicket.score", {
+                                score: currentGameRules.score,
+                            })}
                         </p>
                     </div>
                 </div>
@@ -199,7 +206,7 @@ const EarnAdditionalTickets = ({
             <div className="play-immediately-text-container d-flex align-items-center justify-content-evenly">
                 <div className="line" />
                 <div className="play-immediately-text text-center">
-                    or start playing immediately
+                    {t("additionalTicket.playNow")}
                 </div>
                 <div className="line" />
             </div>

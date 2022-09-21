@@ -221,6 +221,16 @@
         "title": "SORRY",
         "subtitle": "GameBox is not available in your country yet."
     },
+    "additionalTicket": {
+        "title": "Increase your tickets earnings",
+        "ads": "You have chosen to watch ads to boost your ticket earnings",
+        "gems": "You have chosen to use gems to boost your ticket earnings",
+        "boostBy": "Boost Tickets by",
+        "gemsCount": "Gems",
+        "ticketsCount": "+ {{quantity}} tickets",
+        "score": "every {{score}} score points",
+        "playNow": "or start playing immediately"
+    },
     "landing": {
         "register": {
             "title": "How to register",
@@ -321,7 +331,24 @@
     "tournament": {
         "endsIn": "Tournament ends in",
         "join": "JOIN TOURNAMENT",
-        "bonustime": "BONUS TIME!"
+        "title": "JOIN TOURNAMENTS!",
+        "bonustime": "BONUS TIME!",
+        "subtitle": "Compete against other players, collect tickets, and you could win this Prize!",
+        "loading": {
+            "title": "Loading",
+            "closeButton": "Close"
+        },
+        "score": {
+            "fail": {
+                "close": "CLOSE",
+                "retry": "RETRY",
+                "title": "Error",
+                "subtitle": {
+                    "1": "Unable to submit score to the server.",
+                    "2": "Skip: Gems will not be refunded and score will not be recorded"
+                }
+            }
+        }
     },
     "featured": {
         "ticket": "Your tickets",
@@ -362,5 +389,48 @@
     },
     "btn": {
         "back": "Back"
+    },
+    "error": {
+        "brokenLink": {
+            "title": "Error",
+            "message_1": "Opps, something went wrong.",
+            "message_2": "Please contact support for further assistance.",
+            "errorCode": "12-{{prizeId}}-{{gameId}}",
+            "okButtonText": "CLOSE",
+            "closeButtonText": ""
+        },
+        "logGEnterFail": {
+            "title": "Error",
+            "message_1": "Unable to connect to server.",
+            "message_2": "Please check your internet connection and try again.",
+            "errorCode": "1-{{prizeId}}-{{gameId}}",
+            "okButtonText": "RETRY",
+            "closeButtonText": "CLOSE"
+        },
+        "internetError": {
+            "title": "Error",
+            "message_1": "Game failed to load. Please check your internet connection and try again.",
+            "message_2": "Skip: Gems will not be refunded",
+            "errorCode": "200-{{prizeId}}-{{gameId}}",
+            "okButtonText": "RETRY",
+            "closeButtonText": "SKIP"
+        }
+    },
+    "leaderboard": {
+        "placeholder": {
+            "playerName": "-",
+            "points": "0 pts"
+        },
+        "default": {
+            "playerName": "{{user}} (You)",
+            "points": "{{count}} pts"
+        },
+        "other": {
+            "playerName": "Player {{user}}"
+        },
+        "warning": {
+            "title": "Players who attempt to cheat or utilise exploits that can impact gameplay may be banned.",
+            "subtitle": "This website is reCAPTCHA-protected, and the Google <1>Privacy Policy</1> and <3>Terms of Service</3> apply."
+        }
     }
 }

@@ -43,6 +43,7 @@ import { isScrolledIntoView } from "Utils/ScrollHelper";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
 import { BUFFER_END_TIME } from "Utils/TournamentEndTime";
+import { Trans, useTranslation } from "react-i18next";
 
 const Leaderboard = ({
     data,
@@ -127,6 +128,8 @@ const Leaderboard = ({
     });
 
     const [isDisableButton, setIsDisableButton] = useState(false);
+
+    const { t } = useTranslation();
 
     /* REASON COMMENTED: Leaderboard is moved to parent page
     // DISABLE SCROLLING
@@ -484,39 +487,46 @@ const Leaderboard = ({
         switch (errorCode) {
             case LOAD_ERROR_CODES.BROKEN_LINK:
                 setLoadErrorDetails(() => ({
-                    title: "Error",
-                    message_1: "Oops, something went wrong.",
-                    message_2: "Please contact support for further assistance.",
-                    errorCode: `12-${data?.prizeId}-${currentGameDetails?.gameId}`,
-                    okButtonText: "CLOSE",
+                    title: t("error.brokenLink.title"),
+                    message_1: t("error.brokenLink.message_1"),
+                    message_2: t("error.brokenLink.message_2"),
+                    errorCode: t("error.brokenLink.errorCode", {
+                        prizeId: data?.prizeId,
+                        gameId: currentGameDetails?.gameId,
+                    }),
+                    okButtonText: t("error.brokenLink.okButtonText"),
                     okButtonHandling: "closeGame",
-                    closeButtonText: "",
+                    closeButtonText: t("error.brokenLink.closeButtonText"),
                     closeButtonHandling: "",
                 }));
                 break;
             case LOAD_ERROR_CODES.LOG_G_ENTER_FAIL:
                 setLoadErrorDetails(() => ({
-                    title: "Error",
-                    message_1: "Unable to connect to server.",
-                    message_2:
-                        "Please check your internet connection and try again.",
-                    errorCode: `1-${data?.prizeId}-${currentGameDetails?.gameId}`,
-                    closeButtonText: "CLOSE",
-                    closeButtonHandling: "closeGame",
-                    okButtonText: "RETRY",
+                    title: t("error.logGEnterFail.title"),
+                    message_1: t("error.logGEnterFail.message_1"),
+                    message_2: t("error.logGEnterFail.message_2"),
+                    errorCode: t("error.logGEnterFail.errorCode", {
+                        prizeId: data?.prizeId,
+                        gameId: currentGameDetails?.gameId,
+                    }),
+                    okButtonText: t("error.logGEnterFail.okButtonText"),
                     okButtonHandling: "resendLogGEnter",
+                    closeButtonText: t("error.logGEnterFail.closeButtonText"),
+                    closeButtonHandling: "closeGame",
                 }));
                 break;
             default: //Asset Failed to Load due to internet connection
                 setLoadErrorDetails(() => ({
-                    title: "Error",
-                    message_1:
-                        "Game failed to load. Please check your internet connection and try again.",
-                    message_2: "Skip: Gems will not be refunded",
-                    errorCode: `200-${data?.prizeId}-${currentGameDetails?.gameId}`,
-                    okButtonText: "RETRY",
+                    title: t("error.internetError.title"),
+                    message_1: t("error.internetError.message_1"),
+                    message_2: t("error.internetError.message_2"),
+                    errorCode: t("error.internetError.errorCode", {
+                        prizeId: data?.prizeId,
+                        gameId: currentGameDetails?.gameId,
+                    }),
+                    okButtonText: t("error.internetError.okButtonText"),
                     okButtonHandling: "reloadGame",
-                    closeButtonText: "SKIP",
+                    closeButtonText: t("error.internetError.closeButtonText"),
                     closeButtonHandling: "closeGame",
                 }));
         }
@@ -702,8 +712,12 @@ const Leaderboard = ({
                         </div>
 
                         <div className="px-2 ml-3">
-                            <p className="player-name">-</p>
-                            <p className="points">0 pts</p>
+                            <p className="player-name">
+                                {t("leaderboard.placeholder.playerName")}
+                            </p>
+                            <p className="points">
+                                {t("leaderboard.placeholder.points")}
+                            </p>
                         </div>
                         <div className="tickets ml-auto d-flex align-items-center justify-content-center">
                             <span>
@@ -778,20 +792,25 @@ const Leaderboard = ({
                             <p className="player-name">
                                 {leaderboardList[i]?.userId
                                     ? isCurrentUser(leaderboardList[i]?.userId)
-                                        ? `${
-                                              leaderboardList[i]?.nickName ||
-                                              user.username ||
-                                              "Player"
-                                          } (You)`
-                                        : leaderboardList[i]?.nickName ||
-                                          `Player ${leaderboardList[i]?.userId}`
-                                    : "-"}
+                                        ? t("leaderboard.default.playerName", {
+                                              user:
+                                                  leaderboardList[i]
+                                                      ?.nickName ||
+                                                  user.username ||
+                                                  "Player",
+                                          })
+                                        : t("leaderboard.other.playerName", {
+                                              user: leaderboardList[i]?.userId,
+                                          })
+                                    : t("leaderboard.placeholder.playerName")}
                             </p>
                             <p className="points">
-                                {leaderboardList[i]?.gameScore >= 0
-                                    ? leaderboardList[i]?.gameScore
-                                    : "0"}{" "}
-                                pts
+                                {t("leaderboard.default.points", {
+                                    count:
+                                        leaderboardList[i]?.gameScore >= 0
+                                            ? leaderboardList[i]?.gameScore
+                                            : "0",
+                                })}
                             </p>
                         </div>
 
@@ -822,7 +841,7 @@ const Leaderboard = ({
                 <div className="tournament-info-wrapper col-12 p-0">
                     <div className="d-flex flex-row">
                         <span className="tournament-title">
-                            JOIN TOURNAMENTS!
+                            {t("tournament.title")}
                         </span>
                         <img
                             width={20}
@@ -833,8 +852,7 @@ const Leaderboard = ({
                         />
                     </div>
                     <p className="tournament-subtitle mt-2 mb-3">
-                        Compete against other players, collect tickets, and you
-                        could win this Prize!
+                        {t("tournament.subtitle")}
                     </p>
                 </div>
 
@@ -853,7 +871,7 @@ const Leaderboard = ({
                                 </p>
                                 <div className="d-flex align-items-center justify-content-between">
                                     <p className="tournament-end-text mb-0">
-                                        Tournament ends in
+                                        {t("tournament.endsIn")}
                                     </p>
                                     <p
                                         className={`mb-0 text-right ${
@@ -925,10 +943,14 @@ const Leaderboard = ({
 
                                 <div className="px-2 ml-3">
                                     <p className="player-name">
-                                        {yourRankData.nickName}
+                                        {t("leaderboard.default.playerName", {
+                                            user: yourRankData.nickName,
+                                        })}
                                     </p>
                                     <p className="points">
-                                        {yourRankData.gameScore || "0"} pts
+                                        {t("leaderboard.default.points", {
+                                            count: yourRankData.gameScore,
+                                        })}
                                     </p>
                                 </div>
                                 <div className="tickets ml-auto d-flex align-items-center justify-content-center">
@@ -985,23 +1007,16 @@ const Leaderboard = ({
 
                 {/* RECAPTCHA MESSAGES */}
                 <p className="abuse-text my-1 my-md-auto">
-                    Players who attempt to cheat or utilise exploits that can
-                    impact gameplay may be banned.
+                    {t("leaderboard.warning.title")}
                 </p>
 
                 {/* RECAPTCHA MESSAGES */}
+
                 <p className="recaptcha-text my-1 my-md-auto">
-                    This website is reCAPTCHA-protected, and the Google
-                    {""}{" "}
-                    <a href="https://policies.google.com/privacy">
-                        Privacy Policy
-                    </a>{" "}
-                    and
-                    {""}{" "}
-                    <a href="https://policies.google.com/terms">
-                        Terms of Service
-                    </a>{" "}
-                    apply.
+                    <Trans i18nKey={"leaderboard.warning.subtitle"}>
+                        0<a href="https://policies.google.com/privacy">1</a>2
+                        <a href="https://policies.google.com/terms">3</a>4
+                    </Trans>
                 </p>
 
                 {isSubscriptionModalShown && (
@@ -1152,19 +1167,20 @@ const Leaderboard = ({
                     {/* MODAL FOR PENDING SUBMIT SCORE */}
                     {modalStatus.isSubmitScoreFailed && (
                         <RetrySubmitModal
-                            closeButtonText="SKIP"
+                            closeButtonText={t("tournament.score.fail.close")}
                             handleClose={closeGame}
-                            okButtonText="RETRY"
+                            okButtonText={t("tournament.score.fail.retry")}
                             handleOk={() => {
                                 submitScore(scoreObject);
                             }}
                             disableRetry={modalStatus.isSubmittingScore}
-                            title="Error"
+                            title={t("tournament.score.fail.title")}
                             subtitle={
                                 <>
-                                    Unable to submit score to the server. <br />
-                                    <br /> Skip: Gems will not be refunded and
-                                    score will not be recorded
+                                    {t("tournament.score.fail.subtitle.1")}
+                                    <br />
+                                    <br />
+                                    {t("tournament.score.fail.subtitle.2")}
                                 </>
                             }
                         />
@@ -1230,7 +1246,7 @@ const Leaderboard = ({
                         <>
                             <div className="game-loading">
                                 <p className="mb-2 text-center loading-text">
-                                    Loading
+                                    {t("tournament.loading.title")}
                                 </p>
                                 <GenericLoader
                                     height="30"
@@ -1248,7 +1264,7 @@ const Leaderboard = ({
                                     className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
                                     onClick={handleQuitGame}
                                 >
-                                    Close
+                                    {t("tournament.loading.close")}
                                 </button>
                             </div>
                             <iframe
