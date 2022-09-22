@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Toggle from "react-toggle";
+import { useTranslation } from "react-i18next";
 
 import loadUpdateUserSettings from "redux/thunks/UpdateUserSettings.thunk";
 import ConnectWallet from "Components/Global/ConnectWallet.component";
@@ -70,6 +71,8 @@ const Settings = () => {
         });
     };
 
+    const { t } = useTranslation();
+
     return (
         <section id="settings">
             <div className="container-fluid">
@@ -91,13 +94,15 @@ const Settings = () => {
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
-                                    <span className="ml-2">Back</span>
+                                    <span className="ml-2">
+                                        {t("btn.back")}
+                                    </span>
                                 </Link>
                             </div>
                             {/* SETTING ITEMS */}
                             <div className="col-12 mb-4">
                                 <h1 className="main-title my-2 my-md-4">
-                                    Settings
+                                    {t("settings.title")}
                                 </h1>
                                 {/* ITEM 1 - USER INFO */}
                                 <div className="row py-4">
@@ -124,7 +129,7 @@ const Settings = () => {
                                                     {user?.email}
                                                 </p>
                                                 <button className="profile-edit">
-                                                    Edit Profile
+                                                    {t("settings.editProfile")}
                                                 </button>
                                             </div>
                                         </div>
@@ -134,19 +139,21 @@ const Settings = () => {
                                 <div className="row py-4 py-md-5">
                                     <div className="col-12 connect-wallet">
                                         <p className="main-title mb-3 mb-md-4">
-                                            Wallet connected
+                                            {t("settings.wallet.title")}
                                         </p>
                                         <div className="col-12 px-0 mb-2">
                                             <div className="row">
                                                 <p className="mb-3 wallet-label px-3">
-                                                    Wallet address
+                                                    {t("settings.wallet.add")}
                                                 </p>
                                                 <div className="col-12 d-flex align-items-center justify-content-between">
                                                     <div className="wallet-address p-md-4">
                                                         <span>
                                                             {user.walletAddress
                                                                 ? user.walletAddress
-                                                                : "No wallet found"}
+                                                                : t(
+                                                                      "settings.wallet.notFound"
+                                                                  )}
                                                         </span>
                                                     </div>
                                                     <button
@@ -164,23 +171,26 @@ const Settings = () => {
                                                                         : ""
                                                                 }`}
                                                             >
-                                                                Disconnect
-                                                                Wallet
+                                                                {t(
+                                                                    "settings.wallet.dcWallet"
+                                                                )}
                                                             </p>
                                                         )}
                                                         {!user.walletAddress &&
                                                             !user.network && (
                                                                 <p className="mb-0">
-                                                                    Connect
-                                                                    Wallet
+                                                                    {t(
+                                                                        "settings.wallet.cWallet"
+                                                                    )}
                                                                 </p>
                                                             )}
                                                         {!user.walletAddress &&
                                                             user.network ===
                                                                 "Wrong Network!" && (
                                                                 <p className="mb-0">
-                                                                    Wrong
-                                                                    Network
+                                                                    {t(
+                                                                        "settings.wallet.wrongNetwork"
+                                                                    )}
                                                                 </p>
                                                             )}
                                                     </button>
@@ -208,13 +218,15 @@ const Settings = () => {
                                 <div className="row py-4 py-md-5">
                                     <div className="col-12">
                                         <p className="main-title mb-3 mb-md-4">
-                                            Notifications
+                                            {t("settings.notification.title")}
                                         </p>
                                         <div className="col-12 px-0 mb-2 notification-toggle-wrapper">
                                             <div className="row">
                                                 <div className="col-6 d-flex align-items-center">
                                                     <p className="mb-0">
-                                                        Turn on notifications
+                                                        {t(
+                                                            "settings.notification.turnOn"
+                                                        )}
                                                     </p>
                                                 </div>
                                                 <div className="col-6 d-flex align-items-center justify-content-end">
@@ -333,7 +345,7 @@ const Settings = () => {
                                 <div className="row py-4">
                                     <div className="col-12 mb-3">
                                         <p className="main-title">
-                                            More information
+                                            {t("settings.moreInfo.title")}
                                         </p>
                                     </div>
                                     <div className="col-12 d-flex info-links">
@@ -368,14 +380,18 @@ const Settings = () => {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    Contact Support
+                                                    {t(
+                                                        "settings.moreInfo.contact"
+                                                    )}
                                                 </a>
                                                 <span className="app-version">
-                                                    Version:{" "}
-                                                    {
-                                                        process.env
-                                                            .REACT_APP_VERSION
-                                                    }
+                                                    {t(
+                                                        "settings.moreInfo.version",
+                                                        {
+                                                            vNo: process.env
+                                                                .REACT_APP_VERSION,
+                                                        }
+                                                    )}
                                                 </span>
                                             </li>
                                         </ul>

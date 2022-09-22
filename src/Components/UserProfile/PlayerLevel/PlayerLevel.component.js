@@ -1,5 +1,6 @@
 // REACT
 import React from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 // HELPER FUNCTIONS
 import {
@@ -10,6 +11,7 @@ import {
 } from "Utils/CurrentLevel";
 
 const PlayerLevel = ({ user, ranks, handleBackButton }) => {
+    const { t } = useTranslation();
     return (
         <section id="player-level">
             <div className="container level-modal">
@@ -23,7 +25,9 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                     <div className="col-12 mt-3 p-1 p-md-3">
                                         <div className="current-level-wrapper d-flex flex-column justify-content-center align-items-center">
                                             <div className="level-indicator-wrapper d-flex flex-column justify-content-center align-items-center">
-                                                <span>Level</span>
+                                                <span>
+                                                    {t("playerLevel.level")}
+                                                </span>
                                                 <p className="mb-0 level text-center">
                                                     {getCurrentLevelNo(
                                                         user,
@@ -32,48 +36,60 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                 </p>
                                             </div>
                                             <p className="statement text-center">
-                                                Increase your multiplier with
-                                                every level!
+                                                {t("playerLevel.instruction")}
                                             </p>
                                             <div className="current-level-details-wrapper p-2">
                                                 {/* MULTIPLIER & EXP */}
                                                 <div className="exp mb-0 mb-md-2 w-100 d-flex align-items-center justify-content-between">
                                                     {/* MULTIPLIER */}
                                                     <div className="d-flex multiplier-text">
-                                                        <p className="mb-0 pr-1">
-                                                            Multiplier
-                                                        </p>
-                                                        <p className="mb-0 multiplier-value">
-                                                            {getCurrentMultiplier(
-                                                                user,
-                                                                ranks
-                                                            )}
-                                                            %
-                                                        </p>
+                                                        <Trans
+                                                            i18nKey="playerLevel.multiplier"
+                                                            values={{
+                                                                number: getCurrentMultiplier(
+                                                                    user,
+                                                                    ranks
+                                                                ),
+                                                            }}
+                                                        >
+                                                            <p className="mb-0 pr-1">
+                                                                0
+                                                            </p>
+                                                            <p className="mb-0 multiplier-value">
+                                                                1
+                                                            </p>
+                                                        </Trans>
                                                     </div>
                                                     {/* EXP COUNT */}
                                                     <div className="d-flex align-items-center justify-content-center exp-count px-3">
-                                                        <span className="player-exp mr-1">
-                                                            {user.exp >
-                                                            ranks[
-                                                                ranks.length - 1
-                                                            ]?.exp
-                                                                ? ranks[
-                                                                      ranks.length -
-                                                                          1
-                                                                  ]?.exp.toLocaleString()
-                                                                : user.exp.toLocaleString()}
-                                                        </span>
-                                                        <span className="mx-1">
-                                                            /
-                                                        </span>
-                                                        <span>
-                                                            {getCurrentLevelExp(
-                                                                user,
-                                                                ranks
-                                                            ).toLocaleString()}{" "}
-                                                            exp
-                                                        </span>{" "}
+                                                        <Trans
+                                                            i18nKey="playerLevel.currency"
+                                                            values={{
+                                                                expts:
+                                                                    user.exp >
+                                                                    ranks[
+                                                                        ranks.length -
+                                                                            1
+                                                                    ]?.exp
+                                                                        ? ranks[
+                                                                              ranks.length -
+                                                                                  1
+                                                                          ]?.exp.toLocaleString()
+                                                                        : user.exp.toLocaleString(),
+                                                                max: getCurrentLevelExp(
+                                                                    user,
+                                                                    ranks
+                                                                ).toLocaleString(),
+                                                            }}
+                                                        >
+                                                            <span className="player-exp mr-1">
+                                                                0
+                                                            </span>
+                                                            <span className="mx-1">
+                                                                1
+                                                            </span>
+                                                            <span>2</span>
+                                                        </Trans>
                                                     </div>
                                                 </div>
                                                 {/* PROGRESS BAR */}
@@ -130,30 +146,49 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                                 {/* LEVEL EXP */}
                                                                 <div className="d-flex align-items-center justify-content-center px-2 level-exp">
                                                                     <span className="ml-1">
-                                                                        {rank.exp.toLocaleString()}{" "}
-                                                                        exp
+                                                                        {t(
+                                                                            "playerLevel.exp",
+                                                                            {
+                                                                                pts: rank.exp.toLocaleString(),
+                                                                            }
+                                                                        )}
                                                                     </span>
                                                                 </div>
                                                             </div>
                                                             {/* CONTENT */}
                                                             <div className="level-type-content">
                                                                 <p className="mb-0 pt-3 reward-text">
-                                                                    Rewards
+                                                                    {t(
+                                                                        "playerLevel.reward.title"
+                                                                    )}
                                                                 </p>
                                                                 <div className="my-3 d-flex justify-content-center ticket-text">
-                                                                    <p className="ticket pr-1 mb-0">
-                                                                        Ticket
-                                                                        Multiplier
-                                                                    </p>
-                                                                    <p className="mb-0 ticket-value">
-                                                                        {Math.round(rank.multiplier * 100)}
-                                                                        %
-                                                                    </p>
+                                                                    <Trans
+                                                                        i18nKey="playerLevel.reward.ticketMultiplier"
+                                                                        values={{
+                                                                            percent:
+                                                                                Math.round(
+                                                                                    rank.multiplier *
+                                                                                        100
+                                                                                ),
+                                                                        }}
+                                                                    >
+                                                                        <p className="ticket pr-1 mb-0">
+                                                                            0
+                                                                        </p>
+                                                                        <p className="mb-0 ticket-value">
+                                                                            1
+                                                                        </p>
+                                                                    </Trans>
                                                                 </div>
                                                                 <div className="pb-3 d-flex align-items-center justify-content-center gems">
                                                                     <p className="mb-0">
-                                                                        {`+ ${rank.gems}`}{" "}
-                                                                        gems
+                                                                        {t(
+                                                                            "playerLevel.reward.gems",
+                                                                            {
+                                                                                count: rank.gems,
+                                                                            }
+                                                                        )}
                                                                     </p>
                                                                 </div>
                                                             </div>

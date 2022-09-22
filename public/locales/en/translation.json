@@ -43,6 +43,17 @@
         "multiplier": "+ {{multiplier}} ticket multiplier."
     },
     "invite": {
+        "settings": {
+            "title": "Invite Friends",
+            "subtitle": "<0>Refer and get </0><1>{{count}}</1>",
+            "btn": "get code"
+        },
+        "title": "Add Friends & Get Gems",
+        "subtitle": "Share your referral link with your friends to receive {{gems}} Gems (for you and your friend) when they {{action}}",
+        "tapToCopy": "Tap to copy",
+        "copied": "Copied",
+        "msg": "Hey! Use my link to sign up for GameBox and get {{gems}} gems immediately after you register. \n\nSign up at: {{url}}",
+        "tncApply": "Terms and conditions apply.",
         "invitee": {
             "title1": "Welcome to GameBox",
             "title2": "You have reached level",
@@ -382,10 +393,13 @@
         "subtitle2": "Here're some games for you while you wait."
     },
     "VIPPass": {
+        "name": "VIP Pass",
         "title": "GAMEBOX VIP PASS",
         "subtitle": "The Gamebox VIP Pass is a privilege membership pass in Gamebox.",
         "desc": "The Gamebox VIP Pass NFT grants players special utilities, such as increased daily spins and future utilities. This gives players additional free gems daily to participate and win prizes on Gamebox.",
-        "claim": "CLAIM"
+        "claim": "CLAIM",
+        "noVip": "No VIP Pass",
+        "quantity": "GameBox VIP Pass{{count}}"
     },
     "homePage": {
         "limitedTimeReward": "Limited-Time Reward",
@@ -399,7 +413,8 @@
         "back": "Back",
         "continue": "Continue",
         "no": "No",
-        "yes": "Yes"
+        "yes": "Yes",
+        "settings": "settings"
     },
     "error": {
         "brokenLink": {
@@ -683,6 +698,67 @@
         "dataDeletion": {
             "title": "Data Deletion Request",
             "subtitle": "If you would like us to delete User Provided Data that you have provided through the Service, please contact us at <1>Froyo Games</1>. Please keep in mind that some or all of the User Provided Data may be required for our Service to function properly."
+        }
+    },
+    "highscore": {
+        "title": "Highscores",
+        "noData": {
+            "title": "No highscores yet...",
+            "subtitle": "<0>Tap here</0> to check out available prizes."
+        }
+    },
+    "playerLevel": {
+        "level": "Level",
+        "instruction": "Increase your multiplier with every level!",
+        "multiplier": "<0>Multiplier</0> <1>{{number}}%</1>",
+        "currency": "<0>{{expts}}</0> <1>/</1> <2>{{max}} exp</2>",
+        "exp": "{{pts}} exp",
+        "reward": {
+            "title": "Rewards",
+            "ticketMultiplier": "<0>Ticket Mulitplier</0> <1>{{percent}}%</1>",
+            "gems": "+ {{count}} gems"
+        }
+    },
+    "profile": {
+        "defaultPlayer": "Player {{id}}",
+        "gems": "Gems balance"
+    },
+    "reward": {
+        "title": "Rewards",
+        "unclaimed": "Unclaimed Rewards",
+        "claimed": "Claimed Rewards",
+        "noReward": {
+            "title": "No rewards have yet been discovered!",
+            "subtitle": "It appears that you have yet to claim any prizes."
+        },
+        "noWin": {
+            "title": "No rewards have yet been discovered!",
+            "subtitle": "Looks like you've not played for any prizes yet.",
+            "cta": "<0>You don't appear to have won any prizes yet. Click here</0> <1>to look for one that appeals to you.</1>"
+        },
+        "pending": "pending",
+        "claimBtn": "CLAIM REWARD",
+        "claimBtnWithDate": "CLAIM REWARD - {{date}}"
+    },
+    "settings": {
+        "title": "Settings",
+        "editProfile": "Edit Profile",
+        "wallet": {
+            "title": "Wallet Connected",
+            "add": "Wallet address",
+            "notFound": "No Wallet Found",
+            "dcWallet": "Disconnect Wallet",
+            "cWallet": "Connect Wallet",
+            "wrongNetwork": "Wrong Network"
+        },
+        "notification": {
+            "title": "Notifications",
+            "turnOn": "Turn on notifications"
+        },
+        "moreInfo": {
+            "title": "More Information",
+            "contact": "Contact Support",
+            "version": "Version: {{vNo}}"
         }
     }
 }

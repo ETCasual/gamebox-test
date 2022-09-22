@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation, Trans } from "react-i18next";
 
 // COMPONENT FUNCTIONS
 import ConnectWallet from "Components/Global/ConnectWallet.component";
@@ -99,6 +100,8 @@ const Profile = ({
     //     });
     // };
 
+    const { t } = useTranslation();
+
     return (
         <section id="profile">
             <div className="container-fluid">
@@ -147,7 +150,12 @@ const Profile = ({
                                                     <div className="col-12">
                                                         <h3 className="user-name">
                                                             {user.username ||
-                                                                `Player ${user.id}`}
+                                                                t(
+                                                                    "profile.defaultPlayer",
+                                                                    {
+                                                                        id: user.id,
+                                                                    }
+                                                                )}
                                                         </h3>
                                                     </div>
                                                     <div className="col-12">
@@ -173,7 +181,9 @@ const Profile = ({
                                                         >
                                                             <div className="m-auto d-flex align-items-center justify-content-center">
                                                                 <p className="mb-0">
-                                                                    SETTINGS
+                                                                    {t(
+                                                                        "btn.settings"
+                                                                    ).toUpperCase()}
                                                                 </p>
                                                             </div>
                                                         </Link>
@@ -187,7 +197,7 @@ const Profile = ({
                                             {/* GEMS BALANCE */}
                                             <div className="col">
                                                 <p className="gem-balance-text mb-0 mb-md-2">
-                                                    Gems balance
+                                                    {t("profile.gems")}
                                                 </p>
                                             </div>
                                             <div className="col align-items-center justify-content-between">
@@ -271,15 +281,22 @@ const Profile = ({
                                         onClick={handlePlayerLevelPanel}
                                     >
                                         <p className="multiplier-info">
-                                            Multiplier{" "}
-                                            <span>
-                                                {getCurrentMultiplier(
-                                                    user,
-                                                    ranks
-                                                ) || 0}
-                                                %
-                                            </span>
+                                            <Trans
+                                                i18nKey="playerLevel.multiplier"
+                                                values={{
+                                                    number:
+                                                        getCurrentMultiplier(
+                                                            user,
+                                                            ranks
+                                                        ) || 0,
+                                                }}
+                                            >
+                                                {/* HACK: Trick the compile to think this as an element to render proper style */}
+                                                <>0</>
+                                                <span>1</span>
+                                            </Trans>
                                         </p>
+
                                         {/* LEVEL */}
                                         <div className="w-100">
                                             <div className="level mb-2 d-flex align-items-center justify-content-between">
@@ -292,26 +309,36 @@ const Profile = ({
                                                     </span>
                                                 </p>
                                                 <div className="mb-0 d-flex align-items-center exp">
-                                                    <span className="player-exp">
-                                                        {user.exp >
-                                                        ranks[ranks.length - 1]
-                                                            ?.exp
-                                                            ? ranks[
-                                                                  ranks.length -
-                                                                      1
-                                                              ]?.exp?.toLocaleString()
-                                                            : user.exp?.toLocaleString()}
-                                                    </span>
-                                                    <span className="px-1">
-                                                        /
-                                                    </span>
-                                                    <span className="current-multiplier-total">
-                                                        {getCurrentLevelExp(
-                                                            user,
-                                                            ranks
-                                                        )?.toLocaleString() +
-                                                            " exp"}
-                                                    </span>{" "}
+                                                    <Trans
+                                                        i18nKey="playerLevel.currency"
+                                                        values={{
+                                                            max: getCurrentLevelExp(
+                                                                user,
+                                                                ranks
+                                                            )?.toLocaleString(),
+                                                            expts:
+                                                                user.exp >
+                                                                ranks[
+                                                                    ranks.length -
+                                                                        1
+                                                                ]?.exp
+                                                                    ? ranks[
+                                                                          ranks.length -
+                                                                              1
+                                                                      ]?.exp?.toLocaleString()
+                                                                    : user.exp?.toLocaleString(),
+                                                        }}
+                                                    >
+                                                        <span className="player-exp">
+                                                            0
+                                                        </span>
+                                                        <span className="px-1">
+                                                            1
+                                                        </span>
+                                                        <span className="current-multiplier-total">
+                                                            2
+                                                        </span>
+                                                    </Trans>
                                                 </div>
                                             </div>
                                             <div className="col-12 px-0">
@@ -358,13 +385,19 @@ const Profile = ({
                                 <div className="team d-flex align-items-center justify-content-between p-3 px-md-4 py-md-2">
                                     <div className="col-7 col-md-6 p-md-2">
                                         <p className="team-title">
-                                            Invite Friends
+                                            {t("invite.settings.title")}
                                         </p>
                                         <p className="pt-2 mb-2 d-flex align-items-center refer-text">
-                                            Refer and get{" "}
-                                            <span className="px-2">
-                                                {config.gemsPerInvite}
-                                            </span>
+                                            <Trans
+                                                i18nKey="invite.settings.subtitle"
+                                                values={{
+                                                    count: config.gemsPerInvite,
+                                                }}
+                                            >
+                                                {/* HACK: Trick the compile to think this as an element to render proper style */}
+                                                <>0</>
+                                                <span className="px-2">1</span>
+                                            </Trans>
                                             <img
                                                 width="24"
                                                 src={`${window.cdn}assets/gem_01.png`}
@@ -372,24 +405,25 @@ const Profile = ({
                                             />
                                         </p>
                                         <p className="mb-4 share-text">
-                                            {`Share your referral link with
-                                                your friends to receive ${
-                                                    config.gemsPerInvite
-                                                } Gems (for you and your friend) when they 
-                                                ${
+                                            {t("invite.subtitle", {
+                                                gems: config.gemsPerInvite,
+                                                action:
                                                     config.rewardInvitesRank <=
                                                     0
                                                         ? "join Gamebox."
-                                                        : `reaches level ${config.rewardInvitesRank} 
-                                                    in GameBox.`
-                                                }`}
+                                                        : `reaches level ${config.rewardInvitesRank} in GameBox`,
+                                            })}
                                         </p>
                                         <div
                                             className="invite-btn d-flex align-items-center justify-content-center"
                                             // onClick={handleCheckNFTBalance}
                                             onClick={handleTeamPanel}
                                         >
-                                            <p className="mb-0">GET CODE</p>
+                                            <p className="mb-0">
+                                                {t(
+                                                    "invite.settings.btn"
+                                                ).toUpperCase()}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="col-4 col-md-6 px-0 d-flex align-items-end justify-content-end">
@@ -422,7 +456,7 @@ const Profile = ({
                                         >
                                             <div className="highscore d-flex align-items-center justify-content-center">
                                                 <p className="mb-0">
-                                                    Highscores
+                                                    {t("highscore.title")}
                                                 </p>
                                             </div>
                                         </Link>
@@ -439,7 +473,11 @@ const Profile = ({
                                             }}
                                         >
                                             <div className="rewards d-flex align-items-center justify-content-center">
-                                                <p className="mb-0">Rewards</p>
+                                                <p className="mb-0">
+                                                    {t(
+                                                        "playerLevel.reward.title"
+                                                    )}
+                                                </p>
                                             </div>
                                         </Link>
                                     </div>
@@ -450,7 +488,7 @@ const Profile = ({
                             {
                                 <div className="col-12 mt-0 mt-md-4 mb-4">
                                     <div className="vip-pass-title mb-3">
-                                        VIP Pass
+                                        {t("VIPPass.name")}
                                     </div>
                                     <div className="vip-pass-holder py-4">
                                         {!isWalletConnected && (
@@ -459,7 +497,9 @@ const Profile = ({
                                                 onClick={handleConnectWallet}
                                             >
                                                 <p className="mb-0">
-                                                    CONNECT WALLLET
+                                                    {t(
+                                                        "header.profile.connect_wallet"
+                                                    )}
                                                 </p>
                                             </div>
                                         )}
@@ -468,7 +508,7 @@ const Profile = ({
                                             vipPassData.quantity <= 0 && (
                                                 <div className="text-center mt-2">
                                                     <p className="vip-pass-empty">
-                                                        No VIP Pass
+                                                        {t("VIPPass.noVip")}
                                                     </p>
                                                 </div>
                                             )}
@@ -494,12 +534,16 @@ const Profile = ({
                                                             />
                                                             <div className="col-12 mt-3 text-center">
                                                                 <p className="vip-pass-quantity">
-                                                                    {`GameBox VIP Pass${
-                                                                        vipPassData.quantity >
-                                                                        1
-                                                                            ? ` (x${vipPassData.quantity})`
-                                                                            : ""
-                                                                    }`}
+                                                                    {t(
+                                                                        "VIPPass.quantity",
+                                                                        {
+                                                                            count:
+                                                                                vipPassData.quantity >
+                                                                                1
+                                                                                    ? ` (x${vipPassData.quantity})`
+                                                                                    : "",
+                                                                        }
+                                                                    )}
                                                                 </p>
                                                             </div>
                                                         </div>
