@@ -10,6 +10,7 @@ import loadPrizes from "redux/thunks/Prizes.thunk";
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import getTimerFullUnits from "Utils/GetTImerFullUnits";
+import { useTranslation, Trans } from "react-i18next";
 
 const AutomatedEntryTournamentInfo = ({ data, type }) => {
     const location = useLocation();
@@ -80,6 +81,8 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
         return 0;
     };
 
+    const { t } = useTranslation();
+
     return (
         <section id="automatedEntryTournamentInfo">
             <div className="container-fluid">
@@ -101,7 +104,9 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
-                                    <span className="ml-2">Back</span>
+                                    <span className="ml-2">
+                                        {t("btn.back")}
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -122,7 +127,9 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             alt={data?.prizeTitle}
                                         />
                                         <p className="token-id mb-3">
-                                            Token ID: {data?.prizeSubtitle}
+                                            {t("ae.tokenId", {
+                                                tkn: data?.prizeSubtitle,
+                                            })}
                                         </p>
                                         <p className="title text-center mb-3">
                                             {data?.prizeTitle}
@@ -134,14 +141,21 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             {getTimerFullUnits(timer)}
                                         </p>
                                         <div className="w-100 mt-3 mb-5 text-center">
-                                            <p className="mb-2 tickets-label">
-                                                You have collected
-                                            </p>
-                                            <p className="mb-0 tickets-value">
-                                                {getTickets()?.toLocaleString() ||
-                                                    0}{" "}
-                                                tickets
-                                            </p>
+                                            <Trans
+                                                i18nKey="ae.collected"
+                                                values={{
+                                                    tkt:
+                                                        getTickets()?.toLocaleString() ||
+                                                        0,
+                                                }}
+                                            >
+                                                <p className="mb-2 tickets-label">
+                                                    0
+                                                </p>
+                                                <p className="mb-0 tickets-value">
+                                                    1
+                                                </p>
+                                            </Trans>
                                         </div>
                                         <Link
                                             className="start-earning-btn text-center"
@@ -150,24 +164,17 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                                 state: location.pathname,
                                             }}
                                         >
-                                            START EARNING TICKETS
+                                            {t("ae.startEarning")}
                                         </Link>
                                         <div className="line" />
                                         <p className="instructions-title text-center">
-                                            How to win tickets for the Bonus
-                                            Draw?
+                                            {t("ae.howTo.title")}
                                         </p>
                                         <p className="instructions-subtitle text-center">
-                                            Participate in any tournament
-                                            throughout the platform before the
-                                            timer runs out. Tickets won from the
-                                            tournaments will automatically be
-                                            added into the Daily Draw pool. It’s
-                                            that easy.
+                                            {t("ae.howTo.1")}
                                         </p>
                                         <p className="instructions-tip text-center mb-5">
-                                            Tip: Earn more tickets by “use gems”
-                                            to increase your ticket count.
+                                            {t("ae.howTo.2")}
                                         </p>
                                     </div>
                                 </div>

@@ -96,7 +96,7 @@ const Index = () => {
                     <h1 className="main-title mb-0">
                         {t("notification.title")}
                     </h1>
-                    {!noDataLoaded && (
+                    {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">
                                 {t("notification.noData.title")}

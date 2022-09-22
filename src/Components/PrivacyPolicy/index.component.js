@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
+import { useTranslation, Trans } from "react-i18next";
 
 const Index = () => {
     const history = useHistory();
+    const { t } = useTranslation();
 
     return (
         <section className="privacy-policy">
@@ -26,328 +28,303 @@ const Index = () => {
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
-                                    <span className="ml-2">Back</span>
+                                    <span className="ml-2">
+                                        {t("btn.back")}
+                                    </span>
                                 </Link>
                             </div>
                         </div>
                         <div className="row mt-4">
                             {/* MAIN DESCRIPTION */}
                             <div className="col-12 main-desc mb-5">
-                                <h4 className="title mb-4">Privacy Policy</h4>
+                                <h4 className="title mb-4">
+                                    {t("privacy.title")}
+                                </h4>
                                 <p className="description">
-                                    This Privacy Policy informs you of our
-                                    policies and procedures regarding the
-                                    collection, use and disclosure of personal
-                                    information we receive from users. This
-                                    Privacy Policy applies to GameBox’s games,
-                                    websites and related services, which we here
-                                    collectively call the Service. We will
-                                    notify you of any material changes by
-                                    posting the new Privacy Policy on the
-                                    primary access points to our games service
-                                    which may be updated from time to time. You
-                                    are advised to consult this policy regularly
-                                    for any changes
+                                    {t("privacy.subtitle")}
                                 </p>
                             </div>
                             {/* INFO COLLECTION */}
                             <div className="col-12 main-desc mb-3">
                                 <h4 className="title">
-                                    Information Collection and Use:
+                                    {t("privacy.collectionOfUse.title")}
                                 </h4>
                             </div>
                             {/* PERSONALLY IDENTIFIABLE INFO */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Personally Identifiable Information
+                                    {t(
+                                        "privacy.collectionOfUse.personallyIdentifiableInfo.title"
+                                    )}
                                 </p>
                                 <p className="description">
-                                    While using our services, you may provide us
-                                    with personally identifiable information.
-                                    This refers to information about you that
-                                    can be used to contact or identify you
-                                    ("Personal Information"). Personal
-                                    information includes, but is not limited to,
-                                    your name and email address. We primarily
-                                    use your Personal Information to provide our
-                                    services and respond to your inquiries.
+                                    {t(
+                                        "privacy.collectionOfUse.personallyIdentifiableInfo.content.1"
+                                    )}
                                 </p>
                                 <p className="description">
-                                    We primarily use your Personal Information
-                                    (in some cases in conjunction with your
-                                    Non-Identifying Information) to provide our
-                                    games services, complete your transactions,
-                                    and administer your inquiries.
+                                    {t(
+                                        "privacy.collectionOfUse.personallyIdentifiableInfo.content.2"
+                                    )}
                                 </p>
                             </div>
                             {/* DATA PROVIDED BY YOU */}
                             <div className="col-12 mb-4">
-                                <p className="title">Data provided by you</p>
+                                <p className="title">
+                                    {t(
+                                        "privacy.collectionOfUse.dataProvidedByYou.title"
+                                    )}
+                                </p>
                                 <p className="description">
-                                    This is data provided by you and generated
-                                    for you when using our Service
+                                    {t(
+                                        "privacy.collectionOfUse.dataProvidedByYou.subtitle"
+                                    )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
-                                        Contact Information (such as but not
-                                        limited to name, email address. etc)
+                                        {t(
+                                            "privacy.collectionOfUse.dataProvidedByYou.content.1"
+                                        )}
                                     </li>
-                                    <li>Player Name</li>
-                                    <li>Player ID</li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataProvidedByYou.content.2"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataProvidedByYou.content.3"
+                                        )}
+                                    </li>
                                 </ul>
                             </div>
                             {/* DATA COLLETED AUTOMATICALLY */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Data collected automatically
+                                    {t(
+                                        "privacy.collectionOfUse.dataCollectedAutomatically.title"
+                                    )}
                                 </p>
                                 <p className="description">
-                                    This is data that is collected when using
-                                    certain features in our service
+                                    {t(
+                                        "privacy.collectionOfUse.dataCollectedAutomatically.subtitle"
+                                    )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>Advertising ID</li>
                                     <li>
-                                        ADFA (Apple Identifier for advertisers)
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.1"
+                                        )}
                                     </li>
-                                    <li>Android ID</li>
-                                    <li>General Location</li>
                                     <li>
-                                        Data regarding your use of the Service,
-                                        such as gameplay data and your
-                                        interactions with other players within
-                                        the Service
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.2"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.3"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.4"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.5"
+                                        )}
                                     </li>
                                 </ul>
                             </div>
                             {/* DATA COLLECTED BY OUR PARTNERS */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Data collected by our partners
+                                    {t(
+                                        "privacy.collectionOfUse.dataCollectedByPartners.title"
+                                    )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
-                                        Data obtained through a link with a
-                                        third-party tool provided by a service
-                                        (such as but not limited to Facebook,
-                                        Google Play Game Service or Game Centre)
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedByPartners.content.1"
+                                        )}
                                     </li>
                                     <li>
-                                        Demographic data (such as to determine
-                                        the coarse location of your IP address)
-                                    </li>
-                                    <li>Data to fight fraud</li>
-                                    <li>
-                                        Data for platforms that the games run on
-                                        (payment verification etc)
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedByPartners.content.2"
+                                        )}
                                     </li>
                                     <li>
-                                        Data for advertising and analytics
-                                        purposes
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedByPartners.content.3"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedByPartners.content.4"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.dataCollectedByPartners.content.5"
+                                        )}
                                     </li>
                                 </ul>
                             </div>
                             {/* WHY DATA COLLECTED */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Why is this data collected?
+                                    {t(
+                                        "privacy.collectionOfUse.whyIsDataCollected.title"
+                                    )}
                                 </p>
                                 <p className="description">
-                                    The data collected helps us provide our
-                                    service including:
+                                    {t(
+                                        "privacy.collectionOfUse.whyIsDataCollected.subtitle"
+                                    )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
-                                        Create accounts that allow you to save
-                                        your progress and use our applications
-                                    </li>
-                                    <li>Operate the service </li>
-                                    <li>Verify and confirm payments </li>
-                                    <li>
-                                        Provide and deliver products and
-                                        services you request
-                                    </li>
-                                    <li>Communication and correspondence</li>
-                                </ul>
-
-                                <p className="description">
-                                    To improve our service to our players, we
-                                    have implemented the following measures:
-                                </p>
-                                <ul className="description pb-3 px-3 m-0">
-                                    <li>Updates and improvements</li>
-                                    <li>
-                                        Provide social services within our
-                                        service
-                                    </li>
-                                    <li>Customise our game experience</li>
-                                    <li>
-                                        Better respond to issues and provide
-                                        better support
+                                        {t(
+                                            "privacy.collectionOfUse.whyIsDataCollected.content.1"
+                                        )}
                                     </li>
                                     <li>
-                                        Provide offers in the service, or by
-                                        other websites, services and email
+                                        {t(
+                                            "privacy.collectionOfUse.whyIsDataCollected.content.2"
+                                        )}
                                     </li>
                                     <li>
-                                        Share related information such as
-                                        updates, alerts and support
+                                        {t(
+                                            "privacy.collectionOfUse.whyIsDataCollected.content.3"
+                                        )}
                                     </li>
                                     <li>
-                                        Enable communication among other players
+                                        {t(
+                                            "privacy.collectionOfUse.whyIsDataCollected.content.4"
+                                        )}
+                                    </li>
+                                    <li>
+                                        {t(
+                                            "privacy.collectionOfUse.whyIsDataCollected.content.5"
+                                        )}
                                     </li>
                                 </ul>
 
                                 <p className="description">
-                                    To display personalised advertisements
-                                    within the game as well as other websites
-                                    and services by:
+                                    {t("privacy.improve.title")}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>
-                                        Track content you access in the
-                                        application and your online behaviour
-                                    </li>
-                                    <li>
-                                        Deliver, target and improve our
-                                        advertising and our applications
-                                    </li>
+                                    <li>{t("privacy.improve.content.1")}</li>
+                                    <li>{t("privacy.improve.content.2")}</li>
+                                    <li>{t("privacy.improve.content.3")}</li>
+                                    <li>{t("privacy.improve.content.4")}</li>
+                                    <li>{t("privacy.improve.content.5")}</li>
+                                    <li>{t("privacy.improve.content.6")}</li>
+                                    <li>{t("privacy.improve.content.7")}</li>
+                                </ul>
+
+                                <p className="description">
+                                    {t("privacy.ads.title")}
+                                </p>
+                                <ul className="description pb-3 px-3 m-0">
+                                    <li>{t("privacy.ads.content.1")}</li>
+                                    <li>{t("privacy.ads.content.2")}</li>
                                 </ul>
                             </div>
                             {/* SERVICES SAFE & FAIR */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    We keep our Service safe and fair:
+                                    {t("privacy.services.title")}
                                 </p>
                                 <p className="description">
-                                    In order to keep our services and their
-                                    social features safe and fair, prevent fraud
-                                    and ensure acceptable use, we have an
-                                    interest in processing the necessary data
-                                    to:
+                                    {t("privacy.services.subtitle")}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>
-                                        Analyse and monitor the use of our
-                                        service and social interactions{" "}
-                                    </li>
-                                    <li>
-                                        Moderate communications both
-                                        automatically or manually{" "}
-                                    </li>
-                                    <li>
-                                        Take action against players committing
-                                        fraud or abuse
-                                    </li>
+                                    <li>{t("privacy.services.content.1")}</li>
+                                    <li>{t("privacy.services.content.2")}</li>
+                                    <li>{t("privacy.services.content.3")}</li>
                                 </ul>
                             </div>
                             {/* DATA RETENTION */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Data Retention Policy Managing Your Data
+                                    {t("privacy.dataRetention.title")}
                                 </p>
                                 <p className="description">
-                                    All User-Provided data will be retained as
-                                    long as you are using our service and for a
-                                    reasonable amount of time thereafter.
-                                    Collected information will be retained for
-                                    up to 24 months and it may be stored in
-                                    aggregate after the duration. If you’d like
-                                    us to delete User Provided Data that you
-                                    have provided via the Service, please
-                                    contact us at{" "}
-                                    <a
-                                        className="email"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href={getFroyoGamesContactUrl()}
-                                    >
-                                        Froyo Games
-                                    </a>
-                                    . Please note that some or all of the
-                                    User-Provided Data may be required in order
-                                    for our Service to function properly.
+                                    <Trans i18nKey="privacy.dataRetention.subtitle">
+                                        0
+                                        <a
+                                            className="email"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            href={getFroyoGamesContactUrl()}
+                                        >
+                                            1
+                                        </a>
+                                        2
+                                    </Trans>
                                 </p>
                             </div>
                             {/* CHILDREN */}
                             <div className="col-12 mb-4">
-                                <p className="title">Children</p>
+                                <p className="title">
+                                    {t("privacy.children.title")}
+                                </p>
                                 <p className="description">
-                                    We do not knowingly collect, market, or
-                                    solicit personal data about anyone under the
-                                    age of 13, nor do we knowingly allow such
-                                    individuals to use our Services. If you are
-                                    under the age of 13, please do not send us
-                                    any information about yourself, such as your
-                                    name, address, phone number, or email
-                                    address. Anyone under the age of 13 is not
-                                    permitted to provide any personal
-                                    information. If a parent or guardian
-                                    discovers that his or her child has given us
-                                    information without their permission, please
-                                    contact us at{" "}
-                                    <a
-                                        className="email"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href={getFroyoGamesContactUrl()}
-                                    >
-                                        Froyo Games
-                                    </a>
-                                    . We will remove such information within a
-                                    reasonable time.
+                                    <Trans i18nKey="privacy.children.subtitle">
+                                        0
+                                        <a
+                                            className="email"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            href={getFroyoGamesContactUrl()}
+                                        >
+                                            1
+                                        </a>
+                                        2
+                                    </Trans>
                                 </p>
                             </div>
                             {/* SECURITY */}
                             <div className="col-12 mb-4">
-                                <p className="title">Security</p>
+                                <p className="title">
+                                    {t("privacy.security.title")}
+                                </p>
                                 <p className="description">
-                                    We are concerned about safeguarding the
-                                    confidentiality of your information. We
-                                    provide physical, electronic, and procedural
-                                    safeguards to protect the information we
-                                    process and maintain. For example, we limit
-                                    access to this information to authorised
-                                    employees and contractors who need to know
-                                    that information in order to operate,
-                                    develop or improve our Service. Please be
-                                    aware that, although we endeavour to provide
-                                    reasonable security for information we
-                                    process and maintain, no security system can
-                                    prevent all potential security breaches.
+                                    {t("privacy.security.subtitle")}
                                 </p>
                             </div>
                             {/* CONSENT */}
                             <div className="col-12 mb-4">
-                                <p className="title">Your Consent</p>
+                                <p className="title">
+                                    {" "}
+                                    {t("privacy.consent.title")}
+                                </p>
                                 <p className="description">
-                                    By using our Service, you are consenting to
-                                    our processing of your information as set
-                                    forth in this Privacy Policy now and as
-                                    amended by us. “Processing,” means using
-                                    cookies on a computer/handheld device or
-                                    using or touching information in any way,
-                                    including, but not limited to, collecting,
-                                    storing, deleting, using, combining and
-                                    disclosing information.
+                                    {t("privacy.consent.subtitle")}
                                 </p>
                             </div>
                             {/* CONTACT */}
                             <div className="col-12 mb-4">
-                                <p className="title">Contacting Us</p>
+                                <p className="title">
+                                    {t("privacy.contact.title")}
+                                </p>
                                 <p className="description">
-                                    If you have any questions regarding our
-                                    privacy policy or our practices, please
-                                    contact us at{" "}
-                                    <a
-                                        className="email"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href={getFroyoGamesContactUrl()}
-                                    >
-                                        Froyo Games
-                                    </a>
-                                    .
+                                    <Trans i18nKey="privacy.contact.subtitle">
+                                        0
+                                        <a
+                                            className="email"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            href={getFroyoGamesContactUrl()}
+                                        >
+                                            1
+                                        </a>
+                                        2
+                                    </Trans>
                                 </p>
                             </div>
                         </div>
