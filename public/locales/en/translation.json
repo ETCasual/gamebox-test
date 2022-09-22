@@ -419,11 +419,15 @@
             "closeButtonText": "SKIP"
         }
     },
+    "notification": {
+        "title": "Notifications",
+        "noData": {
+            "title": "No notifications found yet!",
+            "subtitle": "Looks like you've not played for any prizes yet.",
+            "cta": "<0>Click here</0> to look for one you like."
+        }
+    },
     "leaderboard": {
-        "vip": {
-            "title": "VIP Privilege",
-            "tickets": "{{prizeInfo}} tickets"
-        },
         "placeholder": {
             "playerName": "-",
             "points": "0 pts"
