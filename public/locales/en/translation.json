@@ -389,7 +389,9 @@
     },
     "btn": {
         "back": "Back",
-        "continue": "Continue"
+        "continue": "Continue",
+        "no": "No",
+        "yes": "Yes"
     },
     "error": {
         "brokenLink": {
@@ -496,5 +498,32 @@
         "title": "No Ads are available at the moment!",
         "subtitle": "You are still able to get additional tickets.",
         "continue": "Continue"
+    },
+    "ads": {
+        "title": "Confirm watch ads?",
+        "subtitle": "You will get the additional tickets immediately after every game."
+    },
+    "revealWinner": {
+        "winner": "<0>{{winner}} (You)</0> <1>Won the</1> <2>{{title}}</2>",
+        "otherWinner": "<0>{{winner}}</0> <1>Won the</1> <2>{{title}}</2>",
+        "nftToken": "TokenID: {{first}}...{{last}}",
+        "nftNotMinted": {
+            "text": "This NFT is not minted yet. We'll notify you once it's out.",
+            "mintDate": "NFT mint date: {{date}}"
+        },
+        "viewPrize": "View Prize",
+        "btn": "CLAIM PRIZE"
+    },
+    "gemsConfirm": {
+        "title": "Confirm use {{count}} gems?",
+        "subtitle": " You will get the additional tickets immediately after every game."
+    },
+    "subscription": {
+        "title": "Out of Gems?",
+        "subtitle": "It appears that you don't have enough Gems. Gems can be used to join tournaments and earn additional tickets.",
+        "btn": {
+            "later": "Get Gems Later",
+            "now": "Get Gems Now!"
+        }
     }
 }

@@ -16,6 +16,8 @@ import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 // HELPER FUNCTION
 import { defaultUserImage } from "Utils/DefaultImage";
 
+import { Trans, useTranslation } from "react-i18next";
+
 const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
 
@@ -44,6 +46,8 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
             year: "numeric",
         });
     };
+
+    const { t } = useTranslation();
 
     return (
         <>
@@ -104,40 +108,55 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                         {user?.username?.toLowerCase() ===
                                             e?.winner?.toLowerCase() && (
                                             <>
-                                                <p className="winner-name p-3">
-                                                    {e?.winner} (You)
-                                                </p>
-                                                <p className="won-text mb-0">
-                                                    Won the
-                                                </p>
-                                                <p className="prize-name my-2">
-                                                    {e?.title}
-                                                </p>
+                                                <Trans
+                                                    i18nKey="revealWinner.winner"
+                                                    values={{
+                                                        winner: e?.winner,
+                                                        title: e?.title,
+                                                    }}
+                                                >
+                                                    <p className="winner-name p-3">
+                                                        0
+                                                    </p>
+                                                    <p className="won-text mb-0">
+                                                        1
+                                                    </p>
+                                                    <p className="prize-name my-2">
+                                                        2
+                                                    </p>
+                                                </Trans>
                                                 <p className="nft-token">
-                                                    TokenID:{" "}
-                                                    {e?.nftContractAddress?.substring(
-                                                        0,
-                                                        5
-                                                    )}
-                                                    ....
-                                                    {e?.nftContractAddress?.substring(
-                                                        e?.nftContractAddress
-                                                            ?.length - 4
+                                                    {t(
+                                                        "revealWinner.nftToken",
+                                                        {
+                                                            first: e?.nftContractAddress?.substring(
+                                                                0,
+                                                                5
+                                                            ),
+                                                            last: e?.nftContractAddress?.substring(
+                                                                e
+                                                                    ?.nftContractAddress
+                                                                    ?.length - 4
+                                                            ),
+                                                        }
                                                     )}
                                                 </p>
 
                                                 {e?.canClaimDate > 0 && (
                                                     <>
                                                         <p className="mb-2 mt-4 not-minted">
-                                                            This NFT is not
-                                                            minted yet. We’ll
-                                                            notify you once it’s
-                                                            out.
+                                                            {t(
+                                                                "revealWinner.nftNotMinted.text"
+                                                            )}
                                                         </p>
                                                         <p className="mint-date">
-                                                            NFT mint date:{" "}
-                                                            {getMintDate(
-                                                                e?.canClaimDate
+                                                            {t(
+                                                                "revealWinner.nftNotMinted.mintDate",
+                                                                {
+                                                                    date: getMintDate(
+                                                                        e?.canClaimDate
+                                                                    ),
+                                                                }
                                                             )}
                                                         </p>
                                                     </>
@@ -152,7 +171,9 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                         }
                                                     >
                                                         <button className="connect-wallet-btn p-3">
-                                                            CLAIM PRIZE
+                                                            {t(
+                                                                "revealWinner.btn"
+                                                            )}
                                                         </button>
                                                     </Link>
                                                 )}
@@ -161,25 +182,37 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                         {user?.username?.toLowerCase() !==
                                             e?.winner?.toLowerCase() && (
                                             <>
-                                                <p className="winner-name mt-5 p-3">
-                                                    {e?.winner}
-                                                </p>
-                                                <p className="won-text mb-0">
-                                                    won the
-                                                </p>
-                                                <p className="prize-name my-2">
-                                                    {e?.title}
-                                                </p>
+                                                <Trans
+                                                    i18nKey="revealWinner.otherWinner"
+                                                    values={{
+                                                        winner: e?.winner,
+                                                        title: e?.title,
+                                                    }}
+                                                >
+                                                    <p className="winner-name mt-5 p-3">
+                                                        0
+                                                    </p>
+                                                    <p className="won-text mb-0">
+                                                        1
+                                                    </p>
+                                                    <p className="prize-name my-2">
+                                                        2
+                                                    </p>
+                                                </Trans>
                                                 <p className="nft-token">
-                                                    TokenID:{" "}
-                                                    {e?.nftContractAddress?.substring(
-                                                        0,
-                                                        5
-                                                    )}
-                                                    ....
-                                                    {e?.nftContractAddress?.substring(
-                                                        e?.nftContractAddress
-                                                            ?.length - 4
+                                                    {t(
+                                                        "revealWinner.nftToken",
+                                                        {
+                                                            first: e?.nftContractAddress?.substring(
+                                                                0,
+                                                                5
+                                                            ),
+                                                            last: e?.nftContractAddress?.substring(
+                                                                e
+                                                                    ?.nftContractAddress
+                                                                    ?.length - 4
+                                                            ),
+                                                        }
                                                     )}
                                                 </p>
                                             </>
