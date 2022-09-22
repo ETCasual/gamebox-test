@@ -420,6 +420,10 @@
         }
     },
     "leaderboard": {
+        "vip": {
+            "title": "VIP Privilege",
+            "tickets": "{{prizeInfo}} tickets"
+        },
         "placeholder": {
             "playerName": "-",
             "points": "0 pts"
