@@ -1,6 +1,7 @@
 // REACT & REDUX
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation, Trans } from "react-i18next";
 
 // HELPER FUNCTIONS
 import {
@@ -37,6 +38,8 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
         };
     }, [playerDetails, playersHighScore, ranks]);
 
+    const { t } = useTranslation();
+
     return (
         <>
             {/* PLAYER INFO */}
@@ -53,7 +56,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                     src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
-                                <span className="ml-2">Back</span>
+                                <span className="ml-2">{t("btn.back")}</span>
                             </div>
                             {/* PLAYER, LEVEL, EXP & MULTIPLIER */}
                             <div className="col-12 mb-2 mb-md-0">
@@ -119,14 +122,19 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                         <div className="col-12 mt-3">
                                             <div className="multiplier p-3 p-md-4 d-flex flex-column align-items-start">
                                                 <p className="mb-md-3 multiplier-info">
-                                                    Multiplier{" "}
-                                                    <span>
-                                                        {getCurrentMultiplier(
-                                                            playerDetailsData,
-                                                            ranksList
-                                                        ) || 0}
-                                                        %
-                                                    </span>
+                                                    <Trans
+                                                        i18nKey="playerLevel.multiplier"
+                                                        values={{
+                                                            number:
+                                                                getCurrentMultiplier(
+                                                                    playerDetailsData,
+                                                                    ranksList
+                                                                ) || 0,
+                                                        }}
+                                                    >
+                                                        <>0</>
+                                                        <span>1</span>
+                                                    </Trans>
                                                 </p>
                                                 {/* LEVEL */}
                                                 <div className="w-100">
@@ -140,28 +148,36 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                             </span>
                                                         </p>
                                                         <div className="mb-0 d-flex align-items-center justify-content-end exp">
-                                                            <span className="player-exp">
-                                                                {playerDetailsData?.exp >
-                                                                ranksList[
-                                                                    ranksList.length -
-                                                                        1
-                                                                ]?.exp
-                                                                    ? ranksList[
-                                                                          ranksList.length -
-                                                                              1
-                                                                      ]?.exp?.toLocaleString()
-                                                                    : playerDetailsData?.exp?.toLocaleString()}
-                                                            </span>
-                                                            <span className="px-1">
-                                                                /
-                                                            </span>
-                                                            <span className="current-mutliplier-total pr-1">
-                                                                {getCurrentLevelExp(
-                                                                    playerDetailsData,
-                                                                    ranksList
-                                                                )?.toLocaleString()}
-                                                            </span>
-                                                            <span>exp</span>
+                                                            <Trans
+                                                                i18nKey="playerLevel.currency"
+                                                                values={{
+                                                                    expts:
+                                                                        playerDetailsData?.exp >
+                                                                        ranksList[
+                                                                            ranksList.length -
+                                                                                1
+                                                                        ]?.exp
+                                                                            ? ranksList[
+                                                                                  ranksList.length -
+                                                                                      1
+                                                                              ]?.exp?.toLocaleString()
+                                                                            : playerDetailsData?.exp?.toLocaleString(),
+                                                                    max: getCurrentLevelExp(
+                                                                        playerDetailsData,
+                                                                        ranksList
+                                                                    )?.toLocaleString(),
+                                                                }}
+                                                            >
+                                                                <span className="player-exp">
+                                                                    0
+                                                                </span>
+                                                                <span className="px-1">
+                                                                    1
+                                                                </span>
+                                                                <span className="current-mutliplier-total pr-1">
+                                                                    2
+                                                                </span>
+                                                            </Trans>
                                                         </div>
                                                     </div>
                                                     <div className="col-12 position-relative px-0">
@@ -190,14 +206,16 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                             <div className="col-12 high-score mt-4 mt-md-5">
                                 <div className="row">
                                     <div className="col-12">
-                                        <p className="title mb-4">Highscores</p>
+                                        <p className="title mb-4">
+                                            {t("highscore.title")}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="content-min-height">
                                     {playersHighScoreList.length === 0 ? (
                                         <div className="no-result">
                                             <p className="title mb-1">
-                                                No highscores yet...
+                                                {t("highscore.noData.title")}
                                             </p>
                                         </div>
                                     ) : (
@@ -228,7 +246,12 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                                 )}
                                                             </p>
                                                             <p className="px-0 score">
-                                                                {`${card.gameScore} pts`}
+                                                                {t(
+                                                                    "leaderboard.default.points",
+                                                                    {
+                                                                        count: card.gameScore,
+                                                                    }
+                                                                )}
                                                             </p>
                                                         </div>
                                                     </div>

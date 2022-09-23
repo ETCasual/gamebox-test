@@ -760,5 +760,13 @@
             "contact": "Contact Support",
             "version": "Version: {{vNo}}"
         }
+    },
+    "winner": {
+        "title": "Latest Winenrs",
+        "noData": {
+            "title": "No Winners found yet!",
+            "subtitle": "Looks like you've not played for any prize yet.",
+            "cta": "<0>Click here</0> to look for one you like."
+        }
     }
 }
