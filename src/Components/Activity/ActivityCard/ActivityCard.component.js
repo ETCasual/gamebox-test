@@ -74,7 +74,7 @@ const ActivityCard = ({ card }) => {
                                 <div className="your-tickets px-3 mb-1 mb-sm-2 d-flex flex-column align-items-md-start justify-content-start">
                                     <div>
                                         <p className="label mb-0 mb-md-1">
-                                            {t("activity.card.ticketTitle")}
+                                            {t("activity.card.title")}
                                         </p>
                                     </div>
                                     <div>

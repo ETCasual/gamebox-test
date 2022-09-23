@@ -99,13 +99,13 @@ const Index = () => {
                     {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">
-                                {t("notification.noData.title")}
+                                {t("notification.no_data.title")}
                             </p>
                             <p className="subtitle mt-1 mb-0">
-                                {t("notification.noData.subtitle")}
+                                {t("notification.no_data.subtitle")}
                             </p>
                             <p className="subtitle">
-                                <Trans i18nKey="notification.noData.cta">
+                                <Trans i18nKey="notification.no_data.cta">
                                     <Link to="/">0</Link>1
                                 </Trans>
                             </p>

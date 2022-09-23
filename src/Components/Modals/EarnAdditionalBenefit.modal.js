@@ -11,7 +11,7 @@ const EarnAdditionalBenefitModal = ({ handleContinueButton, score }) => {
             <div className="modal-body-small text-center">
                 <p className="additional mb-2">
                     {extraEarning.experience > 0
-                        ? t("additionalBenefit.ticketExp")
+                        ? t("additionalBenefit.ticket_exp")
                         : t("additionalBenefit.ticket")}
                 </p>
                 {score >= 0 && (
@@ -22,7 +22,7 @@ const EarnAdditionalBenefitModal = ({ handleContinueButton, score }) => {
                 <div className="benefit d-flex align-items-center justify-content-center">
                     {extraEarning.ticket > 0 && (
                         <p className="mb-0 earn-tickets d-flex align-items-center justify-content-center">
-                            {t("additionalBenefit.extraTicket", {
+                            {t("additionalBenefit.extra_ticket", {
                                 count: extraEarning.ticket,
                             })}
                         </p>
@@ -32,7 +32,7 @@ const EarnAdditionalBenefitModal = ({ handleContinueButton, score }) => {
                     )}
                     {extraEarning.experience > 0 && (
                         <p className="mb-0 earn-exp d-flex align-items-center justify-content-center">
-                            {t("additionalBenefit.extraExp", {
+                            {t("additionalBenefit.extra_exp", {
                                 expts: extraEarning.experience,
                             })}
                         </p>

@@ -75,14 +75,14 @@ const Index = () => {
                     {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">
-                                {t("activity.noData.title")}
+                                {t("activity.no_data.title")}
                             </p>
                             <p className="subtitle mt-1 mb-0">
-                                {t("activity.noData.desc")}
+                                {t("activity.no_data.desc")}
                             </p>
                             <p className="subtitle">
-                                <Link to="/">{t("activity.noData.btn")}</Link>
-                                {t("activity.noData.btnCont")}
+                                <Link to="/">{t("activity.no_data.btn")}</Link>
+                                {t("activity.no_data.btn_cont")}
                             </p>
                         </div>
                     )}

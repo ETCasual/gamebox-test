@@ -167,7 +167,9 @@ const Featured = ({ data, handleWinnerRevealCard }) => {
                                                     </div>
                                                     <div className="pool-tickets mt-3">
                                                         <p className="mb-0 pr-md-2 label d-flex align-items-end">
-                                                            {t("ae.drawStarts")}
+                                                            {t(
+                                                                "ae.draw_starts"
+                                                            )}
                                                         </p>
                                                         <div className="d-flex">
                                                             <p

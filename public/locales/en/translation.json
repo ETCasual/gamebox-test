@@ -12,9 +12,9 @@
         "payment": {
             "summary": "Payment Summary",
             "title": "Total Payment",
-            "gemCount": "{{count}} gems",
+            "gem_count": "{{count}} gems",
             "currency": "SGD ${{price}}",
-            "estimatedPrice": "Estimated Price ",
+            "estimated_price": "Estimated Price ",
             "details": {
                 "title": "Payment Details",
                 "card": {
@@ -27,19 +27,19 @@
             "tnc": "By clicking \"pay\", you are agreeing to our terms and conditions, privacy policy and tournament rules"
         },
         "cards": {
-            "gemCount": "{{count}} GEMS"
+            "gem_count": "{{count}} GEMS"
         },
         "purchase": {
             "title": "Purchase Gems",
             "cta": "Buy $FROYO:",
-            "payWithToken": "Pay using Froyo Tokens",
-            "payWithCard": "Pay using Credit Card"
+            "pay_with_token": "Pay using Froyo Tokens",
+            "pay_with_card": "Pay using Credit Card"
         }
     },
-    "rankUp": {
+    "rank_up": {
         "title": "Reward",
         "subtitle": "Here's a rewards for you.",
-        "gemCount": "+ {{count}} gems",
+        "gem_count": "+ {{count}} gems",
         "multiplier": "+ {{multiplier}} ticket multiplier."
     },
     "invite": {
@@ -50,10 +50,10 @@
         },
         "title": "Add Friends & Get Gems",
         "subtitle": "Share your referral link with your friends to receive {{gems}} Gems (for you and your friend) when they {{action}}",
-        "tapToCopy": "Tap to copy",
+        "tap_to_copy": "Tap to copy",
         "copied": "Copied",
         "msg": "Hey! Use my link to sign up for GameBox and get {{gems}} gems immediately after you register. \n\nSign up at: {{url}}",
-        "tncApply": "Terms and conditions apply.",
+        "tnc_apply": "Terms and conditions apply.",
         "invitee": {
             "title1": "Welcome to GameBox",
             "title2": "You have reached level",
@@ -62,7 +62,7 @@
         "invited": {
             "title": "Say hi to your friend",
             "subtitle": {
-                "yourFriend": "Your friend",
+                "your_friend": "Your friend",
                 "action": "has {{action}} with your referral link."
             }
         },
@@ -72,14 +72,14 @@
     },
     "activity": {
         "header": "Your Activities",
-        "noData": {
+        "no_data": {
             "title": "No activity has been found yet!",
             "desc": "It appears that you have not yet competed for any prizes.",
             "btn": "Click Here",
-            "btnCont": " to select one that appeals to you."
+            "btn_cont": " to select one that appeals to you."
         },
         "card": {
-            "ticketTitle": "Your Tickets",
+            "title": "Your Tickets",
             "remaining": " tickets remaining"
         }
     },
@@ -189,41 +189,41 @@
             "step_4": "Once successfully bound, your wallet should be connected to your account when accessing the Gamebox platform."
         }
     },
-    "purchaseContentWallet": {
+    "purchase_content_wallet": {
         "noWallet": {
             "title": "Wallet not connected.",
-            "subTitle": "Please connect your wallet to continue.",
+            "subtitle": "Please connect your wallet to continue.",
             "button": "CONNECT WALLET"
         },
-        "insufficentToken": {
+        "insufficent_token": {
             "title": "Insufficient Froyo Tokens.",
-            "subTitle": "Please purchase Froyo Tokens to continue.",
+            "subtitle": "Please purchase Froyo Tokens to continue.",
             "button": "PURCHASE FROYO TOKENS",
             "color": "red"
         },
-        "beforePurchaseConfirmation": {
+        "before_purchase_confirmation": {
             "title": "Purchase {{quantity}} gems with {{price}} froyo tokens",
-            "subTitle": "Froyo Tokens will be deducted from your wallet {{first}}...{{last}}.",
+            "subtitle": "Froyo Tokens will be deducted from your wallet {{first}}...{{last}}.",
             "button": "USE {{price}} FROYO TOKENS"
         },
         "processing": {
             "title": "",
-            "subTitle": "Processing your purchase"
+            "subtitle": "Processing your purchase"
         },
-        "isSuccess": {
+        "is_success": {
             "title": "Purchase successful.",
-            "subTitle": "You have successfully purchased {{quantity}} gems.",
+            "subtitle": "You have successfully purchased {{quantity}} gems.",
             "button": "CONTINUE"
         },
-        "isFail": {
+        "is_fail": {
             "title": "Purchase unsuccessful.",
-            "subTitle": "Something went wrong. Please try again later.",
+            "subtitle": "Something went wrong. Please try again later.",
             "button": "CLOSE",
             "color": "red"
         },
-        "processFail": {
+        "process_fail": {
             "title": "Error",
-            "subTitle": "Unable to update payment to server. Please try again",
+            "subtitle": "Unable to update payment to server. Please try again",
             "button": "RETRY",
             "color": "red"
         }
@@ -232,15 +232,15 @@
         "title": "SORRY",
         "subtitle": "GameBox is not available in your country yet."
     },
-    "additionalTicket": {
+    "additional_ticket": {
         "title": "Increase your tickets earnings",
         "ads": "You have chosen to watch ads to boost your ticket earnings",
         "gems": "You have chosen to use gems to boost your ticket earnings",
-        "boostBy": "Boost Tickets by",
-        "gemsCount": "Gems",
-        "ticketsCount": "+ {{quantity}} tickets",
+        "boost_by": "Boost Tickets by",
+        "gems_count": "Gems",
+        "tickets_count": "+ {{quantity}} tickets",
         "score": "every {{score}} score points",
-        "playNow": "or start playing immediately"
+        "play_now": "or start playing immediately"
     },
     "landing": {
         "register": {
@@ -315,13 +315,13 @@
         "gem": "gem"
     },
     "ae": {
-        "dailyReward": "DAILY REWARD",
+        "daily_reward": "DAILY REWARD",
         "tickets": "My tickets",
-        "drawStarts": "Draw starts in",
-        "tokenId": "Token ID: {{tkn}}",
+        "draw_starts": "Draw starts in",
+        "token_id": "Token ID: {{tkn}}",
         "collected": "<0>You have collected</0> <1>{{tkt}} tickets</1>",
-        "startEarning": "START EARNING TICKETS",
-        "howTo": {
+        "start_earning": "START EARNING TICKETS",
+        "how_to": {
             "title": "How to win tickets for the Bonus Draw?",
             "1": "Participate in any tournament throughout the platform before the timer runs out. Tickets won from the tournaments will automatically be added into the Daily Draw pool. It’s that easy.",
             "2": "Tip: Earn more tickets by \"use gems\" to increase your ticket count."
@@ -329,18 +329,18 @@
     },
     "onboarding": {
         "havefun": "Have fun!",
-        "prizePool": "Prize pool"
+        "prize_pool": "Prize pool"
     },
     "spinner": {
-        "freegems": "FREE GEMS",
+        "free_gems": "FREE GEMS",
         "claim": "Claim your daily free gems here!",
         "refresh": "Refresh in",
-        "fortuneWheel": {
+        "fortune_wheel": {
             "earn": "SPIN & EARN MORE REWARDS HERE!",
-            "yourgems": "YOUR GEMS",
-            "rewardsInfo": "Rewards Information",
-            "youHave": "You have",
-            "spinsLeft": "spins left",
+            "your_gems": "YOUR GEMS",
+            "rewards_info": "Rewards Information",
+            "you_have": "You have",
+            "spins_left": "spins left",
             "chance": "CHANCES",
             "reward": "REWARDS",
             "spin": "spin",
@@ -348,14 +348,14 @@
         }
     },
     "tournament": {
-        "endsIn": "Tournament ends in",
+        "ends_in": "Tournament ends in",
         "join": "JOIN TOURNAMENT",
         "title": "JOIN TOURNAMENTS!",
-        "bonustime": "BONUS TIME!",
+        "bonus_time": "BONUS TIME!",
         "subtitle": "Compete against other players, collect tickets, and you could win this Prize!",
         "loading": {
             "title": "Loading",
-            "closeButton": "Close"
+            "close_button": "Close"
         },
         "score": {
             "fail": {
@@ -373,37 +373,37 @@
         "ticket": "Your tickets",
         "play": "PLAY"
     },
-    "featuredCompleted": {
-        "drawingWinner": "Drawing winner",
-        "tapToReveal": "TAP TO REVEAL THE WINNER"
+    "featured_completed": {
+        "drawing_winner": "Drawing winner",
+        "tap_to_reveal": "TAP TO REVEAL THE WINNER"
     },
-    "featuredWinner": {
+    "featured_winner": {
         "congratulations": "Congratulations!",
         "won": "won the",
         "rewards": "REWARDS",
-        "drawnOn": "Prize drawn on"
+        "drawn_on": "Prize drawn on"
     },
     "daily": {
         "title": "Daily",
         "tickets": "Your tickets"
     },
-    "stayTuned": {
+    "stay_tuned": {
         "title": "Stay Tuned!",
         "subtitle1": "We'll be back with more rewards for you.",
         "subtitle2": "Here're some games for you while you wait."
     },
-    "VIPPass": {
+    "vip_pass": {
         "name": "VIP Pass",
         "title": "GAMEBOX VIP PASS",
         "subtitle": "The Gamebox VIP Pass is a privilege membership pass in Gamebox.",
         "desc": "The Gamebox VIP Pass NFT grants players special utilities, such as increased daily spins and future utilities. This gives players additional free gems daily to participate and win prizes on Gamebox.",
         "claim": "CLAIM",
-        "noVip": "No VIP Pass",
+        "no_vip": "No VIP Pass",
         "quantity": "GameBox VIP Pass{{count}}"
     },
-    "homePage": {
-        "limitedTimeReward": "Limited-Time Reward",
-        "featuredRewards": "Featured Rewards",
+    "home_page": {
+        "limited_time_reward": "Limited-Time Reward",
+        "featured_rewards": "Featured Rewards",
         "premium": "Play and Win Rewards"
     },
     "weekly": {
@@ -417,34 +417,34 @@
         "settings": "settings"
     },
     "error": {
-        "brokenLink": {
+        "broken_link": {
             "title": "Error",
             "message_1": "Opps, something went wrong.",
             "message_2": "Please contact support for further assistance.",
-            "errorCode": "12-{{prizeId}}-{{gameId}}",
-            "okButtonText": "CLOSE",
-            "closeButtonText": ""
+            "error_code": "12-{{prizeId}}-{{gameId}}",
+            "ok_button_text": "CLOSE",
+            "close_button_text": ""
         },
-        "logGEnterFail": {
+        "log_g_enter_fail": {
             "title": "Error",
             "message_1": "Unable to connect to server.",
             "message_2": "Please check your internet connection and try again.",
-            "errorCode": "1-{{prizeId}}-{{gameId}}",
-            "okButtonText": "RETRY",
-            "closeButtonText": "CLOSE"
+            "error_code": "1-{{prizeId}}-{{gameId}}",
+            "ok_button_text": "RETRY",
+            "close_button_text": "CLOSE"
         },
-        "internetError": {
+        "internet_error": {
             "title": "Error",
             "message_1": "Game failed to load. Please check your internet connection and try again.",
             "message_2": "Skip: Gems will not be refunded",
-            "errorCode": "200-{{prizeId}}-{{gameId}}",
-            "okButtonText": "RETRY",
-            "closeButtonText": "SKIP"
+            "error_code": "200-{{prizeId}}-{{gameId}}",
+            "ok_button_text": "RETRY",
+            "close_button_text": "SKIP"
         }
     },
     "notification": {
         "title": "Notifications",
-        "noData": {
+        "no_data": {
             "title": "No notifications found yet!",
             "subtitle": "Looks like you've not played for any prizes yet.",
             "cta": "<0>Click here</0> to look for one you like."
@@ -452,15 +452,15 @@
     },
     "leaderboard": {
         "placeholder": {
-            "playerName": "-",
+            "player_name": "-",
             "points": "0 pts"
         },
         "default": {
-            "playerName": "{{user}} (You)",
+            "player_name": "{{user}} (You)",
             "points": "{{count}} pts"
         },
         "other": {
-            "playerName": "Player {{user}}"
+            "player_name": "Player {{user}}"
         },
         "warning": {
             "title": "Players who attempt to cheat or utilise exploits that can impact gameplay may be banned.",
@@ -468,25 +468,25 @@
         }
     },
     "prize": {
-        "tokenId": "Token ID: {{id}}",
+        "token_id": "Token ID: {{id}}",
         "delivered": "Prize delivered to wallet address",
-        "walletAdd": "{{first}}...{{last}}"
+        "wallet_address": "{{first}}...{{last}}"
     },
     "additionalBenefit": {
         "ticket": "Additional tickets earned",
-        "ticketExp": "Additional tickets and experience points earned",
+        "ticket_exp": "Additional tickets and experience points earned",
         "point": "You scored {{pts}} points.",
-        "extraTicket": "{{count}} tickets",
-        "extraExp": "{{expts}} exp"
+        "extra_ticket": "{{count}} tickets",
+        "extra_exp": "{{expts}} exp"
     },
-    "gameEnd": {
+    "game_end": {
         "title": "GAME RESULT",
-        "tournamentEnd": "(The tournament has ended)",
+        "tournament_end": "(The tournament has ended)",
         "score": {
             "title": "Score",
-            "scoreNeededPerExtraTickets": "every {{count}} score",
-            "ticketCount": "+ {{count}}",
-            "totalEarned": "You earned"
+            "score_needed_per_extra_tickets": "every {{count}} score",
+            "ticket_count": "+ {{count}}",
+            "total_earned": "You earned"
         }
     },
     "instructions": {
@@ -506,26 +506,26 @@
             }
         }
     },
-    "quitModal": {
+    "quit_modal": {
         "title": "QUIT GAME?",
         "subtitle": "You will lose your current game score if you exit now and <1>Gems will not be refunded</1>.",
         "confirm": "YES, QUIT",
         "cancel": "CANCEL"
     },
-    "insufficientGems": {
+    "insufficient_gems": {
         "title": "INSUFFICIENT GEMS",
         "subtitle": "You are out of gems. Please purchase more gems to continue.",
         "cta": "GET IT NOW!"
     },
-    "gameMenu": {
+    "game_menu": {
         "booster": {
             "title": "BOOSTER",
             "subtitle": "Every {{count}} score",
-            "boostBy": "+ {{count}}"
+            "boost_by": "+ {{count}}"
         },
         "start": "START PLAYING"
     },
-    "noAds": {
+    "no_ads": {
         "title": "No Ads are available at the moment!",
         "subtitle": "You are still able to get additional tickets.",
         "continue": "Continue"
@@ -534,15 +534,15 @@
         "title": "Confirm watch ads?",
         "subtitle": "You will get the additional tickets immediately after every game."
     },
-    "revealWinner": {
+    "reveal_winner": {
         "winner": "<0>{{winner}} (You)</0> <1>Won the</1> <2>{{title}}</2>",
-        "otherWinner": "<0>{{winner}}</0> <1>Won the</1> <2>{{title}}</2>",
-        "nftToken": "TokenID: {{first}}...{{last}}",
-        "nftNotMinted": {
+        "other_winner": "<0>{{winner}}</0> <1>Won the</1> <2>{{title}}</2>",
+        "nft_token": "TokenID: {{first}}...{{last}}",
+        "nft_not_minted": {
             "text": "This NFT is not minted yet. We'll notify you once it's out.",
-            "mintDate": "NFT mint date: {{date}}"
+            "mint_date": "NFT mint date: {{date}}"
         },
-        "viewPrize": "View Prize",
+        "view_prize": "View Prize",
         "btn": "CLAIM PRIZE"
     },
     "gemsConfirm": {
@@ -560,16 +560,16 @@
     "privacy": {
         "title": "Privacy Policy",
         "subtitle": "This Privacy Policy informs you of our policies and procedures regarding the collection, use and disclosure of personal information we receive from users. This Privacy Policy applies to GameBox’s games, websites and related services, which we here collectively call the Service. We will notify you of any material changes by posting the new Privacy Policy on the primary access points to our games service which may be updated from time to time. You are advised to consult this policy regularly for any changes",
-        "collectionOfUse": {
+        "collection_of_use": {
             "title": "Information Collection and Use:",
-            "personallyIdentifiableInfo": {
+            "personally_identifiable_info": {
                 "title": "Personally Indentifiable Information",
                 "content": {
                     "1": "While using our services, you may provide us with personally identifiable information. This refers to information about you that can be used to contact or identify you (\"Personal Information\"). Personal information includes, but is not limited to, your name and email address. We primarily use your Personal Information to provide our services and respond to your inquiries.",
                     "2": "We primarily use your Personal Information (in some cases in conjunction with your Non-Identifying Information) to provide our games services, complete your transactions, and administer your inquiries."
                 }
             },
-            "dataProvidedByYou": {
+            "data_provided_by_you": {
                 "title": "Data provided by you",
                 "subtitle": "This is data provided by you and generated for you when using our Service",
                 "content": {
@@ -578,7 +578,7 @@
                     "3": "Player ID"
                 }
             },
-            "dataCollectedAutomatically": {
+            "data_collected_automatically": {
                 "title": "Data collected automatically",
                 "subtitle": "This is data that is collected when using certain features in our service",
                 "content": {
@@ -589,7 +589,7 @@
                     "5": "Data regarding your use of the Service, such as gameplay data and your interactions with other players within the Service"
                 }
             },
-            "dataCollectedByPartners": {
+            "data_collected_by_partners": {
                 "title": "Data collected by our partners",
                 "content": {
                     "1": "Data obtained through a link with a third-party tool provided by a service (such as but not limited to Facebook, Google Play Game Service or Game Centre)",
@@ -599,7 +599,7 @@
                     "5": "Data for advertising and analytics purposes"
                 }
             },
-            "whyIsDataCollected": {
+            "why_is_data_collected": {
                 "title": "Why is this data collected?",
                 "subtitle": "The data collected helps us provide our service including:",
                 "content": {
@@ -639,7 +639,7 @@
                 "3": "Take action against players committing fraud or abuse"
             }
         },
-        "dataRetention": {
+        "data_retention": {
             "title": "Data Retention Policy Managing Your Data",
             "subtitle": "All User-Provided data will be retained as long as you are using our service and for a reasonable amount of time thereafter. Collected information will be retained for up to 24 months and it may be stored in aggregate after the duration. If you’d like us to delete User Provided Data that you have provided via the Service, please contact us at <1>Froyo Games</1>. Please note that some or all of the User-Provided Data may be required in order for our Service to function properly."
         },
@@ -665,7 +665,7 @@
         "subtitle1": "We provide a fun space for you to play games with your friends and others across the world. We need your help to keep it an environment that is safe and fun for you.",
         "subtitle2": "These rules apply to all interactions with others both within the game and in our respective communities, services and environments. These standards act as a guide to how you should interact within our ecosystems, including but not limited to the examples below.",
         "subtitle3": "Violation of these rules could result in actions taken against your account including a permanent ban.",
-        "personalInfo": {
+        "personal_info": {
             "title": "Personal Information",
             "subtitle": "We encourage you to never share your personal information. The sharing of personal information of others aside from display names and player IDs are not allowed across all our games and our various social ecosystems."
         },
@@ -695,19 +695,19 @@
             "subtitle2": "Accounts that have been banned may lose access to the game account, items, digital currencies, and other items earned or purchased.",
             "subtitle3": "Supporting one another will result in more fun, joy, and excitement, so let's work together to create a positive environment!"
         },
-        "dataDeletion": {
+        "data_deletion": {
             "title": "Data Deletion Request",
             "subtitle": "If you would like us to delete User Provided Data that you have provided through the Service, please contact us at <1>Froyo Games</1>. Please keep in mind that some or all of the User Provided Data may be required for our Service to function properly."
         }
     },
     "highscore": {
         "title": "Highscores",
-        "noData": {
+        "no_data": {
             "title": "No highscores yet...",
             "subtitle": "<0>Tap here</0> to check out available prizes."
         }
     },
-    "playerLevel": {
+    "player_level": {
         "level": "Level",
         "instruction": "Increase your multiplier with every level!",
         "multiplier": "<0>Multiplier</0> <1>{{number}}%</1>",
@@ -720,42 +720,42 @@
         }
     },
     "profile": {
-        "defaultPlayer": "Player {{id}}",
+        "default_player": "Player {{id}}",
         "gems": "Gems balance"
     },
     "reward": {
         "title": "Rewards",
         "unclaimed": "Unclaimed Rewards",
         "claimed": "Claimed Rewards",
-        "noReward": {
+        "no_reward": {
             "title": "No rewards have yet been discovered!",
             "subtitle": "It appears that you have yet to claim any prizes."
         },
-        "noWin": {
+        "no_win": {
             "title": "No rewards have yet been discovered!",
             "subtitle": "Looks like you've not played for any prizes yet.",
             "cta": "<0>You don't appear to have won any prizes yet. Click here</0> <1>to look for one that appeals to you.</1>"
         },
         "pending": "pending",
-        "claimBtn": "CLAIM REWARD",
-        "claimBtnWithDate": "CLAIM REWARD - {{date}}"
+        "claim_btn": "CLAIM REWARD",
+        "claim_btn_with_date": "CLAIM REWARD - {{date}}"
     },
     "settings": {
         "title": "Settings",
-        "editProfile": "Edit Profile",
+        "edit_profile": "Edit Profile",
         "wallet": {
             "title": "Wallet Connected",
             "add": "Wallet address",
-            "notFound": "No Wallet Found",
-            "dcWallet": "Disconnect Wallet",
-            "cWallet": "Connect Wallet",
-            "wrongNetwork": "Wrong Network"
+            "not_found": "No Wallet Found",
+            "dc_wallet": "Disconnect Wallet",
+            "c_wallet": "Connect Wallet",
+            "wrong_network": "Wrong Network"
         },
         "notification": {
             "title": "Notifications",
-            "turnOn": "Turn on notifications"
+            "turn_on": "Turn on notifications"
         },
-        "moreInfo": {
+        "more_info": {
             "title": "More Information",
             "contact": "Contact Support",
             "version": "Version: {{vNo}}"
@@ -763,7 +763,7 @@
     },
     "winner": {
         "title": "Latest Winenrs",
-        "noData": {
+        "no_data": {
             "title": "No Winners found yet!",
             "subtitle": "Looks like you've not played for any prize yet.",
             "cta": "<0>Click here</0> to look for one you like."

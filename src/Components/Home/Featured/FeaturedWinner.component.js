@@ -66,7 +66,7 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                             <div className="info-wrapper d-flex flex-column justify-content-between text-center pt-3">
                                 <div className="align-items-start mt-4">
                                     <div className="congratz-subtitle">
-                                        {t("featuredWinner.congratulations")}
+                                        {t("featured_winner.congratulations")}
                                     </div>
                                 </div>
                                 <div className="align-items-center mt-4 mb-2">
@@ -83,16 +83,16 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                                         {prizeWon?.userNickName || "..."}
                                     </div>
                                     <div className="winner-subtitle mt-3">
-                                        {t("featuredWinner.won")}
+                                        {t("featured_winner.won")}
                                     </div>
                                     <div className="prize-title mt-2 mb-4">
                                         {prizeWon?.prizeTitle ||
-                                            t("featuredWinner.rewards")}
+                                            t("featured_winner.rewards")}
                                     </div>
                                 </div>
                                 <div className="align-items-end mb-4">
                                     <div className="prize-drawn-title my-1">
-                                        {t("featuredWinner.drawnOn")}
+                                        {t("featured_winner.drawn_on")}
                                     </div>
                                     <div className="prize-drawn-text my-1">
                                         {timer}

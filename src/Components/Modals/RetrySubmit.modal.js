@@ -4,11 +4,11 @@ const RetrySubmitModal = ({
     disableRetry,
     title,
     subtitle,
-    okButtonText = "",
-    closeButtonText = "",
+    ok_button_text = "",
+    close_button_text = "",
 }) => {
-    const showOkBtn = okButtonText !== "";
-    const showCloseBtn = closeButtonText !== "";
+    const showOkBtn = ok_button_text !== "";
+    const showCloseBtn = close_button_text !== "";
 
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
@@ -19,7 +19,7 @@ const RetrySubmitModal = ({
                 <div className="p-0 btn-wrapper d-flex mt-4">
                     {showCloseBtn && (
                         <button className="col btn-no" onClick={handleClose}>
-                            {closeButtonText}
+                            {close_button_text}
                         </button>
                     )}
                     {showOkBtn && (
@@ -29,7 +29,7 @@ const RetrySubmitModal = ({
                             }`}
                             onClick={!disableRetry ? handleOk : null}
                         >
-                            {okButtonText}
+                            {ok_button_text}
                         </button>
                     )}
                 </div>

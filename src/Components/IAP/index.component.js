@@ -48,12 +48,12 @@ const Index = () => {
     const [purchasingStatusModal, setPurchasingStatusModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
         noWallet: user.walletAddress ? false : true,
-        beforePurchaseConfirmation: false,
-        insufficentToken: false,
+        before_purchase_confirmation: false,
+        insufficent_token: false,
         processing: false,
-        isSuccess: false,
-        isFail: false,
-        processFail: false,
+        is_success: false,
+        is_fail: false,
+        process_fail: false,
     });
     const [purchaseInfo, setPurchaseInfo] = useState({});
     const purchaseStatusRef = useRef({
@@ -82,32 +82,32 @@ const Index = () => {
             ) {
                 setPurchasingStatus((prev) => ({
                     ...prev,
-                    beforePurchaseConfirmation: false,
-                    insufficentToken: false,
+                    before_purchase_confirmation: false,
+                    insufficent_token: false,
                     processing: false,
-                    isSuccess: false,
-                    isFail: false,
+                    is_success: false,
+                    is_fail: false,
                     noWallet: true,
                 }));
             } else if (user.walletAddress && user.tokenBalance < price) {
                 setPurchasingStatus((prev) => ({
                     ...prev,
                     noWallet: false,
-                    beforePurchaseConfirmation: false,
+                    before_purchase_confirmation: false,
                     processing: false,
-                    isSuccess: false,
-                    isFail: false,
-                    insufficentToken: true,
+                    is_success: false,
+                    is_fail: false,
+                    insufficent_token: true,
                 }));
             } else if (user.walletAddress && user.tokenBalance >= price) {
                 setPurchasingStatus((prev) => ({
                     ...prev,
                     noWallet: false,
-                    insufficentToken: false,
+                    insufficent_token: false,
                     processing: false,
-                    isSuccess: false,
-                    isFail: false,
-                    beforePurchaseConfirmation: true,
+                    is_success: false,
+                    is_fail: false,
+                    before_purchase_confirmation: true,
                 }));
             }
             setPurchasingStatusModal(true);
@@ -125,11 +125,11 @@ const Index = () => {
         setPurchasingStatus((prev) => ({
             ...prev,
             noWallet: false,
-            beforePurchaseConfirmation: false,
-            insufficentToken: false,
+            before_purchase_confirmation: false,
+            insufficent_token: false,
             processing: false,
-            isSuccess: false,
-            isFail: false,
+            is_success: false,
+            is_fail: false,
         }));
     };
 
@@ -200,7 +200,7 @@ const Index = () => {
                             setPurchasingStatus((prev) => ({
                                 ...prev,
                                 processing: false,
-                                processFail: true,
+                                process_fail: true,
                             }));
 
                             purchaseStatusRef.current = {
@@ -221,7 +221,7 @@ const Index = () => {
                             setPurchasingStatus((prev) => ({
                                 ...prev,
                                 processing: false,
-                                isSuccess: true,
+                                is_success: true,
                             }));
 
                             dispatch(loadGemsList());
@@ -253,7 +253,7 @@ const Index = () => {
                         setPurchasingStatus((prev) => ({
                             ...prev,
                             processing: false,
-                            isFail: true,
+                            is_fail: true,
                         }));
                     });
             }
@@ -267,25 +267,25 @@ const Index = () => {
         if (purchasingStatus.noWallet) {
             setPurchasingStatus((prev) => ({ ...prev, noWallet: false }));
             await handleWallet();
-        } else if (purchasingStatus.beforePurchaseConfirmation) {
+        } else if (purchasingStatus.before_purchase_confirmation) {
             setPurchasingStatus((prev) => ({
                 ...prev,
-                beforePurchaseConfirmation: false,
+                before_purchase_confirmation: false,
             }));
             await openMetaMaskForPurchase();
-        } else if (purchasingStatus.insufficentToken) {
+        } else if (purchasingStatus.insufficent_token) {
             setPurchasingStatus((prev) => ({
                 ...prev,
-                insufficentToken: false,
+                insufficent_token: false,
             }));
-        } else if (purchasingStatus.isFail) {
+        } else if (purchasingStatus.is_fail) {
             setPurchasingStatus((prev) => ({
                 ...prev,
-                isFail: false,
+                is_fail: false,
             }));
-        } else if (purchasingStatus.isSuccess) {
+        } else if (purchasingStatus.is_success) {
             // Do Nothing
-        } else if (purchasingStatus.processFail) {
+        } else if (purchasingStatus.process_fail) {
             sendPurchaseInfo();
         }
     };
@@ -309,7 +309,7 @@ const Index = () => {
             .then((res) => {
                 setPurchasingStatus((prev) => ({
                     ...prev,
-                    processFail: false,
+                    process_fail: false,
                 }));
                 purchaseStatusRef.current = {
                     ...purchaseStatusRef.current,
@@ -320,7 +320,7 @@ const Index = () => {
                     setPurchasingStatus((prev) => ({
                         ...prev,
                         processing: false,
-                        isSuccess: true,
+                        is_success: true,
                     }));
 
                     dispatch(loadGemsList());
@@ -352,7 +352,7 @@ const Index = () => {
             .catch((e) => {
                 setPurchasingStatus((prev) => ({
                     ...prev,
-                    processFail: true,
+                    process_fail: true,
                     processing: false,
                 }));
 
@@ -494,7 +494,7 @@ const Index = () => {
                                             handleSelectedTab("froyo")
                                         }
                                     >
-                                        {t("iap.purchase.payWithToken")}
+                                        {t("iap.purchase.pay_with_token")}
                                     </li>
                                     <li
                                         className={`${
@@ -506,7 +506,7 @@ const Index = () => {
                                             handleSelectedTab("card")
                                         }
                                     >
-                                        {t("iap.purchase.payWithCard")}
+                                        {t("iap.purchase.pay_with_card")}
                                     </li>
                                 </ul>
                                 <div className="gems-wrapper px-3 pt-3">

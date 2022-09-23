@@ -25,23 +25,26 @@ const PurchaseContent = ({
 
     const content = {
         noWallet: {
-            title: t("purchaseContentWallet.noWallet.title"),
-            subTitle: t("purchaseContentWallet.noWallet.subTitle"),
-            button: t("purchaseContentWallet.noWallet.button"),
+            title: t("purchase_content_wallet.noWallet.title"),
+            subtitle: t("purchase_content_wallet.noWallet.subtitle"),
+            button: t("purchase_content_wallet.noWallet.button"),
         },
-        insufficentToken: {
-            title: t("purchaseContentWallet.insufficentToken.title"),
-            subTitle: t("purchaseContentWallet.insufficentToken.subTitle"),
-            button: t("purchaseContentWallet.insufficentToken.button"),
-            color: t("purchaseContentWallet.insufficentToken.color"),
+        insufficent_token: {
+            title: t("purchase_content_wallet.insufficent_token.title"),
+            subtitle: t("purchase_content_wallet.insufficent_token.subtitle"),
+            button: t("purchase_content_wallet.insufficent_token.button"),
+            color: t("purchase_content_wallet.insufficent_token.color"),
         },
-        beforePurchaseConfirmation: {
-            title: t("purchaseContentWallet.beforePurchaseConfirmation.title", {
-                quantity: productInfo?.quantity,
-                price: productInfo?.price,
-            }),
-            subTitle: t(
-                "purchaseContentWallet.beforePurchaseConfirmation.subTitle",
+        before_purchase_confirmation: {
+            title: t(
+                "purchase_content_wallet.before_purchase_confirmation.title",
+                {
+                    quantity: productInfo?.quantity,
+                    price: productInfo?.price,
+                }
+            ),
+            subtitle: t(
+                "purchase_content_wallet.before_purchase_confirmation.subtitle",
                 {
                     first: user.walletAddress?.substring(0, 5),
                     last: user.walletAddress?.substring(
@@ -50,34 +53,34 @@ const PurchaseContent = ({
                 }
             ),
             button: t(
-                "purchaseContentWallet.beforePurchaseConfirmation.button",
+                "purchase_content_wallet.before_purchase_confirmation.button",
                 {
                     price: productInfo?.price,
                 }
             ),
         },
         processing: {
-            title: t("purchaseContentWallet.processing.title"),
-            subTitle: t("purchaseContentWallet.processing.subTitle"),
+            title: t("purchase_content_wallet.processing.title"),
+            subtitle: t("purchase_content_wallet.processing.subtitle"),
         },
-        isSuccess: {
-            title: t("purchaseContentWallet.isSuccess.title"),
-            subTitle: t("purchaseContentWallet.isSuccess.subTitle", {
+        is_success: {
+            title: t("purchase_content_wallet.is_success.title"),
+            subtitle: t("purchase_content_wallet.is_success.subtitle", {
                 quantity: productInfo?.quantity,
             }),
-            button: t("purchaseContentWallet.isSuccess.button"),
+            button: t("purchase_content_wallet.is_success.button"),
         },
-        isFail: {
-            title: t("purchaseContentWallet.isFail.title"),
-            subTitle: t("purchaseContentWallet.isFail.subTitle"),
-            button: t("purchaseContentWallet.isFail.button"),
-            color: t("purchaseContentWallet.isFail.color"),
+        is_fail: {
+            title: t("purchase_content_wallet.is_fail.title"),
+            subtitle: t("purchase_content_wallet.is_fail.subtitle"),
+            button: t("purchase_content_wallet.is_fail.button"),
+            color: t("purchase_content_wallet.is_fail.color"),
         },
-        processFail: {
-            title: t("purchaseContentWallet.processFail.title"),
-            subTitle: t("purchaseContentWallet.processFail.subTitle"),
-            button: t("purchaseContentWallet.processFail.button"),
-            color: t("purchaseContentWallet.processFail.color"),
+        process_fail: {
+            title: t("purchase_content_wallet.process_fail.title"),
+            subtitle: t("purchase_content_wallet.process_fail.subtitle"),
+            button: t("purchase_content_wallet.process_fail.button"),
+            color: t("purchase_content_wallet.process_fail.color"),
         },
     };
 
@@ -95,7 +98,7 @@ const PurchaseContent = ({
                                 : "text-left"
                         }`}
                     >
-                        {content[currentStatus]?.subTitle}
+                        {content[currentStatus]?.subtitle}
                     </p>
                     {/* GENERIC LOADER */}
                     {purchasingStatus.processing && (
@@ -111,8 +114,8 @@ const PurchaseContent = ({
                     {!purchasingStatus.processing && (
                         <div className="btn-wrapper w-100 d-flex align-items-center justify-content-between mt-3">
                             {type === "froyo" &&
-                                (purchasingStatus.beforePurchaseConfirmation ||
-                                    purchasingStatus.insufficentToken ||
+                                (purchasingStatus.before_purchase_confirmation ||
+                                    purchasingStatus.insufficent_token ||
                                     purchasingStatus.noWallet) && (
                                     <button
                                         className="cancel-button"
@@ -124,8 +127,8 @@ const PurchaseContent = ({
                             <button
                                 style={{
                                     backgroundColor:
-                                        purchasingStatus?.isFail ||
-                                        purchasingStatus?.insufficentToken
+                                        purchasingStatus?.is_fail ||
+                                        purchasingStatus?.insufficent_token
                                             ? "#c40000"
                                             : "#ff3399",
                                 }}

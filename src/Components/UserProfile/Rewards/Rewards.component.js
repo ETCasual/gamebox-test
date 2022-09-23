@@ -230,10 +230,10 @@ const Rewards = () => {
                                 claimedPrizes.length === 0 ? (
                                     <div className="no-result">
                                         <p className="title mb-1">
-                                            {t("reward.noReward.title")}
+                                            {t("reward.no_reward.title")}
                                         </p>
                                         <p className="subtitle mt-1 mb-0">
-                                            {t("reward.noReward.subtitle")}
+                                            {t("reward.no_reward.subtitle")}
                                         </p>
                                     </div>
                                 ) : (
@@ -338,13 +338,13 @@ const Rewards = () => {
                             ) : unClaimedPrizes.length === 0 ? (
                                 <div className="no-result">
                                     <p className="title mb-1">
-                                        {t("reward.noWin.title")}
+                                        {t("reward.no_win.title")}
                                     </p>
                                     <p className="subtitle mt-1 mb-0">
-                                        {t("reward.noWin.subtitle")}
+                                        {t("reward.no_win.subtitle")}
                                     </p>
                                     <p className="subtitle">
-                                        <Trans i18nKey="reward.noWin.cta">
+                                        <Trans i18nKey="reward.no_win.cta">
                                             <Link to="/">0</Link>
                                             {/* HACK: Trick the compile to think this as an element to render proper style */}
                                             <>1</>
@@ -435,7 +435,7 @@ const Rewards = () => {
                                                                                     <div className="claim-btn opacity-0-5 d-inline-block py-2 px-3">
                                                                                         <p className="mb-0">
                                                                                             {t(
-                                                                                                "reward.claimBtnWithDate",
+                                                                                                "reward.claim_btn_with_date",
                                                                                                 {
                                                                                                     date: getRemainingDaysToClaim(
                                                                                                         data.prizeCanClaimDate
@@ -464,7 +464,7 @@ const Rewards = () => {
                                                                                         >
                                                                                             <p className="mb-0">
                                                                                                 {t(
-                                                                                                    "reward.claimBtn"
+                                                                                                    "reward.claim_btn"
                                                                                                 )}
                                                                                             </p>
                                                                                         </div>
@@ -485,7 +485,7 @@ const Rewards = () => {
                                                                                         >
                                                                                             <p className="mb-0">
                                                                                                 {t(
-                                                                                                    "reward.claimBtn"
+                                                                                                    "reward.claim_btn"
                                                                                                 )}
                                                                                             </p>
                                                                                         </div>

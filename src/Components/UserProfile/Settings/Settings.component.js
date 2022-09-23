@@ -129,7 +129,7 @@ const Settings = () => {
                                                     {user?.email}
                                                 </p>
                                                 <button className="profile-edit">
-                                                    {t("settings.editProfile")}
+                                                    {t("settings.edit_profile")}
                                                 </button>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@ const Settings = () => {
                                                             {user.walletAddress
                                                                 ? user.walletAddress
                                                                 : t(
-                                                                      "settings.wallet.notFound"
+                                                                      "settings.wallet.not_found"
                                                                   )}
                                                         </span>
                                                     </div>
@@ -172,7 +172,7 @@ const Settings = () => {
                                                                 }`}
                                                             >
                                                                 {t(
-                                                                    "settings.wallet.dcWallet"
+                                                                    "settings.wallet.dc_wallet"
                                                                 )}
                                                             </p>
                                                         )}
@@ -180,7 +180,7 @@ const Settings = () => {
                                                             !user.network && (
                                                                 <p className="mb-0">
                                                                     {t(
-                                                                        "settings.wallet.cWallet"
+                                                                        "settings.wallet.c_wallet"
                                                                     )}
                                                                 </p>
                                                             )}
@@ -189,7 +189,7 @@ const Settings = () => {
                                                                 "Wrong Network!" && (
                                                                 <p className="mb-0">
                                                                     {t(
-                                                                        "settings.wallet.wrongNetwork"
+                                                                        "settings.wallet.wrong_network"
                                                                     )}
                                                                 </p>
                                                             )}
@@ -225,7 +225,7 @@ const Settings = () => {
                                                 <div className="col-6 d-flex align-items-center">
                                                     <p className="mb-0">
                                                         {t(
-                                                            "settings.notification.turnOn"
+                                                            "settings.notification.turn_on"
                                                         )}
                                                     </p>
                                                 </div>
@@ -345,7 +345,7 @@ const Settings = () => {
                                 <div className="row py-4">
                                     <div className="col-12 mb-3">
                                         <p className="main-title">
-                                            {t("settings.moreInfo.title")}
+                                            {t("settings.more_info.title")}
                                         </p>
                                     </div>
                                     <div className="col-12 d-flex info-links">
@@ -381,12 +381,12 @@ const Settings = () => {
                                                     rel="noopener noreferrer"
                                                 >
                                                     {t(
-                                                        "settings.moreInfo.contact"
+                                                        "settings.more_info.contact"
                                                     )}
                                                 </a>
                                                 <span className="app-version">
                                                     {t(
-                                                        "settings.moreInfo.version",
+                                                        "settings.more_info.version",
                                                         {
                                                             vNo: process.env
                                                                 .REACT_APP_VERSION,

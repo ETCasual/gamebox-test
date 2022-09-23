@@ -25,11 +25,11 @@ const InsufficientBalanceModalPopup = ({
                     <div className="d-flex flex-column align-items-center justify-content-center my-4">
                         <div className="col-12 col-md-8 p-2">
                             <p className="title text-center">
-                                {t("insufficientGems.title")}
+                                {t("insufficient_gems.title")}
                             </p>
 
                             <p className="subtitle text-center my-4">
-                                {t("insufficientGems.subtitle")}
+                                {t("insufficient_gems.subtitle")}
                             </p>
 
                             <Link
@@ -43,7 +43,7 @@ const InsufficientBalanceModalPopup = ({
                                 onClick={onBuyClicked}
                             >
                                 <button className="buy-btn d-flex flex-column align-items-center justify-content-center m-auto">
-                                    {t("insufficientGems.cta")}
+                                    {t("insufficient_gems.cta")}
                                 </button>
                             </Link>
                         </div>

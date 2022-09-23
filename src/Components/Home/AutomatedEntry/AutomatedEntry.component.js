@@ -161,7 +161,7 @@ const AutomatedEntry = ({ data }) => {
                         <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                             <div>
                                 <p className="title-text mb-1">
-                                    {t("ae.dailyReward")}
+                                    {t("ae.daily_reward")}
                                 </p>
                                 <div className="desc-text mb-1">
                                     {data.prizeTitle}
@@ -194,7 +194,7 @@ const AutomatedEntry = ({ data }) => {
                 </div>
                 {/* TIMER */}
                 <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
-                    <p className="timer-text mb-0">{t("ae.drawStarts")}</p>
+                    <p className="timer-text mb-0">{t("ae.draw_starts")}</p>
                     <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
                 </div>
             </div>

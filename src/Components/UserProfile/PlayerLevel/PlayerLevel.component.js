@@ -26,7 +26,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                         <div className="current-level-wrapper d-flex flex-column justify-content-center align-items-center">
                                             <div className="level-indicator-wrapper d-flex flex-column justify-content-center align-items-center">
                                                 <span>
-                                                    {t("playerLevel.level")}
+                                                    {t("player_level.level")}
                                                 </span>
                                                 <p className="mb-0 level text-center">
                                                     {getCurrentLevelNo(
@@ -36,7 +36,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                 </p>
                                             </div>
                                             <p className="statement text-center">
-                                                {t("playerLevel.instruction")}
+                                                {t("player_level.instruction")}
                                             </p>
                                             <div className="current-level-details-wrapper p-2">
                                                 {/* MULTIPLIER & EXP */}
@@ -44,7 +44,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                     {/* MULTIPLIER */}
                                                     <div className="d-flex multiplier-text">
                                                         <Trans
-                                                            i18nKey="playerLevel.multiplier"
+                                                            i18nKey="player_level.multiplier"
                                                             values={{
                                                                 number: getCurrentMultiplier(
                                                                     user,
@@ -63,7 +63,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                     {/* EXP COUNT */}
                                                     <div className="d-flex align-items-center justify-content-center exp-count px-3">
                                                         <Trans
-                                                            i18nKey="playerLevel.currency"
+                                                            i18nKey="player_level.currency"
                                                             values={{
                                                                 expts:
                                                                     user.exp >
@@ -147,7 +147,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                                 <div className="d-flex align-items-center justify-content-center px-2 level-exp">
                                                                     <span className="ml-1">
                                                                         {t(
-                                                                            "playerLevel.exp",
+                                                                            "player_level.exp",
                                                                             {
                                                                                 pts: rank.exp.toLocaleString(),
                                                                             }
@@ -159,12 +159,12 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                             <div className="level-type-content">
                                                                 <p className="mb-0 pt-3 reward-text">
                                                                     {t(
-                                                                        "playerLevel.reward.title"
+                                                                        "player_level.reward.title"
                                                                     )}
                                                                 </p>
                                                                 <div className="my-3 d-flex justify-content-center ticket-text">
                                                                     <Trans
-                                                                        i18nKey="playerLevel.reward.ticketMultiplier"
+                                                                        i18nKey="player_level.reward.ticketMultiplier"
                                                                         values={{
                                                                             percent:
                                                                                 Math.round(
@@ -184,7 +184,7 @@ const PlayerLevel = ({ user, ranks, handleBackButton }) => {
                                                                 <div className="pb-3 d-flex align-items-center justify-content-center gems">
                                                                     <p className="mb-0">
                                                                         {t(
-                                                                            "playerLevel.reward.gems",
+                                                                            "player_level.reward.gems",
                                                                             {
                                                                                 count: rank.gems,
                                                                             }

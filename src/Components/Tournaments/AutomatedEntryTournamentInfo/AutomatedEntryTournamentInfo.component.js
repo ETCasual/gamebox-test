@@ -127,7 +127,7 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                             alt={data?.prizeTitle}
                                         />
                                         <p className="token-id mb-3">
-                                            {t("ae.tokenId", {
+                                            {t("ae.token_id", {
                                                 tkn: data?.prizeSubtitle,
                                             })}
                                         </p>
@@ -164,17 +164,17 @@ const AutomatedEntryTournamentInfo = ({ data, type }) => {
                                                 state: location.pathname,
                                             }}
                                         >
-                                            {t("ae.startEarning")}
+                                            {t("ae.start_earning")}
                                         </Link>
                                         <div className="line" />
                                         <p className="instructions-title text-center">
-                                            {t("ae.howTo.title")}
+                                            {t("ae.how_to.title")}
                                         </p>
                                         <p className="instructions-subtitle text-center">
-                                            {t("ae.howTo.1")}
+                                            {t("ae.how_to.1")}
                                         </p>
                                         <p className="instructions-tip text-center mb-5">
-                                            {t("ae.howTo.2")}
+                                            {t("ae.how_to.2")}
                                         </p>
                                     </div>
                                 </div>

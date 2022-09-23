@@ -63,7 +63,7 @@ const IAPFroyoGemPacks = ({ handleSelectedGemPackPayment }) => {
                                     {gem.title}
                                 </p>
                                 <p className="mb-1 quantity">
-                                    {t("iap.cards.gemCount", {
+                                    {t("iap.cards.gem_count", {
                                         count: gem.quantity?.toLocaleString(),
                                     })}
                                 </p>

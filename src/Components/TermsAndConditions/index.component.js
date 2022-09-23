@@ -51,10 +51,10 @@ const Index = () => {
                             {/* PERSONAL INFO */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    {t("tnc.personalInfo.title")}
+                                    {t("tnc.personal_info.title")}
                                 </p>
                                 <p className="description">
-                                    {t("tnc.personalInfo.subtitle")}
+                                    {t("tnc.personal_info.subtitle")}
                                 </p>
                             </div>
                             {/* BULLYING & HARASSMENT */}
@@ -147,10 +147,10 @@ const Index = () => {
                             {/* DATA DELETION REQUEST */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    {t("tnc.dataDeletion.title")}
+                                    {t("tnc.data_deletion.title")}
                                 </p>
                                 <p className="description">
-                                    <Trans i18nKey="tnc.dataDeletion.subtitle">
+                                    <Trans i18nKey="tnc.data_deletion.subtitle">
                                         0
                                         <a
                                             className="email"

@@ -15,12 +15,12 @@ const GameQuitModal = ({ onActionCallback, isShowWarningMessage = true }) => {
                                 {/*EXTRA MARGIN */}
                                 <p className="my-5"></p>
                                 <p className="text-center panel-title text-danger">
-                                    {t("quitModal.title")}
+                                    {t("quit_modal.title")}
                                 </p>
 
                                 {isShowWarningMessage && (
                                     <p className="game-warning-text text-center  mb-0">
-                                        <Trans i18nKey="quitModal.subtitle">
+                                        <Trans i18nKey="quit_modal.subtitle">
                                             0
                                             <span className="text-danger">
                                                 1
@@ -37,14 +37,14 @@ const GameQuitModal = ({ onActionCallback, isShowWarningMessage = true }) => {
                                     className="yes-button d-block bg-danger mx-auto text-center  mt-5 py-2"
                                     onClick={() => onActionCallback("yes")}
                                 >
-                                    {t("quitModal.confirm")}
+                                    {t("quit_modal.confirm")}
                                 </button>
 
                                 <button
                                     className="cancel-button d-block text-center mx-auto mt-3 py-2"
                                     onClick={() => onActionCallback("no")}
                                 >
-                                    {t("quitModal.cancel")}
+                                    {t("quit_modal.cancel")}
                                 </button>
                                 {/*EXTRA MARGIN */}
                                 <p className="my-5"></p>

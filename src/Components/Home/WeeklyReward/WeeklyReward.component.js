@@ -68,7 +68,7 @@ const WeeklyRewards = ({ weeklyRewardsData, usertickets }) => {
                                                     <p>{usertickets}</p>
                                                 </div>
                                                 <div className="tickets-pool">
-                                                    <p>{t("ae.drawStarts")}</p>
+                                                    <p>{t("ae.draw_starts")}</p>
                                                     <p>{timer}</p>
                                                 </div>
                                             </div>

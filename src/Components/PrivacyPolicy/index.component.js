@@ -47,24 +47,24 @@ const Index = () => {
                             {/* INFO COLLECTION */}
                             <div className="col-12 main-desc mb-3">
                                 <h4 className="title">
-                                    {t("privacy.collectionOfUse.title")}
+                                    {t("privacy.collection_of_use.title")}
                                 </h4>
                             </div>
                             {/* PERSONALLY IDENTIFIABLE INFO */}
                             <div className="col-12 mb-4">
                                 <p className="title">
                                     {t(
-                                        "privacy.collectionOfUse.personallyIdentifiableInfo.title"
+                                        "privacy.collection_of_use.personally_identifiable_info.title"
                                     )}
                                 </p>
                                 <p className="description">
                                     {t(
-                                        "privacy.collectionOfUse.personallyIdentifiableInfo.content.1"
+                                        "privacy.collection_of_use.personally_identifiable_info.content.1"
                                     )}
                                 </p>
                                 <p className="description">
                                     {t(
-                                        "privacy.collectionOfUse.personallyIdentifiableInfo.content.2"
+                                        "privacy.collection_of_use.personally_identifiable_info.content.2"
                                     )}
                                 </p>
                             </div>
@@ -72,28 +72,28 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">
                                     {t(
-                                        "privacy.collectionOfUse.dataProvidedByYou.title"
+                                        "privacy.collection_of_use.data_provided_by_you.title"
                                     )}
                                 </p>
                                 <p className="description">
                                     {t(
-                                        "privacy.collectionOfUse.dataProvidedByYou.subtitle"
+                                        "privacy.collection_of_use.data_provided_by_you.subtitle"
                                     )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataProvidedByYou.content.1"
+                                            "privacy.collection_of_use.data_provided_by_you.content.1"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataProvidedByYou.content.2"
+                                            "privacy.collection_of_use.data_provided_by_you.content.2"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataProvidedByYou.content.3"
+                                            "privacy.collection_of_use.data_provided_by_you.content.3"
                                         )}
                                     </li>
                                 </ul>
@@ -102,38 +102,38 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">
                                     {t(
-                                        "privacy.collectionOfUse.dataCollectedAutomatically.title"
+                                        "privacy.collection_of_use.data_collected_automatically.title"
                                     )}
                                 </p>
                                 <p className="description">
                                     {t(
-                                        "privacy.collectionOfUse.dataCollectedAutomatically.subtitle"
+                                        "privacy.collection_of_use.data_collected_automatically.subtitle"
                                     )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.1"
+                                            "privacy.collection_of_use.data_collected_automatically.content.1"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.2"
+                                            "privacy.collection_of_use.data_collected_automatically.content.2"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.3"
+                                            "privacy.collection_of_use.data_collected_automatically.content.3"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.4"
+                                            "privacy.collection_of_use.data_collected_automatically.content.4"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedAutomatically.content.5"
+                                            "privacy.collection_of_use.data_collected_automatically.content.5"
                                         )}
                                     </li>
                                 </ul>
@@ -142,33 +142,33 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">
                                     {t(
-                                        "privacy.collectionOfUse.dataCollectedByPartners.title"
+                                        "privacy.collection_of_use.data_collected_by_partners.title"
                                     )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedByPartners.content.1"
+                                            "privacy.collection_of_use.data_collected_by_partners.content.1"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedByPartners.content.2"
+                                            "privacy.collection_of_use.data_collected_by_partners.content.2"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedByPartners.content.3"
+                                            "privacy.collection_of_use.data_collected_by_partners.content.3"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedByPartners.content.4"
+                                            "privacy.collection_of_use.data_collected_by_partners.content.4"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.dataCollectedByPartners.content.5"
+                                            "privacy.collection_of_use.data_collected_by_partners.content.5"
                                         )}
                                     </li>
                                 </ul>
@@ -177,38 +177,38 @@ const Index = () => {
                             <div className="col-12 mb-4">
                                 <p className="title">
                                     {t(
-                                        "privacy.collectionOfUse.whyIsDataCollected.title"
+                                        "privacy.collection_of_use.why_is_data_collected.title"
                                     )}
                                 </p>
                                 <p className="description">
                                     {t(
-                                        "privacy.collectionOfUse.whyIsDataCollected.subtitle"
+                                        "privacy.collection_of_use.why_is_data_collected.subtitle"
                                     )}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.whyIsDataCollected.content.1"
+                                            "privacy.collection_of_use.why_is_data_collected.content.1"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.whyIsDataCollected.content.2"
+                                            "privacy.collection_of_use.why_is_data_collected.content.2"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.whyIsDataCollected.content.3"
+                                            "privacy.collection_of_use.why_is_data_collected.content.3"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.whyIsDataCollected.content.4"
+                                            "privacy.collection_of_use.why_is_data_collected.content.4"
                                         )}
                                     </li>
                                     <li>
                                         {t(
-                                            "privacy.collectionOfUse.whyIsDataCollected.content.5"
+                                            "privacy.collection_of_use.why_is_data_collected.content.5"
                                         )}
                                     </li>
                                 </ul>
@@ -251,10 +251,10 @@ const Index = () => {
                             {/* DATA RETENTION */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    {t("privacy.dataRetention.title")}
+                                    {t("privacy.data_retention.title")}
                                 </p>
                                 <p className="description">
-                                    <Trans i18nKey="privacy.dataRetention.subtitle">
+                                    <Trans i18nKey="privacy.data_retention.subtitle">
                                         0
                                         <a
                                             className="email"

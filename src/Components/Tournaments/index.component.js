@@ -391,7 +391,7 @@ const Index = ({ match }) => {
                                                             <>
                                                                 <div className="your-tokens-title-text mr-0 mr-md-2">
                                                                     {t(
-                                                                        "ae.drawStarts"
+                                                                        "ae.draw_starts"
                                                                     )}
                                                                 </div>
                                                                 <div className="mt-1">
@@ -426,7 +426,7 @@ const Index = ({ match }) => {
                                                                 <div className="d-flex flex-row align-items-end">
                                                                     <div className="draw-title-text w-100 mr-2 mr-md-2">
                                                                         {t(
-                                                                            "ae.drawStarts"
+                                                                            "ae.draw_starts"
                                                                         )}
                                                                     </div>
 

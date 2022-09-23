@@ -229,11 +229,11 @@ const FortuneWheelRules = ({
                         disabled={!isAbleToSpin || isClickedSpin ? true : false}
                         onClick={onSpinClicked}
                     >
-                        {t("spinner.fortuneWheel.spin")}
+                        {t("spinner.fortune_wheel.spin")}
                         <br />
                         &
                         <br />
-                        {t("spinner.fortuneWheel.win")}
+                        {t("spinner.fortune_wheel.win")}
                         {/* <br />
                         <span className="spins-left-text">{spinLeft}</span> */}
                     </button>

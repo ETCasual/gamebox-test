@@ -116,7 +116,7 @@ const GameDuration = ({
                     <div className="game-title mb-1">{game.gameTitle}</div>
                     <div className="d-flex align-items-center justify-content-between">
                         <div className="tournament-end-in-text">
-                            {t("tournament.endsIn")}
+                            {t("tournament.ends_in")}
                         </div>
                         <div className="game-duration">
                             {timer || "0d 0h 0m 0s"}

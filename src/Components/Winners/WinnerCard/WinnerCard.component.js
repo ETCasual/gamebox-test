@@ -71,11 +71,11 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                                 } `}
                             >
                                 {isCurrentUser(data)
-                                    ? t("leaderboard.default.playerName", {
+                                    ? t("leaderboard.default.player_name", {
                                           user: data.userNickName || "Player",
                                       })
                                     : data.userNickName ||
-                                      t("leaderboard.other.playerName", {
+                                      t("leaderboard.other.player_name", {
                                           user: data.userId,
                                       })}
                             </p>

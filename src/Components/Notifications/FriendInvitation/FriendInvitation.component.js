@@ -94,7 +94,7 @@ const NotificationFriendInvitation = ({
                                     </p>
                                     <p className="subtitle">
                                         {t(
-                                            "invite.invited.subtitle.yourFriend"
+                                            "invite.invited.subtitle.your_friend"
                                         )}
                                         <span className="friend-username">
                                             {getInvitationInfo("inviteeName")}

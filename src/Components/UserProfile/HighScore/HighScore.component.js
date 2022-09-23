@@ -67,10 +67,10 @@ const HighScore = ({ handleBackButton }) => {
                                 {noDataLoaded && (
                                     <div className="no-result">
                                         <p className="title mb-1">
-                                            {t("highscore.noData.title")}
+                                            {t("highscore.no_data.title")}
                                         </p>
                                         <p className="subtitle">
-                                            <Trans i18nKey="highscore.noData.subtitle">
+                                            <Trans i18nKey="highscore.no_data.subtitle">
                                                 <Link to="/">0</Link>1
                                             </Trans>
                                         </p>

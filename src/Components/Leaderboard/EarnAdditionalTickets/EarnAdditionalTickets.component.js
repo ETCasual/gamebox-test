@@ -107,15 +107,15 @@ const EarnAdditionalTickets = ({
     return (
         <>
             <div className="increase-earning-text">
-                {t("additionalTicket.title")}
+                {t("additional_ticket.title")}
             </div>
 
             <div className="select-one-option-text">
                 {earnAdditionalDisabledStatus.ads
-                    ? t("additionalTicket.ads")
+                    ? t("additional_ticket.ads")
                     : ""}
                 {earnAdditionalDisabledStatus.gems
-                    ? t("additionalTicket.gems")
+                    ? t("additional_ticket.gems")
                     : ""}
                 {!earnAdditionalDisabledStatus.ads &&
                 !earnAdditionalDisabledStatus.gems
@@ -182,20 +182,20 @@ const EarnAdditionalTickets = ({
                         alt="use gems"
                     />
                     <p className="boost-tickets mb-1 mb-md-2">
-                        {t("additionalTicket.boostBy")}
+                        {t("additional_ticket.boost_by")}
                     </p>
                     <p className="earn-type-text">
                         {currentGameRules.useHowManyGems}{" "}
-                        {t("additionalTicket.gemsCount")}
+                        {t("additional_ticket.gems_count")}
                     </p>
                     <div className="ticket-holder p-3 d-flex flex-column alig-gn-self-center justify-content-center">
                         <p className="ticket-amount mb-1">
-                            {t("additionalTicket.ticketsCount", {
+                            {t("additional_ticket.tickets_count", {
                                 quantity: currentGameRules.useGemTickets,
                             })}
                         </p>
                         <p className="score-condition mb-0">
-                            {t("additionalTicket.score", {
+                            {t("additional_ticket.score", {
                                 score: currentGameRules.score,
                             })}
                         </p>
@@ -206,7 +206,7 @@ const EarnAdditionalTickets = ({
             <div className="play-immediately-text-container d-flex align-items-center justify-content-evenly">
                 <div className="line" />
                 <div className="play-immediately-text text-center">
-                    {t("additionalTicket.playNow")}
+                    {t("additional_ticket.play_now")}
                 </div>
                 <div className="line" />
             </div>

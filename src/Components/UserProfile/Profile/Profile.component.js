@@ -151,7 +151,7 @@ const Profile = ({
                                                         <h3 className="user-name">
                                                             {user.username ||
                                                                 t(
-                                                                    "profile.defaultPlayer",
+                                                                    "profile.default_player",
                                                                     {
                                                                         id: user.id,
                                                                     }
@@ -282,7 +282,7 @@ const Profile = ({
                                     >
                                         <p className="multiplier-info">
                                             <Trans
-                                                i18nKey="playerLevel.multiplier"
+                                                i18nKey="player_level.multiplier"
                                                 values={{
                                                     number:
                                                         getCurrentMultiplier(
@@ -310,7 +310,7 @@ const Profile = ({
                                                 </p>
                                                 <div className="mb-0 d-flex align-items-center exp">
                                                     <Trans
-                                                        i18nKey="playerLevel.currency"
+                                                        i18nKey="player_level.currency"
                                                         values={{
                                                             max: getCurrentLevelExp(
                                                                 user,
@@ -475,7 +475,7 @@ const Profile = ({
                                             <div className="rewards d-flex align-items-center justify-content-center">
                                                 <p className="mb-0">
                                                     {t(
-                                                        "playerLevel.reward.title"
+                                                        "player_level.reward.title"
                                                     )}
                                                 </p>
                                             </div>
@@ -488,7 +488,7 @@ const Profile = ({
                             {
                                 <div className="col-12 mt-0 mt-md-4 mb-4">
                                     <div className="vip-pass-title mb-3">
-                                        {t("VIPPass.name")}
+                                        {t("vip_pass.name")}
                                     </div>
                                     <div className="vip-pass-holder py-4">
                                         {!isWalletConnected && (
@@ -508,7 +508,7 @@ const Profile = ({
                                             vipPassData.quantity <= 0 && (
                                                 <div className="text-center mt-2">
                                                     <p className="vip-pass-empty">
-                                                        {t("VIPPass.noVip")}
+                                                        {t("vip_pass.no_vip")}
                                                     </p>
                                                 </div>
                                             )}
@@ -535,7 +535,7 @@ const Profile = ({
                                                             <div className="col-12 mt-3 text-center">
                                                                 <p className="vip-pass-quantity">
                                                                     {t(
-                                                                        "VIPPass.quantity",
+                                                                        "vip_pass.quantity",
                                                                         {
                                                                             count:
                                                                                 vipPassData.quantity >

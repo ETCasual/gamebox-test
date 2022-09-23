@@ -73,7 +73,7 @@ const Invitation = ({ handleBackButton }) => {
                                 >
                                     {!copiedText && (
                                         <p className="invite-label mb-1 mb-md-2">
-                                            {t("invite.tapToCopy")}
+                                            {t("invite.tap_to_copy")}
                                         </p>
                                     )}
                                     {/* COPIED TEXT */}
@@ -91,7 +91,7 @@ const Invitation = ({ handleBackButton }) => {
                                 {/* FOOTER */}
                                 <div className="invitation-footer d-flex justify-content-between">
                                     <p className="terms-conditions mt-3 mt-md-4">
-                                        {t("invite.tncApply")}
+                                        {t("invite.tnc_apply")}
                                     </p>
                                 </div>
                             </div>

@@ -45,7 +45,7 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
             {loading && (
                 <div className="drawing-winner d-flex flex-column align-items-center justify-content-center">
                     <p className="mb-0">
-                        {t("featuredCompleted.drawingWinner")}
+                        {t("featured_completed.drawing_winner")}
                     </p>
                     <RevealWinnerLoader
                         cx1={"43%"}
@@ -64,7 +64,7 @@ const FeaturedCompleted = ({ data, handleWinnerRevealCard }) => {
                         {data?.prizeSubtitle}
                     </div>
                     <button className="tap-btn mb-0">
-                        {t("featuredCompleted.tapToReveal")}
+                        {t("featured_completed.tap_to_reveal")}
                     </button>
                 </div>
             )}

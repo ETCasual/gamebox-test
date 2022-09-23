@@ -83,12 +83,12 @@ const GameEndModal = ({
                             <div className="col-10 col-lg-8 mb-2 pl-2 pr-1">
                                 {/* <div className="card-prize d-flex flex-column flex-sm-row m-auto"> */}
                                 <p className="text-center panel-title">
-                                    {t("gameEnd.title")}
+                                    {t("game_end.title")}
                                 </p>
 
                                 {isShowTournamentEndedText ? (
                                     <p className="text-center tournament-has-ended-text">
-                                        {t("gameEnd.tournamentEnd")}
+                                        {t("game_end.tournament_end")}
                                     </p>
                                 ) : (
                                     <p className="text-center tournament-has-ended-text">
@@ -98,7 +98,7 @@ const GameEndModal = ({
 
                                 <div className="mb-5">
                                     <p className="text-center score-text mt-4 mb-0">
-                                        {t("gameEnd.score.title")}
+                                        {t("game_end.score.title")}
                                     </p>
                                     <p className="text-center score-number">
                                         {displayedScore}
@@ -109,16 +109,16 @@ const GameEndModal = ({
                                     <div className="d-flex flex-row justify-content-center text-center pt-2 align-items-center mt-4">
                                         <p className="pr-2 ticket-rate-text-score">
                                             {t(
-                                                "gameEnd.score.scoreNeededPerExtraTickets",
+                                                "game_end.score.score_needed_per_extra_tickets",
                                                 {
-                                                    count: currentGameBoosterInfo.scoreNeededPerExtraTickets,
+                                                    count: currentGameBoosterInfo.score_needed_per_extra_tickets,
                                                 }
                                             )}
                                         </p>
                                         <p className="ticket-rate-text-ticket d-flex tickets-amount align-items-center">
                                             <span className="mr-2">
                                                 {t(
-                                                    "gameEnd.score.ticketCount",
+                                                    "game_end.score.ticket_count",
                                                     {
                                                         count: currentGameBoosterInfo.extraTickets,
                                                     }
@@ -138,7 +138,7 @@ const GameEndModal = ({
                                 {currentGameBoosterInfo.isUseBooster && (
                                     <div className="row text-center mx-auto total-tickets-earned align-items-center">
                                         <p className=" col-7 py-2 pl-0 pr-3 you-earned d-flex mt-3 mb-3 justify-content-end">
-                                            {t("gameEnd.score.totalEarned")}
+                                            {t("game_end.score.total_earned")}
                                         </p>
                                         <p className="col-5 pl-2 d-flex tickets-amount align-items-center d-flex my-auto">
                                             <span className="mr-2">

@@ -123,7 +123,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                             <div className="multiplier p-3 p-md-4 d-flex flex-column align-items-start">
                                                 <p className="mb-md-3 multiplier-info">
                                                     <Trans
-                                                        i18nKey="playerLevel.multiplier"
+                                                        i18nKey="player_level.multiplier"
                                                         values={{
                                                             number:
                                                                 getCurrentMultiplier(
@@ -149,7 +149,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                                         </p>
                                                         <div className="mb-0 d-flex align-items-center justify-content-end exp">
                                                             <Trans
-                                                                i18nKey="playerLevel.currency"
+                                                                i18nKey="player_level.currency"
                                                                 values={{
                                                                     expts:
                                                                         playerDetailsData?.exp >
@@ -215,7 +215,7 @@ const SelectedPlayerInfo = ({ handleBackButton }) => {
                                     {playersHighScoreList.length === 0 ? (
                                         <div className="no-result">
                                             <p className="title mb-1">
-                                                {t("highscore.noData.title")}
+                                                {t("highscore.no_data.title")}
                                             </p>
                                         </div>
                                     ) : (

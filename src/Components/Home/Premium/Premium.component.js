@@ -161,11 +161,13 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 ) && (
                                                     <>
                                                         <p className="mb-0 label d-none align-items-end d-sm-flex">
-                                                            {t("ae.drawStarts")}
+                                                            {t(
+                                                                "ae.draw_starts"
+                                                            )}
                                                         </p>
                                                         <p className="mb-0 label d-flex align-items-end d-sm-none">
                                                             {t(
-                                                                "onboarding.prizePool"
+                                                                "onboarding.prize_pool"
                                                             )}
                                                         </p>
                                                         <div className="col d-flex align-items-center px-0">
@@ -193,7 +195,9 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 ) && (
                                                     <>
                                                         <p className="mb-0 label align-items-end d-sm-flex">
-                                                            {t("ae.drawStarts")}
+                                                            {t(
+                                                                "ae.draw_starts"
+                                                            )}
                                                         </p>
 
                                                         <div className="col d-flex align-items-center px-0">

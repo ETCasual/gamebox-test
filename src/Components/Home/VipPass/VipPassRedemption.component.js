@@ -56,17 +56,17 @@ const VipPassRedemption = ({ data }) => {
                                 <div className="col-12">
                                     <div className="my-3">
                                         <p className="title text-center">
-                                            {t("VIPPass.title")}
+                                            {t("vip_pass.title")}
                                         </p>
                                     </div>
                                     <div>
                                         <p className="desc text-left">
-                                            {t("VIPPass.subtitle")}
+                                            {t("vip_pass.subtitle")}
                                         </p>
                                     </div>
                                     <div>
                                         <p className="desc text-left">
-                                            {t("VIPPass.desc")}
+                                            {t("vip_pass.desc")}
                                         </p>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ const VipPassRedemption = ({ data }) => {
                                             onClick={handleRedeem}
                                         >
                                             <p className="m-auto">
-                                                {t("VIPPass.claim")}
+                                                {t("vip_pass.claim")}
                                             </p>
                                         </div>
                                     </div>

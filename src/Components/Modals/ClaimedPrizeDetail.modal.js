@@ -43,7 +43,7 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                 <div className="prize-info">
                                     <div className="prize-text m-2 p-3">
                                         <div className="content">
-                                            {t("prize.tokenId", {
+                                            {t("prize.token_id", {
                                                 id: data?.prizeSubtitle,
                                             })}
                                         </div>
@@ -62,7 +62,7 @@ const ClaimedPrizeDetailModal = ({ data, onCloseButtonClick }) => {
                                         {t("prize.delivered")}
                                     </p>
                                     <p className="wallet-address">
-                                        {t("prize.walletAdd", {
+                                        {t("prize.wallet_address", {
                                             first: data.walletAddress?.substring(
                                                 0,
                                                 5

@@ -139,7 +139,7 @@ const StayTune = () => {
                             currentGameBoosterInfo={{
                                 isUseBooster: false,
                                 extraTickets: false,
-                                scoreNeededPerExtraTickets: false,
+                                score_needed_per_extra_tickets: false,
                             }}
                         />
                     )}
@@ -180,13 +180,13 @@ const StayTune = () => {
             <div className="container-fluid stay-tune">
                 <div className="row">
                     <div className="col-10 col-lg-5 mx-auto d-flex flex-column align-items-center justify-content-center min-vh-100">
-                        <h1 className="title">{t("stayTuned.title")}</h1>
+                        <h1 className="title">{t("stay_tuned.title")}</h1>
                         <p className="mb-1 subtitle-1 text-center">
-                            {t("stayTuned.subtitle1")}
+                            {t("stay_tuned.subtitle1")}
                         </p>
                         {
                             <p className="mb-4 subtitle-2 text-center">
-                                {t("stayTuned.subtitle2")}
+                                {t("stay_tuned.subtitle2")}
                             </p>
                         }
                         {

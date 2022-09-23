@@ -109,7 +109,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                             e?.winner?.toLowerCase() && (
                                             <>
                                                 <Trans
-                                                    i18nKey="revealWinner.winner"
+                                                    i18nKey="reveal_winner.winner"
                                                     values={{
                                                         winner: e?.winner,
                                                         title: e?.title,
@@ -127,7 +127,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                 </Trans>
                                                 <p className="nft-token">
                                                     {t(
-                                                        "revealWinner.nftToken",
+                                                        "reveal_winner.nft_token",
                                                         {
                                                             first: e?.nftContractAddress?.substring(
                                                                 0,
@@ -146,12 +146,12 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                     <>
                                                         <p className="mb-2 mt-4 not-minted">
                                                             {t(
-                                                                "revealWinner.nftNotMinted.text"
+                                                                "reveal_winner.nft_not_minted.text"
                                                             )}
                                                         </p>
                                                         <p className="mint-date">
                                                             {t(
-                                                                "revealWinner.nftNotMinted.mintDate",
+                                                                "reveal_winner.nft_not_minted.mint_date",
                                                                 {
                                                                     date: getMintDate(
                                                                         e?.canClaimDate
@@ -172,7 +172,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                     >
                                                         <button className="connect-wallet-btn p-3">
                                                             {t(
-                                                                "revealWinner.btn"
+                                                                "reveal_winner.btn"
                                                             )}
                                                         </button>
                                                     </Link>
@@ -183,7 +183,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                             e?.winner?.toLowerCase() && (
                                             <>
                                                 <Trans
-                                                    i18nKey="revealWinner.otherWinner"
+                                                    i18nKey="reveal_winner.other_winner"
                                                     values={{
                                                         winner: e?.winner,
                                                         title: e?.title,
@@ -201,7 +201,7 @@ const RevealCardModal = ({ data, user, handleRevealBackButton }) => {
                                                 </Trans>
                                                 <p className="nft-token">
                                                     {t(
-                                                        "revealWinner.nftToken",
+                                                        "reveal_winner.nft_token",
                                                         {
                                                             first: e?.nftContractAddress?.substring(
                                                                 0,

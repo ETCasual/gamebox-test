@@ -61,7 +61,7 @@ const SpinnerEntry = () => {
                     <div className="row">
                         <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                             <p className="title-text mb-1">
-                                {t("spinner.freegems")}
+                                {t("spinner.free_gems")}
                             </p>
                             <div className="desc-text mb-1">
                                 {t("spinner.claim")}

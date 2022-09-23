@@ -65,7 +65,7 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                                     {gem.title}
                                 </p>
                                 <p className="mb-1 quantity">
-                                    {t("iap.cards.gemCount", {
+                                    {t("iap.cards.gem_count", {
                                         count: gem.quantity?.toLocaleString(),
                                     })}
                                 </p>
@@ -84,7 +84,7 @@ const IAPCardGemPacks = ({ handleSelectedGemPackPayment }) => {
                                 {ipInfo?.currency &&
                                     ipInfo?.currency !== "SGD" && (
                                         <p className="mb-0 estimation">
-                                            {t("iap.payment.estimatedPrice")}
+                                            {t("iap.payment.estimated_price")}
                                             {exchangeRate?.rates[
                                                 ipInfo?.currency
                                             ] && (

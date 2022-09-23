@@ -35,8 +35,8 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
     const [paymentProcessModal, setPaymentProcessModal] = useState(false);
     const [purchasingStatus, setPurchasingStatus] = useState({
         processing: false,
-        isSuccess: false,
-        isFail: false,
+        is_success: false,
+        is_fail: false,
     });
 
     // GET CLIENT SECRET
@@ -57,8 +57,8 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
         setPaymentProcessModal(true);
         setPurchasingStatus({
             processing: true,
-            isSuccess: false,
-            isFail: false,
+            is_success: false,
+            is_fail: false,
         });
         const { paymentIntent } = await stripe.confirmCardPayment(
             clientSecret,
@@ -75,8 +75,8 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
         if (paymentIntent?.status !== "succeeded") {
             setPurchasingStatus({
                 processing: false,
-                isSuccess: false,
-                isFail: true,
+                is_success: false,
+                is_fail: true,
             });
             return;
         }
@@ -96,8 +96,8 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
         setTimeout(() => {
             setPurchasingStatus({
                 processing: false,
-                isSuccess: true,
-                isFail: false,
+                is_success: true,
+                is_fail: false,
             });
             dispatch(loadUserDetails());
             dispatch({
@@ -149,7 +149,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                 </p>
                                 <div className="product mb-3 p-3 d-flex align-items-center justify-content-between">
                                     <p className="product-title mb-0">
-                                        {t("iap.payment.gemCount", {
+                                        {t("iap.payment.gem_count", {
                                             count:
                                                 productInfo?.quantity?.toLocaleString() ||
                                                 0,
@@ -165,7 +165,7 @@ const CardPayment = ({ productInfo, handleBackButton }) => {
                                     </p>
                                 </div>
                                 <p className="estimation text-right">
-                                    {t("iap.payment.estimatedPrice")}
+                                    {t("iap.payment.estimated_price")}
                                     <span>
                                         {ipInfo?.currency === "MYR"
                                             ? "RM"

@@ -408,7 +408,7 @@ const Index = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <h2 className="section-title mb-3">
-                                            {t("homePage.limitedTimeReward")}
+                                            {t("home_page.limited_time_reward")}
                                         </h2>
                                     </div>
 
@@ -432,7 +432,7 @@ const Index = () => {
                                             <div className="col-12">
                                                 <h2 className="section-title mb-3">
                                                     {t(
-                                                        "homePage.featuredRewards"
+                                                        "home_page.featured_rewards"
                                                     )}
                                                 </h2>
                                             </div>
@@ -488,7 +488,7 @@ const Index = () => {
                                         <div className="row">
                                             <div className="col-12 description">
                                                 <h2 className="section-title mb-3">
-                                                    {t("homePage.premium")}
+                                                    {t("home_page.premium")}
                                                 </h2>
                                             </div>
                                             {/* LOADER */}

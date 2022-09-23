@@ -139,7 +139,9 @@ const FortuneWheel = ({
                                                 The Spinner
                                             </p> */}
                                             <p className="earn-more-tickets-text d-block m-auto">
-                                                {t("spinner.fortuneWheel.earn")}
+                                                {t(
+                                                    "spinner.fortune_wheel.earn"
+                                                )}
                                             </p>
                                         </div>
                                     </div>
@@ -211,7 +213,9 @@ const FortuneWheel = ({
                                     {/* GEMS BALANCE */}
                                     <div className="your-balance d-flex flex-row align-items-center justify-content-center m-auto">
                                         <div className="your-balance-text ml-3 mr-auto">
-                                            {t("spinner.fortuneWheel.yourgems")}
+                                            {t(
+                                                "spinner.fortune_wheel.your_gems"
+                                            )}
                                         </div>
                                         <div className="balance-number d-flex flex-row align-items-center justify-content-center mr-3 ml-auto">
                                             {user?.gems || 0}
@@ -239,7 +243,7 @@ const FortuneWheel = ({
                                         />
                                         <span className="mt-auto mb-auto">
                                             {t(
-                                                "spinner.fortuneWheel.rewardsInfo"
+                                                "spinner.fortune_wheel.rewards_info"
                                             )}
                                         </span>
                                     </button>
@@ -268,7 +272,7 @@ const FortuneWheel = ({
                                             <p className="spin-amount-left-wrapper text-center mt-2 mb-0">
                                                 <span className="you-have-text">
                                                     {t(
-                                                        "spinner.fortuneWheel.youHave"
+                                                        "spinner.fortune_wheel.you_have"
                                                     )}
                                                 </span>
                                                 <span className="spin-number">
@@ -278,7 +282,7 @@ const FortuneWheel = ({
                                                 </span>
                                                 <span className="spins-left-text">
                                                     {t(
-                                                        "spinner.fortuneWheel.spinsLeft"
+                                                        "spinner.fortune_wheel.spins_left"
                                                     )}
                                                 </span>
                                             </p>
@@ -290,12 +294,12 @@ const FortuneWheel = ({
                                                 <tr className="probability-row">
                                                     <td className="probability-percentage-caption">
                                                         {t(
-                                                            "spinner.fortuneWheel.chance"
+                                                            "spinner.fortune_wheel.chance"
                                                         )}
                                                     </td>
                                                     <td className="probability-tickets-text-caption">
                                                         {t(
-                                                            "spinner.fortuneWheel.reward"
+                                                            "spinner.fortune_wheel.reward"
                                                         )}
                                                     </td>
                                                 </tr>

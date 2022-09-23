@@ -67,7 +67,7 @@ const Leaderboard = ({
     const { currentGameRules } = useSelector((state) => state.prizes);
     const [currentGameBoosterInfo, setCurrentGameBoosterInfo] = useState({
         isUseBooster: false,
-        scoreNeededPerExtraTickets: 0,
+        score_needed_per_extra_tickets: 0,
         extraTickets: 0,
     });
 
@@ -120,9 +120,9 @@ const Leaderboard = ({
         title: "",
         message_1: "",
         message_2: "",
-        errorCode: "",
-        closeButtonText: "",
-        okButtonText: "",
+        error_code: "",
+        close_button_text: "",
+        ok_button_text: "",
         okButtonHandling: "",
         closeButtonHandling: "",
     });
@@ -413,7 +413,7 @@ const Leaderboard = ({
         setCurrentGameBoosterInfo(() => ({
             isUseBooster: isGemUsed,
             extraTickets: currentGameRules.useGemTickets,
-            scoreNeededPerExtraTickets: currentGameRules.score,
+            score_needed_per_extra_tickets: currentGameRules.score,
         }));
     };
 
@@ -483,50 +483,54 @@ const Leaderboard = ({
         return enterGameConfig;
     };
 
-    window.showLoadErrorPopUp = (errorCode) => {
-        switch (errorCode) {
+    window.showLoadErrorPopUp = (error_code) => {
+        switch (error_code) {
             case LOAD_ERROR_CODES.BROKEN_LINK:
                 setLoadErrorDetails(() => ({
-                    title: t("error.brokenLink.title"),
-                    message_1: t("error.brokenLink.message_1"),
-                    message_2: t("error.brokenLink.message_2"),
-                    errorCode: t("error.brokenLink.errorCode", {
+                    title: t("error.broken_link.title"),
+                    message_1: t("error.broken_link.message_1"),
+                    message_2: t("error.broken_link.message_2"),
+                    error_code: t("error.broken_link.error_code", {
                         prizeId: data?.prizeId,
                         gameId: currentGameDetails?.gameId,
                     }),
-                    okButtonText: t("error.brokenLink.okButtonText"),
+                    ok_button_text: t("error.broken_link.ok_button_text"),
                     okButtonHandling: "closeGame",
-                    closeButtonText: t("error.brokenLink.closeButtonText"),
+                    close_button_text: t("error.broken_link.close_button_text"),
                     closeButtonHandling: "",
                 }));
                 break;
             case LOAD_ERROR_CODES.LOG_G_ENTER_FAIL:
                 setLoadErrorDetails(() => ({
-                    title: t("error.logGEnterFail.title"),
-                    message_1: t("error.logGEnterFail.message_1"),
-                    message_2: t("error.logGEnterFail.message_2"),
-                    errorCode: t("error.logGEnterFail.errorCode", {
+                    title: t("error.log_g_enter_fail.title"),
+                    message_1: t("error.log_g_enter_fail.message_1"),
+                    message_2: t("error.log_g_enter_fail.message_2"),
+                    error_code: t("error.log_g_enter_fail.error_code", {
                         prizeId: data?.prizeId,
                         gameId: currentGameDetails?.gameId,
                     }),
-                    okButtonText: t("error.logGEnterFail.okButtonText"),
+                    ok_button_text: t("error.log_g_enter_fail.ok_button_text"),
                     okButtonHandling: "resendLogGEnter",
-                    closeButtonText: t("error.logGEnterFail.closeButtonText"),
+                    close_button_text: t(
+                        "error.log_g_enter_fail.close_button_text"
+                    ),
                     closeButtonHandling: "closeGame",
                 }));
                 break;
             default: //Asset Failed to Load due to internet connection
                 setLoadErrorDetails(() => ({
-                    title: t("error.internetError.title"),
-                    message_1: t("error.internetError.message_1"),
-                    message_2: t("error.internetError.message_2"),
-                    errorCode: t("error.internetError.errorCode", {
+                    title: t("error.internet_error.title"),
+                    message_1: t("error.internet_error.message_1"),
+                    message_2: t("error.internet_error.message_2"),
+                    error_code: t("error.internet_error.error_code", {
                         prizeId: data?.prizeId,
                         gameId: currentGameDetails?.gameId,
                     }),
-                    okButtonText: t("error.internetError.okButtonText"),
+                    ok_button_text: t("error.internet_error.ok_button_text"),
                     okButtonHandling: "reloadGame",
-                    closeButtonText: t("error.internetError.closeButtonText"),
+                    close_button_text: t(
+                        "error.internet_error.close_button_text"
+                    ),
                     closeButtonHandling: "closeGame",
                 }));
         }
@@ -713,7 +717,7 @@ const Leaderboard = ({
 
                         <div className="px-2 ml-3">
                             <p className="player-name">
-                                {t("leaderboard.placeholder.playerName")}
+                                {t("leaderboard.placeholder.player_name")}
                             </p>
                             <p className="points">
                                 {t("leaderboard.placeholder.points")}
@@ -792,17 +796,17 @@ const Leaderboard = ({
                             <p className="player-name">
                                 {leaderboardList[i]?.userId
                                     ? isCurrentUser(leaderboardList[i]?.userId)
-                                        ? t("leaderboard.default.playerName", {
+                                        ? t("leaderboard.default.player_name", {
                                               user:
                                                   leaderboardList[i]
                                                       ?.nickName ||
                                                   user.username ||
                                                   "Player",
                                           })
-                                        : t("leaderboard.other.playerName", {
+                                        : t("leaderboard.other.player_name", {
                                               user: leaderboardList[i]?.userId,
                                           })
-                                    : t("leaderboard.placeholder.playerName")}
+                                    : t("leaderboard.placeholder.player_name")}
                             </p>
                             <p className="points">
                                 {t("leaderboard.default.points", {
@@ -871,7 +875,7 @@ const Leaderboard = ({
                                 </p>
                                 <div className="d-flex align-items-center justify-content-between">
                                     <p className="tournament-end-text mb-0">
-                                        {t("tournament.endsIn")}
+                                        {t("tournament.ends_in")}
                                     </p>
                                     <p
                                         className={`mb-0 text-right ${
@@ -943,7 +947,7 @@ const Leaderboard = ({
 
                                 <div className="px-2 ml-3">
                                     <p className="player-name">
-                                        {t("leaderboard.default.playerName", {
+                                        {t("leaderboard.default.player_name", {
                                             user: yourRankData.nickName,
                                         })}
                                     </p>
@@ -1167,9 +1171,9 @@ const Leaderboard = ({
                     {/* MODAL FOR PENDING SUBMIT SCORE */}
                     {modalStatus.isSubmitScoreFailed && (
                         <RetrySubmitModal
-                            closeButtonText={t("tournament.score.fail.close")}
+                            close_button_text={t("tournament.score.fail.close")}
                             handleClose={closeGame}
-                            okButtonText={t("tournament.score.fail.retry")}
+                            ok_button_text={t("tournament.score.fail.retry")}
                             handleOk={() => {
                                 submitScore(scoreObject);
                             }}
@@ -1189,7 +1193,7 @@ const Leaderboard = ({
                     {/* MODAL FOR RELOADING GAME IF LOAD FAIL */}
                     {modalStatus.isLoadGameFailed && (
                         <RetrySubmitModal
-                            okButtonText={loadErrorDetails.okButtonText}
+                            ok_button_text={loadErrorDetails.ok_button_text}
                             handleOk={() => {
                                 switch (loadErrorDetails.okButtonHandling) {
                                     case "reloadGame":
@@ -1204,7 +1208,9 @@ const Leaderboard = ({
                                         break;
                                 }
                             }}
-                            closeButtonText={loadErrorDetails.closeButtonText}
+                            close_button_text={
+                                loadErrorDetails.close_button_text
+                            }
                             handleClose={
                                 loadErrorDetails.closeButtonHandling ===
                                 "closeGame"
@@ -1217,7 +1223,7 @@ const Leaderboard = ({
                                 <>
                                     {loadErrorDetails.message_1}
                                     <br />
-                                    {`(Code: ${loadErrorDetails.errorCode})`}
+                                    {`(Code: ${loadErrorDetails.error_code})`}
                                     <br />
                                     <br /> {loadErrorDetails.message_2}
                                 </>
@@ -1264,7 +1270,7 @@ const Leaderboard = ({
                                     className="loading-quit-btn d-block text-center mx-auto mt-4 py-3"
                                     onClick={handleQuitGame}
                                 >
-                                    {t("tournament.loading.closeButton")}
+                                    {t("tournament.loading.close_button")}
                                 </button>
                             </div>
                             <iframe

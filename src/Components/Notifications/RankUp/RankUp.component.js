@@ -56,20 +56,20 @@ const NotificationRankUp = ({
                             <p className="title">
                                 {isSelectedNotificationShown?.description}
                             </p>
-                            <p className="subtitle">{t("rankUp.subtitle")}</p>
+                            <p className="subtitle">{t("rank_up.subtitle")}</p>
                             <div className="reward p-3 p-md-4 mb-3 mb-md-4 d-flex flex-column align-items-start justify-content-around">
                                 <p className="mb-3 title">
-                                    {t("rankUp.title")}
+                                    {t("rank_up.title")}
                                 </p>
                                 <p className="gems mb-0">
-                                    {t("rankUp.gemCount", {
+                                    {t("rank_up.gem_count", {
                                         count:
                                             isSelectedNotificationShown?.gem ||
                                             "0",
                                     })}
                                 </p>
                                 <p className="gems mt-2 mb-0">
-                                    {t("rankUp.multiplier", {
+                                    {t("rank_up.multiplier", {
                                         multiplier: getTicketMultiplier(),
                                     })}
                                 </p>

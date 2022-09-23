@@ -157,17 +157,17 @@ const LaunchGameMenuModalPopup = ({
                                 }}
                             >
                                 <div className="title p-1 text-center">
-                                    {t("gameMenu.booster.title")}
+                                    {t("game_menu.booster.title")}
                                 </div>
                                 <div className="content d-flex flex-column py-4">
                                     <div className="info-text text-center">
-                                        {t("gameMenu.booster.subtitle", {
+                                        {t("game_menu.booster.subtitle", {
                                             count: currentGameRules.score,
                                         })}
                                     </div>
                                     <div className="content-tickets d-flex align-items-center justify-content-center">
                                         <span className="tickets my-1">
-                                            {t("gameMenu.booster.boostBy", {
+                                            {t("game_menu.booster.boost_by", {
                                                 count: currentGameRules.useGemTickets,
                                             })}
                                         </span>
@@ -219,7 +219,7 @@ const LaunchGameMenuModalPopup = ({
                                 >
                                     {!isLoadingGame && (
                                         <>
-                                            {t("gameMenu.start")}
+                                            {t("game_menu.start")}
                                             <div className="d-flex mt-2">
                                                 <span className="btn-text m-auto">
                                                     {startGameCost}
