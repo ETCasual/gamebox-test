@@ -9,6 +9,7 @@ import loadCurrentGameRules from "redux/thunks/CurrentGameRules.thunk";
 // HELPER FUNCTION
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import { useTranslation } from "react-i18next";
+import { useTime } from "Utils/hooks/useTime";
 
 const GameDuration = ({
     game,
@@ -118,9 +119,7 @@ const GameDuration = ({
                         <div className="tournament-end-in-text">
                             {t("tournament.ends_in")}
                         </div>
-                        <div className="game-duration">
-                            {timer || "0d 0h 0m 0s"}
-                        </div>
+                        <div className="game-duration">{useTime(timer)}</div>
                     </div>
                 </div>
             </div>

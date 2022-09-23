@@ -349,6 +349,7 @@
     },
     "tournament": {
         "ends_in": "Tournament ends in",
+
         "join": "JOIN TOURNAMENT",
         "title": "JOIN TOURNAMENTS!",
         "bonus_time": "BONUS TIME!",
@@ -768,5 +769,6 @@
             "subtitle": "Looks like you've not played for any prize yet.",
             "cta": "<0>Click here</0> to look for one you like."
         }
-    }
+    },
+    "timer_ends": "Ended"
 }

@@ -18,6 +18,7 @@ import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
 import { useTranslation } from "react-i18next";
+import { useTime } from "Utils/hooks/useTime";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -80,6 +81,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
     }, [data?.gameInfo, config]);
 
     const { t } = useTranslation();
+    const timeLeft = useTime(timer);
 
     return (
         <>
@@ -202,7 +204,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
 
                                                         <div className="col d-flex align-items-center px-0">
                                                             <p className="mb-0 d-sm-flex align-items-center overtime-text timer">
-                                                                {`\u00A0${timer}`}
+                                                                {`\u00A0${timeLeft}`}
                                                             </p>
                                                         </div>
                                                     </>

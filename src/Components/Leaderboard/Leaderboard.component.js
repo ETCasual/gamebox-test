@@ -44,6 +44,7 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { PLAYER_LOG_RESET } from "redux/types";
 import { BUFFER_END_TIME } from "Utils/TournamentEndTime";
 import { Trans, useTranslation } from "react-i18next";
+import { useTime } from "Utils/hooks/useTime";
 
 const Leaderboard = ({
     data,
@@ -888,7 +889,7 @@ const Leaderboard = ({
                                                 : "timer-text"
                                         }`}
                                     >
-                                        {timer || "0d 0h 0m 0s"}
+                                        {useTime(timer)}
                                     </p>
                                 </div>
                             </div>
