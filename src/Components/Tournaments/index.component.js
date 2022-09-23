@@ -420,7 +420,7 @@ const Index = ({ match }) => {
                                                             <div className="overtime-tickets-wrapper text-left">
                                                                 <p className="overtime-title-text mb-1">
                                                                     {t(
-                                                                        "tournament.bonusTime"
+                                                                        "tournament.bonus_time"
                                                                     )}
                                                                 </p>
                                                                 <div className="d-flex flex-row align-items-end">
