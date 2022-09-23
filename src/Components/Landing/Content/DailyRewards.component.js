@@ -1,15 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const DailyBonus = ({ dailyRewardRef, setRegistrationInstructionModal }) => {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid" id="daily-reward">
             <div
                 className="col-12 col-md-10 col-xl-7 mx-auto main-wrapper"
                 ref={dailyRewardRef}
             >
-                <h1 className="title">That's not all!</h1>
+                <h1 className="title">{t("landing.daily_rewards.title")}</h1>
                 <p className="subtitle">
-                    Every week, you will receive FREE NFTs.
+                    {t("landing.daily_rewards.subtitle")}
                 </p>
 
                 <div className="col-12 position-relative content-wrapper text-center p-3 d-flex flex-column align-items-center justify-content-center">
@@ -25,17 +28,16 @@ const DailyBonus = ({ dailyRewardRef, setRegistrationInstructionModal }) => {
                     />
 
                     <h2 className="title-text mb-4">
-                        Get premium NFT’s every week!
+                        {t("landing.daily_rewards.desc_1")}
                     </h2>
                     <p className="subtitle-text mb-4">
-                        You will automatically receive tickets for weekly NFT
-                        rewards when you win any tournament!
+                        {t("landing.daily_rewards.desc_2")}
                     </p>
                     <button
                         className="register-now-button"
                         onClick={() => setRegistrationInstructionModal(true)}
                     >
-                        REGISTER NOW!
+                        {t("landing.btn.register")}
                     </button>
                 </div>
             </div>

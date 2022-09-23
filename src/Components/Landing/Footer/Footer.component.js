@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
 
 const Footer = () => {
+    const { t } = useTranslation();
+
     const socialList = [
         {
             id: "twitter",
@@ -71,46 +74,54 @@ const Footer = () => {
                 </div>
                 <div className="about-info-container col-12 col-md-8 col-xl-7 no-gutters d-flex flex-wrap mb-3 mb-md-5">
                     <div className="about-detail-container d-flex flex-column col-12 col-md-4 mb-3">
-                        <div className="title-text mb-2">ABOUT</div>
+                        <div className="title-text mb-2">
+                            {t("footer.about")}
+                        </div>
                         {/* <div className="subtitle-text mb-1">GameBox</div> */}
                         <div className="subtitle-text">
                             <a
                                 target="_blank"
                                 rel="noreferrer"
-                                href="https://froyo.games/home"
+                                href={`${process.env.REACT_APP_FROYO_WEB_URL}/home`}
                             >
-                                Froyo Games
+                                {t("footer.foryo_games")}
                             </a>
                         </div>
                     </div>
                     <div className="help-detail-container d-flex flex-column col-12 col-md-4 mb-3">
-                        <div className="title-text mb-2">HELP</div>
+                        <div className="title-text mb-2">
+                            {t("footer.help")}
+                        </div>
                         <div className="subtitle-text">
                             <a
                                 href={getFroyoGamesContactUrl()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Contact Support
+                                {t("footer.contact_support")}
                             </a>
                         </div>
                     </div>
                     <div className="froyo-coin-detail-container d-flex flex-column col-12 col-md-4 mb-3">
-                        <div className="title-text mb-2">FROYO TOKEN</div>
+                        <div className="title-text mb-2">
+                            {t("footer.froyo_token")}
+                        </div>
                         <div className="subtitle-text">
                             <a
                                 className="subtitle-text"
                                 target="_blank"
                                 rel="noreferrer"
-                                href="https://froyo.games/token"
+                                href={`${process.env.REACT_APP_FROYO_WEB_URL}/token`}
                             >
-                                Get $FROYO
+                                {t("footer.get_froyo")}
                             </a>
                         </div>
                     </div>
                 </div>
                 <div className="join-community-container col-12 col-md-4 col-xl-5 text-md-right mb-5">
-                    <div className="title-text mb-2">JOIN OUR COMMUNITY</div>
+                    <div className="title-text mb-2">
+                        {t("footer.join_community")}
+                    </div>
 
                     <div className="logo-img-container">
                         <ul className="float-md-right">
@@ -198,26 +209,30 @@ const Footer = () => {
                 <div className="terms-and-conditions-container col-12 col-md-9 align-self-end">
                     <div className="trademark-container d-flex flex-wrap">
                         <span className="pr-2 d-none d-md-inline-flex">
-                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
+                            {t("footer.copyright", {
+                                year: new Date(nowTimeStamp()).getFullYear(),
+                            })}
                         </span>
                         <span className="d-none d-md-inline-flex">&bull;</span>
                         <Link
                             className="pr-2 px-md-2"
                             to="/terms-and-conditions"
                         >
-                            Terms and Conditions
+                            {t("footer.tnc")}
                         </Link>
                         <span>&bull;</span>
                         <Link className="px-2" to="/privacy-policy">
-                            Privacy Policy
+                            {t("footer.privacy_policy")}
                         </Link>
                         <span>&bull;</span>
                         <Link className="px-2" to="/tournament-rules">
-                            Tournament Rules
+                            {t("footer.tournament_rules")}
                         </Link>
                         <span className="d-md-none">&bull;</span>
                         <span className="pl-2 d-md-none">
-                            © {new Date(nowTimeStamp()).getFullYear()} GameBox{" "}
+                            {t("footer.copyright", {
+                                year: new Date(nowTimeStamp()).getFullYear(),
+                            })}
                         </span>
                     </div>
                 </div>

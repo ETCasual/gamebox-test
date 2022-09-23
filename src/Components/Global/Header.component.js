@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Notification from "Components/Global/Notifications.component";
 
@@ -22,6 +23,8 @@ const Header = ({
     handleOnClickNotificationIcon,
     handleNotificationLeaderboardHistory,
 }) => {
+    const { t } = useTranslation();
+
     const { notificationNumber } = useSelector(
         (state) => state.notificationNumber
     );
@@ -128,7 +131,9 @@ const Header = ({
                                     }}
                                     activeClassName="active"
                                 >
-                                    <div className="py-4 px-2 mx-2">Home</div>
+                                    <div className="py-4 px-2 mx-2">
+                                        {t("header.tab.home")}
+                                    </div>
                                 </NavLink>
                                 <NavLink
                                     to={{
@@ -140,7 +145,7 @@ const Header = ({
                                     activeClassName="active"
                                 >
                                     <div className="py-4 px-2 mx-2">
-                                        Activities
+                                        {t("header.tab.activities")}
                                     </div>
                                 </NavLink>
                                 <NavLink
@@ -153,7 +158,7 @@ const Header = ({
                                     activeClassName="active"
                                 >
                                     <div className="py-4 px-2 mx-2">
-                                        Winners
+                                        {t("header.tab.winners")}
                                     </div>
                                 </NavLink>
                             </div>
@@ -272,7 +277,7 @@ const Header = ({
                                 className="disconnect-wrapper d-flex align-items-center justify-content-center"
                                 onClick={handleWalletDisconnect}
                             >
-                                Disconnect
+                                {t("header.disconnect")}
                             </div>
                         </>
                     )}
@@ -369,7 +374,9 @@ const Header = ({
                                             onClick={handleWallet}
                                         >
                                             <p className="mb-0">
-                                                CONNECT WALLET
+                                                {t(
+                                                    "header.profile.connect_wallet"
+                                                )}
                                             </p>
                                         </div>
                                     )}
@@ -380,7 +387,9 @@ const Header = ({
                                                 onClick={handleWallet}
                                             >
                                                 <p className="mb-0">
-                                                    WRONG NETWORK
+                                                    {t(
+                                                        "header.profile.wrong_network"
+                                                    )}
                                                 </p>
                                             </div>
                                         )}
@@ -407,7 +416,9 @@ const Header = ({
                                                                       )
                                                                       ?.toLocaleString() +
                                                                   " FROYO"
-                                                                : "Invalid token"}{" "}
+                                                                : t(
+                                                                      "header.profile.invalid_token"
+                                                                  )}{" "}
                                                         </div>
                                                     </div>
                                                     <div
@@ -416,7 +427,9 @@ const Header = ({
                                                             handleWalletDisconnect
                                                         }
                                                     >
-                                                        DISCONNECT WALLET
+                                                        {t(
+                                                            "header.profile.disconnect_wallet"
+                                                        )}
                                                     </div>
                                                 </div>
                                             </>
@@ -435,7 +448,9 @@ const Header = ({
                                         }}
                                     >
                                         <p className="submenu-profile">
-                                            GameBox Profile
+                                            {t(
+                                                "header.profile.gamebox_profile"
+                                            )}
                                         </p>
                                     </Link>
                                     <p
@@ -445,7 +460,7 @@ const Header = ({
                                             handleSignOut(dispatch);
                                         }}
                                     >
-                                        Log Out
+                                        {t("header.profile.logout")}
                                     </p>
                                 </div>
                             </div>

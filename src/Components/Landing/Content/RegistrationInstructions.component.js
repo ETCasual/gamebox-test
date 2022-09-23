@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
+    const { t } = useTranslation();
+
     useEffect(() => {
         document.documentElement.style.overflowY = "hidden";
 
@@ -30,11 +33,10 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                             <div className="row">
                                 <div className="top text-center">
                                     <p className="title mb-2">
-                                        How to register
+                                        {t("landing.register.title")}
                                     </p>
                                     <p className="subtitle mb-2">
-                                        Here’s a simple guide for you on how to
-                                        register with us.
+                                        {t("landing.register.subtitle")}
                                     </p>
                                 </div>
                             </div>
@@ -45,14 +47,21 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                             1
                                         </div>
                                         <p className="title">
-                                            Register with www.froyo.games
+                                            {t("landing.register.step_1.title")}
                                         </p>
                                         <p className="description">
-                                            Head over to{" "}
-                                            <span>
-                                                www.froyo.games/registration
-                                            </span>{" "}
-                                            and create an account.
+                                            <Trans i18nKey="landing.register.step_1.desc">
+                                                Head over to
+                                                <a
+                                                    className="link"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    href={`${process.env.REACT_APP_FROYO_WEB_URL}/registration`}
+                                                >
+                                                    www.froyo.games/registration
+                                                </a>
+                                                and create an account.
+                                            </Trans>
                                         </p>
                                     </div>
                                 </div>
@@ -62,11 +71,10 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                             2
                                         </div>
                                         <p className="title">
-                                            Verify your email address
+                                            {t("landing.register.step_2.title")}
                                         </p>
                                         <p className="description">
-                                            Verify your email address once your
-                                            account has been created.
+                                            {t("landing.register.step_2.desc")}
                                         </p>
                                     </div>
                                 </div>
@@ -76,12 +84,21 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                             3
                                         </div>
                                         <p className="title">
-                                            Return to GameBox to login
+                                            {t("landing.register.step_3.title")}
                                         </p>
                                         <p className="description">
-                                            Close all tabs and return to{" "}
-                                            <span>www.froyo.games/gamebox</span>{" "}
-                                            to continue with your login.
+                                            <Trans i18nKey="landing.register.step_3.desc">
+                                                Close all tabs and return to
+                                                <a
+                                                    className="link"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    href={`${process.env.REACT_APP_FROYO_WEB_URL}/gamebox`}
+                                                >
+                                                    www.froyo.games/gamebox
+                                                </a>
+                                                to continue with your login.
+                                            </Trans>
                                         </p>
                                     </div>
                                 </div>
@@ -94,11 +111,13 @@ const RegistrationInstructions = ({ setRegistrationInstructionModal }) => {
                                         href={`${process.env.REACT_APP_FROYO_WEB_URL}/registration`}
                                     >
                                         <p className="mb-0">
-                                            Click here to{" "}
-                                            <span>
-                                                {`www.froyo.games/registration`}
-                                            </span>{" "}
-                                            to start registering.
+                                            <Trans i18nKey="landing.register.register_url">
+                                                Click
+                                                <span className="link">
+                                                    here
+                                                </span>
+                                                to start registering.
+                                            </Trans>
                                         </p>
                                     </a>
                                 </div>

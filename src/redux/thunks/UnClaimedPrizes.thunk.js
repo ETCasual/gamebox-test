@@ -38,28 +38,25 @@ export function loadUnClaimedPrizes() {
     };
 }
 
-export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType, setLoader) {
+export function loadNFTClaim(
+    winnerId,
+    prizeBlockchainNetwork,
+    prizeContractType,
+    setLoader
+) {
     return async (dispatch, getState) => {
         const { user } = getState()?.userData;
         const { blockchainNetworks } = getState()?.blockchainNetworks;
 
         const { web3 } = await getWeb3();
         if (!web3) {
-            dispatch(
-                loadConnectUserWallet(
-                    "no_wallet"
-                )
-            );
+            dispatch(loadConnectUserWallet("no_wallet"));
             setLoader({ id: null, status: false });
             return;
         }
-        
+
         if (!user.walletAddress) {
-            dispatch(
-                loadConnectUserWallet(
-                    "no_wallet"
-                )
-            );
+            dispatch(loadConnectUserWallet("no_wallet"));
             setLoader({ id: null, status: false });
             return;
         }
@@ -75,25 +72,24 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
             selectedNetwork.length > 0 &&
             parseInt(chainId) !== selectedNetwork[0].chainId
         ) {
-
             // CHANGE NETWORK TO PRIZE NETWORK
             try {
                 // check if the chain to connect to is installed
                 await web3.currentProvider.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{
-                        chainId: web3.utils.toHex(
-                            selectedNetwork[0].chainId
-                        )
-                    }], // chainId must be in hexadecimal numbers
+                    method: "wallet_switchEthereumChain",
+                    params: [
+                        {
+                            chainId: web3.utils.toHex(
+                                selectedNetwork[0].chainId
+                            ),
+                        },
+                    ], // chainId must be in hexadecimal numbers
                 });
-
             } catch (error) {
-
                 if (error.code === 4902) {
                     try {
                         await web3.currentProvider.request({
-                            method: 'wallet_addEthereumChain',
+                            method: "wallet_addEthereumChain",
                             params: [
                                 {
                                     chainId: web3.utils.toHex(
@@ -118,70 +114,94 @@ export function loadNFTClaim(winnerId, prizeBlockchainNetwork, prizeContractType
             }
         } else {
             return getNFTClaim(winnerId, user.id, user.walletAddress)
-                .then(async ({ address, tokenId, amount, nonce, signature }) => {
+                .then(
+                    async ({ address, token_id, amount, nonce, signature }) => {
+                        const tokenContract = new web3.eth.Contract(
+                            prizeDistTokenABI,
+                            selectedNetwork[0]?.prizeDistributorAddress
+                        );
 
-                    const tokenContract = new web3.eth.Contract(
-                        prizeDistTokenABI,
-                        selectedNetwork[0]?.prizeDistributorAddress
-                    );
-
-                    // 2 - IERC721, 3 - IERC1155
-                    if (prizeContractType === 2) {
-                        // Send tranfer function to receiver address
-                        tokenContract.methods
-                            .claimNFT721(address, tokenId, nonce, signature)
-                            .send({ from: user.walletAddress })
-                            .on("sending", function (payload) {
-                                console.log("sending", payload);
-                            })
-                            .on("sent", function (payload) {
-                                console.log("payload", payload);
-                            })
-                            .on("transactionHash", function (hash) {
-                                console.log("hash", hash);
-                                dispatch(loadClaimPrize(winnerId, user.id, hash, user.walletAddress));
-                            })
-                            .on("receipt", function (receipt) {
-                                console.log("receipt", receipt);
-                                // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
-                                dispatch(loadClaimedPrizes());
-                                dispatch(loadUnClaimedPrizes());
-                                setLoader({ id: null, status: false });
-                            })
-                            .on("error", function (error) {
-                                console.log("error", error);
-                                setLoader({ id: null, status: false });
-                            });
-                    } else if (prizeContractType === 3) {
-                        // Send tranfer function to receiver address
-                        tokenContract.methods
-                            .claimNFT1155(address, tokenId, amount, nonce, signature)
-                            .send({ from: user.walletAddress })
-                            .on("sending", function (payload) {
-                                console.log("sending", payload);
-                            })
-                            .on("sent", function (payload) {
-                                console.log("payload", payload);
-                            })
-                            .on("transactionHash", function (hash) {
-                                console.log("hash", hash);
-                                dispatch(loadClaimPrize(winnerId, user.id, hash, user.walletAddress));
-                            })
-                            .on("receipt", function (receipt) {
-                                console.log("receipt", receipt);
-                                setLoader({ id: null, status: false });
-                                // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
-                                dispatch(loadClaimedPrizes());
-                                dispatch(loadUnClaimedPrizes());
-                            })
-                            .on("error", function (error) {
-                                console.log("error", error);
-                                setLoader({ id: null, status: false });
-                            });
+                        // 2 - IERC721, 3 - IERC1155
+                        if (prizeContractType === 2) {
+                            // Send tranfer function to receiver address
+                            tokenContract.methods
+                                .claimNFT721(
+                                    address,
+                                    token_id,
+                                    nonce,
+                                    signature
+                                )
+                                .send({ from: user.walletAddress })
+                                .on("sending", function (payload) {
+                                    console.log("sending", payload);
+                                })
+                                .on("sent", function (payload) {
+                                    console.log("payload", payload);
+                                })
+                                .on("transactionHash", function (hash) {
+                                    console.log("hash", hash);
+                                    dispatch(
+                                        loadClaimPrize(
+                                            winnerId,
+                                            user.id,
+                                            hash,
+                                            user.walletAddress
+                                        )
+                                    );
+                                })
+                                .on("receipt", function (receipt) {
+                                    console.log("receipt", receipt);
+                                    // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
+                                    dispatch(loadClaimedPrizes());
+                                    dispatch(loadUnClaimedPrizes());
+                                    setLoader({ id: null, status: false });
+                                })
+                                .on("error", function (error) {
+                                    console.log("error", error);
+                                    setLoader({ id: null, status: false });
+                                });
+                        } else if (prizeContractType === 3) {
+                            // Send tranfer function to receiver address
+                            tokenContract.methods
+                                .claimNFT1155(
+                                    address,
+                                    token_id,
+                                    amount,
+                                    nonce,
+                                    signature
+                                )
+                                .send({ from: user.walletAddress })
+                                .on("sending", function (payload) {
+                                    console.log("sending", payload);
+                                })
+                                .on("sent", function (payload) {
+                                    console.log("payload", payload);
+                                })
+                                .on("transactionHash", function (hash) {
+                                    console.log("hash", hash);
+                                    dispatch(
+                                        loadClaimPrize(
+                                            winnerId,
+                                            user.id,
+                                            hash,
+                                            user.walletAddress
+                                        )
+                                    );
+                                })
+                                .on("receipt", function (receipt) {
+                                    console.log("receipt", receipt);
+                                    setLoader({ id: null, status: false });
+                                    // FOR BACKEND TO CHECK IF THE BLOCK CHAIN TRANSCATION IS SUCCESSFUL
+                                    dispatch(loadClaimedPrizes());
+                                    dispatch(loadUnClaimedPrizes());
+                                })
+                                .on("error", function (error) {
+                                    console.log("error", error);
+                                    setLoader({ id: null, status: false });
+                                });
+                        }
                     }
-
-
-                })
+                )
                 .catch((error) => {
                     if (error.code === 7) {
                         console.log(error.message);
@@ -207,21 +227,13 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
 
         const { web3 } = await getWeb3();
         if (!web3) {
-            dispatch(
-                loadConnectUserWallet(
-                    "no_wallet"
-                )
-            );
+            dispatch(loadConnectUserWallet("no_wallet"));
             setLoader({ id: null, status: false });
             return;
         }
 
         if (!user.walletAddress) {
-            dispatch(
-                loadConnectUserWallet(
-                    "no_wallet"
-                )
-            );
+            dispatch(loadConnectUserWallet("no_wallet"));
             setLoader({ id: null, status: false });
             return;
         }
@@ -236,25 +248,24 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
             selectedNetwork.length > 0 &&
             parseInt(chainId) !== selectedNetwork[0].chainId
         ) {
-
             // CHANGE NETWORK TO PRIZE NETWORK
             try {
                 // check if the chain to connect to is installed
                 await web3.currentProvider.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{
-                        chainId: web3.utils.toHex(
-                            selectedNetwork[0].chainId
-                        )
-                    }], // chainId must be in hexadecimal numbers
+                    method: "wallet_switchEthereumChain",
+                    params: [
+                        {
+                            chainId: web3.utils.toHex(
+                                selectedNetwork[0].chainId
+                            ),
+                        },
+                    ], // chainId must be in hexadecimal numbers
                 });
-
             } catch (error) {
-
                 if (error.code === 4902) {
                     try {
                         await web3.currentProvider.request({
-                            method: 'wallet_addEthereumChain',
+                            method: "wallet_addEthereumChain",
                             params: [
                                 {
                                     chainId: web3.utils.toHex(
@@ -279,7 +290,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
             }
         } else {
             return getNFTClaim(winnerId, user.id, user.walletAddress)
-                .then(async ({ address, tokenId, nonce, signature }) => {
+                .then(async ({ address, token_id, nonce, signature }) => {
                     const tokenContract = new web3.eth.Contract(
                         prizeDistTokenABI,
                         selectedNetwork[0]?.prizeDistributorAddress
@@ -287,7 +298,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
 
                     // Send tranfer function to receiver address
                     tokenContract.methods
-                        .claimToken(address, tokenId, nonce, signature)
+                        .claimToken(address, token_id, nonce, signature)
                         .send({ from: user.walletAddress })
                         .on("sending", function (payload) {
                             console.log("sending", payload);
@@ -297,7 +308,14 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
                         })
                         .on("transactionHash", function (hash) {
                             console.log("hash", hash);
-                            dispatch(loadClaimPrize(winnerId, user.id, hash, user.walletAddress));
+                            dispatch(
+                                loadClaimPrize(
+                                    winnerId,
+                                    user.id,
+                                    hash,
+                                    user.walletAddress
+                                )
+                            );
                         })
                         .on("receipt", function (receipt) {
                             console.log("receipt", receipt);
@@ -306,7 +324,7 @@ export function loadTokenClaim(winnerId, prizeBlockchainNetwork, setLoader) {
                             dispatch(loadClaimedPrizes());
                             dispatch(loadUnClaimedPrizes());
 
-                            setTimeout(async () => {    
+                            setTimeout(async () => {
                                 const { tokenBalance, symbol } =
                                     await getTokenBalance(user.walletAddress);
                                 const chainId = await web3.eth.getChainId();

@@ -18,6 +18,7 @@ import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 // HELPER FUNCTION
 // import { handleConnectWallet } from "Utils/ConnectWallet";
 import { defaultUserImage } from "Utils/DefaultImage";
+import { useTranslation, Trans } from "react-i18next";
 
 const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
     SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, Autoplay]);
@@ -67,6 +68,8 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
             year: "numeric",
         });
     };
+
+    const { t } = useTranslation();
 
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
@@ -155,39 +158,49 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                     {user.username.toLowerCase() ===
                                         e.winner.toLowerCase() && (
                                         <>
-                                            <p className="winner-name">
-                                                {e.winner} (You)
-                                            </p>
-                                            <p className="won-text mb-0">
-                                                Won the
-                                            </p>
-                                            <p className="prize-name my-2">
-                                                {e.title}
-                                            </p>
+                                            <Trans
+                                                i18nKey="reveal_winner.winner"
+                                                values={{
+                                                    winner: e?.winner,
+                                                    title: e?.title,
+                                                }}
+                                            >
+                                                <p className="winner-name">0</p>
+                                                <p className="won-text mb-0">
+                                                    1
+                                                </p>
+                                                <p className="prize-name my-2">
+                                                    2
+                                                </p>
+                                            </Trans>
                                             <p className="nft-token mb-3">
-                                                TokenID:{" "}
-                                                {e.nftContractAddress.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
-                                                {e.nftContractAddress.substring(
-                                                    e.nftContractAddress
-                                                        .length - 4
-                                                )}
+                                                {t("reveal_winner.nft_token", {
+                                                    first: e.nftContractAddress.substring(
+                                                        0,
+                                                        5
+                                                    ),
+                                                    last: e.nftContractAddress.substring(
+                                                        e.nftContractAddress
+                                                            .length - 4
+                                                    ),
+                                                })}
                                             </p>
 
                                             {e.canClaimDate > 0 && (
                                                 <>
                                                     <p className="mb-2 mt-4 not-minted">
-                                                        This NFT is not minted
-                                                        yet. We’ll notify you
-                                                        once it’s out.
+                                                        {t(
+                                                            "reveal_winner.nft_not_minted.text"
+                                                        )}
                                                     </p>
                                                     <p className="mint-date">
-                                                        NFT mint date:{" "}
-                                                        {getMintDate(
-                                                            e.canClaimDate
+                                                        {t(
+                                                            "reveal_winner.nft_not_minted.mint_date",
+                                                            {
+                                                                date: getMintDate(
+                                                                    e?.canClaimDate
+                                                                ),
+                                                            }
                                                         )}
                                                     </p>
                                                 </>
@@ -196,7 +209,9 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                             {e.canClaimDate <= 0 && (
                                                 <Link to="/profile/rewards">
                                                     <button className="connect-wallet-btn">
-                                                        View Prize
+                                                        {t(
+                                                            "reveal_winner.view_prize"
+                                                        )}
                                                     </button>
                                                 </Link>
                                             )}
@@ -205,26 +220,32 @@ const WinnerAnnouncementModal = ({ data, user, handleBackButton }) => {
                                     {user.username.toLowerCase() !==
                                         e.winner.toLowerCase() && (
                                         <>
-                                            <p className="winner-name">
-                                                {e.winner}
-                                            </p>
-                                            <p className="won-text mb-0">
-                                                won the
-                                            </p>
-                                            <p className="prize-name my-2">
-                                                {e.title}
-                                            </p>
+                                            <Trans
+                                                i18nKey="reveal_winner.other_winner"
+                                                values={{
+                                                    winner: e?.winner,
+                                                    title: e?.title,
+                                                }}
+                                            >
+                                                <p className="winner-name">0</p>
+                                                <p className="won-text mb-0">
+                                                    1
+                                                </p>
+                                                <p className="prize-name my-2">
+                                                    2
+                                                </p>
+                                            </Trans>
                                             <p className="nft-token mb-2">
-                                                TokenID:{" "}
-                                                {e.nftContractAddress.substring(
-                                                    0,
-                                                    5
-                                                )}
-                                                ....
-                                                {e.nftContractAddress.substring(
-                                                    e.nftContractAddress
-                                                        .length - 4
-                                                )}
+                                                {t("reveal_winner.nft_token", {
+                                                    first: e?.nftContractAddress?.substring(
+                                                        0,
+                                                        5
+                                                    ),
+                                                    last: e?.nftContractAddress?.substring(
+                                                        e?.nftContractAddress
+                                                            ?.length - 4
+                                                    ),
+                                                })}
                                             </p>
                                             {/* TODO: SHOW PLAYER WINNER DETAILS */}
                                             {/* <table className="drawn-details-table my-auto">

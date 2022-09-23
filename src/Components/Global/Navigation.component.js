@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { gsap } from "gsap";
+import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
     const history = useHistory();
@@ -136,6 +137,8 @@ const Navigation = () => {
             );
     };
 
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid navbar-bottom px-0 d-block d-md-none">
             <div className="navigation-wrapper" ref={navWrapperRef}>
@@ -150,7 +153,7 @@ const Navigation = () => {
                     activeClassName="active"
                 >
                     <p className="mb-0" data-name="home">
-                        Home
+                        {t("nav.home")}
                     </p>
                 </NavLink>
                 <NavLink
@@ -163,7 +166,7 @@ const Navigation = () => {
                     activeClassName="active"
                 >
                     <p className="mb-0" data-name="activity">
-                        Activity
+                        {t("nav.activity")}
                     </p>
                 </NavLink>
                 <NavLink
@@ -176,7 +179,7 @@ const Navigation = () => {
                     activeClassName="active"
                 >
                     <p className="mb-0" data-name="winner">
-                        Winner
+                        {t("nav.winner")}
                     </p>
                 </NavLink>
                 <div

@@ -5,6 +5,7 @@ import { getToken } from "Utils/GetToken";
 import GameEndModal from "Components/Modals/GameEnd.modal";
 import PauseMenuModal from "Components/Modals/PauseMenuModal";
 import GameQuitModal from "Components/Modals/GameQuit.modal";
+import { useTranslation } from "react-i18next";
 
 const StayTune = () => {
     const { user } = useSelector((state) => state.userData);
@@ -110,6 +111,8 @@ const StayTune = () => {
         destination.focus();
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             {gameData && (
@@ -136,7 +139,7 @@ const StayTune = () => {
                             currentGameBoosterInfo={{
                                 isUseBooster: false,
                                 extraTickets: false,
-                                scoreNeededPerExtraTickets: false,
+                                score_needed_per_extra_tickets: false,
                             }}
                         />
                     )}
@@ -177,13 +180,13 @@ const StayTune = () => {
             <div className="container-fluid stay-tune">
                 <div className="row">
                     <div className="col-10 col-lg-5 mx-auto d-flex flex-column align-items-center justify-content-center min-vh-100">
-                        <h1 className="title">Stay Tuned!</h1>
+                        <h1 className="title">{t("stay_tuned.title")}</h1>
                         <p className="mb-1 subtitle-1 text-center">
-                            We'll be back with more rewards for you.
+                            {t("stay_tuned.subtitle1")}
                         </p>
                         {
                             <p className="mb-4 subtitle-2 text-center">
-                                Here're some games for you while you wait.
+                                {t("stay_tuned.subtitle2")}
                             </p>
                         }
                         {

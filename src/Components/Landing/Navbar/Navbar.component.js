@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Navbar = ({ setLoginModal }) => {
+    const { t } = useTranslation();
+
     return (
         <div className="nav-bar position-fixed d-flex align-items-center">
             <div className="blur-background position-absolute w-100 h-100" />
@@ -17,7 +20,7 @@ const Navbar = ({ setLoginModal }) => {
                             className="nav-login"
                             onClick={() => setLoginModal(true)}
                         >
-                            LOGIN
+                            {t("landing.btn.login")}
                         </button>
                     </div>
                 </div>

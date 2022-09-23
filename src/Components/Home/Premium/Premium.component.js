@@ -17,6 +17,7 @@ import getPoolTickets from "Utils/PoolTickets";
 import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import { convertSecondsToHours } from "Utils/TimeConversion";
 import OverTimeModeChecker from "Utils/OverTimeModeChecker";
+import { useTranslation } from "react-i18next";
 
 const Premium = ({ data, handleWinnerRevealCard }) => {
     const dispatch = useDispatch();
@@ -78,6 +79,8 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
         };
     }, [data?.gameInfo, config]);
 
+    const { t } = useTranslation();
+
     return (
         <>
             {
@@ -137,7 +140,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                         <div className="py-2 ticket-wrapper d-block">
                                             <div className="your-tickets">
                                                 <p className="mb-0 label d-flex align-items-center">
-                                                    Your tickets
+                                                    {t("featured.ticket")}
                                                 </p>
                                                 <div className="col d-flex flex-row align-items-center px-0">
                                                     <p className="mb-0 tickets d-flex align-items-center">
@@ -158,10 +161,14 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 ) && (
                                                     <>
                                                         <p className="mb-0 label d-none align-items-end d-sm-flex">
-                                                            Draw starts in
+                                                            {t(
+                                                                "ae.draw_starts"
+                                                            )}
                                                         </p>
                                                         <p className="mb-0 label d-flex align-items-end d-sm-none">
-                                                            Prize pool
+                                                            {t(
+                                                                "onboarding.prize_pool"
+                                                            )}
                                                         </p>
                                                         <div className="col d-flex align-items-center px-0">
                                                             <p className="mb-0 d-none d-sm-flex align-items-center current-tickets tickets">
@@ -188,7 +195,9 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                                 ) && (
                                                     <>
                                                         <p className="mb-0 label align-items-end d-sm-flex">
-                                                            Draw starts in
+                                                            {t(
+                                                                "ae.draw_starts"
+                                                            )}
                                                         </p>
 
                                                         <div className="col d-flex align-items-center px-0">
@@ -221,7 +230,7 @@ const Premium = ({ data, handleWinnerRevealCard }) => {
                                             ))}
                                         </div>
                                         <div className="play-text text-center px-2 py-1">
-                                            PLAY
+                                            {t("featured.play")}
                                         </div>
                                     </div>
                                 </div>

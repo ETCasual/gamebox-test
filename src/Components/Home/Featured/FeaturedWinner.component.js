@@ -11,6 +11,7 @@ import loadWinners from "redux/thunks/Winners.thunk";
 // HELPER
 import { defaultUserImage } from "Utils/DefaultImage";
 import { getDateOrdinalFormat } from "Utils/DateFormat";
+import { useTranslation } from "react-i18next";
 
 const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
     const dispatch = useDispatch();
@@ -46,6 +47,8 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
     //     setPrizeWon(prizeWon);
     // }, [winners, prizeId]);
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="col-12 d-flex align-items-center justify-content-center">
@@ -63,7 +66,7 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                             <div className="info-wrapper d-flex flex-column justify-content-between text-center pt-3">
                                 <div className="align-items-start mt-4">
                                     <div className="congratz-subtitle">
-                                        Congratulations!
+                                        {t("featured_winner.congratulations")}
                                     </div>
                                 </div>
                                 <div className="align-items-center mt-4 mb-2">
@@ -80,15 +83,16 @@ const FeaturedWinner = ({ prizeId, prizeDrawnTimestamp, prizeUrl }) => {
                                         {prizeWon?.userNickName || "..."}
                                     </div>
                                     <div className="winner-subtitle mt-3">
-                                        won the
+                                        {t("featured_winner.won")}
                                     </div>
                                     <div className="prize-title mt-2 mb-4">
-                                        {prizeWon?.prizeTitle || "REWARDS"}
+                                        {prizeWon?.prizeTitle ||
+                                            t("featured_winner.rewards")}
                                     </div>
                                 </div>
                                 <div className="align-items-end mb-4">
                                     <div className="prize-drawn-title my-1">
-                                        Prize drawn on
+                                        {t("featured_winner.drawn_on")}
                                     </div>
                                     <div className="prize-drawn-text my-1">
                                         {timer}

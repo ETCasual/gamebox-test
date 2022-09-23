@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loadLogin } from "redux/thunks/Login.thunk";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Login = ({ setLoginModal }) => {
+    const { t } = useTranslation();
+
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -35,9 +38,11 @@ const Login = ({ setLoginModal }) => {
         >
             <div className="overlay" onClick={() => setLoginModal(false)} />
             <div className="wrapper w-100 px-4 pt-4 pb-2 text-center">
-                <p className="welcome-text mb-2">Welcome back!</p>
+                <p className="welcome-text mb-2">
+                    {t("landing.login.welcome")}
+                </p>
                 <p className="subtitle mb-4 pb-2">
-                    Login with your froyo.games account.
+                    {t("landing.login.subtitle")}
                 </p>
                 <form
                     onSubmit={handleLoginSubmit}
@@ -47,7 +52,7 @@ const Login = ({ setLoginModal }) => {
                         className="email mb-3 text-center"
                         name="username"
                         type="email"
-                        placeholder="Email Address"
+                        placeholder={t("landing.login.email")}
                         value={loginData.username}
                         onChange={handleOnChangeData}
                         required
@@ -58,7 +63,7 @@ const Login = ({ setLoginModal }) => {
                         } text-center`}
                         name="password"
                         type="password"
-                        placeholder="Password"
+                        placeholder={t("landing.login.password")}
                         onChange={handleOnChangeData}
                         required
                     />
@@ -66,14 +71,16 @@ const Login = ({ setLoginModal }) => {
                         <p className="mb-5 error text-danger">{loginError}</p>
                     )}
                     <button type="submit" className="submit mb-4">
-                        LOGIN
+                        {t("landing.login.btn.login")}
                     </button>
                     <a
                         href={`${process.env.REACT_APP_FROYO_WEB_URL}/forgot-pass`}
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <p className="forgot-password">Forgot your password?</p>
+                        <p className="forgot-password">
+                            {t("landing.login.forgot_password")}
+                        </p>
                     </a>
                 </form>
             </div>

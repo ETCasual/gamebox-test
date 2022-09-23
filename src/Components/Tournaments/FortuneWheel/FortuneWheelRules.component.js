@@ -2,6 +2,7 @@ import { delay } from "lodash";
 import React, { useState, useEffect, useRef } from "react";
 import Winwheel from "winwheel";
 import TweenMax from "gsap/all";
+import { useTranslation } from "react-i18next";
 
 const FortuneWheelRules = ({
     spinnerRules,
@@ -205,6 +206,8 @@ const FortuneWheelRules = ({
 
     //#endregion
 
+    const { t } = useTranslation();
+
     return (
         <div className="fortune-wheel-wrapper position-relative px-5">
             <div className="fortune-wheel-holder">
@@ -226,11 +229,11 @@ const FortuneWheelRules = ({
                         disabled={!isAbleToSpin || isClickedSpin ? true : false}
                         onClick={onSpinClicked}
                     >
-                        SPIN
+                        {t("spinner.fortune_wheel.spin")}
                         <br />
                         &
                         <br />
-                        WIN
+                        {t("spinner.fortune_wheel.win")}
                         {/* <br />
                         <span className="spins-left-text">{spinLeft}</span> */}
                     </button>

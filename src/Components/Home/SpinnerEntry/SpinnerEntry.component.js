@@ -7,6 +7,7 @@ import FortuneWheel from "Components/Tournaments/FortuneWheel/FortuneWheel.compo
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
+import { useTranslation } from "react-i18next";
 
 const SpinnerEntry = () => {
     const { config } = useSelector((state) => state.config);
@@ -48,6 +49,8 @@ const SpinnerEntry = () => {
         return countDownTimerEnded;
     }, [config.offsetTimestamp]);
 
+    const { t } = useTranslation();
+
     return (
         <>
             <div
@@ -57,9 +60,11 @@ const SpinnerEntry = () => {
                 <div className="card-wrapper h-100 pt-1 px-2 pb-2 pt-sm-1 px-sm-3 pb-sm-3">
                     <div className="row">
                         <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
-                            <p className="title-text mb-1">FREE GEMS</p>
+                            <p className="title-text mb-1">
+                                {t("spinner.free_gems")}
+                            </p>
                             <div className="desc-text mb-1">
-                                Claim your daily free gems here!
+                                {t("spinner.claim")}
                             </div>
                         </div>
                         <div className="card-img-wrapper col-4 col-lg-5 d-flex justify-content-end">
@@ -73,7 +78,7 @@ const SpinnerEntry = () => {
                 </div>
                 {/* TIMER */}
                 <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
-                    <p className="timer-text mb-0">Refresh in</p>
+                    <p className="timer-text mb-0">{t("spinner.refresh")}</p>
                     <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
                 </div>
             </div>

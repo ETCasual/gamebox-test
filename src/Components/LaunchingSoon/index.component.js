@@ -1,7 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./styles.module.scss";
 
 const Index = () => {
+    const { t } = useTranslation();
+
     return (
         <section id="coming-soon">
             <div className="container-fluid coming-soon-wrapper">
@@ -17,11 +20,9 @@ const Index = () => {
                             data-title="Sorry"
                             className="text-center px-2 px-md-0"
                         >
-                            Sorry
+                            {t("sorry.title")}
                         </h1>
-                        <p className="mb-2 mb-md-0">
-                            GameBox is not available in your country yet.
-                        </p>
+                        <p className="mb-2 mb-md-0">{t("sorry.subtitle")}</p>
                     </div>
                 </div>
             </div>
