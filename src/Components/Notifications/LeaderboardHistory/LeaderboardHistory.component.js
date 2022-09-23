@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import {
     getLeaderboardPrizeInfo,
     getLeaderboardList,
 } from "Utils/NotificationLeaderboardHistory";
 import { timeOptions } from "Utils/Enums";
+import { defaultUserImage } from "Utils/DefaultImage";
+import { useTranslation } from "react-i18next";
 
 const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
     const { user } = useSelector((state) => state.userData);
@@ -14,12 +16,25 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
     );
     const { leaderRuleRanks } = useSelector((state) => state.leaderboardRanks);
 
+    const rankIndex =
+        leaderboardHistory.findIndex((d) => d.userId === user.id) + 1;
+    const { t } = useTranslation();
+
     // DISABLE HTML SCROLL
     useEffect(() => {
         document.documentElement.style.overflowY = "hidden";
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
+
+    const getRankTickets = (index) => {
+        let value;
+        leaderRuleRanks.forEach((el) => {
+            if (el.rankFrom <= index + 1) value = el.tickets;
+            if (index + 1 >= el.rankTo) value = el.tickets;
+        });
+        return value;
+    };
 
     // TODO: Do this when u have VIP
 
@@ -100,7 +115,7 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                             </div>
                         </div>
                         {/* MIDDLE - LEADERBOARD HISTORY */}
-                        <div className="leaderboard-rank-wrapper px-2 py-1">
+                        <div className="leaderboard-rank-wrapper px-2 pt-1">
                             <div className="leaderboard-rank-layer">
                                 {getLeaderboardList(
                                     id,
@@ -109,7 +124,139 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
                                     user?.id
                                 )}
                             </div>
+
+                            <div className="leaderboard-user-wrapper">
+                                <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
+                                    <div className="number-holder">
+                                        <p clasName="rank-number mb-0">
+                                            {rankIndex}
+                                        </p>
+                                    </div>
+                                    <div className="user-avatar">
+                                        {/* PROFILE IMG */}
+                                        <div
+                                            className={`profile-img d-inline-flex ml-3 ${
+                                                user.isVip ? "is-vip" : ""
+                                            }`}
+                                        >
+                                            <span>
+                                                <img
+                                                    className="img-holder"
+                                                    onError={(e) =>
+                                                        defaultUserImage(e)
+                                                    }
+                                                    src={
+                                                        user.avatarUrl ||
+                                                        `${window.cdn}icons/icon_profile.svg`
+                                                    }
+                                                    alt="avatar"
+                                                />
+                                            </span>
+                                            <span className="img-frame">
+                                                {user.isVip && (
+                                                    <img
+                                                        className="vip-frame"
+                                                        src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                        alt="vip-frame"
+                                                    />
+                                                )}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="px-2 ml-3">
+                                        <p className="player-name">
+                                            {t(
+                                                "leaderboard.default.player_name",
+                                                {
+                                                    user: user.username,
+                                                }
+                                            )}
+                                        </p>
+                                        <p className="points">
+                                            {t("leaderboard.default.points", {
+                                                count: user.gameScore,
+                                            })}
+                                        </p>
+                                    </div>
+                                    <div className="tickets ml-auto d-flex align-items-center justify-content-center">
+                                        <span>
+                                            {getRankTickets(rankIndex - 1) ||
+                                                "0"}{" "}
+                                            <img
+                                                className="icon ml-1"
+                                                src={`${window.cdn}assets/tickets_06.png`}
+                                                alt="ticket"
+                                            />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div className="leaderboard-user-wrapper">
+                            <div className="leader-player-card d-flex align-items-center leader-curr-player-card">
+                                <div className="number-holder">
+                                    <p clasName="rank-number mb-0">
+                                        {rankIndex}
+                                    </p>
+                                </div>
+                                <div className="user-avatar">
+                                    {/* PROFILE IMG */}
+                                    <div
+                                        className={`profile-img d-inline-flex ml-3 ${
+                                            user.isVip ? "is-vip" : ""
+                                        }`}
+                                    >
+                                        <span>
+                                            <img
+                                                className="img-holder"
+                                                onError={(e) =>
+                                                    defaultUserImage(e)
+                                                }
+                                                src={
+                                                    user.avatarUrl ||
+                                                    `${window.cdn}icons/icon_profile.svg`
+                                                }
+                                                alt="avatar"
+                                            />
+                                        </span>
+                                        <span className="img-frame">
+                                            {user.isVip && (
+                                                <img
+                                                    className="vip-frame"
+                                                    src={`${window.cdn}icons/icon_vip_frame_01.png`}
+                                                    alt="vip-frame"
+                                                />
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="px-2 ml-3">
+                                    <p className="player-name">
+                                        {t("leaderboard.default.player_name", {
+                                            user: user.username,
+                                        })}
+                                    </p>
+                                    <p className="points">
+                                        {t("leaderboard.default.points", {
+                                            count: user.gameScore,
+                                        })}
+                                    </p>
+                                </div>
+                                <div className="tickets ml-auto d-flex align-items-center justify-content-center">
+                                    <span>
+                                        {getRankTickets(rankIndex - 1) || "0"}{" "}
+                                        <img
+                                            className="icon ml-1"
+                                            src={`${window.cdn}assets/tickets_06.png`}
+                                            alt="ticket"
+                                        />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {/* BOTTOM - EARNED POINTS */}
                     </div>
                 </div>
             </div>

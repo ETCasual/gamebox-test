@@ -998,7 +998,7 @@ const Leaderboard = ({
                                 : null
                         }
                     >
-                        JOIN TOURNAMENT
+                        {t("tournament.join")}
                         {/* <img
                             width={18}
                             className="icon ml-3 mr-1"

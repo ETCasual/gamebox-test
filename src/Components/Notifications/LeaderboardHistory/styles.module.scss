@@ -45,7 +45,7 @@
             .leaderboard-rank-wrapper {
                 background: #0e0e0e;
                 box-shadow: 0px 18px 26px #00000029;
-                overflow: auto;
+                overflow: hidden;
                 .leaderboard-rank-layer {
                     &::-webkit-scrollbar {
                         width: 0; /* Safari and Chrome */
@@ -158,33 +158,104 @@
                     }
                 }
             }
-            .earned-points {
-                background: linear-gradient(130deg, #1c1c1c 0%, #0b0b0b 100%);
-                border-radius: 0px 0px 10px 10px;
-                .leaderboard-level,
-                .leaderboard-exp {
-                    width: 100%;
+            .leaderboard-user-wrapper {
+                position: relative;
+                bottom: 50px;
+                height: 50px;
+            }
+            .leader-player-card {
+                background-color: #0e0e0e;
+                min-height: 3.5em;
+                height: inherit;
+                padding: 1.25rem;
+                .user-avatar {
+                    position: relative;
+                    .profile-img {
+                        display: block;
+                        .img-holder {
+                            position: relative;
+                            width: 35px;
+                            height: 35px;
+                            border-radius: 100%;
+                        }
+                        .img-frame {
+                            position: absolute;
+                            width: 40px;
+                            height:40px;
+    
+                            .vip-frame {
+                                width: 100%;
+                                height: 100%;
+                                margin-left: -3px;
+                            }
+                        }
+                    }
+                }
+                p {
+                    margin: 0;
+                    font-size: 14px;
+                }
+                .player-name {
+                    width: 12ch;
+                    color: #f7f7f7;
                     font-size: $fnt-sz-12;
+                    font-weight: bold;
                     @include media-min($md) {
+                        width: 25ch;
+                    }
+                    white-space: nowrap;
+                    overflow: hidden;
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                }
+                .points {
+                    color: #f7f7f7;
+                    font-size: $fnt-sz-10;
+                    flex-wrap: nowrap;
+                    white-space: nowrap;
+                }
+                .tickets {
+                    height: 100%;
+                    span {
                         font-size: $fnt-sz-14;
-                    }
-                    .tickets {
+                        font-weight: bold;
                         color: #f8ba29;
-                        font-weight: $fnt-wgt-600;
-                        min-width: 90px;
-                        border-radius: 7px;
+    
+                        .icon {
+                            width: 30px;
+                        }
                     }
                 }
-                .line {
-                    width: 100%;
-                    height: 1px;
-                    background-color: #3e3e3e;
-                    margin: 1.5rem 0;
+                .number-holder {
+                    margin-left: 0.5px;
+                    width: 6.88px;
+                    .rank-number {
+                        font-size: $fnt-sz-12;
+                        font-weight: $fnt-wgt-700;
+                        text-align: center;
+                    }
                 }
-                .leaderboard-exp {
-                    .exp {
-                        font-weight: $fnt-wgt-600;
-                        color: #00c1b9;
+            }
+            .leader-curr-player-card,
+            .you {
+                background: #fdc43d;
+ 
+                .player-name,
+                .points,
+                .number-holder,
+                .tickets {
+                    color: #000000;
+                    .rank-number {
+                        color: #000000;
+                    }
+                    span {
+                        color: #000000;
+    
+                        .icon {
+                            width: 30px;
+                            -webkit-filter: drop-shadow(0px 1px 2px #222);
+                            filter: drop-shadow(0px 1px 2px #222);
+                        }
                     }
                 }
             }
