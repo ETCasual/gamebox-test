@@ -98,8 +98,6 @@ const FortuneWheel = ({
         }
     }
     function onSpinFinished() {
-        // setIsEndSpin(true);
-
         setIsClickedSpin(false);
         setWinAmount(-1);
 
