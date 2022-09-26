@@ -151,7 +151,6 @@ const NotificationLeaderboard = ({ id, handleCloseLeaderboardHistory }) => {
     }
 
     // TODO: Do this when u have VIP
-    // FIXME: Fix visibility scroll and Ref
 
     return (
         <div id="leaderboard-history">
