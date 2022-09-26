@@ -42,6 +42,7 @@
                     color: #f7f7f7;
                 }
             }
+            
             .leaderboard-rank-wrapper {
                 background: #0e0e0e;
                 box-shadow: 0px 18px 26px #00000029;
@@ -50,7 +51,7 @@
                     &::-webkit-scrollbar {
                         width: 0; /* Safari and Chrome */
                     }
-                    max-height: 93%;
+                    
                     overflow-y: scroll;
                     -ms-overflow-style: none; /* Internet Explorer 10+ */
                     scrollbar-width: none; /* Firefox */

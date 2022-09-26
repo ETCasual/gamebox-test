@@ -803,9 +803,7 @@ const Leaderboard = ({
                                                   user.username ||
                                                   "Player",
                                           })
-                                        : t("leaderboard.other.player_name", {
-                                              user: leaderboardList[i]?.userId,
-                                          })
+                                        : leaderboardList[i]?.nickName
                                     : t("leaderboard.placeholder.player_name")}
                             </p>
                             <p className="points">

@@ -72,7 +72,8 @@ export function getLeaderboardList(
     id,
     leaderboardHistoryData,
     leaderRuleRanks,
-    userId
+    userId,
+    ref
 ) {
     let _leaderboardHistory,
         _data = [];
