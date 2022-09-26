@@ -15,17 +15,5 @@
     "background_color": "#ffffff",
     "orientation": "portrait",
     "scope": "/",
-    "categories": ["Entertainment"],
-    "screenshots": [
-        {
-            "src": "https://esm-cdn.sgp1.digitaloceanspaces.com/app/images/2.0/pwa/ss_1.png",
-            "sizes": "1280x800",
-            "type": "image/png"
-        },
-        {
-            "src": "https://esm-cdn.sgp1.digitaloceanspaces.com/app/images/2.0/pwa/ss_2.png",
-            "sizes": "750x1334",
-            "type": "image/png"
-        }
-    ]
+    "categories": ["Entertainment"]
 }
