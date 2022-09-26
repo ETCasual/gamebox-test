@@ -88,10 +88,6 @@ const FortuneWheelRules = ({
     }, [shuffleSpinner]);
 
     useEffect(() => {
-        if (!isClickedSpin) setIsSpinning(false);
-    }, [isClickedSpin, setIsSpinning]);
-
-    useEffect(() => {
         const resetWheel = () => {
             wheelRef.current.stopAnimation(false);
             let winningSegmentNumber =

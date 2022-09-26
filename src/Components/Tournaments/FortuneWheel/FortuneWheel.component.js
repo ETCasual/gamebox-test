@@ -106,6 +106,10 @@ const FortuneWheel = ({
         setGemCount(user.gmes);
     }
 
+    useEffect(() => {
+        if (!isClickedSpin) setIsSpinning(false);
+    }, [isClickedSpin, setIsSpinning]);
+
     const { t } = useTranslation();
 
     return (
