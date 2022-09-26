@@ -27,11 +27,20 @@ const FortuneWheel = ({
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
+    const [isSpinning, setIsSpinning] = useState(false);
+    const [gemCount, setGemCount] = useState(user.gems);
     // const [modalHeight, setModalHeight] = useState({
     //     windowWidth: 0,
     //     wrapper: 0,
     //     cols: 0,
     // });
+
+    useEffect(() => {
+        if (!isSpinning) {
+            setGemCount(user.gems);
+        }
+    }, [isSpinning, user.gems]);
+
     const [winAmount, setWinAmount] = useState(-1);
 
     // DISABLE HTML SCROLL
@@ -93,7 +102,13 @@ const FortuneWheel = ({
         setWinAmount(-1);
 
         dispatch(loadUserDetails());
+
+        setGemCount(user.gmes);
     }
+
+    useEffect(() => {
+        if (!isClickedSpin) setIsSpinning(false);
+    }, [isClickedSpin, setIsSpinning]);
 
     const { t } = useTranslation();
 
@@ -218,7 +233,7 @@ const FortuneWheel = ({
                                             )}
                                         </div>
                                         <div className="balance-number d-flex flex-row align-items-center justify-content-center mr-3 ml-auto">
-                                            {user?.gems || 0}
+                                            {gemCount || 0}
                                             <img
                                                 className="icon"
                                                 src={`${window.cdn}assets/gem_01.png`}
@@ -266,6 +281,8 @@ const FortuneWheel = ({
                                                     onClickSpinButton
                                                 }
                                                 onFinished={onSpinFinished}
+                                                isSpinning={isSpinning}
+                                                setIsSpinning={setIsSpinning}
                                             />
 
                                             {/* SPINS LEFT INFO */}
