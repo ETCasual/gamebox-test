@@ -27,11 +27,20 @@ const FortuneWheel = ({
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
+    const [isEndSpin, setIsEndSpin] = useState(false);
+    const [gemCount, setGemCount] = useState(user.gems);
     // const [modalHeight, setModalHeight] = useState({
     //     windowWidth: 0,
     //     wrapper: 0,
     //     cols: 0,
     // });
+
+    useEffect(() => {
+        isEndSpin && setGemCount(user.gems);
+        setIsEndSpin(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isEndSpin]);
+
     const [winAmount, setWinAmount] = useState(-1);
 
     // DISABLE HTML SCROLL
@@ -218,7 +227,7 @@ const FortuneWheel = ({
                                             )}
                                         </div>
                                         <div className="balance-number d-flex flex-row align-items-center justify-content-center mr-3 ml-auto">
-                                            {user?.gems || 0}
+                                            {gemCount || 0}
                                             <img
                                                 className="icon"
                                                 src={`${window.cdn}assets/gem_01.png`}
@@ -266,6 +275,8 @@ const FortuneWheel = ({
                                                     onClickSpinButton
                                                 }
                                                 onFinished={onSpinFinished}
+                                                isEndSpin={isEndSpin}
+                                                setIsEndSpin={setIsEndSpin}
                                             />
 
                                             {/* SPINS LEFT INFO */}

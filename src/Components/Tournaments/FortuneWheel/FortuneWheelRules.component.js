@@ -1,8 +1,8 @@
-import { delay } from "lodash";
 import React, { useState, useEffect, useRef } from "react";
 import Winwheel from "winwheel";
 import TweenMax from "gsap/all";
 import { useTranslation } from "react-i18next";
+import { Timer } from "Utils/hooks/useDelay";
 
 const FortuneWheelRules = ({
     spinnerRules,
@@ -10,6 +10,8 @@ const FortuneWheelRules = ({
     winAmount,
     isClickedSpin,
     onSpinClicked,
+    isEndSpin,
+    setIsEndSpin,
     onFinished = null,
 }) => {
     // Pre-Method
@@ -38,6 +40,7 @@ const FortuneWheelRules = ({
     const isAbleToSpin = spinLeft > 0;
 
     const [isSpinning, setIsSpinning] = useState(false);
+    const delay = useRef(null);
 
     useEffect(() => {
         // Update tickets list
@@ -130,7 +133,7 @@ const FortuneWheelRules = ({
             wheelRef.current.startAnimation();
 
             // Wait for wheel finish spin
-            delay(() => {
+            delay.current = new Timer(() => {
                 // Highlight winning segment
                 let winningSegmentNumber =
                     wheelRef.current.getIndicatedSegmentNumber();
@@ -144,6 +147,7 @@ const FortuneWheelRules = ({
                 wheelRef.current.draw();
 
                 if (onFinishedRef.current) {
+                    setIsEndSpin(true);
                     onFinishedRef.current();
                 }
             }, wheelRef.current.animation.duration * 1000);
@@ -153,7 +157,7 @@ const FortuneWheelRules = ({
             setIsSpinning(true);
             startSpin();
         }
-    }, [isClickedSpin, winAmount, isSpinning]);
+    }, [isClickedSpin, winAmount, isSpinning, setIsEndSpin]);
 
     //#region Methods
 
@@ -205,6 +209,34 @@ const FortuneWheelRules = ({
     };
 
     //#endregion
+
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+    useEffect(() => {
+        const detectVisiblity = () => {
+            if (
+                document.visibilityState === "visible" &&
+                !isFirstLoad &&
+                isSpinning
+            ) {
+                wheelRef.current.resumeAnimation();
+                delay.current.resume();
+            } else if (document.visibilityState === "hidden" && isSpinning) {
+                wheelRef.current.pauseAnimation();
+                delay.current.pause();
+                setIsFirstLoad(false);
+            }
+        };
+
+        document.addEventListener("visibilitychange", detectVisiblity, this);
+
+        return () =>
+            document.removeEventListener(
+                "visibilitychange",
+                detectVisiblity,
+                this
+            );
+    }, [isFirstLoad, isSpinning]);
 
     const { t } = useTranslation();
 
