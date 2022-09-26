@@ -804,9 +804,7 @@ const Leaderboard = ({
                                                   user.username ||
                                                   "Player",
                                           })
-                                        : t("leaderboard.other.player_name", {
-                                              user: leaderboardList[i]?.userId,
-                                          })
+                                        : leaderboardList[i]?.nickName
                                     : t("leaderboard.placeholder.player_name")}
                             </p>
                             <p className="points">
@@ -999,7 +997,7 @@ const Leaderboard = ({
                                 : null
                         }
                     >
-                        JOIN TOURNAMENT
+                        {t("tournament.join")}
                         {/* <img
                             width={18}
                             className="icon ml-3 mr-1"
