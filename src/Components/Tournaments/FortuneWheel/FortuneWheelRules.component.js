@@ -143,7 +143,6 @@ const FortuneWheelRules = ({
 
                 if (onFinishedRef.current) {
                     onFinishedRef.current();
-                    // setIsEndSpin(true);
                 }
             }, wheelRef.current.animation.duration * 1000);
         };
