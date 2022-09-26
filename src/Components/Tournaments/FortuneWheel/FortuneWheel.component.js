@@ -27,7 +27,7 @@ const FortuneWheel = ({
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
-    const [isEndSpin, setIsEndSpin] = useState(false);
+    const [isSpinning, setIsSpinning] = useState(false);
     const [gemCount, setGemCount] = useState(user.gems);
     // const [modalHeight, setModalHeight] = useState({
     //     windowWidth: 0,
@@ -36,10 +36,10 @@ const FortuneWheel = ({
     // });
 
     useEffect(() => {
-        isEndSpin && setGemCount(user.gems);
-        setIsEndSpin(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isEndSpin]);
+        if (!isSpinning) {
+            setGemCount(user.gems);
+        }
+    }, [isSpinning, user.gems]);
 
     const [winAmount, setWinAmount] = useState(-1);
 
@@ -98,10 +98,14 @@ const FortuneWheel = ({
         }
     }
     function onSpinFinished() {
+        // setIsEndSpin(true);
+
         setIsClickedSpin(false);
         setWinAmount(-1);
 
         dispatch(loadUserDetails());
+
+        setGemCount(user.gmes);
     }
 
     const { t } = useTranslation();
@@ -275,8 +279,8 @@ const FortuneWheel = ({
                                                     onClickSpinButton
                                                 }
                                                 onFinished={onSpinFinished}
-                                                isEndSpin={isEndSpin}
-                                                setIsEndSpin={setIsEndSpin}
+                                                isSpinning={isSpinning}
+                                                setIsSpinning={setIsSpinning}
                                             />
 
                                             {/* SPINS LEFT INFO */}

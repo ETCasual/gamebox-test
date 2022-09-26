@@ -10,8 +10,8 @@ const FortuneWheelRules = ({
     winAmount,
     isClickedSpin,
     onSpinClicked,
-    isEndSpin,
-    setIsEndSpin,
+    isSpinning,
+    setIsSpinning,
     onFinished = null,
 }) => {
     // Pre-Method
@@ -39,7 +39,6 @@ const FortuneWheelRules = ({
 
     const isAbleToSpin = spinLeft > 0;
 
-    const [isSpinning, setIsSpinning] = useState(false);
     const delay = useRef(null);
 
     useEffect(() => {
@@ -90,7 +89,7 @@ const FortuneWheelRules = ({
 
     useEffect(() => {
         if (!isClickedSpin) setIsSpinning(false);
-    }, [isClickedSpin]);
+    }, [isClickedSpin, setIsSpinning]);
 
     useEffect(() => {
         const resetWheel = () => {
@@ -147,8 +146,8 @@ const FortuneWheelRules = ({
                 wheelRef.current.draw();
 
                 if (onFinishedRef.current) {
-                    setIsEndSpin(true);
                     onFinishedRef.current();
+                    // setIsEndSpin(true);
                 }
             }, wheelRef.current.animation.duration * 1000);
         };
@@ -157,7 +156,7 @@ const FortuneWheelRules = ({
             setIsSpinning(true);
             startSpin();
         }
-    }, [isClickedSpin, winAmount, isSpinning, setIsEndSpin]);
+    }, [isClickedSpin, winAmount, isSpinning, setIsSpinning]);
 
     //#region Methods
 
