@@ -7,6 +7,7 @@ export const handleSignOut = (dispatch) => {
         .signOut()
         .then(function () {
             dispatch({ type: LOG_OUT });
+            window.location.reload();
         })
         .catch(function (error) {
             console.log(error);
