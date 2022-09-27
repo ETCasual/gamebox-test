@@ -51,6 +51,7 @@ import loadCheckGiveaway from "redux/thunks/Giveaway.thunk";
 // import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 import Footer from "Components/Landing/Footer/Footer.component";
+import { register } from "serviceWorker";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
@@ -63,6 +64,7 @@ const App = () => {
 
     const [pendingRegion, setPendingRegion] = useState(true);
     const [regionAllow, setRegionAllow] = useState(false);
+    register();
 
     // const [consoleOpen, setConsoleOpen] = useState(false);
 
