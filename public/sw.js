@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 const version = "ESM V0.1";
 
 const HTMLToCache = [
