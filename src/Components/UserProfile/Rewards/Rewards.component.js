@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation, Trans } from "react-i18next";
 
 // COMPONENTS
 import ClaimedPrizeDetailModal from "Components/Modals/ClaimedPrizeDetail.modal";
@@ -35,6 +36,8 @@ const Rewards = () => {
     const [isClaimedClicked, setIsClaimedClicked] = useState("unclaimed");
     const [statusOpacity, setStatusOpacity] = useState(0.1);
     const [isIncrementing, setIsIncrementing] = useState(true);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -182,11 +185,15 @@ const Rewards = () => {
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
-                                    <span className="ml-2">Back</span>
+                                    <span className="ml-2">
+                                        {t("btn.back")}
+                                    </span>
                                 </div>
                             </div>
                             <div className="col-12">
-                                <h1 className={`main-title mb-4`}>Rewards</h1>
+                                <h1 className={`main-title mb-4`}>
+                                    {t("reward.title")}
+                                </h1>
                             </div>
                             <div className="div-items col-12 d-flex justify-content-start">
                                 <div
@@ -197,7 +204,7 @@ const Rewards = () => {
                                     }
                                     onClick={handleClickUnclaimedReward}
                                 >
-                                    Unclaimed Rewards
+                                    {t("reward.unclaimed")}
                                     <div
                                         className="unclaimed-status-icon ml-1"
                                         style={
@@ -215,18 +222,18 @@ const Rewards = () => {
                                     }
                                     onClick={handleClickClaimedReward}
                                 >
-                                    Claimed Rewards
+                                    {t("reward.claimed")}
                                 </div>
                             </div>
+
                             {isClaimedClicked === "claimed" ? (
                                 claimedPrizes.length === 0 ? (
                                     <div className="no-result">
                                         <p className="title mb-1">
-                                            No rewards have yet been discovered!
+                                            {t("reward.no_reward.title")}
                                         </p>
                                         <p className="subtitle mt-1 mb-0">
-                                            It appears that you have yet to
-                                            claim any prizes.{" "}
+                                            {t("reward.no_reward.subtitle")}
                                         </p>
                                     </div>
                                 ) : (
@@ -314,7 +321,9 @@ const Rewards = () => {
                                                                                 ? getClaimedDate(
                                                                                       data.claimedOn
                                                                                   )
-                                                                                : "Pending"}
+                                                                                : t(
+                                                                                      "reward.pending"
+                                                                                  )}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -329,18 +338,17 @@ const Rewards = () => {
                             ) : unClaimedPrizes.length === 0 ? (
                                 <div className="no-result">
                                     <p className="title mb-1">
-                                        No rewards have yet been discovered!
+                                        {t("reward.no_win.title")}
                                     </p>
                                     <p className="subtitle mt-1 mb-0">
-                                        Looks like you've not played for any
-                                        prizes yet.{" "}
+                                        {t("reward.no_win.subtitle")}
                                     </p>
                                     <p className="subtitle">
-                                        <Link to="/">
-                                            You don't appear to have won any
-                                            prizes yet. Click here
-                                        </Link>{" "}
-                                        to look for one that appeals to you.
+                                        <Trans i18nKey="reward.no_win.cta">
+                                            <Link to="/">0</Link>
+                                            {/* HACK: Trick the compile to think this as an element to render proper style */}
+                                            <>1</>
+                                        </Trans>
                                     </p>
                                 </div>
                             ) : (
@@ -419,7 +427,6 @@ const Rewards = () => {
                                                                                 data.prizeWinnerPendingInfo
                                                                             }
                                                                         </div>
-
                                                                         {data.prizeNftContractAddress && (
                                                                             <>
                                                                                 {validClaimDate(
@@ -427,11 +434,13 @@ const Rewards = () => {
                                                                                 ) && (
                                                                                     <div className="claim-btn opacity-0-5 d-inline-block py-2 px-3">
                                                                                         <p className="mb-0">
-                                                                                            CLAIM
-                                                                                            REWARD
-                                                                                            -{" "}
-                                                                                            {getRemainingDaysToClaim(
-                                                                                                data.prizeCanClaimDate
+                                                                                            {t(
+                                                                                                "reward.claim_btn_with_date",
+                                                                                                {
+                                                                                                    date: getRemainingDaysToClaim(
+                                                                                                        data.prizeCanClaimDate
+                                                                                                    ),
+                                                                                                }
                                                                                             )}
                                                                                         </p>
                                                                                     </div>
@@ -454,8 +463,9 @@ const Rewards = () => {
                                                                                             }
                                                                                         >
                                                                                             <p className="mb-0">
-                                                                                                CLAIM
-                                                                                                REWARD
+                                                                                                {t(
+                                                                                                    "reward.claim_btn"
+                                                                                                )}
                                                                                             </p>
                                                                                         </div>
                                                                                     )}
@@ -474,8 +484,9 @@ const Rewards = () => {
                                                                                             }
                                                                                         >
                                                                                             <p className="mb-0">
-                                                                                                CLAIM
-                                                                                                REWARD
+                                                                                                {t(
+                                                                                                    "reward.claim_btn"
+                                                                                                )}
                                                                                             </p>
                                                                                         </div>
                                                                                     )}

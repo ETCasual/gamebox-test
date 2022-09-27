@@ -1,4 +1,9 @@
+import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
+
 const GameQuitModal = ({ onActionCallback, isShowWarningMessage = true }) => {
+    const { t } = useTranslation();
+
     return (
         <>
             {
@@ -10,17 +15,18 @@ const GameQuitModal = ({ onActionCallback, isShowWarningMessage = true }) => {
                                 {/*EXTRA MARGIN */}
                                 <p className="my-5"></p>
                                 <p className="text-center panel-title text-danger">
-                                    QUIT GAME?
+                                    {t("quit_modal.title")}
                                 </p>
 
                                 {isShowWarningMessage && (
                                     <p className="game-warning-text text-center  mb-0">
-                                        You will lose your current game score if
-                                        you exit now and{" "}
-                                        <span className="text-danger">
-                                            Gems will not be refunded
-                                        </span>
-                                        .
+                                        <Trans i18nKey="quit_modal.subtitle">
+                                            0
+                                            <span className="text-danger">
+                                                1
+                                            </span>
+                                            2
+                                        </Trans>
                                     </p>
                                 )}
 
@@ -31,14 +37,14 @@ const GameQuitModal = ({ onActionCallback, isShowWarningMessage = true }) => {
                                     className="yes-button d-block bg-danger mx-auto text-center  mt-5 py-2"
                                     onClick={() => onActionCallback("yes")}
                                 >
-                                    YES, QUIT
+                                    {t("quit_modal.confirm")}
                                 </button>
 
                                 <button
                                     className="cancel-button d-block text-center mx-auto mt-3 py-2"
                                     onClick={() => onActionCallback("no")}
                                 >
-                                    CANCEL
+                                    {t("quit_modal.cancel")}
                                 </button>
                                 {/*EXTRA MARGIN */}
                                 <p className="my-5"></p>

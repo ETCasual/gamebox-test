@@ -12,6 +12,7 @@ import WinnerCard from "./WinnerCard/WinnerCard.component";
 import loadWinners from "redux/thunks/Winners.thunk";
 import loadPlayerDetails from "redux/thunks/PlayerDetails.thunk";
 import loadPlayerHighScore from "redux/thunks/PlayerHighScore.thunk";
+import { useTranslation, Trans } from "react-i18next";
 
 const Index = () => {
     const dispatch = useDispatch();
@@ -79,6 +80,8 @@ const Index = () => {
     //     winnerCardPrizeInfoRef.current.style.visibility = "hidden";
     // };
 
+    const { t } = useTranslation();
+
     return (
         <>
             {isCardClicked && (
@@ -89,19 +92,21 @@ const Index = () => {
                     <div className="container-fluid px-0">
                         <div className="col-12 col-md-10 col-lg-8 mx-auto content-min-height">
                             {/* Winners */}
-                            <h1 className="main-title mb-4">Latest Winners</h1>
+                            <h1 className="main-title mb-4">
+                                {t("winner.title")}
+                            </h1>
                             {noDataLoaded && (
                                 <div className="no-result">
                                     <p className="title mb-2">
-                                        No Winners found yet!
+                                        {t("winner.no_data.title")}
                                     </p>
                                     <p className="subtitle mt-1 mb-0">
-                                        Looks like you've not played for any
-                                        prizes yet.{" "}
+                                        {t("winner.no_data.subtitle")}
                                     </p>
                                     <p className="subtitle">
-                                        <Link to="/">Click here</Link> to look
-                                        for one you like.
+                                        <Trans i18nKey="winner.no_data.cta">
+                                            <Link to="/">0</Link>1
+                                        </Trans>
                                     </p>
                                 </div>
                             )}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import GenericLoader from "Components/Loader/Generic.loader";
+import { useTranslation } from "react-i18next";
 
 const PurchaseContent = ({
     type,
@@ -20,48 +21,66 @@ const PurchaseContent = ({
         setCurrentStatus(key);
     }, [purchasingStatus]);
 
+    const { t } = useTranslation();
+
     const content = {
         noWallet: {
-            title: "Wallet not connected.",
-            subTitle: "Please connect your wallet to continue.",
-            button: "CONNECT WALLET",
+            title: t("purchase_content_wallet.noWallet.title"),
+            subtitle: t("purchase_content_wallet.noWallet.subtitle"),
+            button: t("purchase_content_wallet.noWallet.button"),
         },
-        insufficentToken: {
-            title: "Insufficient Froyo Tokens.",
-            subTitle: "Please purchase Froyo Tokens to continue.",
-            button: "PURCHASE FROYO TOKENS",
-            color: "red",
+        insufficent_token: {
+            title: t("purchase_content_wallet.insufficent_token.title"),
+            subtitle: t("purchase_content_wallet.insufficent_token.subtitle"),
+            button: t("purchase_content_wallet.insufficent_token.button"),
+            color: t("purchase_content_wallet.insufficent_token.color"),
         },
-        beforePurchaseConfirmation: {
-            title: `Purchase ${productInfo?.quantity} gems with ${productInfo?.price} froyo tokens`,
-            subTitle:
-                "Froyo Tokens will be deducted from your wallet " +
-                user.walletAddress?.substring(0, 5) +
-                "..." +
-                user.walletAddress?.substring(user.walletAddress.length - 4) +
-                ".",
-            button: `USE ${productInfo?.price} FROYO TOKENS`,
+        before_purchase_confirmation: {
+            title: t(
+                "purchase_content_wallet.before_purchase_confirmation.title",
+                {
+                    quantity: productInfo?.quantity,
+                    price: productInfo?.price,
+                }
+            ),
+            subtitle: t(
+                "purchase_content_wallet.before_purchase_confirmation.subtitle",
+                {
+                    first: user.walletAddress?.substring(0, 5),
+                    last: user.walletAddress?.substring(
+                        user.walletAddress.length - 4
+                    ),
+                }
+            ),
+            button: t(
+                "purchase_content_wallet.before_purchase_confirmation.button",
+                {
+                    price: productInfo?.price,
+                }
+            ),
         },
         processing: {
-            title: "",
-            subTitle: "Processing your purchase",
+            title: t("purchase_content_wallet.processing.title"),
+            subtitle: t("purchase_content_wallet.processing.subtitle"),
         },
-        isSuccess: {
-            title: "Purchase successful.",
-            subTitle: `You have successfully purchased ${productInfo?.quantity} gems.`,
-            button: "CONTINUE",
+        is_success: {
+            title: t("purchase_content_wallet.is_success.title"),
+            subtitle: t("purchase_content_wallet.is_success.subtitle", {
+                quantity: productInfo?.quantity,
+            }),
+            button: t("purchase_content_wallet.is_success.button"),
         },
-        isFail: {
-            title: "Purchase unsuccessful.",
-            subTitle: "Something went wrong. Please try again later.",
-            button: "CLOSE",
-            color: "red",
+        is_fail: {
+            title: t("purchase_content_wallet.is_fail.title"),
+            subtitle: t("purchase_content_wallet.is_fail.subtitle"),
+            button: t("purchase_content_wallet.is_fail.button"),
+            color: t("purchase_content_wallet.is_fail.color"),
         },
-        processFail: {
-            title: "Error",
-            subTitle: "Unable to update payment to server. Please try again",
-            button: "RETRY",
-            color: "red",
+        process_fail: {
+            title: t("purchase_content_wallet.process_fail.title"),
+            subtitle: t("purchase_content_wallet.process_fail.subtitle"),
+            button: t("purchase_content_wallet.process_fail.button"),
+            color: t("purchase_content_wallet.process_fail.color"),
         },
     };
 
@@ -79,7 +98,7 @@ const PurchaseContent = ({
                                 : "text-left"
                         }`}
                     >
-                        {content[currentStatus]?.subTitle}
+                        {content[currentStatus]?.subtitle}
                     </p>
                     {/* GENERIC LOADER */}
                     {purchasingStatus.processing && (
@@ -95,8 +114,8 @@ const PurchaseContent = ({
                     {!purchasingStatus.processing && (
                         <div className="btn-wrapper w-100 d-flex align-items-center justify-content-between mt-3">
                             {type === "froyo" &&
-                                (purchasingStatus.beforePurchaseConfirmation ||
-                                    purchasingStatus.insufficentToken ||
+                                (purchasingStatus.before_purchase_confirmation ||
+                                    purchasingStatus.insufficent_token ||
                                     purchasingStatus.noWallet) && (
                                     <button
                                         className="cancel-button"
@@ -108,8 +127,8 @@ const PurchaseContent = ({
                             <button
                                 style={{
                                     backgroundColor:
-                                        purchasingStatus?.isFail ||
-                                        purchasingStatus?.insufficentToken
+                                        purchasingStatus?.is_fail ||
+                                        purchasingStatus?.insufficent_token
                                             ? "#c40000"
                                             : "#ff3399",
                                 }}

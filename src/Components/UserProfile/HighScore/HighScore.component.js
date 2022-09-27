@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation, Trans } from "react-i18next";
 import loadHighScore from "redux/thunks/HighScore.thunk";
 
 // HELPER FUNCTIONS
@@ -39,6 +40,8 @@ const HighScore = ({ handleBackButton }) => {
         setHighScoreData(highScore);
     }, [highScore, dispatch]);
 
+    const { t } = useTranslation();
+
     return (
         <>
             <section id="high-score">
@@ -54,21 +57,22 @@ const HighScore = ({ handleBackButton }) => {
                                     src={`${window.cdn}buttons/button_back.png`}
                                     alt="back-btn"
                                 />
-                                <span className="ml-2">Back</span>
+                                <span className="ml-2">{t("btn.back")}</span>
                             </div>
                             {/* IF LIST NOT AVAILABLE */}
                             <div className="col-12 mb-4">
                                 <h1 className="main-title my-3 my-md-4">
-                                    Highscores
+                                    {t("highscore.title")}
                                 </h1>
                                 {noDataLoaded && (
                                     <div className="no-result">
                                         <p className="title mb-1">
-                                            No highscores yet...
+                                            {t("highscore.no_data.title")}
                                         </p>
                                         <p className="subtitle">
-                                            <Link to="/">Tap here</Link> to
-                                            check out available Prize’s.
+                                            <Trans i18nKey="highscore.no_data.subtitle">
+                                                <Link to="/">0</Link>1
+                                            </Trans>
                                         </p>
                                     </div>
                                 )}
@@ -101,7 +105,12 @@ const HighScore = ({ handleBackButton }) => {
                                                             )}
                                                         </p>
                                                         <p className="px-0 score mb-0 d-flex align-items-start justify-content-end">
-                                                            {`${card.gameScore?.toLocaleString()} pts`}
+                                                            {t(
+                                                                "leaderboard.default.points",
+                                                                {
+                                                                    count: card.gameScore?.toLocaleString(),
+                                                                }
+                                                            )}
                                                         </p>
                                                     </div>
                                                 </div>

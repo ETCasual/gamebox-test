@@ -23,6 +23,7 @@ import getPrizeTicketCollected from "Utils/PrizeTicketCollected";
 import getPoolTickets from "Utils/PoolTickets";
 import { CURRENT_GAME_DETAILS, PRIZE_ENDED } from "redux/types";
 import PrizeEndedModalPopup from "Components/Modals/PrizeEnded.modal";
+import { useTranslation } from "react-i18next";
 
 const Index = ({ match }) => {
     const {
@@ -263,6 +264,8 @@ const Index = ({ match }) => {
         history.push("/");
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             {type !== "automated" && (
@@ -283,7 +286,9 @@ const Index = ({ match }) => {
                                             src={`${window.cdn}buttons/button_back.png`}
                                             alt="back-btn"
                                         />
-                                        <span className="ml-2">Back</span>
+                                        <span className="ml-2">
+                                            {t("btn.back")}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -368,7 +373,9 @@ const Index = ({ match }) => {
                                                 <div className="your-tokens-info d-flex flex-row flex-md-column align-items-end mt-2">
                                                     <div className="col-4 col-md-auto p-0 mt-auto mx-auto ml-md-0">
                                                         <div className="your-tokens-title-text">
-                                                            Your tickets
+                                                            {t(
+                                                                "featured.ticket"
+                                                            )}
                                                         </div>
                                                         <div className="your-tokens-number mt-1">
                                                             {getPoolTickets(
@@ -383,8 +390,9 @@ const Index = ({ match }) => {
                                                         {!currentPrize.overTime && (
                                                             <>
                                                                 <div className="your-tokens-title-text mr-0 mr-md-2">
-                                                                    Draw starts
-                                                                    in
+                                                                    {t(
+                                                                        "ae.draw_starts"
+                                                                    )}
                                                                 </div>
                                                                 <div className="mt-1">
                                                                     {/* CURRENT PRIZE POOL TICKETS */}
@@ -411,13 +419,15 @@ const Index = ({ match }) => {
                                                         {currentPrize.overTime && (
                                                             <div className="overtime-tickets-wrapper text-left">
                                                                 <p className="overtime-title-text mb-1">
-                                                                    BONUS TIME!
+                                                                    {t(
+                                                                        "tournament.bonus_time"
+                                                                    )}
                                                                 </p>
                                                                 <div className="d-flex flex-row align-items-end">
                                                                     <div className="draw-title-text w-100 mr-2 mr-md-2">
-                                                                        Draw
-                                                                        starts
-                                                                        in
+                                                                        {t(
+                                                                            "ae.draw_starts"
+                                                                        )}
                                                                     </div>
 
                                                                     {/* COUNT DOWN TIME */}

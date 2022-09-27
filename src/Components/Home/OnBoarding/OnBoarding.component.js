@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -21,6 +22,8 @@ const OnBoarding = ({ handleOnBoardingClose }) => {
         continueBtn: false,
         backBtn: false,
     });
+
+    const { t } = useTranslation();
 
     const onBoardingData = [
         {
@@ -158,7 +161,7 @@ const OnBoarding = ({ handleOnBoardingClose }) => {
                                                 className="continue mt-2"
                                                 onClick={handleOnBoardingClose}
                                             >
-                                                Have fun!
+                                                {t("onboarding.havefun")}
                                             </button>
                                         )}
                                     </div>

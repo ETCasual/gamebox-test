@@ -1366,7 +1366,7 @@ export async function getNFTClaim(winnerId, userId, claimerAddress) {
     });
     const nftInfo = {
         address: response.getAddress(),
-        tokenId: response.getPrizeIdAmt(),
+        token_id: response.getPrizeIdAmt(),
         amount: response.getAmount(),
         nonce: response.getNonce(),
         signature: response.getSignature(),

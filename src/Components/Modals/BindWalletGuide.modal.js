@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 
+//TODO: Check The i18n localization
+
 const BindWalletGuideModalPopup = ({ handleCloseBtn }) => {
     const { t } = useTranslation();
 

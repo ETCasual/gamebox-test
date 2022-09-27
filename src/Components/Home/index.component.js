@@ -22,6 +22,7 @@ import loadPlayerTickets from "redux/thunks/PlayerTickets.thunk";
 import { loadPrizePoolTickets } from "redux/thunks/PrizePoolTickets.thunk";
 import { loadUpdateNotificationSeen } from "redux/thunks/Notifcations.thunk";
 import { loadUnClaimedPrizes } from "redux/thunks/UnClaimedPrizes.thunk";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
     const { prizes } = useSelector((state) => state.prizes);
@@ -353,6 +354,8 @@ const Index = () => {
         setIsRevealCardModalShown(false);
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             <section id="home">
@@ -405,7 +408,7 @@ const Index = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <h2 className="section-title mb-3">
-                                            Limited-Time Reward
+                                            {t("home_page.limited_time_reward")}
                                         </h2>
                                     </div>
 
@@ -428,7 +431,9 @@ const Index = () => {
                                         <div className="row">
                                             <div className="col-12">
                                                 <h2 className="section-title mb-3">
-                                                    Featured Rewards
+                                                    {t(
+                                                        "home_page.featured_rewards"
+                                                    )}
                                                 </h2>
                                             </div>
 
@@ -483,7 +488,7 @@ const Index = () => {
                                         <div className="row">
                                             <div className="col-12 description">
                                                 <h2 className="section-title mb-3">
-                                                    Play and Win Rewards
+                                                    {t("home_page.premium")}
                                                 </h2>
                                             </div>
                                             {/* LOADER */}

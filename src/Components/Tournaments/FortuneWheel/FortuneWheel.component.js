@@ -8,6 +8,7 @@ import FortuneWheelRules from "Components/Tournaments/FortuneWheel/FortuneWheelR
 // REDUX THUNKS TO CALL SERVICES (AYSNC) AND ADD DATA TO STORE
 import loadPlayerSpinnerSpin from "redux/thunks/PlayerSpinnerSpin.thunk";
 import loadUserDetails from "redux/thunks/UserDetails.thunk";
+import { useTranslation } from "react-i18next";
 
 // HELPER FUNCTION
 // import getPoolTickets from "Utils/PoolTickets";
@@ -26,11 +27,20 @@ const FortuneWheel = ({
     const [isClickedSpin, setIsClickedSpin] = useState(false);
     const [spinBuyProcess, setSpinBuyProcess] = useState(false);
     const [isProbabilityShown, setIsProbabilityShown] = useState(false);
+    const [isSpinning, setIsSpinning] = useState(false);
+    const [gemCount, setGemCount] = useState(user.gems);
     // const [modalHeight, setModalHeight] = useState({
     //     windowWidth: 0,
     //     wrapper: 0,
     //     cols: 0,
     // });
+
+    useEffect(() => {
+        if (!isSpinning) {
+            setGemCount(user.gems);
+        }
+    }, [isSpinning, user.gems]);
+
     const [winAmount, setWinAmount] = useState(-1);
 
     // DISABLE HTML SCROLL
@@ -92,7 +102,15 @@ const FortuneWheel = ({
         setWinAmount(-1);
 
         dispatch(loadUserDetails());
+
+        setGemCount(user.gmes);
     }
+
+    useEffect(() => {
+        if (!isClickedSpin) setIsSpinning(false);
+    }, [isClickedSpin, setIsSpinning]);
+
+    const { t } = useTranslation();
 
     return (
         <div className="fortune-wheel d-flex align-items-center justify-content-center">
@@ -136,7 +154,9 @@ const FortuneWheel = ({
                                                 The Spinner
                                             </p> */}
                                             <p className="earn-more-tickets-text d-block m-auto">
-                                                SPIN & EARN MORE REWARDS HERE!
+                                                {t(
+                                                    "spinner.fortune_wheel.earn"
+                                                )}
                                             </p>
                                         </div>
                                     </div>
@@ -208,10 +228,12 @@ const FortuneWheel = ({
                                     {/* GEMS BALANCE */}
                                     <div className="your-balance d-flex flex-row align-items-center justify-content-center m-auto">
                                         <div className="your-balance-text ml-3 mr-auto">
-                                            YOUR GEMS
+                                            {t(
+                                                "spinner.fortune_wheel.your_gems"
+                                            )}
                                         </div>
                                         <div className="balance-number d-flex flex-row align-items-center justify-content-center mr-3 ml-auto">
-                                            {user?.gems || 0}
+                                            {gemCount || 0}
                                             <img
                                                 className="icon"
                                                 src={`${window.cdn}assets/gem_01.png`}
@@ -235,7 +257,9 @@ const FortuneWheel = ({
                                             alt="question-mark"
                                         />
                                         <span className="mt-auto mb-auto">
-                                            Rewards Informations
+                                            {t(
+                                                "spinner.fortune_wheel.rewards_info"
+                                            )}
                                         </span>
                                     </button>
                                 </div>
@@ -257,12 +281,16 @@ const FortuneWheel = ({
                                                     onClickSpinButton
                                                 }
                                                 onFinished={onSpinFinished}
+                                                isSpinning={isSpinning}
+                                                setIsSpinning={setIsSpinning}
                                             />
 
                                             {/* SPINS LEFT INFO */}
                                             <p className="spin-amount-left-wrapper text-center mt-2 mb-0">
                                                 <span className="you-have-text">
-                                                    You have
+                                                    {t(
+                                                        "spinner.fortune_wheel.you_have"
+                                                    )}
                                                 </span>
                                                 <span className="spin-number">
                                                     {spinner?.freeSpins > 0
@@ -270,7 +298,9 @@ const FortuneWheel = ({
                                                         : 0}
                                                 </span>
                                                 <span className="spins-left-text">
-                                                    spins left
+                                                    {t(
+                                                        "spinner.fortune_wheel.spins_left"
+                                                    )}
                                                 </span>
                                             </p>
                                         </>
@@ -280,10 +310,14 @@ const FortuneWheel = ({
                                             <tbody>
                                                 <tr className="probability-row">
                                                     <td className="probability-percentage-caption">
-                                                        CHANCES
+                                                        {t(
+                                                            "spinner.fortune_wheel.chance"
+                                                        )}
                                                     </td>
                                                     <td className="probability-tickets-text-caption">
-                                                        REWARDS
+                                                        {t(
+                                                            "spinner.fortune_wheel.reward"
+                                                        )}
                                                     </td>
                                                 </tr>
                                                 {spinnerRules?.map(

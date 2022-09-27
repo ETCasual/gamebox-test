@@ -17,6 +17,7 @@ import loadLeaderboardRanks from "redux/thunks/LeaderboardRanks.thunk";
 // HELPER FUNCTION
 import { defaultGameImage } from "Utils/DefaultImage";
 import { timeOptions } from "Utils/Enums";
+import { useTranslation, Trans } from "react-i18next";
 
 const Index = () => {
     const dispatch = useDispatch();
@@ -85,23 +86,28 @@ const Index = () => {
         setIsSelectedNotificationShown((prev) => ({ ...prev, status: false }));
     };
 
+    const { t } = useTranslation();
+
     return (
         <section id="notification">
             <div className="container-fluid px-0">
                 {/* NOTIFICATIONS */}
                 <div className="col-12 col-md-10 col-lg-8 mx-auto content-min-height">
-                    <h1 className="main-title mb-0">Notifications</h1>
+                    <h1 className="main-title mb-0">
+                        {t("notification.title")}
+                    </h1>
                     {noDataLoaded && (
                         <div className="no-result">
                             <p className="title mb-2">
-                                No notifications found yet!
+                                {t("notification.no_data.title")}
                             </p>
                             <p className="subtitle mt-1 mb-0">
-                                Looks like you've not played for any prizes yet.
+                                {t("notification.no_data.subtitle")}
                             </p>
                             <p className="subtitle">
-                                <Link to="/">Click here</Link> to look for one
-                                you like.
+                                <Trans i18nKey="notification.no_data.cta">
+                                    <Link to="/">0</Link>1
+                                </Trans>
                             </p>
                         </div>
                     )}

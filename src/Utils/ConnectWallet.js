@@ -306,7 +306,7 @@ export async function getNFTTokenIdList(address) {
     return list;
 }
 
-export async function getVIPPassNFTMetadata(tokenId) {
+export async function getVIPPassNFTMetadata(token_id) {
     const { web3 } = await getWeb3();
 
     const chainId = await web3.eth.getChainId();
@@ -322,7 +322,7 @@ export async function getVIPPassNFTMetadata(tokenId) {
         );
         // GET NFT METADATA
         const nftMetadata = await tokenContract.methods
-            .tokenURI(tokenId)
+            .tokenURI(token_id)
             .call();
         return nftMetadata;
     }

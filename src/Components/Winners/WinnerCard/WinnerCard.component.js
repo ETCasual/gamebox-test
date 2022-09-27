@@ -8,6 +8,7 @@ import ThumbnailMedia from "Components/Global/ThumbnailMedia.component";
 // HELPER FUNCTIONS
 import { defaultUserImage, defaultGameImage } from "Utils/DefaultImage";
 import { getDateFormat } from "Utils/DateFormat";
+import { useTranslation } from "react-i18next";
 
 const WinnerCard = ({ data, index, onWinnerDetails }) => {
     const { user } = useSelector((state) => state.userData);
@@ -15,6 +16,8 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
     const isCurrentUser = (player) => {
         if (user.id === player.userId) return true;
     };
+
+    const { t } = useTranslation();
 
     return (
         <div
@@ -68,9 +71,13 @@ const WinnerCard = ({ data, index, onWinnerDetails }) => {
                                 } `}
                             >
                                 {isCurrentUser(data)
-                                    ? `${data.userNickName || "Player"} (You)`
+                                    ? t("leaderboard.default.player_name", {
+                                          user: data.userNickName || "Player",
+                                      })
                                     : data.userNickName ||
-                                      `Player ${data.userId}`}
+                                      t("leaderboard.other.player_name", {
+                                          user: data.userId,
+                                      })}
                             </p>
                         </div>
                     </div>

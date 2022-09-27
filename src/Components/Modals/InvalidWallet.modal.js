@@ -72,13 +72,11 @@ const SelectWalletsModalPopup = ({
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
                                     <Trans i18nKey="connect_wallet.invalid_wallet.step_1">
-                                        Disconnect all accounts on Metamask
-                                        (click the
+                                        0
                                         <span className="highlight-tips">
-                                            "Connected"
+                                            1
                                         </span>
-                                        button on the top left of the Metamask
-                                        wallet)
+                                        2
                                     </Trans>
                                 </p>
                             </div>
@@ -100,17 +98,16 @@ const SelectWalletsModalPopup = ({
                             <div className="col-10 col-md-10 px-0">
                                 <p className="mb-0">
                                     <Trans i18nKey="connect_wallet.invalid_wallet.step_3">
-                                        To unbind this wallet from your Froyo
-                                        Games Account, please
+                                        0
                                         <a
                                             className="highlight-url"
                                             href={getFroyoGamesContactUrl()}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            click here
+                                            1
                                         </a>
-                                        to contact support
+                                        2
                                     </Trans>
                                 </p>
                             </div>

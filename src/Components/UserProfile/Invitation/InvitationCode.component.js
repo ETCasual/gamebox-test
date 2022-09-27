@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AES from "crypto-js/aes";
+import { useTranslation } from "react-i18next";
 
 const Invitation = ({ handleBackButton }) => {
     const { user } = useSelector((state) => state.userData);
     const { config } = useSelector((state) => state.config);
 
     const [copiedText, setCopiedText] = useState(false);
+    const { t } = useTranslation();
 
     let shareUrl = "";
 
@@ -20,7 +22,10 @@ const Invitation = ({ handleBackButton }) => {
         window.location.pathname?.split("/")?.[1]
     }`;
 
-    shareUrl = `Hey! Use my link to sign up for GameBox and get ${config.gemsPerInvite} gems immediately after you register. \n\nSign up at: ${baseUrl}/invite/${ciphertext}`;
+    shareUrl = t("invite.msg", {
+        gems: config.gemsPerInvite,
+        url: `${baseUrl}/invite/${ciphertext}`,
+    });
 
     const handleInvite = () => {
         navigator.clipboard.writeText(shareUrl);
@@ -49,18 +54,16 @@ const Invitation = ({ handleBackButton }) => {
                                 {/* TITLE & SUBTITLE */}
                                 <div className="main-title">
                                     <p className="title mb-2 mb-md-3">
-                                        Add Friends {"&"} Get Gems
+                                        {t("invite.title")}
                                     </p>
                                     <p className="subtitle mb-1">
-                                        {`Share your referral link with your friends to receive ${
-                                            config.gemsPerInvite
-                                        } Gems (for you and your friend) when they
-                                        ${
-                                            config.rewardInvitesRank <= 0
-                                                ? "join Gamebox."
-                                                : `reaches level ${config.rewardInvitesRank} 
-                                            in GameBox.`
-                                        }`}
+                                        {t("invite.subtitle", {
+                                            gems: config.gemsPerInvite,
+                                            action:
+                                                config.rewardInvitesRank <= 0
+                                                    ? "join Gamebox."
+                                                    : `reaches level ${config.rewardInvitesRank} in GameBox`,
+                                        })}
                                     </p>
                                 </div>
                                 {/* INVITATION CODE */}
@@ -70,13 +73,13 @@ const Invitation = ({ handleBackButton }) => {
                                 >
                                     {!copiedText && (
                                         <p className="invite-label mb-1 mb-md-2">
-                                            Tap to copy
+                                            {t("invite.tap_to_copy")}
                                         </p>
                                     )}
                                     {/* COPIED TEXT */}
                                     {copiedText && (
                                         <p className="text-center copied mb-1 mb-md-2">
-                                            Copied!
+                                            {t("invite.copied")}
                                         </p>
                                     )}
                                     <p className="invite-link mb-1">
@@ -88,7 +91,7 @@ const Invitation = ({ handleBackButton }) => {
                                 {/* FOOTER */}
                                 <div className="invitation-footer d-flex justify-content-between">
                                     <p className="terms-conditions mt-3 mt-md-4">
-                                        Terms and conditions apply.
+                                        {t("invite.tnc_apply")}
                                     </p>
                                 </div>
                             </div>

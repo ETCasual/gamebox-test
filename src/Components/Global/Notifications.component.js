@@ -123,10 +123,12 @@ const Notification = ({
                                                         }`}
                                                     >
                                                         {n?.type === "winprize"
-                                                            ? `You've won`
+                                                            ? t("winprize.won")
                                                             : n?.type === "tour"
                                                             ? `+${n?.tickets}`
-                                                            : `+${n?.gem} gems`}
+                                                            : `+${n?.gem} ${t(
+                                                                  "winprize.gem"
+                                                              )}`}
 
                                                         {n?.type === "tour" ? (
                                                             <img

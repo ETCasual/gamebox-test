@@ -11,6 +11,7 @@ import AutomatedEntryModalPopup from "Components/Modals/AutomatedEntry.modal";
 
 // HELPER FUNCTIONS
 import { convertSecondsToHours } from "Utils/TimeConversion";
+import { useTranslation } from "react-i18next";
 
 const AutomatedEntry = ({ data }) => {
     const dispatch = useDispatch();
@@ -147,6 +148,7 @@ const AutomatedEntry = ({ data }) => {
         return 0;
     };
 
+    const { t } = useTranslation();
     return (
         <>
             <div
@@ -158,7 +160,9 @@ const AutomatedEntry = ({ data }) => {
                         {/* PRIZE INFO */}
                         <div className="col-8 col-lg-7 d-flex flex-column align-items-start position-relative">
                             <div>
-                                <p className="title-text mb-1">DAILY REWARD</p>
+                                <p className="title-text mb-1">
+                                    {t("ae.daily_reward")}
+                                </p>
                                 <div className="desc-text mb-1">
                                     {data.prizeTitle}
                                 </div>
@@ -166,7 +170,7 @@ const AutomatedEntry = ({ data }) => {
                             {/* TICKETS */}
                             <div className="total-ticket-info d-flex mt-2 mt-sm-4">
                                 <p className="mb-0 ticket-label d-flex align-items-center mr-3">
-                                    My tickets
+                                    {t("ae.tickets")}
                                 </p>
                                 <p className="mb-0 ticket-value d-inline-flex align-items-center">
                                     {getTickets()?.toLocaleString() || "-"}
@@ -190,7 +194,7 @@ const AutomatedEntry = ({ data }) => {
                 </div>
                 {/* TIMER */}
                 <div className="timer d-flex align-items-center justify-content-sm-center px-2 px-md-3">
-                    <p className="timer-text mb-0">Draw starts in</p>
+                    <p className="timer-text mb-0">{t("ae.draw_starts")}</p>
                     <p className="countdown mb-0">{`\u00A0 ${timer} `}</p>
                 </div>
             </div>

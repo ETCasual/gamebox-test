@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
     useEffect(() => {
@@ -6,6 +7,8 @@ const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
 
         return () => (document.documentElement.style.overflowY = "visible");
     }, []);
+
+    const { t } = useTranslation();
 
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
@@ -18,69 +21,71 @@ const GameInstructionsModalPopup = ({ handleInstructionsCloseBtn }) => {
                     alt="close-btn"
                 />
                 <div className="col-12 p-3">
-                    <h5 className="title">HOW TO WIN PRIZES?</h5>
-                    <p className="subtitle">Follow these 4 simple steps.</p>
+                    <h5 className="title">{t("instructions.prize.title")}</h5>
+                    <p className="subtitle">
+                        {t("instructions.prize.subtitle")}
+                    </p>
                     <ul className="my-4 list-unstyled">
                         <li className="row">
                             <div className="col-3 col-md-2 step">
-                                <p className="mb-0">Step 1</p>
+                                <p className="mb-0">
+                                    {t("instructions.prize.step")} 1
+                                </p>
                             </div>
                             <div className="col-9 col-md-10 px-0 instruction">
                                 <p className="mb-0">
-                                    Select the prize you would like to win.
+                                    {t("instructions.prize.1")}
                                 </p>
                             </div>
                         </li>
                         <li className="row">
                             <div className="col-3 col-md-2 step">
-                                <p className="mb-0">Step 2</p>
+                                <p className="mb-0">
+                                    {t("instructions.prize.step")} 2
+                                </p>
                             </div>
                             <div className="col-9 col-md-10 px-0 instruction">
                                 <p className="mb-0">
-                                    Participate in the tournament.
+                                    {t("instructions.prize.2")}
                                 </p>
                             </div>
                         </li>
                         <li className="row">
                             <div className="col-3 col-md-2 step">
-                                <p className="mb-0">Step 3</p>
+                                <p className="mb-0">
+                                    {t("instructions.prize.step")} 3
+                                </p>
                             </div>
                             <div className="col-9 col-md-10 px-0 instruction">
                                 <p className="mb-0">
-                                    Win and earn tickets at the end of
-                                    tournament.
+                                    {t("instructions.prize.3")}
                                 </p>
                             </div>
                         </li>
                         <li className="row">
                             <div className="col-3 col-md-2 step">
-                                <p className="mb-0">Step 4</p>
+                                <p className="mb-0">
+                                    {t("instructions.prize.step")} 4
+                                </p>
                             </div>
                             <div className="col-9 col-md-10 px-0 instruction">
                                 <p className="mb-0">
-                                    Enter new tournaments to collect more
-                                    tickets.
+                                    {t("instructions.prize.4")}
                                 </p>
                             </div>
                         </li>
                     </ul>
                     <p className="subtitle">
-                        Pro tip: The more tickets you have, the higher chance to
-                        win the prize.
+                        {t("instructions.prize.footer.tip")}
                     </p>
-                    <h5 className="title">How it works?</h5>
+                    <h5 className="title">
+                        {t("instructions.prize.footer.title")}
+                    </h5>
                     <p className="subtitle">
-                        When the total amount of tickets (global tickets)
-                        reaches the allocated number, your tickets (along with
-                        other players' tickets) will enter a pool. The winner
-                        will be chosen based on the ticket drawn from the pool
-                        randomly.
+                        {t("instructions.prize.footer.subtitle1")}
                     </p>
                     <p className="subtitle mb-0">
-                        If a prize enter's overtime, players can still
-                        participate in tournaments and win tickets. Consider it
-                        as a bonus hour to earn more tickets before the prize
-                        ends.
+                        {t("instructions.prize.footer.subtitle2")}
                     </p>
                 </div>
             </div>
