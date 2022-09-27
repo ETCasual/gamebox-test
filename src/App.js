@@ -280,7 +280,7 @@ const App = () => {
                         path="/tournament-rules"
                         component={TournamentRules}
                     />
-                    <Route path="*" component={NotFound} />
+                    <Route path="/notFound" component={NotFound} />
                 </Switch>
                 <Footer />
                 <NavigationHOC />

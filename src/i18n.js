@@ -6,6 +6,9 @@ import I18NextHttpBackend from "i18next-http-backend";
 i18n.use(I18NextHttpBackend)
     .use(initReactI18next)
     .init({
+        backend: {
+            loadPath: `${window.location.pathname}/locales/{{lng}}/{{ns}}.json`,
+        },
         fallbackLng: "en",
         debug: process.env.REACT_APP_NODE_ENV !== "production",
         interpolation: {

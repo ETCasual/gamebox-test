@@ -10,6 +10,7 @@ import App from "./App";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 import "./i18n";
+import { register } from "serviceWorker";
 
 // import * as serviceWorker from "./serviceWorker";
 const recaptchaSiteKey = process.env.REACT_APP_RECAPTCHA_SITEKEY;
@@ -29,5 +30,5 @@ ReactDOM.render(
     document.getElementById("root")
 );
 
-// serviceWorker.register();
+register();
 // serviceWorker.fcmRegister();

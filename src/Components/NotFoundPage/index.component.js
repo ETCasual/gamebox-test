@@ -1,16 +1,19 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
-import React from "react";
+import React, { useState } from "react";
 
 // COMPONENTS
 import Navbar from "Components/Landing/Navbar/Navbar.component";
+import Login from "Components/Landing/Content/Login.component";
 
 // HELPER FUNCTION
 
 const Index = () => {
+    const [loginModal, setLoginModal] = useState(false);
     return (
         <>
             {/* TOP NAVIGATION BAR */}
-            <Navbar setLoginModal={null} />
+            <Navbar setLoginModal={setLoginModal} />
+            {loginModal && <Login setLoginModal={setLoginModal} />}
 
             <section id="not_found_page">
                 <div className="container-fluid px-0">

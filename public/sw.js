@@ -3,14 +3,14 @@ const version = "V1.0";
 
 const HTMLToCache = [
     "/",
-    "/activity",
-    "/winners",
-    "/profile",
-    "/profile/settings",
-    "/profile/edit",
-    "/profile/rewards",
-    "/notifications",
-    "/iap",
+    "./activity",
+    "./winners",
+    "./profile",
+    "./profile/settings",
+    "./profile/edit",
+    "./profile/rewards",
+    "./notifications",
+    "./iap",
 ];
 
 self.addEventListener("install", (event) => {
