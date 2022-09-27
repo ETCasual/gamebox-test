@@ -770,5 +770,9 @@
             "cta": "<0>Click here</0> to look for one you like."
         }
     },
-    "timer_ends": "Ended"
+    "timer_ends": "Ended",
+    "404": {
+        "title": "Error 404 : Page Not Found",
+        "subtitle": "<0>The page you are looking for might have been removed had its</0><1></1> <2>name changed or is temporarily unavailable.</2>"
+    }
 }

@@ -4,7 +4,7 @@ import { loadLogin } from "redux/thunks/Login.thunk";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const Login = ({ setLoginModal }) => {
+const Login = ({ setLoginModal, setIsFirstEncounter }) => {
     const { t } = useTranslation();
 
     const history = useHistory();
@@ -24,6 +24,7 @@ const Login = ({ setLoginModal }) => {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
+        setIsFirstEncounter(false);
         dispatch(loadLogin(loginData, setLoginError, history));
     };
 
