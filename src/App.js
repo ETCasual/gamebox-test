@@ -83,6 +83,13 @@ const App = () => {
     // 	launch();
     // }
 
+    useEffect(() => {
+        const token = localStorage
+            .getItem("froyo-authenticationtoken")
+            ?.replaceAll('"', "");
+        if (token) dispatch(loadLoginUserWithToken());
+    }, [dispatch]);
+
     // FIREBASE ONMESSAGE
     onMessageListener()
         .then((payload) => {

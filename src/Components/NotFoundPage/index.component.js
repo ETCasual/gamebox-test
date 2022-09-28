@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from "react";
 
 // COMPONENTS
-import Navbar from "Components/Landing/Navbar/Navbar.component";
+// import Navbar from "Components/Landing/Navbar/Navbar.component";
 import Login from "Components/Landing/Content/Login.component";
 import { useDispatch, useSelector } from "react-redux";
-import NavigationHOC from "Components/Global/NavigationHOC.component";
 import { useHistory } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { getToken } from "Utils/GetToken";
@@ -38,15 +37,11 @@ const Index = () => {
             })
         );
     }, [user.id, dispatch]);
-
     return (
         <>
             {/* TOP NAVIGATION BAR */}
-            {user.id ? (
-                <NavigationHOC />
-            ) : (
-                <Navbar setLoginModal={setLoginModal} />
-            )}
+
+            {/*  <HeaderHOC /> */}
 
             <section id="not_found_page">
                 <div className="container-fluid px-0">
