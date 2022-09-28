@@ -1,11 +1,6 @@
 // import { addListener, launch } from "devtools-detector";
 import React, { useEffect, useState } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { messaging, onMessageListener } from "./firebase";
@@ -57,7 +52,6 @@ import loadCheckGiveaway from "redux/thunks/Giveaway.thunk";
 // import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 import Footer from "Components/Landing/Footer/Footer.component";
-import { register } from "serviceWorker";
 import { MaintenanceModal } from "Components/Modals/MaintenanceModal";
 
 const App = () => {
@@ -71,7 +65,7 @@ const App = () => {
 
     const [pendingRegion, setPendingRegion] = useState(true);
     const [regionAllow, setRegionAllow] = useState(false);
-    register();
+    // register();
 
     // const [consoleOpen, setConsoleOpen] = useState(false);
 
@@ -249,15 +243,21 @@ const App = () => {
                 <HeaderHOC />
                 <ScrollToTop />
                 <GoogleAnalytics />
-                {true && <MaintenanceModal />}
+                {/* TODO: Dynamically check for versioning */}
+                {false && <MaintenanceModal />}
                 <Switch>
                     <ProtectedRoute path="/" exact component={Home} />
-                    <Route path="/invite/:id" component={Invite} />
-                    <ProtectedRoute path="/activity" component={Activity} />
-                    <ProtectedRoute path="/winners" component={Winners} />
+                    <Route path="/invite/:id" exact component={Invite} />
+                    <ProtectedRoute
+                        path="/activity"
+                        exact
+                        component={Activity}
+                    />
+                    <ProtectedRoute path="/winners" exact component={Winners} />
                     <ProtectedRoute
                         path="/prize/:type/:id"
                         component={Tournament}
+                        exact
                     />
                     <ProtectedRoute
                         exact
@@ -268,31 +268,38 @@ const App = () => {
                     <ProtectedRoute
                         path="/profile/highscore"
                         component={HighScore}
+                        exact
                     />
                     <ProtectedRoute
                         path="/profile/rewards"
                         component={Rewards}
+                        exact
                     />
                     <ProtectedRoute
                         path="/profile/settings"
                         component={Settings}
+                        exact
                     />
-                    <ProtectedRoute path="/iap" component={IAP} />
+                    <ProtectedRoute path="/iap" exact component={IAP} />
                     <Route
                         path="/terms-and-conditions"
+                        exact
                         component={TermsAndConditions}
                     />
-                    <Route path="/privacy-policy" component={PrivacyPolicy} />
+                    <Route
+                        path="/privacy-policy"
+                        exact
+                        component={PrivacyPolicy}
+                    />
                     <Route
                         path="/tournament-rules"
                         component={TournamentRules}
+                        exact
                     />
-
-                    <Route path="*">
-                        <Redirect to={"/"} />
-                    </Route>
-                    <Route path="/gamebox/*" component={NotFound} />
+                    {/* <ProtectedRoute path="*" component={NotFound} /> */}
+                    <Route path="*" component={NotFound} />
                 </Switch>
+
                 <Footer />
                 <NavigationHOC />
 

@@ -1,85 +1,44 @@
 import React from "react";
-import { useTranslation ,Trans} from "react-i18next";
+import { useEffect } from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 export const MaintenanceModal = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+
+    useEffect(() => {
+        document.documentElement.style.overflowY = "hidden";
+
+        return () => (document.documentElement.style.overflowY = "visible");
+    }, []);
+    
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center modal-pop">
-            <div className="modal-body-bind-wallet position-relative p-4">
-
-                This Page is currently under maintenance!
-                
+            <div className="modal-body-maintenance position-relative p-4">
+                <img
+                    className="maintenance-img"
+                    alt="img"
+                    width={"50%"}
+                    src="https://cdni.iconscout.com/illustration/premium/thumb/designer-designing-smart-watch-interface-4550673-3781700.png?w=420&h=0&f=png"
+                />
                 <div className="col-12 my-3 px-0">
-                    <p className="subtitle">
-                        {t("connect_wallet.bind_wallet_guide.subtitle")}
+                    <p className="title">
+                        {t("maintenance.title").toUpperCase()}
                     </p>
-                    <ul className="my-4 list-unstyled">
-                        <li className="row mb-2">
-                            <div className="col-1 step">
-                                <p className="mb-0">1)</p>
-                            </div>
-                            <div className="col-10 col-md-10 px-0">
-                                <p className="mb-0">
-                                    <Trans i18nKey="connect_wallet.bind_wallet_guide.step_1">
-                                        Please log in to your account on
-                                        <a
-                                            className="highlight-url"
-                                            href={
-                                                process.env
-                                                    .REACT_APP_FROYO_WEB_URL
-                                            }
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            {{
-                                                url: process.env
-                                                    .REACT_APP_FROYO_WEB_URL,
-                                            }}
-                                        </a>
-                                    </Trans>
-                                </p>
-                            </div>
-                        </li>
-
-                        <li className="row mb-2">
-                            <div className="col-1 step">
-                                <p className="mb-0">2)</p>
-                            </div>
-                            <div className="col-10 col-md-10 px-0">
-                                <p className="mb-0">
-                                    {t(
-                                        "connect_wallet.bind_wallet_guide.step_2"
-                                    )}
-                                </p>
-                            </div>
-                        </li>
-
-                        <li className="row mb-2">
-                            <div className="col-1 step">
-                                <p className="mb-0">3)</p>
-                            </div>
-                            <div className="col-10 col-md-10 px-0">
-                                <p className="mb-0">
-                                    {t(
-                                        "connect_wallet.bind_wallet_guide.step_3"
-                                    )}
-                                </p>
-                            </div>
-                        </li>
-
-                        <li className="row mb-2">
-                            <div className="col-1 step">
-                                <p className="mb-0">4)</p>
-                            </div>
-                            <div className="col-10 col-md-10 px-0">
-                                <p className="mb-0">
-                                    {t(
-                                        "connect_wallet.bind_wallet_guide.step_4"
-                                    )}
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
+                    <div className="col">
+                        <p className="text-center">
+                            <Trans i18nKey={"maintenance.subtitle"}>
+                                <>0</>
+                                <br/>
+                                <>2</>
+                                <a className="highlight-url" href="/gamebox">
+                                    3
+                                </a>
+                                <>4</>
+                                <br/>
+                                <>6</>
+                            </Trans>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
