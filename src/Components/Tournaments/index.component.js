@@ -1,6 +1,6 @@
 // REACT, REDUX & 3RD PARTY LIBRARIES
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS
@@ -48,6 +48,8 @@ const Index = ({ match }) => {
     );
 
     const history = useHistory();
+
+    const urlParams = useParams();
 
     // PRIZES STATES
     const [currentPrize, setCurrentPrize] = useState({});
@@ -164,7 +166,17 @@ const Index = ({ match }) => {
             } else {
                 // To redirect to home page if no prize at id
                 // dispatch(loadPrizes());
-                history.push("/");
+
+                // Check session storage whether prize id is "completed", return to home page only if completed
+                const cachedPrizeData = JSON.parse(
+                    sessionStorage.getItem("prizeDetailList")
+                ).filter((data) => data.prizeId.toString() === urlParams.id);
+                if (
+                    cachedPrizeData.length > 0 &&
+                    cachedPrizeData[0].completed
+                ) {
+                    history.push("/");
+                }
             }
         },
         // eslint-disable-next-line
