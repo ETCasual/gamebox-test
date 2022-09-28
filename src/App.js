@@ -58,6 +58,7 @@ import loadCheckGiveaway from "redux/thunks/Giveaway.thunk";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 import Footer from "Components/Landing/Footer/Footer.component";
 import { register } from "serviceWorker";
+import { MaintenanceModal } from "Components/Modals/MaintenanceModal";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
@@ -248,6 +249,7 @@ const App = () => {
                 <HeaderHOC />
                 <ScrollToTop />
                 <GoogleAnalytics />
+                {true && <MaintenanceModal />}
                 <Switch>
                     <ProtectedRoute path="/" exact component={Home} />
                     <Route path="/invite/:id" component={Invite} />

@@ -86,6 +86,8 @@
         ]
     },
     "devDependencies": {
+        "@types/node": "^18.7.23",
+        "@types/react": "^18.0.21",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
         "react-error-overlay": "6.0.9",
