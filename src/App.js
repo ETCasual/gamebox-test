@@ -52,7 +52,7 @@ import loadCheckGiveaway from "redux/thunks/Giveaway.thunk";
 // import { LOG_OUT } from "redux/types";
 import GoogleAnalytics from "Components/Global/GoogleAnalytics.component";
 import Footer from "Components/Landing/Footer/Footer.component";
-import { MaintenanceModal } from "Components/Modals/MaintenanceModal";
+import { MaintenanceModal } from "Components/Modals/MaintenanceModal.modal";
 
 const App = () => {
     const { user } = useSelector((state) => state.userData);
