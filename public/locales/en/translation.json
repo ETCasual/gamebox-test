@@ -415,7 +415,8 @@
         "continue": "Continue",
         "no": "No",
         "yes": "Yes",
-        "settings": "settings"
+        "settings": "settings",
+        "home": "Home"
     },
     "error": {
         "broken_link": {
@@ -770,5 +771,13 @@
             "cta": "<0>Click here</0> to look for one you like."
         }
     },
-    "timer_ends": "Ended"
+    "timer_ends": "Ended",
+    "404": {
+        "title": "Error 404 : Page Not Found",
+        "subtitle": "<0>The page you are looking for might have been removed had its</0><1></1> <2>name changed or is temporarily unavailable.</2>"
+    },
+    "maintenance": {
+        "title": "Under Maintenance!",
+        "subtitle": "This page is currently in the works to bring you the best experience! <1></1> <2>In the meantime, play our games at </2><3>GameBox</3><4>!</4> <5></5><6>We'll be back in no time!</6>"
+    }
 }

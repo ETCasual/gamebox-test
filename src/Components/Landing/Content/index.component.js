@@ -1,4 +1,3 @@
-import Login from "Components/Landing/Content/Login.component";
 import RegistrationInstructions from "Components/Landing/Content/RegistrationInstructions.component";
 import Hero from "Components/Landing/Content/Hero.component";
 import HowItWorks from "Components/Landing/Content/HowItWorks.component";
@@ -16,7 +15,6 @@ const Content = ({
 }) => {
     return (
         <section id="landing">
-            {loginModal && <Login setLoginModal={setLoginModal} />}
             {registrationInstructionModal && (
                 <RegistrationInstructions
                     setRegistrationInstructionModal={

@@ -12,7 +12,6 @@
 html,
 #root {
     overflow-x: hidden;
-
 }
 body {
     width: 100vw;
@@ -380,19 +379,19 @@ html {
         min-width: 270px;
         font-size: $fnt-sz-12;
 
-        .profile-avatar {
-            // img {
-            //     border: 2px solid #393939;
-            //     border-radius: 100%;
-            //     width: 54px;
-            //     height: 54px;
-            //     @include media-min($lg) {
-            //         width: 60px;
-            //         height: 60px;
-            //     }
-            //     object-fit: contain;
-            // }
-        }
+        // .profile-avatar {
+        //     // img {
+        //     //     border: 2px solid #393939;
+        //     //     border-radius: 100%;
+        //     //     width: 54px;
+        //     //     height: 54px;
+        //     //     @include media-min($lg) {
+        //     //         width: 60px;
+        //     //         height: 60px;
+        //     //     }
+        //     //     object-fit: contain;
+        //     // }
+        // }
         .profile-img {
             display: block;
             .img-holder {
@@ -1037,6 +1036,61 @@ html {
             color: #49e79c !important;
         }
     }
+    .modal-body-maintenance {
+        background: linear-gradient(90deg, #38303d 0%, #1c181f 100%);
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 10px;
+        padding: 0.7em;
+        width: 50.375rem;
+        display: flex;
+        flex-direction: column;
+
+        // Check is mobile
+        @media (pointer: none), (pointer: coarse) {
+            top: 3rem;
+        }
+
+        .maintenance-img {
+            align-self: center;
+            margin: 0 auto;
+            justify-self: center;
+            object-fit: cover;
+        }
+
+        p {
+            font-size: $fnt-sz-16;
+        }
+
+        .subtitle {
+            font-size: $fnt-sz-16;
+            font-weight: bold;
+            @include media-min($md) {
+                font-size: $fnt-sz-18;
+            }
+        }
+        .title {
+            color: #ff3399;
+            font-size: $fnt-sz-20;
+            font-weight: $fnt-wgt-700;
+            text-align: center;
+            @include media-min($md) {
+                font-size: $fnt-sz-30;
+            }
+        }
+
+        .highlight-url {
+            color: #49e79c !important;
+        }
+        p {
+            font-size: $fnt-sz-20;
+            line-height: 1.5rem;
+
+            @include media-min($md) {
+                font-size: $fnt-sz-20;
+            }
+        }
+    }
+
     .modal-body-automated-entry {
         //Scale pop up for pc scale settings that are set to larger than 100%
         @media (min-width: 641px) {

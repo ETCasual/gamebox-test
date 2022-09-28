@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -8,21 +8,17 @@ import Content from "Components/Landing/Content/index.component";
 import BlockedUserModal from "Components/Landing/BlockedUserModal/BlockedUserModal.component";
 import Loading from "Components/Landing/Loading/Loading.component";
 
-import { loadLoginUserWithToken } from "redux/thunks/Login.thunk";
-
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
     const { user, loginStatus } = useSelector((state) => state.userData);
-    const dispatch = useDispatch();
-
     let heroRef = useRef(null);
     let workRef = useRef(null);
     let workCardRef = useRef([]);
     let dailyRewardRef = useRef(null);
 
     const [blockedArchivedModal, setBlockedArchivedModal] = useState(false);
-    const [loginModal, setLoginModal] = useState(false);
+
     const [registrationInstructionModal, setRegistrationInstructionModal] =
         useState(false);
 
@@ -151,17 +147,10 @@ const Index = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const token = localStorage
-            .getItem("froyo-authenticationtoken")
-            ?.replaceAll('"', "");
-        if (token) dispatch(loadLoginUserWithToken());
-    }, [dispatch]);
-
     return (
         <>
             {/* TOP NAVIGATION BAR */}
-            <Navbar setLoginModal={setLoginModal} />
+            <Navbar />
 
             {/* MIDDLE CONTENT */}
             <Content
@@ -169,8 +158,6 @@ const Index = () => {
                 workRef={workRef}
                 workCardRef={workCardRef}
                 dailyRewardRef={dailyRewardRef}
-                loginModal={loginModal}
-                setLoginModal={setLoginModal}
                 registrationInstructionModal={registrationInstructionModal}
                 setRegistrationInstructionModal={
                     setRegistrationInstructionModal
