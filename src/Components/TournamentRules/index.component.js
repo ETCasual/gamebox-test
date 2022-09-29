@@ -2,11 +2,13 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import getFroyoGamesContactUrl from "Utils/GetFroyoGamesContact";
+import { Trans, useTranslation } from "react-i18next";
 
 const Index = () => {
     const { config } = useSelector((state) => state.config);
 
     const history = useHistory();
+    const { t } = useTranslation();
 
     return (
         <section className="tournament-rules">
@@ -29,7 +31,9 @@ const Index = () => {
                                         src={`${window.cdn}buttons/button_back.png`}
                                         alt="back-btn"
                                     />
-                                    <span className="ml-2">Back</span>
+                                    <span className="ml-2">
+                                        {t("btn.back")}
+                                    </span>
                                 </Link>
                             </div>
                         </div>
@@ -37,660 +41,224 @@ const Index = () => {
                             {/* MAIN DESCRIPTION */}
                             <div className="col-12 main-desc mb-5">
                                 <h4 className="title mb-4">
-                                    Prize / Reward / Tournament Rules
+                                    {t("rules.title")}
                                 </h4>
-                                <small>Effective date: Mar 1, 2022</small>
+                                <small>{t("rules.date")}</small>
                                 <p className="subtitle my-4">
-                                    Welcome to GameBox.
+                                    {t("rules.subtitle")}
                                 </p>
                             </div>
                             {/* GENERAL */}
                             <div className="col-12 mb-4">
-                                <p className="title">General</p>
-                                <p className="description">
-                                    No purchase or payment is required to enter
-                                    the tournaments for the prizes in Gamebox.
+                                <p className="title">
+                                    {t("rules.content.general.title")}
                                 </p>
                                 <p className="description">
-                                    By entering the tournaments, all entrants
-                                    agree to abide by and be bound by these
-                                    official prizes and tournament rules and
-                                    consent to the use of their personal
-                                    information to administer the prize and/or
-                                    tournament.
+                                    {t("rules.content.general.1")}
                                 </p>
                                 <p className="description">
-                                    The Prize Sponsor reserves the right to
-                                    alter the rules of the prize and/or
-                                    tournament and cancel the prize and/or
-                                    tournament at any time for any reason,
-                                    especially in case of any suspicion of fraud
-                                    and violation of the prize and tournament
-                                    rules.
+                                    {t("rules.content.general.2")}
+                                </p>
+                                <p className="description">
+                                    {t("rules.content.general.3")}
                                 </p>
                             </div>
                             {/* PARTICIPANTS */}
                             <div className="col-12 mb-4">
-                                <p className="title">Participants</p>
+                                <p className="title">
+                                    {t("rules.content.participants.title")}
+                                </p>
                                 <p className="description">
-                                    The prizes and tournaments are open to all
-                                    GameBox and Froyo registered users.
+                                    {t("rules.content.participants.subtitle")}
                                 </p>
                             </div>
                             {/* PRIZE / REWARD / TOURNAMENT PERIOD */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Prize / Reward / Tournament Period
+                                    {t("rules.content.period.title")}
                                 </p>
                                 <p className="description">
-                                    The featured and premium prize duration is
-                                    shown in the GameBox platform as the number
-                                    of tickets the prize has collected over the
-                                    maximum number of tickets (the draw
-                                    condition) of the prize. It displays the
-                                    total number of tickets that the prize has
-                                    accumulated until it reaches its draw
-                                    condition and a winner is chosen for the
-                                    prize.
+                                    {t("rules.content.period.1")}
                                 </p>
                                 <p className="description">
-                                    The bonus prize duration is shown on the
-                                    GameBox platform as a countdown that
-                                    displays the time until the bonus prize ends
-                                    and a winner is chosen.
+                                    {t("rules.content.period.2")}
                                 </p>
                                 <p className="description">
-                                    The tournament duration is shown on the
-                                    GameBox platform as a countdown that
-                                    displays the time until the next Tournament.
+                                    {t("rules.content.period.3")}
                                 </p>
                                 <p className="description">
-                                    It is GameBox's sole discretion to announce
-                                    a new prize and/or tournament or cancel an
-                                    upcoming prize and/or tournament, at any
-                                    time, without any reason whatsoever.
+                                    {t("rules.content.period.4")}
                                 </p>
                             </div>
                             {/* PARTICIPATION */}
                             <div className="col-12 mb-4">
-                                <p className="title">Participation</p>
+                                <p className="title">
+                                    {t("rules.content.participation.title")}
+                                </p>
                                 <p className="description">
-                                    To enter a Prize/Tournament, the user needs
-                                    to:
+                                    {t("rules.content.participation.subtitle")}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
                                     <li>
-                                        Register by opening an account with
-                                        www.froyo.games. To register,
-                                        participants must accept and agree to
-                                        the Privacy Policy, Terms and Conditions
-                                        and the Prize and Tournament Rules and
-                                        be at least 18 years of age.
+                                        {t("rules.content.participation.1")}
                                     </li>
                                     <li>
-                                        Use the GameBox platform to earn tickets
-                                        ("Tickets") that are each worth one (1)
-                                        entry into the Prize played. Tickets can
-                                        be earned in various ways, including (i)
-                                        participating in tournaments, (ii) using
-                                        the spinner, and (iii) other defined
-                                        activities in the application. Tickets
-                                        have no cash value.
+                                        {t("rules.content.participation.2")}
                                     </li>
                                     <li>
-                                        In the event of a dispute over the
-                                        identity of a participant, each entry
-                                        will be considered to have been
-                                        submitted by the Registered Owner of the
-                                        email address associated with the entry.
-                                        "Registered Owner" is the natural person
-                                        assigned an email address by an Internet
-                                        access provider, online service provider
-                                        or other organisation/individual
-                                        responsible for assigning email
-                                        addresses for the domain associated with
-                                        the submitted email address.
+                                        {t("rules.content.participation.3")}
                                     </li>
                                 </ul>
                             </div>
                             {/* PRIZE / REWARD AND WINNING A TOURNAMENT */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Prizes and Winning a Tournament
+                                    {t("rules.content.winning.title")}
                                 </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>
-                                        All prizes are awarded to the winners by
-                                        the Prize Sponsor. Winners must accept
-                                        the Prize as awarded by the Prize
-                                        Sponsor or the Prize will be forfeited.
-                                        Prizes cannot be transferred or
-                                        substituted, except at the Prize
-                                        Sponsor's sole discretion. Failure to
-                                        verify or declare a winner or otherwise
-                                        unclaimed Prizes will result in such
-                                        Prizes being forfeited and not awarded.
-                                    </li>
-                                    <li>
-                                        Selected entrants are notified after the
-                                        prize and/or tournament via in-app
-                                        announcement and/or notification and/or
-                                        email.
-                                    </li>
+                                    <li>{t("rules.content.winning.1")}</li>
+                                    <li>{t("rules.content.winning.2")}</li>
                                 </ul>
 
-                                <p className="title">Prize Draw</p>
+                                <p className="title">
+                                    {t("rules.content.draw.title")}
+                                </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>
-                                        At the end of each Prize Period, a draw
-                                        will be held from among all eligible
-                                        entries received during the Prize Period
-                                        to select a participant eligible to win
-                                        the Prize.
-                                    </li>
-                                    <li>
-                                        All available tickets in the prize at
-                                        the moment of the draw are entered into
-                                        the prize.
-                                    </li>
-                                    <li>
-                                        The Prize winner is announced through
-                                        the GameBox platform, right after the
-                                        Prize Draw.
-                                    </li>
-                                    <li>
-                                        The odds of winning the Prize depend
-                                        upon the number of eligible entries
-                                        received by the Prize Sponsor during the
-                                        Prize and Tournament Period.
-                                    </li>
+                                    <li>{t("rules.content.draw.1")}</li>
+                                    <li>{t("rules.content.draw.2")}</li>
+                                    <li>{t("rules.content.draw.3")}</li>
+                                    <li>{t("rules.content.draw.4")}</li>
                                 </ul>
 
-                                <p className="title">Bonus Prize</p>
+                                <p className="title">
+                                    {t("rules.content.bonus_prize.title")}
+                                </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>
-                                        The bonus participation prize is offered
-                                        as long as participants enter and win
-                                        tickets from any tournament via the
-                                        spinner or the additional tickets with
-                                        ads or gems on the GameBox platform.
-                                    </li>
-                                    <li>
-                                        Bonus prizes are offered in the form of
-                                        NFTs or Tokens.
-                                    </li>
-                                    <li>
-                                        The bonus prize/reward winner is
-                                        randomly selected from all participating
-                                        participants when the countdown timer
-                                        ends.
-                                    </li>
-                                    <li>
-                                        The prize sponsor reserves the right to
-                                        change the Prize and/or duration of the
-                                        Prize at its own discretion.
-                                    </li>
-                                    <li>
-                                        Being granted the prize requires no
-                                        purchase or payment of any kind.
-                                    </li>
+                                    <li>{t("rules.content.bonus_prize.1")}</li>
+                                    <li>{t("rules.content.bonus_prize.2")}</li>
+                                    <li>{t("rules.content.bonus_prize.3")}</li>
+                                    <li>{t("rules.content.bonus_prize.4")}</li>
+                                    <li>{t("rules.content.bonus_prize.5")}</li>
                                 </ul>
 
-                                <p className="title">Prize Claims</p>
+                                <p className="title">
+                                    {t("rules.content.claims.title")}
+                                </p>
                                 <ul className="description pb-3 px-3 m-0">
-                                    <li>
-                                        All prizes won by entrants must be
-                                        claimed within 180 days.
-                                    </li>
-                                    <li>
-                                        Prizes must be claimed by the Prize
-                                        Winner for the Prize to be transferred.
-                                    </li>
-                                    <li>
-                                        When claiming the Prize, the Transaction
-                                        Fee (Gas Fee) will be borne by the Prize
-                                        Winner.
-                                    </li>
-                                    <li>
-                                        Unminted Prizes and/or Prizes under
-                                        promotional campaigns cannot be claimed
-                                        by Prize Winners immediately unless
-                                        stated by Prize Sponsor. Prize Winners
-                                        will need to wait for the Prize to be
-                                        minted and/or the promotional campaign
-                                        to end before the Prize can be claimed.
-                                        It is the Prize Sponsor's sole
-                                        discretion to determine the duration of
-                                        when the Prize will be minted and/or the
-                                        promotional campaign ends.
-                                    </li>
-                                    <li>
-                                        The Prize Sponsor will not be
-                                        responsible for the transfer duration of
-                                        the Prize to the Prize Winner’s
-                                        cryptocurrency wallet.
-                                    </li>
-                                    <li>
-                                        The Prize Sponsor will not be held
-                                        liable for any loss of Prize.
-                                    </li>
-                                    <li>
-                                        All Prizes are final and non-refundable,
-                                        unless stated by the Prize Sponsor.
-                                    </li>
-                                    <li>
-                                        The Prize Sponsor reserves the right to
-                                        change the days to claim Prize.
-                                    </li>
-                                    <li>
-                                        To claim any Prize, Prize Winners are
-                                        required to connect to a cryptocurrency
-                                        wallet.
-                                    </li>
-                                    <li>
-                                        By claiming the Prize, Prize Winners
-                                        agree to accept the Terms and
-                                        Conditions, Privacy Policy and Prize and
-                                        Tournament Rules of Gamebox.
-                                    </li>
-                                    <li>
-                                        Once participants claim their Prize, the
-                                        participant (i) confirms compliance with
-                                        the tournament rules, and (ii) releases
-                                        the Tournament Parties and Prize Sponsor
-                                        from any and all liability in connection
-                                        with the Tournament or the acceptance,
-                                        awarding, use or misuse of any Prize;
-                                        The Prize Sponsor reserves the right to
-                                        verify any of the foregoing requirements
-                                        including, without limitation, proof of
-                                        age and jurisdiction of residence prior
-                                        to awarding the Prize. If an entrant’s
-                                        name is drawn and they are unqualified,
-                                        the Prize may be forfeited at the Prize
-                                        Sponsor’s sole discretion.
-                                    </li>
-                                    <li>
-                                        Any error in submission will result in
-                                        the prize becoming invalid.
-                                    </li>
-                                    <li>
-                                        The Prize Sponsor may interfere with the
-                                        claim in the case of doubt or failure to
-                                        comply with the rules. If the Prize
-                                        Sponsor cancels the claim, the Prize
-                                        will be deemed invalid.
-                                    </li>
-                                    <li>
-                                        Expiration period - all prizes expire
-                                        180 days after the first prize
-                                        announcement.
-                                    </li>
-                                    <li>
-                                        Prizes will be cancelled and removed for
-                                        users who are no longer eligible.
-                                    </li>
+                                    <li>{t("rules.content.claims.1")}</li>
+                                    <li>{t("rules.content.claims.2")}</li>
+                                    <li>{t("rules.content.claims.3")}</li>
+                                    <li>{t("rules.content.claims.4")}</li>
+                                    <li>{t("rules.content.claims.5")}</li>
+                                    <li>{t("rules.content.claims.6")}</li>
+                                    <li>{t("rules.content.claims.7")}</li>
+                                    <li>{t("rules.content.claims.8")}</li>
+                                    <li>{t("rules.content.claims.9")}</li>
+                                    <li>{t("rules.content.claims.10")}</li>
+                                    <li>{t("rules.content.claims.11")}</li>
+                                    <li>{t("rules.content.claims.12")}</li>
+                                    <li>{t("rules.content.claims.13")}</li>
+                                    <li>{t("rules.content.claims.14")}</li>
+                                    <li>{t("rules.content.claims.15")}</li>
                                 </ul>
 
-                                <p className="title">Referral reward (i)</p>
-                                <p className="description">
-                                    The Prize Sponsor rewards existing users for
-                                    inviting other users to the service. Users
-                                    will receive {config.gemsPerInvite} gems
-                                    added to their GameBox account when the
-                                    other users register using the user’s invite
-                                    link
-                                    {config.rewardInvitesRank > 1
-                                        ? `reaches level ${config.rewardInvitesRank}`
-                                        : ""}
-                                    . The invited user will also receive{" "}
-                                    {config.gemsPerInvite} gems
-                                    {config.rewardInvitesRank > 1
-                                        ? `upon reaching level ${config.rewardInvitesRank}`
-                                        : ""}{" "}
-                                    when they register with GameBox using an
-                                    invite link. The Prize Sponsor reserves the
-                                    right to evaluate and reject such reward in
-                                    suspected cases of fraud.
+                                <p className="title">
+                                    {t("rules.content.referral.title")}
                                 </p>
                                 <p className="description">
-                                    There is no limit as to how many users that
-                                    may be added using the same link.
+                                    {t("rules.content.referral.1", {
+                                        gemsPerInvite: config.gemsPerInvite,
+                                        action:
+                                            config.rewardInvitesRank > 1
+                                                ? ` reaches level ${config.rewardInvitesRank}`
+                                                : "",
+                                    })}
                                 </p>
                                 <p className="description">
-                                    The Prize Sponsor reserves the right to
-                                    change the referral reward at any time at
-                                    its own discretion.
+                                    {t("rules.content.referral.2")}
+                                </p>
+                                <p className="description">
+                                    {t("rules.content.referral.3")}
                                 </p>
                             </div>
                             {/* SUSPEND, MODIFY & TERMINATE */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Right to Suspend, Modify and Terminate
+                                    {t("rules.content.right_to_suspend.title")}
                                 </p>
                                 <p className="description">
-                                    The Prize Sponsor reserves the right, in its
-                                    sole discretion, to suspend or cancel the
-                                    prize and/or tournament at any time if, for
-                                    any reason the prize and/or tournament is
-                                    not capable of running as planned,
-                                    including, without limitation, infection by
-                                    computer virus, bugs, tampering,
-                                    unauthorised intervention, fraud, technical
-                                    failures, or any other causes which corrupt
-                                    or affect the administration, security,
-                                    fairness, integrity or proper conduct of the
-                                    prize and/or tournament ("Interruptions").
-                                    The Prize Sponsor reserves the right to
-                                    cancel, at its sole discretion, to suspend
-                                    and/or modify the prize and/or tournament,
-                                    or any part of it and disqualify any
-                                    individual who is responsible for any
-                                    Interruptions, tampering with the entry
-                                    process, the operation of the prize and/or
-                                    tournament, or who is otherwise in violation
-                                    of these Official Prize and/or Tournament
-                                    Rules. If terminated, the Prize Sponsor may,
-                                    in its sole discretion, determine the
-                                    winners from among all eligible Entries
-                                    received up to the time of such action using
-                                    the procedures outlined herein. Each prize
-                                    will be awarded "as is" and without warranty
-                                    of any kind, express or implied (including,
-                                    without limitation, any implied warranty of
-                                    merchantability or fitness for a particular
-                                    purpose).
+                                    {t(
+                                        "rules.content.right_to_suspend.subtitle"
+                                    )}
                                 </p>
                             </div>
                             {/* PROPERTY RIGHTS */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Confidentiality, Publicity and Intellectual
-                                    Property Rights
+                                    {t("rules.content.confidentiality.title")}
                                 </p>
                                 <p className="description">
-                                    For purposes of the Official Prize and/or
-                                    Tournament Rules, Intellectual Property
-                                    Rights means any trade marks, copyright,
-                                    moral rights, performer’s rights,
-                                    confidential information, trade secrets and
-                                    all or any other intellectual or industrial
-                                    property rights, both registered and
-                                    unregistered anywhere in the world,
-                                    including any renewals and extensions and
-                                    including any such rights discovered or
-                                    invented after the date hereof.
+                                    {t("rules.content.confidentiality.1")}
                                 </p>
                                 <p className="description">
-                                    Each Participant shall keep confidential any
-                                    information which the Participant knows or
-                                    reasonably ought to know is confidential and
-                                    relates to GameBox, GameBox’s business or
-                                    the prize and/or tournament.
+                                    {t("rules.content.confidentiality.2")}
                                 </p>
                                 <p className="description">
-                                    Each Participant agrees to participate, at
-                                    GameBox's request, in publicity (including
-                                    interviews) and further agrees that GameBox
-                                    owns all Intellectual Property Rights in,
-                                    and may use at GameBox's absolute
-                                    discretion, such publicity/interviews. In
-                                    addition, GameBox may refer to the
-                                    Participant's association with the Prize
-                                    and/or Tournament in all publicity,
-                                    marketing and materials.
+                                    {t("rules.content.confidentiality.3")}
                                 </p>
                                 <p className="description">
-                                    The Participant shall not publicise their
-                                    involvement in the Prize and/or Tournament
-                                    or that the Participant has won any prize
-                                    (including giving interviews) except with
-                                    GameBox's prior written consent.
+                                    {t("rules.content.confidentiality.4")}
                                 </p>
                                 <p className="description">
-                                    By entering a Tournament or submitting a
-                                    video, image, audio file or any other
-                                    materials in relation to a Tournament or
-                                    Prize (the Products) each Participant: (i)
-                                    confirms the grant by the Participant to
-                                    GameBox of a worldwide, perpetual, royalty
-                                    free licence in the Intellectual Property
-                                    Rights in the Products or Prize and/or
-                                    Tournament entry, (ii) waives any moral
-                                    rights and like rights the Participant has
-                                    in relation to the Products or GameBox entry
-                                    so that GameBox shall be entitled to use the
-                                    Products or GameBox entry in any and all
-                                    media at no cost to GameBox and (iii)
-                                    warrants to GameBox that the Products or
-                                    GameBox entry: (a) are personal and related
-                                    specifically to the Participant; (b) are
-                                    owned and controlled by the Participant and
-                                    that the Participant has the right, power
-                                    and authority to grant the rights set out in
-                                    these terms and conditions; (c) will not
-                                    infringe the Intellectual Property Rights,
-                                    privacy or any other rights of any third
-                                    party; (d) will not contain anything which
-                                    is untrue, defamatory, obscene, indecent,
-                                    harassing or threatening; (e) do not violate
-                                    any applicable law or regulation (including
-                                    any laws regarding anti-discrimination or
-                                    false advertising); (f) are not obscene or
-                                    pornographic; (g) do not, to the best of the
-                                    Participant’s knowledge, contain any viruses
-                                    or other computer programming routines that
-                                    are intended to damage, detrimentally
-                                    interfere with, surreptitiously intercept or
-                                    expropriate any system, data or personal
-                                    information; (h) are free from any
-                                    encumbrances such that GameBox may use the
-                                    Products in accordance with and in the
-                                    manner set out in these Official Prize
-                                    and/or Tournament Rules.
+                                    {t("rules.content.confidentiality.5")}
                                 </p>
                                 <p className="description">
-                                    For the avoidance of doubt, all rights
-                                    relating to the Prize and/or Tournament
-                                    (including the name, title and format of the
-                                    Prize and/or Tournament) will vest
-                                    exclusively in GameBox for our own use (at
-                                    our absolute discretion). Unless otherwise
-                                    stated, prize and/or tournament entries will
-                                    not be returned to you.
+                                    {t("rules.content.confidentiality.6")}
                                 </p>
                             </div>
                             {/* LIMITATION OF LIABILITY & RELEASE */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Limitation of Liability and Release
+                                    {t("rules.content.limitation.title")}
                                 </p>
                                 <p className="description">
-                                    No liability or responsibility is assumed by
-                                    the Prize and/or Tournament Parties
-                                    resulting from Participant's participation
-                                    in or attempt to participate in the Prize
-                                    and/or Tournament, ability or inability to
-                                    upload or download any information in
-                                    connection with the Prize and/or Tournament,
-                                    or from the disruption of third-party
-                                    services such as mail delivery. No
-                                    responsibility or liability is assumed by
-                                    the Prize and/or Tournament Parties for
-                                    Interruptions, technical problems or
-                                    technical malfunction arising in connection
-                                    with any of the following occurrences which
-                                    may affect the operation of the Prize and/or
-                                    Tournament: hardware or software errors;
-                                    faulty computer, cable, satellite, network,
-                                    electronic, Internet connectivity or other
-                                    online or network communication problems;
-                                    errors or limitations of any Internet
-                                    service providers, servers, hosts or other
-                                    providers; garbled, jumbled or faulty data
-                                    transmissions; failure of any online
-                                    transmissions to be sent or received; lost,
-                                    late, delayed or intercepted transmissions;
-                                    inaccessibility of the Prize and/or
-                                    Tournament Platform in whole or in part for
-                                    any reason; traffic congestion on the
-                                    Internet or the Prize and/or Tournament
-                                    Platform's servers; unauthorised human or
-                                    non-human intervention of the operation of
-                                    the Prize and/or Tournament, including
-                                    without limitation, unauthorised tampering,
-                                    hacking, theft, virus, bugs, or worms; or
-                                    destruction of any aspect of the Prize
-                                    and/or Tournament, or loss, miscount,
-                                    misdirection, inaccessibility or
-                                    unavailability of an email account used in
-                                    connection with the Prize and/or Tournament.
-                                    The Prize and/or Tournament Parties are not
-                                    responsible for any printing, typographical,
-                                    technical, computer, network or human error
-                                    which may occur in the administration of the
-                                    Prize and/or Tournament, the processing of
-                                    Tickets or entries, or in any Prize and/or
-                                    Tournament-related materials. Use of the
-                                    Prize and/or Tournament Platform is at the
-                                    user's own risk. The Prize and/or tournament
-                                    Parties are not responsible for any personal
-                                    injury or property damage, or losses of any
-                                    kind which may be sustained to the user's or
-                                    any other person's computer equipment
-                                    resulting from participation in the Prize
-                                    and/or Tournament. By participating in the
-                                    Prize and/or Tournament, entrants agree: (i)
-                                    to release, hold harmless and indemnify the
-                                    Prize and/or Tournament Parties and
-                                    Froyo.Games from any and all claims, damages
-                                    or liabilities arising from or relating to
-                                    such Participant's participation in the
-                                    Prize and/or Tournaments; (ii) all causes of
-                                    action arising out of or connected with this
-                                    Prize and/or Tournament, or any Prize
-                                    awarded, shall be resolved individually,
-                                    without resort to any form of class action;
-                                    and (iii) any and all claims, judgments, and
-                                    awards shall be limited to actual
-                                    out-of-pocket costs incurred, excluding
-                                    legal fees and court costs. By accepting a
-                                    Prize, the winner agrees that the Prize
-                                    and/or Tournament Sponsor, its parent,
-                                    subsidiaries, related or affiliated
-                                    companies or, if applicable, any of their
-                                    respective advertising or promotion
-                                    agencies, or any other company or individual
-                                    engaged in the provision of goods or
-                                    services related to this Prize and/or
-                                    Tournament and their officers, directors,
-                                    employees, representatives and agents will
-                                    have no liability whatsoever for and shall
-                                    be held harmless by winner against, any
-                                    liability for injuries, losses or damages of
-                                    any kind to persons or property resulting in
-                                    whole or in part, directly or indirectly,
-                                    from participation in the Prize and/or
-                                    Tournament or from the acceptance,
-                                    possession, misuse or use of any Prize. ANY
-                                    ATTEMPT BY AN INDIVIDUAL, WHETHER OR NOT A
-                                    PARTICIPANT, TO DELIBERATELY DAMAGE,
-                                    DESTROY, TAMPER OR VANDALISE THE PRIZE
-                                    AND/OR TOURNAMENT PLATFORM OR INTERFERE WITH
-                                    THE OPERATION OF THE PRIZE AND / OR
-                                    TOURNAMENT IS A VIOLATION OF CRIMINAL AND
-                                    CIVIL LAWS, AND THE PRIZE AND/OR TOURNAMENT
-                                    SPONSOR RESERVES THE RIGHT TO SEEK DAMAGES
-                                    AND DILIGENTLY PURSUE ALL REMEDIES AGAINST
-                                    ANY SUCH INDIVIDUAL TO THE FULLEST EXTENT
-                                    PERMITTED BY LAW.
+                                    {t("rules.content.limitation.subtitle")}
                                 </p>
                             </div>
                             {/* PRIVACY & PUBLIC RELEASE */}
                             <div className="col-12 mb-4">
                                 <p className="title">
-                                    Privacy and Public Release
+                                    {t("rules.content.release.title")}
                                 </p>
                                 <p className="description">
-                                    The Prize Sponsor and its authorised agents
-                                    will collect, use, and disclose the personal
-                                    information provided upon registration and
-                                    entry into the Prize and/or Tournament for
-                                    the purposes of administering the Tournament
-                                    and Prize fulfilment, in accordance with the
-                                    Prize Sponsor's Privacy Statement. By
-                                    accepting a Prize, winners consent to the
-                                    publication and use of their name,
-                                    statements, profile pictures, photographs,
-                                    image and/or likeness in any form, manner or
-                                    media whether now known or hereafter
-                                    devised, including, without limitation, in
-                                    print, radio, television, in the Prize
-                                    and/or Tournament Platform, and on the
-                                    Internet for any purpose in connection with
-                                    the Prize and/or Tournament including,
-                                    without limitation, for the purposes of
-                                    advertising and trade, and promoting the
-                                    Prize Sponsor and its services, without
-                                    further notice or compensation.
+                                    {t("rules.content.release.subtitle")}
                                 </p>
                             </div>
                             {/* GENERAL CONDITIONS */}
                             <div className="col-12 mb-4">
-                                <p className="title">General Conditions</p>
-                                <p className="description">
-                                    The Prize Sponsor is not responsible for any
-                                    other costs associated with claiming or
-                                    using the Prize. The winners are solely
-                                    responsible for the reporting and payment of
-                                    any and all taxes, if any, that may result
-                                    in claiming the prizes in this Prize and/or
-                                    Tournament. Prize and/or Tournament Winner
-                                    understands that the prize received might be
-                                    reduced by tax obligations that arise for
-                                    the Prize Sponsor related to awarding such
-                                    prize. Decisions of the Prize Sponsor are
-                                    final on all matters relating to the Prize
-                                    and/or Tournament, including matters of
-                                    fact, interpretation, eligibility, procedure
-                                    and fulfilment in respect to the Prize
-                                    and/or Tournament. The Prize Sponsor
-                                    reserves the right at any time to cancel or
-                                    modify the Prize and/or Tournament or to
-                                    modify or supplement these Official Prize
-                                    and/or Tournament Rules without notice, in
-                                    its sole discretion, subject to applicable
-                                    law.
+                                <p className="title">
+                                    {t("rules.content.conditions.title")}
                                 </p>
                                 <p className="description">
-                                    Questions concerning the construction,
-                                    validity, interpretation and enforceability
-                                    of these Official Rules, entrants' rights
-                                    and obligations, or the rights and
-                                    obligations of the Prize Sponsor in
-                                    connection with the Prize and/or Tournament,
-                                    shall be governed by, and construed in
-                                    accordance with, the laws in effect in
-                                    Malaysia, without giving effect to any
-                                    choice of law or conflict of law rules. Any
-                                    waiver of any obligation hereunder by the
-                                    Prize Sponsor does not constitute a general
-                                    waiver of any obligation to entrants. The
-                                    Prize Sponsor reserves the right to update
-                                    or modify these Rules at any time, without
-                                    prior notice.
+                                    {t("rules.content.conditions.1")}
+                                </p>
+                                <p className="description">
+                                    {t("rules.content.conditions.2")}
                                 </p>
 
                                 <p className="description">
-                                    The Prize Sponsor may be contacted at{" "}
-                                    <a
-                                        className="email"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        href={getFroyoGamesContactUrl()}
-                                    >
-                                        Froyo Games
-                                    </a>
+                                    <Trans i18nKey="rules.content.conditions.3">
+                                        {/* HACK: Trick the compile to think this as an element to render proper style */}
+                                        <>0</>
+                                        <a
+                                            className="email"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            href={getFroyoGamesContactUrl()}
+                                        >
+                                            1
+                                        </a>
+                                    </Trans>
                                 </p>
                             </div>
                             {/* CONTACT */}
